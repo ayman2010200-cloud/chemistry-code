@@ -2178,6 +2178,8 @@ body.lang-ar .chapnav a { direction: rtl; }
             if (activeTab) activeTab.classList.add('active');
             if (activePanel) activePanel.classList.add('active');
 
+            localStorage.setItem('codevault_preferred_payment_method', method);
+
             if (method === 'paypal') {
                 initPayPalPanel();
             }
@@ -2258,11 +2260,18 @@ body.lang-ar .chapnav a { direction: rtl; }
             if (isUnlocked) {
                 window.open(targetUrl, '_blank');
             } else {
+                const preferredMethod = localStorage.getItem('codevault_preferred_payment_method') || 'tap';
+                if (typeof switchPayment === 'function') {
+                    switchPayment(preferredMethod);
+                }
                 showToast(currentLang === 'ar' 
-                    ? "هذا الكود مقفل! يرجى إدخال كود التفعيل بالأسفل أولاً." 
-                    : "This code is locked! Please verify your IP access code below.");
-                document.getElementById('verify-section').scrollIntoView({ behavior: 'smooth' });
-                document.getElementById('access-code-input').focus();
+                    ? "هذا المحتوى مدفوع. يرجى إتمام الدفع أولاً ثم إدخال كود التفعيل لفتح الوصول." 
+                    : "This chapter is premium. Please complete payment first, then enter your activation code to unlock access.");
+                document.getElementById('payment-section').scrollIntoView({ behavior: 'smooth' });
+                const preferredInput = document.getElementById(`input-${preferredMethod}`);
+                if (preferredInput) {
+                    preferredInput.focus();
+                }
             }
         }
 
