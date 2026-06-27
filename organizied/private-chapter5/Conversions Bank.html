@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100 Conversion Questions — أسئلة التحويلات</title>
+<style>
+:root { --bg:#0b0f19; --card:#111827; --bd:#1f2937; --gold:#fbbf24; --grn:#4ade80; --cyan:#7dd3fc; }
+* { box-sizing:border-box; }
+body { margin:0; padding:28px 16px 60px; color:#f8fafc; min-height:100vh;
+  background: radial-gradient(1200px 600px at 50% -10%, #101a33 0%, var(--bg) 60%);
+  font-family:'Segoe UI', Tahoma, sans-serif; user-select:none; }
+input { user-select:text; }
+h1 { margin:0 0 6px; font-size:29px; font-weight:800; text-align:center;
+  background:linear-gradient(90deg,#7dd3fc,#c084fc,#fbbf24); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.subtitle { margin:0 auto 18px; color:#94a3b8; font-size:14.5px; text-align:center; max-width:820px; line-height:1.6; }
+.subtitle b { color:#e2e8f0; }
+
+.toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:center;
+  background:var(--card); border:1px solid var(--bd); border-radius:12px; padding:12px 18px;
+  margin:0 auto 18px; max-width:1100px; position:sticky; top:10px; z-index:20; box-shadow:0 10px 30px rgba(0,0,0,.45); }
+.toolbar input { background:#0d1117; border:1px solid #2b3648; color:#e2e8f0; border-radius:8px;
+  padding:8px 12px; font-size:13.5px; width:260px; outline:none; font-family:inherit; }
+.toolbar input:focus { border-color:#38bdf8; }
+.btn { background:#1b2435; border:1px solid #2b3648; color:#cbd5e1; border-radius:8px; padding:8px 14px;
+  font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; transition:all .15s; user-select:none; }
+.btn:hover { background:#243049; color:#fff; }
+.btn.gold { background:#3a2e08; border-color:#8a6d12; color:#fde68a; }
+.count { font-size:13px; color:#64748b; font-weight:600; }
+
+.filters { display:flex; flex-wrap:wrap; justify-content:center; gap:7px; margin:0 auto 22px; max-width:1100px; }
+.pill { display:flex; align-items:center; gap:7px; font-size:11.5px; font-weight:700; letter-spacing:.4px;
+  text-transform:uppercase; color:#cbd5e1; background:var(--card); border:1px solid var(--bd);
+  border-radius:999px; padding:6px 13px; cursor:pointer; transition:all .15s; user-select:none; }
+.pill:hover { border-color:#3b4a66; }
+.pill.active { background:#1d2a40; border-color:var(--pc); color:#fff; }
+.pill .dot { width:9px; height:9px; border-radius:50%; background:var(--pc); }
+
+.bank { max-width:1100px; margin:0 auto; }
+.qcard { background:linear-gradient(160deg,#121a2a 0%,#0d1117 80%); border:1px solid #1d2738;
+  border-left:5px solid var(--qc,#38bdf8); border-radius:14px; padding:18px 22px; margin-bottom:16px;
+  transition:box-shadow .15s; }
+.qcard:hover { box-shadow:0 8px 24px rgba(0,0,0,.45), 0 0 14px color-mix(in srgb, var(--qc) 18%, transparent); }
+.qcard.hidden { display:none; }
+
+.qhead { display:flex; align-items:flex-start; gap:12px; flex-wrap:wrap; }
+.qnum { width:34px; height:34px; border-radius:50%; flex:0 0 auto;
+  background:color-mix(in srgb, var(--qc) 22%, #0b0f19); border:2px solid var(--qc); color:var(--qc);
+  font-size:14px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+.qtxt { flex:1; min-width:240px; }
+.qen { font-size:15.5px; font-weight:800; color:#fff; }
+.qen b { color:var(--gold); }  .qen i { color:var(--grn); font-style:normal; }
+.qar { font-size:14.5px; font-weight:700; color:#cbd5e1; direction:rtl; text-align:right; margin-top:3px; }
+.qar b { color:var(--gold); } .qar i { color:var(--grn); font-style:normal; }
+.qmeta { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.steps-chip { font-size:10.5px; font-weight:800; letter-spacing:.5px; color:var(--qc);
+  border:1.4px solid var(--qc); border-radius:999px; padding:3px 11px; white-space:nowrap; }
+.showbtn { background:#3a2e08; border:1px solid #8a6d12; color:#fde68a; border-radius:8px;
+  padding:6px 16px; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit; white-space:nowrap; }
+.showbtn:hover { background:#4d3d0a; }
+
+/* mini map chart */
+.chain { display:flex; align-items:center; flex-wrap:wrap; gap:6px 4px; margin:16px 0 4px; }
+.cbox { border-radius:10px; padding:8px 14px; text-align:center; min-width:86px;
+  background:#0d1117; border:1.6px solid #334155; line-height:1.35; }
+.cbox .cf { font-size:15px; font-weight:800; color:#fff; }
+.cbox .cn { font-size:10px; color:#7c8aa0; font-weight:600; }
+.cbox .cnar { font-size:10px; color:#94a3b8; font-weight:700; direction:rtl; }
+.cbox.start { border-color:var(--gold); background:#2a230a33; }
+.cbox.start .cf { color:var(--gold); }
+.cbox.target { border-color:var(--grn); background:#0a2a1633; }
+.cbox.target .cf { color:var(--grn); }
+.cbox.mystery { border-style:dashed; border-color:#475569; }
+.cbox.mystery .cf { color:#64748b; font-size:19px; }
+.carrow { display:flex; flex-direction:column; align-items:center; min-width:52px; margin:0 2px; }
+.carrow .cd { font-size:9.5px; color:var(--cyan); font-family:Consolas,monospace; font-weight:700;
+  max-width:140px; text-align:center; line-height:1.3; margin-bottom:-2px; visibility:hidden; }
+.carrow .aa { color:var(--gold); font-size:19px; line-height:.9; }
+.carrow .rn { font-size:9.5px; color:#fde68a; font-weight:800; max-width:140px;
+  text-align:center; line-height:1.25; margin-top:1px; visibility:hidden; }
+body.lang-ar .carrow .rn { direction:rtl; font-family:'Segoe UI',Tahoma,sans-serif; }
+.qcard.open .carrow .cd, .qcard.open .carrow .rn { visibility:visible; }
+/* one-language display */
+.qar, .ar-only { display:none; }
+body.lang-ar .qar, body.lang-ar .ar-only { display:block; }
+body.lang-ar .qen, body.lang-ar .en-only { display:none; }
+body.lang-ar .cbox .cn { display:none; }
+.cbox .cnar { display:none; }
+body.lang-ar .cbox .cnar { display:block; }
+body.lang-ar .astep .sname .en { display:none; }
+.astep .sname .ar { display:none; }
+body.lang-ar .astep .sname .ar { display:inline; }
+body.lang-ar h1 .en, body.lang-ar .subtitle .en { display:none; }
+h1 .ar, .subtitle .ar { display:none; }
+body.lang-ar h1 .ar { display:inline; }
+body.lang-ar .subtitle .ar { display:block; direction:rtl; }
+body.lang-ar .pill .en { display:none; }
+.pill .ar { display:none; }
+body.lang-ar .pill .ar { display:inline; direction:rtl; }
+
+/* answer area */
+.answer { display:none; margin-top:14px; padding:14px 16px 8px;
+  background: linear-gradient(160deg, rgba(16,185,129,.10) 0%, rgba(16,185,129,.04) 55%, rgba(13,17,23,.6) 100%);
+  border: 1.6px solid rgba(74,222,128,.45);
+  border-radius: 12px;
+  box-shadow: inset 0 0 30px rgba(16,185,129,.06);
+  position: relative;
+}
+.answer::before {
+  content: '✓ Model Answer · الإجابة النموذجية';
+  display: inline-block;
+  font-size: 11px; font-weight: 800; letter-spacing: .6px;
+  color: #052e16; background: #4ade80;
+  border-radius: 999px; padding: 3px 14px;
+  margin-bottom: 11px;
+}
+body.lang-ar .answer::before { content: '✓ الإجابة النموذجية'; }
+body:not(.lang-ar) .answer::before { content: '✓ Model Answer'; }
+.qcard.open .answer { display:block; }
+.astep { background:rgba(5,25,16,.55); border:1px solid rgba(74,222,128,.25); border-left:3px solid #4ade80;
+  border-radius:9px; padding:9px 13px; margin-bottom:8px; }
+.astep .sname { font-size:12px; font-weight:800; color:#4ade80; margin-bottom:3px; display:flex; gap:10px; flex-wrap:wrap; }
+.astep .sname .ar { direction:rtl; color:#a5b4cf; }
+.astep .seq { font-size:15.5px; font-weight:700; color:#e8edf5; line-height:1.8; }
+.astep .seq .cnd { color:var(--cyan); font-size:11px; font-family:Consolas,monospace; }
+
+.empty { text-align:center; color:#64748b; font-size:15px; padding:50px 0; display:none; }
+.topbtn { position:fixed; right:22px; bottom:22px; width:46px; height:46px; border-radius:50%;
+  background:#1b2435; border:1.5px solid #2b3648; color:#cbd5e1; font-size:19px; cursor:pointer; z-index:30;
+  display:flex; align-items:center; justify-content:center; box-shadow:0 8px 22px rgba(0,0,0,.5); }
+.topbtn:hover { background:#243049; color:#fff; }
+
+@media print {
+  body { background:#fff !important; color:#111 !important; }
+  .toolbar,.filters,.topbtn,.showbtn { display:none !important; }
+  h1 { color:#111 !important; -webkit-text-fill-color:#111; background:none; }
+  .qcard { background:#fff !important; border:1px solid #999 !important; break-inside:avoid; }
+  .qen,.cbox .cf,.astep .seq { color:#111 !important; }
+  .qar { color:#333 !important; }
+  .qcard.open .answer { display:block; background:#f0fdf4 !important; border-color:#16a34a !important; }
+  .astep { background:#fff !important; border-color:#bbf7d0 !important; }
+  .astep .sname { color:#15803d !important; }
+}
+/* ================= BRAND / TEACHER IDENTITY ================= */
+.brandbar {
+  display: flex; align-items: center; gap: 18px;
+  background: linear-gradient(90deg, #101a33 0%, #0f172a 60%, #1a1430 100%);
+  border: 1px solid #facc15aa; border-radius: 16px;
+  padding: 12px 22px; margin: 0 auto 18px;
+  max-width: 1640px; width: 100%;
+  box-shadow: 0 8px 28px rgba(0,0,0,.5), 0 0 18px #facc1522;
+  position: relative; z-index: 10;
+}
+.brandbar .bphoto {
+  width: 74px; height: 74px; border-radius: 50%;
+  border: 3px solid #facc15; object-fit: cover; flex: 0 0 auto;
+  box-shadow: 0 0 16px #facc1566; background: #fff;
+}
+.brandbar .bnames { line-height: 1.3; }
+.brandbar .bar { font-size: 21px; font-weight: 800; color: #facc15; }
+.brandbar .ben { font-size: 13px; font-weight: 700; color: #7dd3fc; letter-spacing: .5px; }
+.brandbar .bpage {
+  margin-inline-start: auto; text-align: center; line-height: 1.45;
+}
+.brandbar .bpage .pa { font-size: 16px; font-weight: 800; color: #e2e8f0; direction: rtl; }
+.brandbar .bpage .pe { font-size: 11.5px; font-weight: 600; color: #94a3b8; }
+.brandbar .bexam { text-align: end; line-height: 1.4; }
+.brandbar .bexam .x1 { font-size: 15px; font-weight: 800; color: #4ade80; direction: rtl; }
+.brandbar .bexam .x2 { font-size: 10.5px; color: #64748b; direction: rtl; }
+@media (max-width: 900px){ .brandbar{flex-wrap:wrap; justify-content:center; text-align:center;} .brandbar .bpage{margin:0;} }
+
+/* watermark: faint photo + repeated bilingual name */
+#wmark {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+}
+#wmark .wphoto {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%,-50%);
+  width: min(56vmin, 520px); height: min(56vmin, 520px);
+  border-radius: 50%;
+  background-size: cover; background-position: center;
+  opacity: .045; filter: grayscale(60%);
+}
+body > *:not(#wmark){ position: relative; z-index: 1; }
+
+.brandfoot {
+  margin: 26px auto 0; max-width: 1640px; width: 100%;
+  border-top: 1px dashed #facc1555;
+  padding: 12px 8px 4px;
+  display: flex; flex-wrap: wrap; gap: 6px 24px;
+  align-items: center; justify-content: center;
+  font-size: 12.5px; color: #94a3b8; text-align: center;
+}
+.brandfoot b { color: #facc15; }
+.brandfoot .sep { color: #334155; }
+@media print { #wmark .wphoto { opacity: .05; } .brandbar{box-shadow:none;} }
+#wmark{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='300'%3E%3Ctext x='50%25' y='44%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='26' font-weight='bold' fill='%23ffffff' opacity='0.13'%3EProf./ Ayman Mansour%3C/text%3E%3Ctext x='50%25' y='60%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='22' font-weight='bold' fill='%23ffffff' opacity='0.10'%3E%D8%A3/ %D8%A3%D9%8A%D9%85%D9%86 %D9%85%D9%86%D8%B5%D9%88%D8%B1%3C/text%3E%3C/svg%3E");background-repeat:repeat;z-index:9999;}
+
+/* ===== model-2 security overlay ===== */
+.security-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #0b1220; color: #ef4444;
+    display: none; justify-content: center; align-items: center; flex-direction: column;
+    z-index: 999999; font-size: 1.6rem; font-weight: 800; text-align: center; gap: 8px;
+}
+.security-overlay .ar { font-size: 1.3rem; color: #f87171; direction: rtl; }
+body { user-select: none; }
+input, select, textarea { user-select: text; }
+
+.brandfoot { flex-direction: column; gap: 8px; }
+.brandfoot .fline1, .brandfoot .fline2 {
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+  align-items: center; justify-content: center;
+}
+.brandfoot .fname { color: #facc15; font-size: 15px; font-weight: 800; direction: rtl; }
+.brandfoot .fname2 { color: #7dd3fc; font-size: 13px; font-weight: 700; }
+.brandfoot .fphone {
+  color: #4ade80; font-weight: 700; font-size: 13px;
+  background: #4ade8011; border: 1px solid #4ade8044;
+  border-radius: 999px; padding: 4px 14px;
+}
+.brandfoot .fphone b { color: #86efac; letter-spacing: 1px; }
+
+/* ===== Arabic mode ===== */
+body.lang-ar .eq-name { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; }
+body.lang-ar .eq-tag { direction: rtl; }
+body.lang-ar .arrowbox .cond { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; font-size: calc(var(--eqfs) * 0.52); }
+body.lang-ar .eq-top { flex-direction: row; }
+
+body.lang-ar #pgTitle, body.lang-ar #pgSub { direction: rtl; font-family:'Segoe UI',Tahoma,sans-serif; }
+body.lang-ar .chap-head h2, body.lang-ar .chap-head .sub { direction: rtl; text-align: right; }
+body.lang-ar .chapnav a { direction: rtl; }
+
+/* ===== model-2 security overlay ===== */
+.security-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #0b1220; color: #ef4444;
+    display: none; justify-content: center; align-items: center; flex-direction: column;
+    z-index: 999999; font-size: 1.6rem; font-weight: 800; text-align: center; gap: 8px;
+}
+.security-overlay .ar { font-size: 1.3rem; color: #f87171; direction: rtl; }
+body { user-select: none; }
+input, select, textarea { user-select: text; }
+
+
+.brandbar .blogo {
+  width: 78px; height: 68px; border-radius: 12px;
+  object-fit: contain; background: #fff; flex: 0 0 auto;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 14px rgba(56,189,248,.45);
+  padding: 3px;
+}
+</style>
+</head>
+<body>
+<div id="wmark"><div class="wphoto" style="background-image:url(data:image/jpeg;base64,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)"></div></div>
+<div class="brandbar"><img class="blogo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCACuAMgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7LooooAKKKKACiiigAooooAKKKKACiignAyaAKuqahZ6ZZSXt9OkFvGMs7Hgf/Xqh4d8T6Lr7SJpd4Jni5dCpVgPXBHSsz4m6Ld+I/DBttNZXmjlWVU3YEmARjPTPOfwrlfhL4Q1rS9dfVNTt2s40iaNY2YFnJx6E8DFdlOhRdCU5StLoj5zF5lmFPNaWGpUb0pLWWv57K3Z7nq1FFFcZ9GFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXEfGg6mPCB/s/wA0J5y/aTFnPl4PXHbOM125OBmseTxR4YVmSXxFo6sDgq17HkH860oz9nUU7XsceYYVYvDTw/Ny8ytddDzf4EHUxqF4P3p04RZbcfk8zIxj3xnOK9bjnhkdkjkR2U4YKwJU+/pWO3ifwp5LRJ4k0WMEEZW+iGP1rivAVnoPhzXLq/n8baHcLKhRFS9QFgSDubLdeP1NdNepHESlUej6LuePluEr5RSo4OmvaRbfNK6XL1WmunzPUqKqabqenakjPp2oWl4iHDNbzLIFPodpOKt1xH0l7hRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBleMdKl13wpquiwXj2Ut9aS26XCdYi6kBh9M1+fXxK+HepeAvGUHhfVbmxubmeOKVJbfcU2u5UZ3AHPyniv0ar4w/bC/5L5pY7/YbP/wBHSV2YObU+VHm5nTi6al1TNH/hknxLjH/CVaL/AOA0lee/Gj4N6l8LrHTbvUdWsNQGoSvEggiZShVQcnd9a/QCvmf9vX/kAeFP+vy4/wDRa1dDE1J1Em9zPF4KjToylFao0v2RPhfqnhW3PjO71e3ktdb0yJoLOAN8oYhw0mQBuA4GM9TzX0NXH/BL/kkHhL/sEW3/AKLFdhXJVm5zbZ6GHpxhTSiFFFFZmwUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFcR8YfiRonw38NNqWosJr2XKWNkrYe4cfyUd27fUgU4xcnZEzmoLmlsN+MnxK0X4b+G21DUGE9/NlbGxVsPO4/kg7t/UgV5t+yx8QfiN4917W7zxGY59BRP3Uq26xrFOWGIkIGWG0nOckYXnmvH/AXhDxf+0B8QLjxF4hu5otKjkAursDCxqORbwA8Zx+WcnJPP2j4b0TS/DuiWujaNZx2djapsiiQcAep9SepJ5JrpqxhSjyby/I4qM6mIn7TaK28zQdgqliQAOSSeBXxB43vJvjP+0rBb+HlDWqTx2sM45H2eBizzH2JLEfVR3r3P9rn4hnwn4EOgadOU1fXFaEFTzFb9JH9s52j6k9qzv2Nvh7/wj/g5/F+o2+3UdaUfZwwwYrUH5f8Avs/N9AtOj+6g6j32QsR+/qqitlqz33NeCftseGr/AFn4d2Ot2K+Ymi3RluUA58p1Clx/unbn2JPaus+IOleM7vxpBNpLXRtQE8h45dqRH+LcM+vPPUV6FcpYajaXGlXZguVliMVxASDuVhggj0INTyex5Kid+voYUcY8bOth503BRdk3tLzR5b+yd42tfE/wvtNJJRNR0JFs54gesYH7uQexAwfdTXqXiF9Tj0HUH0aOKXU1tpDaJKcI0u07Afbdivi2xkv/ANn39oJoZmlfRZG2sf8AnvYyNw3uyEfmh9a+3LWeG6to7m3kWWGVA8bqcqykZBB9CDSxEFGXNHZ6nXg6jlDkl8UdGfLfwZ/aC1yz8VT+GfipKYzJOYlu5IFha0lzgxyqoA2Z/ixx3yOR9ToyuoZGDKRkEHIIrxX9o/4KWvjyzfX9AiitvE1unPRUvkA+4/o2Put+B46eZfs5/Gm78KX6eAfHzzQWUUn2e2ubkESWLg48qXPOzPAJ+79Olypxqx56e63RnTqzw8/Z1XdPZ/oz64opEZXUMpDKRkEdCKWuQ9AKKKKACiiigAooooAKKKKACiiigAooooA474vePtL+HPg+XXtRR55C4htLZDgzzEEhc9hgEk9gD9K+T/AnhTxh+0D8QbjxB4gupYtKikAurpRhIk6i3gB4zg/hnJyTz9cfFLwNo/xB8Jz6BrCuqsRJbzx/ft5QDtdfXqQR3BIr5I8M6341/Z1+Isuk6vbvc6VcMGngQnyryLOBNCT0cen4Hsa7MPblfL8R5mNv7SLqfB+vmfZ3hrQ9K8OaHa6LotlHZ2NqmyKKMcAep9SepJ5Jqzql9a6ZptzqN9OkFraxNNNK5wERRkk/gKp+EvEWj+KtAtdc0K9S7sbldyOvUHurDswPBB6V8+/trfEI2WlwfD7TJz9ovQJ9SKHlYQfkj47sRkj0Uetc8KbqT5Tsq1o0qfP06Hm2gW1/8f8A4/zX96si6NG4lmU9ILKM4SP2Z+n1Zj2r7Gh8QeGbaFLeLWNMjjiUIqLOgCgcAAZ6CvD/AIfaB/wqr4NxWsqiLxL4iAmu/wC9ChHCf8BU4/3mb0rnWJLY25+lexRwCxSve0Vov8z4POOK3k1ZUYQU5vWV3tfZfcfSh8TeHCDjXNOz/wBfC/41534V0qx0rxxJrdx4r0l7ffIwK3QMku7PDDoOuep6VwWreHtc0qyivdQ06aC3mxsdgMZIyAe4P1rKDGuqjlsFGXs6l09HomfPZjxfXqVqTxWGtKm+ZXcl+HU7z9qPwjp/xB+H8msaBNbXur6CDOvkOHZ4SMyR8ew3D3X3rN/Yy+If9u+FZPBeoz7r/SE32hY8y2pPA99hOPoVqH4fa8dA8RQ3EjH7JN+6uV7bD3/A8/nXlvxT0q++CXx1svFHh+LGk3UpvbJVPyPGxxNb/T5jj2ZT2rgr4R0v3Ld+qf5o+yyTPo5nT+tJcsk7TXl0Z9uV4j+0h8E7bx1ZyeIPD0Udv4lgTkcKl8oH3GPZwPut+B4wR674a1mw8Q6BZa5pkwms72BZoXH90jOD7joR6g14n+0v8cI/CUM/hXwrcJJr8i7bm5UgrYKf5ykdB/D1PYV51FT9ouTc+pxLpOk3U2/rY4n9mX4xahoWrwfDfxn9oEXni0sZplPmWku7aIJM87c8A/wnjp0+s6+WP2Yvgpd3N7bfELxtHNv8wXOnWcxO93zkTy5568qDyep7V9T1WK5Of3Pn6kYFVFS9/wCXewUUUVznYFFFFABRRRQAUUUUAFFFFABRRRQAVynxS8BaF8QvDEui63DyMvbXKAebbSY4dT/MdCK6uimm07omUVJWZ8/fBLwbq/wT8O+Ndf8AFt+zafbZaC3hlzFOka5EwHZnyEAODwc54ryv4DaHd/FP4v6l4/8AFe19P06b7fdl/uGXkxRf7qhc49EA719DftURzyfAfxILfJKpCzgf3BNGW/SvKf2YjHdfs/eKLHTxu1CPUjJcov3mjKx4/DCsPwNd1JucXJ7tpX7HjY1/V1aKuoRcku7V9DU8a67J4g1+41FtwizsgQ/wxjp+fX8axIpHjlSVSAyMGGfUUrLxTdpx1r6unTjCCgtkfgOKxNXE15VqjvJu9/M7rxn8QD4i0BNNXTjbs7K07tJuGRzhfx9a5bU9E1XTrK3u76wlt4LkZhdsYbjP4cc81ngfLitjWvEmsaxYWtjqFyJYbb/VgIAScYySOpxWNOh7C0aKXL1/4B34nMFmXPWx8m6iSUbJW0fX/gdTGVucV1XiDQo/in8ILzww2G17Rx9p0x2PLbRwufQjKH6qe1crtIOa7P4QR3LeNrVoA2xEdpiOgTaRz+OKzzGmpUXLrHVHdwnjKmHzGEIq6n7rXk+vy3OP/Yw8bzyLqXw01SeaHMclxp7A7ZIj0ljHoQTvHod1a/wa/Z1l0zxje+IPHkkeoraXkn9nwM28XOGyLiX1z1CnvyfSvPfhaY779sWafRSDaf2vfyho/u+VtlyfoSf1FfatfN15uEny6cyP2nB01VgufXlbSADAooorjPTCiiigAooooAKKKKACiiigAooooAKKKKACiiigCnrem2esaPeaTqEImtLyF4J4z/EjAgj8jXxPqenePv2cviBJqFghudHuCY455EJt72HOQkmPuSD8wckZBr7kqG9tLW+tntb22huYJBh4pow6MPQg8GtqVb2d01dM58Rh/a2admtmfJ4/aK8CXA86++F5Ny3Mnl3KFc98fKP5Uf8ADQfw5/6JfN/4EJ/hXvU/wb+F00rSyeB9G3McnbDtH5DApn/ClvhX/wBCPpH/AH7P+NdH1in/AHvvPLeU3d3CH/gK/wAjwj/hoP4c/wDRLpv/AAIT/Cj/AIaD+HP/AES6b/wIT/Cvdv8AhS3wr/6EfSf+/Z/xpf8AhS3wr/6EfSf+/Z/xo+s0/wC994f2Sv5If+Ar/I8I/wCGg/h1/wBEum/8CE/wrF8YftB3eqaPJ4c+HvhQeH2vx5Uk0bebcvnjbGFAwT0zyfTHWvpH/hS3wr/6EfSf+/Z/xrb8L+A/BnheYz+H/DOl6dMePNht1EmPTcecfjSeIp9m/Vl08slB3iox81FJ/keUfsn/AAivPBVjP4o8SQeTreoRCKG2blrWDIJDf7bEDI7AAdc173RRXLObnLmZ6tKlGlBRiFFFFQaBRRRQAUUUUAFFFFABRRRQBi+NPFOheDtBl1zxFfpZWUZC7yCxZj0VVHLMfQVxvw/+OXw+8ba6uiaTqFzDfyZ8mK7gMXnEDJCnJBOOcHBrzz9uTMuleDrRyTBLqcm9M8H5VH8mP511nxR+Dh1zxX4Q1zwkNI0Q6HOrXGIjG0saOjIq7FwSArjn+9W6hBRTl1uck6tX2jUFtb8Tt9I+IXhvVPiDqPgS0muG1rTojLcI0BCBRs6N0P31qlp/xV8IX914ot7e4uy/hdJH1PNswCBCwbb/AHuUbpXhdh4x8O+CP2uvGmr+Jr82Nm9sYFk8p5MuVtyBhQT0U/lWT8MdQs9Xufjvquny+dZ3mnXM8Em0jejNOVODyOD3qvYaX8kR9ad7aXu/wvY9c/4aa+FOQP7Q1MH3sHrr7/4qeD7Hx/aeBrq8uI9YuxH5Km3byz5i7kG/oCf5mvD/ANmnxj8KrPwLpHhrxGumy+IZ714ljn0wysxklxGN+wjnI78Vxv7Un9oW/wC0HfahpYKz6ZZWt6pXgoIgp3fgcH6Cr+rxdRx1W5n9amqKqXT22/4c+tPiL458PeAdEj1jxHcyQW0s4gj8uIyMzkE4CjnoprL134r+D9FtvDM99cXap4mVW03bbMxcNsxu/u/6xetfM/7VHjX/AITx9CTSTu06w0ePVLrachJLgooU+65Uf8CNa3xe/wCQN8A/+uFv/O1qY0E1G/W5csXLmly7K34s+gPiZ8W/BPw9uobPxBqEv22VPMW1tojLIEzjcw6KOvUjPaoLL4zeArzwJfeM7bVJZNM090S8UQN50LOwVQydeSRyOOvPFeJ/E67i+H37Ub+MfGWiSan4f1CFVtpvKEix/ulTKg8FkKn5euGyK9J+CngPwT/aniDxf4Z1y01zQvELc6d9lUQWxEm8IVJPKk/dZRiplThGKbv/AF0KjWqTqOKtpf19RrftN/ClVLHUNTx/2D3rY8XfHf4e+FtWXS9YvL+O5a3iuAEs3YbJFDLyO+COK8u+EejaPc/tXePtOuNJsJrOGCXyreS2Ro0xJD91SMDqenrVbxld+G9J/bLE/iZ9Ot9Hi01FkN4q+Sv+jEKCCMdcYq/ZQ5rK+1yFiKvJzNre39anuGh/FnwRrnhHVPE+kalLeWelR+bexx27efCuM5MZGSMAnI44PpV/w58QfDGv+BZ/Gthev/Y1ukrzSyRlGjEWd+VPOePxyK8C/Z5i0jWf2gvH7eHreNvCtzZTRbYk2wsjyIFAHGAf3hA9M153q2rat4E8O+OPgusc8txe6vCllt/jiY84/wB9VhH/AAI0fV4tuK30+5h9bkoqUttfvW33n1lo/wAV/BepeBLrxut/Na6HbSmF57qBoyzjHyovVjkgcd8+lZPgj48fDrxdr8Wh6bqVzBeztst1u7cxrM391W5GT2BwTXkf7TPhxPBnwC8EeFYG+W3vVFxt6SS+U7O34szH8a9C+KXwZXxM/g688JLpGhy6JIjyP5RRnjGxlUFByQVJ59ankp2u+t7Fe1rOVlbS1/n2Ow+JvxY8F/DyWC38Q38ou513x2ttEZZdmcbiBwoznqRnBx0q58NviP4T+INlPc+G9QMzW+PPgljMcsWehKnscHkZFeL6ZY2etftu63HqtrDex2mnb4UnQOqMIYQCAeON7fic0nw7srXQ/wBs3xPpmlQJZ2cmnu5giXamWSFzgDgfMSfxodKPLbra4LET50+l7eZ2bftLfCtJmifUNSVlYqc2EnY4NdzL8QvCg+H83ju31MXehQx+ZJNAhdh8wUgp1DAkZB5rwb9jrw7oWv6B4zg1rSLHUEa+WMG4gVyqlWyASMj8K474WvIv7NfxXsTKxggniMak52kkAn8dq/lVSowu0ujX4kwxNSyk7ap/ge52n7SfwturuG1i1DUfNmkWNAbBx8zHA/U17FXzZ+zr4x+E/wDwhvhfwrqKaZL4nkYwlJdLLuZWlYpmTZjOCOc8V9J1jWgoSslY6MPUdSHM2n6BRRRWR0BRRRQB85/tyQTLoHhTUxE7WtpqbCZ1GdpZVKj8dhrV8bfHeKXxp4R0D4c3Wma5/a1wiX2YncxKzoAAQRhtu8kHOMDNe16zpena1ps2matZW99ZTrtlgnjDo49wa53wj8M/AfhPUDqPh7wxYWN4QQJ1BZ1B6hSxJX8MVsqkeVKS2OaVKpzuUHa9vwPD/CmiaPr37Y3jWz1vSrLUrZbRpFiuoFlQMFtwGwwIzgnn3rA+Httb2eq/H20tII7e3hsruOKKNQqIoecBQBwAB2r6isfCfhux8T3Xie10e0h1m7TZcXqriSRfl4J/4Cv5Cq9r4G8I2s2sTW+g2McmtKy6kypzdBiSwfnnJZvzqvb6fJfgR9Ve9+rf3nz5+zZrnwg0v4c6a/iubwxB4ggu5ZPMvIUNwmJCY23EZGBgjn0q74h0y01/9sW90m7Ae01Dw7JBJ7q9sRn9a9b/AOFNfCz/AKEfR/8Av1/9eujTwl4bTxQvihdHtBrSxeSL3b+8Cbdu3Ppjih1lzOSvrcUMPNQjCVtLfgfJut/CnWfh38BPGl54jS3GoXl5ZQQeVKJMQJMpzntuJ6f7IrS+LoH9i/AQ/wDTC3/na19VeJNC0fxHpMmk67p8GoWMpVngmXKsVOQfwIBrN1HwL4Q1GLSIr7QLG4TRgBpwdMi2A242en3F/IU44jW8l3/KwPBpJqO1l+DueVeIPijZJ8Zdb+HPxIs9Et/Cwg3Ws13ASJGKoy7yxK4OXwQByAM5rmf2TRZx/GDx5B4UeV/CYGbc5JQnzf3eM/7O/BPOAK948Z+AvB3jJoX8TaBZ6lJCMRySArIo9AykHHtnFX/Cvhnw/wCFdM/s3w7pNrptru3GOBMbm9WPVj7mp9pHkaS3+4r2E3UUm9E/n6Hgnwa/5O9+If8A1wm/9GQ1keO/DeleLv2x5/D+s26zWl3pJBz/AAMLUlXHupwR9K+jdM8JeGtM8R3niOw0a0t9WvgRc3aJiSUEgnJ+oH5UreE/DbeLB4rOj2n9uLH5Yvtv73bt24z9OKPbWd12sH1a8OV97nhv7HF+NEuvFPw41OGGHVtMvWm3BAGmUHy3yerbWAI9nFVfinY2kn7Z3gnfbxnzbaGWTj77oZypPuNq/kK95g8HeF7fxXJ4rh0Szj1yUFZL1UxI4ICnJ78AD8Kff+E/Dd/4mtPE15o9pNrNmoS3vHXMkYGeAf8AgTfnR7Zc7lbdAsO1TUG9n+Fzxf8AbmtbiT4eaLdxRM8NtqoMzAZCBo3Az9Tx9SKf43+PUCX3hDSPh1c6drV3qkscd3E8Tu0KsUVV4Iw/LZBzjFe7arp9jqunzadqVpBeWk67JYJkDo49CDwa5rwr8MfAPhfVP7U0Hwvp9le4IWdVLOgPXaWJ2/hiiNSPKlJbBOjU9o5Qdr2/A8Ou9b03wV+2fq2p+JrldOsb7TwsNzNxH80UWCT2G6Nlz61J8J9StfFv7XXifxNoTm70mPT2Q3KqQp+SJARnsSrY9QM1734y8E+FPGMUUfibQrPUhDnymlUh0z1AYEMB7Zqfwl4U8OeEtPaw8OaPaaZbu251hTBdvVieWP1NP2seXbW1iVhpc++l7+Z8w/sp+P8Awj4K0XxcfEutW9jJLeLLDC+TJKFVs7VAyTnisb4X2lz/AMMw/FHVJIXS3vZ4xCzDAbYy7seuNwH1zX0ofg18LS5c+B9HLE7iTEeT+ddNc+GfD9x4abw1LpFmdGaMRGxWILDsBzjaMDGRmqlXi22lvb8CYYWaSTa0T/E8E/Z+1/4N6d4A8NHWbjwvB4nhLbpJoU+1LL5rbDu253YK4OfSvpIdK4SD4O/DCCaOaLwTpCSRsHRhEcgg5B6+td3WNWSlK6OmhCUI8sradgooorM2CiiigAooooA4bx1JqsviWGx019TZjp0kqR2dwsQEgcBWbdwVGenNY3ie+1u11OSNr2+juYbayTzIJwltFM5YM0inqpI9Pyr07yYvtAuPKTzQuwPtG7bnOM+lRz2NpP5vm20MnnKFl3IDvA6A+oFdEKyjbQ8XEZVUquco1WnJ38lo1+ev5HCaveSSXevz3niGfS7jTsC0hSYIhXYGDlT9/cxI79MUqTatqfimFJP7VVPsNpNLFaXYhSF33Fiynlhx0HpXa3Gl6fcTRTXFjazSxf6t5IlZk+hI4qykESTNMsaCVwAzgfMwHQE+2TR7ZJaIf9m1XO8p6Xv6773uuqXovS3N/ETULm30mGwsJZ4r2/lEUbwIXkjUfM7hRycAfrWLfa3qx8P6Xr9g5Nw2bC6tZG2qs7HYHIPQq4/I13r28LzpO0SGVAQjlRlQeoB7ZqP7BabGT7NDtaTzWGwYL5zu+uQOamNSMUlY1xGCrVakpqpZNWXlazT++9+6fkcRrmoan4c1zTQLm5vrSz08tfISWeXLhfMx6hsfhmq9prWs23hPVY76eZ9Wm1E2sIjBZomkRWwoHPyAsce1eieRF5/n+Wnm7dm/HzbeuM+mai+w2nnCb7ND5gfzA2wZ3Yxuz644z6VSqxtqjKWW1uduFVpO+na6t38lbs7vqcDLrGsXfh3R4bK9kh1WHU/sk3mqVMrIjsA6nkBwFJHvW34D1ibWJdYuJfPQJeLGsEvWAiJNyfg26ujNhZmfzjbQ+ZvEm7yxncBgNn1xxn0qSG3hheR4oo0aVt0hVQCx6ZPqaUqkWmki8PgK9OrGcql0t13srL59X3+R5lea3r6JrlhDcTObq6uPsdzyfsqRE+aM9sKBj3arfibxBqMMGjDTpLqR7azj1C88mNpPMXAwjkdAw3nJ9BXoS21usUkSwRBJCxdQgwxbqSO+e9MisrWLf5VvCm9QjbUA3KBgA+w9Kr20b35TD+ysQouKrPX8Nb6a9/w06HC63r9/b67d39lO82kppsMksSclVkL4mX3BAz7fSqGpapfRaXpN7catcNHHpMU9wkF4sc6seTKVYYlB6Y9unNekRWFpECsdtAgMYjIWMAbB0X6cnj3qObSdMmEAm0+0k+z48ndCp8v/AHeOPwojWgre6FTK8RPmaq769dHe/wB3l+V9ON1C+N5f60934hudLNjEjWcaSiMFTGG81lP38tkY6cY60qa7ciS4l1O7FnJL4fjuUjd9gWX59xUHv939K7O90zT7yaOa7sbaeSLmN5IlYr9CRxS32nWN8YzeWdvcGI5jMsYbafUZ6Uvax7Gry+upOSnrr31vffXonZWPL9e1bV4EgYXmqpImj2km+KYLHFNIzDfMG6qTjPBr1e33+RH5hVn2jcV6E45xUUtlaymQy20LmVPLk3IDuX+6fUcnip0VUQIihVUYAHQCoqVFNJJWN8Fgp4ec5SnzJ2+Vr/8AA+4Wiiisj0QooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z" alt="Chemistry Code"><img class="bphoto" src="data:image/jpeg;base64,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" alt="teacher"><div class="bnames"><div class="bar">أ/ أيمن منصور — مستشار الكيمياء</div><div class="ben">Prof./ Ayman Mansour — Chemistry Consultant</div></div><div class="bpage"><div class="pa">بنك أسئلة التحويلات — ١٠٠ سؤال</div><div class="pe">100 Conversion Questions</div></div><div class="bexam"><div class="x1">كيمياء ٢٠٢٦ — Chemistry 2026</div></div></div>
+
+<h1><span class="en">100 Conversion Questions</span><span class="ar">١٠٠ سؤال تحويلات</span></h1>
+<p class="subtitle"><span class="en">Multi-step conversion questions exactly as exams ask — each with a <b>mini map chart</b>. <b>Press "Show answer"</b> to reveal the intermediate compounds, the reagents above each arrow, the reaction name under it, and the full equations.</span><span class="ar">أسئلة تحويلات متعددة الخطوات كما تأتي في الامتحانات — كل سؤال بمخطط مصغر. <b>اضغط «أظهر الإجابة»</b> لكشف المركبات الوسيطة والظروف فوق كل سهم واسم التفاعل تحته والمعادلات كاملة.</span></p>
+
+<div class="toolbar">
+  <input id="search" placeholder="🔍 search question / compound…  بحث">
+  <button class="btn" id="btnLang">🌐 عربي</button>
+  <button class="btn gold" id="btnAll">👁 Show all answers</button>
+  <button class="btn" id="btnNone">🙈 Hide all</button>
+  <button class="btn" id="btnPrint">🖨 Print / PDF</button>
+  <span class="count" id="count"></span>
+</div>
+<div class="filters" id="filters"></div>
+<div class="bank" id="bank"></div>
+<div class="empty" id="empty">No questions match · لا توجد أسئلة مطابقة</div>
+<button class="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* Q1-10: from carbide & methane */
+const QS = [
+{g:'carbide', fromEn:'calcium carbide', fromAr:'كربيد الكالسيوم', toEn:'benzene', toAr:'البنزين',
+ c:[['CaC₂','كربيد الكالسيوم','calcium carbide'],['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene']],
+ s:[['CaC₂ + 2H₂O →(H₂O) HC≡CH↑ + Ca(OH)₂','Hydrolysis','تحلل مائي','+ 2H₂O'],
+    ['3 HC≡CH →(red-hot Fe tube , 600°C) C₆H₆','Cyclic polymerisation','بلمرة حلقية','red-hot Fe tube']]},
+{g:'carbide', fromEn:'calcium carbide', fromAr:'كربيد الكالسيوم', toEn:'ethanoic acid', toAr:'حمض الإيثانويك',
+ c:[['CaC₂','الكربيد','carbide'],['HC≡CH','الإيثاين','ethyne'],['CH₃CHO','الإيثانال','ethanal'],['CH₃COOH','حمض الإيثانويك','ethanoic acid']],
+ s:[['CaC₂ + 2H₂O → HC≡CH↑ + Ca(OH)₂','Hydrolysis','تحلل مائي','+ 2H₂O'],
+    ['HC≡CH + H₂O →(H₂SO₄ 40% / HgSO₄ , 60°C) CH₃CHO','Hydration (Kucherov)','إماهة (كوتشيروف)','H₂SO₄/HgSO₄'],
+    ['CH₃CHO + (O) →(KMnO₄/H⁺) CH₃COOH','Oxidation','أكسدة','(O) KMnO₄/H⁺']]},
+{g:'carbide', fromEn:'calcium carbide', fromAr:'كربيد الكالسيوم', toEn:'ethanol', toAr:'الإيثانول',
+ c:[['CaC₂','الكربيد','carbide'],['HC≡CH','الإيثاين','ethyne'],['CH₂=CH₂','الإيثين','ethene'],['CH₃CH₂OH','الإيثانول','ethanol']],
+ s:[['CaC₂ + 2H₂O → HC≡CH↑ + Ca(OH)₂','Hydrolysis','تحلل مائي','+ 2H₂O'],
+    ['HC≡CH + H₂ →(Ni , Δ) CH₂=CH₂','Partial hydrogenation','هدرجة جزئية','+ H₂ / Ni'],
+    ['CH₂=CH₂ + H₂O →(dil. H₂SO₄) CH₃CH₂OH','Hydration','إماهة','+ H₂O / dil. H₂SO₄']]},
+{g:'carbide', fromEn:'calcium carbide', fromAr:'كربيد الكالسيوم', toEn:'TNT', toAr:'الـ TNT',
+ c:[['CaC₂','الكربيد','carbide'],['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene'],['C₆H₅CH₃','التولوين','toluene'],['C₇H₅(NO₂)₃','TNT','TNT']],
+ s:[['CaC₂ + 2H₂O → HC≡CH↑ + Ca(OH)₂','Hydrolysis','تحلل مائي','+ 2H₂O'],
+    ['3 HC≡CH →(red-hot Fe tube) C₆H₆','Cyclic polymerisation','بلمرة حلقية','Fe tube'],
+    ['C₆H₆ + CH₃Cl →(AlCl₃) C₆H₅CH₃ + HCl','Friedel–Crafts alkylation','ألكلة فريدل-كرافتس','+ CH₃Cl / AlCl₃'],
+    ['C₆H₅CH₃ + 3HNO₃ →(conc. H₂SO₄ , Δ) C₇H₅(NO₂)₃ + 3H₂O','Trinitration','نيترة ثلاثية','+ 3HNO₃ / H₂SO₄']]},
+{g:'carbide', fromEn:'methane', fromAr:'الميثان', toEn:'benzene', toAr:'البنزين',
+ c:[['CH₄','الميثان','methane'],['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene']],
+ s:[['2CH₄ →(1500°C , rapid cooling) HC≡CH + 3H₂','Pyrolysis (cracking)','تكسير حراري','1500°C'],
+    ['3 HC≡CH →(red-hot Fe tube) C₆H₆','Cyclic polymerisation','بلمرة حلقية','Fe tube']]},
+{g:'carbide', fromEn:'methane', fromAr:'الميثان', toEn:'ethanol', toAr:'الإيثانول',
+ c:[['CH₄','الميثان','methane'],['HC≡CH','الإيثاين','ethyne'],['CH₂=CH₂','الإيثين','ethene'],['CH₃CH₂OH','الإيثانول','ethanol']],
+ s:[['2CH₄ →(1500°C) HC≡CH + 3H₂','Pyrolysis','تكسير حراري','1500°C'],
+    ['HC≡CH + H₂ →(Ni , Δ) CH₂=CH₂','Partial hydrogenation','هدرجة جزئية','+ H₂ / Ni'],
+    ['CH₂=CH₂ + H₂O →(dil. H₂SO₄) CH₃CH₂OH','Hydration','إماهة','+ H₂O']]},
+{g:'carbide', fromEn:'methane', fromAr:'الميثان', toEn:'ethanoic acid', toAr:'حمض الإيثانويك',
+ c:[['CH₄','الميثان','methane'],['HC≡CH','الإيثاين','ethyne'],['CH₃CHO','الإيثانال','ethanal'],['CH₃COOH','الحمض','acid']],
+ s:[['2CH₄ →(1500°C) HC≡CH + 3H₂','Pyrolysis','تكسير حراري','1500°C'],
+    ['HC≡CH + H₂O →(H₂SO₄/HgSO₄) CH₃CHO','Kucherov hydration','إماهة كوتشيروف','H₂SO₄/HgSO₄'],
+    ['CH₃CHO + (O) →(KMnO₄/H⁺) CH₃COOH','Oxidation','أكسدة','(O)']]},
+{g:'carbide', fromEn:'methane', fromAr:'الميثان', toEn:'chloroform', toAr:'الكلوروفورم',
+ c:[['CH₄','الميثان','methane'],['CH₃Cl','كلورو الميثان','chloromethane'],['CH₂Cl₂','ثنائي الكلورو','dichloromethane'],['CHCl₃','الكلوروفورم','chloroform']],
+ s:[['CH₄ + Cl₂ →(UV) CH₃Cl + HCl','Photochlorination 1','كلورة ضوئية 1','+ Cl₂ / UV'],
+    ['CH₃Cl + Cl₂ →(UV) CH₂Cl₂ + HCl','Photochlorination 2','كلورة ضوئية 2','+ Cl₂ / UV'],
+    ['CH₂Cl₂ + Cl₂ →(UV) CHCl₃ + HCl','Photochlorination 3','كلورة ضوئية 3','+ Cl₂ / UV']]},
+{g:'carbide', fromEn:'sodium ethanoate', fromAr:'إيثانوات الصوديوم', toEn:'ethyne', toAr:'الإيثاين',
+ c:[['CH₃COONa','إيثانوات الصوديوم','sodium ethanoate'],['CH₄','الميثان','methane'],['HC≡CH','الإيثاين','ethyne']],
+ s:[['CH₃COONa + NaOH →(CaO , Δ) CH₄↑ + Na₂CO₃','Decarboxylation','نزع الكربوكسيل','NaOH(CaO)/Δ'],
+    ['2CH₄ →(1500°C , rapid cooling) HC≡CH + 3H₂','Pyrolysis','تكسير حراري','1500°C']]},
+{g:'carbide', fromEn:'calcium carbide', fromAr:'كربيد الكالسيوم', toEn:'polyethylene', toAr:'البولي إيثيلين',
+ c:[['CaC₂','الكربيد','carbide'],['HC≡CH','الإيثاين','ethyne'],['CH₂=CH₂','الإيثين','ethene'],['(C₂H₄)ₙ','بولي إيثيلين','polyethylene']],
+ s:[['CaC₂ + 2H₂O → HC≡CH↑ + Ca(OH)₂','Hydrolysis','تحلل مائي','+ 2H₂O'],
+    ['HC≡CH + H₂ →(Ni , Δ) CH₂=CH₂','Partial hydrogenation','هدرجة جزئية','+ H₂ / Ni'],
+    ['n CH₂=CH₂ →(heat , pressure , catalyst) (–CH₂–CH₂–)ₙ','Addition polymerisation','بلمرة بالإضافة','polymerise']]},
+
+/* Q11-20: hydrocarbons family */
+{g:'hydro', fromEn:'ethyne', fromAr:'الإيثاين', toEn:'ethyl ethanoate', toAr:'إيثانوات الإيثيل',
+ c:[['HC≡CH','الإيثاين','ethyne'],['CH₃CHO','الإيثانال','ethanal'],['CH₃COOH','الحمض','acid'],['CH₃COOC₂H₅','الإستر','ester']],
+ s:[['HC≡CH + H₂O →(H₂SO₄/HgSO₄ , 60°C) CH₃CHO','Kucherov hydration','إماهة كوتشيروف','H₂SO₄/HgSO₄'],
+    ['CH₃CHO + (O) →(KMnO₄/H⁺) CH₃COOH','Oxidation','أكسدة','(O)'],
+    ['CH₃COOH + C₂H₅OH ⇌(conc. H₂SO₄) CH₃COOC₂H₅ + H₂O','Esterification','أسترة','+ C₂H₅OH / H⁺']]},
+{g:'hydro', fromEn:'ethyne', fromAr:'الإيثاين', toEn:'1,1-dibromoethane', toAr:'1،1-ثنائي برومو الإيثان',
+ c:[['HC≡CH','الإيثاين','ethyne'],['CH₂=CHBr','برومو إيثين','bromoethene'],['CH₃CHBr₂','1،1-ثنائي برومو','1,1-dibromoethane']],
+ s:[['HC≡CH + HBr → CH₂=CHBr','Markovnikov addition 1','إضافة ماركونيكوف 1','+ HBr'],
+    ['CH₂=CHBr + HBr → CH₃–CHBr₂','Markovnikov addition 2','إضافة ماركونيكوف 2','+ HBr']]},
+{g:'hydro', fromEn:'ethene', fromAr:'الإيثين', toEn:'acetamide', toAr:'الأسيتاميد',
+ c:[['CH₂=CH₂','الإيثين','ethene'],['CH₃CH₂OH','الإيثانول','ethanol'],['CH₃COOH','الحمض','acid'],['CH₃CONH₂','الأسيتاميد','acetamide']],
+ s:[['CH₂=CH₂ + H₂O →(dil. H₂SO₄) CH₃CH₂OH','Hydration','إماهة','+ H₂O'],
+    ['CH₃CH₂OH + 2(O) →(KMnO₄/H⁺) CH₃COOH + H₂O','Complete oxidation','أكسدة كاملة','2(O)'],
+    ['CH₃COOH + NH₃ → CH₃COONH₄ →(Δ , –H₂O) CH₃CONH₂','Amide formation','تكوين أميد','+ NH₃ / Δ']]},
+{g:'hydro', fromEn:'ethene', fromAr:'الإيثين', toEn:'oxalic acid', toAr:'حمض الأوكساليك',
+ c:[['CH₂=CH₂','الإيثين','ethene'],['CH₂OH–CH₂OH','الجليكول','glycol'],['HOOC–COOH','حمض الأوكساليك','oxalic acid']],
+ s:[['CH₂=CH₂ + (O) + H₂O →(cold alk. KMnO₄) CH₂OH–CH₂OH','Baeyer\u2019s test','اختبار باير','cold KMnO₄'],
+    ['CH₂OH–CH₂OH + 4(O) →(KMnO₄/H⁺) HOOC–COOH + 2H₂O','Oxidation of diol','أكسدة الديول','4(O)']]},
+{g:'hydro', fromEn:'ethane', fromAr:'الإيثان', toEn:'ethanol', toAr:'الإيثانول',
+ c:[['CH₃–CH₃','الإيثان','ethane'],['CH₃CH₂Br','برومو الإيثان','bromoethane'],['CH₃CH₂OH','الإيثانول','ethanol']],
+ s:[['CH₃CH₃ + Br₂ →(UV) CH₃CH₂Br + HBr','Halogen substitution','استبدال هالوجيني','+ Br₂ / UV'],
+    ['CH₃CH₂Br + KOH →(aqueous) CH₃CH₂OH + KBr','Hydrolysis of R–X','تحلل مائي','+ KOH(aq)']]},
+{g:'hydro', fromEn:'ethane', fromAr:'الإيثان', toEn:'ethanoic acid', toAr:'حمض الإيثانويك',
+ c:[['CH₃–CH₃','الإيثان','ethane'],['CH₃CH₂Br','برومو الإيثان','bromoethane'],['CH₃CH₂OH','الإيثانول','ethanol'],['CH₃COOH','الحمض','acid']],
+ s:[['CH₃CH₃ + Br₂ →(UV) CH₃CH₂Br + HBr','Substitution','استبدال','+ Br₂ / UV'],
+    ['CH₃CH₂Br + KOH →(aq) CH₃CH₂OH + KBr','Hydrolysis','تحلل مائي','+ KOH(aq)'],
+    ['CH₃CH₂OH + 2(O) →(KMnO₄/H⁺) CH₃COOH + H₂O','Oxidation','أكسدة','2(O)']]},
+{g:'hydro', fromEn:'ethyne', fromAr:'الإيثاين', toEn:'diethyl ether', toAr:'الإيثير الإيثيلي',
+ c:[['HC≡CH','الإيثاين','ethyne'],['CH₂=CH₂','الإيثين','ethene'],['CH₃CH₂OH','الإيثانول','ethanol'],['C₂H₅–O–C₂H₅','الإيثير','ether']],
+ s:[['HC≡CH + H₂ →(Ni , Δ) CH₂=CH₂','Partial hydrogenation','هدرجة جزئية','+ H₂/Ni'],
+    ['CH₂=CH₂ + H₂O →(dil. H₂SO₄) CH₃CH₂OH','Hydration','إماهة','+ H₂O'],
+    ['2C₂H₅OH →(conc. H₂SO₄ , 140°C) C₂H₅–O–C₂H₅ + H₂O','Dehydration 140°C','نزع ماء 140°م','140°C']]},
+{g:'hydro', fromEn:'propene', fromAr:'البروبين', toEn:'acetone', toAr:'الأسيتون',
+ c:[['CH₃CH=CH₂','البروبين','propene'],['(CH₃)₂CHOH','2-بروبانول','2-propanol'],['CH₃COCH₃','الأسيتون','acetone']],
+ s:[['CH₃–CH=CH₂ + H₂O →(H₂SO₄) CH₃–CH(OH)–CH₃','Markovnikov hydration','إماهة ماركونيكوف','+ H₂O / H₂SO₄'],
+    ['CH₃CH(OH)CH₃ + (O) →(Cu , 300°C) CH₃COCH₃ + H₂O','Oxidation of 2° alcohol','أكسدة كحول ثانوي','(O) Cu/Δ']]},
+{g:'hydro', fromEn:'ethyne', fromAr:'الإيثاين', toEn:'gammexane', toAr:'الجاميكسان',
+ c:[['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene'],['C₆H₆Cl₆','جاميكسان','gammexane']],
+ s:[['3 HC≡CH →(red-hot Fe tube) C₆H₆','Cyclic polymerisation','بلمرة حلقية','Fe tube'],
+    ['C₆H₆ + 3Cl₂ →(UV) C₆H₆Cl₆','Halogen addition (UV)','إضافة هالوجين','+ 3Cl₂ / UV']]},
+{g:'hydro', fromEn:'heptane', fromAr:'الهبتان', toEn:'benzoic acid', toAr:'حمض البنزويك',
+ c:[['C₇H₁₆','الهبتان','heptane'],['C₆H₅CH₃','التولوين','toluene'],['C₆H₅COOH','حمض البنزويك','benzoic acid']],
+ s:[['CH₃(CH₂)₅CH₃ →(Pt/Al₂O₃ , 500°C) C₆H₅CH₃ + 4H₂','Catalytic reforming','إعادة تشكيل حفزية','Pt , 500°C'],
+    ['C₆H₅CH₃ + 3(O) →(KMnO₄) C₆H₅COOH + H₂O','Side-chain oxidation','أكسدة السلسلة الجانبية','3(O)']]},
+
+/* Q21-30: alcohols & sugars */
+{g:'alco', fromEn:'lactic acid', fromAr:'حمض اللاكتيك', toEn:'methane', toAr:'الميثان',
+ c:[['CH₃CH(OH)COOH','حمض اللاكتيك','lactic acid'],['CH₃CH(OH)COONa','لاكتات الصوديوم','sodium lactate'],['CH₃CH₂OH + ...','(تبسيط)','—'],['CH₄','الميثان','methane']],
+ s:[['CH₃CH(OH)COOH + NaOH → CH₃CH(OH)COONa + H₂O','Neutralisation','تعادل','+ NaOH'],
+    ['CH₃CH(OH)COONa + NaOH →(CaO , Δ) CH₃CH₂OH + Na₂CO₃','Decarboxylation','نزع الكربوكسيل','NaOH(CaO)/Δ'],
+    ['CH₃CH₂OH →(steps: oxidation → CH₃COOH → CH₃COONa → soda lime) CH₄↑','Via ethanoate route','عبر مسار الإيثانوات','soda lime']]},
+{g:'alco', fromEn:'ethanol', fromAr:'الإيثانول', toEn:'methane', toAr:'الميثان',
+ c:[['CH₃CH₂OH','الإيثانول','ethanol'],['CH₃COOH','الحمض','acid'],['CH₃COONa','الملح','salt'],['CH₄','الميثان','methane']],
+ s:[['CH₃CH₂OH + 2(O) →(KMnO₄/H⁺) CH₃COOH + H₂O','Complete oxidation','أكسدة كاملة','2(O)'],
+    ['CH₃COOH + NaOH → CH₃COONa + H₂O','Neutralisation','تعادل','+ NaOH'],
+    ['CH₃COONa + NaOH →(CaO , Δ) CH₄↑ + Na₂CO₃','Decarboxylation','نزع الكربوكسيل','soda lime / Δ']]},
+{g:'alco', fromEn:'ethanol', fromAr:'الإيثانول', toEn:'ethyne', toAr:'الإيثاين',
+ c:[['CH₃CH₂OH','الإيثانول','ethanol'],['CH₃COOH','الحمض','acid'],['CH₄','الميثان','methane'],['HC≡CH','الإيثاين','ethyne']],
+ s:[['CH₃CH₂OH + 2(O) →(KMnO₄/H⁺) CH₃COOH + H₂O','Oxidation','أكسدة','2(O)'],
+    ['CH₃COOH + NaOH → CH₃COONa ; CH₃COONa + NaOH →(CaO,Δ) CH₄↑','Salt then soda lime','ملح ثم صودا جيرية','NaOH ثم CaO/Δ'],
+    ['2CH₄ →(1500°C , rapid cooling) HC≡CH + 3H₂','Pyrolysis','تكسير حراري','1500°C']]},
+{g:'alco', fromEn:'sucrose', fromAr:'السكروز', toEn:'ethyl ethanoate', toAr:'إيثانوات الإيثيل',
+ c:[['C₁₂H₂₂O₁₁','السكروز','sucrose'],['C₆H₁₂O₆','جلوكوز','glucose'],['C₂H₅OH','الإيثانول','ethanol'],['CH₃COOC₂H₅','الإستر','ester']],
+ s:[['C₁₂H₂₂O₁₁ + H₂O →(invertase) C₆H₁₂O₆ + C₆H₁₂O₆','Hydrolysis (inversion)','تحلل مائي','invertase'],
+    ['C₆H₁₂O₆ →(zymase , 35°C) 2C₂H₅OH + 2CO₂↑','Fermentation','تخمر','zymase'],
+    ['C₂H₅OH + CH₃COOH ⇌(conc. H₂SO₄) CH₃COOC₂H₅ + H₂O','Esterification','أسترة','+ CH₃COOH / H⁺']]},
+{g:'alco', fromEn:'sucrose', fromAr:'السكروز', toEn:'ethene', toAr:'الإيثين',
+ c:[['C₁₂H₂₂O₁₁','السكروز','sucrose'],['C₆H₁₂O₆','جلوكوز','glucose'],['C₂H₅OH','الإيثانول','ethanol'],['CH₂=CH₂','الإيثين','ethene']],
+ s:[['C₁₂H₂₂O₁₁ + H₂O →(invertase) 2C₆H₁₂O₆','Hydrolysis','تحلل مائي','invertase'],
+    ['C₆H₁₂O₆ →(zymase , 35°C) 2C₂H₅OH + 2CO₂↑','Fermentation','تخمر','zymase'],
+    ['C₂H₅OH →(conc. H₂SO₄ , 180°C) CH₂=CH₂ + H₂O','Dehydration','نزع الماء','180°C']]},
+{g:'alco', fromEn:'glycerol', fromAr:'الجليسرول', toEn:'nitroglycerine', toAr:'النيتروجليسرين',
+ c:[['C₃H₅(OH)₃','الجليسرول','glycerol'],['C₃H₅(ONO₂)₃','نيتروجليسرين','nitroglycerine']],
+ s:[['C₃H₅(OH)₃ + 3HNO₃ →(conc. H₂SO₄ , cold) C₃H₅(ONO₂)₃ + 3H₂O','Esterification (nitration)','أسترة (نيترة)','+ 3HNO₃ / H₂SO₄'],
+    ['Note: dynamite explosive AND artery-widening heart medicine','Application','تطبيق','—'],
+    ['Glycerol from fats: triglyceride + 3NaOH → glycerol + 3 soap','Source (saponification)','المصدر (تصبن)','+ NaOH']]},
+{g:'alco', fromEn:'ethanol', fromAr:'الإيثانول', toEn:'bromoethane', toAr:'برومو الإيثان',
+ c:[['CH₃CH₂OH','الإيثانول','ethanol'],['CH₂=CH₂','الإيثين','ethene'],['CH₃CH₂Br','برومو الإيثان','bromoethane']],
+ s:[['C₂H₅OH →(conc. H₂SO₄ , 180°C) CH₂=CH₂ + H₂O','Dehydration','نزع الماء','180°C'],
+    ['CH₂=CH₂ + HBr → CH₃CH₂Br','HBr addition','إضافة HBr','+ HBr']]},
+{g:'alco', fromEn:'methanol', fromAr:'الميثانول', toEn:'marookh oil', toAr:'زيت الماروخ',
+ c:[['CH₃OH','الميثانول','methanol'],['+ salicylic','حمض الساليسيليك','salicylic acid'],['HOC₆H₄COOCH₃','زيت الماروخ','marookh oil']],
+ s:[['Salicylic acid (from phenol chemistry) is prepared first','Get salicylic acid','تحضير حمض الساليسيليك','—'],
+    ['CH₃OH + HOC₆H₄COOH →(H⁺) HOC₆H₄COOCH₃ + H₂O','Esterification','أسترة','+ H⁺'],
+    ['Use: absorbed by skin to relieve rheumatic pains','Application','تطبيق','—']]},
+{g:'alco', fromEn:'ethylene glycol', fromAr:'جليكول الإيثيلين', toEn:'Dacron', toAr:'الداكرون',
+ c:[['CH₂OH–CH₂OH','الجليكول','glycol'],['+ terephthalic','حمض التيرفثاليك','terephthalic acid'],['(C₁₀H₈O₄)ₙ','الداكرون','Dacron']],
+ s:[['Terephthalic acid: oxidation of p-xylene (2 CH₃ → 2 COOH)','Get terephthalic acid','تحضير حمض التيرفثاليك','3(O)'],
+    ['n HOOC–C₆H₄–COOH + n HO–CH₂CH₂–OH →(Δ) Dacron + 2n H₂O','Condensation polymerisation','بلمرة بالتكاثف','Δ'],
+    ['Use: polyester fibre & PET bottles','Application','تطبيق','—']]},
+{g:'alco', fromEn:'ethanol', fromAr:'الإيثانول', toEn:'polyethylene', toAr:'البولي إيثيلين',
+ c:[['CH₃CH₂OH','الإيثانول','ethanol'],['CH₂=CH₂','الإيثين','ethene'],['(C₂H₄)ₙ','بولي إيثيلين','PE']],
+ s:[['C₂H₅OH →(conc. H₂SO₄ , 180°C) CH₂=CH₂ + H₂O','Dehydration','نزع الماء','180°C'],
+    ['n CH₂=CH₂ →(heat , pressure , catalyst) (–CH₂–CH₂–)ₙ','Addition polymerisation','بلمرة بالإضافة','polymerise']]},
+
+/* Q31-40: aromatics */
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'aspirin', toAr:'الأسبرين',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅Cl','كلورو بنزين','chlorobenzene'],['C₆H₅OH','الفينول','phenol'],['HOC₆H₄COOH','حمض الساليسيليك','salicylic acid'],['C₉H₈O₄','الأسبرين','aspirin']],
+ s:[['C₆H₆ + Cl₂ →(FeCl₃) C₆H₅Cl + HCl','Chlorination','كلورة','+ Cl₂ / FeCl₃'],
+    ['C₆H₅Cl + NaOH →(300°C , 300 atm) C₆H₅OH + NaCl','Chlorobenzene → phenol','كلورو بنزين ← فينول','NaOH / T,P'],
+    ['Phenol + CO₂/NaOH →(Kolbe-type route) salicylic acid','Get salicylic acid','تحضير الساليسيليك','Kolbe'],
+    ['Salicylic acid + CH₃COOH →(H⁺) aspirin + H₂O','Esterification (acetylation)','أسترة (أستلة)','+ CH₃COOH']]},
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'picric acid', toAr:'حمض البكريك',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅Cl','كلورو بنزين','chlorobenzene'],['C₆H₅OH','الفينول','phenol'],['C₆H₂(NO₂)₃OH','حمض البكريك','picric acid']],
+ s:[['C₆H₆ + Cl₂ →(FeCl₃) C₆H₅Cl + HCl','Chlorination','كلورة','+ Cl₂ / FeCl₃'],
+    ['C₆H₅Cl + NaOH →(high T & P) C₆H₅OH + NaCl','Hydrolysis','تحلل','NaOH / T,P'],
+    ['C₆H₅OH + 3HNO₃ →(conc. H₂SO₄) C₆H₂(NO₂)₃OH + 3H₂O','Nitration of phenol','نيترة الفينول','+ 3HNO₃']]},
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'Bakelite', toAr:'الباكيليت',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅Cl','كلورو بنزين','chlorobenzene'],['C₆H₅OH','الفينول','phenol'],['Bakelite','الباكيليت','Bakelite']],
+ s:[['C₆H₆ + Cl₂ →(FeCl₃) C₆H₅Cl + HCl','Chlorination','كلورة','+ Cl₂ / FeCl₃'],
+    ['C₆H₅Cl + NaOH →(300°C , 300 atm) C₆H₅OH + NaCl','Phenol preparation','تحضير الفينول','NaOH / T,P'],
+    ['n C₆H₅OH + n HCHO →(Δ) Bakelite + n H₂O','Condensation polymerisation','بلمرة بالتكاثف','+ HCHO / Δ']]},
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'ethyl benzoate', toAr:'بنزوات الإيثيل',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅CH₃','التولوين','toluene'],['C₆H₅COOH','حمض البنزويك','benzoic acid'],['C₆H₅COOC₂H₅','الإستر','ester']],
+ s:[['C₆H₆ + CH₃Cl →(AlCl₃) C₆H₅CH₃ + HCl','Friedel–Crafts','فريدل-كرافتس','+ CH₃Cl / AlCl₃'],
+    ['C₆H₅CH₃ + 3(O) →(KMnO₄) C₆H₅COOH + H₂O','Side-chain oxidation','أكسدة السلسلة','3(O)'],
+    ['C₆H₅COOH + C₂H₅OH ⇌(conc. H₂SO₄) C₆H₅COOC₂H₅ + H₂O','Esterification','أسترة','+ C₂H₅OH']]},
+{g:'arom', fromEn:'toluene', fromAr:'التولوين', toEn:'benzene', toAr:'البنزين',
+ c:[['C₆H₅CH₃','التولوين','toluene'],['C₆H₅COOH','حمض البنزويك','benzoic acid'],['C₆H₅COONa','بنزوات الصوديوم','sodium benzoate'],['C₆H₆','البنزين','benzene']],
+ s:[['C₆H₅CH₃ + 3(O) →(KMnO₄) C₆H₅COOH + H₂O','Side-chain oxidation','أكسدة السلسلة','3(O)'],
+    ['C₆H₅COOH + NaOH → C₆H₅COONa + H₂O','Neutralisation','تعادل','+ NaOH'],
+    ['C₆H₅COONa + NaOH →(CaO , Δ) C₆H₆ + Na₂CO₃','Decarboxylation','نزع الكربوكسيل','soda lime / Δ']]},
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'benzamide', toAr:'البنزاميد',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅CH₃','التولوين','toluene'],['C₆H₅COOH','الحمض','acid'],['C₆H₅CONH₂','البنزاميد','benzamide']],
+ s:[['C₆H₆ + CH₃Cl →(AlCl₃) C₆H₅CH₃ + HCl','Friedel–Crafts','فريدل-كرافتس','+ CH₃Cl'],
+    ['C₆H₅CH₃ + 3(O) →(KMnO₄) C₆H₅COOH + H₂O','Oxidation','أكسدة','3(O)'],
+    ['C₆H₅COOH + NH₃ → salt →(Δ , –H₂O) C₆H₅CONH₂','Amide formation','تكوين أميد','+ NH₃ / Δ']]},
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'detergent', toAr:'منظف صناعي',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅SO₃H','حمض السلفونيك','sulphonic acid'],['R–C₆H₄–SO₃Na','المنظف','detergent']],
+ s:[['C₆H₆ + H₂SO₄(conc.) →(Δ) C₆H₅SO₃H + H₂O','Sulphonation','سلفنة','+ H₂SO₄ / Δ'],
+    ['Alkylation gives R–C₆H₄–SO₃H , then + NaOH → R–C₆H₄–SO₃Na','Neutralisation','تعادل','+ NaOH'],
+    ['Use: washing powders — works in hard water','Application','تطبيق','—']]},
+{g:'arom', fromEn:'phenol', fromAr:'الفينول', toEn:'TNB', toAr:'الـ TNB',
+ c:[['C₆H₅OH','الفينول','phenol'],['C₆H₅ONa','فينوكسيد الصوديوم','sodium phenoxide'],['C₆H₆','البنزين (مسار مبسط)','benzene'],['C₆H₃(NO₂)₃','TNB','TNB']],
+ s:[['C₆H₅OH + NaOH → C₆H₅ONa + H₂O','Phenol is acidic','الفينول حمضي','+ NaOH'],
+    ['Phenoxide → benzene via reduction route (Zn dust)','Reduction (Zn dust)','اختزال بغبار الزنك','Zn dust'],
+    ['C₆H₆ + 3HNO₃ →(conc. H₂SO₄ , Δ) C₆H₃(NO₂)₃ + 3H₂O','Trinitration','نيترة ثلاثية','+ 3HNO₃']]},
+{g:'arom', fromEn:'toluene', fromAr:'التولوين', toEn:'m-chlorobenzoic acid', toAr:'ميتا كلورو حمض البنزويك',
+ c:[['C₆H₅CH₃','التولوين','toluene'],['C₆H₅COOH','حمض البنزويك','benzoic acid'],['ClC₆H₄COOH','ميتا كلورو الحمض','m-chloro acid']],
+ s:[['C₆H₅CH₃ + 3(O) →(KMnO₄) C₆H₅COOH + H₂O','Side-chain oxidation first!','أكسدة السلسلة أولاً!','3(O)'],
+    ['C₆H₅COOH + Cl₂ →(FeCl₃) m-ClC₆H₄COOH + HCl','COOH directs meta','COOH موجه ميتا','+ Cl₂ / FeCl₃'],
+    ['Order matters: oxidise first so COOH directs the Cl to meta','Strategy note','ملاحظة استراتيجية','—']]},
+{g:'arom', fromEn:'toluene', fromAr:'التولوين', toEn:'o/p-chlorotoluene', toAr:'كلورو تولوين (أرثو/بارا)',
+ c:[['C₆H₅CH₃','التولوين','toluene'],['CH₃C₆H₄Cl','كلورو تولوين','chlorotoluene'],['+ compare','مقارنة مع الميتا','meta compare']],
+ s:[['C₆H₅CH₃ + Cl₂ →(FeCl₃) o/p-CH₃C₆H₄Cl + HCl','CH₃ directs o/p','CH₃ موجه أرثو/بارا','+ Cl₂ / FeCl₃'],
+    ['Contrast: chlorinate AFTER oxidation → meta product','Directing rules','قواعد التوجيه','—']]},
+
+/* Q41-50: acids & mixed */
+{g:'acid', fromEn:'lactic acid', fromAr:'حمض اللاكتيك', toEn:'sodium lactate', toAr:'لاكتات الصوديوم',
+ c:[['CH₃CH(OH)COOH','حمض اللاكتيك','lactic acid'],['CH₃CH(OH)COONa','اللاكتات','lactate'],['+ note','الـ OH لا يتفاعل','OH unaffected']],
+ s:[['CH₃CH(OH)COOH + NaOH → CH₃CH(OH)COONa + H₂O','Neutralisation (1 NaOH)','تعادل (1 NaOH)','+ NaOH'],
+    ['Only –COOH reacts; the alcoholic –OH is NOT acidic','Key concept','مفهوم أساسي','—']]},
+{g:'acid', fromEn:'ethanoic acid', fromAr:'حمض الإيثانويك', toEn:'ethyne', toAr:'الإيثاين',
+ c:[['CH₃COOH','الحمض','acid'],['CH₃COONa','الملح','salt'],['CH₄','الميثان','methane'],['HC≡CH','الإيثاين','ethyne']],
+ s:[['CH₃COOH + NaOH → CH₃COONa + H₂O','Neutralisation','تعادل','+ NaOH'],
+    ['CH₃COONa + NaOH →(CaO , Δ) CH₄↑ + Na₂CO₃','Decarboxylation','نزع الكربوكسيل','soda lime'],
+    ['2CH₄ →(1500°C , rapid cooling) HC≡CH + 3H₂','Pyrolysis','تكسير حراري','1500°C']]},
+{g:'acid', fromEn:'ethanoic acid', fromAr:'حمض الإيثانويك', toEn:'ethanol', toAr:'الإيثانول',
+ c:[['CH₃COOH','الحمض','acid'],['CH₃CH₂OH','الإيثانول','ethanol'],['+ check','طريقتان','2 routes']],
+ s:[['CH₃COOH + 2H₂ →(CuCrO₄ , 200°C) CH₃CH₂OH + H₂O','Direct reduction','اختزال مباشر','+ 2H₂ / CuCrO₄'],
+    ['Alt: acid → ester → hydrolysis, or via salt → CH₄ route','Alternative routes','مسارات بديلة','—']]},
+{g:'acid', fromEn:'oxalic acid', fromAr:'حمض الأوكساليك', toEn:'sodium oxalate', toAr:'أوكسالات الصوديوم',
+ c:[['HOOC–COOH','حمض الأوكساليك','oxalic acid'],['NaOOC–COONa','الأوكسالات','oxalate'],['+ rule','قاعدة 2NaOH','2NaOH rule']],
+ s:[['HOOC–COOH + 2NaOH → NaOOC–COONa + 2H₂O','Neutralisation (2 NaOH)','تعادل (2 NaOH)','+ 2NaOH'],
+    ['Dibasic acid: TWO carboxyl groups need TWO moles NaOH','Basicity rule','قاعدة القاعدية','—']]},
+{g:'acid', fromEn:'salicylic acid', fromAr:'حمض الساليسيليك', toEn:'aspirin and marookh oil', toAr:'الأسبرين وزيت الماروخ',
+ c:[['HOC₆H₄COOH','الساليسيليك','salicylic'],['C₉H₈O₄','الأسبرين','aspirin'],['HOC₆H₄COOCH₃','الماروخ','marookh']],
+ s:[['Salicylic + CH₃COOH →(H⁺) aspirin + H₂O (the phenolic OH esterifies)','To aspirin','إلى الأسبرين','+ CH₃COOH'],
+    ['Salicylic + CH₃OH →(H⁺) methyl salicylate + H₂O (the COOH esterifies)','To marookh oil','إلى زيت الماروخ','+ CH₃OH'],
+    ['Same acid, two esters — depends which group reacts!','Key concept','مفهوم أساسي','—']]},
+{g:'acid', fromEn:'benzoic acid', fromAr:'حمض البنزويك', toEn:'gammexane', toAr:'الجاميكسان',
+ c:[['C₆H₅COOH','حمض البنزويك','benzoic acid'],['C₆H₅COONa','البنزوات','benzoate'],['C₆H₆','البنزين','benzene'],['C₆H₆Cl₆','جاميكسان','gammexane']],
+ s:[['C₆H₅COOH + NaOH → C₆H₅COONa + H₂O','Neutralisation','تعادل','+ NaOH'],
+    ['C₆H₅COONa + NaOH →(CaO , Δ) C₆H₆ + Na₂CO₃','Decarboxylation','نزع الكربوكسيل','soda lime'],
+    ['C₆H₆ + 3Cl₂ →(UV) C₆H₆Cl₆','Addition (UV)','إضافة (UV)','+ 3Cl₂ / UV']]},
+{g:'acid', fromEn:'ethanoic acid', fromAr:'حمض الإيثانويك', toEn:'TNB', toAr:'الـ TNB',
+ c:[['CH₃COOH','الحمض','acid'],['CH₄','الميثان','methane'],['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene'],['C₆H₃(NO₂)₃','TNB','TNB']],
+ s:[['CH₃COOH + NaOH → CH₃COONa ; + NaOH →(CaO,Δ) CH₄↑','To methane','إلى الميثان','soda lime'],
+    ['2CH₄ →(1500°C) HC≡CH + 3H₂','Pyrolysis','تكسير حراري','1500°C'],
+    ['3HC≡CH →(Fe tube) C₆H₆','Polymerisation','بلمرة','Fe tube'],
+    ['C₆H₆ + 3HNO₃ →(conc. H₂SO₄ , Δ) C₆H₃(NO₂)₃ + 3H₂O','Trinitration','نيترة ثلاثية','+ 3HNO₃']]},
+{g:'acid', fromEn:'methyl ethanoate', fromAr:'إيثانوات الميثيل', toEn:'methane', toAr:'الميثان',
+ c:[['CH₃COOCH₃','الإستر','ester'],['CH₃COOH','الحمض','acid'],['CH₃COONa','الملح','salt'],['CH₄','الميثان','methane']],
+ s:[['CH₃COOCH₃ + H₂O →(dil. acid) CH₃COOH + CH₃OH','Ester hydrolysis','تحلل الإستر','+ H₂O / H⁺'],
+    ['CH₃COOH + NaOH → CH₃COONa + H₂O','Neutralisation','تعادل','+ NaOH'],
+    ['CH₃COONa + NaOH →(CaO , Δ) CH₄↑ + Na₂CO₃','Decarboxylation','نزع الكربوكسيل','soda lime']]},
+{g:'acid', fromEn:'citric acid', fromAr:'حمض الستريك', toEn:'trisodium citrate', toAr:'سترات الصوديوم الثلاثية',
+ c:[['C₆H₈O₇','حمض الستريك','citric acid'],['Na₃-citrate','السترات','citrate'],['+ rule','قاعدة 3NaOH','3NaOH rule']],
+ s:[['Citric acid (3 –COOH) + 3NaOH → trisodium citrate + 3H₂O','Neutralisation (3 NaOH)','تعادل (3 NaOH)','+ 3NaOH'],
+    ['Series: lactic 1 · oxalic 2 · citric 3 — count COOH!','Basicity ladder','سلم القاعدية','—']]},
+{g:'acid', fromEn:'fat (triglyceride)', fromAr:'الدهن (جليسريد ثلاثي)', toEn:'nitroglycerine', toAr:'النيتروجليسرين',
+ c:[['fat','الدهن','triglyceride'],['C₃H₅(OH)₃','الجليسرول','glycerol'],['C₃H₅(ONO₂)₃','نيتروجليسرين','TNG']],
+ s:[['Fat + 3NaOH →(Δ) glycerol + 3 soap (saponification)','Saponification','تصبن','+ 3NaOH / Δ'],
+    ['C₃H₅(OH)₃ + 3HNO₃ →(conc. H₂SO₄ , cold) C₃H₅(ONO₂)₃ + 3H₂O','Nitration ester','أسترة نيترية','+ 3HNO₃'],
+    ['Use: dynamite + heart medicine (widens arteries)','Application','تطبيق','—']]}
+/* Q51-60: aromatic -> aromatic */
+,{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'m-chloronitrobenzene', toAr:'ميتا كلورو نيترو البنزين',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅NO₂','نيترو البنزين','nitrobenzene'],['ClC₆H₄NO₂','ميتا كلورو نيترو','m-chloronitrobenzene']],
+ s:[['C₆H₆ + HNO₃ →(conc. H₂SO₄ , 50–60°C) C₆H₅NO₂ + H₂O','Nitration first!','النيترة أولاً!','+ HNO₃ / H₂SO₄'],
+    ['C₆H₅NO₂ + Cl₂ →(FeCl₃) m-ClC₆H₄NO₂ + HCl','NO₂ directs meta','NO₂ موجه ميتا','+ Cl₂ / FeCl₃']]},
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'o/p-chloronitrobenzene', toAr:'أرثو/بارا كلورو نيترو البنزين',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅Cl','كلورو البنزين','chlorobenzene'],['ClC₆H₄NO₂','أرثو/بارا المنتج','o/p product']],
+ s:[['C₆H₆ + Cl₂ →(FeCl₃) C₆H₅Cl + HCl','Chlorination first!','الكلورة أولاً!','+ Cl₂ / FeCl₃'],
+    ['C₆H₅Cl + HNO₃ →(conc. H₂SO₄) o/p-ClC₆H₄NO₂ + H₂O','Cl directs o/p','الكلور موجه أرثو/بارا','+ HNO₃ / H₂SO₄'],
+    ['Compare with Q51: order of steps decides the position!','Strategy','استراتيجية','—']]},
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'cresol (methyl phenol)', toAr:'الكريسول (ميثيل فينول)',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅Cl','كلورو البنزين','chlorobenzene'],['CH₃C₆H₄Cl','كلورو تولوين','chlorotoluene'],['CH₃C₆H₄OH','الكريسول','cresol']],
+ s:[['C₆H₆ + Cl₂ →(FeCl₃) C₆H₅Cl + HCl','Chlorination','كلورة','+ Cl₂ / FeCl₃'],
+    ['C₆H₅Cl + CH₃Cl →(AlCl₃ anhydrous) CH₃C₆H₄Cl + HCl','Friedel–Crafts','فريدل-كرافتس','+ CH₃Cl / AlCl₃'],
+    ['CH₃C₆H₄Cl + NaOH →(Δ , pressure) CH₃C₆H₄OH + NaCl','Hydrolysis','تحلل','NaOH / Δ,P']]},
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'salicylic acid', toAr:'حمض الساليسيليك',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅Cl','كلورو بنزين','chlorobenzene'],['CH₃C₆H₄Cl','كلورو تولوين','chlorotoluene'],['CH₃C₆H₄OH','الكريسول','cresol'],['HOC₆H₄COOH','الساليسيليك','salicylic acid']],
+ s:[['C₆H₆ + Cl₂ →(FeCl₃) C₆H₅Cl + HCl','Chlorination','كلورة','+ Cl₂'],
+    ['C₆H₅Cl + CH₃Cl →(AlCl₃) CH₃C₆H₄Cl + HCl','Friedel–Crafts','فريدل-كرافتس','+ CH₃Cl'],
+    ['CH₃C₆H₄Cl + NaOH →(Δ , P) CH₃C₆H₄OH + NaCl','Hydrolysis → cresol','تحلل ← كريسول','NaOH'],
+    ['CH₃C₆H₄OH + 3(O) →(O₂ / V₂O₅ , 400°C) HOC₆H₄COOH + H₂O','Side-chain oxidation','أكسدة السلسلة','O₂/V₂O₅']]},
+{g:'arom', fromEn:'toluene', fromAr:'التولوين', toEn:'sodium benzoate', toAr:'بنزوات الصوديوم',
+ c:[['C₆H₅CH₃','التولوين','toluene'],['C₆H₅COOH','حمض البنزويك','benzoic acid'],['C₆H₅COONa','البنزوات','benzoate']],
+ s:[['C₆H₅CH₃ + 3(O) →(KMnO₄) C₆H₅COOH + H₂O','Side-chain oxidation','أكسدة السلسلة الجانبية','3(O)'],
+    ['C₆H₅COOH + NaOH → C₆H₅COONa + H₂O','Neutralisation','تعادل','+ NaOH'],
+    ['Use: E211 preservative in soft drinks','Application','تطبيق','—']]},
+{g:'arom', fromEn:'phenol', fromAr:'الفينول', toEn:'Bakelite', toAr:'الباكيليت',
+ c:[['C₆H₅OH','الفينول','phenol'],['+ HCHO','الميثانال','methanal'],['Bakelite','الباكيليت','Bakelite']],
+ s:[['Methanal from methanol: CH₃OH + (O) →(Cu , Δ) HCHO + H₂O','Get methanal','تحضير الميثانال','(O) / Cu'],
+    ['n C₆H₅OH + n HCHO →(Δ , catalyst) Bakelite + n H₂O','Condensation polymerisation','بلمرة بالتكاثف','Δ'],
+    ['Thermoset: switches, plugs, pot handles','Application','تطبيق','—']]},
+{g:'arom', fromEn:'nitrobenzene', fromAr:'نيترو البنزين', toEn:'TNB', toAr:'الـ TNB',
+ c:[['C₆H₅NO₂','نيترو البنزين','nitrobenzene'],['C₆H₄(NO₂)₂','ثنائي النيترو','dinitrobenzene'],['C₆H₃(NO₂)₃','TNB','TNB']],
+ s:[['C₆H₅NO₂ + HNO₃ →(conc. H₂SO₄ , Δ) m-C₆H₄(NO₂)₂ + H₂O','2nd nitration (meta)','نيترة ثانية (ميتا)','+ HNO₃ / Δ'],
+    ['C₆H₄(NO₂)₂ + HNO₃ →(conc. H₂SO₄ , Δ) 1,3,5-C₆H₃(NO₂)₃ + H₂O','3rd nitration','نيترة ثالثة','+ HNO₃ / Δ'],
+    ['Each NO₂ directs the next to meta → 1,3,5 product','Directing logic','منطق التوجيه','—']]},
+{g:'arom', fromEn:'chlorobenzene', fromAr:'كلورو البنزين', toEn:'picric acid', toAr:'حمض البكريك',
+ c:[['C₆H₅Cl','كلورو البنزين','chlorobenzene'],['C₆H₅OH','الفينول','phenol'],['C₆H₂(NO₂)₃OH','حمض البكريك','picric acid']],
+ s:[['C₆H₅Cl + NaOH →(300°C , 300 atm) C₆H₅OH + NaCl','Hydrolysis','تحلل','NaOH / T,P'],
+    ['C₆H₅OH + 3HNO₃ →(conc. H₂SO₄) C₆H₂(NO₂)₃OH + 3H₂O','Trinitration of phenol','نيترة ثلاثية للفينول','+ 3HNO₃'],
+    ['OH activates the ring → easy trinitration at 2,4,6','Why phenol nitrates easily','لماذا يُنترت الفينول بسهولة','—']]},
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'cyclohexane', toAr:'الهكسان الحلقي',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₁₂','الهكسان الحلقي','cyclohexane'],['+ note','3π = 3H₂','3 mol H₂']],
+ s:[['C₆H₆ + 3H₂ →(Ni , Δ) C₆H₁₂','Catalytic hydrogenation','هدرجة حفزية','+ 3H₂ / Ni'],
+    ['Moles of H₂ = number of π bonds (benzene 3, naphthalene 5, anthracene 7)','π rule','قاعدة باي','—']]},
+{g:'arom', fromEn:'sodium benzoate', fromAr:'بنزوات الصوديوم', toEn:'nitrobenzene', toAr:'نيترو البنزين',
+ c:[['C₆H₅COONa','البنزوات','benzoate'],['C₆H₆','البنزين','benzene'],['C₆H₅NO₂','نيترو البنزين','nitrobenzene']],
+ s:[['C₆H₅COONa + NaOH →(CaO , Δ) C₆H₆ + Na₂CO₃','Decarboxylation','نزع الكربوكسيل','soda lime / Δ'],
+    ['C₆H₆ + HNO₃ →(conc. H₂SO₄ , 50–60°C) C₆H₅NO₂ + H₂O','Nitration','نيترة','+ HNO₃ / H₂SO₄']]},
+
+/* Q61-70: aliphatic -> aromatic crossover */
+{g:'cross', fromEn:'methane', fromAr:'الميثان', toEn:'toluene', toAr:'التولوين',
+ c:[['CH₄','الميثان','methane'],['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene'],['C₆H₅CH₃','التولوين','toluene']],
+ s:[['2CH₄ →(1500°C , rapid cooling) HC≡CH + 3H₂','Pyrolysis','تكسير حراري','1500°C'],
+    ['3HC≡CH →(red-hot Fe tube) C₆H₆','Cyclic polymerisation','بلمرة حلقية','Fe tube'],
+    ['C₆H₆ + CH₃Cl →(AlCl₃) C₆H₅CH₃ + HCl','Friedel–Crafts (CH₃Cl from CH₄ + Cl₂/UV)','فريدل-كرافتس','+ CH₃Cl / AlCl₃']]},
+{g:'cross', fromEn:'methane', fromAr:'الميثان', toEn:'nitrobenzene', toAr:'نيترو البنزين',
+ c:[['CH₄','الميثان','methane'],['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene'],['C₆H₅NO₂','نيترو البنزين','nitrobenzene']],
+ s:[['2CH₄ →(1500°C) HC≡CH + 3H₂','Pyrolysis','تكسير حراري','1500°C'],
+    ['3HC≡CH →(Fe tube) C₆H₆','Polymerisation','بلمرة','Fe tube'],
+    ['C₆H₆ + HNO₃ →(conc. H₂SO₄ , 50–60°C) C₆H₅NO₂ + H₂O','Nitration','نيترة','+ HNO₃']]},
+{g:'cross', fromEn:'calcium carbide', fromAr:'كربيد الكالسيوم', toEn:'phenol', toAr:'الفينول',
+ c:[['CaC₂','الكربيد','carbide'],['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene'],['C₆H₅Cl','كلورو بنزين','chlorobenzene'],['C₆H₅OH','الفينول','phenol']],
+ s:[['CaC₂ + 2H₂O → HC≡CH↑ + Ca(OH)₂','Hydrolysis','تحلل مائي','+ 2H₂O'],
+    ['3HC≡CH →(Fe tube) C₆H₆','Polymerisation','بلمرة','Fe tube'],
+    ['C₆H₆ + Cl₂ →(FeCl₃) C₆H₅Cl + HCl','Chlorination','كلورة','+ Cl₂ / FeCl₃'],
+    ['C₆H₅Cl + NaOH →(300°C , 300 atm) C₆H₅OH + NaCl','Hydrolysis','تحلل','NaOH / T,P']]},
+{g:'cross', fromEn:'calcium carbide', fromAr:'كربيد الكالسيوم', toEn:'picric acid', toAr:'حمض البكريك',
+ c:[['CaC₂','الكربيد','carbide'],['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene'],['C₆H₅OH','الفينول','phenol'],['C₆H₂(NO₂)₃OH','البكريك','picric acid']],
+ s:[['CaC₂ + 2H₂O → HC≡CH↑ + Ca(OH)₂','Hydrolysis','تحلل مائي','+ 2H₂O'],
+    ['3HC≡CH →(Fe tube) C₆H₆ ; then + Cl₂/FeCl₃ ; then NaOH(T,P)','To phenol (2 steps)','إلى الفينول','via C₆H₅Cl'],
+    ['C₆H₅OH + 3HNO₃ →(conc. H₂SO₄) picric acid + 3H₂O','Trinitration','نيترة ثلاثية','+ 3HNO₃']]},
+{g:'cross', fromEn:'ethanol', fromAr:'الإيثانول', toEn:'benzene', toAr:'البنزين',
+ c:[['C₂H₅OH','الإيثانول','ethanol'],['CH₃COOH','الحمض','acid'],['CH₄','الميثان','methane'],['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene']],
+ s:[['C₂H₅OH + 2(O) →(KMnO₄/H⁺) CH₃COOH + H₂O','Oxidation','أكسدة','2(O)'],
+    ['CH₃COOH + NaOH → CH₃COONa ; →(CaO , Δ) CH₄↑','Soda lime route','مسار الصودا الجيرية','soda lime'],
+    ['2CH₄ →(1500°C) HC≡CH + 3H₂','Pyrolysis','تكسير حراري','1500°C'],
+    ['3HC≡CH →(Fe tube) C₆H₆','Polymerisation','بلمرة','Fe tube']]},
+{g:'cross', fromEn:'sucrose', fromAr:'السكروز', toEn:'benzene', toAr:'البنزين',
+ c:[['C₁₂H₂₂O₁₁','السكروز','sucrose'],['C₂H₅OH','الإيثانول','ethanol'],['CH₄','الميثان','methane'],['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene']],
+ s:[['Sucrose →(invertase) glucose →(zymase) 2C₂H₅OH + 2CO₂','Hydrolysis + fermentation','تحلل + تخمر','enzymes'],
+    ['Ethanol →(oxidation , salt , soda lime) CH₄↑','To methane','إلى الميثان','3 sub-steps'],
+    ['2CH₄ →(1500°C) HC≡CH ; 3HC≡CH →(Fe tube) C₆H₆','Pyrolysis + polymerisation','تكسير + بلمرة','1500°C ثم Fe tube']]},
+{g:'cross', fromEn:'ethanoic acid', fromAr:'حمض الإيثانويك', toEn:'toluene', toAr:'التولوين',
+ c:[['CH₃COOH','الحمض','acid'],['CH₄','الميثان','methane'],['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene'],['C₆H₅CH₃','التولوين','toluene']],
+ s:[['CH₃COOH →(NaOH then soda lime , Δ) CH₄↑','Decarboxylation route','مسار نزع الكربوكسيل','soda lime'],
+    ['2CH₄ →(1500°C) HC≡CH ; 3HC≡CH →(Fe tube) C₆H₆','To benzene','إلى البنزين','1500°C / Fe tube'],
+    ['CH₄ + Cl₂ →(UV) CH₃Cl ; C₆H₆ + CH₃Cl →(AlCl₃) C₆H₅CH₃ + HCl','Friedel–Crafts','فريدل-كرافتس','+ CH₃Cl / AlCl₃']]},
+{g:'cross', fromEn:'ethyne', fromAr:'الإيثاين', toEn:'benzoic acid', toAr:'حمض البنزويك',
+ c:[['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene'],['C₆H₅CH₃','التولوين','toluene'],['C₆H₅COOH','حمض البنزويك','benzoic acid']],
+ s:[['3HC≡CH →(red-hot Fe tube) C₆H₆','Polymerisation','بلمرة','Fe tube'],
+    ['C₆H₆ + CH₃Cl →(AlCl₃) C₆H₅CH₃ + HCl','Friedel–Crafts','فريدل-كرافتس','+ CH₃Cl'],
+    ['C₆H₅CH₃ + 3(O) →(KMnO₄) C₆H₅COOH + H₂O','Side-chain oxidation','أكسدة السلسلة','3(O)']]},
+{g:'cross', fromEn:'methane', fromAr:'الميثان', toEn:'gammexane', toAr:'الجاميكسان',
+ c:[['CH₄','الميثان','methane'],['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene'],['C₆H₆Cl₆','جاميكسان','gammexane']],
+ s:[['2CH₄ →(1500°C) HC≡CH + 3H₂','Pyrolysis','تكسير حراري','1500°C'],
+    ['3HC≡CH →(Fe tube) C₆H₆','Polymerisation','بلمرة','Fe tube'],
+    ['C₆H₆ + 3Cl₂ →(UV) C₆H₆Cl₆','Addition (UV!)','إضافة (UV!)','+ 3Cl₂ / UV']]},
+{g:'cross', fromEn:'sodium ethanoate', fromAr:'إيثانوات الصوديوم', toEn:'TNT', toAr:'الـ TNT',
+ c:[['CH₃COONa','الإيثانوات','ethanoate'],['CH₄','الميثان','methane'],['C₆H₆','البنزين','benzene'],['C₆H₅CH₃','التولوين','toluene'],['TNT','TNT','TNT']],
+ s:[['CH₃COONa + NaOH →(CaO , Δ) CH₄↑ + Na₂CO₃','Decarboxylation','نزع الكربوكسيل','soda lime'],
+    ['2CH₄ →(1500°C) HC≡CH ; 3HC≡CH →(Fe tube) C₆H₆','To benzene','إلى البنزين','1500°C / Fe tube'],
+    ['C₆H₆ + CH₃Cl →(AlCl₃) C₆H₅CH₃','Friedel–Crafts','فريدل-كرافتس','+ CH₃Cl'],
+    ['C₆H₅CH₃ + 3HNO₃ →(conc. H₂SO₄ , Δ) TNT + 3H₂O','Trinitration','نيترة ثلاثية','+ 3HNO₃']]},
+
+/* Q71-80: aromatic -> aliphatic crossover */
+{g:'cross', fromEn:'benzene', fromAr:'البنزين', toEn:'methane', toAr:'الميثان',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅CH₃','التولوين','toluene'],['C₆H₅COOH','الحمض','acid'],['C₆H₅COONa','الملح','salt'],['CH₄ (via C₆H₆?)','ملاحظة','note']],
+ s:[['Direct route impossible — go via toluene side-chain!','Strategy','استراتيجية','—'],
+    ['C₆H₆ + CH₃Cl →(AlCl₃) C₆H₅CH₃ + HCl','Friedel–Crafts','فريدل-كرافتس','+ CH₃Cl'],
+    ['Side note: CH₃Cl itself comes from CH₄ + Cl₂/UV — the aliphatic bridge','Aliphatic bridge','الجسر الأليفاتي','CH₄ + Cl₂/UV']]},
+{g:'cross', fromEn:'toluene', fromAr:'التولوين', toEn:'methane', toAr:'الميثان',
+ c:[['C₆H₅CH₃','التولوين','toluene'],['C₆H₅COOH','حمض البنزويك','benzoic acid'],['C₆H₅COONa','البنزوات','benzoate'],['C₆H₆','البنزين','benzene']],
+ s:[['C₆H₅CH₃ + 3(O) →(KMnO₄) C₆H₅COOH + H₂O','Side-chain oxidation','أكسدة السلسلة','3(O)'],
+    ['C₆H₅COOH + NaOH → C₆H₅COONa + H₂O','Neutralisation','تعادل','+ NaOH'],
+    ['C₆H₅COONa + NaOH →(CaO , Δ) C₆H₆ + Na₂CO₃ (benzene NOT methane — ring stays!)','Decarboxylation gives benzene','نزع الكربوكسيل يعطي بنزين','soda lime']]},
+{g:'cross', fromEn:'benzoic acid', fromAr:'حمض البنزويك', toEn:'ethyne', toAr:'الإيثاين',
+ c:[['C₆H₅COOH','حمض البنزويك','benzoic acid'],['C₆H₆','البنزين','benzene'],['HC≡CH','الإيثاين','ethyne'],['+ note','عكس البلمرة صعب','reverse note']],
+ s:[['C₆H₅COOH + NaOH → salt ; salt + NaOH →(CaO,Δ) C₆H₆','To benzene','إلى البنزين','soda lime'],
+    ['C₆H₆ →(1000°C cracking, industrial) 3HC≡CH (reverse of polymerisation — hard conditions)','Cracking of benzene','تكسير البنزين','1000°C'],
+    ['Exam note: usually conversions go ethyne → benzene, the reverse is rarely asked','Note','ملاحظة','—']]},
+{g:'cross', fromEn:'phenol', fromAr:'الفينول', toEn:'ethanol', toAr:'الإيثانول',
+ c:[['C₆H₅OH','الفينول','phenol'],['C₆H₆','البنزين','benzene'],['HC≡CH','الإيثاين (مسار طويل)','ethyne'],['CH₂=CH₂','الإيثين','ethene'],['C₂H₅OH','الإيثانول','ethanol']],
+ s:[['Phenol →(Zn dust , Δ) benzene + ZnO','Reduction by Zn dust','اختزال بغبار الزنك','Zn dust'],
+    ['C₆H₆ →(cracking 1000°C) 3HC≡CH','Cracking','تكسير','1000°C'],
+    ['HC≡CH + H₂ →(Ni) CH₂=CH₂ ; + H₂O →(dil. H₂SO₄) C₂H₅OH','Hydrogenation + hydration','هدرجة + إماهة','+ H₂ ثم + H₂O']]},
+{g:'cross', fromEn:'benzene', fromAr:'البنزين', toEn:'ethanoic acid', toAr:'حمض الإيثانويك',
+ c:[['C₆H₆','البنزين','benzene'],['HC≡CH','الإيثاين','ethyne'],['CH₃CHO','الإيثانال','ethanal'],['CH₃COOH','الحمض','acid']],
+ s:[['C₆H₆ →(cracking , 1000°C) 3HC≡CH','Cracking','تكسير','1000°C'],
+    ['HC≡CH + H₂O →(H₂SO₄/HgSO₄ , 60°C) CH₃CHO','Kucherov','كوتشيروف','H₂SO₄/HgSO₄'],
+    ['CH₃CHO + (O) →(KMnO₄/H⁺) CH₃COOH','Oxidation','أكسدة','(O)']]},
+{g:'cross', fromEn:'gammexane', fromAr:'الجاميكسان', toEn:'phenol', toAr:'الفينول',
+ c:[['C₆H₆Cl₆','جاميكسان','gammexane'],['C₆H₆','البنزين','benzene'],['C₆H₅Cl','كلورو بنزين','chlorobenzene'],['C₆H₅OH','الفينول','phenol']],
+ s:[['C₆H₆Cl₆ →(Δ , –3HCl , then dehalogenation) C₆H₆ (regenerate ring)','Recover benzene','استرجاع البنزين','Δ'],
+    ['C₆H₆ + Cl₂ →(FeCl₃ , dark!) C₆H₅Cl + HCl','Substitution (dark)','استبدال (ظلام)','+ Cl₂ / FeCl₃'],
+    ['C₆H₅Cl + NaOH →(300°C , 300 atm) C₆H₅OH + NaCl','Hydrolysis','تحلل','NaOH / T,P']]},
+{g:'cross', fromEn:'toluene', fromAr:'التولوين', toEn:'ethyl benzoate', toAr:'بنزوات الإيثيل',
+ c:[['C₆H₅CH₃','التولوين','toluene'],['C₆H₅COOH','حمض البنزويك','benzoic acid'],['+ C₂H₅OH','من الإيثين','from ethene'],['C₆H₅COOC₂H₅','الإستر','ester']],
+ s:[['C₆H₅CH₃ + 3(O) →(KMnO₄) C₆H₅COOH + H₂O','Side-chain oxidation','أكسدة السلسلة','3(O)'],
+    ['Ethanol from ethene: CH₂=CH₂ + H₂O →(dil. H₂SO₄) C₂H₅OH','Aliphatic partner','الشريك الأليفاتي','+ H₂O'],
+    ['C₆H₅COOH + C₂H₅OH ⇌(conc. H₂SO₄) C₆H₅COOC₂H₅ + H₂O','Esterification','أسترة','+ C₂H₅OH / H⁺']]},
+{g:'cross', fromEn:'benzene', fromAr:'البنزين', toEn:'methyl benzoate', toAr:'بنزوات الميثيل',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅CH₃','التولوين','toluene'],['C₆H₅COOH','الحمض','acid'],['C₆H₅COOCH₃','بنزوات الميثيل','methyl benzoate']],
+ s:[['C₆H₆ + CH₃Cl →(AlCl₃) C₆H₅CH₃ + HCl','Friedel–Crafts','فريدل-كرافتس','+ CH₃Cl'],
+    ['C₆H₅CH₃ + 3(O) →(KMnO₄) C₆H₅COOH + H₂O','Oxidation','أكسدة','3(O)'],
+    ['C₆H₅COOH + CH₃OH ⇌(conc. H₂SO₄) C₆H₅COOCH₃ + H₂O','Esterification with methanol','أسترة مع الميثانول','+ CH₃OH / H⁺']]},
+{g:'cross', fromEn:'ethene', fromAr:'الإيثين', toEn:'ethyl benzoate', toAr:'بنزوات الإيثيل',
+ c:[['CH₂=CH₂','الإيثين','ethene'],['C₂H₅OH','الإيثانول','ethanol'],['+ benzoic','حمض البنزويك','benzoic acid'],['C₆H₅COOC₂H₅','الإستر','ester']],
+ s:[['CH₂=CH₂ + H₂O →(dil. H₂SO₄) C₂H₅OH','Hydration','إماهة','+ H₂O'],
+    ['Benzoic acid from toluene oxidation (aromatic partner)','Aromatic partner','الشريك الأروماتي','3(O)'],
+    ['C₆H₅COOH + C₂H₅OH ⇌(conc. H₂SO₄) C₆H₅COOC₂H₅ + H₂O','Esterification','أسترة','+ H⁺']]},
+{g:'cross', fromEn:'ethanol', fromAr:'الإيثانول', toEn:'aspirin', toAr:'الأسبرين',
+ c:[['C₂H₅OH','الإيثانول','ethanol'],['CH₃COOH','حمض الإيثانويك','ethanoic acid'],['+ salicylic','حمض الساليسيليك','salicylic acid'],['C₉H₈O₄','الأسبرين','aspirin']],
+ s:[['C₂H₅OH + 2(O) →(KMnO₄/H⁺) CH₃COOH + H₂O','Oxidation','أكسدة','2(O)'],
+    ['Salicylic acid from phenol chemistry (aromatic partner)','Aromatic partner','الشريك الأروماتي','—'],
+    ['Salicylic + CH₃COOH →(H⁺) aspirin + H₂O','Esterification (acetylation)','أسترة (أستلة)','+ H⁺']]},
+
+/* Q81-90: harder aromatic strategy questions */
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'m-nitrobenzoic acid', toAr:'ميتا نيترو حمض البنزويك',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅CH₃','التولوين','toluene'],['C₆H₅COOH','حمض البنزويك','benzoic acid'],['O₂NC₆H₄COOH','ميتا نيترو الحمض','m-nitro acid']],
+ s:[['C₆H₆ + CH₃Cl →(AlCl₃) C₆H₅CH₃ + HCl','Friedel–Crafts','فريدل-كرافتس','+ CH₃Cl'],
+    ['C₆H₅CH₃ + 3(O) →(KMnO₄) C₆H₅COOH + H₂O','Oxidise FIRST','أكسد أولاً','3(O)'],
+    ['C₆H₅COOH + HNO₃ →(conc. H₂SO₄) m-O₂NC₆H₄COOH + H₂O','COOH directs meta','COOH موجه ميتا','+ HNO₃']]},
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'o/p-nitrotoluene', toAr:'أرثو/بارا نيترو التولوين',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅CH₃','التولوين','toluene'],['CH₃C₆H₄NO₂','نيترو التولوين','nitrotoluene']],
+ s:[['C₆H₆ + CH₃Cl →(AlCl₃) C₆H₅CH₃ + HCl','Friedel–Crafts','فريدل-كرافتس','+ CH₃Cl'],
+    ['C₆H₅CH₃ + HNO₃ →(conc. H₂SO₄ , 50–60°C) o/p-CH₃C₆H₄NO₂ + H₂O','CH₃ directs o/p','CH₃ موجه أرثو/بارا','+ HNO₃'],
+    ['Compare Q81: oxidise first → meta · nitrate first → o/p','Order strategy','استراتيجية الترتيب','—']]},
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'benzenesulphonic acid', toAr:'حمض البنزين سلفونيك',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅SO₃H','حمض السلفونيك','sulphonic acid'],['+ use','منظفات','detergents']],
+ s:[['C₆H₆ + H₂SO₄(conc.) →(Δ) C₆H₅SO₃H + H₂O','Sulphonation','سلفنة','+ H₂SO₄(c) / Δ'],
+    ['Route to phenol (alkali fusion) and detergents','Applications','تطبيقات','—']]},
+{g:'arom', fromEn:'toluene', fromAr:'التولوين', toEn:'cresol', toAr:'الكريسول',
+ c:[['C₆H₅CH₃','التولوين','toluene'],['CH₃C₆H₄Cl','كلورو تولوين','chlorotoluene'],['CH₃C₆H₄OH','الكريسول','cresol']],
+ s:[['C₆H₅CH₃ + Cl₂ →(FeCl₃) o/p-CH₃C₆H₄Cl + HCl','Ring chlorination (o/p)','كلورة الحلقة','+ Cl₂ / FeCl₃'],
+    ['CH₃C₆H₄Cl + NaOH →(Δ , pressure) CH₃C₆H₄OH + NaCl','Hydrolysis','تحلل','NaOH / Δ,P'],
+    ['Cresol = methyl phenol — antiseptics (Dettol family)','Application','تطبيق','—']]},
+{g:'arom', fromEn:'cresol', fromAr:'الكريسول', toEn:'aspirin', toAr:'الأسبرين',
+ c:[['CH₃C₆H₄OH','الكريسول','cresol'],['HOC₆H₄COOH','حمض الساليسيليك','salicylic acid'],['C₉H₈O₄','الأسبرين','aspirin']],
+ s:[['CH₃C₆H₄OH + 3(O) →(O₂ / V₂O₅ , 400°C) HOC₆H₄COOH + H₂O','Side-chain oxidation','أكسدة السلسلة','O₂/V₂O₅'],
+    ['HOC₆H₄COOH + CH₃COOH →(H⁺) aspirin + H₂O','Acetylation','أستلة','+ CH₃COOH'],
+    ['This is the ministry model-exam route (Z = cresol)!','Exam note','ملاحظة امتحانية','—']]},
+{g:'arom', fromEn:'cresol', fromAr:'الكريسول', toEn:'marookh oil', toAr:'زيت الماروخ',
+ c:[['CH₃C₆H₄OH','الكريسول','cresol'],['HOC₆H₄COOH','الساليسيليك','salicylic'],['HOC₆H₄COOCH₃','الماروخ','marookh']],
+ s:[['CH₃C₆H₄OH + 3(O) →(O₂/V₂O₅ , 400°C) HOC₆H₄COOH + H₂O','Oxidation to salicylic','أكسدة إلى الساليسيليك','O₂/V₂O₅'],
+    ['HOC₆H₄COOH + CH₃OH →(H⁺) HOC₆H₄COOCH₃ + H₂O','Esterification','أسترة','+ CH₃OH'],
+    ['Hydrolysis of marookh oil regenerates salicylic acid','Reverse note','ملاحظة عكسية','+ H₂O / H⁺']]},
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'propylbenzene', toAr:'بروبيل البنزين',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅C₃H₇','بروبيل البنزين','propylbenzene'],['+ source','من البروبين','from propene']],
+ s:[['Propyl chloride from propane: C₃H₈ + Cl₂ →(UV) C₃H₇Cl + HCl','Aliphatic partner','الشريك الأليفاتي','+ Cl₂/UV'],
+    ['C₆H₆ + C₃H₇Cl →(AlCl₃) C₆H₅C₃H₇ + HCl','Friedel–Crafts','فريدل-كرافتس','+ C₃H₇Cl / AlCl₃']]},
+{g:'arom', fromEn:'benzene', fromAr:'البنزين', toEn:'diphenylmethane', toAr:'ثنائي فينيل الميثان',
+ c:[['C₆H₆','البنزين','benzene'],['C₆H₅CH₂Cl','كلوريد البنزيل','benzyl chloride'],['C₆H₅CH₂C₆H₅','ثنائي فينيل الميثان','diphenylmethane']],
+ s:[['Benzyl chloride: C₆H₅CH₃ + Cl₂ →(UV , side-chain!) C₆H₅CH₂Cl + HCl','Side-chain chlorination (UV)','كلورة السلسلة (UV)','+ Cl₂/UV'],
+    ['C₆H₆ + C₆H₅CH₂Cl →(AlCl₃) C₆H₅CH₂C₆H₅ + HCl','Friedel–Crafts','فريدل-كرافتس','+ AlCl₃'],
+    ['UV on toluene hits the CH₃; FeCl₃/dark hits the ring!','UV vs FeCl₃ rule','قاعدة UV مقابل FeCl₃','—']]},
+{g:'arom', fromEn:'naphthalene', fromAr:'النفثالين', toEn:'decalin (fully saturated)', toAr:'الديكالين (مشبع كلياً)',
+ c:[['C₁₀H₈','النفثالين','naphthalene'],['C₁₀H₁₈','الديكالين','decalin'],['+ rule','5π = 5H₂','5 mol H₂']],
+ s:[['C₁₀H₈ + 5H₂ →(Ni , Δ) C₁₀H₁₈','Catalytic hydrogenation','هدرجة حفزية','+ 5H₂ / Ni'],
+    ['π bonds = 5 → moles H₂ = 5 (compare benzene 3, anthracene 7)','π counting rule','قاعدة عد باي','—']]},
+{g:'arom', fromEn:'anthracene', fromAr:'الأنثراسين', toEn:'perhydroanthracene', toAr:'الأنثراسين المشبع',
+ c:[['C₁₄H₁₀','الأنثراسين','anthracene'],['C₁₄H₂₄','المشبع كلياً','saturated'],['+ rule','7π = 7H₂','7 mol H₂']],
+ s:[['C₁₄H₁₀ + 7H₂ →(Ni , Δ) C₁₄H₂₄','Catalytic hydrogenation','هدرجة حفزية','+ 7H₂ / Ni'],
+    ['7 π bonds → 7 moles H₂ — the saturation series 3·5·6·7','Series rule','قاعدة السلسلة','—']]},
+
+/* Q91-100: mixed long chains & exam-model style */
+{g:'cross', fromEn:'calcium carbide', fromAr:'كربيد الكالسيوم', toEn:'aspirin', toAr:'الأسبرين',
+ c:[['CaC₂','الكربيد','carbide'],['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene'],['C₆H₅OH','الفينول','phenol'],['C₉H₈O₄','الأسبرين','aspirin']],
+ s:[['CaC₂ + 2H₂O → HC≡CH↑ + Ca(OH)₂','Hydrolysis','تحلل مائي','+ 2H₂O'],
+    ['3HC≡CH →(Fe tube) C₆H₆ ; + Cl₂/FeCl₃ ; + NaOH(T,P) → C₆H₅OH','To phenol','إلى الفينول','3 sub-steps'],
+    ['Phenol → salicylic acid (Kolbe) ; + CH₃COOH →(H⁺) aspirin','To aspirin','إلى الأسبرين','+ CH₃COOH'],
+    ['Full chain: carbide → ethyne → benzene → phenol → salicylic → aspirin','Summary','الملخص','5 stages']]},
+{g:'cross', fromEn:'methane', fromAr:'الميثان', toEn:'Bakelite', toAr:'الباكيليت',
+ c:[['CH₄','الميثان','methane'],['HCHO','الميثانال','methanal'],['+ phenol','الفينول','phenol'],['Bakelite','الباكيليت','Bakelite']],
+ s:[['CH₄ + Cl₂ →(UV) CH₃Cl ; + KOH(aq) → CH₃OH','Methane → methanol','ميثان ← ميثانول','عبر CH₃Cl'],
+    ['CH₃OH + (O) →(Cu , Δ) HCHO + H₂O','Partial oxidation','أكسدة جزئية','(O)/Cu'],
+    ['Phenol from benzene chemistry (other branch from CH₄!)','Phenol branch','فرع الفينول','via C₆H₆'],
+    ['n C₆H₅OH + n HCHO →(Δ) Bakelite + n H₂O','Condensation polymerisation','بلمرة بالتكاثف','Δ']]},
+{g:'cross', fromEn:'ethyne', fromAr:'الإيثاين', toEn:'Dacron', toAr:'الداكرون',
+ c:[['HC≡CH','الإيثاين','ethyne'],['CH₂=CH₂','الإيثين','ethene'],['CH₂OH–CH₂OH','الجليكول','glycol'],['Dacron','الداكرون','Dacron']],
+ s:[['HC≡CH + H₂ →(Ni , Δ) CH₂=CH₂','Partial hydrogenation','هدرجة جزئية','+ H₂/Ni'],
+    ['CH₂=CH₂ + (O) + H₂O →(cold KMnO₄) CH₂OH–CH₂OH','Baeyer (glycol)','باير (جليكول)','cold KMnO₄'],
+    ['Glycol + terephthalic acid →(Δ) Dacron + 2n H₂O','Condensation polymerisation','بلمرة بالتكاثف','Δ']]},
+{g:'cross', fromEn:'benzene', fromAr:'البنزين', toEn:'soap-free detergent', toAr:'منظف صناعي (بديل الصابون)',
+ c:[['C₆H₆','البنزين','benzene'],['R–C₆H₅','ألكيل بنزين','alkylbenzene'],['R–C₆H₄SO₃H','حمض السلفونيك','sulphonic'],['R–C₆H₄SO₃Na','المنظف','detergent']],
+ s:[['C₆H₆ + R–Cl →(AlCl₃) R–C₆H₅ + HCl','Friedel–Crafts alkylation','ألكلة فريدل-كرافتس','+ R–Cl / AlCl₃'],
+    ['R–C₆H₅ + H₂SO₄(conc.) →(Δ) R–C₆H₄SO₃H + H₂O','Sulphonation','سلفنة','+ H₂SO₄'],
+    ['R–C₆H₄SO₃H + NaOH → R–C₆H₄SO₃Na + H₂O','Neutralisation','تعادل','+ NaOH']]},
+{g:'cross', fromEn:'glucose', fromAr:'الجلوكوز', toEn:'ethyl benzoate', toAr:'بنزوات الإيثيل',
+ c:[['C₆H₁₂O₆','الجلوكوز','glucose'],['C₂H₅OH','الإيثانول','ethanol'],['+ benzoic','حمض البنزويك','benzoic acid'],['C₆H₅COOC₂H₅','الإستر','ester']],
+ s:[['C₆H₁₂O₆ →(zymase , 35°C) 2C₂H₅OH + 2CO₂↑','Fermentation','تخمر','zymase'],
+    ['Benzoic acid from toluene (aromatic partner)','Aromatic partner','الشريك الأروماتي','3(O)'],
+    ['C₆H₅COOH + C₂H₅OH ⇌(conc. H₂SO₄) ester + H₂O','Esterification','أسترة','+ H⁺']]},
+{g:'cross', fromEn:'sodium benzoate', fromAr:'بنزوات الصوديوم', toEn:'gammexane', toAr:'الجاميكسان',
+ c:[['C₆H₅COONa','البنزوات','benzoate'],['C₆H₆','البنزين','benzene'],['C₆H₆Cl₆','جاميكسان','gammexane']],
+ s:[['C₆H₅COONa + NaOH →(CaO , Δ) C₆H₆ + Na₂CO₃','Decarboxylation','نزع الكربوكسيل','soda lime'],
+    ['C₆H₆ + 3Cl₂ →(UV light!) C₆H₆Cl₆','Addition (UV)','إضافة (UV)','+ 3Cl₂ / UV'],
+    ['Contrast: FeCl₃/dark would give C₆H₅Cl (substitution)','UV vs dark','UV مقابل الظلام','—']]},
+{g:'cross', fromEn:'ethanol', fromAr:'الإيثانول', toEn:'TNB', toAr:'الـ TNB',
+ c:[['C₂H₅OH','الإيثانول','ethanol'],['CH₄','الميثان','methane'],['HC≡CH','الإيثاين','ethyne'],['C₆H₆','البنزين','benzene'],['TNB','TNB','TNB']],
+ s:[['Ethanol →(oxidation → salt → soda lime) CH₄↑','To methane','إلى الميثان','3 sub-steps'],
+    ['2CH₄ →(1500°C) HC≡CH ; 3HC≡CH →(Fe tube) C₆H₆','To benzene','إلى البنزين','1500°C / Fe tube'],
+    ['C₆H₆ + 3HNO₃ →(conc. H₂SO₄ , Δ) C₆H₃(NO₂)₃ + 3H₂O','Trinitration','نيترة ثلاثية','+ 3HNO₃']]},
+{g:'cross', fromEn:'toluene', fromAr:'التولوين', toEn:'methyl benzoate', toAr:'بنزوات الميثيل',
+ c:[['C₆H₅CH₃','التولوين','toluene'],['C₆H₅COOH','الحمض','acid'],['+ CH₃OH','من الميثان','from methane'],['C₆H₅COOCH₃','الإستر','ester']],
+ s:[['C₆H₅CH₃ + 3(O) →(KMnO₄) C₆H₅COOH + H₂O','Side-chain oxidation','أكسدة السلسلة','3(O)'],
+    ['Methanol: CH₄ + Cl₂ →(UV) CH₃Cl ; + KOH(aq) → CH₃OH','Aliphatic partner','الشريك الأليفاتي','عبر CH₃Cl'],
+    ['C₆H₅COOH + CH₃OH ⇌(conc. H₂SO₄) C₆H₅COOCH₃ + H₂O','Esterification','أسترة','+ H⁺']]},
+{g:'cross', fromEn:'phenol', fromAr:'الفينول', toEn:'sodium benzoate', toAr:'بنزوات الصوديوم',
+ c:[['C₆H₅OH','الفينول','phenol'],['C₆H₆','البنزين','benzene'],['C₆H₅CH₃','التولوين','toluene'],['C₆H₅COONa','البنزوات','benzoate']],
+ s:[['C₆H₅OH →(Zn dust , Δ) C₆H₆ + ZnO','Reduction by Zn dust','اختزال بغبار الزنك','Zn dust'],
+    ['C₆H₆ + CH₃Cl →(AlCl₃) C₆H₅CH₃ + HCl','Friedel–Crafts','فريدل-كرافتس','+ CH₃Cl'],
+    ['C₆H₅CH₃ + 3(O) →(KMnO₄) C₆H₅COOH ; + NaOH → C₆H₅COONa','Oxidation + neutralisation','أكسدة + تعادل','3(O) ثم NaOH']]},
+{g:'cross', fromEn:'calcium carbide', fromAr:'كربيد الكالسيوم', toEn:'marookh oil', toAr:'زيت الماروخ',
+ c:[['CaC₂','الكربيد','carbide'],['HC≡CH','الإيثاين','ethyne'],['C₆H₅OH','الفينول (عبر البنزين)','phenol'],['HOC₆H₄COOH','الساليسيليك','salicylic'],['HOC₆H₄COOCH₃','الماروخ','marookh']],
+ s:[['CaC₂ + 2H₂O → HC≡CH↑ + Ca(OH)₂','Hydrolysis','تحلل مائي','+ 2H₂O'],
+    ['Ethyne → benzene → chlorobenzene → phenol','To phenol','إلى الفينول','3 sub-steps'],
+    ['Phenol → salicylic acid (via cresol oxidation route or Kolbe)','To salicylic','إلى الساليسيليك','oxidation'],
+    ['Salicylic + CH₃OH →(H⁺) methyl salicylate + H₂O','Esterification','أسترة','+ CH₃OH / H⁺']]},
+
+/* Coal tar → benzene */
+{g:'arom', fromEn:'coal tar', fromAr:'قطران الفحم', toEn:'benzene', toAr:'البنزين',
+ c:[['coal tar','قطران الفحم','coal tar'],['C₆H₆','البنزين','benzene']],
+ s:[['Coal tar →(fractional distillation) C₆H₆','Fractional distillation','تقطير تجزيئي','fractional distillation'],
+    ['Note: benzene, toluene & xylene are all obtained from coal tar','Industrial note','ملاحظة صناعية','—']]},
+
+/* n-Hexane → benzene */
+{g:'arom', fromEn:'n-hexane', fromAr:'الهكسان العادي', toEn:'benzene', toAr:'البنزين',
+ c:[['CH₃(CH₂)₄CH₃','الهكسان العادي','n-hexane'],['C₆H₆','البنزين','benzene']],
+ s:[['CH₃(CH₂)₄CH₃ →(Pt/Al₂O₃ , 500°C) C₆H₆ + 4H₂↑','Catalytic reforming (hydroforming)','إعادة تشكيل حفزية','Pt , 500°C'],
+    ['Same as heptane → toluene: C₆ chain cyclises & aromatises','Rule','قاعدة','—']]},
+
+/* Phenol → benzene */
+{g:'arom', fromEn:'phenol', fromAr:'الفينول', toEn:'benzene', toAr:'البنزين',
+ c:[['C₆H₅OH','الفينول','phenol'],['C₆H₆','البنزين','benzene']],
+ s:[['C₆H₅OH + Zn →(distillation , Δ) C₆H₆ + ZnO','Reduction with Zn dust','اختزال بغبار الزنك','Zn dust , Δ'],
+    ['Phenol vapour is passed over heated zinc dust','Method','طريقة','—']]},
+
+/* Sodium benzoate → benzene */
+{g:'arom', fromEn:'sodium benzoate', fromAr:'بنزوات الصوديوم', toEn:'benzene', toAr:'البنزين',
+ c:[['C₆H₅COONa','بنزوات الصوديوم','sodium benzoate'],['C₆H₆','البنزين','benzene']],
+ s:[['C₆H₅COONa + NaOH →(CaO , Δ) C₆H₆ + Na₂CO₃','Decarboxylation','نزع الكربوكسيل','+ NaOH / CaO , Δ'],
+    ['Soda lime (NaOH+CaO) causes loss of CO₂ from the salt','Rule','قاعدة','—']]}
+];
+
+
+
+
+
+/* ===== families for filtering by starting material ===== */
+const FAMS = [
+ {id:'carbide', c:'#facc15', en:'From CaC₂ / methane', ar:'من الكربيد / الميثان'},
+ {id:'hydro',   c:'#38bdf8', en:'From hydrocarbons',   ar:'من الهيدروكربونات'},
+ {id:'alco',    c:'#34d399', en:'From alcohols / sugars', ar:'من الكحولات / السكريات'},
+ {id:'arom',    c:'#22d3ee', en:'From aromatics',      ar:'من الأروماتية'},
+ {id:'acid',    c:'#c084fc', en:'From acids / others', ar:'من الأحماض / أخرى'},
+ {id:'cross',   c:'#fb7185', en:'Aromatic ⇄ Aliphatic', ar:'أروماتي ⇄ أليفاتي'}
+];
+
+var LANG = 'en';
+function setBtnTxt(btn, open){
+  if (LANG === 'ar') btn.textContent = open ? '🙈 أخفِ الإجابة' : '👁 أظهر الإجابة';
+  else btn.textContent = open ? '🙈 Hide answer' : '👁 Show answer';
+}
+const $bank = document.getElementById('bank');
+function eqHTML(eq){
+  return eq.replace(/→\(([^)]*)\)/g, '<span class="cnd">$1</span> ⟶')
+           .replace(/⇌\(([^)]*)\)/g, '<span class="cnd">$1</span> ⇌');
+}
+function render(){
+  $bank.innerHTML = '';
+  QS.forEach((q,qi)=>{
+    const F = FAMS.find(f=>f.id===q.g) || FAMS[0];
+    const card = document.createElement('div');
+    card.className = 'qcard';
+    card.dataset.g = q.g;
+    card.style.setProperty('--qc', F.c);
+    const chainHTML = q.c.map((b,i)=>{
+      const last = i === q.c.length-1, first = i === 0;
+      const cls = first ? 'start' : (last ? 'target' : 'mystery');
+      const inner = (first||last)
+        ? `<div class="cf">${b[0]}</div><div class="cn">${b[2]}</div><div class="cnar">${b[1]}</div>`
+        : `<div class="cf mys">?</div><div class="cn rev" style="display:none">${b[2]}</div><div class="cnar rev" style="display:none">${b[1]}</div>`;
+      const arrow = last ? '' :
+        `<div class="carrow"><div class="cd">${q.s[i] ? (q.s[i][3]||'') : ''}</div><div class="aa">⟶</div><div class="rn"><span class="en-only">${q.s[i] ? q.s[i][1] : ''}</span><span class="ar-only">${q.s[i] ? q.s[i][2] : ''}</span></div></div>`;
+      return `<div class="cbox ${cls}" data-f="${b[0]}">${inner}</div>` + arrow;
+    }).join('');
+    const stepsHTML = q.s.map((st,si)=>`
+      <div class="astep">
+        <div class="sname"><span class="en">${si+1}. ${st[1]}</span><span class="ar">${si+1}. ${st[2]}</span></div>
+        <div class="seq">${eqHTML(st[0])}</div>
+      </div>`).join('');
+    card.innerHTML = `
+      <div class="qhead">
+        <div class="qnum">${qi+1}</div>
+        <div class="qtxt">
+          <div class="qen">How can you obtain <i>${q.toEn}</i> from <b>${q.fromEn}</b>?</div>
+          <div class="qar">كيف يمكنك الحصول على <i>${q.toAr}</i> من <b>${q.fromAr}</b>؟</div>
+        </div>
+        <div class="qmeta">
+          <span class="steps-chip"><span class="en-only" style="display:inline">${q.s.length} steps</span><span class="ar-only" style="display:none">${q.s.length} خطوات</span></span>
+          <button class="showbtn"></button>
+        </div>
+      </div>
+      <div class="chain">${chainHTML}</div>
+      <div class="answer">${stepsHTML}</div>`;
+    card.dataset.text = (q.fromEn+' '+q.toEn+' '+q.fromAr+' '+q.toAr+' '+q.c.map(b=>b[0]+' '+b[1]+' '+b[2]).join(' ')).toLowerCase();
+    const btn = card.querySelector('.showbtn');
+    setBtnTxt(btn, false);
+    btn.addEventListener('click', ()=>{
+      const open = card.classList.toggle('open');
+      setBtnTxt(btn, open);
+      card.querySelectorAll('.cbox.mystery').forEach(bx=>{
+        bx.querySelector('.mys').textContent = open ? bx.dataset.f : '?';
+        bx.querySelector('.mys').style.color = open ? '#fff' : '#64748b';
+        bx.querySelector('.mys').style.fontSize = open ? '15px' : '19px';
+        bx.querySelectorAll('.rev').forEach(r=>r.style.display = open ? '' : 'none');
+        bx.style.borderStyle = open ? 'solid' : 'dashed';
+        bx.style.borderColor = open ? '#4ade80' : '#475569';
+        bx.style.background = open ? 'rgba(16,185,129,.10)' : '#0d1117';
+      });
+    });
+    $bank.appendChild(card);
+  });
+  document.getElementById('count').textContent = QS.length + ' / ' + QS.length;
+}
+
+/* filters */
+let activeF = null;
+const $filters = document.getElementById('filters');
+FAMS.forEach(f=>{
+  const d = document.createElement('div');
+  d.className = 'pill'; d.dataset.f = f.id;
+  d.style.setProperty('--pc', f.c);
+  d.innerHTML = `<span class="dot"></span><span class="en">${f.en}</span><span class="ar">${f.ar}</span>`;
+  d.addEventListener('click', ()=>{
+    activeF = activeF === f.id ? null : f.id;
+    $filters.querySelectorAll('.pill').forEach(x=>x.classList.toggle('active', x.dataset.f===activeF));
+    applyVis();
+  });
+  $filters.appendChild(d);
+});
+function applyVis(){
+  const qy = document.getElementById('search').value.trim().toLowerCase();
+  let shown = 0;
+  document.querySelectorAll('.qcard').forEach(c=>{
+    const ok = (!activeF || c.dataset.g===activeF) && (!qy || c.dataset.text.includes(qy));
+    c.classList.toggle('hidden', !ok);
+    if (ok) shown++;
+  });
+  document.getElementById('empty').style.display = shown ? 'none' : 'block';
+  document.getElementById('count').textContent = shown + ' / ' + QS.length;
+}
+document.getElementById('search').addEventListener('input', applyVis);
+document.getElementById('btnAll').addEventListener('click', ()=>{
+  document.querySelectorAll('.qcard:not(.hidden):not(.open) .showbtn').forEach(b=>b.click());
+});
+document.getElementById('btnNone').addEventListener('click', ()=>{
+  document.querySelectorAll('.qcard.open .showbtn').forEach(b=>b.click());
+});
+document.getElementById('btnLang').addEventListener('click', function(){
+  LANG = (LANG === 'en') ? 'ar' : 'en';
+  this.textContent = (LANG === 'en') ? '🌐 عربي' : '🌐 English';
+  this.classList.toggle('gold', LANG === 'ar');
+  document.body.classList.toggle('lang-ar', LANG === 'ar');
+  document.querySelectorAll('.steps-chip').forEach(ch=>{
+    ch.querySelector('.en-only').style.display = LANG==='ar' ? 'none' : 'inline';
+    ch.querySelector('.ar-only').style.display = LANG==='ar' ? 'inline' : 'none';
+  });
+  document.querySelectorAll('.qcard').forEach(c=>{
+    setBtnTxt(c.querySelector('.showbtn'), c.classList.contains('open'));
+  });
+  document.getElementById('btnAll').textContent = LANG==='ar' ? '👁 أظهر كل الإجابات' : '👁 Show all answers';
+  document.getElementById('btnNone').textContent = LANG==='ar' ? '🙈 أخفِ الكل' : '🙈 Hide all';
+  document.getElementById('search').placeholder = LANG==='ar' ? '🔍 بحث عن سؤال / مركب…' : '🔍 search question / compound…';
+});
+document.getElementById('btnPrint').addEventListener('click', ()=>window.print());
+render();
+</script>
+<div class="brandfoot"><span class="fline1"><span class="fname">أ/ أيمن منصور — مستشار الكيمياء</span><span class="sep">|</span><span class="fname2">Prof./ Ayman Mansour — Chemistry Consultant</span></span><span class="fline2"><span class="fphone">📞 / WhatsApp: <b>01068018005</b> · <b>01287996430</b></span><span class="sep">|</span><span>كيمياء ٢٠٢٦ • Chemistry 2026</span></span></div>
+<div id="security-overlay" class="security-overlay">
+    <div style="font-size:3rem">🛡</div>
+    <div>Screen Recording / Copying Disabled</div>
+    <div class="ar">تم تعطيل تصوير الشاشة / النسخ</div>
+</div>
+
+<script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => { e.preventDefault(); });
+    document.addEventListener('keydown', e => {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 's' || e.key === 'u' || e.key === 'a')) {
+            e.preventDefault();
+        }
+    });
+    document.addEventListener('keyup', e => {
+        if (e.key === 'PrintScreen') { try { navigator.clipboard.writeText(''); } catch(_){} }
+    });
+    window.addEventListener('blur', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'flex';
+    });
+    window.addEventListener('focus', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'none';
+    });
+</script>
+
+</body>
+</html>

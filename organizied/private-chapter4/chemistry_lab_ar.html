@@ -1,0 +1,2226 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مختبر الكيمياء | كود الكيمياء</title>
+    <style>
+        :root {
+            --bg-deep: #050810;
+            --bg-card: #0c1424;
+            --bg-elevated: #131e35;
+            --text-bright: #f1f5f9;
+            --text-muted: #64748b;
+            --text-soft: #94a3b8;
+            
+            --galvanic: #06b6d4;
+            --electrolytic: #f97316;
+            --organic: #a855f7;
+            --battery: #facc15;
+            
+            --anode: #ef4444;
+            --cathode: #3b82f6;
+            --total: #10b981;
+            
+            --border: #1e2a44;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Cairo', 'Noto Sans Arabic', 'Inter', system-ui, sans-serif;
+            background: var(--bg-deep);
+            background-image: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(6,182,212,0.15), transparent),
+                radial-gradient(ellipse 80% 50% at 80% 50%, rgba(168,85,247,0.08), transparent),
+                radial-gradient(ellipse 80% 50% at 20% 80%, rgba(249,115,22,0.08), transparent);
+            color: var(--text-bright);
+            padding: 2.5rem 2rem;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+ 
+  .site-footer{
+    position:fixed;bottom:0;left:0;right:0;z-index:1000;
+    background:linear-gradient(90deg,#0c4a6e,#0369a1,#0284c7);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    gap:16px;
+    padding:5px 16px;
+    height:46px;
+    box-shadow:0 -3px 18px rgba(3,105,161,0.3);
+  }
+  .footer-label{
+    font-size:0.78rem;font-weight:600;opacity:0.8;
+    display:none;
+  }
+  .footer-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:5px 16px;border-radius:20px;
+    text-decoration:none;font-weight:700;font-size:0.82rem;
+    transition:all 0.3s;font-family:'Cairo',sans-serif;
+  }
+  .footer-btn.whatsapp{background:#25d366;color:#fff;}
+  .footer-btn.whatsapp:hover{background:#1da851;transform:translateY(-1px);}
+  .footer-btn.call{background:rgba(255,255,255,0.95);color:#0369a1;}
+  .footer-btn.call:hover{background:#e0f2fe;transform:translateY(-1px);}
+  .footer-prof{
+    font-size:0.75rem;font-weight:600;opacity:0.7;
+    position:absolute;left:16px;
+  }
+
+  @media(min-width:640px){
+    .footer-label{display:inline;}
+    .footer-prof{display:block;}
+  }
+        /* HEADER */
+        .hero {
+            text-align: center;
+             margin-top: 100px; padding: 3rem 2rem;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, rgba(12,20,36,0.8), rgba(19,30,53,0.4));
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--galvanic), var(--organic), var(--electrolytic), transparent);
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #06b6d4 0%, #a855f7 50%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            color: var(--text-soft);
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* TABLE OF CONTENTS */
+        .toc {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem auto 0;
+            max-width: 900px;
+        }
+
+        .toc a {
+            padding: 0.5rem 1.25rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 2rem;
+            color: var(--text-soft);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .toc a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* SECTION */
+        .section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(90deg, rgba(255,255,255,0.03), transparent);
+            border-left: 5px solid;
+            border-radius: 0 1rem 1rem 0;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+            width: 60px; height: 60px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.05);
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .section-title { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
+        .section-sub { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.25rem; }
+
+        .galvanic-section .section-header { border-color: var(--galvanic); }
+        .galvanic-section .section-title { color: var(--galvanic); }
+        .electrolytic-section .section-header { border-color: var(--electrolytic); }
+        .electrolytic-section .section-title { color: var(--electrolytic); }
+        .organic-section .section-header { border-color: var(--organic); }
+        .organic-section .section-title { color: var(--organic); }
+        .battery-section .section-header { border-color: var(--battery); }
+        .battery-section .section-title { color: var(--battery); }
+
+        /* CARDS */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(620px, 1fr));
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 700px) {
+            .container { grid-template-columns: 1fr; }
+            body { padding: 1rem; }
+        }
+
+        .card {
+            background: linear-gradient(160deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+            border-radius: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 
+                0 20px 50px -15px rgba(0,0,0,0.6),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, transparent, currentColor, transparent);
+        }
+
+        .card[data-type="galvanic"] { color: var(--galvanic); }
+        .card[data-type="electrolytic"] { color: var(--electrolytic); }
+        .card[data-type="organic"] { color: var(--organic); }
+        .card[data-type="battery"] { color: var(--battery); }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 
+                0 30px 60px -15px rgba(0,0,0,0.8),
+                0 0 30px -10px currentColor,
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .card-header {
+            padding: 1.5rem 2rem;
+            background: rgba(0,0,0,0.3);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-bright);
+        }
+
+        .card-badge {
+            font-size: 0.7rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: 1px solid currentColor;
+            background: rgba(255,255,255,0.03);
+            white-space: nowrap;
+        }
+
+        /* VISUAL CANVAS */
+        .card-visual {
+            background: 
+                radial-gradient(ellipse at center, rgba(255,255,255,0.02) 0%, transparent 70%),
+                #050810;
+            padding: 1.5rem;
+            height: 440px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .card-visual svg {
+            width: 100%;
+            height: 100%;
+            max-height: 410px;
+        }
+
+        /* CONTENT */
+        .card-content { padding: 1.75rem; display: flex; flex-direction: column; gap: 1.25rem; }
+
+        .reaction-tabs {
+            display: flex;
+            background: rgba(0,0,0,0.4);
+            border-radius: 0.75rem;
+            padding: 0.4rem;
+            gap: 0.4rem;
+            border: 1px solid var(--border);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: inherit;
+        }
+
+        .tab-btn:hover { color: var(--text-bright); background: rgba(255,255,255,0.04); }
+        .tab-btn.active.anode { background: rgba(239,68,68,0.15); color: #fca5a5; box-shadow: inset 0 0 0 1px rgba(239,68,68,0.3); }
+        .tab-btn.active.cathode { background: rgba(59,130,246,0.15); color: #93c5fd; box-shadow: inset 0 0 0 1px rgba(59,130,246,0.3); }
+        .tab-btn.active.total { background: rgba(16,185,129,0.15); color: #6ee7b7; box-shadow: inset 0 0 0 1px rgba(16,185,129,0.3); }
+
+        .reaction-display {
+            background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+            border-radius: 1rem;
+            padding: 1.5rem 1.75rem;
+            border-left: 5px solid;
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.35s;
+        }
+
+        .reaction-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.75rem;
+            font-weight: 800;
+            opacity: 0.9;
+        }
+
+        .reaction-formula {
+            font-size: 1.2rem;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-weight: 700;
+            color: var(--text-bright);
+            line-height: 1.5;
+            letter-spacing: 0;
+        }
+        
+        .reaction-meta {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-soft);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .display-anode { border-color: var(--anode); }
+        .display-anode .reaction-title { color: #fca5a5; }
+        .display-cathode { border-color: var(--cathode); }
+        .display-cathode .reaction-title { color: #93c5fd; }
+        .display-total { border-color: var(--total); }
+        .display-total .reaction-title { color: #6ee7b7; }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes flowElectron { to { stroke-dashoffset: -100; } }
+        @keyframes flowGas { to { stroke-dashoffset: -40; } }
+        @keyframes bubbleUp {
+            0% { transform: translateY(0) scale(0.4); opacity: 0; }
+            15% { opacity: 0.9; }
+            85% { opacity: 0.7; }
+            100% { transform: translateY(-90px) scale(1.4); opacity: 0; }
+        }
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); opacity: 0.4; }
+            50% { transform: translate(var(--dx, 25px), var(--dy, -8px)); opacity: 1; }
+        }
+        @keyframes flicker {
+            0%, 100% { transform: scaleY(1) scaleX(1) skewX(0deg); opacity: 1; filter: brightness(1); }
+            25% { transform: scaleY(1.08) scaleX(0.98) skewX(0.8deg); opacity: 0.97; filter: brightness(1.04); }
+            50% { transform: scaleY(0.96) scaleX(1.02) skewX(-0.8deg); opacity: 0.98; filter: brightness(0.97); }
+            75% { transform: scaleY(1.04) scaleX(1) skewX(0.5deg); opacity: 0.96; filter: brightness(1.02); }
+        }
+        @keyframes pulse { 0%, 100% { opacity: 0.5; r: 4; } 50% { opacity: 1; r: 6; } }
+        @keyframes shimmer { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }
+        @keyframes drop {
+            0% { transform: translateY(-15px); opacity: 0; }
+            30% { opacity: 1; }
+            100% { transform: translateY(40px); opacity: 0; }
+        }
+        @keyframes spinGlow {
+            0%, 100% { filter: drop-shadow(0 0 4px currentColor); }
+            50% { filter: drop-shadow(0 0 12px currentColor); }
+        }
+
+        .e-flow { stroke-dasharray: 12, 6; animation: flowElectron 1.5s linear infinite; }
+        .gas-flow { stroke-dasharray: 8, 4; animation: flowGas 1.2s linear infinite; }
+        .bubble { animation: bubbleUp 2.5s infinite ease-in; }
+        .bubble-2 { animation: bubbleUp 2.5s infinite ease-in 0.6s; }
+        .bubble-3 { animation: bubbleUp 2.5s infinite ease-in 1.2s; }
+        .bubble-4 { animation: bubbleUp 2.5s infinite ease-in 1.8s; }
+        .drift-r { --dx: 30px; animation: drift 3s infinite ease-in-out; }
+        .drift-l { --dx: -30px; animation: drift 3s infinite ease-in-out; }
+        .flame { animation: flicker 1.2s infinite ease-in-out; transform-origin: 50% 100%; filter: url(#flame-glow) drop-shadow(0 0 8px rgba(255, 107, 53, 0.6)); }
+        .pulse { animation: pulse 1.5s infinite ease-in-out; }
+        .shimmer { animation: shimmer 2s infinite ease-in-out; }
+        .water-drop { animation: drop 1.8s infinite ease-in; }
+        .glow { animation: spinGlow 2s infinite ease-in-out; }
+
+        /* Reusable SVG classes */
+        .glass-stroke { fill: rgba(120,180,255,0.04); stroke: rgba(200,230,255,0.4); stroke-width: 2; }
+        .label-name { fill: #cbd5e1; font-size: 12px; font-weight: 600; font-family: inherit; }
+        .label-small { fill: #94a3b8; font-size: 10px; font-family: inherit; }
+        .label-tag { fill: white; font-size: 12px; font-weight: 700; font-family: inherit; }
+    
+        :root {
+            --am-gold: #fbbf24;
+            --am-sky: #38bdf8;
+        }
+        .am-brandbar{position:fixed!important;top:12px!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;z-index:2000000!important;display:flex!important;align-items:center!important;gap:14px!important;width:min(1180px,calc(100% - 28px))!important;min-height:88px!important;border-radius:26px!important;padding:12px 18px!important;background:linear-gradient(135deg,rgba(7,11,20,.92),rgba(15,23,42,.94) 50%,rgba(17,24,39,.92))!important;border:1px solid rgba(56,189,248,.36)!important;box-shadow:0 18px 48px rgba(0,0,0,.46),inset 0 1px 0 rgba(255,255,255,.08)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;direction:rtl!important;}
+        .am-brandbar:before{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;background:linear-gradient(90deg,rgba(56,189,248,.55),rgba(167,139,250,.45),rgba(251,191,36,.38));opacity:.32;z-index:-1;filter:blur(10px);}
+        .am-brandbar .am-bphoto,.am-brandbar .am-blogo{width:70px!important;height:70px!important;flex:0 0 70px!important;display:block!important;}
+        .am-brandbar .am-bphoto{border-radius:50%!important;object-fit:cover!important;border:3px solid var(--am-gold)!important;box-shadow:0 0 0 4px rgba(251,191,36,.12),0 0 22px rgba(251,191,36,.36)!important;}
+        .am-brandbar .am-bnames{line-height:1.28!important;min-width:220px!important;}
+        .am-brandbar .am-bar{font-weight:1000!important;color:#fff!important;font-size:clamp(15px,1.4vw,19px)!important;}
+        .am-brandbar .am-ben{font-weight:900!important;color:#c4b5fd!important;font-size:clamp(11px,1vw,13px)!important;direction:ltr!important;text-align:left!important;}
+        .am-brandbar .am-bpage{margin-inline-start:auto!important;text-align:center!important;line-height:1.42!important;min-width:220px!important;}
+        .am-brandbar .am-pa{font-weight:1000!important;color:#facc15!important;font-size:clamp(14px,1.45vw,20px)!important;}
+        .am-brandbar .am-pe{font-weight:900!important;color:#7dd3fc!important;font-size:clamp(11px,1vw,13px)!important;direction:ltr!important;}
+        .am-brandbar .am-bexam{text-align:left!important;line-height:1.4!important;}
+        .am-brandbar .am-x1{font-weight:1000!important;color:#86efac!important;font-size:14px!important;}
+        .am-brandbar .am-x2{font-weight:850!important;color:#cbd5e1!important;font-size:11px!important;}
+        .am-brandbar a{color:#e0f2fe!important;text-decoration:none!important;}
+        @media(max-width:1100px){.am-brandbar{position:relative!important;top:auto!important;left:auto!important;right:auto!important;transform:none!important;margin:12px auto!important;width:min(100%,calc(100% - 20px))!important;flex-wrap:wrap!important;justify-content:center!important;text-align:center!important;}.am-brandbar .am-bpage,.am-brandbar .am-bexam{flex-basis:100%!important;text-align:center!important;min-width:0!important;}}
+        @media(max-width:700px){.am-brandbar{display:grid!important;grid-template-columns:58px 58px 1fr!important;gap:8px!important;padding:10px!important;border-radius:18px!important;}.am-brandbar .am-bphoto{width:54px!important;height:54px!important;flex-basis:54px!important;}.am-brandbar .am-bnames{min-width:0!important;text-align:left!important;}.am-brandbar .am-bpage,.am-brandbar .am-bexam{grid-column:1/-1!important;}}
+        @media print{.am-brandbar{display:none!important;}}
+
+    
+        /* FULL PAGE ZOOM MODAL */
+        .card-modal {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(6,13,27,0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            z-index: 3000000; display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+        }
+        .card-modal.show { opacity: 1; pointer-events: auto; }
+        .modal-content {
+            width: 95%; max-height: 95vh; max-width: 900px;
+            display: flex; justify-content: center; align-items: center;
+            transform: scale(0.95); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card-modal.show .modal-content { transform: scale(1); }
+        .modal-content .card {
+            width: 100%; height: auto; max-height: 90vh; overflow-y: auto;
+            border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            background: var(--bg-card); display: flex; flex-direction: column;
+        }
+        .modal-content .card svg {
+            width: 100%; max-height: 55vh; /* Allow space for reaction box */
+            box-shadow: none; border-radius: 0;
+        }
+        .modal-content .card-header {
+            flex-shrink: 0;
+        }
+        .modal-content .card-content {
+            flex-shrink: 0;
+        }
+        .close-modal {
+            position: absolute; top: 20px; right: 30px;
+            color: #fff; font-size: 40px; font-weight: bold; cursor: pointer;
+            transition: all 0.3s ease; z-index: 3000001;
+        }
+        .close-modal:hover { color: #ef4444; transform: scale(1.1) rotate(90deg); }
+        .zoomable-svg { cursor: pointer; transition: transform 0.3s ease; }
+        .zoomable-svg:hover { transform: scale(1.02); }
+
+    
+.watermark {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    pointer-events: none !important;
+    z-index: 9999999 !important;
+    user-select: none !important;
+    background-repeat: repeat !important;
+    background-size: 450px 300px !important;
+    background-attachment: fixed !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='300'%3E%3Ctext x='50%25' y='44%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='Arial,sans-serif' font-size='27' font-weight='900' fill='%23ffffff' opacity='0.13'%3EProf./ Ayman Mansour%3C/text%3E%3Ctext x='50%25' y='60%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='Arial,sans-serif' font-size='22' font-weight='900' fill='%23ffffff' opacity='0.10'%3E%D8%A3/ %D8%A3%D9%8A%D9%85%D9%86 %D9%85%D9%86%D8%B5%D9%88%D8%B1%3C/text%3E%3C/svg%3E") !important;
+}
+</style>
+<style id="typical-index-header">
+/* Typical first-page index header */
+.cc-topbar.typical-index-head{
+  position:fixed!important;top:10px!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;
+  width:min(1420px,calc(100% - 34px))!important;height:112px!important;z-index:9999!important;
+  display:grid!important;grid-template-columns:1.05fr .78fr 1.35fr auto!important;align-items:center!important;gap:22px!important;
+  padding:14px 22px!important;border-radius:28px!important;direction:ltr!important;
+  background:linear-gradient(135deg,rgba(15,23,42,.98),rgba(26,31,63,.96) 48%,rgba(17,24,39,.98))!important;
+  border:1px solid rgba(56,189,248,.38)!important;
+  box-shadow:0 18px 45px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08),0 0 24px rgba(56,189,248,.12)!important;
+  backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;overflow:hidden!important;
+}
+.cc-topbar.typical-index-head:before{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at 8% 50%,rgba(56,189,248,.20),transparent 30%),radial-gradient(circle at 92% 50%,rgba(251,191,36,.18),transparent 28%);}
+.typ-left,.typ-center,.typ-prof,.typ-images{position:relative;z-index:1}
+.typ-left{text-align:left;direction:ltr}
+.typ-center{text-align:center;direction:ltr}
+.typ-prof{text-align:right;direction:rtl}
+.typ-course{font-size:clamp(18px,1.7vw,23px);font-weight:1000;line-height:1.1;background:linear-gradient(90deg,#86efac,#7dd3fc,#fde68a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.typ-sub{margin-top:6px;color:#d7e3f3;font-weight:850;font-size:clamp(11px,.95vw,14px);line-height:1.3}
+.typ-main{font-size:clamp(24px,2.2vw,34px);font-weight:1000;line-height:1;color:#fff;letter-spacing:-.03em;text-shadow:0 2px 0 rgba(0,0,0,.22)}
+.typ-min{margin-top:9px;font-size:clamp(13px,1.05vw,17px);font-weight:950;color:#c4b5fd}
+.typ-prof-ar{font-size:clamp(20px,2vw,30px);font-weight:1000;line-height:1.05;color:#ffd21f;text-shadow:0 8px 24px rgba(251,191,36,.12)}
+.typ-prof-en{margin-top:7px;font-size:clamp(13px,1.1vw,17px);font-weight:950;color:#8fd8ff;direction:ltr}
+.typ-images{display:flex;align-items:center;gap:14px}
+.typ-images .logo-box{width:76px!important;height:76px!important;border-radius:20px!important;background:#fff!important;display:grid!important;place-items:center!important;box-shadow:0 0 0 4px rgba(56,189,248,.18),0 0 28px rgba(56,189,248,.42)!important;flex:0 0 76px!important}
+.typ-images .index-logo{width:66px!important;height:66px!important;object-fit:contain!important;display:block!important}
+.typ-images .index-photo{width:76px!important;height:76px!important;border-radius:50!important;object-fit:cover!important;border:4px solid #facc15!important;box-shadow:0 0 0 4px rgba(250,204,21,.18),0 0 28px rgba(250,204,21,.35)!important;background:#fff!important;flex:0 0 76px!important}
+body{padding-top:138px!important}
+@media(max-width:1050px){.cc-topbar.typical-index-head{height:auto!important;min-height:112px!important;grid-template-columns:1fr auto!important;gap:10px!important}.typ-center,.typ-prof{grid-column:1/-1}.typ-prof{text-align:center}.typ-left{text-align:left}.typ-images{grid-row:1;grid-column:2}}
+@media(max-width:620px){.cc-topbar.typical-index-head{top:8px!important;width:calc(100% - 16px)!important;padding:12px!important;border-radius:22px!important}.typ-images .logo-box,.typ-images .index-photo{width:58px!important;height:58px!important;flex-basis:58px!important}.typ-images .index-logo{width:50px!important;height:50px!important}.typ-course{font-size:17px}.typ-prof-ar{font-size:19px}.typ-main{font-size:22px}}
+</style>
+
+</head>
+<body>
+
+    <nav class="am-brandbar" aria-label="Prof Ayman Mansour header">
+        <img alt="Prof. Ayman Mansour photo" class="am-bphoto" src="https://i.postimg.cc/JhQfYL1D/logo.jpg
+... output truncated ...
+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bxBqMMGjDTpLqR7azj1C88mNpPMXAwjkdAw3nJ9BXoS21usUkSwRBJCxdQgwxbqSO+e9MisrWLf5VvCm9QjbUA3KBgA+w9Kr20b35TD+ysQouKrPX8Nb6a9/w06HC63r9/b67d39lO82kppsMksSclVkL4mX3BAz7fSqGpapfRaXpN7catcNHHpMU9wkF4sc6seTKVYYlB6Y9unNekRWFpECsdtAgMYjIWMAbB0X6cnj3qObSdMmEAm0+0k+z48ndCp8v/AHeOPwojWgre6FTK8RPmaq769dHe/wB3l+V9ON1C+N5f60934hudLNjEjWcaSiMFTGG81lP38tkY6cY60qa7ciS4l1O7FnJL4fjuUjd9gWX59xUHv939K7O90zT7yaOa7sbaeSLmN5IlYr9CRxS32nWN8YzeWdvcGI5jMsYbafUZ6Uvax7Gry+upOSnrr31vffXonZWPL9e1bV4EgYXmqpImj2km+KYLHFNIzDfMG6qTjPBr1e33+RH5hVn2jcV6E45xUUtlaymQy20LmVPLk3IDuX+6fUcnip0VUQIihVUYAHQCoqVFNJJWN8Fgp4ec5SnzJ2+Vr/8AA+4Wiiisj0QooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z">
+        <div class="am-bnames">
+            <div class="am-bar">بروف/ أيمن منصور — مستشار الكيمياء</div>
+            <div class="am-ben">Prof./ Ayman Mansour — Chemistry Consultant</div>
+        </div>
+        <div class="am-bpage">
+            <div class="am-pa">المختبر التفاعلي</div>
+            <div class="am-pe">Interactive Lab</div>
+        </div>
+        <div class="am-bexam">
+            <div class="am-x1">كيمياء ٢٠٢٦</div>
+            <div class="am-x2">الأدوات والتجهيزات</div>
+        </div>
+    </nav>
+
+<!-- ===== TYPICAL INDEX HEADER ===== -->
+
+
+
+
+         
+    
+    <header class="hero">
+        <h1>مختبر الكيمياء من كود الكيمياء</h1>
+        <p>أنظمة كهروكيميائية، بطاريات، وتحضيرات معملية عضوية بتصميم واقعي للأجهزة</p>
+        <nav class="toc">
+            <a href="#galvanic">⚡ الخلايا الجلفانية الأولية</a>
+            <a href="#batteries">🔋 الخلايا الجلفانية الثانوية</a>
+            <a href="#electrolytic">⚙️ الخلايا التحليلية</a>
+            <a href="#organic">🧪 التحضيرات العضوية والاختبارات</a>
+        </nav>
+    </header>
+<!-- ===== FIXED FOOTER ===== -->
+
+    <!-- ═══════════ GALVANIC CELLS ═══════════ -->
+    <section id="galvanic" class="section galvanic-section">
+        <div class="section-header">
+            <div class="section-icon">⚡</div>
+            <div>
+                <div class="section-title">الخلايا الجلفانية (الفولتية)</div>
+                <div class="section-sub">تفاعلات أكسدة-اختزال تلقائية تنتج طاقة كهربائية</div>
+            </div>
+        </div>
+        
+        <div class="container">
+
+             <!-- DANIELL CELL - MODIFIED: salt bridge touches solution, electrode mass changes, redox labels -->
+    <div class="card" data-type="galvanic primary cells">
+      <div class="card-header">
+        <span class="card-title">خلية دانيال</span>
+        <span class="card-badge">أولية · جلفانية</span>
+      </div>
+      <div class="card-visual">
+        <svg viewBox="0 0 600 440" class="zoomable-svg">
+          <defs>
+            <linearGradient id="zn-g" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#475569"/><stop offset="50%" stop-color="#cbd5e1"/><stop offset="100%" stop-color="#475569"/>
+            </linearGradient>
+            <linearGradient id="cu-g" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#7c2d12"/><stop offset="50%" stop-color="#fb923c"/><stop offset="100%" stop-color="#7c2d12"/>
+            </linearGradient>
+            <linearGradient id="znso4" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#bae6fd" stop-opacity="0.3"/><stop offset="100%" stop-color="#0284c7" stop-opacity="0.5"/>
+            </linearGradient>
+            <linearGradient id="cuso4" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.35"/><stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.6"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Voltmeter -->
+          <g class="glow" style="color:#fbbf24">
+            <circle cx="300" cy="48" r="32" fill="#0c1424" stroke="#fbbf24" stroke-width="2.5"/>
+            <text x="300" y="56" text-anchor="middle" fill="#fbbf24" font-size="22" font-weight="900" font-family="sans-serif">V</text>
+            <line x1="300" y1="48" x2="314" y2="36" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="300" cy="48" r="2" fill="#fbbf24"/>
+          </g>
+          <text x="300" y="98" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="sans-serif">1.10 فولت</text>
+
+          <!-- Wires -->
+          <path d="M 168 148 L 168 48 L 268 48" fill="none" stroke="#64748b" stroke-width="3" stroke-linecap="round"/>
+          <path d="M 432 148 L 432 48 L 332 48" fill="none" stroke="#64748b" stroke-width="3" stroke-linecap="round"/>
+          <path class="e-flow" d="M 168 148 L 168 48 L 268 48" fill="none" stroke="#fbbf24" stroke-width="3"/>
+          <path class="e-flow" d="M 332 48 L 432 48 L 432 148" fill="none" stroke="#fbbf24" stroke-width="3"/>
+          <text x="200" y="40" fill="#fbbf24" font-size="11" font-family="sans-serif" font-weight="700">e⁻ →</text>
+
+          <!-- MODIFIED Salt bridge - now dips INTO both solutions (y=270) -->
+          <path d="M 222 270 L 222 138 L 378 138 L 378 270" fill="none" stroke="#3f3f46" stroke-width="24" stroke-linecap="round"/>
+          <path d="M 222 270 L 222 138 L 378 138 L 378 270" fill="none" stroke="#84cc16" stroke-width="10" stroke-linecap="round" class="shimmer"/>
+          <text x="300" y="130" text-anchor="middle" fill="#84cc16" font-size="10" font-weight="700" font-family="sans-serif">الجسر الملحي Na₂SO₄</text>
+
+          <!-- Salt bridge ions moving through bridge -->
+          <!-- Anions (SO₄²⁻) migrate to الأنود (Left) -->
+          <circle cx="258" cy="138" r="5" fill="#22d3ee" class="drift-l" style="--dx: -20px;"/>
+          <circle cx="280" cy="138" r="4" fill="#22d3ee" class="drift-l" style="--dx: -20px;" opacity="0.6"/>
+          <text x="260" y="155" fill="#22d3ee" font-size="8" font-weight="700" font-family="sans-serif" class="drift-l" style="--dx: -20px;">SO₄²⁻</text>
+
+          <!-- Cations (Na⁺) migrate to الكاثود (Right) -->
+          <circle cx="342" cy="138" r="5" fill="#ef4444" class="drift-r" style="--dx: 20px;"/>
+          <circle cx="320" cy="138" r="4" fill="#ef4444" class="drift-r" style="--dx: 20px;" opacity="0.6"/>
+          <text x="340" y="155" fill="#ef4444" font-size="8" font-weight="700" font-family="sans-serif" class="drift-r" style="--dx: 20px;">Na⁺</text>
+
+          <!-- Left Beaker (الأنود side) -->
+          <path d="M 98 190 L 88 390 L 238 390 L 228 190 Z" fill="none" stroke="rgba(200,230,255,0.4)" stroke-width="2.5"/>
+          <path d="M 88 390 Q 163 404 238 390" fill="none" stroke="rgba(200,230,255,0.4)" stroke-width="2.5"/>
+          <path d="M 100 240 L 90 388 L 236 388 L 226 240 Z" fill="url(#znso4)" class="liq-a"/>
+          <path d="M 100 240 Q 163 232 226 240" fill="none" stroke="#7dd3fc" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <path d="M 95 190 L 98 185 L 228 185 L 231 190" fill="none" stroke="rgba(200,230,255,0.4)" stroke-width="2"/>
+
+          <!-- MODIFIED Zn Electrode - SHRINKS over time (mass decreases) -->
+          <g>
+            <rect x="153" y="148" width="26" height="220" fill="url(#zn-g)" rx="2">
+              <animate attributeName="width" values="26;16" dur="10s" repeatCount="indefinite"/>
+              <animate attributeName="x" values="153;158" dur="10s" repeatCount="indefinite"/>
+              <animate attributeName="height" values="220;170" dur="10s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="156" y="152" width="20" height="4" fill="white" opacity="0.5">
+              <animate attributeName="width" values="20;12" dur="10s" repeatCount="indefinite"/>
+              <animate attributeName="x" values="156;160" dur="10s" repeatCount="indefinite"/>
+            </rect>
+          </g>
+          <text x="166" y="185" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="900" font-family="sans-serif">Zn</text>
+          <text x="166" y="145" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="sans-serif">الكتلة ↓</text>
+
+          <!-- Zn²⁺ ions dissolving from electrode -->
+          <text x="110" y="295" fill="#38bdf8" font-size="11" font-weight="700" font-family="sans-serif" class="pulse">Zn²⁺</text>
+          <text x="195" y="340" fill="#38bdf8" font-size="11" font-weight="700" font-family="sans-serif" class="pulse">Zn²⁺</text>
+          <text x="130" y="320" fill="#38bdf8" font-size="9" font-weight="700" font-family="sans-serif" class="pulse">Zn²⁺</text>
+
+          <!-- REDOX label at الأنود -->
+          <text x="163" y="435" text-anchor="middle" fill="#ef4444" font-size="12" font-weight="800" font-family="sans-serif">الأنود (−)</text>
+          <text x="163" y="378" text-anchor="middle" fill="#7dd3fc" font-size="10" font-family="sans-serif">ZnSO₄(aq)</text>
+          <rect x="80" y="392" width="170" height="32" rx="4" fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.3)" stroke-width="1"/>
+          <text x="165" y="408" text-anchor="middle" fill="#fca5a5" font-size="9" font-weight="700" font-family="Courier New, monospace" class="redox-label">Zn → Zn²⁺ + 2e⁻</text>
+          <text x="165" y="420" text-anchor="middle" fill="#fca5a5" font-size="8" font-family="sans-serif">(Oxidation)</text>
+
+          <!-- Right Beaker (الكاثود side) -->
+          <path d="M 372 190 L 362 390 L 512 390 L 502 190 Z" fill="none" stroke="rgba(200,230,255,0.4)" stroke-width="2.5"/>
+          <path d="M 362 390 Q 437 404 512 390" fill="none" stroke="rgba(200,230,255,0.4)" stroke-width="2.5"/>
+          <path d="M 374 240 L 364 388 L 510 388 L 500 240 Z" fill="url(#cuso4)" class="liq-a"/>
+          <path d="M 374 240 Q 437 232 500 240" fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <path d="M 369 190 L 372 185 L 502 185 L 505 190" fill="none" stroke="rgba(200,230,255,0.4)" stroke-width="2"/>
+
+          <!-- MODIFIED Cu Electrode - GROWS over time (mass increases) -->
+          <g>
+            <rect x="421" y="148" width="26" height="220" fill="url(#cu-g)" rx="2">
+              <animate attributeName="width" values="26;38" dur="10s" repeatCount="indefinite"/>
+              <animate attributeName="x" values="421;415" dur="10s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="424" y="152" width="20" height="4" fill="white" opacity="0.5">
+              <animate attributeName="width" values="20;32" dur="10s" repeatCount="indefinite"/>
+              <animate attributeName="x" values="424;418" dur="10s" repeatCount="indefinite"/>
+            </rect>
+          </g>
+          <text x="434" y="185" text-anchor="middle" fill="#7c2d12" font-size="13" font-weight="900" font-family="sans-serif">Cu</text>
+          <text x="434" y="145" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="sans-serif">الكتلة ↑</text>
+
+          <!-- Cu²⁺ ions being deposited -->
+          <text x="378" y="295" fill="#1d4ed8" font-size="11" font-weight="700" font-family="sans-serif" class="pulse">Cu²⁺</text>
+          <text x="460" y="340" fill="#1d4ed8" font-size="11" font-weight="700" font-family="sans-serif" class="pulse">Cu²⁺</text>
+
+          <!-- REDOX label at الكاثود -->
+          <text x="437" y="435" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="800" font-family="sans-serif">الكاثود (+)</text>
+          <text x="437" y="378" text-anchor="middle" fill="#bfdbfe" font-size="10" font-family="sans-serif">CuSO₄(aq)</text>
+          <rect x="350" y="392" width="180" height="32" rx="4" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.3)" stroke-width="1"/>
+          <text x="440" y="408" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="700" font-family="Courier New, monospace" class="redox-label">Cu²⁺ + 2e⁻ → Cu</text>
+          <text x="440" y="420" text-anchor="middle" fill="#93c5fd" font-size="8" font-family="sans-serif">(Reduction)</text>
+        </svg>
+      </div>
+      <div class="card-content">
+        <div class="reaction-tabs">
+          <button class="tab-btn active ta" onclick="switchReact(this,'anode','Zn(s) → Zn²⁺(aq) + 2e⁻','E° = +0.76 V')">تفاعل الانود</button>
+          <button class="tab-btn tc" onclick="switchReact(this,'cathode','Cu²⁺(aq) + 2e⁻ → Cu(s)','E° = +0.34 V')">تفاعل الكاثود</button>
+          <button class="tab-btn tt" onclick="switchReact(this,'total','Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s)','E°cell = +1.10 فولت')">الكلي</button>
+        </div>
+        <div class="reaction-display display-anode">
+          <div class="reaction-title">⚛ تفاعل الانود (أكسدة)</div>
+          <div class="reaction-formula">Zn(s) → Zn²⁺(aq) + 2e⁻</div>
+          <div class="reaction-meta">E° = +0.76 V</div>
+        </div>
+      </div>
+    </div>
+
+            <!-- ▓▓ STANDARD HYDROGEN ELECTRODE ▓▓ -->
+            <div class="card" data-type="galvanic">
+                <div class="card-header">
+                    <span class="card-title">القطب الهيدروجيني القياسي (SHE)</span>
+                    <span class="card-badge">Reference · E° = 0.00 V</span>
+                </div>
+                <div class="card-visual">
+                    <svg viewBox="0 0 600 410" class="zoomable-svg">
+                        <defs>
+                            <linearGradient id="hcl-liq" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#0369a1" stop-opacity="0.5"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- H2 Gas Cylinder -->
+                        <g transform="translate(60,80)">
+                            <rect x="0" y="0" width="50" height="120" rx="5" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+                            <rect x="5" y="10" width="40" height="80" rx="3" fill="#dc2626"/>
+                            <text x="25" y="55" text-anchor="middle" fill="white" font-size="11" font-weight="900">H₂</text>
+                            <text x="25" y="70" text-anchor="middle" fill="white" font-size="8">1 atm</text>
+                            <rect x="15" y="-15" width="20" height="15" fill="#64748b"/>
+                            <circle cx="25" cy="-20" r="6" fill="#fbbf24" stroke="#1e293b"/>
+                        </g>
+                        <text x="85" y="220" text-anchor="middle" class="label-small">H₂ Tank</text>
+
+                        <!-- Tubing from tank to apparatus -->
+                        <path d="M 110 90 Q 180 90 180 130 L 240 130" fill="none" stroke="#475569" stroke-width="4"/>
+                        <path class="gas-flow" d="M 110 90 Q 180 90 180 130 L 240 130" fill="none" stroke="#7dd3fc" stroke-width="2.5"/>
+
+                        <!-- Outer Beaker -->
+                        <path d="M 220 160 L 220 360 Q 220 380 240 380 L 440 380 Q 460 380 460 360 L 460 160" class="glass-stroke"/>
+                        <path d="M 224 200 L 224 358 Q 224 376 240 376 L 440 376 Q 456 376 456 358 L 456 200 Z" fill="url(#hcl-liq)"/>
+                        <ellipse cx="340" cy="200" rx="116" ry="3" fill="#7dd3fc" opacity="0.4"/>
+
+                        <!-- Inner Glass Tube (inverted) -->
+                        <path d="M 300 360 L 300 130 Q 300 110 320 110 L 360 110 Q 380 110 380 130 L 380 360" fill="rgba(125,211,252,0.05)" stroke="rgba(255,255,255,0.4)" stroke-width="2.5"/>
+                        
+                        <!-- Side inlet to inner tube -->
+                        <line x1="240" y1="130" x2="300" y2="130" stroke="rgba(255,255,255,0.4)" stroke-width="2.5"/>
+
+                        <!-- H2 Bubbles inside -->
+                        <circle cx="340" cy="340" r="5" fill="#7dd3fc" class="bubble" opacity="0.8"/>
+                        <circle cx="335" cy="320" r="4" fill="#7dd3fc" class="bubble-2" opacity="0.7"/>
+                        <circle cx="345" cy="300" r="6" fill="#7dd3fc" class="bubble-3" opacity="0.8"/>
+                        <circle cx="338" cy="280" r="3" fill="#7dd3fc" class="bubble-4" opacity="0.6"/>
+
+                        <!-- Platinum wire & foil -->
+                        <line x1="340" y1="60" x2="340" y2="330" stroke="#cbd5e1" stroke-width="2.5"/>
+                        <rect x="320" y="325" width="40" height="25" fill="#64748b" stroke="#94a3b8" stroke-width="1.5" rx="2"/>
+                        <line x1="325" y1="328" x2="355" y2="328" stroke="#cbd5e1" stroke-width="0.5"/>
+                        <line x1="325" y1="332" x2="355" y2="332" stroke="#cbd5e1" stroke-width="0.5"/>
+                        <line x1="325" y1="336" x2="355" y2="336" stroke="#cbd5e1" stroke-width="0.5"/>
+                        <line x1="325" y1="340" x2="355" y2="340" stroke="#cbd5e1" stroke-width="0.5"/>
+                        <line x1="325" y1="344" x2="355" y2="344" stroke="#cbd5e1" stroke-width="0.5"/>
+                        
+                        <text x="395" y="335" class="label-small">Pt(s) Platinized</text>
+
+                        <!-- Wire to circuit -->
+                        <line x1="340" y1="60" x2="340" y2="35" stroke="#64748b" stroke-width="3"/>
+                        <circle cx="340" cy="32" r="4" fill="#fbbf24"/>
+
+                        <!-- Labels -->
+                        <text x="340" y="402" text-anchor="middle" fill="#7dd3fc" font-size="12" font-weight="700">HCl(aq) · [H⁺] = 1 M</text>
+                        <text x="500" y="170" fill="#cbd5e1" font-size="11">Glass jacket</text>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="reaction-tabs">
+                        <button class="tab-btn active anode" onclick="switchReact(this,'anode','H₂(g) → 2H⁺(aq) + 2e⁻','When SHE is anode (oxidation)')">As الأنود</button>
+                        <button class="tab-btn cathode" onclick="switchReact(this,'cathode','2H⁺(aq) + 2e⁻ → H₂(g)','When SHE is cathode (reduction)')">As الكاثود</button>
+                        <button class="tab-btn total" onclick="switchReact(this,'total','H₂(g) ⇌ 2H⁺(aq) + 2e⁻','Reference E° = 0.00 V (defined)')">Equilibrium</button>
+                    </div>
+                    <div class="reaction-display display-anode">
+                        <div class="reaction-title">⚛ تفاعل الانود (أكسدة)</div>
+                        <div class="reaction-formula">H₂(g) → 2H⁺(aq) + 2e⁻</div>
+                        <div class="reaction-meta">Reference standard, E° = 0.00 V</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ▓▓ MERCURY CELL ▓▓ -->
+            <div class="card" data-type="galvanic">
+                <div class="card-header">
+                    <span class="card-title">خلية الزئبق</span>
+                    <span class="card-badge">Primary · Compact</span>
+                </div>
+                <div class="card-visual">
+                    <svg viewBox="0 0 600 410" class="zoomable-svg">
+                        <defs>
+                            <radialGradient id="button-shine" cx="30%" cy="30%">
+                                <stop offset="0%" stop-color="#f1f5f9"/>
+                                <stop offset="60%" stop-color="#94a3b8"/>
+                                <stop offset="100%" stop-color="#334155"/>
+                            </radialGradient>
+                            <linearGradient id="hg-cathode" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#7f1d1d"/>
+                                <stop offset="100%" stop-color="#450a0a"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Side view button battery -->
+                        <g transform="translate(150,80)">
+                            <!-- Outer metal case (cathode contact ring) -->
+                            <ellipse cx="150" cy="180" rx="155" ry="20" fill="#334155" stroke="#1e293b" stroke-width="2"/>
+                            <path d="M -5 180 L -5 60 Q -5 40 15 40 L 285 40 Q 305 40 305 60 L 305 180 Z" fill="url(#button-shine)" stroke="#1e293b" stroke-width="2"/>
+                            <ellipse cx="150" cy="60" rx="155" ry="18" fill="#cbd5e1" stroke="#94a3b8"/>
+                            
+                            <!-- Inner content (Zn anode top) -->
+                            <rect x="20" y="65" width="260" height="35" fill="#64748b" stroke="#475569"/>
+                            <text x="150" y="88" text-anchor="middle" fill="white" font-weight="900" font-size="14">Zn(Hg) AMALGAM ANODE</text>
+                            
+                            <!-- Separator with KOH -->
+                            <rect x="20" y="100" width="260" height="20" fill="#16a34a" opacity="0.4"/>
+                            <text x="150" y="114" text-anchor="middle" fill="#86efac" font-weight="700" font-size="10">KOH-saturated separator + ZnO</text>
+                            
+                            <!-- HgO الكاثود bottom -->
+                            <rect x="20" y="120" width="260" height="50" fill="url(#hg-cathode)" stroke="#450a0a"/>
+                            <text x="150" y="143" text-anchor="middle" fill="white" font-weight="900" font-size="14">HgO + GRAPHITE</text>
+                            <text x="150" y="160" text-anchor="middle" fill="#fecaca" font-size="11">CATHODE</text>
+                            
+                            <!-- Insulating gasket -->
+                            <rect x="20" y="60" width="6" height="120" fill="#1e293b"/>
+                            <rect x="274" y="60" width="6" height="120" fill="#1e293b"/>
+
+                            <!-- Polarity terminals -->
+                            <text x="-25" y="65" fill="#cbd5e1" font-size="22" font-weight="900">−</text>
+                            <text x="310" y="195" fill="#94a3b8" font-size="22" font-weight="900">+</text>
+                        </g>
+                        
+                        <!-- External circuit + LED bulb -->
+                        <path d="M 300 140 L 300 100 L 50 100 L 50 360 L 550 360 L 550 260 L 455 260" fill="none" stroke="#64748b" stroke-width="3"/>
+                        <path class="e-flow" d="M 300 140 L 300 100 L 50 100 L 50 360 L 550 360 L 550 260 L 455 260" fill="none" stroke="#fbbf24" stroke-width="3"/>
+                        
+                        <!-- Light bulb -->
+                        <g transform="translate(300,340)" class="glow" style="color:#fbbf24">
+                            <circle cx="0" cy="0" r="18" fill="#fbbf24" opacity="0.3"/>
+                            <circle cx="0" cy="0" r="14" fill="#fef08a" opacity="0.6"/>
+                            <circle cx="0" cy="0" r="10" fill="#fbbf24"/>
+                            <text x="0" y="5" text-anchor="middle" fill="#7c2d12" font-weight="900" font-size="14">💡</text>
+                        </g>
+                        <text x="300" y="395" text-anchor="middle" class="label-small">Powered Device</text>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="reaction-tabs">
+                        <button class="tab-btn active anode" onclick="switchReact(this,'anode','Zn(Hg) + 2OH⁻ → ZnO(s) + H₂O + 2e⁻')">تفاعل الانود</button>
+                        <button class="tab-btn cathode" onclick="switchReact(this,'cathode','HgO(s) + H₂O + 2e⁻ → Hg(l) + 2OH⁻')">تفاعل الكاثود</button>
+                        <button class="tab-btn total" onclick="switchReact(this,'total','Zn(Hg) + HgO(s) → ZnO(s) + Hg(l)','E°cell ≈ 1.35 V (stable)')">الكلي</button>
+                    </div>
+                    <div class="reaction-display display-anode">
+                        <div class="reaction-title">⚛ تفاعل الانود (أكسدة)</div>
+                        <div class="reaction-formula">Zn(S) + 2OH⁻ → ZnO(s) + H₂O + 2e⁻</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ▓▓ FUEL CELL ▓▓ -->
+            <div class="card" data-type="galvanic">
+                <div class="card-header">
+                    <span class="card-title">خلية الوقود (هيدروجين-أكسجين)</span>
+                    <span class="card-badge">Continuous · Green Energy</span>
+                </div>
+                <div class="card-visual">
+                    <svg viewBox="0 0 600 410" class="zoomable-svg">
+                        <defs>
+                            <linearGradient id="anode-elec" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#475569"/>
+                                <stop offset="100%" stop-color="#1e293b"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Cell body outline -->
+                        <rect x="170" y="100" width="260" height="240" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+
+                        <!-- الأنود plate (porous) -->
+                        <rect x="200" y="120" width="50" height="200" fill="url(#anode-elec)" stroke="#94a3b8"/>
+                        <g fill="#64748b" opacity="0.5">
+                            <circle cx="215" cy="150" r="2"/><circle cx="235" cy="170" r="2"/>
+                            <circle cx="220" cy="200" r="2"/><circle cx="240" cy="230" r="2"/>
+                            <circle cx="215" cy="260" r="2"/><circle cx="235" cy="290" r="2"/>
+                        </g>
+                        
+                        <!-- الكاثود plate (porous) -->
+                        <rect x="350" y="120" width="50" height="200" fill="url(#anode-elec)" stroke="#94a3b8"/>
+                        <g fill="#64748b" opacity="0.5">
+                            <circle cx="365" cy="150" r="2"/><circle cx="385" cy="170" r="2"/>
+                            <circle cx="370" cy="200" r="2"/><circle cx="390" cy="230" r="2"/>
+                            <circle cx="365" cy="260" r="2"/><circle cx="385" cy="290" r="2"/>
+                        </g>
+
+                        <!-- KOH electrolyte chamber -->
+                        <rect x="250" y="120" width="100" height="200" fill="rgba(34,197,94,0.15)" stroke="rgba(34,197,94,0.4)" stroke-width="2"/>
+                        <text x="300" y="220" text-anchor="middle" fill="#86efac" font-size="11" font-weight="700">KOH</text>
+                        <text x="300" y="235" text-anchor="middle" fill="#86efac" font-size="9">الإلكتروليت</text>
+                        
+                        <!-- Ion movement OH- -->
+                        <text x="335" y="180" fill="#86efac" font-size="10" font-weight="700" class="drift-l" style="--dx:-60px">OH⁻</text>
+                        <text x="335" y="270" fill="#86efac" font-size="10" font-weight="700" class="drift-l" style="--dx:-60px">OH⁻</text>
+
+                        <!-- H2 Inlet (left) -->
+                        <path d="M 60 145 L 200 145" fill="none" stroke="#475569" stroke-width="10" stroke-linecap="round"/>
+                        <path d="M 60 145 L 200 145" fill="none" stroke="#1e293b" stroke-width="6" stroke-linecap="round"/>
+                        <path class="gas-flow" d="M 60 145 L 200 145" fill="none" stroke="#7dd3fc" stroke-width="3" stroke-linecap="round"/>
+                        <text x="40" y="135" fill="#7dd3fc" font-size="13" font-weight="800">H₂ →</text>
+                        <text x="40" y="170" fill="#94a3b8" font-size="9">Hydrogen fuel</text>
+
+                        <!-- H2 excess outlet (left bottom) -->
+                        <path d="M 200 295 L 60 295" fill="none" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M 200 295 L 60 295" fill="none" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+                        <text x="40" y="318" fill="#94a3b8" font-size="10">Excess H₂ ←</text>
+
+                        <!-- O2 Inlet (right) -->
+                        <path d="M 540 145 L 400 145" fill="none" stroke="#475569" stroke-width="10" stroke-linecap="round"/>
+                        <path d="M 540 145 L 400 145" fill="none" stroke="#1e293b" stroke-width="6" stroke-linecap="round"/>
+                        <path class="gas-flow" d="M 540 145 L 400 145" fill="none" stroke="#f87171" stroke-width="3" stroke-linecap="round"/>
+                        <text x="510" y="135" fill="#f87171" font-size="13" font-weight="800">← O₂</text>
+                        <text x="495" y="170" fill="#94a3b8" font-size="9">Oxygen</text>
+
+                        <!-- H2O Outlet (right bottom) -->
+                        <path d="M 400 295 L 540 295" fill="none" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M 400 295 L 540 295" fill="none" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+                        <path class="gas-flow" d="M 400 295 L 540 295" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round"/>
+                        <text x="510" y="318" fill="#60a5fa" font-size="10" font-weight="700">H₂O →</text>
+
+                        <!-- External wire with motor/load -->
+                        <path d="M 225 120 L 225 50 L 375 50 L 375 120" fill="none" stroke="#64748b" stroke-width="3"/>
+                        <path class="e-flow" d="M 225 120 L 225 50 L 290 50" fill="none" stroke="#fbbf24" stroke-width="3"/>
+                        
+                        <!-- Motor symbol -->
+                        <circle cx="300" cy="50" r="20" fill="#0c1424" stroke="#fbbf24" stroke-width="2"/>
+                        <text x="300" y="56" text-anchor="middle" fill="#fbbf24" font-weight="900" font-size="14">M</text>
+                        
+                        <!-- Labels -->
+                        <text x="225" y="365" text-anchor="middle" fill="#ef4444" font-size="12" font-weight="800">الأنود (−)</text>
+                        <text x="375" y="365" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="800">الكاثود (+)</text>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="reaction-tabs">
+                        <button class="tab-btn active anode" onclick="switchReact(this,'anode','2H₂(g) + 4OH⁻ → 4H₂O(l) + 4e⁻')">تفاعل الانود</button>
+                        <button class="tab-btn cathode" onclick="switchReact(this,'cathode','O₂(g) + 2H₂O + 4e⁻ → 4OH⁻')">تفاعل الكاثود</button>
+                        <button class="tab-btn total" onclick="switchReact(this,'total','2H₂(g) + O₂(g) → 2H₂O(l) + Energy','Eco-friendly · Zero emissions')">الكلي</button>
+                    </div>
+                    <div class="reaction-display display-anode">
+                        <div class="reaction-title">⚛ تفاعل الانود (أكسدة)</div>
+                        <div class="reaction-formula">2H₂(g) + 4OH⁻ → 4H₂O(l) + 4e⁻</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════ BATTERIES ═══════════ -->
+    <section id="batteries" class="section battery-section">
+        <div class="section-header">
+            <div class="section-icon">🔋</div>
+            <div>
+                <div class="section-title">البطاريات القابلة لإعادة الشحن</div>
+                <div class="section-sub">الخلايا الثانوية - تخزين الطاقة الكهروكيميائية القابلة للعكس</div>
+            </div>
+        </div>
+        
+        <div class="container">
+
+   
+    <!-- LEAD ACID - 6 CELLS -->
+    <div class="card" data-type="battery">
+      <div class="card-header">
+        <span class="card-title">بطارية الرصاص الحمضية (مراكم الرصاص)</span>
+        <span class="card-badge">12V · 6 Cells · Secondary</span>
+      </div>
+      <div class="card-visual">
+        <svg viewBox="0 0 600 440" class="zoomable-svg">
+          <defs>
+            <linearGradient id="bat-body" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1e293b"/><stop offset="100%" stop-color="#0f172a"/>
+            </linearGradient>
+            <linearGradient id="acid" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fef9c3" stop-opacity="0.2"/><stop offset="100%" stop-color="#a16207" stop-opacity="0.35"/>
+            </linearGradient>
+            <linearGradient id="pb-p" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6b7280"/><stop offset="100%" stop-color="#374151"/>
+            </linearGradient>
+            <linearGradient id="pbo2-p" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#9a3412"/><stop offset="100%" stop-color="#4c1d0f"/>
+            </linearGradient>
+          </defs>
+          <rect x="75" y="120" width="450" height="240" rx="8" fill="url(#bat-body)" stroke="#334155" stroke-width="3"/>
+          <rect x="75" y="95" width="450" height="30" rx="4" fill="#334155" stroke="#1e293b" stroke-width="2"/>
+          <!-- 6 vent caps -->
+          <circle cx="115" cy="110" r="7" fill="#1e293b" stroke="#475569"/>
+          <circle cx="185" cy="110" r="7" fill="#1e293b" stroke="#475569"/>
+          <circle cx="260" cy="110" r="7" fill="#1e293b" stroke="#475569"/>
+          <circle cx="335" cy="110" r="7" fill="#1e293b" stroke="#475569"/>
+          <circle cx="410" cy="110" r="7" fill="#1e293b" stroke="#475569"/>
+          <circle cx="485" cy="110" r="7" fill="#1e293b" stroke="#475569"/>
+          <rect x="90" y="180" width="420" height="165" fill="url(#acid)"/>
+          <path d="M 90 180 Q 300 172 510 180" fill="none" stroke="#fde047" stroke-width="1" stroke-dasharray="3,2"/>
+          <!-- 5 cell dividers = 6 cells -->
+          <g stroke="#1e293b" stroke-width="3">
+            <line x1="150" y1="130" x2="150" y2="355"/>
+            <line x1="225" y1="130" x2="225" y2="355"/>
+            <line x1="300" y1="130" x2="300" y2="355"/>
+            <line x1="375" y1="130" x2="375" y2="355"/>
+            <line x1="450" y1="130" x2="450" y2="355"/>
+          </g>
+          <!-- CELL 1 -->
+          <rect x="88" y="148" width="8" height="190" fill="url(#pb-p)"/>
+          <rect x="102" y="148" width="8" height="190" fill="url(#pbo2-p)"/>
+          <rect x="116" y="148" width="8" height="190" fill="url(#pb-p)"/>
+          <rect x="130" y="148" width="8" height="190" fill="url(#pbo2-p)"/>
+          <text x="119" y="370" text-anchor="middle" fill="#fbbf24" font-size="8" font-weight="700">Cell 1</text>
+          <!-- CELL 2 -->
+          <rect x="160" y="148" width="8" height="190" fill="url(#pb-p)"/>
+          <rect x="174" y="148" width="8" height="190" fill="url(#pbo2-p)"/>
+          <rect x="188" y="148" width="8" height="190" fill="url(#pb-p)"/>
+          <rect x="202" y="148" width="8" height="190" fill="url(#pbo2-p)"/>
+          <text x="187" y="370" text-anchor="middle" fill="#fbbf24" font-size="8" font-weight="700">Cell 2</text>
+          <!-- CELL 3 -->
+          <rect x="235" y="148" width="8" height="190" fill="url(#pb-p)"/>
+          <rect x="249" y="148" width="8" height="190" fill="url(#pbo2-p)"/>
+          <rect x="263" y="148" width="8" height="190" fill="url(#pb-p)"/>
+          <rect x="277" y="148" width="8" height="190" fill="url(#pbo2-p)"/>
+          <text x="262" y="370" text-anchor="middle" fill="#fbbf24" font-size="8" font-weight="700">Cell 3</text>
+          <!-- CELL 4 -->
+          <rect x="310" y="148" width="8" height="190" fill="url(#pb-p)"/>
+          <rect x="324" y="148" width="8" height="190" fill="url(#pbo2-p)"/>
+          <rect x="338" y="148" width="8" height="190" fill="url(#pb-p)"/>
+          <rect x="352" y="148" width="8" height="190" fill="url(#pbo2-p)"/>
+          <text x="337" y="370" text-anchor="middle" fill="#fbbf24" font-size="8" font-weight="700">Cell 4</text>
+          <!-- CELL 5 -->
+          <rect x="385" y="148" width="8" height="190" fill="url(#pb-p)"/>
+          <rect x="399" y="148" width="8" height="190" fill="url(#pbo2-p)"/>
+          <rect x="413" y="148" width="8" height="190" fill="url(#pb-p)"/>
+          <rect x="427" y="148" width="8" height="190" fill="url(#pbo2-p)"/>
+          <text x="412" y="370" text-anchor="middle" fill="#fbbf24" font-size="8" font-weight="700">Cell 5</text>
+          <!-- CELL 6 -->
+          <rect x="460" y="148" width="8" height="190" fill="url(#pb-p)"/>
+          <rect x="474" y="148" width="8" height="190" fill="url(#pbo2-p)"/>
+          <rect x="488" y="148" width="8" height="190" fill="url(#pb-p)"/>
+          <rect x="502" y="148" width="8" height="190" fill="url(#pbo2-p)"/>
+          <text x="487" y="370" text-anchor="middle" fill="#fbbf24" font-size="8" font-weight="700">Cell 6</text>
+          <!-- Terminals -->
+          <rect x="80" y="68" width="30" height="30" rx="3" fill="#475569"/>
+          <rect x="85" y="60" width="20" height="12" rx="2" fill="#6b7280"/>
+          <text x="95" y="72" text-anchor="middle" fill="#ef4444" font-size="16" font-weight="900">−</text>
+          <rect x="490" y="68" width="30" height="30" rx="3" fill="#b91c1c"/>
+          <rect x="495" y="60" width="20" height="12" rx="2" fill="#dc2626"/>
+          <text x="505" y="72" text-anchor="middle" fill="white" font-size="16" font-weight="900">+</text>
+          <!-- Legend -->
+          <g transform="translate(75,52)">
+            <rect x="0" y="0" width="12" height="9" fill="url(#pb-p)"/>
+            <text x="16" y="8" fill="#cbd5e1" font-size="9">Pb (anode)</text>
+            <rect x="100" y="0" width="12" height="9" fill="url(#pbo2-p)"/>
+            <text x="116" y="8" fill="#cbd5e1" font-size="9">PbO₂ (cathode)</text>
+            <text x="240" y="8" fill="#fbbf24" font-size="9" font-weight="700">6 × 2.05V = 12V</text>
+          </g>
+          <!-- Bubbles -->
+          <circle cx="200" cy="280" r="3" fill="#fde047" class="bubble" opacity="0.7"/>
+          <circle cx="310" cy="260" r="4" fill="#fde047" class="bubble-2" opacity="0.7"/>
+          <circle cx="420" cy="275" r="3" fill="#fde047" class="bubble-3" opacity="0.7"/>
+          <text x="230" y="220" fill="#fbbf24" font-size="11" font-weight="800" class="pulse">H⁺</text>
+          <text x="340" y="250" fill="#94a3b8" font-size="11" font-weight="800" class="pulse">SO₄²⁻</text>
+          <text x="300" y="395" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700">Dilute H₂SO₄ الإلكتروليت</text>
+          <!-- Mechanism on plates -->
+          <text x="155" y="125" text-anchor="middle" fill="#ef4444" font-size="8" font-weight="700">Pb+SO₄²⁻→PbSO₄+2e⁻</text>
+          <text x="430" y="125" text-anchor="middle" fill="#3b82f6" font-size="8" font-weight="700">PbO₂+4H⁺+SO₄²⁻+2e⁻→PbSO₄+2H₂O</text>
+          <!-- Cable -->
+          <path d="M 95 68 L 95 40 L 505 40 L 505 68" fill="none" stroke="#64748b" stroke-width="3"/>
+          <path class="e-flow" d="M 95 68 L 95 40 L 300 40" fill="none" stroke="#fbbf24" stroke-width="3"/>
+          <text x="300" y="32" text-anchor="middle" fill="#fbbf24" font-size="10">e⁻ (discharge →)</text>
+        </svg>
+      </div>
+      <div class="card-content">
+        <div class="reaction-tabs">
+          <button class="tab-btn active ta" onclick="switchReact(this,'anode','Pb(s) + SO₄²⁻ → PbSO₄(s) + 2e⁻','Negative plate discharges')">تفاعل الانود</button>
+          <button class="tab-btn tc" onclick="switchReact(this,'cathode','PbO₂ + 4H⁺ + SO₄²⁻ + 2e⁻ → PbSO₄ + 2H₂O','Positive plate discharges')">تفاعل الكاثود</button>
+          <button class="tab-btn tt" onclick="switchReact(this,'total','Pb + PbO₂ + 2H₂SO₄ ⇌ 2PbSO₄ + 2H₂O','E°cell ≈ 2.05 V/cell · 6 cells = 12V')">الكلي</button>
+        </div>
+        <div class="reaction-display display-anode">
+          <div class="reaction-title">⚛ تفاعل الانود (تفريغ)</div>
+          <div class="reaction-formula">Pb(s) + SO₄²⁻ → PbSO₄(s) + 2e⁻</div>
+        </div>
+      </div>
+    </div>
+
+            <!-- ▓▓ LITHIUM ION BATTERY ▓▓ -->
+            <div class="card" data-type="battery">
+                <div class="card-header">
+                    <span class="card-title">بطارية الليثيوم أيون</span>
+                    <span class="card-badge">3V · Secondary</span>
+                </div>
+                <div class="card-visual">
+                    <svg viewBox="0 0 600 410" class="zoomable-svg">
+                        <defs>
+                            <linearGradient id="li-shell" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#e5e7eb"/>
+                                <stop offset="50%" stop-color="#9ca3af"/>
+                                <stop offset="100%" stop-color="#374151"/>
+                            </linearGradient>
+                            <linearGradient id="graphite-grad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#374151"/>
+                                <stop offset="100%" stop-color="#111827"/>
+                            </linearGradient>
+                            <linearGradient id="cobalt-grad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#1e3a8a"/>
+                                <stop offset="100%" stop-color="#312e81"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Cylindrical battery 18650 style outline -->
+                        <ellipse cx="120" cy="80" rx="30" ry="8" fill="#9ca3af" stroke="#374151"/>
+                        <path d="M 90 80 L 90 360 Q 90 372 120 372 Q 150 372 150 360 L 150 80" fill="url(#li-shell)" stroke="#374151" stroke-width="2"/>
+                        <ellipse cx="120" cy="360" rx="30" ry="8" fill="#374151" opacity="0.5"/>
+                        
+                        <!-- + terminal -->
+                        <rect x="110" y="60" width="20" height="12" rx="2" fill="#374151"/>
+                        <text x="120" y="56" text-anchor="middle" fill="#ef4444" font-size="14" font-weight="900">+</text>
+                        <!-- - terminal -->
+                        <text x="120" y="395" text-anchor="middle" fill="#3b82f6" font-size="14" font-weight="900">−</text>
+                        <!-- Label band -->
+                        <rect x="90" y="180" width="60" height="80" fill="#1e40af" opacity="0.7"/>
+                        <text x="120" y="215" text-anchor="middle" fill="white" font-size="9" font-weight="700" transform="rotate(-90 120 215)">Li-ION 18650</text>
+
+                        <!-- Internal view (cutaway) -->
+                        <g transform="translate(200,80)">
+                            <!-- الأنود current collector (Cu) -->
+                            <rect x="0" y="0" width="15" height="240" fill="#b45309"/>
+                            <text x="7" y="260" fill="#b45309" font-size="9" text-anchor="middle" font-weight="700">Cu</text>
+                            
+                            <!-- Graphite anode (LiC6) -->
+                            <rect x="15" y="0" width="80" height="240" fill="url(#graphite-grad)" stroke="#1f2937"/>
+                            <!-- Layers in graphite -->
+                            <g stroke="#4b5563" stroke-width="0.5" opacity="0.6">
+                                <line x1="20" y1="20" x2="92" y2="20"/>
+                                <line x1="20" y1="40" x2="92" y2="40"/>
+                                <line x1="20" y1="60" x2="92" y2="60"/>
+                                <line x1="20" y1="80" x2="92" y2="80"/>
+                                <line x1="20" y1="100" x2="92" y2="100"/>
+                                <line x1="20" y1="120" x2="92" y2="120"/>
+                                <line x1="20" y1="140" x2="92" y2="140"/>
+                                <line x1="20" y1="160" x2="92" y2="160"/>
+                                <line x1="20" y1="180" x2="92" y2="180"/>
+                                <line x1="20" y1="200" x2="92" y2="200"/>
+                                <line x1="20" y1="220" x2="92" y2="220"/>
+                            </g>
+                            <!-- Li atoms in graphite -->
+                            <circle cx="40" cy="30" r="3" fill="#22c55e"/>
+                            <circle cx="65" cy="50" r="3" fill="#22c55e"/>
+                            <circle cx="50" cy="90" r="3" fill="#22c55e"/>
+                            <circle cx="75" cy="130" r="3" fill="#22c55e"/>
+                            <circle cx="45" cy="170" r="3" fill="#22c55e"/>
+                            <circle cx="70" cy="210" r="3" fill="#22c55e"/>
+                            <text x="55" y="260" fill="#94a3b8" font-size="11" text-anchor="middle" font-weight="700">LiC₆ (الأنود)</text>
+
+                            <!-- Separator with electrolyte -->
+                            <rect x="95" y="0" width="50" height="240" fill="rgba(34,197,94,0.1)" stroke="#22c55e" stroke-dasharray="4,3" stroke-width="2"/>
+                            <text x="120" y="125" text-anchor="middle" fill="#86efac" font-size="9" font-weight="700">LiPF₆ in</text>
+                            <text x="120" y="140" text-anchor="middle" fill="#86efac" font-size="9" font-weight="700">organic</text>
+                            <text x="120" y="155" text-anchor="middle" fill="#86efac" font-size="9" font-weight="700">solvent</text>
+
+                            <!-- Li+ ions moving -->
+                            <circle cx="115" cy="60" r="5" fill="#22c55e" class="drift-r" style="--dx:30px">
+                                <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="115" cy="120" r="5" fill="#22c55e" class="drift-r" style="--dx:30px">
+                                <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.6s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="115" cy="180" r="5" fill="#22c55e" class="drift-r" style="--dx:30px">
+                                <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="1.2s" repeatCount="indefinite"/>
+                            </circle>
+                            <text x="120" y="280" text-anchor="middle" fill="#86efac" font-size="10" font-weight="700">Li⁺ migration</text>
+
+                            <!-- LiCoO2 cathode -->
+                            <rect x="145" y="0" width="80" height="240" fill="url(#cobalt-grad)" stroke="#1e1b4b"/>
+                            <!-- Layered structure -->
+                            <g stroke="#6366f1" stroke-width="0.5" opacity="0.5">
+                                <line x1="150" y1="25" x2="222" y2="25"/>
+                                <line x1="150" y1="50" x2="222" y2="50"/>
+                                <line x1="150" y1="75" x2="222" y2="75"/>
+                                <line x1="150" y1="100" x2="222" y2="100"/>
+                                <line x1="150" y1="125" x2="222" y2="125"/>
+                                <line x1="150" y1="150" x2="222" y2="150"/>
+                                <line x1="150" y1="175" x2="222" y2="175"/>
+                                <line x1="150" y1="200" x2="222" y2="200"/>
+                            </g>
+                            <text x="185" y="260" text-anchor="middle" fill="#c7d2fe" font-size="11" font-weight="700">LiCoO₂ (الكاثود)</text>
+
+                            <!-- الكاثود collector (Al) -->
+                            <rect x="225" y="0" width="15" height="240" fill="#94a3b8"/>
+                            <text x="232" y="260" fill="#94a3b8" font-size="9" text-anchor="middle" font-weight="700">Al</text>
+                        </g>
+
+                        <!-- External circuit -->
+                        <path d="M 207 80 L 207 35 L 432 35 L 432 80" fill="none" stroke="#64748b" stroke-width="3"/>
+                        <path class="e-flow" d="M 207 80 L 207 35 L 432 35 L 432 80" fill="none" stroke="#fbbf24" stroke-width="3"/>
+                        <text x="320" y="25" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="700">e⁻ (Discharge)</text>
+
+                        <text x="207" y="392" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="800">الأنود (−)</text>
+                        <text x="432" y="392" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="800">الكاثود (+)</text>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="reaction-tabs">
+                        <button class="tab-btn active anode" onclick="switchReact(this,'anode','LiC₆ → C₆ + Li⁺ + e⁻','Li deintercalation')">تفاعل الانود</button>
+                        <button class="tab-btn cathode" onclick="switchReact(this,'cathode','CoO₂ + Li⁺ + e⁻ → LiCoO₂','Li intercalation')">تفاعل الكاثود</button>
+                        <button class="tab-btn total" onclick="switchReact(this,'total','LiC₆ + CoO₂ ⇌ C₆ + LiCoO₂','E°cell ≈ 3.7 V · 100s of cycles')">الكلي</button>
+                    </div>
+                    <div class="reaction-display display-anode">
+                        <div class="reaction-title">⚛ تفاعل الانود (تفريغ)</div>
+                        <div class="reaction-formula">LiC₆ → C₆ + Li⁺ + e⁻</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════ ELECTROLYTIC CELLS ═══════════ -->
+    <section id="electrolytic" class="section electrolytic-section">
+        <div class="section-header">
+            <div class="section-icon">⚙️</div>
+            <div>
+                <div class="section-title">الخلايا التحليلية</div>
+                <div class="section-sub">تفاعلات غير تلقائية مدفوعة بطاقة كهربائية خارجية</div>
+            </div>
+        </div>
+        
+        <div class="container">
+
+            <!-- ▓▓ ELECTROLYSIS OF CuCl2 ▓▓ -->
+            <div class="card" data-type="electrolytic">
+                <div class="card-header">
+                    <span class="card-title">تحليل محلول CuCl₂ كهربائياً</span>
+                    <span class="card-badge">Decomposition</span>
+                </div>
+                <div class="card-visual">
+                    <svg viewBox="0 0 600 410" class="zoomable-svg">
+                        <defs>
+                            <linearGradient id="cucl-liq" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.2"/>
+                                <stop offset="100%" stop-color="#0c4a6e" stop-opacity="0.5"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- DC Power supply -->
+                        <g transform="translate(220,30)">
+                            <rect x="0" y="0" width="160" height="60" rx="5" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+                            <rect x="10" y="10" width="100" height="25" fill="#000" rx="2"/>
+                            <text x="60" y="28" text-anchor="middle" fill="#22d3ee" font-family="monospace" font-size="14">6.00 V</text>
+                            <circle cx="130" cy="22" r="6" fill="#22c55e">
+                                <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
+                            </circle>
+                            <text x="130" y="50" text-anchor="middle" fill="#94a3b8" font-size="8">ON</text>
+                            <text x="60" y="50" text-anchor="middle" fill="#94a3b8" font-size="9">DC POWER</text>
+                            <!-- Knobs -->
+                            <circle cx="20" cy="50" r="4" fill="#64748b"/>
+                            <circle cx="50" cy="50" r="4" fill="#64748b"/>
+                        </g>
+                        <!-- Power source terminals -->
+                        <circle cx="240" cy="95" r="4" fill="#ef4444"/>
+                        <circle cx="360" cy="95" r="4" fill="#3b82f6"/>
+                        <text x="232" y="108" fill="#ef4444" font-size="10" font-weight="900">+</text>
+                        <text x="356" y="108" fill="#3b82f6" font-size="10" font-weight="900">−</text>
+
+                        <!-- Wires -->
+                        <path d="M 240 95 L 240 130 L 200 130 L 200 170" fill="none" stroke="#64748b" stroke-width="3"/>
+                        <path d="M 360 95 L 360 130 L 400 130 L 400 170" fill="none" stroke="#64748b" stroke-width="3"/>
+                        <path class="e-flow" d="M 360 95 L 360 130 L 400 130 L 400 170" fill="none" stroke="#fbbf24" stroke-width="3"/>
+
+                        <!-- Beaker -->
+                        <path d="M 130 200 L 130 360 Q 130 380 150 380 L 450 380 Q 470 380 470 360 L 470 200" class="glass-stroke"/>
+                        <path d="M 134 240 L 134 358 Q 134 376 150 376 L 450 376 Q 466 376 466 358 L 466 240 Z" fill="url(#cucl-liq)"/>
+                        <ellipse cx="300" cy="240" rx="166" ry="3" fill="#7dd3fc" opacity="0.4"/>
+
+                        <!-- الأنود (+) Carbon rod -->
+                        <rect x="190" y="170" width="20" height="180" fill="#1e293b" stroke="#374151"/>
+                        <rect x="193" y="173" width="14" height="174" fill="#0f172a"/>
+                        <text x="200" y="395" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="800">ANODE (+)</text>
+                        
+                        <!-- Cl2 bubbles at anode -->
+                        <circle cx="195" cy="320" r="4" fill="#bef264" class="bubble"/>
+                        <circle cx="205" cy="290" r="5" fill="#bef264" class="bubble-2"/>
+                        <circle cx="198" cy="260" r="3" fill="#bef264" class="bubble-3"/>
+                        <text x="170" y="200" fill="#bef264" font-size="10" font-weight="800">Cl₂↑</text>
+
+                        <!-- الكاثود (-) Carbon rod -->
+                        <rect x="390" y="170" width="20" height="180" fill="#1e293b" stroke="#374151"/>
+                        <rect x="393" y="173" width="14" height="174" fill="#0f172a"/>
+                        <!-- Cu deposition -->
+                        <rect x="388" y="250" width="24" height="100" fill="#7c2d12" opacity="0.7"/>
+                        <rect x="386" y="280" width="28" height="70" fill="#b45309"/>
+                        <text x="400" y="395" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="800">CATHODE (−)</text>
+                        <text x="445" y="295" fill="#fb923c" font-size="10" font-weight="800">Cu deposit</text>
+
+                        <!-- Ions migrating in solution -->
+                        <!-- Copper ions (Cu²⁺) migrate to الكاثود (Right) -->
+                        <g>
+                            <circle cx="270" cy="280" r="10" fill="#0ea5e9" opacity="0.6" class="drift-r" style="--dx: 60px;"/>
+                            <text x="270" y="284" text-anchor="middle" fill="white" font-size="9" font-weight="900" class="drift-r" style="--dx: 60px;">Cu²⁺</text>
+                        </g>
+                        <g>
+                            <circle cx="310" cy="320" r="10" fill="#0ea5e9" opacity="0.6" class="drift-r" style="--dx: 60px;"/>
+                            <text x="310" y="324" text-anchor="middle" fill="white" font-size="9" font-weight="900" class="drift-r" style="--dx: 60px;">Cu²⁺</text>
+                        </g>
+
+                        <!-- Chlorine ions (Cl⁻) migrate to الأنود (Left) -->
+                        <g>
+                            <circle cx="330" cy="290" r="10" fill="#84cc16" opacity="0.6" class="drift-l" style="--dx: -60px;"/>
+                            <text x="330" y="294" text-anchor="middle" fill="white" font-size="9" font-weight="900" class="drift-l" style="--dx: -60px;">Cl⁻</text>
+                        </g>
+                        <g>
+                            <circle cx="290" cy="330" r="10" fill="#84cc16" opacity="0.6" class="drift-l" style="--dx: -60px;"/>
+                            <text x="290" y="334" text-anchor="middle" fill="white" font-size="9" font-weight="900" class="drift-l" style="--dx: -60px;">Cl⁻</text>
+                        </g>
+
+                        <text x="300" y="355" text-anchor="middle" fill="#7dd3fc" font-size="10" font-weight="700">CuCl₂(aq)</text>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="reaction-tabs">
+                        <button class="tab-btn active anode" onclick="switchReact(this,'anode','2Cl⁻(aq) → Cl₂(g) + 2e⁻')">تفاعل الانود</button>
+                        <button class="tab-btn cathode" onclick="switchReact(this,'cathode','Cu²⁺(aq) + 2e⁻ → Cu(s)')">تفاعل الكاثود</button>
+                        <button class="tab-btn total" onclick="switchReact(this,'total','Cu²⁺(aq) + 2Cl⁻(aq) → Cu(s) + Cl₂(g)','Inert carbon electrodes')">الكلي</button>
+                    </div>
+                    <div class="reaction-display display-anode">
+                        <div class="reaction-title">⚛ تفاعل الانود (أكسدة)</div>
+                        <div class="reaction-formula">2Cl⁻(aq) → Cl₂(g) + 2e⁻</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ▓▓ ALUMINUM EXTRACTION ▓▓ -->
+            <div class="card" data-type="electrolytic">
+                <div class="card-header">
+                    <span class="card-title">عملية استخلاص الألومنيوم</span>
+                    <span class="card-badge">Industrial · 950°C</span>
+                </div>
+                <div class="card-visual">
+                    <svg viewBox="0 0 600 410" class="zoomable-svg">
+                        <defs>
+                            <linearGradient id="molten-al" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#cbd5e1"/>
+                                <stop offset="100%" stop-color="#64748b"/>
+                            </linearGradient>
+                            <linearGradient id="cryolite-melt" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#fed7aa" stop-opacity="0.4"/>
+                                <stop offset="100%" stop-color="#9a3412" stop-opacity="0.6"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Steel container (cathode) -->
+                        <path d="M 80 130 L 520 130 L 520 350 Q 520 380 490 380 L 110 380 Q 80 380 80 350 Z" fill="#1e293b" stroke="#475569" stroke-width="3"/>
+                        <!-- Carbon lining (cathode) -->
+                        <path d="M 95 140 L 505 140 L 505 350 Q 505 370 485 370 L 115 370 Q 95 370 95 350 Z" fill="#0c0a09" stroke="#1c1917" stroke-width="2"/>
+                        <text x="50" y="200" fill="#94a3b8" font-size="11" font-weight="700" transform="rotate(-90 50 200)">Steel shell</text>
+                        <text x="540" y="200" fill="#1c1917" font-size="11" font-weight="700" transform="rotate(-90 540 200)" style="fill:#78716c">Carbon lining (cathode)</text>
+                        
+                        <!-- Molten Al layer at bottom (cathode product) -->
+                        <path d="M 100 310 L 500 310 L 500 350 Q 500 365 485 365 L 115 365 Q 100 365 100 350 Z" fill="url(#molten-al)" stroke="#475569"/>
+                        <text x="300" y="340" text-anchor="middle" fill="#1e293b" font-weight="900" font-size="13">⬇ MOLTEN ALUMINUM ⬇</text>
+                        
+                        <!-- Cryolite-Al2O3 melt -->
+                        <rect x="100" y="200" width="400" height="110" fill="url(#cryolite-melt)"/>
+                        <text x="300" y="240" text-anchor="middle" fill="#fed7aa" font-size="13" font-weight="800">Al₂O₃ dissolved in Cryolite (Na₃AlF₆)</text>
+                        <text x="300" y="258" text-anchor="middle" fill="#fcd34d" font-size="10">~950°C molten electrolyte</text>
+
+                        <!-- Carbon anodes (top, dipping in) - with decay animation -->
+                        <g>
+                            <!-- Rod 1 -->
+                            <rect x="140" y="80" width="50" height="130" fill="#1c1917" stroke="#0c0a09" stroke-width="2">
+                                <animate attributeName="height" values="130;105;130" dur="20s" begin="0s" repeatCount="indefinite"/>
+                            </rect>
+                            <rect x="143" y="85" width="44" height="3" fill="#475569"/>
+                            
+                            <!-- Rod 2 -->
+                            <rect x="225" y="80" width="50" height="130" fill="#1c1917" stroke="#0c0a09" stroke-width="2">
+                                <animate attributeName="height" values="130;105;130" dur="20s" begin="5s" repeatCount="indefinite"/>
+                            </rect>
+                            <rect x="228" y="85" width="44" height="3" fill="#475569"/>
+                            
+                            <!-- Rod 3 -->
+                            <rect x="310" y="80" width="50" height="130" fill="#1c1917" stroke="#0c0a09" stroke-width="2">
+                                <animate attributeName="height" values="130;105;130" dur="20s" begin="10s" repeatCount="indefinite"/>
+                            </rect>
+                            <rect x="313" y="85" width="44" height="3" fill="#475569"/>
+                            
+                            <!-- Rod 4 -->
+                            <rect x="395" y="80" width="50" height="130" fill="#1c1917" stroke="#0c0a09" stroke-width="2">
+                                <animate attributeName="height" values="130;105;130" dur="20s" begin="15s" repeatCount="indefinite"/>
+                            </rect>
+                            <rect x="398" y="85" width="44" height="3" fill="#475569"/>
+                        </g>
+                        <text x="290" y="65" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="800">CARBON ANODES (+)</text>
+
+                        <!-- CO2 bubbles at anodes -->
+                        <g fill="#a3a3a3" opacity="0.7">
+                            <circle cx="165" cy="190" r="3" class="bubble"/>
+                            <circle cx="250" cy="185" r="4" class="bubble-2"/>
+                            <circle cx="335" cy="195" r="3" class="bubble-3"/>
+                            <circle cx="420" cy="180" r="4" class="bubble-4"/>
+                        </g>
+                        <text x="490" y="170" fill="#a3a3a3" font-size="10" font-weight="700">CO₂↑</text>
+
+                        <!-- Animated Molten Aluminum droplets falling to bottom -->
+                        <g fill="#cbd5e1" opacity="0.8">
+                            <circle cx="165" cy="200" r="3">
+                                <animate attributeName="cy" values="200;310" dur="2.4s" begin="0s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="1;1;0" dur="2.4s" begin="0s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="250" cy="200" r="3">
+                                <animate attributeName="cy" values="200;310" dur="2.8s" begin="0.7s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="1;1;0" dur="2.8s" begin="0.7s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="335" cy="200" r="3">
+                                <animate attributeName="cy" values="200;310" dur="2.6s" begin="1.4s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="1;1;0" dur="2.6s" begin="1.4s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="420" cy="200" r="3">
+                                <animate attributeName="cy" values="200;310" dur="2.5s" begin="2.1s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="1;1;0" dur="2.5s" begin="2.1s" repeatCount="indefinite" />
+                            </circle>
+                        </g>
+
+                        <!-- Tap hole (Al outflow) with animated pouring stream and crucible -->
+                        <path d="M 500 350 L 555 360" stroke="#475569" stroke-width="8"/>
+                        
+                        <!-- Molten aluminum stream pouring down -->
+                        <path class="gas-flow" d="M 553 360 L 553 395" fill="none" stroke="#cbd5e1" stroke-width="4"/>
+                        <circle cx="553" cy="360" r="2.5" fill="#cbd5e1">
+                            <animate attributeName="cy" values="360;395" dur="1s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="1;1;0" dur="1s" repeatCount="indefinite" />
+                        </circle>
+
+                        <!-- Crucible collector at bottom -->
+                        <rect x="538" y="390" width="30" height="20" fill="#334155" stroke="#475569" stroke-width="1.5" rx="2"/>
+                        <rect x="541" y="393" width="24" height="15" fill="url(#molten-al)"/>
+
+                        <text x="555" y="382" text-anchor="middle" fill="#94a3b8" font-size="8" font-weight="700">Al tap</text>
+
+                        <!-- Power connections to ALL graphite rods -->
+                        <line x1="165" y1="80" x2="165" y2="50" stroke="#64748b" stroke-width="3"/>
+                        <line x1="250" y1="80" x2="250" y2="50" stroke="#64748b" stroke-width="3"/>
+                        <line x1="335" y1="80" x2="335" y2="50" stroke="#64748b" stroke-width="3"/>
+                        <line x1="420" y1="80" x2="420" y2="50" stroke="#64748b" stroke-width="3"/>
+                        
+                        <line x1="165" y1="50" x2="280" y2="50" stroke="#64748b" stroke-width="3"/>
+                        <line x1="420" y1="50" x2="320" y2="50" stroke="#64748b" stroke-width="3"/>
+                        
+                        <!-- الكاثود connection wire (steel shell) -->
+                        <path d="M 300 35 L 300 20 L 40 20 L 40 280 L 80 280" fill="none" stroke="#64748b" stroke-width="3"/>
+                        <path class="e-flow" d="M 300 35 L 300 20 L 40 20 L 40 280 L 80 280" fill="none" stroke="#fbbf24" stroke-width="3"/>
+                        
+                        <!-- الأنود electron flow for all 4 rods -->
+                        <path class="e-flow" d="M 165 80 L 165 50 L 280 50" fill="none" stroke="#fbbf24" stroke-width="3"/>
+                        <path class="e-flow" d="M 250 80 L 250 50 L 280 50" fill="none" stroke="#fbbf24" stroke-width="3"/>
+                        <path class="e-flow" d="M 335 80 L 335 50 L 320 50" fill="none" stroke="#fbbf24" stroke-width="3"/>
+                        <path class="e-flow" d="M 420 80 L 420 50 L 320 50" fill="none" stroke="#fbbf24" stroke-width="3"/>
+
+                        <rect x="280" y="35" width="40" height="30" fill="#1e293b" stroke="#fbbf24" stroke-width="2" rx="3"/>
+                        <text x="300" y="55" text-anchor="middle" fill="#fbbf24" font-weight="900" font-size="12">DC</text>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="reaction-tabs">
+                        <button class="tab-btn active anode" onclick="switchReact(this,'anode','C(s) + 2O²⁻ → CO₂(g) + 4e⁻','Carbon anodes are consumed')">تفاعل الانود</button>
+                        <button class="tab-btn cathode" onclick="switchReact(this,'cathode','Al³⁺ + 3e⁻ → Al(l)','Molten Al collects at bottom')">تفاعل الكاثود</button>
+                        <button class="tab-btn total" onclick="switchReact(this,'total','2Al₂O₃ + 3C → 4Al(l) + 3CO₂(g)','Industrial Hall-Héroult process')">الكلي</button>
+                    </div>
+                    <div class="reaction-display display-anode">
+                        <div class="reaction-title">⚛ تفاعل الانود (أكسدة)</div>
+                        <div class="reaction-formula"> 6O²⁻ → 3/2O₂(g) + 6e⁻</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ▓▓ SILVER ELECTROPLATING ▓▓ -->
+            <div class="card" data-type="electrolytic">
+                <div class="card-header">
+                    <span class="card-title">الطلاء الكهربائي بالفضة</span>
+                    <span class="card-badge">Surface Coating</span>
+                </div>
+                <div class="card-visual">
+                    <svg viewBox="0 0 600 410" class="zoomable-svg">
+                        <defs>
+                            <linearGradient id="ag-grad" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#9ca3af"/>
+                                <stop offset="50%" stop-color="#f9fafb"/>
+                                <stop offset="100%" stop-color="#9ca3af"/>
+                            </linearGradient>
+                            <linearGradient id="agno3-liq" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#cbd5e1" stop-opacity="0.15"/>
+                                <stop offset="100%" stop-color="#64748b" stop-opacity="0.4"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Battery source -->
+                        <g transform="translate(240,30)">
+                            <rect x="0" y="10" width="100" height="40" rx="3" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+                            <rect x="-8" y="20" width="8" height="20" fill="#fbbf24"/>
+                            <rect x="100" y="20" width="8" height="20" fill="#fbbf24"/>
+                            <text x="20" y="36" fill="#ef4444" font-weight="900" font-size="20">−</text>
+                            <text x="75" y="38" fill="#3b82f6" font-weight="900" font-size="20">+</text>
+                            <text x="50" y="48" text-anchor="middle" fill="#cbd5e1" font-size="9" font-weight="700">BATTERY</text>
+                        </g>
+
+                        <!-- Wires -->
+                        <path d="M 232 50 L 232 100 L 180 100 L 180 170" fill="none" stroke="#64748b" stroke-width="3"/>
+                        <path d="M 348 50 L 348 100 L 420 100 L 420 170" fill="none" stroke="#64748b" stroke-width="3"/>
+                        <path class="e-flow" d="M 348 50 L 348 100 L 420 100 L 420 170" fill="none" stroke="#fbbf24" stroke-width="3"/>
+
+                        <!-- Tank -->
+                        <path d="M 80 200 L 80 360 Q 80 380 100 380 L 500 380 Q 520 380 520 360 L 520 200" class="glass-stroke"/>
+                        <path d="M 84 240 L 84 358 Q 84 376 100 376 L 500 376 Q 516 376 516 358 L 516 240 Z" fill="url(#agno3-liq)"/>
+                        <ellipse cx="300" cy="240" rx="216" ry="3" fill="#cbd5e1" opacity="0.4"/>
+
+                        <!-- الكاثود - Spoon to be plated (left) -->
+                        <g transform="translate(180,90)">
+                            <line x1="0" y1="0" x2="0" y2="90" stroke="#64748b" stroke-width="3"/>
+                            <!-- Spoon shape -->
+                            <ellipse cx="0" cy="170" rx="35" ry="55" fill="#52525b" stroke="#27272a" stroke-width="2"/>
+                            <ellipse cx="0" cy="170" rx="28" ry="48" fill="#71717a"/>
+                            <!-- Silver coating (animated) -->
+                            <ellipse cx="0" cy="170" rx="28" ry="48" fill="url(#ag-grad)" opacity="0.6">
+                                <animate attributeName="opacity" values="0.2;0.7;0.2" dur="3s" repeatCount="indefinite"/>
+                            </ellipse>
+                            <rect x="-3" y="90" width="6" height="60" fill="#52525b"/>
+                        </g>
+                        <text x="180" y="402" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="800">CATHODE (−) Spoon</text>
+
+                        <!-- الأنود - Pure silver bar (right) -->
+                        <rect x="408" y="90" width="24" height="260" fill="url(#ag-grad)" stroke="#9ca3af" stroke-width="1"/>
+                        <rect x="411" y="93" width="18" height="4" fill="white" opacity="0.5"/>
+                        <text x="420" y="200" text-anchor="middle" fill="#1e293b" font-weight="900" font-size="14">Ag</text>
+                        <text x="420" y="402" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="800">ANODE (+) Pure Silver</text>
+
+                        <!-- Ag+ ions migrating -->
+                        <g>
+                            <circle cx="370" cy="270" r="8" fill="#e2e8f0" opacity="0.8" class="drift-l" style="--dx:-40px"/>
+                            <text x="370" y="274" text-anchor="middle" fill="#1e293b" font-size="8" font-weight="900" class="drift-l" style="--dx:-40px">Ag⁺</text>
+                        </g>
+                        <g>
+                            <circle cx="320" cy="310" r="8" fill="#e2e8f0" opacity="0.8" class="drift-l" style="--dx:-50px"/>
+                            <text x="320" y="314" text-anchor="middle" fill="#1e293b" font-size="8" font-weight="900" class="drift-l" style="--dx:-50px">Ag⁺</text>
+                        </g>
+                        <g>
+                            <circle cx="270" cy="280" r="8" fill="#e2e8f0" opacity="0.8" class="drift-l" style="--dx:-30px"/>
+                            <text x="270" y="284" text-anchor="middle" fill="#1e293b" font-size="8" font-weight="900" class="drift-l" style="--dx:-30px">Ag⁺</text>
+                        </g>
+
+                        <text x="300" y="355" text-anchor="middle" fill="#cbd5e1" font-size="11" font-weight="700">AgNO₃(aq) Solution</text>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="reaction-tabs">
+                        <button class="tab-btn active anode" onclick="switchReact(this,'anode','Ag(s) → Ag⁺(aq) + e⁻','Pure silver dissolves')">تفاعل الانود</button>
+                        <button class="tab-btn cathode" onclick="switchReact(this,'cathode','Ag⁺(aq) + e⁻ → Ag(s)','Plated on object surface')">تفاعل الكاثود</button>
+                        <button class="tab-btn total" onclick="switchReact(this,'total','Ag (anode) → Ag (plated on spoon)','Net mass transfer')">الكلي</button>
+                    </div>
+                    <div class="reaction-display display-anode">
+                        <div class="reaction-title">⚛ تفاعل الانود (أكسدة)</div>
+                        <div class="reaction-formula">Ag(s) → Ag⁺(aq) + e⁻</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ▓▓ COPPER PURIFICATION ▓▓ -->
+            <div class="card" data-type="electrolytic">
+                <div class="card-header">
+                    <span class="card-title">تنقية النحاس بالتحليل الكهربائي</span>
+                    <span class="card-badge">99.99% Purity</span>
+                </div>
+                <div class="card-visual">
+                    <svg viewBox="0 0 600 410" class="zoomable-svg">
+                        <defs>
+                            <linearGradient id="cuso-liq" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.25"/>
+                                <stop offset="100%" stop-color="#1e3a8a" stop-opacity="0.5"/>
+                            </linearGradient>
+                            <linearGradient id="impure-cu" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#78350f"/>
+                                <stop offset="50%" stop-color="#b45309"/>
+                                <stop offset="100%" stop-color="#78350f"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- DC Source -->
+                        <g transform="translate(240,30)">
+                            <rect x="0" y="0" width="120" height="50" rx="4" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+                            <text x="60" y="22" text-anchor="middle" fill="#22d3ee" font-family="monospace" font-size="11">DC Supply</text>
+                            <text x="60" y="40" text-anchor="middle" fill="#94a3b8" font-size="9">~0.3 V (low)</text>
+                        </g>
+
+                        <!-- Wires -->
+                        <path d="M 260 80 L 260 110 L 180 110 L 180 170" stroke="#64748b" stroke-width="3" fill="none"/>
+                        <path d="M 340 80 L 340 110 L 420 110 L 420 170" stroke="#64748b" stroke-width="3" fill="none"/>
+                        <text x="170" y="90" fill="#3b82f6" font-weight="900" font-size="16">−</text>
+                        <text x="425" y="90" fill="#ef4444" font-weight="900" font-size="16">+</text>
+
+                        <!-- Tank -->
+                        <path d="M 80 200 L 80 360 Q 80 380 100 380 L 500 380 Q 520 380 520 360 L 520 200" class="glass-stroke"/>
+                        <path d="M 84 240 L 84 358 Q 84 376 100 376 L 500 376 Q 516 376 516 358 L 516 240 Z" fill="url(#cuso-liq)"/>
+                        <ellipse cx="300" cy="240" rx="216" ry="3" fill="#60a5fa" opacity="0.4"/>
+
+                        <!-- Pure thin Cu cathode (left) - growing thicker -->
+                        <rect x="170" y="170" width="20" height="180" fill="#ea580c" stroke="#c2410c"/>
+                        <rect x="167" y="180" width="3" height="160" fill="#fb923c" opacity="0.7"/>
+                        <rect x="190" y="180" width="3" height="160" fill="#fb923c" opacity="0.7"/>
+                        <text x="180" y="402" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="800">CATHODE (−)</text>
+                        <text x="180" y="160" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="700">Pure Cu (thin)</text>
+
+                        <!-- Impure thick Cu anode (right) - irregular shape -->
+                        <path d="M 405 170 L 435 170 L 440 200 L 430 230 L 442 260 L 428 295 L 438 330 L 408 340 L 402 305 L 415 270 L 405 235 L 410 200 Z" fill="url(#impure-cu)" stroke="#78350f" stroke-width="2"/>
+                        <!-- Impurity specks -->
+                        <circle cx="420" cy="200" r="2" fill="#fbbf24"/>
+                        <circle cx="425" cy="240" r="2" fill="#e2e8f0"/>
+                        <circle cx="415" cy="280" r="2" fill="#fbbf24"/>
+                        <circle cx="430" cy="320" r="2" fill="#a3a3a3"/>
+                        <text x="420" y="402" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="800">ANODE (+)</text>
+                        <text x="420" y="160" text-anchor="middle" fill="#78350f" font-size="10" font-weight="700">Impure Cu</text>
+
+                        <!-- الأنود mud at bottom -->
+                        <ellipse cx="420" cy="365" rx="35" ry="6" fill="#451a03" opacity="0.8"/>
+                        <circle cx="408" cy="362" r="3" fill="#451a03"/>
+                        <circle cx="425" cy="367" r="4" fill="#1c1917"/>
+                        <circle cx="438" cy="362" r="3" fill="#fbbf24" opacity="0.6"/>
+                        <text x="490" y="370" fill="#94a3b8" font-size="9">الأنود mud(sludge)</text>
+                        <text x="490" y="382" fill="#fbbf24" font-size="8">(Au, Ag, Pt)</text>
+
+                        <!-- Cu²⁺ ions migrating -->
+                        <g>
+                            <circle cx="370" cy="270" r="10" fill="#0ea5e9" opacity="0.7" class="drift-l" style="--dx:-50px"/>
+                            <text x="370" y="274" text-anchor="middle" fill="white" font-size="9" font-weight="900" class="drift-l" style="--dx:-50px">Cu²⁺</text>
+                        </g>
+                        <g>
+                            <circle cx="290" cy="300" r="10" fill="#0ea5e9" opacity="0.7" class="drift-l" style="--dx:-40px"/>
+                            <text x="290" y="304" text-anchor="middle" fill="white" font-size="9" font-weight="900" class="drift-l" style="--dx:-40px">Cu²⁺</text>
+                        </g>
+
+                        <text x="300" y="355" text-anchor="middle" fill="#7dd3fc" font-size="11" font-weight="700">Acidified CuSO₄(aq)</text>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="reaction-tabs">
+                        <button class="tab-btn active anode" onclick="switchReact(this,'anode','Cu(impure) → Cu²⁺(aq) + 2e⁻','Impure copper dissolves')">تفاعل الانود</button>
+                        <button class="tab-btn cathode" onclick="switchReact(this,'cathode','Cu²⁺(aq) + 2e⁻ → Cu(pure)','Pure copper deposits')">تفاعل الكاثود</button>
+                        <button class="tab-btn total" onclick="switchReact(this,'total','Cu(impure anode) → Cu(pure cathode)','Au, Ag fall as anode mud')">الكلي</button>
+                    </div>
+                    <div class="reaction-display display-anode">
+                        <div class="reaction-title">⚛ تفاعل الانود (أكسدة)</div>
+                        <div class="reaction-formula">Cu(impure) → Cu²⁺(aq) + 2e⁻</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════ ORGANIC PREPARATIONS ═══════════ -->
+    <section id="organic" class="section organic-section">
+        <div class="section-header">
+            <div class="section-icon">🧪</div>
+            <div>
+                <div class="section-title">Organic Lab Preparations</div>
+                <div class="section-sub">Laboratory synthesis of important hydrocarbons</div>
+            </div>
+        </div>
+        
+        <div class="container">
+
+            <!-- ▓▓ METHANE PREP ▓▓ -->
+            <div class="card" data-type="organic">
+                <div class="card-header">
+                    <span class="card-title">تحضير الميثان (التقطير الجاف)</span>
+                    <span class="card-badge">Decarboxylation · CH₄</span>
+                </div>
+                <div class="card-visual">
+                    <svg viewBox="0 0 600 410" class="zoomable-svg">
+                        <defs>
+                            <linearGradient id="flame-grad" x1="0" y1="1" x2="0" y2="0">
+                                <stop offset="0%" stop-color="#1e40af" stop-opacity="0.8"/>
+                                <stop offset="30%" stop-color="#dc2626"/>
+                                <stop offset="60%" stop-color="#f59e0b"/>
+                                <stop offset="100%" stop-color="#fef08a"/>
+                            </linearGradient>
+                            <filter id="flame-glow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                            <linearGradient id="water-bath" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.4"/>
+                                <stop offset="100%" stop-color="#0369a1" stop-opacity="0.6"/>
+                            </linearGradient>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                <polygon points="0,0 10,5 0,10" fill="#06b6d4"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Stand + clamp -->
+                        <rect x="60" y="350" width="50" height="10" fill="#475569"/>
+                        <rect x="80" y="100" width="6" height="260" fill="#475569"/>
+                        
+                        <!-- Test tube (clamped horizontally) -->
+                        <g transform="translate(80,180) rotate(-15)">
+                            <rect x="0" y="0" width="200" height="40" rx="20" fill="rgba(125,211,252,0.05)" stroke="#cbd5e1" stroke-width="2.5"/>
+                            <polygon points="185,2 200,5 200,35 185,38" fill="#4b5563" opacity="0.9"/>
+                            <!-- Solid mixture inside -->
+                            <ellipse cx="50" cy="20" rx="40" ry="12" fill="#d6d3d1" stroke="#a8a29e"/>
+                            <text x="50" y="24" text-anchor="middle" fill="#1c1917" font-size="9" font-weight="800">CH₃COONa+CaO</text>
+                            <!-- Clamp -->
+                            <rect x="-15" y="15" width="20" height="10" fill="#1e293b"/>
+                        </g>
+                        
+                        <!-- Bunsen burner -->
+                        <g transform="translate(140,310)">
+                            <path d="M -15 50 L 15 50 L 12 25 L -12 25 Z" fill="#475569"/>
+                            <rect x="-8" y="-30" width="16" height="55" fill="#334155"/>
+                            <rect x="-10" y="25" width="20" height="5" fill="#1e293b"/>
+                            <!-- Flame -->
+                            <g class="flame" transform="translate(0,-90)">
+                                <path d="M 0 20 Q -12 0 -6 -15 Q 0 -25 6 -15 Q 12 0 0 20 Z" fill="url(#flame-grad)"/>
+                                <path d="M 0 20 Q -7 5 -3 -5 Q 0 -12 3 -5 Q 7 5 0 20 Z" fill="#1e40af" opacity="0.7"/>
+                                <path d="M 0 18 Q -8 5 -4 -8 Q 0 -18 4 -8 Q 8 5 0 18 Z" fill="#fef08a" opacity="0.3"/>
+                            </g>
+                        </g>
+
+                        <!-- Delivery tube -->
+                        <path d="M 269 149 L 290 155 Q 330 155 360 240 L 400 275 Q 430 280 467 330" fill="none" stroke="#cbd5e1" stroke-width="3"/>
+                        <path class="gas-flow" d="M 269 149 L 290 155 Q 330 155 360 240 L 400 275 Q 430 280 467 330" fill="none" stroke="#7dd3fc" stroke-width="2"/>
+
+                        <!-- Water trough -->
+                        <path d="M 400 280 L 540 280 L 540 380 L 400 380 Z" fill="rgba(125,211,252,0.05)" stroke="#cbd5e1" stroke-width="2.5"/>
+                        <rect x="400" y="310" width="140" height="65" fill="url(#water-bath)"/>
+                        <ellipse cx="470" cy="310" rx="68" ry="2" fill="#7dd3fc" opacity="0.4"/>
+
+                        <!-- Inverted gas jar - OPEN AT BOTTOM -->
+                        <path d="M 425 200 L 425 305 L 445 330 L 490 330 L 510 305 L 510 200 Z" fill="rgba(125,211,252,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="2.5"/>
+                        <path d="M 415 200 L 520 200 L 515 195 L 420 195 Z" fill="#475569" stroke="#1e293b" stroke-width="1.5"/>
+                        <!-- Open bottom gap -->
+                        <line x1="445" y1="330" x2="490" y2="330" stroke="#06b6d4" stroke-width="3" stroke-dasharray="5,3"/>
+                        <text x="467" y="350" text-anchor="middle" fill="#06b6d4" font-size="8" font-weight="700">OPEN</text>
+                        <!-- Arrow showing gas entry -->
+                        <path d="M 467 365 L 467 345" fill="none" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- CH4 gas inside jar -->
+                        <circle cx="450" cy="290" r="4" fill="#a78bfa" class="bubble" opacity="0.7"/>
+                        <circle cx="475" cy="300" r="5" fill="#a78bfa" class="bubble-2" opacity="0.7"/>
+                        <circle cx="490" cy="295" r="3" fill="#a78bfa" class="bubble-3" opacity="0.7"/>
+                        <circle cx="465" cy="270" r="4" fill="#a78bfa" class="bubble" opacity="0.7"/>
+                        <circle cx="445" cy="310" r="3" fill="#a78bfa" class="bubble-2" opacity="0.7"/>
+                        <circle cx="485" cy="260" r="5" fill="#a78bfa" class="bubble-3" opacity="0.7"/>
+                        
+                        <text x="467" y="240" text-anchor="middle" fill="#a78bfa" font-size="16" font-weight="900">CH₄</text>
+                        <text x="467" y="255" text-anchor="middle" fill="#c4b5fd" font-size="9" font-weight="700">methane</text>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="reaction-tabs">
+                        <button class="tab-btn active total" onclick="switchReact(this,'total','CH₃COONa + NaOH → CH₄↑ + Na₂CO₃','CaO catalyst · Δ heat')">Reaction</button>
+                    </div>
+                    <div class="reaction-display display-total">
+                        <div class="reaction-title">🧪 Decarboxylation (Soda-Lime)</div>
+                        <div class="reaction-formula">CH₃COONa + NaOH <span style="color:#f97316">━(CaO/Δ)→</span> CH₄↑ + Na₂CO₃</div>
+                        <div class="reaction-meta">Collect over water · methane is insoluble</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ▓▓ ETHYLENE PREP ▓▓ -->
+            <div class="card" data-type="organic">
+                <div class="card-header">
+                    <span class="card-title">تحضير الإيثيلين (نزع الماء)</span>
+                    <span class="card-badge">Dehydration · C₂H₄</span>
+                </div>
+                <div class="card-visual">
+                    <svg viewBox="0 0 600 410" class="zoomable-svg">
+                        <defs>
+                            <radialGradient id="flask-shine" cx="30%" cy="30%">
+                                <stop offset="0%" stop-color="rgba(255,255,255,0.3)"/>
+                                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                            </radialGradient>
+                            <linearGradient id="ethanol-mix" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#fde047" stop-opacity="0.5"/>
+                                <stop offset="100%" stop-color="#a16207" stop-opacity="0.7"/>
+                            </linearGradient>
+                            <linearGradient id="naoh-liq" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#a5f3fc" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#0891b2" stop-opacity="0.5"/>
+                            </linearGradient>
+                            <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                <polygon points="0,0 10,5 0,10" fill="#10b981"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Stand base -->
+                        <rect x="40" y="370" width="60" height="8" fill="#475569"/>
+                        <rect x="65" y="100" width="6" height="270" fill="#475569"/>
+
+                        <!-- Round-bottom flask -->
+                        <g transform="translate(150,220)">
+                            <!-- Neck -->
+                            <rect x="-8" y="-110" width="16" height="60" fill="rgba(125,211,252,0.05)" stroke="#cbd5e1" stroke-width="2.5"/>
+                            <rect x="-10" y="-115" width="20" height="10" fill="#4b5563" rx="1" opacity="0.9"/>
+                            <!-- Round body -->
+                            <circle cx="0" cy="0" r="55" fill="rgba(125,211,252,0.05)" stroke="#cbd5e1" stroke-width="2.5"/>
+                            <!-- Liquid mix -->
+                            <path d="M -52 -25 A 55 55 0 0 0 52 -25 L 52 20 A 55 55 0 0 1 -52 20 Z" fill="url(#ethanol-mix)"/>
+                            <ellipse cx="0" cy="-25" rx="52" ry="3" fill="#fde047" opacity="0.5"/>
+                            <!-- Shine -->
+                            <circle cx="-20" cy="-15" r="20" fill="url(#flask-shine)" opacity="0.6"/>
+                            <!-- Clamp -->
+                            <rect x="-22" y="-90" width="14" height="8" fill="#1e293b"/>
+                            
+                            <!-- Thermometer -->
+                            <line x1="0" y1="-100" x2="0" y2="-160" stroke="#cbd5e1" stroke-width="2"/>
+                            <circle cx="0" cy="-160" r="3" fill="#ef4444"/>
+                            <rect x="-2" y="-160" width="4" height="50" fill="#ef4444" opacity="0.7"/>
+                            <text x="15" y="-150" fill="#ef4444" font-size="10" font-weight="800">180°C</text>
+                        </g>
+
+                        <!-- Boiling chips / bubbles inside flask -->
+                        <circle cx="135" cy="240" r="3" fill="#fde047" opacity="0.8">
+                            <animate attributeName="cy" values="240;220;240" dur="1.5s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="165" cy="245" r="2" fill="#fde047" opacity="0.8">
+                            <animate attributeName="cy" values="245;215;245" dur="2s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+
+                        <text x="150" y="305" text-anchor="middle" fill="#fde047" font-size="10" font-weight="700">Ethanol + Conc. H₂SO₄</text>
+
+                        <!-- Heater under flask -->
+                        <g transform="translate(150,310)">
+                            <path d="M -25 30 L 25 30 L 20 10 L -20 10 Z" fill="#374151"/>
+                            <rect x="-3" y="-12" width="6" height="22" fill="#1e293b"/>
+                            <g class="flame">
+                                <path d="M 0 15 Q -15 0 -8 -20 Q 0 -30 8 -20 Q 15 0 0 15 Z" fill="url(#flame-grad)"/>
+                            </g>
+                        </g>
+
+                        <!-- Delivery tube to wash bottle -->
+                        <path d="M 150 110 Q 150 80 200 80 L 320 80 Q 360 80 360 130 L 360 215" fill="none" stroke="#cbd5e1" stroke-width="2.5"/>
+                        <path class="gas-flow" d="M 150 110 Q 150 80 200 80 L 320 80 Q 360 80 360 130 L 360 215" fill="none" stroke="#86efac" stroke-width="2"/>
+
+                        <!-- Wash bottle (NaOH) -->
+                        <g transform="translate(360,250)">
+                            <path d="M -25 -30 L -25 50 Q -25 65 -10 65 L 10 65 Q 25 65 25 50 L 25 -30 Z" fill="rgba(125,211,252,0.05)" stroke="#cbd5e1" stroke-width="2.5"/>
+                            <path d="M -22 -10 L -22 48 Q -22 62 -10 62 L 10 62 Q 22 62 22 48 L 22 -10 Z" fill="url(#naoh-liq)"/>
+                            <text x="0" y="25" text-anchor="middle" fill="#a5f3fc" font-size="11" font-weight="800">NaOH</text>
+                            <text x="0" y="40" text-anchor="middle" fill="#67e8f9" font-size="8">wash</text>
+                            <rect x="-12" y="-35" width="24" height="8" fill="#4b5563" rx="1" opacity="0.9"/>
+                            <!-- Inlet (extended to dip in liquid) -->
+                            <rect x="-3" y="-35" width="6" height="60" fill="#cbd5e1"/>
+                            <!-- Bubbles inside -->
+                            <circle cx="-10" cy="45" r="2" fill="#86efac" class="bubble"/>
+                            <circle cx="8" cy="40" r="3" fill="#86efac" class="bubble-2"/>
+                        </g>
+
+                        <!-- Tube to collector -->
+                        <path d="M 370 220 Q 410 220 430 250 L 450 280 L 450 330" fill="none" stroke="#cbd5e1" stroke-width="2.5"/>
+
+                        <!-- Water trough -->
+                        <path d="M 410 320 L 560 320 L 560 390 L 410 390 Z" fill="rgba(125,211,252,0.05)" stroke="#cbd5e1" stroke-width="2"/>
+                        <rect x="410" y="340" width="150" height="50" fill="url(#water-bath)"/>
+
+                        <!-- Inverted gas jar - OPEN AT BOTTOM -->
+                        <path d="M 435 240 L 435 310 L 455 340 L 495 340 L 515 310 L 515 240 Z" fill="rgba(125,211,252,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="2.5"/>
+                        <!-- Open bottom gap -->
+                        <line x1="455" y1="340" x2="495" y2="340" stroke="#10b981" stroke-width="3" stroke-dasharray="5,3"/>
+                        <text x="475" y="358" text-anchor="middle" fill="#10b981" font-size="8" font-weight="700">OPEN</text>
+                        <!-- Arrow showing gas entry -->
+                        <path d="M 475 370 L 475 350" fill="none" stroke="#10b981" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                        
+                        <circle cx="455" cy="310" r="4" fill="#86efac" class="bubble" opacity="0.7"/>
+                        <circle cx="490" cy="315" r="5" fill="#86efac" class="bubble-2" opacity="0.7"/>
+                        <circle cx="470" cy="280" r="3" fill="#86efac" class="bubble-3" opacity="0.7"/>
+                        <circle cx="445" cy="295" r="4" fill="#86efac" class="bubble" opacity="0.7"/>
+                        <circle cx="500" cy="300" r="3" fill="#86efac" class="bubble-2" opacity="0.7"/>
+                        
+                        <text x="475" y="270" text-anchor="middle" fill="#86efac" font-size="16" font-weight="900">C₂H₄</text>
+                        <text x="475" y="285" text-anchor="middle" fill="#a7f3d0" font-size="9" font-weight="700">ethylene</text>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="reaction-tabs">
+                        <button class="tab-btn active total" onclick="switchReact(this,'total','C₂H₅OH → C₂H₄↑ + H₂O','Conc. H₂SO₄ catalyst at 170°C')">Reaction</button>
+                    </div>
+                    <div class="reaction-display display-total">
+                        <div class="reaction-title">🧪 Dehydration of Ethanol</div>
+                        <div class="reaction-formula">C₂H₅OH <span style="color:#f97316">━(Conc.H₂SO₄/180°C)→</span> C₂H₄↑ + H₂O</div>
+                        <div class="reaction-meta">NaOH removes acidic impurities (SO₂, CO₂)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ▓▓ ACETYLENE PREP(water dripping) ▓▓ -->
+            <div class="card" data-type="organic">
+                <div class="card-header">
+                    <span class="card-title">تحضير الأسيتيلين (تقطير الماء)</span>
+                    <span class="card-badge">Hydrolysis · C₂H₂</span>
+                </div>
+                <div class="card-visual">
+                    <svg viewBox="0 0 600 410" class="zoomable-svg">
+                        <defs>
+                            <linearGradient id="cuso-wash" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.4"/>
+                                <stop offset="100%" stop-color="#1e3a8a" stop-opacity="0.6"/>
+                            </linearGradient>
+                            <linearGradient id="lime-water" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#bae6fd" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#075985" stop-opacity="0.5"/>
+                            </linearGradient>
+                            <marker id="arrowhead3" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                <polygon points="0,0 10,5 0,10" fill="#ef4444"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Stand -->
+                        <rect x="40" y="370" width="50" height="8" fill="#475569"/>
+                        <rect x="60" y="40" width="6" height="335" fill="#475569"/>
+
+                        <!-- Dropping funnel (top) -->
+                        <g transform="translate(150,80)">
+                            <!-- Funnel body -->
+                            <path d="M -20 -30 L 20 -30 L 20 0 L 5 30 L -5 30 L -20 0 Z" fill="rgba(125,211,252,0.05)" stroke="#cbd5e1" stroke-width="2.5"/>
+                            <!-- Water inside -->
+                            <path d="M -17 -10 L 17 -10 L 17 0 L 4 26 L -4 26 L -17 0 Z" fill="rgba(125,211,252,0.4)"/>
+                            <!-- Top opening -->
+                            <ellipse cx="0" cy="-30" rx="20" ry="3" fill="rgba(125,211,252,0.5)"/>
+                            <!-- Stopcock -->
+                            <rect x="-8" y="30" width="16" height="6" fill="#1e293b"/>
+                            <circle cx="0" cy="33" r="4" fill="#475569"/>
+                            <!-- Stem -->
+                            <line x1="0" y1="36" x2="0" y2="55" stroke="#cbd5e1" stroke-width="2"/>
+                            <!-- Clamp -->
+                            <rect x="-25" y="-10" width="15" height="6" fill="#1e293b"/>
+                            
+                            <text x="35" y="-15" fill="#7dd3fc" font-size="11" font-weight="800">H₂O</text>
+                        </g>
+
+                        <!-- Drop animation -->
+                        <circle cx="150" cy="140" r="2.5" fill="#7dd3fc" class="water-drop"/>
+
+                        <!-- Conical flask with CaC2 -->
+                        <g transform="translate(150,260)">
+                            <!-- Flask body (Erlenmeyer) -->
+                            <path d="M -10 -75 L 10 -75 L 10 -50 L 50 30 Q 55 50 35 50 L -35 50 Q -55 50 -50 30 L -10 -50 Z" fill="rgba(125,211,252,0.05)" stroke="#cbd5e1" stroke-width="2.5"/>
+                            <rect x="-12" y="-78" width="24" height="8" fill="#4b5563" rx="1" opacity="0.9"/>
+                            <!-- CaC2 chunks at bottom -->
+                            <g fill="#374151" stroke="#1f2937" stroke-width="1">
+                                <circle cx="-25" cy="42" r="7"/>
+                                <circle cx="-10" cy="45" r="9"/>
+                                <circle cx="10" cy="44" r="8"/>
+                                <circle cx="28" cy="46" r="6"/>
+                                <circle cx="0" cy="40" r="6"/>
+                                <circle cx="20" cy="42" r="5"/>
+                            </g>
+                            <text x="0" y="80" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="800">CaC₂ chunks</text>
+                            <!-- Bubbles rising -->
+                            <circle cx="-15" cy="10" r="3" fill="#fca5a5" class="bubble" opacity="0.7"/>
+                            <circle cx="15" cy="5" r="4" fill="#fca5a5" class="bubble-2" opacity="0.7"/>
+                            <circle cx="0" cy="-5" r="3" fill="#fca5a5" class="bubble-3" opacity="0.7"/>
+                        </g>
+
+                        <!-- Delivery tube -->
+                        <path d="M 150 185 Q 150 155 220 155 L 290 155 Q 330 155 330 205 L 330 270" fill="none" stroke="#cbd5e1" stroke-width="2.5"/>
+                        <path class="gas-flow" d="M 150 185 Q 150 155 220 155 L 290 155 Q 330 155 330 205 L 330 270" fill="none" stroke="#fca5a5" stroke-width="2"/>
+
+                        <!-- Wash bottle (CuSO4 + H2SO4) -->
+                        <g transform="translate(330,300)">
+                            <path d="M -28 -25 L -28 60 Q -28 75 -13 75 L 13 75 Q 28 75 28 60 L 28 -25 Z" fill="rgba(125,211,252,0.05)" stroke="#cbd5e1" stroke-width="2.5"/>
+                            <path d="M -25 0 L -25 58 Q -25 72 -13 72 L 13 72 Q 25 72 25 58 L 25 0 Z" fill="url(#cuso-wash)"/>
+                            <text x="0" y="30" text-anchor="middle" fill="#bfdbfe" font-size="10" font-weight="800">CuSO₄</text>
+                            <text x="0" y="44" text-anchor="middle" fill="#93c5fd" font-size="8">+H₂SO₄</text>
+                            <rect x="-12" y="-30" width="24" height="8" fill="#4b5563" rx="1" opacity="0.9"/>
+                            <!-- Inlet (extended to dip in liquid) -->
+                            <rect x="-3" y="-30" width="6" height="60" fill="#cbd5e1"/>
+                            <circle cx="-10" cy="55" r="2" fill="#fca5a5" class="bubble"/>
+                            <circle cx="10" cy="50" r="3" fill="#fca5a5" class="bubble-2"/>
+                            <text x="0" y="92" text-anchor="middle" fill="#94a3b8" font-size="8">remove H₂S, PH₃</text>
+                        </g>
+
+                        <!-- Tube to collector -->
+                        <path d="M 340 275 Q 380 275 410 310 L 440 340" fill="none" stroke="#cbd5e1" stroke-width="2.5"/>
+
+                        <!-- Water trough + gas jar -->
+                        <path d="M 410 365 L 560 365 L 560 430 L 410 430 Z" fill="rgba(125,211,252,0.05)" stroke="#cbd5e1" stroke-width="2"/>
+                        <rect x="410" y="385" width="150" height="48" fill="url(#water-bath)"/>
+
+                        <!-- Inverted gas jar - OPEN AT BOTTOM -->
+                        <path d="M 440 285 L 440 355 L 460 385 L 495 385 L 515 355 L 515 285 Z" fill="rgba(125,211,252,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="2.5"/>
+                        <!-- Open bottom gap -->
+                        <line x1="460" y1="385" x2="495" y2="385" stroke="#ef4444" stroke-width="3" stroke-dasharray="5,3"/>
+                        <text x="477" y="403" text-anchor="middle" fill="#ef4444" font-size="8" font-weight="700">OPEN</text>
+                        <!-- Arrow showing gas entry -->
+                        <path d="M 477 415 L 477 395" fill="none" stroke="#ef4444" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                        
+                        <circle cx="455" cy="355" r="4" fill="#fca5a5" class="bubble" opacity="0.7"/>
+                        <circle cx="495" cy="360" r="5" fill="#fca5a5" class="bubble-2" opacity="0.7"/>
+
+                        <text x="477" y="320" text-anchor="middle" fill="#fca5a5" font-size="16" font-weight="900">C₂H₂</text>
+                        <text x="477" y="335" text-anchor="middle" fill="#fecaca" font-size="9" font-weight="700">acetylene</text>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="reaction-tabs">
+                        <button class="tab-btn active total" onclick="switchReact(this,'total','CaC₂ + 2H₂O → C₂H₂↑ + Ca(OH)₂','Vigorous exothermic hydrolysis')">Reaction</button>
+                    </div>
+                    <div class="reaction-display display-total">
+                        <div class="reaction-title">🧪 Hydrolysis of Calcium Carbide</div>
+                        <div class="reaction-formula">CaC₂ + 2H₂O → C₂H₂↑ + Ca(OH)₂</div>
+                        <div class="reaction-meta">CuSO₄+H₂SO₄ wash removes H₂S, PH₃ impurities</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ▓▓ ORGANIC TEST ▓▓ -->
+            <div class="card" data-type="organic">
+                <div class="card-header">
+                    <span class="card-title">اختبار الهيدروجين والكربون في المركبات العضوية</span>
+                    <span class="card-badge">Combustion Test</span>
+                </div>
+                <div class="card-visual">
+                    <svg viewBox="0 0 600 410" class="zoomable-svg">
+                        <defs>
+                            <linearGradient id="lime-w" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#e0e7ff" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#6366f1" stop-opacity="0.5"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Stand -->
+                        <rect x="30" y="370" width="50" height="8" fill="#475569"/>
+                        <rect x="50" y="120" width="6" height="255" fill="#475569"/>
+
+                        <!-- Test tube (horizontal) -->
+                        <g transform="translate(80,200)">
+                            <path d="M 0 0 L 160 0 L 160 30 Q 160 40 150 40 L 0 40 Q -15 40 -15 20 Q -15 0 0 0 Z" fill="rgba(125,211,252,0.05)" stroke="#cbd5e1" stroke-width="2.5"/>
+                            <polygon points="148,3 160,5 160,35 148,37" fill="#4b5563" opacity="0.9"/>
+                            <!-- Mixture: organic + CuO -->
+                            <rect x="20" y="8" width="60" height="22" fill="#1c1917" stroke="#0c0a09" rx="3"/>
+                            <text x="50" y="22" text-anchor="middle" fill="white" font-size="8" font-weight="800">Org+CuO</text>
+                            <!-- Clamp -->
+                            <rect x="-20" y="10" width="15" height="20" fill="#1e293b"/>
+                        </g>
+
+                        <!-- Burner under -->
+                        <g transform="translate(140,280)">
+                            <path d="M -20 60 L 20 60 L 17 40 L -17 40 Z" fill="#475569"/>
+                            <rect x="-6" y="-15" width="12" height="55" fill="#334155"/>
+                            <g class="flame">
+                                <path d="M 0 20 Q -14 0 -7 -20 Q 0 -30 7 -20 Q 14 0 0 20 Z" fill="url(#flame-grad)"/>
+                            </g>
+                        </g>
+
+                        <!-- CuSO4 collection tube -->
+                        <g transform="translate(280,200)">
+                            <path d="M -20 -15 L -20 60 Q -20 75 -5 75 L 5 75 Q 20 75 20 60 L 20 -15 Z" fill="rgba(125,211,252,0.05)" stroke="#cbd5e1" stroke-width="2.5"/>
+                            <!-- Open top -->
+                            <ellipse cx="0" cy="-15" rx="20" ry="3" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+                            <!-- White CuSO4 inside -->
+                            <path d="M -16 10 L -16 58 Q -16 70 -5 70 L 5 70 Q 16 70 16 58 L 16 10 Z" fill="#fef3c7" opacity="0.8"/>
+                            <!-- Blue tint at top (water absorbed) -->
+                            <path d="M -16 10 L -16 25 Q -16 28 -14 30 L 14 30 Q 16 28 16 25 L 16 10 Z" fill="#3b82f6" opacity="0.4"/>
+                            <text x="0" y="40" text-anchor="middle" fill="#78350f" font-size="7" font-weight="700">CuSO₄</text>
+                            <text x="0" y="52" text-anchor="middle" fill="#3b82f6" font-size="7" font-weight="700">H₂O</text>
+                            <!-- Inlet tube -->
+                            <rect x="-3" y="-20" width="6" height="35" fill="#cbd5e1"/>
+                            <!-- Clamp -->
+                            <rect x="-25" y="15" width="15" height="6" fill="#1e293b"/>
+                        </g>
+
+                        <!-- Delivery tube to CuSO4 -->
+                        <path d="M 240 220 L 275 220 L 277 210" fill="none" stroke="#cbd5e1" stroke-width="2.5"/>
+                        <path class="gas-flow" d="M 240 220 L 275 220 L 277 210" fill="none" stroke="#9ca3af" stroke-width="2"/>
+
+                        <!-- Delivery tube to limewater -->
+                        <path d="M 295 220 Q 350 220 395 220 L 415 220 L 415 335" fill="none" stroke="#cbd5e1" stroke-width="2.5"/>
+                        <path class="gas-flow" d="M 295 220 Q 350 220 395 220 L 415 220 L 415 335" fill="none" stroke="#9ca3af" stroke-width="2"/>
+
+                        <!-- Boiling tube with limewater - OPEN AT TOP -->
+                        <g transform="translate(420,300)">
+                            <path d="M -25 -50 L -25 70 Q -25 85 -10 85 L 10 85 Q 25 85 25 70 L 25 -50 Z" fill="rgba(125,211,252,0.05)" stroke="#cbd5e1" stroke-width="2.5"/>
+                            <!-- Open rim at top -->
+                            <ellipse cx="0" cy="-50" rx="25" ry="4" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+                            <path d="M -25 -50 L 25 -50" fill="none" stroke="#a5b4fc" stroke-width="2" stroke-dasharray="3,2"/>
+                            <path d="M -20 -50 L -25 -50" fill="none" stroke="#a5b4fc" stroke-width="2"/>
+                            <path d="M 20 -50 L 25 -50" fill="none" stroke="#a5b4fc" stroke-width="2"/>
+                            <path d="M -10 -52 L 0 -55 L 10 -52" fill="none" stroke="#a5b4fc" stroke-width="1.5"/>
+                            <path d="M -15 -48 L -25 -50" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            <path d="M 15 -48 L 25 -50" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            <path d="M -22 0 L -22 68 Q -22 82 -10 82 L 10 82 Q 22 82 22 68 L 22 0 Z" fill="url(#lime-w)"/>
+                            <!-- Cloudiness indicator -->
+                            <circle cx="-8" cy="40" r="3" fill="#e0e7ff" opacity="0.6" class="pulse"/>
+                            <circle cx="8" cy="55" r="2" fill="#e0e7ff" opacity="0.6" class="pulse"/>
+                            <circle cx="0" cy="25" r="2.5" fill="#e0e7ff" opacity="0.6" class="pulse"/>
+                            
+                            <text x="0" y="-65" text-anchor="middle" fill="#c7d2fe" font-size="10" font-weight="800">Lime Water</text>
+                            <text x="0" y="-55" text-anchor="middle" fill="#a5b4fc" font-size="8">Ca(OH)₂</text>
+                            
+                            <!-- Bubbles -->
+                            <circle cx="-5" cy="65" r="3" fill="#9ca3af" class="bubble"/>
+                            <circle cx="10" cy="70" r="2" fill="#9ca3af" class="bubble-2"/>
+                            <!-- Clamp -->
+                            <rect x="22" y="20" width="15" height="6" fill="#1e293b"/>
+                        </g>
+                        <text x="420" y="405" text-anchor="middle" fill="#a5b4fc" font-size="9" font-weight="700">turns milky → CO₂ present</text>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <div class="reaction-tabs">
+                        <button class="tab-btn active anode" onclick="switchReact(this,'anode','H₂ + CuO → Cu + H₂O','White CuSO₄ → blue')">اختبار الهيدروجين</button>
+                        <button class="tab-btn cathode" onclick="switchReact(this,'cathode','C + 2CuO → 2Cu + CO₂','Limewater → milky')">اختبار الكربون</button>
+                        <button class="tab-btn total" onclick="switchReact(this,'total','Organic + CuO(black) → CO₂ + H₂O + Cu(red)','Confirms organic nature')">الكلي</button>
+                    </div>
+                    <div class="reaction-display display-anode">
+                        <div class="reaction-title">🧪 الكشف عن الهيدروجين</div>
+                        <div class="reaction-formula">H₂ + CuO <span style="color:#f97316">━Δ→</span> Cu + H₂O</div>
+                        <div class="reaction-meta">Water turns anhydrous white CuSO₄ → blue (CuSO₄·5H₂O)</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer style="text-align:center; padding:3rem 1rem; color:var(--text-muted); font-size:0.9rem; border-top:1px solid var(--border); margin-top:3rem;">
+         كود الكيمياء (أ.د/ أيمن منصور) - تعليمي
+         
+<br><a href="chemistry_lab.html" class="footer-btn" style="display:inline-block; margin-top:15px; background:linear-gradient(135deg,#38bdf8,#818cf8); color:white; padding:8px 18px; border-radius:12px; font-weight:800; font-size:14px; text-decoration:none;">English</a>
+</footer>
+    <script>
+        function switchReact(btn, type, equation, meta='') {
+            const cardContent = btn.closest('.card-content');
+            const tabs = cardContent.querySelectorAll('.tab-btn');
+            tabs.forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const display = cardContent.querySelector('.reaction-display');
+            display.className = `reaction-display display-${type}`;
+            
+            const titleElem = display.querySelector('.reaction-title');
+            const formulaElem = display.querySelector('.reaction-formula');
+            const metaElem = display.querySelector('.reaction-meta');
+            
+            let labels = {
+                'anode': '⚛ تفاعل الانود (أكسدة)',
+                'cathode': '⚛ تفاعل الكاثود Reaction (Reduction)',
+                'total': '🧪 Overall Process Reaction'
+            };
+            
+            titleElem.textContent = labels[type];
+            formulaElem.innerHTML = equation;
+            
+            if (metaElem) {
+                metaElem.textContent = meta;
+            } else if (meta) {
+                const newMeta = document.createElement('div');
+                newMeta.className = 'reaction-meta';
+                newMeta.textContent = meta;
+                display.appendChild(newMeta);
+            }
+        }
+    
+        // Interactive Zoom for SVGs
+        document.addEventListener('DOMContentLoaded', () => {
+            const svgs = document.querySelectorAll('.zoomable-svg');
+            const modal = document.getElementById('card-modal');
+            const modalContent = document.querySelector('.modal-content');
+            const closeModalBtn = document.querySelector('.close-modal');
+
+            svgs.forEach(svg => {
+                svg.addEventListener('click', function () {
+                    // Clone the entire card
+                    const parentCard = this.closest('.card');
+                    if (!parentCard) return;
+                    
+                    const clonedCard = parentCard.cloneNode(true);
+                    const clonedSvg = clonedCard.querySelector('.zoomable-svg');
+                    if (clonedSvg) clonedSvg.classList.remove('zoomable-svg');
+                    
+                    modalContent.innerHTML = '';
+                    modalContent.appendChild(clonedCard);
+                    modal.classList.add('show');
+                });
+            });
+
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', () => {
+                    modal.classList.remove('show');
+                });
+            }
+
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('show');
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('show')) {
+                    modal.classList.remove('show');
+                }
+            });
+        });
+
+    </script>
+<div class="footer-note">Prof./ Ayman Mansour — Chemistry Consultant · Chemistry 2026</div>
+
+    <!-- FULL PAGE ZOOM MODAL -->
+    <div id="card-modal" class="card-modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content"></div>
+    </div>
+
+
+    <div class="watermark"></div>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0f2dea66c493d70',t:'MTc4MjA0MzQwMw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

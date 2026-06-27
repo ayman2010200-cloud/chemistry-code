@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organic Chemistry Equations Book — All Chart Reactions</title>
+<style>
+    :root {
+        --bg-main: #0b0f19;
+        --bg-card: #111827;
+        --border-color: #1f2937;
+        --gold: #fbbf24;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        padding: 28px 10px 70px;
+        background: radial-gradient(1200px 600px at 50% -10%, #101a33 0%, var(--bg-main) 60%);
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        color: #f8fafc;
+        min-height: 100vh;
+    }
+    h1 {
+        margin: 0 0 6px;
+        font-size: 30px;
+        font-weight: 800;
+        text-align: center;
+        background: linear-gradient(90deg, #7dd3fc, #c084fc, #fbbf24);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    .subtitle {
+        margin: 0 0 20px 0;
+        color: #94a3b8;
+        font-size: 14.5px;
+        text-align: center;
+        max-width: 100%;
+        width: 100%;
+        line-height: 1.55;
+    }
+    .subtitle b { color: #e2e8f0; }
+
+    /* ===== toolbar ===== */
+    .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 12px 18px;
+        margin: 0 0 18px 0;
+        max-width: 100%;
+        width: 100%;
+        position: sticky;
+        top: 10px;
+        z-index: 20;
+        box-shadow: 0 10px 30px rgba(0,0,0,.45);
+    }
+    .toolbar input {
+        background: #0d1117;
+        border: 1px solid #2b3648;
+        color: #e2e8f0;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 13.5px;
+        width: 250px;
+        outline: none;
+        font-family: inherit;
+    }
+    .toolbar input:focus { border-color: #38bdf8; }
+    .btn {
+        background: #1b2435;
+        border: 1px solid #2b3648;
+        color: #cbd5e1;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all .15s;
+        user-select: none;
+    }
+    .btn:hover { background: #243049; color: #fff; }
+    .btn.gold { background: #3a2e08; border-color: #8a6d12; color: #fde68a; }
+    .count { font-size: 13px; color: #64748b; font-weight: 600; }
+
+    /* ===== chapter nav ===== */
+    .chapnav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 7px;
+        margin: 0 0 26px 0;
+        max-width: 100%;
+        width: 100%;
+    }
+    .chapnav a {
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: .4px;
+        text-transform: uppercase;
+        color: #cbd5e1;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        padding: 6px 13px;
+        text-decoration: none;
+        transition: all .15s;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+    .chapnav a:hover { border-color: var(--ch); color: #fff; }
+    .chapnav .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ch); }
+
+    /* ===== book ===== */
+    .book { max-width: 100%; width: 100%; margin: 0; }
+
+    .chapter { margin-bottom: 34px; }
+    .chap-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: linear-gradient(90deg, color-mix(in srgb, var(--ch) 16%, #121a2a) 0%, #0e1422 70%);
+        border: 1px solid color-mix(in srgb, var(--ch) 45%, #1f2937);
+        border-left: 6px solid var(--ch);
+        border-radius: 12px;
+        padding: 14px 20px;
+        margin-bottom: 12px;
+    }
+    .chap-head .icon {
+        width: 40px; height: 40px;
+        border-radius: 10px;
+        background: color-mix(in srgb, var(--ch) 20%, #0b0f19);
+        border: 1.5px solid var(--ch);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 19px;
+    }
+    .chap-head h2 { margin: 0; font-size: 21px; font-weight: 800; color: #fff; }
+    .chap-head .sub { font-size: 12.5px; color: #94a3b8; margin-top: 2px; }
+    .chap-head .n {
+        margin-left: auto;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--ch);
+        border: 1.5px solid var(--ch);
+        border-radius: 999px;
+        padding: 4px 14px;
+        white-space: nowrap;
+    }
+
+    /* equation card */
+    .eq {
+        background: linear-gradient(160deg, #121a2a 0%, #0d1117 80%);
+        border: 1px solid #1d2738;
+        border-left: 4px solid var(--ch);
+        border-radius: 12px;
+        padding: 14px 18px 13px;
+        margin-bottom: 10px;
+        transition: border-color .15s, box-shadow .15s;
+    }
+    .eq:hover {
+        border-color: color-mix(in srgb, var(--ch) 55%, #1d2738);
+        box-shadow: 0 6px 20px rgba(0,0,0,.4), 0 0 12px color-mix(in srgb, var(--ch) 18%, transparent);
+    }
+    .eq.hidden { display: none; }
+    .eq-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 9px;
+        flex-wrap: wrap;
+    }
+    .eq-num {
+        width: 26px; height: 26px;
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--ch) 22%, #0b0f19);
+        border: 1.5px solid var(--ch);
+        color: var(--ch);
+        font-size: 12px;
+        font-weight: 800;
+        display: flex; align-items: center; justify-content: center;
+        flex: 0 0 auto;
+    }
+    .eq-name { font-size: 14.5px; font-weight: 800; color: #fff; }
+    .eq-tag {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .6px;
+        text-transform: uppercase;
+        color: var(--ch);
+        background: color-mix(in srgb, var(--ch) 14%, transparent);
+        border-radius: 999px;
+        padding: 3px 10px;
+    }
+    /* origin-chapter chip shown in "by type" view */
+    .eq-chip {
+        margin-left: auto;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        color: var(--cc);
+        border: 1px solid color-mix(in srgb, var(--cc) 55%, transparent);
+        background: color-mix(in srgb, var(--cc) 10%, transparent);
+        border-radius: 999px;
+        padding: 3px 10px;
+        white-space: nowrap;
+    }
+    .seg { display: flex; gap: 0; }
+    .seg .btn { border-radius: 0; }
+    .seg .btn:first-child { border-radius: 8px 0 0 8px; }
+    .seg .btn:last-child { border-radius: 0 8px 8px 0; border-left: none; }
+
+    /* the equation line itself — size controlled by A− / A+ buttons */
+    :root { --eqfs: 21px; }
+    .eq-line {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 4px 12px;
+        font-size: var(--eqfs);
+        font-weight: 700;
+        color: #e8edf5;
+        padding: 10px 4px 5px;
+        line-height: 1.9;
+        width: 100%;
+    }
+    .eq-line .sp { color: #e8edf5; }
+    .eq-line .plus { color: #64748b; font-weight: 600; }
+    .arrowbox {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 6px;
+        min-width: 86px;
+    }
+    .arrowbox .cond {
+        font-size: calc(var(--eqfs) * 0.56);
+        font-weight: 700;
+        color: #7dd3fc;
+        font-family: Consolas, 'Courier New', monospace;
+        margin-bottom: -3px;
+        text-align: center;
+        max-width: 230px;
+        line-height: 1.35;
+    }
+    .arrowbox .arr { color: var(--gold); font-size: calc(var(--eqfs) * 1.18); line-height: .8; }
+
+    /* ===== Kekulé ring structures inside equations ===== */
+    .eq-line .ringwrap { display: inline-flex; align-items: center; }
+    .eq-line svg.ring { display: block; }
+    svg.ring line { stroke: #dbe3ef; stroke-width: 1.7; stroke-linecap: round; }
+    .eq-line .spn {
+        font-size: calc(var(--eqfs) * 0.6);
+        color: #8fa1ba;
+        font-weight: 600;
+        align-self: flex-end;
+        padding-bottom: 6px;
+    }
+    .eq-note {
+        font-size: 12px;
+        color: #8fa1ba;
+        margin-top: 7px;
+        padding-top: 7px;
+        border-top: 1px dashed #1d2738;
+    }
+    .eq-note b { color: #cbd5e1; }
+    .hl { background: #3a2e08; color: #fde68a; border-radius: 3px; padding: 0 3px; }
+
+    .empty {
+        text-align: center;
+        color: #64748b;
+        font-size: 15px;
+        padding: 50px 0;
+    }
+
+    .topbtn {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        width: 46px; height: 46px;
+        border-radius: 50%;
+        background: #1b2435;
+        border: 1.5px solid #2b3648;
+        color: #cbd5e1;
+        font-size: 19px;
+        cursor: pointer;
+        z-index: 30;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 8px 22px rgba(0,0,0,.5);
+    }
+    .topbtn:hover { background: #243049; color: #fff; }
+
+    /* ===== print (light) mode ===== */
+    @media print {
+        body { background: #fff !important; color: #111 !important; padding: 10px; }
+        .toolbar, .chapnav, .topbtn, .subtitle { display: none !important; }
+        h1 { color: #111 !important; -webkit-text-fill-color: #111; background: none; }
+        .chap-head { background: #f3f4f6 !important; border-color: #999 !important; }
+        .chap-head h2 { color: #111 !important; }
+        .chap-head .sub { color: #444 !important; }
+        .eq { background: #fff !important; border: 1px solid #bbb !important; break-inside: avoid; }
+        .eq-line, .eq-line .sp { color: #111 !important; }
+        .eq-name { color: #111 !important; }
+        .arrowbox .cond { color: #1d4ed8 !important; }
+        .arrowbox .arr { color: #b45309 !important; }
+        .eq-note { color: #444 !important; }
+    }
+
+/* ================= BRAND / TEACHER IDENTITY ================= */
+.brandbar {
+  display: flex; align-items: center; gap: 18px;
+  background: linear-gradient(90deg, #101a33 0%, #0f172a 60%, #1a1430 100%);
+  border: 1px solid #facc15aa; border-radius: 16px;
+  padding: 12px 22px; margin: 0 0 18px 0;
+  max-width: 100%; width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 8px 28px rgba(0,0,0,.5), 0 0 18px #facc1522;
+  position: relative; z-index: 10;
+}
+.brandbar .bphoto {
+  width: 74px; height: 74px; border-radius: 50%;
+  border: 3px solid #facc15; object-fit: cover; flex: 0 0 auto;
+  box-shadow: 0 0 16px #facc1566; background: #fff;
+}
+.brandbar .bnames { line-height: 1.3; }
+.brandbar .bar { font-size: 21px; font-weight: 800; color: #facc15; }
+.brandbar .ben { font-size: 13px; font-weight: 700; color: #7dd3fc; letter-spacing: .5px; }
+.brandbar .bpage {
+  margin-inline-start: auto; text-align: center; line-height: 1.45;
+}
+.brandbar .bpage .pa { font-size: 16px; font-weight: 800; color: #e2e8f0; direction: rtl; }
+.brandbar .bpage .pe { font-size: 11.5px; font-weight: 600; color: #94a3b8; }
+.brandbar .bexam { text-align: end; line-height: 1.4; }
+.brandbar .bexam .x1 { font-size: 15px; font-weight: 800; color: #4ade80; direction: rtl; }
+.brandbar .bexam .x2 { font-size: 10.5px; color: #64748b; direction: rtl; }
+@media (max-width: 900px){ .brandbar{flex-wrap:wrap; justify-content:center; text-align:center;} .brandbar .bpage{margin:0;} }
+
+/* watermark: faint photo + repeated bilingual name */
+#wmark {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+}
+#wmark .wphoto {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%,-50%);
+  width: min(56vmin, 520px); height: min(56vmin, 520px);
+  border-radius: 50%;
+  background-size: cover; background-position: center;
+  opacity: .045; filter: grayscale(60%);
+}
+body > *:not(#wmark){ position: relative; z-index: 1; }
+
+.brandfoot {
+  margin: 26px 0 0 0; max-width: 100%; width: 100%;
+  border-top: 1px dashed #facc1555;
+  padding: 12px 8px 4px;
+  display: flex; flex-wrap: wrap; gap: 6px 24px;
+  align-items: center; justify-content: center;
+  font-size: 12.5px; color: #94a3b8; text-align: center;
+  box-sizing: border-box;
+}
+.brandfoot b { color: #facc15; }
+.brandfoot .sep { color: #334155; }
+@media print { #wmark .wphoto { opacity: .05; } .brandbar{box-shadow:none;} }
+#wmark{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='300'%3E%3Ctext x='50%25' y='44%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='26' font-weight='bold' fill='%23ffffff' opacity='0.13'%3EProf./ Ayman Mansour%3C/text%3E%3Ctext x='50%25' y='60%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='22' font-weight='bold' fill='%23ffffff' opacity='0.10'%3E%D8%A3/ %D8%A3%D9%8A%D9%85%D9%86 %D9%85%D9%86%D8%B5%D9%88%D8%B1%3C/text%3E%3C/svg%3E");background-repeat:repeat;z-index:9999;}
+
+/* ===== model-2 security overlay ===== */
+.security-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #0b1220; color: #ef4444;
+    display: none; justify-content: center; align-items: center; flex-direction: column;
+    z-index: 999999; font-size: 1.6rem; font-weight: 800; text-align: center; gap: 8px;
+}
+.security-overlay .ar { font-size: 1.3rem; color: #f87171; direction: rtl; }
+body { user-select: none; }
+input, select, textarea { user-select: text; }
+
+.brandfoot { flex-direction: column; gap: 8px; }
+.brandfoot .fline1, .brandfoot .fline2 {
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+  align-items: center; justify-content: center;
+}
+.brandfoot .fname { color: #facc15; font-size: 15px; font-weight: 800; direction: rtl; }
+.brandfoot .fname2 { color: #7dd3fc; font-size: 13px; font-weight: 700; }
+.brandfoot .fphone {
+  color: #4ade80; font-weight: 700; font-size: 13px;
+  background: #4ade8011; border: 1px solid #4ade8044;
+  border-radius: 999px; padding: 4px 14px;
+}
+.brandfoot .fphone b { color: #86efac; letter-spacing: 1px; }
+
+/* ===== Arabic mode ===== */
+body.lang-ar .eq-name { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; }
+body.lang-ar .eq-tag { direction: rtl; }
+body.lang-ar .arrowbox .cond { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; font-size: calc(var(--eqfs) * 0.52); }
+body.lang-ar .eq-top { flex-direction: row; }
+
+body.lang-ar #pgTitle, body.lang-ar #pgSub { direction: rtl; font-family:'Segoe UI',Tahoma,sans-serif; }
+body.lang-ar .chap-head h2, body.lang-ar .chap-head .sub { direction: rtl; text-align: right; }
+body.lang-ar .chapnav a { direction: rtl; }
+
+.brandbar .blogo {
+  width: 78px; height: 68px; border-radius: 12px;
+  object-fit: contain; background: #fff; flex: 0 0 auto;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 14px rgba(56,189,248,.45);
+  padding: 3px;
+}
+</style>
+</head>
+<body>
+
+<div id="wmark"><div class="wphoto" style="background-image:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7LooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACory5trO3e5u54oIUGWkkYKoHuTXD/Fn4peHfh7p5a9lF1qLj9zZRsN5Pq390V8b/ABQ+J3ijx5fNLqd68VkCfKsoiViUfTufc0FKLZ9W+L/2gPh9oLPFb30urTrxts1yuf8AePFeYa1+1bdAN/ZfheBBnhricscfQAV80BJJCCBxxVqPTJ5Ii4JI9AKXNFGipNntcv7VHjbzAU0nRgmehRzkf99V0mgftXTbkXW/C8ZX+J7Wcj9GFfNNxp8sYUMDnHpTYrK4Y4WMnj0p80RezfY+9PA/xt+H/ipkhg1YWF03AgvB5ZJ9Aeh/OvSEZXQOjBlIyCDkGvzEkguLYhirDHSvTfhJ8avFPgq6hgeeTUtIziSzmfO0dyhPQ/pRo9iXFo+76KxPBHinR/GHh+DWtFuVmglHzL/FG3dWHYituggKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACvNf2gPiVF8PPCu+1KSaxe5js4j/AA+shHoP516VXw78e9TvfG/xmv7CFmaG1l+ywDPCqvBI/HJpN2Vy6cOZ2OHij1vxjq1xfzzS3VxIxeW4lJJJNb1j4AvJh86KuO5PWvU9A8OWmhaZBaRRqXVRuIHJNbEMQOBtH5VwVMRK+h7lHBxtqeSWXgS4ilyACo6jFbdp4OjUbANjdSpHevSooCvUUrW6k5x1rB1pM64YWCPNbrwI08gkd05A4ArQs/BljAmGRXbHPFdvJER0GKheIjJBqHVkzVYaCeiOH1Lwfp06FViVD0ry3xd4Xn0aaSaNS0OenpXvc4OSeffFYuu6dDf2ksLgHeMDI6VVOu4Mwr4ONSO2pwHwL+It94C8Uw3O930u4YJe2+cgqT94D1HWvvGxuoL2zhvLWRZYJ0EkbjoykZBr83dc06TStVmtmOCjfpX2d+ynr8mtfCyC1nkLy6bM1tknJ2dV/n+letGSkro+cqQcXZnrVFFFUZBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFADZW2ROw7KTXxR8NNPOo/EXXNUmG8rPI2T2Jc19skAgg9DXyx4DsYtO8V+K7MKFePUHGPbcf8ayq/CdeE+M6CZC0xz1FWbdOOAKil/1pGantwx4U15b3PpINcqJQMdh+VDDjp+lPZHUetREMTjNTYu5C64b5hULp2yPzq08WT3JpjWwdTg81EjRNWMySFCcZrPuINrHjitm4heM4IqnOvUEc1nZhe55L8VtJAuEv1jxkbWPrXsn7FMxGmeILXsJYpMe5BFcD8SEU6SoYZUv3Fd7+xfbskXiSYjC+ZEg+uGNethJNwsz53MYpVG0fRdFFFdh5YUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAV896tp66b8aPEsONq3cUdyg+uM/rX0G7KilmICgZJPavDPGeoWWo/F157AMRFpe2SUjhiG4x6gVFTVWOnC3U7o5fxZ4j0/Qp3SZjJOvzGJeTj3rD074m2PmJ52mXaRt1YIeKl8R3WiaPe3F5fgy3E7b9gXe7+gArm9c8czFY7a38Ijy+CrODyCCd3yqQOnTPeuJKOyR67lJJNux6rpPiLSdXtxJZzZHcHgitCTy8grIpz2BryLw/rElw+Y7FrMk4bbyOa7e3DNZlnLEjnOa5puzPRoq6NrVb9bSB5UiMjgfKoPWvN73xR4zurhhYWsEIB4Xbk/nWnf3Ls4T944J6FuB9axNQj8TtBLJp008cqsNiRBVBXnPJz7VVJqRjiINK+poWkvjsN9ouJIShGdhww/lxWvperNfo0dxGIrmLiQDofeuO0648fWlgst47XT8B4ZlT5hjnDL79K6bw8xvSLvymhlK4kjb7wqahNK++pnfEZTJ4eaTbu2tXpH7Gu0+GtdcDlrtMn/AIDXB+O42PhK+UKSQu7gZxg1o/BfXNX8F+HZZrYpLFdKJ3hdehxxg/SunD1I046nFisNUxFTlhufU1FYXgLxCnijwvaawsXlNKCHjznaw6it2u9NNXR404SpycZboKKKKZAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAFPXYGudFvbdSQ0kDqCDjqDXgXh6xZLWS7kldriKJock5/i/+tX0QwDKVPQjBrw6/tpNO1HUtMYAEXLMPdTyK5q+kos9nLJJ06lP0Zys2i7ruW+lKvIx5+X7o9BRNZNJbGFigU+kYzXRRQEt5Y55rP1q6+xP5VugeUnGfQ1w9T1oQVjFg02O1jMccWBnJLcGtaOMpaYxwR0qCMyzTK8rbs8Gtqe2dECFT93OPbFTJaG8NGc0bZZXUgDIOK0fsKrGPkx9KzWiffJMjlQp6Vb0nWd04tZlyjDG70NZxLlG5L9jVsAg8dNxp4sYYd0qoocjk1pm2D528nrxVC6aSNvLZqkzkijLCsttNG67lZcEHnIqpol1FdadND5SwjmNR3wOlacfMbd+tc9EyN4gu/IP+jQKGcjpvxyK2mrRRGE1nI9s/Z63/wDCv1DdBcyBfpmvRa5f4V6edM8CabAy7XePzXHuxzXUV6tJWgkfL42aniJyXdhRRRWhyhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFedfE3Tli1m21FAAJUKv7kV6LWH400t9T0rbEu6SJt6juazqx5onVg6vs6qd9HoeRNcC2Z3JGBznNc7LcxSzNczuF352Kew9as+JUnW2uYWUiSIEFfXFeA+JPEmsS6tcJGszBZQoAJPyjjjFcMKfNJnvTxPs4LQ9P1nxGdLmEsc8csWfmiP3h7g1cfx4s+lG6igmY7CAM8/nXiSz3t9c7bgSKr43EjnP+cVehm1O306a2UEKH+XC8kVcqUWrXMo4uo3ex21j4nutXulhN39kiU5dFIORnvXoOkJZNCDHKjkjg7q+eIWubVmlSBxI4weMHpUn9vatZqRbeaSCD8uTtrN0V0ZccZOK95H03Zal5V0YnxvUdD3HrVS+uBLNkjnNeV/DXxTqWtapaW1wrGRQwYt124r0yGFiGk9ScZrnnFxdmdMayqxvEuW64tWcd6NF0gX19a2MEYQy3IaQKPvc8mtrw3oMuuW32GKYQyS7hvIztHrXpPhDwdbaFILiSQXFyF2h9uAK6o0ZT5exwvGQoKV373Q6W2iWC3jgQYWNQo+gFSUUV6J883cKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPKPivoxtNSOpRRgxXIw3HAb3ryKx0LT4bi5McMZkkkLYH8OfSvqbXdMt9X0yWyuFBVx8p/unsa+dfFuk3XhvxAFuIwI9213/AJH6VxV6bWqPawOIUlyy3RxfiSKDSpS9xpQuI2PEir0+prEbxV4XZDG9hKCpwMAV6bdy232R/N2NGyk8jNeQ6rpmmG586IIqtKAG9Sc1jTs1qd1Xmi7wZq/8JB4bjRETTZZWlPy8Dn8q6PQdJN1ukksYre1ZcogX5s+9Q+AdN0i3BkmtYzMGIUnmur1C9gtbd5C44BOB2rCo0nZG9JO15swNC0uz07xPNJa2yozJgt1//VXVqSI/lGcngVzfhlZJnk1OUkLMfkUnnHrW5LcYVdh20nvqTsm0em/C5VTU1i4JWE5x6nGa9Krxb4a38unyXWqypJLb28LNLtGWYYzgD1xzXq3hjX9I8S6PDq2i3sd3aSj5XTsfQjsfavWovmgmfOYyPLVaNOiiitTlCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAryr44WUF1LEsi5LQ/1r1WvKfjJd+VrljCytslidVYDjcuDg/gT+RqKmkTfDK9RHzJrlxr2lag1pdCaS3Q/K4UlWWucvNcVd3mBcFvMQeh6V7y9tHcFldVPXtWLc+D9InP73T4Wyf7tcPto31R7DoVLaM8k07xFex3SPbb3YOcBcn9K9C0Cz1XWJI7vUi0cW3/VD+I+/wCVdFp/h3TrA5trKKM+yitSMMF8uNQOwwKynOLehtSpyiveZVVI7dBGvbsO1Mtob3V74abpUXmzk4d+dkQ9WPb6da6jQfA2o6i4ub6RrK3YZ5H7xh7Dt9TXoGiaHYaNZLaWECxoOSerOfUnuaunhpT1lojDEY6NP3YaspaDpSaJoSWfnGZwCZZSMeYx68dhXhHwa8fJ4J8f31pJMRoV5dukkY6R/Mdrj6V6/wDF/wARDw14Lv7xHVbmSMw24J5Ltxx9OtfH8czNOTu3c8n1Ne1h6Ss10PArVG5Xe5+j1tPDc28dxbyLLFIoZHU5DA9CKkr5a+AXxig8O2w0DxPcP/ZoP+j3B+YwE/wn/Z/lX0romuaPrdstzpOpWt7EwyDDIG/TtWdSm4OzBNM0KKKKgYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFYfijxd4b8M25m1zWLWzAGQjv85+ijmvGvGH7TGj2xkg8M6TNfOOBPcny4/wA5P6VcacpbITaR9A1ma34h0PRIjLq2rWdko/56yhT+XWvi3xb8cviBrbsja01hA3/LKzXyxj69f1rgJr++1O6M19dzzknLNJIWJ/E1vHCt7sh1EfX/jH9oLwrpkE40KKXV5owQJANkO76nk/gKb4Mu5fiD8ObTVdVZUubx5JRIg/1TBzgqPTt9K+Q7+ea58uztRlm+VFH86+u/gfps+i/DHRtMuyPNjg3k+zEt/WqqUYQVh05yvc5bU9PvdJ1GS2ukCsOVZfuuPUUkcw8sluAO+elRfFP4yeF7NZ9Ht7GfV5omx9oidUSNx/dY5Jx9MVyPwt+IWh654wg0zXrNrKK4O2GQyAoZM8K/HAPr6149bAz5/d2PdoZlDk9/dHpOhaDe6w2bcBbcHDzyDj6Ad67/QfDem6TiSOPzrnGPOkGSPoOgrXhiESCNUCKvAUDAH4VJit6WGhT82cOIxtStpshuKjnZUjLscAdSe1TAV5j+0N4r/4R7wVPa20pS9vR5MeDyFPU/lXTGPM7I42zxH49+Mj4n8WPZ2kn/Ev08mOIA/ff+J682jOxQo6nmo5D+8LFiT70wMck54HrXpRgoqxzt3JrucoqoCCxOfwrR0TWNS02dZ7C9ntJRyHikKn9K5xpjLOzg8dB9KlWY561DkFj33wT8evFWj7IdTkXWLccHzziQD2Yf1r2fwv8cvBOrKiXtxJpU7dVnGUz/vCviSCYk5zVmK6I71m6MJeRak0fovpmraZqkIl07ULa7Q9DFKG/lVyvzx0zWr2wkWS0u57dx3ikKn9K9F8MfGvxxpBRTqgv4h/yzu13/r1rOWFf2WNVF1PsmivEfB37QejXxSDxFYSadIeDNEd8f4jqP1r17Q9b0nXLQXWk6hb3kR/iicHH1HaueVOUd0WmmaFFFFQMKKKKACiiigAooooAKKKKACiiigAoorx/wCO3xmtfBBbRNGSO811k3NuOY7YHoW9W9BVQg5uyE2krs9D8Y+LvD/hHTje69qUNqmCUQnLv7KvU181fEj9ovWtUaWy8Kxf2VZnIFw4BncevoteNeKvEmr+ItTk1LWb+a7uH6s7Zx7Adh7VgySH+9XoU8LGGstWYyqN7Ghqmq3upXT3V9dzXMznLSSuWY/iapSy4Q1VDEt16U1zuzk1uZieZySeavLMFVccDsKzgKezfuyV7dKS0Geofs+eGW8TeLJ7iSI/ZrQKHY9Bk5Ir6E+LmpjSfBdxbWjtFcXii1h2HBUHAJH0Fcp+zZb2uh/CmLU3iaSe9leVxGuXPOAPyFdTLpc2uarb6rq1vtRSfKtnbIUdv8a4qkm2dEUrHyLrtlcWF9LYXSNFcQttdWHPt+lVYsQkFR8y989D6iu4+O0iP8VNZEEiFYzHGyhfussag1ynhTRLnxFraabbyRRuwLEuccDritJx0uzJb2R9Kfs3fFQeILZfCevXB/tWBP8AQ53/AOXiMfwk/wB9f1Fe359a8W+Hfwv0vwhbRXbut7qTgSNcMPuegX0r1jSb77TH5UgxKo6/3q55R6o2WxeuZVhhaRugFfHH7Q3ihtf8dT2sTk2+nkxDngv/ABH+Q/CvdPj543k0Lw1d2+mzMk4AjaYD7jt0Ue+Mk+gFfIcsjSMXdmd3O5mY5JJ6k1vQhZXIm+hFPMyKWILfSqp8yR90jcdlU8VYlIzzVd9yZIGQOTW7MwBCk05W5qIEEZHQ0oPeoAtxvgE96kjk5qkHPQVYi6U0Nl6JyTirMcvSqEbBakWTHOa0JNWO6IwMmtjw/wCJtV0K7F3pWoXFnMveJyM/Ud65QTAc5qeI/wATcmjcD6i+Gf7QKTtDYeMIQhbCi+iHH1de31Fe/Wdzb3lrHdWsyTQSKGSRGyrD1Br864ZTkc4r6b/ZF8R3NzZ6n4cuJXeO2Cz24Y52AnDAe2cVyV6EUuaJrCd9Ge/UUUVxmgUUUUAFFFFABRRRQAUUUUAYXj/xBD4W8G6pr02MWluzoD/E/RR+ZFfnvq+p3erand6nfTNNc3UzSyuxySTX1L+2b4kFp4Z03w1DJiS+m8+YA/8ALNOn5k/pXyVG/wArf7xr0sHC0ebuYVX0EmYkGoHPHNPYhiecYqBzyea6WZDS3BxSZNIDRSGPU80khxG30zSA89KWQFhsHVuBUy2HHc+wfgTavD8MdFSQY3xlwPbNdzfTw2NvLeTMFht4mlcnoAoyf5VleA7Maf4R0i0AwIbOJT9doz+teWftMeOmsbb/AIRDTJcTXEe6+dTyqH7qD0J6n2rkinJ2RvJ2VzwzWNQk1jWb/VpyTLeXDzMT/tMSP04qx4Ole08V6bdRPtYXKqx/2ScH9CayoV+QDI46AVteDLOS/wDFWnWsWCWmGSf4cck/pXRUhaBzQk3I+s/ANzLq+lmd2Y28b+XGx/iAHJ/OulmKIdy4UKM5HYVj+CYobXw9BbWoxEg2qfX3rD+Mnib/AIRfwPd3sbD7VMRb249Xbv8AgK4oJs7JOx4H8dfFI1vxNJptrITZWcjbsdHlPBP4Dj8683fJQ4ODT5pHmmeSRizuSzMe5Jyaic4wBXcopKxzSldkbMejjB/nVa5diREhwzcsfQVPKwwST8oHNVYiSpkI5c5/Cp8gTHgBVCjoKD2FC8mnKvNFgHxLhxmrIIqNQMilHWqSFckDZoz82KYoO6kmbb8ndqoRLD87Fu3aryngVStSFABqdm+XHvipKRciccEV7n+yLcMvxDuYeglsWz+BBrwW2zjOeBXtX7Jc3/F0417NZTD9BUVfgaKjufX9FFFeYbhRRRQAUUUUAFFFFABRRUGoXKWVhcXkpASCJpGJPYDNAHxR+1Dr/wDbfxY1GNJN0GnhbSPngFRlv/Hia8ihcFZB6SGtnxZftf6/qF/JktcXEkpJPPzMTXP2rZeZfRs17SjyJRONu92SuODiqznoDViQ8daqv9+hjQ4UDk0inrTlIz1oAUjBq3pMX2jWLGDGfMuEGPxFVM5Nb/w6tftnj3RbbGd90vH41FT4WVHc+05Lu20bw/JfXTBLe0tzJIT2Cr0/Svi3xXrFz4g8RX2r3bFp7qYzN7Keg/AYFfSP7SGsjTPhwbBXxJqFwsOP9hfmc/oK+XgMN6lDxxyw9aeFp6cxNeWtiVVXlR93tXUfDJGPiuGRAd6xPwO2RgH9TXL7hjaCOeh7Cu3+Ee1dTuJcZlYJCo92bk/pV4pctJmdC7mj6p0KJbTRLSBR0iHT1r53/aa8TjU/FEPh62kD2+lLmUjvOw5H4DA/GvefEOsW/h3wzdavdECGxt94B/iYDCqPqcV8Y6leTX99cX1wS01xK0sh/wBpjk1yUIdTqqSKpOaicjNPkOBUBOTXQYle9bKCEdXOD9KaRg4FIDvkeYE88L9BTgMtnFQtQHIOamVeRTFHzVYQZIpgCjFOjXJJpVHHNSxDapbGaaAaCACc9KqBvMlL/lUl0x2BR1Y4qFf3YAApNjRbiIGCxwKVpQSSOg6e5qurZTdMcAdF9akjBbEko2qv3RSGi9CcRDPevXf2U5tnxcsVz963mX/x2vGEkaU5xhRXrP7MchT4x6KM4Deav/jhqJu8WXHc+3aKKK802CiiigAooooAKKKKACvOf2j/ABAPD3wm1WVH2z3gFpFzzlzg/pmvRq+Xv229f3Xei+HI34iRruYA9z8q/wAjW1CHNUSJm7I+bdRbfKx981nwqVmmPqBU1zN8oZu/GfSok/jPXOK9aWrOYVyQpqv3qWY9qhHrU9R3HYwv0ojPtQTkURdcUMQ8fert/gPCLj4taOrDIRmf8gTXD55r0j9miPzPirCzYxHbyH6cVlV2LhudF+07rRvvGttpSPvg062CuoPAkk+Yk/Qba8nHCEk5Ze/94Vt/EDVI9X8a6zqSEtFcXkgBJ5IB2r+gFYWSM5PzJwcdMV2U48sUjlm7ybHrgYHY8r7GvQ/gZbi88XWkDAn995j/AEUZrzkEBSO3Uetev/szQINX1TV7ghYLO3O5j2zyT+QrDFu8UjXDr3rm3+1F4hdYdO8MwSACT/S7kA+nCA+2cn8q8F79a2vHevyeJfFeoay+QtxKfKQnOyMcKPyArBJOaiMbItu7GyMCTVe6OIggOGfj8O9Sk5aqzESSmTt0X6VTEIijAAGAOlSAelAFPQc1NgHRryKsKMCmIvepVx0HPFIBOnNPB+THrTM5OKZdSCKBjnnHFMCFW8yVmb7qnC012Ak+XLGkXAjRR1xzU0SYOcdaW40EcWf3shJPp2p8uW5P5U4cjmkxmVSTxmlIpFi1RUTnrXpf7Osoj+MHh5vWcr+aEV5jI/zhe9egfAqQxfFfw0V6/bUB/GiStBoa3PvSiiivKNwooooAKKKKACiiigAr4K/aL17+3/ixrVykm+GCX7NEQcjbGMcfjmvtvx1rCeH/AAdq+tSHAtLSSQf7wHH64r85NSuZLm5luJGLSysXcnuSck/rXdgo6uRlVfQpyYzzTYd4DBsYzwRSF0LlTx9aYmfn547V2dTEJSM0zIpsh5oHSgB1CHBPrSMcChOeaGBKOSBXefAy/Gma3ruq45tdLuGX3O0AfqRXApy4HvWjoV69tpuqRI5VrrERx1I3gkfpWU9XFeZUXZNibtx3MSd/3z6GkUkEZ+8vGPam7snOMZ6j0NCvjGByOvvXc5WOVJjyeGPUYyK9F8L6uPD3wW1d42xd6vci0jPdV25c/wDfPH415tKcRt2B6Vf1C+aaxs7JWzFbKxC9t7Hk/kBXHV1qJG9PRMoluQAc8U2Rj260vQZNR5B69qoZHcNhNo4LfypoAAwKaWLu0hHB+79KeAc1KAcv3hUnQ8ikRfpSnqfpQwJA49O1PQ5ye1V9w59qkQ4Tr1pXAlGRVS9O9o4h67jVhXABJ7VmRS+dezMvRflFJvVIaLsYVQWPWgEnHFQNPGnU5NRPcu5xGDj1p8yGXjIMgZpxlXdu7CswH5hvbc3oDVqG3eQjzPkTrjuam9xlm1JlmMvRR0r0D4Kvt+K3honjOoRD82rhDhAqIMCu0+CyySfFfwvHEjSP/aUR2qMnAOSfwAJpTejGtz9A6KKK8w3CiiigAooooAKKKKAPFP2xtdOl/C1dNicrLql0sXB6ovzN/IV8UztkGv0f+Ing7R/HPhe40HWYsxSDdFKo+eCQfddT6j9RkHrXwJ8UvA+t/D/xRLoesxer21yo/d3MeeHX+o6g8V6GEnHl5epjUTvc5NwrdR+NNiDANk5H9aHOFzTY2JYium+pmDdaKVgT0+tIKdhAelOj6U0+lEfegCVOGBpdM+aN89C5wfemr1zT9OUixVv7zEilGN6i8iZu0S0eBnH3utNA5DHr0Y0m/K57HrTgeME10SaaMldEV4xWEBehYAVKpwvvUEw33ESAfKuXNSk+lc0kua5tHYVySBiobg4Cxjjd972FSZGcscAVXRt2XJGW9ewpXGSRx7iAAcCpRGFpkTqAMMPzpxkB5zQA7BU8qaYSSeFx+NKZASeeaRjxkAn8KQETZBPzYz6ClWX5tgJwO/rTHaRgcJjPQk0yIMrElg30qOo+hYuX2QM+egzWfabo7Xj7znezHjrTtXmK2chz1GKitpiVUAZwAM0m7yH0JERiOELk9zU0cDY/fSbV/urUglVEG4jd6ClUAje5PsKqyFclt0iUgRJz6mrQPQcE96po/OFGB7VPHhQT2qkFyYbnkUAEknAAGSa+yv2YvhOfCGlDxPr9uBr19H+6icc2cJ/h9nbv6Dj1rlP2YPgw0LWvjrxbalZOJdMsZV5X0mcHv3Udup5xj6Yrjr1b+6jaMeoUUUVymgUUUUAFFFFABRRRQAVy3xO8CaD8QfDUmi65Bnq1tcoB5ttJjh0P8x0I611NFNNp3QH5xfFn4d+Ifh1r50zW4N8EhJtL2MHyrlB3B7N6qeR9MGuJEgWUDua/Tnxp4W0Lxj4fn0LxDYR3tlMOVbhkbs6t1Vh2Ir4a+O3wL8R/Di+fVLIS6v4aLZS8RMvbjPCzKOn++PlPseK7adfm0e5jKFjzJfm70EYoQALmldgTXYtjJjTSp3pCc5pU6GgBQ2FP0NS2hxZQqOPlqB/9U/sppdObdawjIPyDHsaqn8RE9i2vYdh1FOYhfciiMDOc9etJMorRkiR9WcjrS0qDagyKXgkk4wK53uaIq3pyUgXgyH5j6Cp2TGBtHSq0P7yYzkdThR7Vc3fMKlFDUj44UcU4qRxipQQB14NRsw4GTwaAGOx55qKZ/wDa7Us0gyarzsGz60mwEZsKcGlVtqGoetSMcIKgfQzdek/0dVz941bs42Fuu3rgA1naxl5Ik9/61qQzCMYxxUR1kw6EscYT5nO408EuRmqz3UY7ZNXvDdlqviHWINI0PTLjUL+dsRwQJuY+/sB3J4FaKSQrDoUJYIqkseFAGSTX1T+zj8Bmt3t/F3jqzAlGJLHS5R9w9RJKPX0Tt1PPA6f4B/ATT/Bv2fxB4oEOo+IQA8cY+aCyP+z/AHnH97t29T7nXNVr30iawp21YUUUVymoUUUUAFFFFABRRRQAUUUUAFFFFABTZo45onimjWSN1KujDIYHqCO4p1FAHzb8aP2ZrHVPP1n4fNFp962XfTJDi3lPfy2/5Zn2Py/7tfKXiHRNX8O6rJpWu6dc6dfRffhnQq2PUdiPcZFfp/XPeOvBXhjxtpZ07xNpFvfxDPluwxJEfVHHzKfofrXVSxMo6S1RnKmnsfmlkdqEOc19G/E39lrXNMaW+8C3w1i15P2K6ZY7hB6K3Cv+O0/Wvn7V9J1TRNTk07WdOutPu4/vwXMRjcfge3vXbCpGezMXFrcqH/Vyf7ppuiDdp8Jz26+tPPMb/wC6ar6E3/EujyeAxH61UXaZMvhNJg3agKWcFj+FJuJwecj+H1pyD5ic8dvatZaIzjq7D2J6AVDeNtjWH+KQ4P071Oi5JPpVVWEsry9Rnav0Fcz7G1hyjCjHQcCplNRKMmpkwOTTGKw4qtM4TnOafPJgEVSckmpbGPaTd+NRueTTRx9aRmqWwsKDSyvhRTSQFyaqXU4APOOPWlfQCtetuu4vQGpJZxyM13Pwz+DHxE+IVzDcaRocltpjHnUb7MMGPVSRl/8AgINfWvwk/Zk8E+D3h1LXx/wk2rphg9zHi2ib/Yi5B+rZ+grn9olctRufM/wY+A/jP4jSxXzwPougtgtqF1GcyD/pkhwX+vC+/avtv4VfDLwn8N9I+xeHbHE8igXN7Nhp7gj+83Yf7IwB6V2SqqqFUBVAwABwBS1jKbkWopBRRRUFBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFZHijwx4e8UWJsvEOjWWpwY4W4iDFfdT1U+4IrXooTsB86+OP2VPDV+JZ/Ces3ejSsDtt7gfaIM+gOQ6j8WrwzWP2dfil4XidW0aPWbZWJE2mSiXj12HD/pX37RW8MROLvuRKmmrH5iX9hqGmXBg1KxurGdThkuIWjY/gwFQx/d+vSv041HT7DUrc2+o2NteQnrHPEsin8CCK4fW/gt8L9WJa48H2ELn+O13W5H/fsgVu8ZzbozVHl6n5/XrmK38sffk+UAfrTIl2oFA4FfZHir9mf4cCJr22k1y1dRhVjvFZR/32jH9a8S8bfDTQtDkYWl5qbgHA82SM/wAkFaQmmDjY8oC96SRsYGa3b/SLeBgqSTHnuR/hVzS/C9he3UUcs90oY87WX/4mqbEcY7bs81G3C8mvpzwD8APBmtmM3uoa7hsZCXESj/0XXquk/s3fCexYNLot1qBH/P3eyMD+ClR+lYSqqJSi2fBLMAQO/aun8LfDnx54pdRoXhTVbtGP+uMBji/77fC/rX6E+HvAPgnw8VbRfCmjWTr0kjtE3/8AfRGf1rpaylX7IpQPjPwX+yZ4r1ApL4s1yy0aHqYbUfaJvpnhB+bV7x8PfgD8NPBrR3MGiDVr9ORd6mROwPqqkbF/Bc+9eqUVlKcmWopCKAqhVAAAwAO1LRRUDCiiigAooooAKKKKACiiigAooooA/9k=)"></div></div>
+<div class="brandbar"><img class="blogo" src="data:image/jpeg;base64,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" alt="Chemistry Code"><img class="bphoto" src="data:image/jpeg;base64,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" alt="teacher"><div class="bnames"><div class="bar">أ/ أيمن منصور — مستشار الكيمياء</div><div class="ben">Prof./ Ayman Mansour — Chemistry Consultant</div></div><div class="bpage"><div class="pa">كتاب المعادلات العضوية</div><div class="pe">Equations Book</div></div><div class="bexam"><div class="x1">كيمياء ٢٠٢٦ — Chemistry 2026</div></div></div>
+
+
+<h1 id="pgTitle">Organic Chemistry Equations Book</h1>
+<p class="subtitle" id="pgSub">Every reaction of the conversion roadmap written as a <b>complete balanced equation</b> with
+conditions above the arrow — organised <b>chapter by chapter</b> exactly like your syllabus.
+Use 🖨 Print for a white-paper study sheet.</p>
+
+<div class="toolbar">
+    <div class="seg">
+        <button class="btn gold" id="btnChap">📚 By chapter</button>
+        <button class="btn" id="btnType">🏷 By reaction type</button>
+    </div>
+    <input id="search" placeholder="🔍 search equation, compound or reaction name…" autocomplete="off">
+    <div class="seg">
+        <button class="btn" id="fsDn" title="Smaller equations">A−</button>
+        <button class="btn" id="fsUp" title="Larger equations">A+</button>
+    </div>
+    <button class="btn" id="btnLang" title="تبديل اللغة">🌐 عربي</button>
+    <button class="btn gold" id="btnStruct" title="Show benzene rings as Kekulé structures">⬡ Kekulé ON</button>
+    <button class="btn" id="btnPrint">📚</button>
+    <button class="btn" id="btnReset">⟲ Reset</button>
+    <span class="count" id="count"></span>
+</div>
+
+<div class="chapnav" id="chapnav"></div>
+<div class="book" id="book"></div>
+<div class="empty" id="empty" style="display:none">No equations match your search.</div>
+<button class="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+<script>
+/* =====================================================================
+   CHAPTERS & EQUATIONS  (terms: r = reactant list, p = product list,
+   c = condition above arrow, rev = reversible, name, tag, note)
+   ===================================================================== */
+const CHAPTERS = [
+ {id:'alkanes', icon:'🔥', color:'#38bdf8', title:'Methane & Alkanes',
+  sub:'preparation and reactions of CH₄ and C₂H₆',
+  eqs:[
+   {name:'Lab preparation of methane', tag:'decarboxylation',
+    r:['CH₃COONa','NaOH'], p:['CH₄↑','Na₂CO₃'], c:'CaO , Δ',
+    note:'Soda lime = NaOH + CaO. <b>CaO lowers the melting point</b> and is not a reactant.'},
+   {name:'Complete combustion of methane', tag:'oxidation',
+    r:['CH₄','2O₂'], p:['CO₂','2H₂O','energy'], c:'Δ / spark',
+    note:'Main reaction of natural-gas fuel. CO₂ turns lime water milky — proves carbon.'},
+   {name:'Steam reforming (synthesis gas)', tag:'industrial',
+    r:['CH₄','H₂O(g)'], p:['CO','3H₂'], c:'Ni , 725°C',
+    note:'CO + 3H₂ = <b>synthesis gas</b> — source of industrial hydrogen.'},
+   {name:'Thermal decomposition of methane', tag:'pyrolysis',
+    r:['CH₄'], p:['C','2H₂'], c:'1000°C',
+    note:'Gives carbon black for inks, tyres & paints.'},
+   {name:'Methane → ethyne (cracking)', tag:'pyrolysis',
+    r:['2CH₄'], p:['HC≡CH','3H₂'], c:'1500°C , rapid cooling',
+    note:'Rapid cooling prevents decomposition of ethyne back to its elements.'},
+   {name:'Chlorination of methane — step 1', tag:'substitution',
+    r:['CH₄','Cl₂'], p:['CH₃Cl','HCl'], c:'UV / diffused light',
+    note:'Substitution chain continues below ↓'},
+   {name:'Chlorination — step 2', tag:'substitution',
+    r:['CH₃Cl','Cl₂'], p:['CH₂Cl₂','HCl'], c:'UV'},
+   {name:'Chlorination — step 3', tag:'substitution',
+    r:['CH₂Cl₂','Cl₂'], p:['CHCl₃ (chloroform)','HCl'], c:'UV'},
+   {name:'Chlorination — step 4', tag:'substitution',
+    r:['CHCl₃','Cl₂'], p:['CCl₄','HCl'], c:'UV',
+    note:'Four steps: CH₄ → CH₃Cl → CH₂Cl₂ → CHCl₃ → CCl₄ (each releases HCl).'},
+   {name:'Bromination of ethane', tag:'substitution',
+    r:['CH₃–CH₃','Br₂'], p:['CH₃CH₂Br','HBr'], c:'UV',
+    note:'Alkanes react by substitution only (saturated).'},
+   {name:'Combustion of ethene', tag:'oxidation',
+    r:['CH₂=CH₂','3O₂'], p:['2CO₂','2H₂O','energy'], c:'Δ',
+    note:'Alkenes burn with a more luminous flame than alkanes (higher C%).'},
+   {name:'Incomplete burning of ethyne (smoky flame)', tag:'oxidation',
+    r:['2C₂H₂','3O₂ (limited)'], p:['2CO₂','2H₂O','2C (soot)'], c:'limited O₂',
+    note:'In limited oxygen, ethyne burns with a <b>smoky flame</b> depositing carbon.'},
+   {name:'Complete burning of ethyne (oxy-acetylene flame)', tag:'oxidation',
+    r:['2C₂H₂','5O₂ (excess)'], p:['4CO₂','2H₂O'], c:'excess O₂ · ΔH = –3000 kJ',
+    note:'<b>Oxy-acetylene flame (~3000°C)</b> — used for welding & cutting metals.'}
+  ]},
+
+ {id:'alkenes', icon:'🌿', color:'#2dd4bf', title:'Ethene & Alkenes',
+  sub:'preparation and addition reactions of CH₂=CH₂',
+  eqs:[
+   {name:'Preparation: dehydration of ethanol', tag:'elimination',
+    r:['CH₃CH₂OH'], p:['CH₂=CH₂','H₂O'], c:'conc. H₂SO₄ , 180°C',
+    note:'<b>Excess acid + 180°C</b> → ethene. (Compare: 140°C → ether!)'},
+   {name:'Preparation: partial hydrogenation of ethyne', tag:'addition',
+    r:['HC≡CH','H₂'], p:['CH₂=CH₂'], c:'Ni , Δ'},
+   {name:'Hydrogenation → ethane', tag:'addition',
+    r:['CH₂=CH₂','H₂'], p:['CH₃–CH₃'], c:'Ni',
+    note:'Same reaction hardens vegetable oils into margarine.'},
+   {name:'Bromine water test', tag:'addition · test',
+    r:['CH₂=CH₂','Br₂'], p:['BrCH₂–CH₂Br'], c:'room temp.',
+    note:'<b>Orange-brown colour disappears</b> — test for unsaturation. Product: 1,2-dibromoethane.'},
+   {name:'Hydration → ethanol', tag:'addition',
+    r:['CH₂=CH₂','H₂O'], p:['CH₃CH₂OH'], c:'dil. H₂SO₄',
+    note:'Industrial ethanol production (Markovnikov addition of H–OH).'},
+   {name:'Baeyer\u2019s test → ethylene glycol', tag:'mild oxidation · test',
+    r:['CH₂=CH₂','(O)','H₂O'], p:['CH₂OH–CH₂OH'], c:'cold alk. KMnO₄',
+    note:'<b>Violet colour disappears</b>; product is ethylene glycol (car antifreeze).'},
+   {name:'Polymerisation → polyethylene', tag:'addition polymerisation',
+    r:['n CH₂=CH₂'], p:['(–CH₂–CH₂–)ₙ'], c:'heat , pressure , catalyst',
+    note:'Plastic bags & bottles. Same pattern: propene → PP, vinyl chloride → PVC, C₂F₄ → Teflon.'},
+   {name:'Hydration of propene (Markovnikov)', tag:'addition',
+    r:['CH₃–CH=CH₂','H₂O'], p:['CH₃–CH(OH)–CH₃'], c:'H₂SO₄',
+    note:'<b>Markovnikov rule:</b> OH goes to the carbon with fewer H → <b>2-propanol (secondary alcohol)</b>, not 1-propanol.'},
+   {name:'Hydration of 2-methyl-2-butene', tag:'addition',
+    r:['CH₃–C(CH₃)=CH–CH₃','H₂O'], p:['CH₃–C(CH₃)(OH)–CH₂–CH₃'], c:'H₂SO₄',
+    note:'Gives <b>2-methyl-2-butanol — a tertiary alcohol</b>. Hydration always follows Markovnikov.'}
+  ]},
+
+ {id:'alkynes', icon:'⚡', color:'#818cf8', title:'Ethyne & Alkynes',
+  sub:'preparation and reactions of HC≡CH (acetylene)',
+  eqs:[
+   {name:'Preparation from calcium carbide', tag:'hydrolysis',
+    r:['CaC₂','2H₂O'], p:['HC≡CH↑','Ca(OH)₂'], c:'room temp.',
+    note:'The famous <b>carbide lamp</b> reaction — also ripens fruit artificially.'},
+   {name:'Addition of HBr — step 1', tag:'addition',
+    r:['HC≡CH','HBr'], p:['CH₂=CHBr (bromoethene)'], c:'—'},
+   {name:'Addition of HBr — step 2', tag:'Markovnikov addition',
+    r:['CH₂=CHBr','HBr'], p:['CH₃–CHBr₂'], c:'—',
+    note:'<b>Markovnikov:</b> H adds to the carbon with more hydrogens → 1,1-dibromoethane.'},
+   {name:'Addition of bromine', tag:'addition · test',
+    r:['HC≡CH','2Br₂'], p:['Br₂HC–CHBr₂'], c:'—',
+    note:'Decolourises bromine water — 1,1,2,2-tetrabromoethane.'},
+   {name:'Hydration → ethanal ', tag:'addition',
+    r:['HC≡CH','H₂O'], p:['[CH₂=CHOH]','→ CH₃CHO'], c:'H₂SO₄ 40% / HgSO₄ , 60°C',
+    note:'Vinyl alcohol forms first but is unstable — it <b>tautomerises instantly to ethanal</b>.'},
+   {name:'Cyclic polymerisation → benzene', tag:'polymerisation',
+    r:['3 HC≡CH'], p:['C₆H₆'], c:'red-hot Fe tube , 600°C',
+    note:'Three ethyne molecules join into the aromatic ring — the bridge from aliphatic to aromatic chemistry!'}
+  ]},
+
+ {id:'alcohols', icon:'🍷', color:'#34d399', title:'Ethanol & Alcohols',
+  sub:'preparation and reactions of CH₃CH₂OH',
+  eqs:[
+   {name:'Preparation: hydration of ethene', tag:'addition',
+    r:['CH₂=CH₂','H₂O'], p:['CH₃CH₂OH'], c:'dil. H₂SO₄/110°C',
+    note:'Industrial ethanol production (Markovnikov addition of H–OH).'},
+   {name:'Preparation: reduction of ethanal', tag:'reduction',
+    r:['CH₃CHO','H₂'], p:['CH₃CH₂OH'], c:'Ni'},
+   {name:'Hydrolysis of sucrose (inversion)', tag:'hydrolysis',
+    r:['C₁₂H₂₂O₁₁ (sucrose)','H₂O'], p:['C₆H₁₂O₆ (glucose)','C₆H₁₂O₆ (fructose)'], c:'dil. acid',
+    note:'Step 1 of ethanol-from-sugar: sucrose splits into the two simple sugars (invert sugar).'},
+   {name:'Fermentation of glucose', tag:'fermentation',
+    r:['C₆H₁₂O₆ (glucose)'], p:['2C₂H₅OH','2CO₂↑'], c:'zymase enzyme (yeast) , 35°C',
+    note:'Step 2: <b>zymase from yeast</b> turns glucose into ethanol + CO₂↑ — the biological preparation of ethanol.'},
+   {name:'Dehydration at 180°C → ethene', tag:'elimination',
+    r:['CH₃CH₂OH'], p:['CH₂=CH₂','H₂O'], c:'conc. H₂SO₄ , 180°C'},
+   {name:'Dehydration at 140°C → diethyl ether', tag:'condensation',
+    r:['2 C₂H₅OH'], p:['C₂H₅–O–C₂H₅','H₂O'], c:'conc. H₂SO₄ , 140°C',
+    note:'<span class="hl">Memorise:</span> 180°C → ethene (excess acid) · 140°C → ether (excess alcohol).'},
+   {name:'Partial oxidation → ethanal', tag:'oxidation',
+    r:['CH₃CH₂OH','(O)'], p:['CH₃CHO','H₂O'], c:'KMnO₄ / H⁺ ',
+    note:'Hot copper acts as oxygen carrier — stops at the aldehyde.'},
+   {name:'Complete oxidation → ethanoic acid', tag:'oxidation',
+    r:['CH₃CH₂OH','2(O)'], p:['CH₃COOH','H₂O'], c:'KMnO₄ / H⁺',
+    note:'Same reaction sours wine into vinegar (air oxidation by bacteria).'},
+   {name:'Reaction with sodium', tag:'test for –OH',
+    r:['2C₂H₅OH','2Na'], p:['2C₂H₅ONa (sodium ethoxide)','H₂↑'], c:'room temp.',
+    note:'H₂ bubbles prove the –OH group. Sodium ethoxide = white precipitate.'},
+   {name:'Ethanol + H₂SO₄ at 80°C (first step)', tag:'esterification',
+    r:['C₂H₅OH','H₂SO₄'], p:['C₂H₅HSO₄ (ethyl hydrogen sulphate)','H₂O'], c:'80°C',
+    note:'<span class="hl">Three temperatures with H₂SO₄:</span> 80°C → ethyl hydrogen sulphate · 140°C → ether · 180°C → ethene.'},
+   {name:'Preparation: reduction of ethanoic acid', tag:'reduction',
+    r:['CH₃COOH','2H₂'], p:['CH₃CH₂OH','H₂O'], c:'CuCrO₄ , 200°C',
+    note:'Copper chromite catalyst reduces the acid directly to the alcohol.'},
+   {name:'Hydrolysis of ethyl chloride → ethanol', tag:'substitution',
+    r:['C₂H₅Cl','KOH (aq)'], p:['C₂H₅OH','KCl'], c:'aqueous',
+    note:'General rule: <b>R–X + KOH(aq) → R–OH + KX</b>. Gives a <b>primary</b> alcohol here.'},
+   {name:'Hydrolysis of 2-bromopropane → 2-propanol', tag:'substitution',
+    r:['(CH₃)₂CHBr','KOH (aq)'], p:['(CH₃)₂CHOH','KBr'], c:'aqueous',
+    note:'Gives a <b>secondary</b> alcohol (carbinol carbon bonded to 2 carbons).'},
+   {name:'Hydrolysis of 2-bromo-2-methylpropane', tag:'substitution',
+    r:['(CH₃)₃CBr','KOH (aq)'], p:['(CH₃)₃COH','KBr'], c:'aqueous',
+    note:'Gives a <b>tertiary</b> alcohol. Class depends on the carbinol carbon: ⑴ 1 C → 1° ⑵ 2 C → 2° ⑶ 3 C → 3°.'},
+   {name:'Ethanol + HCl ', tag:'substitution',
+    r:['C₂H₅OH','HCl'], p:['C₂H₅Cl','H₂O'], c:'ZnCl₂',
+    note:'Alcohol reacts with HCl/ZnCl₂. <b>Phenol + HCl → NO reaction</b> (difference #2 below).'},
+   {name:'Ethanol + NaOH', tag:'comparison',
+    r:['C₂H₅OH','NaOH'], p:['NO reaction'], c:'—',
+    note:'Ethanol is too weak an acid to react with NaOH — but phenol does! '}
+  ]},
+
+ {id:'phenol', icon:'🌡', color:'#a3e635', title:'Phenol vs Alcohol',
+  sub:'the famous comparison — acidity of carbolic acid',
+  eqs:[
+   {name:'Phenol + sodium metal', tag:'like alcohol ✓',
+    r:['C₆H₅OH','2Na'], p:['2C₆H₅ONa (sodium phenoxide)','H₂↑'], c:'—',
+    note:'Both alcohol AND phenol react with Na giving H₂.'},
+   {name:'Phenol + NaOH (alcohol cannot!)', tag:'difference ①',
+    r:['C₆H₅OH','NaOH'], p:['C₆H₅ONa','H₂O'], c:'—',
+    note:'<span class="hl">Phenol is acidic</span> (carbolic acid) → neutralised by NaOH. <b>Ethanol + NaOH → no reaction.</b>'},
+   {name:'Phenol + HCl (no reaction)', tag:'difference ②',
+    r:['C₆H₅OH','HCl'], p:['NO reaction'], c:'ZnCl₂',
+    note:'Opposite of difference ①: <b>ethanol + HCl/ZnCl₂ → C₂H₅Cl</b>, but phenol refuses. Two-way distinguishing test!'},
+   {name:'Phenol + FeCl₃ (colour test)', tag:'test',
+    r:['C₆H₅OH','FeCl₃'], p:['violet-coloured complex'], c:'neutral solution',
+    note:'Instant violet colour — quickest identification of phenols.'},
+   {name:'Picric acid from phenol', tag:'nitration',
+    r:['C₆H₅OH','3HNO₃'], p:['C₆H₂(NO₂)₃OH (picric acid)','3H₂O'], c:'conc. H₂SO₄',
+    note:'Explosive + treatment of skin burns.'},
+   {name:'Bakelite from phenol', tag:'condensation polymerisation',
+    r:['n C₆H₅OH','n HCHO'], p:['Bakelite (network)','n H₂O'], c:'Δ',
+    note:'With formaldehyde (methanal) → first synthetic plastic, electric insulators,ash tray.'}
+  ]},
+
+ {id:'carbonyl', icon:'🧪', color:'#fb923c', title:'Ethanal & Ethanoic Acid',
+  sub:'the carbonyl bridge: aldehyde → acid → derivatives',
+  eqs:[
+   {name:'Preparation of ethanal (Kucherov)', tag:'hydration',
+    r:['HC≡CH','H₂O'], p:['CH₃CHO'], c:'H₂SO₄ 40% / HgSO₄ , 60°C'},
+   {name:'Oxidation of ethanal → acid', tag:'oxidation',
+    r:['CH₃CHO','(O)'], p:['CH₃COOH'], c:'KMnO₄ / H⁺',
+    note:'Ethanal oxidises to ethanoic acid.'},
+   {name:'Reduction of ethanal → ethanol', tag:'reduction',
+    r:['CH₃CHO','H₂'], p:['CH₃CH₂OH'], c:'Ni'},
+   {name:'Neutralisation → sodium ethanoate', tag:'acid–base',
+    r:['CH₃COOH','NaOH'], p:['CH₃COONa','H₂O'], c:'—',
+    note:'With NaHCO₃ instead: gives CO₂ <b>effervescence</b> — test for –COOH.'},
+   {name:'Esterification → methyl ethanoate', tag:'esterification', rev:1,
+    r:['CH₃COOH','CH₃OH'], p:['CH₃COOCH₃','H₂O'], c:'conc. H₂SO₄ , Δ',
+    note:'Reversible. Conc. H₂SO₄ = catalyst + dehydrating agent. Esters smell pleasant → food flavours.'},
+   {name:'Amide formation → acetamide', tag:'two steps',
+    r:['CH₃COOH','NH₃'], p:['CH₃COONH₄','→(Δ , –H₂O) CH₃CONH₂'], c:'—',
+    note:'First the ammonium salt forms, then heating removes water.'},
+   {name:'Back to methane (decarboxylation)', tag:'decarboxylation',
+    r:['CH₃COONa','NaOH'], p:['CH₄↑','Na₂CO₃'], c:'CaO , Δ',
+    note:'Closes the loop of the aliphatic chart!'}
+  ]},
+
+ {id:'benzene', icon:'⬡', color:'#22d3ee', title:'Benzene Reactions',
+  sub:'substitution & addition on the aromatic ring',
+  eqs:[
+   {name:'Preparation from ethyne', tag:'polymerisation',
+    r:['3 HC≡CH'], p:['C₆H₆'], c:'red-hot Ni tube'},
+   {name:'Preparation from sodium benzoate', tag:'dry distillation or decarboxylation',
+    r:['C₆H₅COONa','NaOH'], p:['C₆H₆','Na₂CO₃'], c:'CaO , Δ'},
+   {name:'Chlorination (substitution)', tag:' substitution',
+    r:['C₆H₆','Cl₂'], p:['C₆H₅Cl','HCl'], c:'FeCl₃ (catalyst)',
+    note:'Dark + catalyst = substitution. Compare with UV addition below!'},
+   {name:'Chlorine addition (UV) → gammexane', tag:'addition',
+    r:['C₆H₆','3Cl₂'], p:['C₆H₆Cl₆'], c:'UV light',
+    note:'<span class="hl">Contrast:</span> FeCl₃/dark → substitution · UV/sunlight → addition (insecticide gammexane).'},
+   {name:'Nitration', tag:'substitution',
+    r:['C₆H₆','HNO₃ (conc.)'], p:['C₆H₅NO₂','H₂O'], c:'conc. H₂SO₄ , 50–60°C',
+    note:'Nitrobenzene = oil of mirbane → reduced to aniline for dyes.'},
+   {name:'Trinitration → TNB', tag:'substitution',
+    r:['C₆H₆','3HNO₃'], p:['C₆H₃(NO₂)₃','3H₂O'], c:'conc. H₂SO₄ , Δ',
+    note:'1,3,5-trinitrobenzene — explosive.'},
+   {name:'Sulphonation', tag:'substitution',
+    r:['C₆H₆','H₂SO₄ (conc.)'], p:['C₆H₅SO₃H','H₂O'], c:'Δ',
+    note:'Benzenesulphonic acid → detergents (sodium alkylbenzene sulphonate).'},
+   {name:'Friedel–Crafts alkylation → toluene', tag:'substitution',
+    r:['C₆H₆','CH₃Cl'], p:['C₆H₅CH₃','HCl'], c:'AlCl₃ (catalyst)'},
+   {name:'Catalytic hydrogenation → cyclohexane', tag:'addition',
+    r:['C₆H₆','3H₂'], p:['C₆H₁₂'], c:'Ni , Δ',
+    note:'3 mol H₂ = number of π bonds in the ring (compare naphthalene 5, biphenyl 6, anthracene 7).'},
+   {name:'Chlorobenzene → phenol', tag:'substitution',
+    r:['C₆H₅Cl','NaOH(aq)'], p:['C₆H₅OH','NaCl'], c:'high T & P',
+    note:'Phenol → disinfectants, Bakelite, aspirin & picric acid.'}
+  ]},
+
+ {id:'toluene', icon:'🏭', color:'#fbbf24', title:'Toluene & Benzoic Acid',
+  sub:'side-chain chemistry and the acid family',
+  eqs:[
+   {name:'Trinitration of toluene → TNT', tag:'substitution',
+    r:['C₆H₅CH₃','3HNO₃'], p:['C₇H₅(NO₂)₃','3H₂O'], c:'conc. H₂SO₄ , Δ',
+    note:'CH₃ directs the three NO₂ groups to positions 2, 4, 6.'},
+   {name:'Ring chlorination of toluene', tag:'substitution (o/p)',
+    r:['C₆H₅CH₃','Cl₂'], p:['o/p-chlorotoluene','HCl'], c:'FeCl₃',
+    note:'<b>CH₃ is an o/p-director</b> (activating group).'},
+   {name:'Side-chain oxidation → benzoic acid', tag:'oxidation',
+    r:['C₆H₅CH₃','3(O)'], p:['C₆H₅COOH','H₂O'], c:'KMnO₄  or  3O₂ / V₂O₅',
+    note:'Whatever the side-chain length, oxidation always gives –COOH on the ring.'},
+   {name:'Neutralisation → sodium benzoate', tag:'acid–base',
+    r:['C₆H₅COOH','NaOH'], p:['C₆H₅COONa','H₂O'], c:'—',
+    note:'Sodium benzoate (E211) preserves soft drinks.'},
+   {name:'Ring chlorination of benzoic acid', tag:'substitution (meta)',
+    r:['C₆H₅COOH','Cl₂'], p:['m-chlorobenzoic acid','HCl'], c:'FeCl₃',
+    note:'<b>COOH is a meta-director</b> (deactivating group) — compare with CH₃ above!'},
+   {name:'Amide formation → benzamide', tag:'two steps',
+    r:['C₆H₅COOH','NH₃'], p:['salt','→(Δ , –H₂O) C₆H₅CONH₂'], c:'—'},
+   {name:'Esterification → ethyl benzoate', tag:'esterification', rev:1,
+    r:['C₆H₅COOH','C₂H₅OH'], p:['C₆H₅COOC₂H₅','H₂O'], c:'conc. H₂SO₄',
+    note:'Perfume ester with sweet fruity scent.'}
+  ]},
+
+ {id:'esters', icon:'🌸', color:'#c084fc', title:'Esters & Medical Compounds',
+  sub:'esterification reactions and pharmacy applications',
+  eqs:[
+   {name:'Methyl ethanoate', tag:'esterification', rev:1,
+    r:['CH₃COOH','CH₃OH'], p:['CH₃COOCH₃','H₂O'], c:'H⁺ , Δ'},
+   {name:'Marookh oil (methyl salicylate)', tag:'esterification',
+    r:['salicylic acid','CH₃OH'], p:['methyl salicylate','H₂O'], c:'H⁺',
+    note:'Absorbed by the skin to relieve <b>rheumatic pains</b> (oil of wintergreen).'},
+   {name:'Aspirin from salicylic acid', tag:'esterification',
+    r:['salicylic acid','CH₃COOH (acetic acid)'], p:['aspirin (acetylsalicylic acid)','H₂O'], c:'H⁺',
+    note:'The phenolic –OH of salicylic acid esterifies with acetic acid. Aspirin removes pain & headache, reduces blood clots — prevents heart crises.'},
+   {name:'Nitroglycerine from glycerol', tag:'esterification',
+    r:['C₃H₅(OH)₃','3HNO₃'], p:['C₃H₅(ONO₂)₃','3H₂O'], c:'conc. H₂SO₄ , cold',
+    note:'Dynamite explosive, heart medicine (widens arteries).'},
+   {name:'Picric acid from phenol', tag:'nitration',
+    r:['C₆H₅OH','3HNO₃'], p:['C₆H₂(NO₂)₃OH','3H₂O'], c:'conc. H₂SO₄',
+    note:'2,4,6-trinitrophenol — explosive + treatment of skin burns.'},
+   {name:'Bakelite formation', tag:'condensation polymerisation',
+    r:['n C₆H₅OH','n HCHO'], p:['Bakelite network','n H₂O'], c:'Δ , catalyst',
+    note:'Phenol + formaldehyde → thermoset plastic for switches & pot handles.'},
+   {name:'Dacron formation, heart valves &artires', tag:'condensation polymerisation',
+    r:['n HOOC–C₆H₄–COOH','n HO–CH₂CH₂–OH'], p:['Dacron polyester','2n H₂O'], c:'Δ',
+    note:'Terephthalic acid + ethylene glycol → polyester fibre .'},
+   {name:'Ethyl acetate (with HCl catalyst)', tag:'esterification', rev:1,
+    r:['CH₃COOH','C₂H₅OH'], p:['CH₃COOC₂H₅ (ethyl acetate)','H₂O'], c:'HCl or H₂SO₄',
+    note:'Any strong acid catalyses esterification.'},
+   {name:'Hydrolysis of ester (reverse reaction)', tag:'hydrolysis', rev:1,
+    r:['CH₃COOC₂H₅','H₂O'], p:['CH₃COOH','C₂H₅OH'], c:'dil. acid / Δ',
+    note:'<b>Hydrolysis ✗ esterification</b> — the two opposite directions of the same equilibrium.'},
+   {name:'Triglyceride (fat) formation', tag:'esterification',
+    r:['glycerol C₃H₅(OH)₃','3 RCOOH (fatty acids)'], p:['triglyceride ester (fat/oil)','3H₂O'], c:'—',
+    note:'Glycerol has 3 OH groups → ester with 3 fatty-acid molecules = natural fats & oils. (Its hydrolysis with NaOH = soap making!)'}
+  ]},
+
+ {id:'applied', icon:'🎯', color:'#f87171', title:'Applied Exam Examples',
+  sub:'the general rules applied to NEW compounds — exactly as exams ask',
+  eqs:[
+   {name:'Dry distillation of sodium methanoate', tag:'decarboxylation',
+    r:['HCOONa','NaOH'], p:['H₂↑','Na₂CO₃'], c:'CaO , Δ',
+    note:'<span class="hl">Special case!</span> The R group of HCOONa is just H → the "alkane" produced is <b>hydrogen gas</b>, not a hydrocarbon.'},
+   {name:'Dry distillation of sodium ethanoate', tag:'decarboxylation',
+    r:['CH₃COONa','NaOH'], p:['CH₄↑','Na₂CO₃'], c:'CaO , Δ',
+    note:'The standard example: R–COONa → R–H. (CH₃– → methane).'},
+   {name:'Dry distillation of sodium butanoate', tag:'decarboxylation',
+    r:['CH₃CH₂CH₂COONa','NaOH'], p:['C₃H₈ (propane)↑','Na₂CO₃'], c:'CaO , Δ',
+    note:'<b>Rule:</b> the product alkane has ONE carbon less than the salt — butanoate (C₄) → propane (C₃).'},
+   {name:'Friedel–Crafts with propyl chloride', tag:'substitution',
+    r:['C₆H₆','CH₃CH₂CH₂Cl'], p:['C₆H₅C₃H₇ (propylbenzene)','HCl'], c:'AlCl₃',
+    note:'Same pattern as CH₃Cl → toluene: the alkyl group replaces a ring H. Product: propylbenzene.'},
+   {name:'Friedel–Crafts with benzyl chloride', tag:'electrophilic substitution',
+    r:['C₆H₆','C₆H₅CH₂Cl (benzyl chloride)'], p:['C₆H₅CH₂C₆H₅ (diphenylmethane)','HCl'], c:'AlCl₃',
+    note:'Benzyl chloride = chloro on the CH₂, not the ring → links the two rings through CH₂: <b>diphenylmethane</b>.'},
+   {name:'Catalytic reforming of heptane → toluene', tag:'industrial',
+    r:['CH₃(CH₂)₅CH₃ (heptane)'], p:['C₆H₅CH₃ (toluene)','4H₂↑'], c:'Pt / Al₂O₃ , 500°C , pressure',
+    note:'<span class="hl">Hydroforming:</span> straight-chain C₇ alkane cyclises & aromatises. Source of toluene from petroleum.'},
+   {name:'Catalytic reforming of octane (2-methylheptane) → xylene', tag:'industrial',
+    r:['C₈H₁₈ (2-methylheptane)'], p:['C₆H₄(CH₃)₂ (xylene)','4H₂↑'], c:'Pt , 500°C',
+    note:'C₈ alkane → dimethylbenzene (xylene). <b>Rule:</b> C₆ chain part forms the ring; extra carbons become the CH₃ branches.'},
+   {name:'Oxidation of ethylene glycol → oxalic acid', tag:'oxidation',
+    r:['CH₂OH–CH₂OH','4(O)'], p:['HOOC–COOH (oxalic acid)','2H₂O'], c:'KMnO₄ / H⁺',
+    note:'<b>Each terminal –CH₂OH oxidises to –COOH</b> — a diol gives a di-acid! Glycol (2 OH) → oxalic acid (2 COOH).'},
+   {name:'Oxidation of ethanol vs glycol — compare', tag:'oxidation',
+    r:['CH₃CH₂OH','2(O)'], p:['CH₃COOH','H₂O'], c:'KMnO₄ / H⁺',
+    note:'One –OH → one –COOH. Same logic scaled up for the diol above.'},
+   {name:'Esterification: citric acid + ethylene glycol', tag:'esterification', rev:1,
+    r:['citric acid (3 –COOH)','ethylene glycol (2 –OH)'], p:['polyester network + H₂O'], c:'conc. H₂SO₄ , Δ',
+    note:'Tri-acid + di-ol → <b>cross-linked polyester</b> (each COOH meets an OH releasing H₂O). Basis of alkyd resins.'},
+   {name:'NaOH + oxalic acid (dibasic)', tag:'acid–base',
+    r:['HOOC–COOH','2NaOH'], p:['NaOOC–COONa (sodium oxalate)','2H₂O'], c:'—',
+    note:'<b>Dibasic acid needs 2 NaOH</b> — both carboxyl groups are neutralised.'},
+   {name:'NaOH + lactic acid (monobasic)', tag:'acid–base',
+    r:['CH₃CH(OH)COOH','NaOH'], p:['CH₃CH(OH)COONa (sodium lactate)','H₂O'], c:'—',
+    note:'Only the –COOH reacts with NaOH; the alcoholic –OH of lactic acid does NOT (it is not acidic). 1 mol NaOH only!'},
+   {name:'NaOH + citric acid (tribasic)', tag:'acid–base',
+    r:['C₃H₄(OH)(COOH)₃','3NaOH'], p:['trisodium citrate','3H₂O'], c:'—',
+    note:'<b>Tribasic acid needs 3 NaOH.</b> Series: lactic 1 · oxalic 2 · citric 3 — count the COOH groups!'}
+  ]}
+];
+
+/* ===================================================================== */
+/* classify every equation into a REACTION TYPE for "group by type" view */
+const RTYPES = [
+ {id:'nitr',    icon:'💥', color:'#e879f9', title:'Nitration & Sulphonation',
+                sub:'HNO₃ and H₂SO₄ attacking the benzene ring — nitrobenzene, TNB, TNT, picric acid',
+                match:(t,n)=>/nitration|sulphonation/.test(t) || /nitration|sulphonation|tnb|tnt|picric/.test(n)},
+ {id:'subst',   icon:'🔄', color:'#f43f5e', title:'Substitution & Halogenation',
+                sub:'replacement of H by halogen or other groups (alkanes, benzene ring, R–X hydrolysis)',
+                match:t=>/substitution|halogenation/.test(t)},
+ {id:'hydro',   icon:'⚗️', color:'#38bdf8', title:'Hydrogenation & Reduction',
+                sub:'adding H₂ / removing O — alkyne→alkene→alkane, aldehyde→alcohol, acid→alcohol',
+                match:(t,n)=>/reduction/.test(t) || /hydrogenation/.test(n)},
+ {id:'add',     icon:'➕', color:'#2dd4bf', title:'Addition Reactions',
+                sub:'breaking π bonds: X₂, HX and H₂O adding to alkenes & alkynes (Markovnikov)',
+                match:t=>/addition|hydration|markovnikov/.test(t) && !/polymer/.test(t)},
+ {id:'oxid',    icon:'🔥', color:'#fb923c', title:'Oxidation & Combustion',
+                sub:'burning, KMnO₄ oxidations and the alcohol→aldehyde→acid ladder',
+                match:t=>/oxidation/.test(t)},
+ {id:'ester',   icon:'🌸', color:'#c084fc', title:'Esterification & Hydrolysis',
+                sub:'acid + alcohol ⇌ ester + water, and the reverse hydrolysis; fats & medical esters',
+                match:t=>/esterification|hydrolysis|acetylation/.test(t)},
+ {id:'elim',    icon:'💧', color:'#34d399', title:'Dehydration & Elimination',
+                sub:'removing H₂O with conc. H₂SO₄ — the 80 / 140 / 180°C story',
+                match:t=>/elimination|condensation$/.test(t)},
+ {id:'poly',    icon:'🔗', color:'#94a3b8', title:'Polymerisation',
+                sub:'addition polymers (PE, PVC, Teflon) & condensation polymers (Bakelite, Dacron)',
+                match:t=>/polymerisation/.test(t)},
+ {id:'decarb',  icon:'🧂', color:'#60a5fa', title:'Decarboxylation & Acid–Base',
+                sub:'soda-lime preparations, neutralisation and salt formation',
+                match:t=>/decarboxylation|acid–base|two steps/.test(t)},
+ {id:'pyro',    icon:'♨️', color:'#fbbf24', title:'Pyrolysis & Industrial',
+                sub:'thermal cracking, steam reforming and high-temperature reactions',
+                match:t=>/pyrolysis|industrial/.test(t)},
+ {id:'tests',   icon:'🔬', color:'#fcd34d', title:'Tests & Comparisons',
+                sub:'distinguishing tests and the phenol-vs-alcohol comparison',
+                match:t=>/test|difference|comparison|like alcohol/.test(t)}
+];
+function typeOf(e){
+    const t = (e.tag||'').toLowerCase(), n = (e.name||'').toLowerCase();
+    for (const rt of RTYPES) if (rt.match(t, n)) return rt.id;
+    return 'subst';
+}
+
+const $book = document.getElementById('book');
+const $nav  = document.getElementById('chapnav');
+let total = 0;
+
+/* flat list with both classifications */
+const ALL = [];
+CHAPTERS.forEach(ch => ch.eqs.forEach(e => { e._chap = ch; e._type = typeOf(e); ALL.push(e); total++; }));
+
+/* ============ ARABIC TRANSLATION (names + conditions + tags) ============ */
+let LANG = 'en';
+const AR_NAMES = {
+"Lab preparation of methane":"تحضير الميثان في المعمل",
+"Complete combustion of methane":"الاحتراق الكامل للميثان",
+"Steam reforming (synthesis gas)":"إعادة التشكيل بالبخار (غاز التخليق / الغاز المائي)",
+"Thermal decomposition of methane":"التفكك الحراري للميثان",
+"Methane → ethyne (cracking)":"ميثان ← إيثاين (تكسير حراري)",
+"Chlorination of methane — step 1":"كلورة الميثان — الخطوة 1",
+"Chlorination — step 2":"الكلورة — الخطوة 2",
+"Chlorination — step 3":"الكلورة — الخطوة 3",
+"Chlorination — step 4":"الكلورة — الخطوة 4",
+"Bromination of ethane":"برومة الإيثان",
+"Combustion of ethene":"احتراق الإيثين",
+"Incomplete burning of ethyne (smoky flame)":"احتراق غير كامل للإيثاين (لهب مدخن)",
+"Complete burning of ethyne (oxy-acetylene flame)":"احتراق كامل للإيثاين (لهب الأوكسي أسيتيلين)",
+"Preparation: dehydration of ethanol":"التحضير: نزع الماء من الإيثانول",
+"Preparation: partial hydrogenation of ethyne":"التحضير: هدرجة جزئية للإيثاين",
+"Hydrogenation → ethane":"الهدرجة ← إيثان",
+"Bromine water test":"اختبار ماء البروم",
+"Hydration → ethanol":"الإماهة ← إيثانول",
+"Baeyer\u2019s test → ethylene glycol":"اختبار باير ← جليكول الإيثيلين",
+"Polymerisation → polyethylene":"البلمرة ← بولي إيثيلين",
+"Hydration of propene (Markovnikov)":"إماهة البروبين (ماركونيكوف)",
+"Hydration of 2-methyl-2-butene":"إماهة 2-ميثيل-2-بيوتين",
+"Preparation from calcium carbide":"التحضير من كربيد الكالسيوم",
+"Addition of HBr — step 1":"إضافة HBr — الخطوة 1",
+"Addition of HBr — step 2":"إضافة HBr — الخطوة 2",
+"Addition of bromine":"إضافة البروم",
+"Hydration → ethanal (Kucherov)":"الإماهة ← إيثانال (كوتشيروف)",
+"Cyclic polymerisation → benzene":"بلمرة حلقية ← بنزين",
+"Preparation: hydration of ethene":"التحضير: إماهة الإيثين",
+"Preparation: reduction of ethanal":"التحضير: اختزال الإيثانال",
+"Hydrolysis of sucrose (inversion)":"التحلل المائي للسكروز (انعكاس)",
+"Fermentation of glucose":"تخمر الجلوكوز",
+"Dehydration at 180°C → ethene":"نزع الماء عند 180°م ← إيثين",
+"Dehydration at 140°C → diethyl ether":"نزع الماء عند 140°م ← إيثير ثنائي الإيثيل",
+"Partial oxidation → ethanal":"أكسدة جزئية ← إيثانال",
+"Complete oxidation → ethanoic acid":"أكسدة كاملة ← حمض الإيثانويك",
+"Reaction with sodium":"التفاعل مع الصوديوم",
+"Ethanol + H₂SO₄ at 80°C (first step)":"إيثانول + H₂SO₄ عند 80°م (الخطوة الأولى)",
+"Preparation: reduction of ethanoic acid":"التحضير: اختزال حمض الإيثانويك",
+"Hydrolysis of ethyl chloride → ethanol":"التحلل المائي لكلوريد الإيثيل ← إيثانول",
+"Hydrolysis of 2-bromopropane → 2-propanol":"التحلل المائي لـ 2-برومو بروبان ← 2-بروبانول",
+"Hydrolysis of 2-bromo-2-methylpropane":"التحلل المائي لـ 2-برومو-2-ميثيل بروبان",
+"Ethanol + HCl (Lucas-type)":"إيثانول + HCl (نوع لوكاس)",
+"Ethanol + NaOH":"إيثانول + هيدروكسيد الصوديوم",
+"Phenol + sodium metal":"فينول + فلز الصوديوم",
+"Phenol + NaOH (alcohol cannot!)":"فينول + NaOH (الكحول لا يستطيع!)",
+"Phenol + HCl (no reaction)":"فينول + HCl (لا يحدث تفاعل)",
+"Phenol + FeCl₃ (colour test)":"فينول + FeCl₃ (اختبار اللون)",
+"Picric acid from phenol":"حمض البكريك من الفينول",
+"Bakelite from phenol":"الباكيليت من الفينول"
+};
+
+Object.assign(AR_NAMES, {
+"Preparation of ethanal (Kucherov)":"تحضير الإيثانال (كوتشيروف)",
+"Oxidation of ethanal → acid":"أكسدة الإيثانال ← حمض",
+"Reduction of ethanal → ethanol":"اختزال الإيثانال ← إيثانول",
+"Neutralisation → sodium ethanoate":"التعادل ← إيثانوات الصوديوم",
+"Esterification → methyl ethanoate":"الأسترة ← إيثانوات الميثيل",
+"Amide formation → acetamide":"تكوين الأميد ← أسيتاميد",
+"Back to methane (decarboxylation)":"العودة إلى الميثان (نزع الكربوكسيل)",
+"Preparation from ethyne":"التحضير من الإيثاين",
+"Preparation from sodium benzoate":"التحضير من بنزوات الصوديوم",
+"Chlorination (substitution)":"الكلورة (استبدال)",
+"Chlorine addition (UV) → gammexane":"إضافة الكلور (فوق بنفسجية) ← جاميكسان",
+"Nitration":"النيترة",
+"Trinitration → TNB":"نيترة ثلاثية ← TNB",
+"Sulphonation":"السلفنة",
+"Friedel–Crafts alkylation → toluene":"ألكلة فريدل-كرافتس ← تولوين",
+"Catalytic hydrogenation → cyclohexane":"هدرجة حفزية ← هكسان حلقي",
+"Chlorobenzene → phenol":"كلورو بنزين ← فينول",
+"Trinitration of toluene → TNT":"نيترة ثلاثية للتولوين ← TNT",
+"Ring chlorination of toluene":"كلورة حلقة التولوين",
+"Side-chain oxidation → benzoic acid":"أكسدة السلسلة الجانبية ← حمض البنزويك",
+"Neutralisation → sodium benzoate":"التعادل ← بنزوات الصوديوم",
+"Ring chlorination of benzoic acid":"كلورة حلقة حمض البنزويك",
+"Amide formation → benzamide":"تكوين الأميد ← بنزاميد",
+"Esterification → ethyl benzoate":"الأسترة ← بنزوات الإيثيل",
+"Methyl ethanoate":"إيثانوات الميثيل",
+"Marookh oil (methyl salicylate)":"زيت الماروخ (ساليسيلات الميثيل)",
+"Aspirin from salicylic acid":"الأسبرين من حمض الساليسيليك",
+"Nitroglycerine from glycerol":"النيتروجليسرين من الجليسرول",
+"Bakelite formation":"تكوين الباكيليت",
+"Dacron (PET) formation":"تكوين الداكرون (PET)",
+"Ethyl acetate (with HCl catalyst)":"أسيتات الإيثيل (بحفز HCl)",
+"Hydrolysis of ester (reverse reaction)":"التحلل المائي للإستر (التفاعل العكسي)",
+"Triglyceride (fat) formation":"تكوين الجليسريد الثلاثي (الدهون)",
+"Dry distillation of sodium methanoate":"التقطير الجاف لميثانوات الصوديوم",
+"Dry distillation of sodium ethanoate":"التقطير الجاف لإيثانوات الصوديوم",
+"Dry distillation of sodium butanoate":"التقطير الجاف لبيوتانوات الصوديوم",
+"Friedel–Crafts with propyl chloride":"فريدل-كرافتس مع كلوريد البروبيل",
+"Friedel–Crafts with benzyl chloride":"فريدل-كرافتس مع كلوريد البنزيل",
+"Catalytic reforming of heptane → toluene":"إعادة تشكيل حفزية للهبتان ← تولوين",
+"Catalytic reforming of octane (2-methylheptane) → xylene":"إعادة تشكيل حفزية للأوكتان ← زايلين",
+"Oxidation of ethylene glycol → oxalic acid":"أكسدة جليكول الإيثيلين ← حمض الأوكساليك",
+"Oxidation of ethanol vs glycol — compare":"أكسدة الإيثانول مقابل الجليكول — قارن",
+"Esterification: citric acid + ethylene glycol":"الأسترة: حمض الستريك + جليكول الإيثيلين",
+"NaOH + oxalic acid (dibasic)":"NaOH + حمض الأوكساليك (ثنائي القاعدية)",
+"NaOH + lactic acid (monobasic)":"NaOH + حمض اللاكتيك (أحادي القاعدية)",
+"NaOH + citric acid (tribasic)":"NaOH + حمض الستريك (ثلاثي القاعدية)",
+"Preparation from coal tar":"التحضير من قطران الفحم",
+"Catalytic reforming of n-hexane → benzene":"إعادة تشكيل حفزية للهكسان العادي ← بنزين",
+"Reduction of phenol → benzene":"اختزال الفينول ← بنزين"
+});
+
+const AR_CONDS = {
+"1000°C":"1000°م",
+"1500°C , rapid cooling":"1500°م ، تبريد مفاجئ",
+"80°C":"80°م",
+"AlCl₃":"AlCl₃ (عامل حفاز)",
+"AlCl₃ (catalyst)":"AlCl₃ (عامل حفاز)",
+"CaO , Δ":"CaO ، تسخين Δ",
+"Cu , 300°C":"نحاس ، 300°م",
+"CuCrO₄ , 200°C":"CuCrO₄ ، 200°م",
+"FeCl₃":"FeCl₃ (عامل حفاز)",
+"FeCl₃ (catalyst)":"FeCl₃ (عامل حفاز)",
+"HCl or H₂SO₄":"HCl أو H₂SO₄",
+"H⁺":"وسط حمضي H⁺",
+"H⁺ , Δ":"وسط حمضي H⁺ ، تسخين",
+"H₂SO₄":"H₂SO₄",
+"H₂SO₄ / HgSO₄ , 60°C":"H₂SO₄ / HgSO₄ ، 60°م",
+"H₂SO₄ 40% / HgSO₄ , 60°C":"H₂SO₄ 40% / HgSO₄ ، 60°م",
+"KMnO₄  or  3O₂ / V₂O₅":"KMnO₄ أو 3O₂ / V₂O₅",
+"KMnO₄ / H⁺":"KMnO₄ / وسط حمضي",
+"Ni":"نيكل (حفاز)",
+"Ni , 725°C":"نيكل ، 725°م",
+"Ni , Δ":"نيكل ، تسخين",
+"Pt , 500°C":"بلاتين ، 500°م",
+"Pt / Al₂O₃ , 500°C , pressure":"بلاتين / Al₂O₃ ، 500°م ، ضغط",
+"UV":"ضوء فوق بنفسجي",
+"UV / diffused light":"ضوء فوق بنفسجي / ضوء مشتت",
+"UV light":"ضوء فوق بنفسجي",
+"ZnCl₂":"ZnCl₂ (عامل نازع للماء)",
+"aqueous":"محلول مائي",
+"cold alk. KMnO₄":"KMnO₄ قلوي بارد",
+"conc. H₂SO₄":"H₂SO₄ مركز",
+"conc. H₂SO₄ , 140°C":"H₂SO₄ مركز ، 140°م",
+"conc. H₂SO₄ , 180°C":"H₂SO₄ مركز ، 180°م",
+"conc. H₂SO₄ , 50–60°C":"H₂SO₄ مركز ، 50–60°م",
+"conc. H₂SO₄ , cold":"H₂SO₄ مركز ، بارد",
+"conc. H₂SO₄ , Δ":"H₂SO₄ مركز ، تسخين",
+"dil. H₂SO₄":"H₂SO₄ مخفف",
+"dil. acid / Δ":"حمض مخفف / تسخين",
+"excess O₂ · ΔH = –3000 kJ":"وفرة من O₂ · ΔH = –3000 ك.جول",
+"heat , pressure , catalyst":"حرارة ، ضغط ، عامل حفاز",
+"high T & P":"درجة حرارة وضغط مرتفعان",
+"invertase / dil. acid":"إنزيم الإنفرتيز / حمض مخفف",
+"limited O₂":"كمية محدودة من O₂",
+"neutral solution":"محلول متعادل",
+"red-hot Fe tube":"أنبوبة حديد مسخنة للاحمرار",
+"red-hot Fe tube , 600°C":"أنبوبة حديد مسخنة للاحمرار ، 600°م",
+"room temp.":"درجة حرارة الغرفة",
+"zymase enzyme (yeast) , 35°C":"إنزيم الزيماز (خميرة) ، 35°م",
+"Δ":"تسخين Δ",
+"Δ , catalyst":"تسخين ، عامل حفاز",
+"Δ / spark":"تسخين / شرارة"
+};
+const AR_TAGS = {
+"Markovnikov addition":"إضافة ماركونيكوف","acid–base":"حمض-قاعدة","addition":"إضافة",
+"addition polymerisation":"بلمرة بالإضافة","addition · test":"إضافة · اختبار","comparison":"مقارنة",
+"condensation":"تكاثف","condensation polymerisation":"بلمرة بالتكاثف","decarboxylation":"نزع الكربوكسيل",
+"difference ①":"فرق ①","difference ②":"فرق ②","electrophilic substitution":"استبدال إلكتروفيلي",
+"elimination":"حذف","esterification":"أسترة","fermentation":"تخمر","hydration":"إماهة",
+"hydrolysis":"تحلل مائي","industrial":"صناعي","like alcohol ✓":"مثل الكحول ✓",
+"mild oxidation · test":"أكسدة هادئة · اختبار","nitration":"نيترة","nucleophilic substitution":"استبدال نيوكليوفيلي",
+"oxidation":"أكسدة","polymerisation":"بلمرة","pyrolysis":"تكسير حراري","reduction":"اختزال",
+"substitution":"استبدال","substitution (meta)":"استبدال (ميتا)","substitution (o/p)":"استبدال (أرثو/بارا)",
+"test":"اختبار","test for –OH":"اختبار مجموعة –OH","two steps":"خطوتان"
+};
+function trName(n){ return LANG==='ar' ? (AR_NAMES[n]||n) : n; }
+function trCond(c){ return LANG==='ar' ? (AR_CONDS[c]||c) : c; }
+function trTag(t){ return LANG==='ar' ? (AR_TAGS[t]||t) : t; }
+/* ===== Arabic chapter titles & UI for Equations Book ===== */
+const AR_CHAP = {
+"Methane & Alkanes":["الميثان والألكانات","تحضير وتفاعلات CH₄ و C₂H₆"],
+"Ethene & Alkenes":["الإيثين والألكينات","تحضير وتفاعلات الإضافة لـ CH₂=CH₂"],
+"Ethyne & Alkynes":["الإيثاين والألكاينات","تحضير وتفاعلات HC≡CH (الأسيتيلين)"],
+"Ethanol & Alcohols":["الإيثانول والكحولات","تحضير وتفاعلات CH₃CH₂OH"],
+"Phenol vs Alcohol":["الفينول مقابل الكحول","المقارنة الشهيرة — حمضية حمض الكربوليك"],
+"Ethanal & Ethanoic Acid":["الإيثانال وحمض الإيثانويك","جسر الكربونيل: ألدهيد ← حمض ← مشتقات"],
+"Benzene Reactions":["تفاعلات البنزين","الاستبدال والإضافة على الحلقة الأروماتية"],
+"Toluene & Benzoic Acid":["التولوين وحمض البنزويك","كيمياء السلسلة الجانبية وعائلة الحمض"],
+"Esters & Medical Compounds":["الإسترات والمركبات الطبية","تفاعلات الأسترة والتطبيقات الدوائية"],
+"Applied Exam Examples":["أمثلة امتحانية تطبيقية","القواعد العامة مطبقة على مركبات جديدة — كما تأتي في الامتحانات"],
+"Substitution & Halogenation":["الاستبدال والهلجنة","استبدال الهيدروجين بهالوجين أو مجموعات أخرى"],
+"Addition Reactions":["تفاعلات الإضافة","كسر روابط باي: إضافة X₂ و HX و H₂O (ماركونيكوف)"],
+"Hydrogenation & Reduction":["الهدرجة والاختزال","إضافة H₂ / نزع الأكسجين"],
+"Oxidation & Combustion":["الأكسدة والاحتراق","الاحتراق وأكسدة KMnO₄ وسلم كحول←ألدهيد←حمض"],
+"Nitration & Sulphonation":["النيترة والسلفنة","هجوم HNO₃ و H₂SO₄ على حلقة البنزين"],
+"Esterification & Hydrolysis":["الأسترة والتحلل المائي","حمض + كحول ⇌ إستر + ماء والعكس"],
+"Dehydration & Elimination":["نزع الماء والحذف","نزع الماء بـ H₂SO₄ المركز — قصة 80 / 140 / 180°م"],
+"Polymerisation":["البلمرة","بوليمرات الإضافة والتكاثف"],
+"Decarboxylation & Acid–Base":["نزع الكربوكسيل وحمض-قاعدة","تحضيرات الصودا الجيرية والتعادل"],
+"Pyrolysis & Industrial":["التكسير الحراري والصناعي","التكسير وإعادة التشكيل بالبخار"],
+"Tests & Comparisons":["الاختبارات والمقارنات","اختبارات التمييز ومقارنة الفينول والكحول"]
+};
+function trChapT(t){ return LANG==='ar' && AR_CHAP[t] ? AR_CHAP[t][0] : t; }
+function trChapS(t,sub){ return LANG==='ar' && AR_CHAP[t] ? AR_CHAP[t][1] : sub; }
+const AR_BOOK_TITLE = 'كتاب معادلات الكيمياء العضوية';
+const AR_BOOK_SUB = 'كل تفاعلات خريطة التحويلات مكتوبة كمعادلات موزونة كاملة مع الظروف فوق السهم — منظمة <b>فصلاً بفصل</b> مثل منهجك تماماً. استخدم 🖨 للطباعة كورقة مراجعة بيضاء.';
+
+
+
+function arrowHTML(c, rev){
+    const a = rev ? '⇌' : '⟶';
+    return `<span class="arrowbox">${c && c !== '—' ? `<span class="cond">${trCond(c)}</span>` : ''}<span class="arr">${a}</span></span>`;
+}
+
+/* =====================================================================
+   KEKULÉ RING STRUCTURES inside the equations
+   positions: 1=top, 2=upper-right, 3=lower-right, 4=bottom, 5=lower-left, 6=upper-left
+   ===================================================================== */
+let structMode = true;
+const KEK = {
+ 'C₆H₆':            {s:{}},
+ 'C₆H₁₂':           {s:{}, arom:0},
+ 'C₆H₆Cl₆':         {s:{1:'Cl',2:'Cl',3:'Cl',4:'Cl',5:'Cl',6:'Cl'}, arom:0},
+ 'C₆H₅Cl':          {s:{1:'Cl'}},
+ 'C₆H₅OH':          {s:{1:'OH'}},
+ 'C₆H₅ONa':         {s:{1:'ONa'}},
+ 'C₆H₅NO₂':         {s:{1:'NO₂'}},
+ 'C₆H₅CH₃':         {s:{1:'CH₃'}},
+ 'C₆H₅SO₃H':        {s:{1:'SO₃H'}},
+ 'C₆H₅COOH':        {s:{1:'COOH'}},
+ 'C₆H₅COONa':       {s:{1:'COONa'}},
+ 'C₆H₅CONH₂':       {s:{1:'CONH₂'}},
+ 'C₆H₅COOC₂H₅':     {s:{1:'COOC₂H₅'}},
+ 'C₆H₅C₃H₇':        {s:{1:'C₃H₇'}},
+ 'C₆H₅CH₂Cl':       {s:{1:'CH₂Cl'}},
+ 'C₆H₃(NO₂)₃':      {s:{1:'NO₂',3:'NO₂',5:'NO₂'}},
+ 'C₇H₅(NO₂)₃':      {s:{1:'CH₃',2:'NO₂',4:'NO₂',6:'NO₂'}},
+ 'C₆H₂(NO₂)₃OH':    {s:{1:'OH',2:'NO₂',4:'NO₂',6:'NO₂'}},
+ 'C₆H₄(CH₃)₂':      {s:{1:'CH₃',4:'CH₃'}},
+ 'HOOC–C₆H₄–COOH':  {s:{1:'COOH',4:'COOH'}},
+ 'salicylic acid':       {s:{1:'COOH',2:'OH'}},
+ 'aspirin':              {s:{1:'COOH',2:'OCOCH₃'}},
+ 'acetylsalicylic acid': {s:{1:'COOH',2:'OCOCH₃'}},
+ 'methyl salicylate':    {s:{1:'COOCH₃',2:'OH'}},
+ 'picric acid':          {s:{1:'OH',2:'NO₂',4:'NO₂',6:'NO₂'}},
+ 'm-chlorobenzoic acid': {s:{1:'COOH',3:'Cl'}},
+ 'm-chloronitrobenzene': {s:{1:'NO₂',3:'Cl'}},
+ 'o/p-chlorotoluene':    {s:{1:'CH₃',4:'Cl'}, nm:'(o/p)'},
+ 'xylene':               {s:{1:'CH₃',4:'CH₃'}},
+ 'toluene':              {s:{1:'CH₃'}},
+ 'phenol':               {s:{1:'OH'}},
+ 'benzene':              {s:{}},
+ 'nitrobenzene':         {s:{1:'NO₂'}},
+ 'chlorobenzene':        {s:{1:'Cl'}},
+ 'benzoic acid':         {s:{1:'COOH'}},
+ 'sodium benzoate':      {s:{1:'COONa'}},
+ 'sodium phenoxide':     {s:{1:'ONa'}},
+ 'propylbenzene':        {s:{1:'C₃H₇'}},
+ 'benzyl chloride':      {s:{1:'CH₂Cl'}},
+ 'C₆H₅CH₂C₆H₅':     {special:'dpm'},
+ 'Bakelite':             {special:'bakelite'},
+ 'Bakelite (network)':   {special:'bakelite'},
+ 'Bakelite network':     {special:'bakelite'},
+ 'Dacron polyester':     {special:'dacron'}
+};
+function subColor(l){
+    if (/NO₂/.test(l)) return '#93c5fd';
+    if (/SO₃/.test(l)) return '#fde047';
+    if (/Cl/.test(l))  return '#4ade80';
+    if (/^CO/.test(l)) return '#fde68a';
+    if (/^O/.test(l))  return '#f87171';
+    return '#e8edf5';
+}
+function ringSVG(o){
+    const r = 25, v = [];
+    for (let k = 0; k < 6; k++){
+        const a = (-90 + k*60) * Math.PI/180;
+        v.push([r*Math.cos(a), r*Math.sin(a)]);
+    }
+    let minX = -r, maxX = r, minY = -r, maxY = r;
+    const parts = [];
+    for (let k = 0; k < 6; k++){
+        const [x1,y1] = v[k], [x2,y2] = v[(k+1)%6];
+        parts.push(`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"/>`);
+        if (o.arom !== 0 && k % 2 === 0){
+            const f = .72;
+            const ax = (x1+(x2-x1)*.16)*f, ay = (y1+(y2-y1)*.16)*f;
+            const bx = (x1+(x2-x1)*.84)*f, by = (y1+(y2-y1)*.84)*f;
+            parts.push(`<line x1="${ax.toFixed(1)}" y1="${ay.toFixed(1)}" x2="${bx.toFixed(1)}" y2="${by.toFixed(1)}"/>`);
+        }
+    }
+    const s = o.s || {};
+    for (const p in s){
+        const [vx,vy] = v[p-1];
+        const ux = vx/r, uy = vy/r;
+        parts.push(`<line x1="${vx.toFixed(1)}" y1="${vy.toFixed(1)}" x2="${(vx+ux*9).toFixed(1)}" y2="${(vy+uy*9).toFixed(1)}"/>`);
+        const lbl = s[p];
+        let anchor = 'middle', tx = vx + ux*13, ty = vy + uy*13 + 3.5;
+        if (ux > .35){ anchor = 'start'; }
+        else if (ux < -.35){ anchor = 'end'; }
+        else if (uy < 0){ ty = vy + uy*13 - 1; }
+        else { ty = vy + uy*13 + 9; }
+        parts.push(`<text x="${tx.toFixed(1)}" y="${ty.toFixed(1)}" text-anchor="${anchor}" style="font-size:10.5px;font-weight:800;fill:${subColor(lbl)};font-family:'Segoe UI',sans-serif">${lbl}</text>`);
+        const w = lbl.length * 6.8;
+        if (anchor === 'start') maxX = Math.max(maxX, tx + w);
+        else if (anchor === 'end') minX = Math.min(minX, tx - w);
+        else { minX = Math.min(minX, tx - w/2); maxX = Math.max(maxX, tx + w/2); }
+        minY = Math.min(minY, ty - 10);
+        maxY = Math.max(maxY, ty + 3);
+    }
+    const pad = 3, W = maxX - minX + pad*2, H = maxY - minY + pad*2;
+    return `<svg class="ring" width="${W.toFixed(0)}" height="${H.toFixed(0)}" viewBox="${(minX-pad).toFixed(1)} ${(minY-pad).toFixed(1)} ${W.toFixed(1)} ${H.toFixed(1)}" xmlns="http://www.w3.org/2000/svg">${parts.join('')}</svg>`;
+}
+function speciesHTML(x){
+    const plain = `<span class="sp">${x}</span>`;
+    if (!structMode) return plain;
+    let coef = '', body = x;
+    const cm = x.match(/^([0-9]+|n|2n|3n)\s*(?=[A-Za-z(])/);
+    if (cm){ coef = cm[1]; body = x.slice(cm[0].length); }
+    let key = body.trim(), par = '';
+    const pm = key.match(/^(.*?)\s*\(([^)]*)\)\s*$/);
+    if (pm){ key = pm[1].trim(); par = pm[2]; }
+    let k = KEK[key] || KEK[par];
+    let prefix = '';
+    if (!k){
+        /* fallback: a trailing aromatic formula after some text, e.g. "→(Δ , –H₂O) C₆H₅CONH₂" */
+        const tm = key.match(/^(.*\s)(\S+)$/);
+        if (tm && KEK[tm[2]]){ prefix = tm[1]; k = KEK[tm[2]]; }
+        else return plain;
+    }
+    if (k.special === 'dpm'){
+        return `<span class="ringwrap">${coef ? `<span class="sp">${coef}&nbsp;</span>` : ''}${ringSVG({})}<span class="sp" style="margin:0 2px">–CH₂–</span>${ringSVG({})}${par ? `<span class="spn">&nbsp;${par}</span>` : ''}</span>`;
+    }
+    if (k.special === 'bakelite'){
+        return `<span class="ringwrap"><span class="sp">[&nbsp;</span>${ringSVG({s:{1:'OH'}})}<span class="sp" style="margin:0 2px">–CH₂–</span>${ringSVG({s:{1:'OH'}})}<span class="sp">&nbsp;]ₙ</span><span class="spn">&nbsp;Bakelite 3-D network</span></span>`;
+    }
+    if (k.special === 'dacron'){
+        return `<span class="ringwrap"><span class="sp">[–OC–</span>${ringSVG({})}<span class="sp">–CO–O–CH₂CH₂–O–]ₙ</span><span class="spn">&nbsp;Dacron</span></span>`;
+    }
+    const nm = par || k.nm || '';
+    return `<span class="ringwrap">${prefix ? `<span class="sp">${prefix}&nbsp;</span>` : ''}${coef ? `<span class="sp">${coef}&nbsp;</span>` : ''}${ringSVG(k)}${nm ? `<span class="spn">&nbsp;${nm}</span>` : ''}</span>`;
+}
+
+function eqCard(e, i, color){
+    const d = document.createElement('div');
+    d.className = 'eq';
+    const right = e.p.map(speciesHTML).join('<span class="plus">+</span>');
+    const left  = e.r.map(speciesHTML).join('<span class="plus">+</span>');
+    d.innerHTML = `
+      <div class="eq-top">
+        <span class="eq-num">${i+1}</span>
+        <span class="eq-name">${trName(e.name)}</span>
+        <span class="eq-tag">${trTag(e.tag)}</span>
+        ${color ? `<span class="eq-chip" style="--cc:${e._chap.color}">${e._chap.title}</span>` : ''}
+      </div>
+      <div class="eq-line">${left}${arrowHTML(e.c, e.rev)}${right}</div>
+      ${e.note ? `<div class="eq-note">📌 ${e.note}</div>` : ''}`;
+    d.dataset.text = (e.name+' '+e.tag+' '+e.r.join(' ')+' '+e.p.join(' ')+' '+(e.c||'')+' '+e._chap.title).toLowerCase();
+    return d;
+}
+
+let mode = 'chapter';        /* 'chapter' | 'type' */
+
+function build(){
+    $book.innerHTML = '';
+    $nav.innerHTML = '';
+    const groups = mode === 'chapter'
+        ? CHAPTERS.map(ch => ({...ch, list: ch.eqs}))
+        : RTYPES.map(rt => ({...rt, list: ALL.filter(e => e._type === rt.id)})).filter(g => g.list.length);
+
+    groups.forEach(g=>{
+        const a = document.createElement('a');
+        a.href = '#'+g.id;
+        a.style.setProperty('--ch', g.color);
+        a.innerHTML = `<span class="dot"></span>${trChapT(g.title)}`;
+        $nav.appendChild(a);
+
+        const sec = document.createElement('section');
+        sec.className = 'chapter';
+        sec.id = g.id;
+        sec.style.setProperty('--ch', g.color);
+        sec.innerHTML = `
+          <div class="chap-head">
+            <div class="icon">${g.icon}</div>
+            <div><h2>${trChapT(g.title)}</h2><div class="sub">${trChapS(g.title, g.sub)}</div></div>
+            <span class="n">${g.list.length} ${LANG==='ar' ? 'معادلة' : 'equations'}</span>
+          </div>`;
+        g.list.forEach((e,i)=> sec.appendChild(eqCard(e, i, mode==='type')));
+        $book.appendChild(sec);
+    });
+    document.getElementById('count').textContent = total + ' equations';
+    applySearch();
+}
+
+/* view toggle */
+const $btnChap = document.getElementById('btnChap');
+const $btnType = document.getElementById('btnType');
+function setMode(m){
+    mode = m;
+    $btnChap.classList.toggle('gold', m==='chapter');
+    $btnType.classList.toggle('gold', m==='type');
+    build();
+    window.scrollTo({top:0});
+}
+$btnChap.addEventListener('click', ()=>setMode('chapter'));
+$btnType.addEventListener('click', ()=>setMode('type'));
+
+/* font size control */
+let fs = 21;
+function applyFS(){ document.documentElement.style.setProperty('--eqfs', fs + 'px'); }
+document.getElementById('fsUp').addEventListener('click', ()=>{ fs = Math.min(fs+2, 33); applyFS(); });
+document.getElementById('fsDn').addEventListener('click', ()=>{ fs = Math.max(fs-2, 15); applyFS(); });
+applyFS();
+
+/* search */
+const $search = document.getElementById('search');
+function applySearch(){
+    const q = $search.value.trim().toLowerCase();
+    let shown = 0;
+    document.querySelectorAll('.eq').forEach(d=>{
+        const ok = !q || d.dataset.text.includes(q);
+        d.classList.toggle('hidden', !ok);
+        if (ok) shown++;
+    });
+    document.querySelectorAll('.chapter').forEach(sec=>{
+        const any = sec.querySelectorAll('.eq:not(.hidden)').length > 0;
+        sec.style.display = any ? '' : 'none';
+    });
+    document.getElementById('empty').style.display = shown ? 'none' : '';
+    document.getElementById('count').textContent = shown + ' / ' + total + ' equations';
+}
+$search.addEventListener('input', applySearch);
+document.getElementById('btnReset').addEventListener('click', ()=>{
+    $search.value=''; applySearch();
+});
+document.getElementById('btnPrint').addEventListener('click', ()=>window.print());
+
+/* Kekulé structure toggle */
+document.getElementById('btnLang').addEventListener('click', function(){
+    LANG = (LANG === 'en') ? 'ar' : 'en';
+    this.textContent = (LANG === 'en') ? '🌐 عربي' : '🌐 English';
+    this.classList.toggle('gold', LANG === 'ar');
+    document.body.classList.toggle('lang-ar', LANG === 'ar');
+    document.getElementById('pgTitle').innerHTML = (LANG==='ar') ? AR_BOOK_TITLE : 'Organic Chemistry Equations Book';
+    document.getElementById('pgSub').innerHTML = (LANG==='ar') ? AR_BOOK_SUB : 'Every reaction of the conversion roadmap written as a <b>complete balanced equation</b> with conditions above the arrow — organised <b>chapter by chapter</b> exactly like your syllabus. Use 🖨 Print for a white-paper study sheet.';
+    build();
+});
+
+document.getElementById('btnStruct').addEventListener('click', function(){
+    structMode = !structMode;
+    this.textContent = structMode ? '⬡ Kekulé ON' : '⬡ Kekulé OFF';
+    this.classList.toggle('gold', structMode);
+    build();
+});
+
+build();
+</script>
+<div class="brandfoot"><span class="fline1"><span class="fname">أ/ أيمن منصور — مستشار الكيمياء</span><span class="sep">|</span><span class="fname2">Prof./ Ayman Mansour — Chemistry Consultant</span></span><span class="fline2"><span class="fphone">📞 / WhatsApp: <b>01068018005</b> · <b>01287996430</b></span><span class="sep">|</span><span>كيمياء ٢٠٢٦ • Chemistry 2026</span></span></div>
+
+<div id="security-overlay" class="security-overlay">
+    <div style="font-size:3rem">🛡</div>
+    <div>Screen Recording / Copying Disabled</div>
+    <div class="ar">تم تعطيل تصوير الشاشة / النسخ</div>
+</div>
+
+<script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => { e.preventDefault(); });
+    document.addEventListener('keydown', e => {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 's' || e.key === 'u' || e.key === 'a')) {
+            e.preventDefault();
+        }
+    });
+    document.addEventListener('keyup', e => {
+        if (e.key === 'PrintScreen') { try { navigator.clipboard.writeText(''); } catch(_){} }
+    });
+    window.addEventListener('blur', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'flex';
+    });
+    window.addEventListener('focus', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'none';
+    });
+</script>
+</body>
+</html>

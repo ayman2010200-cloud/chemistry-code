@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alcohols Chart — Ethanol at the Centre</title>
+<style>
+    :root {
+        --bg-main: #0b0f19;
+        --bg-card: #111827;
+        --border-color: #1f2937;
+        --text-light: #f8fafc;
+
+        --color-hydrocarbon: #38bdf8;
+        --color-aromatic:    #22d3ee;
+        --color-halogen:     #f43f5e;
+        --color-alcohol:     #34d399;
+        --color-carbonyl:    #fbbf24;
+        --color-ester:       #c084fc;
+        --color-inorganic:   #f472b6;
+        --color-start:       #facc15;
+        --gold: #fbbf24;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        padding: 28px 16px 40px;
+        background: radial-gradient(1200px 600px at 50% -10%, #101a33 0%, var(--bg-main) 60%);
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        color: var(--text-light);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    h1 {
+        margin: 0 0 6px 0;
+        font-size: 29px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        text-align: center;
+        background: linear-gradient(90deg, #7dd3fc, #c084fc, #fbbf24);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .subtitle {
+        margin: 0 0 18px 0;
+        color: #94a3b8;
+        font-size: 14px;
+        text-align: center;
+        max-width: 780px;
+        line-height: 1.55;
+    }
+    .subtitle b { color: #e2e8f0; }
+
+    /* ============ TOOLBAR ============ */
+    .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 14px;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 12px 18px;
+        margin-bottom: 14px;
+        max-width: 1640px;
+        width: 100%;
+    }
+    .tb-group { display: flex; align-items: center; gap: 7px; }
+    .tb-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #64748b; text-transform: uppercase; }
+
+    .toolbar input, .toolbar select {
+        background: #0d1117;
+        border: 1px solid #2b3648;
+        color: #e2e8f0;
+        border-radius: 8px;
+        padding: 7px 10px;
+        font-size: 13px;
+        font-family: inherit;
+        outline: none;
+        transition: border-color .15s;
+    }
+    .toolbar input:focus, .toolbar select:focus { border-color: #38bdf8; }
+    .toolbar input { width: 195px; }
+    .toolbar select { max-width: 185px; }
+
+    .btn {
+        background: #1b2435;
+        border: 1px solid #2b3648;
+        color: #cbd5e1;
+        border-radius: 8px;
+        padding: 7px 13px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: background .15s, border-color .15s, color .15s;
+        user-select: none;
+    }
+    .btn:hover { background: #243049; border-color: #3b4a66; color: #fff; }
+    .btn.gold { background: #3a2e08; border-color: #8a6d12; color: #fde68a; }
+    .btn.gold:hover { background: #4d3d0a; }
+    .btn.icon { padding: 7px 11px; font-size: 15px; line-height: 1; }
+
+    /* ============ LEGEND (clickable filters) ============ */
+    .legend {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 10px;
+        margin-bottom: 14px;
+        max-width: 1640px;
+    }
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        color: #cbd5e1;
+        text-transform: uppercase;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        padding: 6px 14px;
+        cursor: pointer;
+        transition: border-color .15s, background .15s, opacity .15s;
+        user-select: none;
+    }
+    .legend-item:hover { border-color: #3b4a66; }
+    .legend-item.active { background: #1d2a40; border-color: var(--lc, #38bdf8); color: #fff; }
+    .legend-item.muted { opacity: .35; }
+    .legend-color { width: 11px; height: 11px; border-radius: 50%; flex: 0 0 auto; }
+
+    /* ============ LAYOUT: map + side panel ============ */
+    .stage {
+        display: flex;
+        gap: 14px;
+        align-items: stretch;
+        max-width: 1640px;
+        width: 100%;
+    }
+
+    .map-container {
+        position: relative;
+        flex: 1 1 auto;
+        background: #070a13;
+        border-radius: 14px;
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.65);
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+        min-width: 0;
+        height: 760px;
+    }
+    svg#map { display: block; width: 100%; height: 100%; cursor: grab; }
+    svg#map.panning { cursor: grabbing; }
+
+    .zoombar {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        z-index: 5;
+    }
+    .zoombar .btn { width: 38px; text-align: center; }
+
+    .map-hint {
+        position: absolute;
+        left: 14px;
+        bottom: 10px;
+        font-size: 11.5px;
+        color: #52617a;
+        pointer-events: none;
+        z-index: 5;
+    }
+
+    /* ============ SIDE PANEL ============ */
+    .panel {
+        flex: 0 0 312px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+        padding: 18px;
+        overflow-y: auto;
+        height: 760px;
+    }
+    .panel h2 {
+        margin: 0 0 4px 0;
+        font-size: 19px;
+        font-weight: 800;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+    }
+    .panel .dot { width: 12px; height: 12px; border-radius: 50%; flex: 0 0 auto; }
+    .panel .pf { font-size: 14px; color: #94a3b8; margin: 0 0 2px; font-weight: 600; }
+    .panel .pclass {
+        display: inline-block;
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: .8px;
+        text-transform: uppercase;
+        border-radius: 999px;
+        padding: 3px 10px;
+        margin: 8px 0 14px;
+        border: 1px solid;
+    }
+    .panel h3 {
+        margin: 16px 0 8px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: #64748b;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 6px;
+    }
+    .rxn {
+        background: #0d1117;
+        border: 1px solid #1d2738;
+        border-left: 3px solid #334155;
+        border-radius: 8px;
+        padding: 8px 10px;
+        margin-bottom: 7px;
+        font-size: 12.5px;
+        line-height: 1.5;
+        cursor: pointer;
+        transition: border-color .15s, background .15s;
+    }
+    .rxn:hover { background: #131a26; border-left-color: var(--gold); }
+    .rxn .arrow { color: var(--gold); font-weight: 700; }
+    .rxn .cond { color: #7dd3fc; font-family: Consolas, 'Courier New', monospace; font-size: 11.5px; }
+    .rxn b { color: #fff; }
+
+    .placeholder { color: #64748b; font-size: 13.5px; line-height: 1.7; }
+    .placeholder li { margin-bottom: 8px; }
+    .placeholder b { color: #cbd5e1; }
+
+    .path-step {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 2px;
+        font-size: 13px;
+    }
+    .path-step .num {
+        width: 20px; height: 20px; border-radius: 50%;
+        background: #3a2e08; color: #fde68a;
+        font-size: 11px; font-weight: 800;
+        display: flex; align-items: center; justify-content: center;
+        flex: 0 0 auto;
+    }
+    .path-cond {
+        margin: 2px 0 8px 28px;
+        font-size: 11.5px;
+        color: #7dd3fc;
+        font-family: Consolas, monospace;
+        border-left: 2px dotted #2b3648;
+        padding-left: 9px;
+    }
+    .nopath { color: #fda4af; font-size: 13px; }
+
+    /* ============ SVG NODES ============ */
+    .node { cursor: pointer; transition: opacity .25s ease; }
+    .node rect.box {
+        fill: #0d1117;
+        stroke-width: 1.8;
+        transition: filter .18s ease, stroke-width .18s ease;
+    }
+    .node:hover rect.box, .node.sel rect.box {
+        fill: #131a24;
+        stroke-width: 2.8;
+        filter: drop-shadow(0 0 10px var(--gc));
+    }
+    .node.sel rect.box { stroke: var(--gold) !important; }
+    .node .formula { font-size: 15px; font-weight: 700; fill: #fff; }
+    .node .cname { font-size: 10.5px; font-weight: 500; fill: #7c8aa0; letter-spacing: .2px; }
+    .node.dim { opacity: .13; pointer-events: all; }
+
+    /* ============ SVG EDGES ============ */
+    .edge { transition: opacity .25s ease; }
+    .edge path.line {
+        fill: none;
+        stroke: #44516a;
+        stroke-width: 1.8;
+        stroke-dasharray: 7 5;
+        animation: flow 26s linear infinite;
+        transition: stroke .15s ease;
+    }
+    .edge text.rg {
+        font-size: 10.5px;
+        font-weight: 700;
+        fill: #b7c2d4;
+        font-family: 'Consolas', 'Courier New', monospace;
+        paint-order: stroke;
+        stroke: #070a13;
+        stroke-width: 5px;
+        stroke-linejoin: round;
+    }
+    .edge.hot path.line { stroke: var(--gold); stroke-width: 2.6; animation-duration: 5s; }
+    .edge.hot text.rg   { fill: #fde68a; }
+    .edge.dim { opacity: .08; }
+
+    /* invisible wide hit-zone so arrows are easy to click */
+    .edge path.hit {
+        fill: none;
+        stroke: transparent;
+        stroke-width: 16;
+        cursor: pointer;
+    }
+    .edge:hover path.line { stroke: #7d8db0; }
+    .edge.hot:hover path.line { stroke: var(--gold); }
+
+    /* big reaction-name callout shown beside a clicked arrow */
+    #callout { pointer-events: none; }
+    #callout rect.bg {
+        fill: rgba(13, 17, 23, .94);
+        stroke: var(--gold);
+        stroke-width: 2;
+        rx: 12; ry: 12;
+        filter: drop-shadow(0 0 14px rgba(251, 191, 36, .45));
+    }
+    #callout text.big {
+        font-size: 26px;
+        font-weight: 800;
+        fill: #fde68a;
+        letter-spacing: .3px;
+    }
+    #callout text.sub {
+        font-size: 13px;
+        font-weight: 600;
+        fill: #93c5fd;
+        font-family: Consolas, 'Courier New', monospace;
+    }
+    #callout path.tail {
+        fill: rgba(13, 17, 23, .94);
+        stroke: var(--gold);
+        stroke-width: 2;
+    }
+    #callout { animation: calloutPop .22s ease-out; }
+    @keyframes calloutPop {
+        from { opacity: 0; transform: scale(.85); transform-origin: center; }
+        to   { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes flow { to { stroke-dashoffset: -240px; } }
+
+    @media (max-width: 1180px) {
+        .stage { flex-direction: column; }
+        .panel { flex: none; width: 100%; height: auto; max-height: 420px; }
+        .map-container { height: 560px; }
+    }
+
+/* ================= BRAND / TEACHER IDENTITY ================= */
+.brandbar {
+  display: flex; align-items: center; gap: 18px;
+  background: linear-gradient(90deg, #101a33 0%, #0f172a 60%, #1a1430 100%);
+  border: 1px solid #facc15aa; border-radius: 16px;
+  padding: 12px 22px; margin: 0 auto 18px;
+  max-width: 1640px; width: 100%;
+  box-shadow: 0 8px 28px rgba(0,0,0,.5), 0 0 18px #facc1522;
+  position: relative; z-index: 10;
+}
+.brandbar .bphoto {
+  width: 74px; height: 74px; border-radius: 50%;
+  border: 3px solid #facc15; object-fit: cover; flex: 0 0 auto;
+  box-shadow: 0 0 16px #facc1566; background: #fff;
+}
+.brandbar .bnames { line-height: 1.3; }
+.brandbar .bar { font-size: 21px; font-weight: 800; color: #facc15; }
+.brandbar .ben { font-size: 13px; font-weight: 700; color: #7dd3fc; letter-spacing: .5px; }
+.brandbar .bpage {
+  margin-inline-start: auto; text-align: center; line-height: 1.45;
+}
+.brandbar .bpage .pa { font-size: 16px; font-weight: 800; color: #e2e8f0; direction: rtl; }
+.brandbar .bpage .pe { font-size: 11.5px; font-weight: 600; color: #94a3b8; }
+.brandbar .bexam { text-align: end; line-height: 1.4; }
+.brandbar .bexam .x1 { font-size: 15px; font-weight: 800; color: #4ade80; direction: rtl; }
+.brandbar .bexam .x2 { font-size: 10.5px; color: #64748b; direction: rtl; }
+@media (max-width: 900px){ .brandbar{flex-wrap:wrap; justify-content:center; text-align:center;} .brandbar .bpage{margin:0;} }
+
+/* watermark: faint photo + repeated bilingual name */
+#wmark {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+}
+#wmark .wphoto {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%,-50%);
+  width: min(56vmin, 520px); height: min(56vmin, 520px);
+  border-radius: 50%;
+  background-size: cover; background-position: center;
+  opacity: .045; filter: grayscale(60%);
+}
+body > *:not(#wmark){ position: relative; z-index: 1; }
+
+.brandfoot {
+  margin: 26px auto 0; max-width: 1640px; width: 100%;
+  border-top: 1px dashed #facc1555;
+  padding: 12px 8px 4px;
+  display: flex; flex-wrap: wrap; gap: 6px 24px;
+  align-items: center; justify-content: center;
+  font-size: 12.5px; color: #94a3b8; text-align: center;
+}
+.brandfoot b { color: #facc15; }
+.brandfoot .sep { color: #334155; }
+@media print { #wmark .wphoto { opacity: .05; } .brandbar{box-shadow:none;} }
+#wmark{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='300'%3E%3Ctext x='50%25' y='44%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='26' font-weight='bold' fill='%23ffffff' opacity='0.13'%3EProf./ Ayman Mansour%3C/text%3E%3Ctext x='50%25' y='60%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='22' font-weight='bold' fill='%23ffffff' opacity='0.10'%3E%D8%A3/ %D8%A3%D9%8A%D9%85%D9%86 %D9%85%D9%86%D8%B5%D9%88%D8%B1%3C/text%3E%3C/svg%3E");background-repeat:repeat;z-index:9999;}
+
+/* ===== model-2 security overlay ===== */
+.security-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #0b1220; color: #ef4444;
+    display: none; justify-content: center; align-items: center; flex-direction: column;
+    z-index: 999999; font-size: 1.6rem; font-weight: 800; text-align: center; gap: 8px;
+}
+.security-overlay .ar { font-size: 1.3rem; color: #f87171; direction: rtl; }
+body { user-select: none; }
+input, select, textarea { user-select: text; }
+
+.brandfoot { flex-direction: column; gap: 8px; }
+.brandfoot .fline1, .brandfoot .fline2 {
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+  align-items: center; justify-content: center;
+}
+.brandfoot .fname { color: #facc15; font-size: 15px; font-weight: 800; direction: rtl; }
+.brandfoot .fname2 { color: #7dd3fc; font-size: 13px; font-weight: 700; }
+.brandfoot .fphone {
+  color: #4ade80; font-weight: 700; font-size: 13px;
+  background: #4ade8011; border: 1px solid #4ade8044;
+  border-radius: 999px; padding: 4px 14px;
+}
+.brandfoot .fphone b { color: #86efac; letter-spacing: 1px; }
+
+    .btn.gold { background: #3a2e08; border-color: #8a6d12; color: #fde68a; }
+    body.lang-ar #callout text.big { font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body.lang-ar #pgTitle, body.lang-ar #pgSub { direction: rtl; font-family:'Segoe UI',Tahoma,sans-serif; }
+body.lang-ar .legend-item { direction: rtl; }
+
+.brandbar .blogo {
+  width: 78px; height: 68px; border-radius: 12px;
+  object-fit: contain; background: #fff; flex: 0 0 auto;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 14px rgba(56,189,248,.45);
+  padding: 3px;
+}
+</style>
+</head>
+<body>
+
+<div id="wmark"><div class="wphoto" style="background-image:url(data:image/jpeg;base64,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)"></div></div>
+<div class="brandbar"><img class="blogo" src="data:image/jpeg;base64,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" alt="Chemistry Code"><img class="bphoto" src="data:image/jpeg;base64,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" alt="teacher"><div class="bnames"><div class="bar">أ/ أيمن منصور — مستشار الكيمياء</div><div class="ben">Prof./ Ayman Mansour — Chemistry Consultant</div></div><div class="bpage"><div class="pa">مخطط الكحولات: الإيثانول في المركز</div><div class="pe">Alcohols Chart</div></div><div class="bexam"><div class="x1">كيمياء ٢٠٢٦ — Chemistry 2026</div></div></div>
+
+
+<h1 id="pgTitle">Alcohols Chart — Ethanol at the Centre</h1>
+<p class="subtitle" id="pgSub">Everything ethanol does: the three H₂SO₄ temperatures (80 / 140 / 180°C), oxidation ladder, R–X hydrolysis, sodium test, esterification — plus glycol, 2-propanol and methanol. <b>Click a compound</b> to focus · <b>click an arrow</b> for the reaction name.</p>
+
+<div class="toolbar">
+    <div class="tb-group">
+        <span class="tb-label">Search</span>
+        <input id="search" list="cmpds" placeholder="e.g. ethanol, CH₃COOH…" autocomplete="off">
+        <datalist id="cmpds"></datalist>
+    </div>
+    <div class="tb-group">
+        <span class="tb-label">Route</span>
+        <select id="pfrom"><option value="">from…</option></select>
+        <span style="color:#fbbf24;font-weight:800;">→</span>
+        <select id="pto"><option value="">to…</option></select>
+        <button class="btn gold" id="btnPath">Find path</button>
+    </div>
+    <div class="tb-group">
+        <button class="btn" id="btnLang">🌐 عربي</button>
+        <button class="btn" id="btnQuiz" title="Hide all reagent labels — test yourself!">🎓 Quiz mode</button>
+        <button class="btn" id="btnReset">⟲ Reset</button>
+    </div>
+</div>
+
+<div class="legend" id="legend"></div>
+
+<div class="stage">
+    <div class="map-container">
+        <div class="zoombar">
+            <button class="btn icon" id="zin"  title="Zoom in">＋</button>
+            <button class="btn icon" id="zout" title="Zoom out">－</button>
+            <button class="btn icon" id="zfit" title="Fit to view">⊡</button>
+        </div>
+        <div class="map-hint">scroll = zoom · drag = pan · click node = focus · <b style="color:#fbbf24">click arrow = reaction name</b> · click background = clear</div>
+        <svg id="map" viewBox="0 0 1500 780" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#5b6b88"/>
+                </marker>
+                <marker id="arrHot" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24"/>
+                </marker>
+            </defs>
+            <rect id="bgcatch" x="-2000" y="-2000" width="6000" height="6000" fill="transparent"/>
+            <g id="world">
+                <g id="edges"></g>
+                <g id="nodes"></g>
+            </g>
+        </svg>
+    </div>
+
+    <aside class="panel" id="panel">
+        <h2>🧭 How to use</h2>
+        <ul class="placeholder">
+            <li><b>Click any compound</b> → its box turns gold, every reaction in/out lights up, and full details appear here.</li>
+        <li><b>Click any arrow</b> → the <b>reaction name appears in large text</b> right beside it, and only that reaction stays lit.</li>
+            <li><b>Route finder</b> → choose two compounds in the toolbar and press <b>Find path</b>; the shortest conversion sequence glows step-by-step.</li>
+            <li><b>Legend pills</b> → click a family (e.g. Halogen derivatives) to spotlight only that class.</li>
+            <li><b>🎓 Quiz mode</b> → hides all reagents/conditions on the arrows so you can test yourself; click again to reveal.</li>
+            <li><b>Zoom &amp; pan</b> → mouse wheel + drag, or the ＋ / － / ⊡ buttons.</li>
+        </ul>
+    </aside>
+</div>
+
+<script>
+/* ============================================================
+   DATA — colours assigned by FUNCTIONAL GROUP
+   (same functional group ⇒ same colour everywhere)
+   ============================================================ */
+const TYPES = {
+    alkene:{c:'#2dd4bf', n:'Alkenes',           sym:'C=C'},
+    ol:    {c:'#34d399', n:'Alcohols',          sym:'–OH'},
+    ald:   {c:'#fb923c', n:'Aldehydes',         sym:'–CHO'},
+    acid:  {c:'#fbbf24', n:'Carboxylic acids',  sym:'–COOH'},
+    ether: {c:'#cbd5e1', n:'Ethers',            sym:'–O–'},
+    halo:  {c:'#f43f5e', n:'Halogen compounds', sym:'–X'},
+    ester: {c:'#c084fc', n:'Esters',            sym:'–COO–'},
+    salt:  {c:'#60a5fa', n:'Sodium salts',      sym:'–ONa'},
+    sugar: {c:'#f472b6', n:'Carbohydrates',     sym:'C(H₂O)ₙ'}
+};
+
+const NODES = [
+  {id:'oxalic', x:200,  y:80,  f:'HOOC–COOH',     n:'oxalic acid',        t:'acid', w:130},
+  {id:'glycol', x:200,  y:215, f:'CH₂OH–CH₂OH',  n:'ethylene glycol',    t:'ol',  w:146},
+  {id:'etcl',   x:480,  y:80,  f:'C₂H₅Cl',        n:'ethyl chloride',     t:'halo', w:104},
+  {id:'ethanal',x:760,  y:80,  f:'CH₃CHO',        n:'ethanal',            t:'ald', w:104},
+  {id:'acid',   x:1060, y:80,  f:'CH₃COOH',       n:'ethanoic acid',      t:'acid', w:118},
+  {id:'ester2', x:1330, y:170, f:'CH₃COOC₂H₅',   n:'ethyl ethanoate',    t:'ester', w:140},
+  {id:'ethene', x:430,  y:360, f:'CH₂=CH₂',       n:'ethene',             t:'alkene', w:106},
+  {id:'ethanol',x:760,  y:360, f:'CH₃CH₂OH',      n:'ETHANOL',            t:'ol', w:130, big:1},
+  {id:'ethoxide',x:1060,y:500, f:'C₂H₅ONa',       n:'sodium ethoxide',    t:'salt', w:120},
+  {id:'ehs',    x:430,  y:520, f:'C₂H₅HSO₄',     n:'ethyl hydrogen sulphate', t:'ester', w:130},
+  {id:'ether',  x:760,  y:540, f:'C₂H₅–O–C₂H₅', n:'diethyl ether',      t:'ether', w:140},
+  {id:'propene',x:200,  y:500, f:'CH₃–CH=CH₂',  n:'propene',            t:'alkene', w:124},
+  {id:'prop2ol',x:200,  y:640, f:'(CH₃)₂CHOH',    n:'2-propanol (2°)',    t:'ol', w:124},
+  {id:'meoh',   x:1060, y:640, f:'CH₃OH',         n:'methanol',           t:'ol', w:96},
+  {id:'ester1', x:1330, y:560, f:'CH₃COOCH₃',     n:'methyl ethanoate',   t:'ester', w:130},
+  {id:'salic',  x:1330, y:700, f:'–COOCH₃ , –OH',   n:'methyl salicylate',  t:'ester', w:168, ring:1},
+  {id:'sucrose',x:430,  y:700, f:'C₁₂H₂₂O₁₁',    n:'sucrose (cane sugar)', t:'sugar', w:124},
+  {id:'invert', x:720,  y:700, f:'2 C₆H₁₂O₆',     n:'glucose + fructose', t:'sugar', w:130}
+];
+
+/* a:from  b:to  l:short arrow label  rn:reaction name (big callout)  eq:full reaction note */
+const EDGES = [
+  {a:'ethene', b:'ethanol', l:'+ H₂O , dil. H₂SO₄', sh:[0,-12], lt:.45, dy:-10, rn:'Hydration', eq:'CH₂=CH₂ + H₂O →(dil. H₂SO₄) CH₃CH₂OH'},
+  {a:'ethanol',b:'ethene',  l:'conc. H₂SO₄ · 180°C', sh:[0,12], lt:.55, dy:14, rn:'Dehydration', eq:'CH₃CH₂OH →(conc. H₂SO₄ , 180°C) CH₂=CH₂ + H₂O'},
+  {a:'ethanol',b:'ether',   l:'conc. H₂SO₄ · 140°C', dx:10, an:'start', rn:'Dehydration (condensation)', eq:'2 C₂H₅OH →(conc. H₂SO₄ , 140°C) C₂H₅–O–C₂H₅ + H₂O'},
+  {a:'ethanol',b:'ehs',     l:'H₂SO₄ · 80°C', lt:.55, dy:14, rn:'Esterification (inorganic)', eq:'C₂H₅OH + H₂SO₄ →(80°C) C₂H₅HSO₄ + H₂O'},
+  {a:'ethanal',b:'ethanol', l:'+ H₂ / Ni', sh:[-14,0], dx:-22, an:'end', rn:'Reduction', eq:'CH₃CHO + H₂ →(Ni) CH₃CH₂OH'},
+  {a:'ethanol',b:'ethanal', l:'(O) · Cu / 300°C', sh:[14,0], dx:24, an:'start', rn:'Partial oxidation', eq:'CH₃CH₂OH + (O) →(Cu , 300°C) CH₃CHO + H₂O'},
+  {a:'ethanol',b:'acid',    l:'2(O) · KMnO₄/H⁺', lt:.55, dx:14, an:'start', rn:'Complete oxidation', eq:'CH₃CH₂OH + 2(O) →(KMnO₄/H⁺) CH₃COOH + H₂O'},
+  {a:'acid',   b:'ethanol', l:'+ 2H₂ · CuCrO₄ 200°C', c:{x:920,y:260}, lt:.5, dx:-14, an:'end', rn:'Reduction of acid', eq:'CH₃COOH + 2H₂ →(CuCrO₄ , 200°C) CH₃CH₂OH + H₂O'},
+  {a:'ethanal',b:'acid',    l:'(O) , KMnO₄/H⁺', dy:-9, rn:'Oxidation', eq:'CH₃CHO + (O) →(KMnO₄/H⁺) CH₃COOH'},
+  {a:'etcl',   b:'ethanol', l:'+ KOH (aq)', sh:[-14,-6], lt:.4, dx:-20, an:'end', rn:'Hydrolysis of R–X', eq:'C₂H₅Cl + KOH(aq) → C₂H₅OH + KCl  (primary alcohol)'},
+  {a:'ethanol',b:'etcl',    l:'+ HCl / ZnCl₂', sh:[14,6], lt:.6, dx:22, an:'start', rn:'Chlorination of alcohol', eq:'C₂H₅OH + HCl →(ZnCl₂) C₂H₅Cl + H₂O  (phenol cannot!)'},
+  {a:'ethanol',b:'ethoxide',l:'+ Na  (→ H₂↑)', lt:.5, dy:14, rn:'Test for –OH', eq:'2C₂H₅OH + 2Na → 2C₂H₅ONa + H₂↑ (white ppt.)'},
+  {a:'ethanol',b:'ester2',  l:'+ CH₃COOH / H⁺ ⇌', c:{x:1120,y:280}, lt:.55, dx:14, an:'start', rn:'Esterification', eq:'CH₃COOH + C₂H₅OH ⇌(conc. H₂SO₄) CH₃COOC₂H₅ + H₂O'},
+  {a:'acid',   b:'ester2',  l:'+ C₂H₅OH / H⁺', lt:.5, dx:12, an:'start', rn:'Esterification', eq:'CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O'},
+  {a:'ethene', b:'glycol',  l:'(O)+H₂O · cold KMnO₄', lt:.5, dy:-10, rn:'Baeyer’s test', eq:'CH₂=CH₂ + (O) + H₂O →(cold alk. KMnO₄) CH₂OH–CH₂OH'},
+  {a:'glycol', b:'oxalic',  l:'+ 4(O) · KMnO₄/H⁺', dx:12, an:'start', rn:'Oxidation of diol', eq:'CH₂OH–CH₂OH + 4(O) → HOOC–COOH + 2H₂O (each CH₂OH → COOH)'},
+  {a:'propene',b:'prop2ol', l:'+ H₂O / H₂SO₄', dx:12, an:'start', rn:'Markovnikov hydration', eq:'CH₃–CH=CH₂ + H₂O →(H₂SO₄) CH₃–CH(OH)–CH₃ (secondary!)'},
+  {a:'meoh',   b:'ester1',  l:'+ CH₃COOH / H⁺', dy:-10, rn:'Esterification', eq:'CH₃OH + CH₃COOH ⇌(H⁺) CH₃COOCH₃ + H₂O'},
+  {a:'meoh',   b:'salic',   l:'+ salicylic acid / H⁺', lt:.55, dy:14, rn:'Esterification', eq:'CH₃OH + salicylic acid →(H⁺) methyl salicylate (marookh oil)'},
+  {a:'sucrose',b:'invert',  l:'+ H₂O · invertase', dy:-10, rn:'Hydrolysis (inversion)', eq:'C₁₂H₂₂O₁₁ + H₂O →(invertase enzyme / dil. acid) C₆H₁₂O₆ (glucose) + C₆H₁₂O₆ (fructose)'},
+  {a:'invert', b:'ethanol', l:'zymase · 35°C (–CO₂↑)', lt:.45, dx:14, an:'start', rn:'Fermentation', eq:'C₆H₁₂O₆ →(zymase enzyme from yeast , 35°C) 2C₂H₅OH + 2CO₂↑'}
+];
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+const SVGNS = 'http://www.w3.org/2000/svg';
+const svg = document.getElementById('map');
+const $world = document.getElementById('world');
+const $nodes = document.getElementById('nodes');
+const $edges = document.getElementById('edges');
+const $panel = document.getElementById('panel');
+const byId = {};
+NODES.forEach(n => {
+    n.h = n.big ? (n.hex ? 130 : 58) : (n.n ? 58 : 44);
+    if (n.hex) n.w = 150;
+    byId[n.id] = n;
+});
+
+function el(tag, attrs, parent){
+    const e = document.createElementNS(SVGNS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+}
+const color = n => TYPES[n.t].c;
+
+function anchorPt(n, tx, ty){
+    const dx = tx - n.x, dy = ty - n.y;
+    const hw = n.w/2 + 9, hh = n.h/2 + 9;
+    let s = Infinity;
+    if (dx) s = Math.min(s, hw/Math.abs(dx));
+    if (dy) s = Math.min(s, hh/Math.abs(dy));
+    if (!isFinite(s)) s = 0;
+    return {x: n.x + dx*s, y: n.y + dy*s};
+}
+function hexPoints(cx, cy, r){
+    const p = [];
+    for (let i = 0; i < 6; i++){
+        const a = (-90 + i*60) * Math.PI/180;
+        p.push((cx + r*Math.cos(a)).toFixed(1) + ',' + (cy + r*Math.sin(a)).toFixed(1));
+    }
+    return p.join(' ');
+}
+
+/* ---- edges ---- */
+const edgeEls = [];
+EDGES.forEach((e, i) => {
+    e.i = i;
+    const A = byId[e.a], B = byId[e.b];
+    const ta = e.c || B, tb = e.c || A;
+    const p1 = anchorPt(A, ta.x, ta.y);
+    const p2 = anchorPt(B, tb.x, tb.y);
+    if (e.sh){ p1.x+=e.sh[0]; p1.y+=e.sh[1]; p2.x+=e.sh[0]; p2.y+=e.sh[1]; }
+
+    const g = el('g', {class:'edge'}, $edges);
+    let d, lp;
+    const t = (e.lt === undefined) ? .5 : e.lt;
+    if (e.c){
+        d = `M ${p1.x.toFixed(1)} ${p1.y.toFixed(1)} Q ${e.c.x} ${e.c.y} ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+        const u = 1 - t;
+        lp = { x: u*u*p1.x + 2*u*t*e.c.x + t*t*p2.x, y: u*u*p1.y + 2*u*t*e.c.y + t*t*p2.y };
+    } else {
+        d = `M ${p1.x.toFixed(1)} ${p1.y.toFixed(1)} L ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+        lp = { x: p1.x + (p2.x-p1.x)*t, y: p1.y + (p2.y-p1.y)*t };
+    }
+    el('path', {d, class:'line', 'marker-end':'url(#arr)'}, g);
+    /* midpoint of the arrow (for the big-name callout) */
+    if (e.c){
+        e.mid = { x: .25*p1.x + .5*e.c.x + .25*p2.x, y: .25*p1.y + .5*e.c.y + .25*p2.y };
+    } else {
+        e.mid = { x: (p1.x+p2.x)/2, y: (p1.y+p2.y)/2 };
+    }
+    if (e.l){
+        const txt = el('text', {
+            x:(lp.x + (e.dx||0)).toFixed(1),
+            y:(lp.y + (e.dy||0) + 3.5).toFixed(1),
+            class:'rg', 'text-anchor': e.an || 'middle'
+        }, g);
+        txt.textContent = e.l;
+    }
+    /* wide invisible hit-zone so the arrow is easy to click */
+    const hit = el('path', {d, class:'hit'}, g);
+    const tEl = el('title', {}, g);
+    tEl.textContent = (e.rn || '') + ' — click to show reaction name';
+    hit.addEventListener('click', ev => { ev.stopPropagation(); selectEdge(e); });
+    edgeEls.push(g);
+});
+
+/* ---- nodes ---- */
+const nodeEls = {};
+NODES.forEach(n => {
+    const c = color(n);
+    const g = el('g', {class:'node', transform:`translate(${n.x},${n.y})`}, $nodes);
+    g.style.setProperty('--gc', c);
+    nodeEls[n.id] = g;
+
+    const title = el('title', {}, g);
+    title.textContent = (n.n ? n.n + ' — ' : '') + n.f + '  [' + TYPES[n.t].n + ']';
+
+    el('rect', {class:'box', x:-n.w/2, y:-n.h/2, width:n.w, height:n.h, rx:9, ry:9, stroke:c}, g);
+    /* subtle colour-tinted fill so the group colour reads instantly */
+    el('rect', {x:-n.w/2, y:-n.h/2, width:n.w, height:n.h, rx:9, ry:9,
+                fill:c, opacity:.07, 'pointer-events':'none'}, g);
+
+    /* functional-group badge chip on the top edge of the box */
+    const sym = TYPES[n.t].sym;
+    if (sym && !n.hex){
+        const bw2 = sym.length * 6.4 + 14;
+        el('rect', {x:n.w/2 - bw2 + 6, y:-n.h/2 - 9, width:bw2, height:16, rx:8, ry:8,
+                    fill:'#0b0f19', stroke:c, 'stroke-width':1.4}, g);
+        const bt = el('text', {x:n.w/2 - bw2/2 + 6, y:-n.h/2 + 3, 'text-anchor':'middle',
+                    style:`font-size:9.5px;font-weight:800;fill:${c};letter-spacing:.3px;`}, g);
+        bt.textContent = sym;
+    }
+
+    if (n.hex){
+        el('polygon', {points:hexPoints(0,-12,34), fill:'rgba(250,204,21,.10)', stroke:'#facc15', 'stroke-width':2.4}, g);
+        el('circle', {cx:0, cy:-12, r:19, fill:'none', stroke:'#facc15', 'stroke-width':1.8}, g);
+        const f = el('text', {x:0, y:42, class:'formula', 'text-anchor':'middle', fill:'#facc15'}, g);
+        f.textContent = n.f;
+        const nm = el('text', {x:0, y:58, class:'cname', 'text-anchor':'middle'}, g);
+        nm.textContent = trNode(n.n);
+        nm.setAttribute('data-nn', n.n);
+        nm.setAttribute('style','font-weight:700; letter-spacing:2px; fill:#cbd5e1;');
+    } else {
+        let fx = 0, fan = 'middle';
+        if (n.ring){
+            const ix = -n.w/2 + 22;
+            el('polygon', {points:hexPoints(ix, n.n ? -6 : 0, 11), fill:'none', stroke:'#e2e8f0', 'stroke-width':1.5}, g);
+            el('circle', {cx:ix, cy:n.n ? -6 : 0, r:5.5, fill:'none', stroke:'#e2e8f0', 'stroke-width':1.1}, g);
+            fx = ix + 18; fan = 'start';
+        }
+        const f = el('text', {x:fx, y:n.n ? -2 : 5, class:'formula', 'text-anchor':fan}, g);
+        f.textContent = n.f;
+        if (n.big) f.setAttribute('style','font-size:19px; fill:' + c + ';');
+        if (n.n){
+            const nm = el('text', {x:0, y:17, class:'cname', 'text-anchor':'middle'}, g);
+            nm.textContent = trNode(n.n);
+            nm.setAttribute('data-nn', n.n);
+        }
+    }
+
+    g.addEventListener('mouseenter', () => { if (!state.focus && !state.path) hotFor(n.id, true); });
+    g.addEventListener('mouseleave', () => { if (!state.focus && !state.path) hotFor(n.id, false); });
+    g.addEventListener('click', ev => { ev.stopPropagation(); focusNode(n.id); });
+});
+
+/* ============================================================
+   STATE & HIGHLIGHTING
+   ============================================================ */
+const state = { focus:null, path:null, filter:null, quiz:false, edge:null };
+
+function setEdgeHot(i, on){
+    edgeEls[i].classList.toggle('hot', on);
+    edgeEls[i].querySelector('path').setAttribute('marker-end', on ? 'url(#arrHot)' : 'url(#arr)');
+}
+function hotFor(id, on){
+    EDGES.forEach(e => { if (e.a === id || e.b === id) setEdgeHot(e.i, on); });
+}
+function clearVisual(){
+    EDGES.forEach(e => setEdgeHot(e.i, false));
+    edgeEls.forEach(g => g.classList.remove('dim'));
+    Object.values(nodeEls).forEach(g => g.classList.remove('dim', 'sel'));
+    removeCallout();
+}
+
+/* ============================================================
+   BIG REACTION-NAME CALLOUT (click an arrow)
+   ============================================================ */
+function removeCallout(){
+    const old = document.getElementById('callout');
+    if (old) old.remove();
+    state.edge = null;
+}
+
+function selectEdge(e){
+    /* toggle off if same arrow clicked again */
+    if (state.edge === e){ clearVisual(); renderHome(); return; }
+    state.filter = null; refreshLegend();
+    state.focus = null; state.path = null;
+    clearVisual();
+    state.edge = e;
+
+    /* spotlight: only this reaction + its two compounds stay lit */
+    EDGES.forEach(x => {
+        if (x === e) setEdgeHot(x.i, true);
+        else edgeEls[x.i].classList.add('dim');
+    });
+    NODES.forEach(n => {
+        if (n.id !== e.a && n.id !== e.b) nodeEls[n.id].classList.add('dim');
+    });
+    nodeEls[e.a].classList.add('sel');
+    nodeEls[e.b].classList.add('sel');
+
+    drawCallout(e);
+    renderEdgePanel(e);
+}
+
+/* ============ ARABIC reaction names for charts ============ */
+var LANG = 'en';
+const AR_RN = {
+"Hydrolysis":"تحلل مائي","Hydrolysis (inversion)":"تحلل مائي (انعكاس)",
+"Addition (Markovnikov)":"إضافة (ماركونيكوف)","Markovnikov addition":"إضافة ماركونيكوف",
+"Partial hydrogenation":"هدرجة جزئية","Hydrogenation":"هدرجة",
+"Halogen addition":"إضافة هالوجين","Halogen addition (UV)":"إضافة هالوجين (فوق بنفسجية)",
+"Halogen substitution":"استبدال هالوجيني","Hydration (Kucherov)":"إماهة (كوتشيروف)",
+"Cyclic polymerisation":"بلمرة حلقية","Pyrolysis (cracking)":"تكسير حراري",
+"Oxidation":"أكسدة","Reduction":"اختزال","Partial oxidation":"أكسدة جزئية",
+"Complete oxidation":"أكسدة كاملة","Dehydration":"نزع الماء",
+"Hydration":"إماهة","Mild oxidation (Baeyer)":"أكسدة هادئة (باير)",
+"Dehydration (condensation)":"نزع ماء (تكاثف)","Esterification":"أسترة",
+"Esterification (inorganic)":"أسترة (غير عضوية)","Esterification (nitration)":"أسترة (نيترة)",
+"Esterification (acetylation)":"أسترة (أستلة)","Amide formation":"تكوين أميد",
+"Neutralisation":"تعادل","Decarboxylation":"نزع الكربوكسيل",
+"Photochlorination":"كلورة ضوئية","Complete combustion":"احتراق كامل",
+"Steam reforming":"إعادة تشكيل بالبخار","Thermal decomposition":"تفكك حراري",
+"Electrophilic substitution":"استبدال إلكتروفيلي",
+"Electrophilic substitution (meta)":"استبدال إلكتروفيلي (ميتا)",
+"Electrophilic substitution (o/p)":"استبدال إلكتروفيلي (أرثو/بارا)",
+"Nucleophilic substitution":"استبدال نيوكليوفيلي","Nitration":"نيترة",
+"Nitration of phenol":"نيترة الفينول","Trinitration":"نيترة ثلاثية",
+"Trinitration (2,4,6)":"نيترة ثلاثية (2،4،6)","Catalytic hydrogenation":"هدرجة حفزية",
+"Sulphonation":"سلفنة","Friedel\u2013Crafts alkylation":"ألكلة فريدل-كرافتس",
+"Side-chain oxidation":"أكسدة السلسلة الجانبية","Addition polymerisation":"بلمرة بالإضافة",
+"Condensation polymerisation":"بلمرة بالتكاثف","Fermentation":"تخمر",
+"Test for \u2013OH":"اختبار مجموعة \u2013OH","Baeyer\u2019s test":"اختبار باير",
+"Hydrolysis of R\u2013X":"تحلل مائي لـ R\u2013X","Chlorination of alcohol":"كلورة الكحول",
+"Reduction of acid":"اختزال الحمض","Oxidation of diol":"أكسدة ثنائي الهيدروكسيل",
+"Markovnikov hydration":"إماهة ماركونيكوف","Fat formation":"تكوين الدهون",
+"Monobasic acid":"حمض أحادي القاعدية","Dibasic acid":"حمض ثنائي القاعدية",
+"Tribasic acid":"حمض ثلاثي القاعدية","Phenol is acidic!":"الفينول حمضي!",
+"NO\u2082 directs meta":"NO\u2082 موجه ميتا","CH\u2083 directs ortho/para":"CH\u2083 موجه أرثو/بارا",
+"Detergent manufacture":"صناعة المنظفات","Hydroforming":"إعادة تشكيل حفزية"
+};
+function trRN(n){ return LANG==='ar' ? (AR_RN[n]||n) : n; }
+/* ===== Arabic content: node names + legend families ===== */
+const AR_NODE = {
+"calcium carbide":"كربيد الكالسيوم","ethyne (acetylene)":"الإيثاين (أسيتيلين)","ethyne (entry)":"الإيثاين (مدخل)",
+"ethene":"الإيثين","ethane":"الإيثان","methane":"الميثان","methane (exit)":"الميثان (مخرج)",
+"bromoethene":"برومو إيثين","1,1-dibromoethane":"1،1-ثنائي برومو الإيثان",
+"1,1,2,2-tetrabromoethane":"رباعي برومو الإيثان","tetrabromoethane":"رباعي برومو الإيثان",
+"1,2-dibromoethane":"1،2-ثنائي برومو الإيثان","bromoethane":"برومو الإيثان",
+"ethanal":"الإيثانال","ethanal (entry)":"الإيثانال (مدخل)","ethanal → acids chart":"الإيثانال ← مخطط الأحماض",
+"ethanoic acid":"حمض الإيثانويك","ETHANOIC ACID":"حمض الإيثانويك","ethylene glycol":"جليكول الإيثيلين",
+"ethanol":"الإيثانول","ETHANOL":"الإيثانول","ethanol (entry)":"الإيثانول (مدخل)","ethanol → alcohols chart":"الإيثانول ← مخطط الكحولات",
+"methyl ethanoate":"إيثانوات الميثيل","sodium ethanoate":"إيثانوات الصوديوم","diethyl ether":"الإيثير الإيثيلي",
+"acetamide":"الأسيتاميد","methanol":"الميثانول","methyl salicylate":"ساليسيلات الميثيل",
+"chloromethane":"كلورو الميثان","dichloromethane":"ثنائي كلورو الميثان","chloroform":"الكلوروفورم",
+"carbon tetrachloride":"رابع كلوريد الكربون","combustion + energy":"احتراق + طاقة",
+"synthesis gas":"غاز التخليق","pyrolysis 1000°C":"تكسير حراري 1000°م",
+"BENZENE":"البنزين","benzene → aromatic chart":"البنزين ← مخطط الأروماتية",
+"phenol":"الفينول","phenol (carbolic acid)":"الفينول (حمض الكربوليك)","chlorobenzene":"كلورو البنزين",
+"nitrobenzene":"نيترو البنزين","TNB (explosive)":"TNB (متفجر)","cyclohexane":"الهكسان الحلقي",
+"benzenesulfonic acid":"حمض البنزين سلفونيك","benzenesulphonic acid":"حمض البنزين سلفونيك",
+"benzene hexachloride":"سداسي كلوريد البنزين","toluene":"التولوين","toluene (entry)":"التولوين (مدخل)",
+"TNT (explosive)":"TNT (متفجر)","chlorotoluene (o/p)":"كلورو تولوين (أرثو/بارا)",
+"benzoic acid":"حمض البنزويك","benzoic acid → acids chart":"حمض البنزويك ← مخطط الأحماض",
+"sodium benzoate":"بنزوات الصوديوم","3-chlorobenzoic acid":"3-كلورو حمض البنزويك",
+"benzamide":"البنزاميد","ethyl benzoate":"بنزوات الإيثيل","polyethylene":"البولي إيثيلين",
+"oxalic acid":"حمض الأوكساليك","ethyl chloride":"كلوريد الإيثيل","ethyl ethanoate":"إيثانوات الإيثيل",
+"sodium ethoxide":"إيثوكسيد الصوديوم","ethyl hydrogen sulphate":"كبريتات الإيثيل الهيدروجينية",
+"propene":"البروبين","2-propanol (2°)":"2-بروبانول (ثانوي)","sucrose (cane sugar)":"السكروز (سكر القصب)",
+"glucose + fructose":"جلوكوز + فركتوز","sodium phenoxide":"فينوكسيد الصوديوم","picric acid":"حمض البكريك",
+"phenol-methanal polymer":"بوليمر الفينول-ميثانال (باكيليت)","m-chloronitrobenzene":"ميتا كلورو نيترو بنزين",
+"gammexane (insecticide)":"جاميكسان (مبيد حشري)","detergent":"منظف صناعي","marookh oil":"زيت الماروخ",
+"salicylic acid":"حمض الساليسيليك","ASPIRIN":"الأسبرين","nitroglycerine":"النيتروجليسرين",
+"glycerol":"الجليسرول","triglyceride ester":"جليسريد ثلاثي (دهن)","lactic acid (1 COOH)":"حمض اللاكتيك (1 COOH)",
+"oxalic acid (2 COOH)":"حمض الأوكساليك (2 COOH)","citric acid (3 COOH)":"حمض الستريك (3 COOH)",
+"lactate · oxalate · citrate":"لاكتات · أوكسالات · سترات"
+};
+const AR_TYPE = {
+"Starting material":"مادة البدء","Alkanes":"ألكانات","Alkenes":"ألكينات","Alkynes":"ألكاينات",
+"Aromatic hydrocarbons":"هيدروكربونات أروماتية","Halogen compounds":"مركبات هالوجينية",
+"Halogen products":"نواتج هالوجينية","Alcohols":"كحولات","Phenols":"فينولات","Ethers":"إيثرات",
+"Aldehydes":"ألدهيدات","Aldehyde (entry)":"ألدهيد (مدخل)","Aldehyde (exit)":"ألدهيد (مخرج)",
+"Carboxylic acids":"أحماض كربوكسيلية","Sulphonic acids":"أحماض سلفونية","Esters":"إسترات",
+"Amides":"أميدات","Nitro compounds":"مركبات نيترو","Salts":"أملاح","Salts of acids":"أملاح الأحماض",
+"Sodium salts":"أملاح الصوديوم","Salt (entry)":"ملح (مدخل)","Polymers":"بوليمرات",
+"Inorganic products":"نواتج غير عضوية","Carbohydrates":"كربوهيدرات","Aromatic (entry)":"أروماتي (مدخل)",
+"Aromatic (exit)":"أروماتي (مخرج)","Acids (exit)":"أحماض (مخرج)","Alkane (exit)":"ألكان (مخرج)",
+"Alkyne (entry)":"ألكاين (مدخل)","Alcohol (exit)":"كحول (مخرج)"
+};
+function trNode(n){ return LANG==='ar' ? (AR_NODE[n]||n) : n; }
+function trType(n){ return LANG==='ar' ? (AR_TYPE[n]||n) : n; }
+
+
+function drawCallout(e){
+    const name = trRN(e.rn || 'Reaction');
+    const sub  = e.l || '';
+    const g = el('g', {id:'callout'}, $world);
+
+    /* measure text to size the bubble */
+    const tBig = el('text', {class:'big', x:0, y:0}, g);
+    tBig.textContent = name;
+    const tSub = sub ? el('text', {class:'sub', x:0, y:0}, g) : null;
+    if (tSub) tSub.textContent = sub;
+    const wBig = tBig.getComputedTextLength();
+    const wSub = tSub ? tSub.getComputedTextLength() : 0;
+    const padX = 26, padY = 18;
+    const bw = Math.max(wBig, wSub) + padX*2;
+    const bh = (tSub ? 78 : 58);
+
+    /* place beside the arrow midpoint; flip to stay inside the map */
+    let bx = e.mid.x + 34, by = e.mid.y - bh/2;
+    let side = 'right';
+    if (bx + bw > 1485) { bx = e.mid.x - 34 - bw; side = 'left'; }
+    if (by < 8) by = 8;
+    if (by + bh > 768) by = 768 - bh;
+
+    /* avoid covering the two compound boxes: nudge up/down if overlapping */
+    const overlaps = n => bx < n.x + n.w/2 + 6 && bx + bw > n.x - n.w/2 - 6 &&
+                          by < n.y + n.h/2 + 6 && by + bh > n.y - n.h/2 - 6;
+    [byId[e.a], byId[e.b]].forEach(n => {
+        if (!overlaps(n)) return;
+        const upSpace = n.y - n.h/2 - bh - 14;
+        const downY   = n.y + n.h/2 + 14;
+        if (downY + bh <= 768 && Math.abs(downY - e.mid.y) <= Math.abs(upSpace - e.mid.y)) by = downY;
+        else if (upSpace >= 8) by = upSpace;
+    });
+
+    const rect = el('rect', {class:'bg', x:bx, y:by, width:bw, height:bh, rx:12, ry:12}, g);
+    g.insertBefore(rect, tBig);
+
+    /* little pointer tail toward the arrow */
+    const ty = Math.min(Math.max(e.mid.y, by+16), by+bh-16);
+    const tail = side === 'right'
+        ? `M ${bx} ${ty-9} L ${e.mid.x+10} ${e.mid.y} L ${bx} ${ty+9} Z`
+        : `M ${bx+bw} ${ty-9} L ${e.mid.x-10} ${e.mid.y} L ${bx+bw} ${ty+9} Z`;
+    const tailEl = el('path', {class:'tail', d:tail}, g);
+    g.insertBefore(tailEl, tBig);
+
+    tBig.setAttribute('x', bx + padX);
+    tBig.setAttribute('y', by + (tSub ? 36 : 38));
+    if (tSub){
+        tSub.setAttribute('x', bx + padX);
+        tSub.setAttribute('y', by + 62);
+    }
+}
+
+function renderEdgePanel(e){
+    const A = byId[e.a], B = byId[e.b];
+    $panel.innerHTML =
+        `<h2 class="rn-t">⚡ ${trRN(e.rn || 'Reaction')}</h2>
+        <p class="pf" style="margin-top:8px"><b style="color:#fff">${A.f}</b>
+        <span style="color:#fbbf24;font-weight:800"> → </span>
+        <b style="color:#fff">${B.f}</b></p>
+        <p class="pf" style="font-size:12px;color:#7c8aa0">${A.n || ''} → ${B.n || ''}</p>
+        <h3>Equation &amp; conditions</h3>
+        <div class="rxn" style="cursor:default"><span class="cond">${e.eq || e.l}</span></div>
+        <h3>Compounds</h3>
+        <div class="rxn" data-node="${A.id}"><b>${A.f}</b> — ${A.n || ''}</div>
+        <div class="rxn" data-node="${B.id}"><b>${B.f}</b> — ${B.n || ''}</div>
+        <p class="placeholder" style="margin-top:14px">Click the arrow again (or the background) to clear.</p>`;
+    bindPanelClicks();
+}
+
+function applyFilter(){
+    clearVisual();
+    state.focus = null; state.path = null;
+    if (!state.filter) { renderHome(); return; }
+    NODES.forEach(n => nodeEls[n.id].classList.toggle('dim', n.t !== state.filter));
+    EDGES.forEach(e => {
+        const keep = byId[e.a].t === state.filter || byId[e.b].t === state.filter;
+        edgeEls[e.i].classList.toggle('dim', !keep);
+    });
+    const T = TYPES[state.filter];
+    $panel.innerHTML = `<h2><span class="dot" style="background:${T.c}"></span>${T.n}</h2>
+        <p class="placeholder" style="margin-top:6px">Showing only <b>${T.n.toLowerCase()}</b> and their direct reactions.
+        Click the pill again (or Reset) to show everything.</p>
+        <h3>Members</h3>` +
+        NODES.filter(n => n.t === state.filter)
+             .map(n => `<div class="rxn" data-node="${n.id}"><b>${n.f}</b> — ${n.n}</div>`).join('');
+    bindPanelClicks();
+}
+
+function focusNode(id){
+    state.filter = null; refreshLegend();
+    state.path = null;
+    state.focus = id;
+    clearVisual();
+
+    const keepNodes = new Set([id]);
+    EDGES.forEach(e => {
+        if (e.a === id || e.b === id){
+            setEdgeHot(e.i, true);
+            keepNodes.add(e.a); keepNodes.add(e.b);
+        } else edgeEls[e.i].classList.add('dim');
+    });
+    NODES.forEach(n => { if (!keepNodes.has(n.id)) nodeEls[n.id].classList.add('dim'); });
+    nodeEls[id].classList.add('sel');
+    renderNodePanel(id);
+}
+
+function renderNodePanel(id){
+    const n = byId[id], T = TYPES[n.t];
+    const outs = EDGES.filter(e => e.a === id);
+    const ins  = EDGES.filter(e => e.b === id);
+    const rxnHtml = (e, dir) => {
+        const other = byId[dir === 'out' ? e.b : e.a];
+        const head = dir === 'out'
+            ? `<b>${n.f}</b> <span class="arrow">→</span> <b>${other.f}</b>`
+            : `<b>${other.f}</b> <span class="arrow">→</span> <b>${n.f}</b>`;
+        return `<div class="rxn" data-node="${other.id}">${head}<br><span class="cond">${e.eq || e.l}</span></div>`;
+    };
+    $panel.innerHTML =
+        `<h2><span class="dot" style="background:${T.c}"></span>${n.n || n.f}</h2>
+        <p class="pf">${n.f}</p>
+        <span class="pclass" style="color:${T.c}; border-color:${T.c}55; background:${T.c}14">${T.n}</span>
+        <h3>Produces (${outs.length})</h3>` +
+        (outs.length ? outs.map(e => rxnHtml(e,'out')).join('') : '<p class="placeholder">— end product in this map.</p>') +
+        `<h3>Made from (${ins.length})</h3>` +
+        (ins.length ? ins.map(e => rxnHtml(e,'in')).join('') : '<p class="placeholder">— starting point in this map.</p>');
+    bindPanelClicks();
+}
+
+function bindPanelClicks(){
+    $panel.querySelectorAll('[data-node]').forEach(d => {
+        d.addEventListener('click', () => { focusNode(d.dataset.node); zoomTo(d.dataset.node); });
+    });
+}
+
+function renderHome(){
+    $panel.innerHTML = document.getElementById('homePanel').innerHTML;
+}
+
+/* ============================================================
+   PATH FINDER (BFS, directed)
+   ============================================================ */
+function findPath(from, to){
+    if (from === to) return [from];
+    const prev = {}, q = [from], seen = new Set([from]);
+    while (q.length){
+        const u = q.shift();
+        for (const e of EDGES){
+            if (e.a !== u || seen.has(e.b)) continue;
+            seen.add(e.b); prev[e.b] = {node:u, edge:e};
+            if (e.b === to){
+                const path = [to]; let cur = to;
+                while (cur !== from){ cur = prev[cur].node; path.unshift(cur); }
+                return path;
+            }
+            q.push(e.b);
+        }
+    }
+    return null;
+}
+
+function showPath(){
+    const from = document.getElementById('pfrom').value;
+    const to   = document.getElementById('pto').value;
+    if (!from || !to) return;
+    state.filter = null; refreshLegend();
+    state.focus = null;
+    clearVisual();
+    const path = findPath(from, to);
+
+    if (!path){
+        state.path = null;
+        $panel.innerHTML = `<h2>🧭 Route finder</h2>
+            <p class="nopath" style="margin-top:10px">No direct conversion route from
+            <b>${byId[from].f}</b> to <b>${byId[to].f}</b> exists in this map (arrows are one-way).
+            Try the reverse direction or an intermediate compound.</p>`;
+        return;
+    }
+    state.path = path;
+    const keep = new Set(path);
+    const steps = [];
+    for (let i = 0; i < path.length - 1; i++){
+        const e = EDGES.find(e => e.a === path[i] && e.b === path[i+1]);
+        steps.push(e);
+    }
+    EDGES.forEach(e => {
+        if (steps.includes(e)) setEdgeHot(e.i, true);
+        else edgeEls[e.i].classList.add('dim');
+    });
+    NODES.forEach(n => { if (!keep.has(n.id)) nodeEls[n.id].classList.add('dim'); });
+    path.forEach(id => nodeEls[id].classList.add('sel'));
+
+    let html = `<h2>🧭 Route found</h2>
+        <p class="placeholder" style="margin:6px 0 14px"><b>${byId[from].n || byId[from].f}</b> ⟶ <b>${byId[to].n || byId[to].f}</b>
+        in <b>${steps.length}</b> step${steps.length > 1 ? 's' : ''}:</p>`;
+    path.forEach((id, i) => {
+        html += `<div class="path-step"><span class="num">${i+1}</span><b>${byId[id].f}</b>&nbsp;<span style="color:#7c8aa0;font-size:11.5px">${byId[id].n||''}</span></div>`;
+        if (i < steps.length) html += `<div class="path-cond">${steps[i].eq || steps[i].l}</div>`;
+    });
+    $panel.innerHTML = html;
+}
+
+/* ============================================================
+   LEGEND / SEARCH / TOOLBAR
+   ============================================================ */
+const $legend = document.getElementById('legend');
+Object.entries(TYPES).forEach(([k, T]) => {
+    const d = document.createElement('div');
+    d.className = 'legend-item';
+    d.dataset.t = k;
+    d.style.setProperty('--lc', T.c);
+    d.innerHTML = `<span class="legend-color" style="background:${T.c}"></span><span class="lg-t">${trType(T.n)}</span>`;
+    d.addEventListener('click', () => {
+        state.filter = (state.filter === k) ? null : k;
+        refreshLegend();
+        applyFilter();
+    });
+    $legend.appendChild(d);
+});
+function refreshLegend(){
+    $legend.querySelectorAll('.legend-item').forEach(d => {
+        d.classList.toggle('active', d.dataset.t === state.filter);
+        d.classList.toggle('muted', state.filter && d.dataset.t !== state.filter);
+    });
+}
+
+/* search + route selects */
+const dl = document.getElementById('cmpds');
+const selFrom = document.getElementById('pfrom'), selTo = document.getElementById('pto');
+NODES.slice().sort((a,b) => (a.n||a.f).localeCompare(b.n||b.f)).forEach(n => {
+    const o = document.createElement('option');
+    o.value = (n.n || n.f);
+    dl.appendChild(o);
+    [selFrom, selTo].forEach(s => {
+        const op = document.createElement('option');
+        op.value = n.id; op.textContent = (n.n || n.f);
+        s.appendChild(op);
+    });
+});
+function lookup(q){
+    q = q.trim().toLowerCase();
+    if (!q) return null;
+    return NODES.find(n => (n.n||'').toLowerCase() === q || n.f.toLowerCase() === q)
+        || NODES.find(n => (n.n||'').toLowerCase().includes(q) || n.f.toLowerCase().includes(q));
+}
+const $search = document.getElementById('search');
+$search.addEventListener('change', () => {
+    const n = lookup($search.value);
+    if (n){ focusNode(n.id); zoomTo(n.id); }
+});
+
+document.getElementById('btnPath').addEventListener('click', showPath);
+document.getElementById('btnLang').addEventListener('click', function(){
+    LANG = (LANG === 'en') ? 'ar' : 'en';
+    this.textContent = (LANG === 'en') ? '🌐 عربي' : '🌐 English';
+    this.classList.toggle('gold', LANG === 'ar');
+    document.body.classList.toggle('lang-ar', LANG === 'ar');
+    document.getElementById('pgTitle').innerHTML = (LANG==='ar') ? 'مخطط الكحولات — الإيثانول في المركز' : 'Alcohols Chart — Ethanol at the Centre';
+    document.getElementById('pgSub').innerHTML = (LANG==='ar') ? 'كل تفاعلات الإيثانول: درجات حرارة H₂SO₄ الثلاث (80 / 140 / 180°م)، سلم الأكسدة، التحلل المائي لـ R–X، اختبار الصوديوم، الأسترة — مع الجليكول و2-بروبانول والميثانول. <b>اضغط على مركب</b> للتركيز.' : 'Everything ethanol does: the three H₂SO₄ temperatures (80 / 140 / 180°C), oxidation ladder, R–X hydrolysis, sodium test, esterification — plus glycol, 2-propanol and methanol. <b>Click a compound</b> to focus · <b>click an arrow</b> for the reaction name.';
+    document.querySelectorAll('text.cname[data-nn]').forEach(t=>{ t.textContent = trNode(t.getAttribute('data-nn')); });
+    document.querySelectorAll('#legend .legend-item').forEach(d=>{ const T = TYPES[d.dataset.t]; d.querySelector('.lg-t').textContent = trType(T.n); });
+    if (state.edge){ const e = state.edge; state.edge = null; selectEdge(e); }
+    if (state.focus){ renderNodePanel(state.focus); }
+});
+document.getElementById('btnReset').addEventListener('click', resetAll);
+document.getElementById('btnQuiz').addEventListener('click', function(){
+    state.quiz = !state.quiz;
+    this.textContent = state.quiz ? '👁 Show reagents' : '🎓 Quiz mode';
+    this.classList.toggle('gold', state.quiz);
+    document.querySelectorAll('.edge text.rg').forEach(t => t.style.visibility = state.quiz ? 'hidden' : 'visible');
+});
+
+function resetAll(){
+    state.focus = null; state.path = null; state.filter = null;
+    refreshLegend(); clearVisual(); renderHome();
+    $search.value = ''; selFrom.value = ''; selTo.value = '';
+    fitView();
+}
+
+svg.addEventListener('click', e => {
+    if (e.target.id === 'bgcatch'){ state.focus = null; state.path = null; clearVisual(); renderHome(); }
+});
+
+/* ============================================================
+   PAN & ZOOM (viewBox based)
+   ============================================================ */
+const FULL = {x:0, y:0, w:1500, h:780};
+let vb = {...FULL};
+function setVB(){ svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`); }
+function fitView(){ vb = {...FULL}; setVB(); }
+function zoomAt(cx, cy, factor){
+    const nw = Math.min(Math.max(vb.w * factor, 280), 3400);
+    const k = nw / vb.w;
+    vb.x = cx - (cx - vb.x) * k;
+    vb.y = cy - (cy - vb.y) * k;
+    vb.w = nw; vb.h = vb.h * k;
+    setVB();
+}
+function clientToSvg(ev){
+    const r = svg.getBoundingClientRect();
+    return { x: vb.x + (ev.clientX - r.left) / r.width * vb.w,
+             y: vb.y + (ev.clientY - r.top) / r.height * vb.h };
+}
+svg.addEventListener('wheel', ev => {
+    ev.preventDefault();
+    const p = clientToSvg(ev);
+    zoomAt(p.x, p.y, ev.deltaY > 0 ? 1.15 : 0.87);
+}, {passive:false});
+
+let drag = null;
+svg.addEventListener('mousedown', ev => {
+    drag = { sx: ev.clientX, sy: ev.clientY, vx: vb.x, vy: vb.y, moved:false };
+    svg.classList.add('panning');
+});
+window.addEventListener('mousemove', ev => {
+    if (!drag) return;
+    const r = svg.getBoundingClientRect();
+    const dx = (ev.clientX - drag.sx) / r.width * vb.w;
+    const dy = (ev.clientY - drag.sy) / r.height * vb.h;
+    if (Math.abs(ev.clientX - drag.sx) + Math.abs(ev.clientY - drag.sy) > 4) drag.moved = true;
+    vb.x = drag.vx - dx; vb.y = drag.vy - dy;
+    setVB();
+});
+window.addEventListener('mouseup', () => { drag = null; svg.classList.remove('panning'); });
+
+function zoomTo(id){
+    const n = byId[id];
+    const w = 760, h = w * FULL.h / FULL.w;
+    vb = { x: n.x - w/2, y: n.y - h/2, w, h };
+    setVB();
+}
+document.getElementById('zin').addEventListener('click', () => zoomAt(vb.x+vb.w/2, vb.y+vb.h/2, 0.8));
+document.getElementById('zout').addEventListener('click', () => zoomAt(vb.x+vb.w/2, vb.y+vb.h/2, 1.25));
+document.getElementById('zfit').addEventListener('click', fitView);
+
+fitView();
+</script>
+
+<!-- home panel template -->
+<template id="homePanel">
+    <h2>🧭 How to use</h2>
+    <ul class="placeholder">
+        <li><b>Click any compound</b> → its box turns gold, every reaction in/out lights up, and full details appear here.</li>
+        <li><b>Click any arrow</b> → the <b>reaction name appears in large text</b> right beside it, and only that reaction stays lit.</li>
+        <li><b>Route finder</b> → choose two compounds in the toolbar and press <b>Find path</b>; the shortest conversion sequence glows step-by-step.</li>
+        <li><b>Legend pills</b> → click a family (e.g. Halogen derivatives) to spotlight only that class.</li>
+        <li><b>🎓 Quiz mode</b> → hides all reagents/conditions on the arrows so you can test yourself; click again to reveal.</li>
+        <li><b>Zoom &amp; pan</b> → mouse wheel + drag, or the ＋ / － / ⊡ buttons.</li>
+    </ul>
+</template>
+<div class="brandfoot"><span class="fline1"><span class="fname">أ/ أيمن منصور — مستشار الكيمياء</span><span class="sep">|</span><span class="fname2">Prof./ Ayman Mansour — Chemistry Consultant</span></span><span class="fline2"><span class="fphone">📞 / WhatsApp: <b>01068018005</b> · <b>01287996430</b></span><span class="sep">|</span><span>كيمياء ٢٠٢٦ • Chemistry 2026</span></span></div>
+
+<div id="security-overlay" class="security-overlay">
+    <div style="font-size:3rem">🛡</div>
+    <div>Screen Recording / Copying Disabled</div>
+    <div class="ar">تم تعطيل تصوير الشاشة / النسخ</div>
+</div>
+
+<script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => { e.preventDefault(); });
+    document.addEventListener('keydown', e => {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 's' || e.key === 'u' || e.key === 'a')) {
+            e.preventDefault();
+        }
+    });
+    document.addEventListener('keyup', e => {
+        if (e.key === 'PrintScreen') { try { navigator.clipboard.writeText(''); } catch(_){} }
+    });
+    window.addEventListener('blur', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'flex';
+    });
+    window.addEventListener('focus', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'none';
+    });
+</script>
+</body>
+</html>

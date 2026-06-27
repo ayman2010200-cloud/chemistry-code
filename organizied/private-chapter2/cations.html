@@ -1,0 +1,2327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organic Chemistry Equations Book — All Chart Reactions</title>
+<style>
+    :root {
+        --bg-main: #0b0f19;
+        --bg-card: #111827;
+        --border-color: #1f2937;
+        --gold: #fbbf24;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        padding: 28px 10px 70px;
+        background: radial-gradient(1200px 600px at 50% -10%, #101a33 0%, var(--bg-main) 60%);
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        color: #f8fafc;
+        min-height: 100vh;
+    }
+    h1 {
+        margin: 0 0 6px;
+        font-size: 30px;
+        font-weight: 800;
+        text-align: center;
+        background: linear-gradient(90deg, #7dd3fc, #c084fc, #fbbf24);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    .subtitle {
+        margin: 0 0 20px 0;
+        color: #94a3b8;
+        font-size: 14.5px;
+        text-align: center;
+        max-width: 100%;
+        width: 100%;
+        line-height: 1.55;
+    }
+    .subtitle b { color: #e2e8f0; }
+
+    /* ===== toolbar ===== */
+    .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 12px 18px;
+        margin: 0 0 18px 0;
+        max-width: 100%;
+        width: 100%;
+        position: sticky;
+        top: 10px;
+        z-index: 20;
+        box-shadow: 0 10px 30px rgba(0,0,0,.45);
+    }
+    .toolbar input {
+        background: #0d1117;
+        border: 1px solid #2b3648;
+        color: #e2e8f0;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 13.5px;
+        width: 250px;
+        outline: none;
+        font-family: inherit;
+    }
+    .toolbar input:focus { border-color: #38bdf8; }
+    .btn {
+        background: #1b2435;
+        border: 1px solid #2b3648;
+        color: #cbd5e1;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all .15s;
+        user-select: none;
+    }
+    .btn:hover { background: #243049; color: #fff; }
+    .btn.gold { background: #3a2e08; border-color: #8a6d12; color: #fde68a; }
+    .count { font-size: 13px; color: #64748b; font-weight: 600; }
+
+    /* ===== chapter nav ===== */
+    .chapnav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 7px;
+        margin: 0 0 26px 0;
+        max-width: 100%;
+        width: 100%;
+    }
+    .chapnav a {
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: .4px;
+        text-transform: uppercase;
+        color: #cbd5e1;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        padding: 6px 13px;
+        text-decoration: none;
+        transition: all .15s;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+    .chapnav a:hover { border-color: var(--ch); color: #fff; }
+    .chapnav .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ch); }
+
+    /* ===== book ===== */
+    .book { max-width: 100%; width: 100%; margin: 0; }
+
+    .chapter { margin-bottom: 34px; }
+    .chap-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: linear-gradient(90deg, color-mix(in srgb, var(--ch) 16%, #121a2a) 0%, #0e1422 70%);
+        border: 1px solid color-mix(in srgb, var(--ch) 45%, #1f2937);
+        border-left: 6px solid var(--ch);
+        border-radius: 12px;
+        padding: 14px 20px;
+        margin-bottom: 12px;
+    }
+    .chap-head .icon {
+        width: 40px; height: 40px;
+        border-radius: 10px;
+        background: color-mix(in srgb, var(--ch) 20%, #0b0f19);
+        border: 1.5px solid var(--ch);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 19px;
+    }
+    .chap-head h2 { margin: 0; font-size: 21px; font-weight: 800; color: #fff; }
+    .chap-head .sub { font-size: 12.5px; color: #94a3b8; margin-top: 2px; }
+    .chap-head .n {
+        margin-left: auto;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--ch);
+        border: 1.5px solid var(--ch);
+        border-radius: 999px;
+        padding: 4px 14px;
+        white-space: nowrap;
+    }
+
+    /* equation card */
+    .eq {
+        background: linear-gradient(160deg, #121a2a 0%, #0d1117 80%);
+        border: 1px solid #1d2738;
+        border-left: 4px solid var(--ch);
+        border-radius: 12px;
+        padding: 14px 18px 13px;
+        margin-bottom: 10px;
+        transition: border-color .15s, box-shadow .15s;
+    }
+    .eq:hover {
+        border-color: color-mix(in srgb, var(--ch) 55%, #1d2738);
+        box-shadow: 0 6px 20px rgba(0,0,0,.4), 0 0 12px color-mix(in srgb, var(--ch) 18%, transparent);
+    }
+    .eq.hidden { display: none; }
+    .eq-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 9px;
+        flex-wrap: wrap;
+    }
+    .eq-num {
+        width: 26px; height: 26px;
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--ch) 22%, #0b0f19);
+        border: 1.5px solid var(--ch);
+        color: var(--ch);
+        font-size: 12px;
+        font-weight: 800;
+        display: flex; align-items: center; justify-content: center;
+        flex: 0 0 auto;
+    }
+    .eq-name { font-size: 14.5px; font-weight: 800; color: #fff; }
+    .eq-tag {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .6px;
+        text-transform: uppercase;
+        color: var(--ch);
+        background: color-mix(in srgb, var(--ch) 14%, transparent);
+        border-radius: 999px;
+        padding: 3px 10px;
+    }
+    /* origin-chapter chip shown in "by type" view */
+    .eq-chip {
+        margin-left: auto;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        color: var(--cc);
+        border: 1px solid color-mix(in srgb, var(--cc) 55%, transparent);
+        background: color-mix(in srgb, var(--cc) 10%, transparent);
+        border-radius: 999px;
+        padding: 3px 10px;
+        white-space: nowrap;
+    }
+    .seg { display: flex; gap: 0; }
+    .seg .btn { border-radius: 0; }
+    .seg .btn:first-child { border-radius: 8px 0 0 8px; }
+    .seg .btn:last-child { border-radius: 0 8px 8px 0; border-left: none; }
+
+    /* the equation line itself — size controlled by A− / A+ buttons */
+    :root { --eqfs: 21px; }
+    .eq-line {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 4px 12px;
+        font-size: var(--eqfs);
+        font-weight: 700;
+        color: #e8edf5;
+        padding: 10px 4px 5px;
+        line-height: 1.9;
+        width: 100%;
+    }
+    .eq-line .sp { color: #e8edf5; }
+    .eq-line .plus { color: #64748b; font-weight: 600; }
+    .arrowbox {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 6px;
+        min-width: 86px;
+    }
+    .arrowbox .cond {
+        font-size: calc(var(--eqfs) * 0.56);
+        font-weight: 700;
+        color: #7dd3fc;
+        font-family: Consolas, 'Courier New', monospace;
+        margin-bottom: -3px;
+        text-align: center;
+        max-width: 230px;
+        line-height: 1.35;
+    }
+    .arrowbox .arr { color: var(--gold); font-size: calc(var(--eqfs) * 1.18); line-height: .8; }
+
+    /* ===== Kekulé ring structures inside equations ===== */
+    .eq-line .ringwrap { display: inline-flex; align-items: center; }
+    .eq-line svg.ring { display: block; }
+    svg.ring line { stroke: #dbe3ef; stroke-width: 1.7; stroke-linecap: round; }
+    .eq-line .spn {
+        font-size: calc(var(--eqfs) * 0.6);
+        color: #8fa1ba;
+        font-weight: 600;
+        align-self: flex-end;
+        padding-bottom: 6px;
+    }
+    .eq-note {
+        font-size: 12px;
+        color: #8fa1ba;
+        margin-top: 7px;
+        padding-top: 7px;
+        border-top: 1px dashed #1d2738;
+    }
+    .eq-note b { color: #cbd5e1; }
+    .hl { background: #3a2e08; color: #fde68a; border-radius: 3px; padding: 0 3px; }
+
+    .empty {
+        text-align: center;
+        color: #64748b;
+        font-size: 15px;
+        padding: 50px 0;
+    }
+
+    .topbtn {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        width: 46px; height: 46px;
+        border-radius: 50%;
+        background: #1b2435;
+        border: 1.5px solid #2b3648;
+        color: #cbd5e1;
+        font-size: 19px;
+        cursor: pointer;
+        z-index: 30;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 8px 22px rgba(0,0,0,.5);
+    }
+    .topbtn:hover { background: #243049; color: #fff; }
+
+    /* ===== print (light) mode ===== */
+    @media print {
+        body { background: #fff !important; color: #111 !important; padding: 10px; }
+        .toolbar, .chapnav, .topbtn, .subtitle { display: none !important; }
+        h1 { color: #111 !important; -webkit-text-fill-color: #111; background: none; }
+        .chap-head { background: #f3f4f6 !important; border-color: #999 !important; }
+        .chap-head h2 { color: #111 !important; }
+        .chap-head .sub { color: #444 !important; }
+        .eq { background: #fff !important; border: 1px solid #bbb !important; break-inside: avoid; }
+        .eq-line, .eq-line .sp { color: #111 !important; }
+        .eq-name { color: #111 !important; }
+        .arrowbox .cond { color: #1d4ed8 !important; }
+        .arrowbox .arr { color: #b45309 !important; }
+        .eq-note { color: #444 !important; }
+    }
+
+/* ================= BRAND / TEACHER IDENTITY ================= */
+.brandbar {
+  display: flex; align-items: center; gap: 18px;
+  background: linear-gradient(90deg, #101a33 0%, #0f172a 60%, #1a1430 100%);
+  border: 1px solid #facc15aa; border-radius: 16px;
+  padding: 12px 22px; margin: 0 0 18px 0;
+  max-width: 100%; width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 8px 28px rgba(0,0,0,.5), 0 0 18px #facc1522;
+  position: relative; z-index: 10;
+}
+.brandbar .bphoto {
+  width: 74px; height: 74px; border-radius: 50%;
+  border: 3px solid #facc15; object-fit: cover; flex: 0 0 auto;
+  box-shadow: 0 0 16px #facc1566; background: #fff;
+}
+.brandbar .bnames { line-height: 1.3; }
+.brandbar .bar { font-size: 21px; font-weight: 800; color: #facc15; }
+.brandbar .ben { font-size: 13px; font-weight: 700; color: #7dd3fc; letter-spacing: .5px; }
+.brandbar .bpage {
+  margin-inline-start: auto; text-align: center; line-height: 1.45;
+}
+.brandbar .bpage .pa { font-size: 16px; font-weight: 800; color: #e2e8f0; direction: rtl; }
+.brandbar .bpage .pe { font-size: 11.5px; font-weight: 600; color: #94a3b8; }
+.brandbar .bexam { text-align: end; line-height: 1.4; }
+.brandbar .bexam .x1 { font-size: 15px; font-weight: 800; color: #4ade80; direction: rtl; }
+.brandbar .bexam .x2 { font-size: 10.5px; color: #64748b; direction: rtl; }
+@media (max-width: 900px){ .brandbar{flex-wrap:wrap; justify-content:center; text-align:center;} .brandbar .bpage{margin:0;} }
+
+/* watermark: faint photo + repeated bilingual name */
+#wmark {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+}
+#wmark .wphoto {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%,-50%);
+  width: min(56vmin, 520px); height: min(56vmin, 520px);
+  border-radius: 50%;
+  background-size: cover; background-position: center;
+  opacity: .045; filter: grayscale(60%);
+}
+body > *:not(#wmark){ position: relative; z-index: 1; }
+
+.brandfoot {
+  margin: 26px 0 0 0; max-width: 100%; width: 100%;
+  border-top: 1px dashed #facc1555;
+  padding: 12px 8px 4px;
+  display: flex; flex-wrap: wrap; gap: 6px 24px;
+  align-items: center; justify-content: center;
+  font-size: 12.5px; color: #94a3b8; text-align: center;
+  box-sizing: border-box;
+}
+.brandfoot b { color: #facc15; }
+.brandfoot .sep { color: #334155; }
+@media print { #wmark .wphoto { opacity: .05; } .brandbar{box-shadow:none;} }
+#wmark{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='300'%3E%3Ctext x='50%25' y='44%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='26' font-weight='bold' fill='%23ffffff' opacity='0.13'%3EProf./ Ayman Mansour%3C/text%3E%3Ctext x='50%25' y='60%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='22' font-weight='bold' fill='%23ffffff' opacity='0.10'%3E%D8%A3/ %D8%A3%D9%8A%D9%85%D9%86 %D9%85%D9%86%D8%B5%D9%88%D8%B1%3C/text%3E%3C/svg%3E");background-repeat:repeat;z-index:9999;}
+
+/* ===== model-2 security overlay ===== */
+.security-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #0b1220; color: #ef4444;
+    display: none; justify-content: center; align-items: center; flex-direction: column;
+    z-index: 999999; font-size: 1.6rem; font-weight: 800; text-align: center; gap: 8px;
+}
+.security-overlay .ar { font-size: 1.3rem; color: #f87171; direction: rtl; }
+body { user-select: none; }
+input, select, textarea { user-select: text; }
+
+.brandfoot { flex-direction: column; gap: 8px; }
+.brandfoot .fline1, .brandfoot .fline2 {
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+  align-items: center; justify-content: center;
+}
+.brandfoot .fname { color: #facc15; font-size: 15px; font-weight: 800; direction: rtl; }
+.brandfoot .fname2 { color: #7dd3fc; font-size: 13px; font-weight: 700; }
+.brandfoot .fphone {
+  color: #4ade80; font-weight: 700; font-size: 13px;
+  background: #4ade8011; border: 1px solid #4ade8044;
+  border-radius: 999px; padding: 4px 14px;
+}
+.brandfoot .fphone b { color: #86efac; letter-spacing: 1px; }
+
+/* ===== Arabic mode ===== */
+body.lang-ar .eq-name { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; }
+body.lang-ar .eq-tag { direction: rtl; }
+body.lang-ar .arrowbox .cond { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; font-size: calc(var(--eqfs) * 0.52); }
+body.lang-ar .eq-top { flex-direction: row; }
+
+body.lang-ar #pgTitle, body.lang-ar #pgSub { direction: rtl; font-family:'Segoe UI',Tahoma,sans-serif; }
+body.lang-ar .chap-head h2, body.lang-ar .chap-head .sub { direction: rtl; text-align: right; }
+body.lang-ar .chapnav a { direction: rtl; }
+
+.brandbar .blogo {
+  width: 78px; height: 68px; border-radius: 12px;
+  object-fit: contain; background: #fff; flex: 0 0 auto;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 14px rgba(56,189,248,.45);
+  padding: 3px;
+}
+</style>
+</head>
+<body>
+
+
+<div id="wmark"><div class="wphoto" style="background-image:url(data:image/jpeg;base64,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)"></div></div>
+<div class="brandbar"><img class="blogo" src="data:image/jpeg;base64,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" alt="Chemistry Code"><img class="bphoto" src="data:image/jpeg;base64,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" alt="teacher"><div class="bnames"><div class="bar">بروف/ أيمن منصور — مستشار الكيماء</div><div class="ben">Prof./ Ayman Mansour — Chemistry Consultant</div></div><div class="bpage"><div class="pa"> </div><div class="pe"></div></div><div class="bexam"><div class="x1">كود الكيمياء — Chemistry Code</div></div></div>
+
+</script>
+
+
+<!-- CATIONS_DASHBOARD_EMBED_START -->
+<section id="cations-dashboard" style="max-width:100%; width:100%; margin: 0 0 26px 0; position: relative; z-index: 2;">
+  <div style="background: linear-gradient(160deg, #121a2a 0%, #0d1117 80%); border: 1px solid #1d2738; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.45);">
+    <iframe id="cationsFrame" title="Cations Chemistry Master Guide" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;Chemistry Master - Bilingual Guide | دليل الكيمياء ثنائي اللغة&lt;/title&gt;
+&lt;style&gt;
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    :root {
+        --bg-deep: #0a0e27;
+        --bg-card: #15173a;
+        --bg-elevated: #1e2050;
+        --border: #2a2d5e;
+        --border-glow: #4f46e5;
+
+        --primary: #ec4899;
+        --primary-bright: #f472b6;
+        --secondary: #8b5cf6;
+        --secondary-bright: #a78bfa;
+        --tertiary: #fbbf24;
+        --success: #34d399;
+        --danger: #fb7185;
+        --info: #22d3ee;
+
+        --text: #f5f3ff;
+        --text-muted: #c4b5fd;
+        --text-dim: #8b8aad;
+
+        --gradient-main: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #22d3ee 100%);
+        --gradient-warm: linear-gradient(135deg, #f97316 0%, #ec4899 50%, #8b5cf6 100%);
+        --gradient-cool: linear-gradient(135deg, #8b5cf6 0%, #22d3ee 100%);
+    }
+
+    body {
+        font-family: &#x27;Segoe UI&#x27;, Tahoma, Arial, sans-serif;
+        background: radial-gradient(ellipse at top, #1a1d4d 0%, var(--bg-deep) 70%);
+        background-attachment: fixed;
+        color: var(--text);
+        line-height: 1.6;
+        transition: direction 0.3s ease;
+        min-height: 100vh;
+    }
+
+    body.rtl {
+        direction: rtl;
+        text-align: right;
+    }
+
+    body.rtl .header-inner,
+    body.rtl .nav,
+    body.rtl .section,
+    body.rtl .card,
+    body.rtl .list-item,
+    body.rtl .table-row,
+    body.rtl .table-cell,
+    body.rtl .flow-step,
+    body.rtl .quiz-option {
+        text-align: right;
+    }
+
+    /* HEADER */
+    header {
+        background: linear-gradient(135deg, #1a0a2e 0%, #0a0e27 100%);
+        padding: 1.2rem 1.5rem;
+        box-shadow: 0 4px 20px rgba(236, 72, 153, 0.15);
+        border-bottom: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+    }
+
+    header::before {
+        content: &#x27;&#x27;;
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .header-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .header-title h1 {
+        font-size: 1.4rem;
+        font-weight: 800;
+        margin-bottom: 4px;
+        background: var(--gradient-main);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: 0.3px;
+    }
+
+    .header-title p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
+
+    /* LANGUAGE TOGGLE */
+    .toggle-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(139, 92, 246, 0.1));
+        padding: 6px 12px;
+        border-radius: 30px;
+        border: 1px solid var(--border);
+    }
+
+    .toggle-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 4px 10px;
+        border-radius: 20px;
+        transition: all 0.2s ease;
+        opacity: 0.5;
+        user-select: none;
+        color: var(--text);
+    }
+
+    .toggle-label.active {
+        background: var(--gradient-main);
+        color: #fff;
+        opacity: 1;
+        box-shadow: 0 2px 8px rgba(236, 72, 153, 0.4);
+    }
+
+    .toggle-track {
+        width: 50px;
+        height: 26px;
+        background: var(--bg-elevated);
+        border-radius: 13px;
+        position: relative;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--border);
+    }
+
+    .toggle-knob {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 20px;
+        height: 20px;
+        background: var(--gradient-main);
+        border-radius: 50%;
+        transition: left 0.3s ease;
+        box-shadow: 0 0 10px rgba(236, 72, 153, 0.6);
+    }
+
+    body.rtl .toggle-knob {
+        left: auto;
+        right: 3px;
+    }
+
+    /* NAVIGATION */
+    nav {
+        background: linear-gradient(180deg, var(--bg-card) 0%, rgba(21, 23, 58, 0.95) 100%);
+        border-bottom: 1px solid var(--border);
+        padding: 0.75rem 1.5rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(10px);
+    }
+
+    .nav-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-btn {
+        background: transparent;
+        border: 1px solid transparent;
+        color: var(--text-muted);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.25s;
+        font-family: inherit;
+    }
+
+    .nav-btn:hover {
+        background-color: var(--bg-elevated);
+        color: var(--text);
+        border-color: var(--border);
+    }
+
+    .nav-btn.active {
+        background: var(--gradient-warm);
+        color: #fff;
+        font-weight: 700;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        border-color: transparent;
+    }
+
+    /* MAIN CONTAINER */
+    main {
+        max-width: 1100px;
+        margin: 1.5rem auto;
+        padding: 0 1.5rem;
+    }
+
+    .section {
+        background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3), 0 0 0 1px rgba(139, 92, 246, 0.05) inset;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .section::before {
+        content: &#x27;&#x27;;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gradient-main);
+        opacity: 0.7;
+    }
+
+    body.rtl .section::before {
+        left: 0;
+        right: 0;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+        font-weight: 800;
+        background: var(--gradient-main);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border);
+        letter-spacing: 0.3px;
+    }
+
+    .section p {
+        margin-bottom: 0.75rem;
+        font-size: 0.95rem;
+        color: var(--text-muted);
+    }
+
+    /* INTRO CARDS */
+    .intro-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .intro-card {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(236, 72, 153, 0.05));
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1rem;
+        transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        position: relative;
+    }
+
+    .intro-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--primary);
+        box-shadow: 0 8px 20px rgba(236, 72, 153, 0.2);
+    }
+
+    .intro-card h3 {
+        font-size: 1rem;
+        font-weight: 700;
+        background: var(--gradient-warm);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+    }
+
+    .intro-card p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin: 0;
+    }
+
+    /* CATION CARDS */
+    .cation-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .cation-card {
+        background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.25rem;
+        cursor: pointer;
+        transition: all 0.25s;
+        border-left: 4px solid var(--text-dim);
+        position: relative;
+        overflow: hidden;
+    }
+
+    body.rtl .cation-card {
+        border-left: 1px solid var(--border);
+        border-right: 4px solid var(--text-dim);
+    }
+
+    .cation-card::after {
+        content: &#x27;&#x27;;
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+    }
+
+    .cation-card:hover::after {
+        opacity: 1;
+    }
+
+    .cation-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--primary);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 20px rgba(236, 72, 153, 0.2);
+    }
+
+    .cation-card.group1 { border-left-color: #94a3b8; }
+    .cation-card.group2 { border-left-color: var(--info); }
+    .cation-card.group3 { border-left-color: var(--tertiary); }
+    .cation-card.group5 { border-left-color: var(--danger); }
+
+    body.rtl .cation-card.group1 { border-right-color: #94a3b8; }
+    body.rtl .cation-card.group2 { border-right-color: var(--info); }
+    body.rtl .cation-card.group3 { border-right-color: var(--tertiary); }
+    body.rtl .cation-card.group5 { border-right-color: var(--danger); }
+
+    .cation-card h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+        color: var(--text);
+        position: relative;
+        z-index: 1;
+    }
+
+    .cation-card .cation-meta {
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .cation-card .cation-desc {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        position: relative;
+        z-index: 1;
+    }
+
+    /* DETAIL VIEW */
+    .cation-detail {
+        background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.75rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        margin-bottom: 1.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cation-detail::before {
+        content: &#x27;&#x27;;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--gradient-warm);
+    }
+
+    .detail-header {
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .detail-header h2 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        background: var(--gradient-main);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .detail-header .group-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .group-badge.g1 { background-color: rgba(148, 163, 184, 0.2); color: #cbd5e1; border: 1px solid #94a3b8; }
+    .group-badge.g2 { background-color: rgba(34, 211, 238, 0.2); color: var(--info); border: 1px solid var(--info); }
+    .group-badge.g3 { background-color: rgba(251, 191, 36, 0.2); color: var(--tertiary); border: 1px solid var(--tertiary); }
+    .group-badge.g5 { background-color: rgba(251, 113, 133, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+
+    .detail-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+        .detail-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .detail-block {
+        background: linear-gradient(135deg, rgba(10, 14, 39, 0.6) 0%, rgba(30, 32, 80, 0.4) 100%);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1rem;
+        position: relative;
+    }
+
+    .detail-block h4 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--primary-bright);
+        margin-bottom: 8px;
+        letter-spacing: 0.3px;
+    }
+
+    .detail-block .label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        margin-top: 8px;
+        margin-bottom: 2px;
+        letter-spacing: 0.5px;
+    }
+
+    .detail-block .value {
+        font-size: 0.9rem;
+        color: var(--text);
+        margin-bottom: 6px;
+    }
+
+    .observation {
+        background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(251, 113, 133, 0.1));
+        border-left: 3px solid var(--tertiary);
+        padding: 10px 12px;
+        border-radius: 6px;
+        font-size: 0.88rem;
+        margin: 6px 0;
+        color: var(--tertiary);
+        font-weight: 500;
+    }
+
+    body.rtl .observation {
+        border-left: 1px solid rgba(251, 191, 36, 0.15);
+        border-right: 3px solid var(--tertiary);
+    }
+
+    .reaction {
+        background: linear-gradient(135deg, #050816 0%, #0a0e27 100%);
+        color: var(--info);
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        margin: 8px 0;
+        white-space: pre-wrap;
+        border: 1px dashed var(--border);
+        position: relative;
+    }
+
+    .reaction::before {
+        content: &#x27;⚗&#x27;;
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        color: var(--primary);
+        font-size: 1.2rem;
+        opacity: 0.5;
+    }
+
+    body.rtl .reaction::before {
+        right: auto;
+        left: 10px;
+    }
+
+    /* FLOWCHART */
+    .flow-step {
+        background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        position: relative;
+        transition: border-color 0.2s;
+    }
+
+    .flow-step:hover {
+        border-color: var(--primary);
+    }
+
+    .flow-step h4 {
+        font-size: 1rem;
+        font-weight: 700;
+        background: var(--gradient-cool);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+    }
+
+    .flow-step .step-num {
+        display: inline-block;
+        background: var(--gradient-warm);
+        color: #fff;
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+        letter-spacing: 0.5px;
+    }
+
+    .flow-options {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    @media (min-width: 600px) {
+        .flow-options {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .flow-opt {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-family: inherit;
+        transition: all 0.2s;
+    }
+
+    .flow-opt:hover {
+        background: var(--gradient-warm);
+        color: #fff;
+        border-color: transparent;
+        transform: translateX(2px);
+    }
+
+    body.rtl .flow-opt:hover {
+        transform: translateX(-2px);
+    }
+
+    .flow-result {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.18), rgba(139, 92, 246, 0.14) 50%, rgba(34, 211, 238, 0.12));
+        border: 2px solid transparent;
+        border-image: var(--gradient-main);
+        border-image-slice: 1;
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin-top: 0.75rem;
+        font-weight: 700;
+        color: #f5f3ff;
+        box-shadow: 0 0 30px rgba(236, 72, 153, 0.35), 0 8px 24px rgba(0,0,0,0.4);
+        position: relative;
+        overflow: hidden;
+        animation: resultGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes resultGlow {
+        0%, 100% { box-shadow: 0 0 30px rgba(236, 72, 153, 0.35), 0 8px 24px rgba(0,0,0,0.4); }
+        50% { box-shadow: 0 0 45px rgba(139, 92, 246, 0.45), 0 8px 24px rgba(0,0,0,0.4); }
+    }
+
+    .flow-result::before {
+        content: &#x27;&#x27;;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--gradient-main);
+    }
+
+    .flow-result strong {
+        font-size: 1.05rem;
+        background: var(--gradient-main);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: inline-block;
+        margin-bottom: 4px;
+    }
+
+    .flow-result.unknown {
+        background: linear-gradient(135deg, rgba(251, 113, 133, 0.2), rgba(236, 72, 153, 0.12));
+        border: 2px solid #fb7185;
+        color: #fbcfe8;
+        box-shadow: 0 0 25px rgba(251, 113, 133, 0.35);
+        animation: none;
+    }
+
+    .flow-result.unknown::before {
+        background: linear-gradient(135deg, #fb7185, #ec4899);
+    }
+
+    .flow-result.unknown strong {
+        background: linear-gradient(135deg, #fb7185, #ec4899);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* QUIZ FINAL RESULT */
+    .quiz-final-result {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.18), rgba(139, 92, 246, 0.14) 50%, rgba(34, 211, 238, 0.12));
+        border: 2px solid transparent;
+        border-image: var(--gradient-main);
+        border-image-slice: 1;
+        border-radius: 14px;
+        padding: 2rem 1.5rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 40px rgba(236, 72, 153, 0.4), 0 12px 32px rgba(0,0,0,0.5);
+    }
+
+    .quiz-final-result::before {
+        content: &#x27;&#x27;;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-main);
+    }
+
+    .quiz-final-result .result-percent {
+        font-size: 5rem;
+        font-weight: 900;
+        background: var(--gradient-main);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 0.5rem 0 1rem 0;
+        line-height: 1;
+        filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.5));
+    }
+
+    .quiz-final-result .result-title {
+        font-size: 1.6rem;
+        font-weight: 800;
+        background: var(--gradient-main);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+    }
+
+    .quiz-final-result .result-score {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #f5f3ff;
+        margin-bottom: 0.5rem;
+    }
+
+    .quiz-final-result .result-msg {
+        color: #c4b5fd;
+        margin-bottom: 1.5rem;
+    }
+
+    /* QUIZ */
+    .quiz-card {
+        background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 40px rgba(236, 72, 153, 0.1);
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .quiz-card::before {
+        content: &#x27;&#x27;;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-main);
+    }
+
+    .quiz-header {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    .quiz-question {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+        color: var(--text);
+    }
+
+    .quiz-option {
+        background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-deep) 100%);
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        padding: 0.85rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .quiz-option:hover {
+        border-color: var(--primary);
+        color: var(--text);
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(139, 92, 246, 0.05));
+        transform: translateX(3px);
+    }
+
+    body.rtl .quiz-option:hover {
+        transform: translateX(-3px);
+    }
+
+    .quiz-option .opt-letter {
+        background: var(--gradient-main);
+        color: #fff;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        font-weight: 800;
+        flex-shrink: 0;
+        box-shadow: 0 2px 8px rgba(236, 72, 153, 0.4);
+    }
+
+    .quiz-option.correct {
+        background: linear-gradient(135deg, rgba(52, 211, 153, 0.2), rgba(34, 211, 238, 0.1));
+        border-color: var(--success);
+        color: var(--success);
+    }
+
+    .quiz-option.correct .opt-letter {
+        background: var(--success);
+        box-shadow: 0 2px 8px rgba(52, 211, 153, 0.5);
+    }
+
+    .quiz-option.incorrect {
+        background: linear-gradient(135deg, rgba(251, 113, 133, 0.2), rgba(236, 72, 153, 0.1));
+        border-color: var(--danger);
+        color: var(--danger);
+    }
+
+    .quiz-option.incorrect .opt-letter {
+        background: var(--danger);
+    }
+
+    .quiz-explanation {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(34, 211, 238, 0.05));
+        border-left: 3px solid var(--secondary);
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 0.88rem;
+        margin-top: 1rem;
+        line-height: 1.5;
+        color: var(--text-muted);
+    }
+
+    body.rtl .quiz-explanation {
+        border-left: 1px solid rgba(139, 92, 246, 0.1);
+        border-right: 3px solid var(--secondary);
+    }
+
+    .quiz-btn {
+        background: var(--gradient-warm);
+        color: #fff;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.95rem;
+        font-weight: 700;
+        font-family: inherit;
+        margin-top: 1rem;
+        transition: all 0.2s;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        letter-spacing: 0.3px;
+    }
+
+    .quiz-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
+    }
+
+    /* CHEATSHEET TABLE */
+    .table-wrapper {
+        overflow-x: auto;
+        margin-top: 1rem;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.88rem;
+    }
+
+    thead {
+        background: linear-gradient(135deg, #1a0a2e 0%, #2a1a5e 100%);
+    }
+
+    th {
+        padding: 12px 14px;
+        text-align: left;
+        font-weight: 700;
+        font-size: 0.85rem;
+        color: var(--primary-bright);
+        border-bottom: 2px solid var(--border);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    body.rtl th {
+        text-align: right;
+    }
+
+    td {
+        padding: 14px 12px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+        background: transparent;
+        color: var(--text-muted);
+    }
+
+    tbody tr {
+        background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+        transition: background 0.2s;
+    }
+
+    tbody tr:hover {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08), rgba(139, 92, 246, 0.05));
+    }
+
+    .table-cation {
+        font-weight: 700;
+        color: var(--text);
+    }
+
+    .group-tag {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+    }
+
+    .group-tag.g1 { background-color: rgba(148, 163, 184, 0.2); color: #cbd5e1; border: 1px solid #94a3b8; }
+    .group-tag.g2 { background-color: rgba(34, 211, 238, 0.2); color: var(--info); border: 1px solid var(--info); }
+    .group-tag.g3 { background-color: rgba(251, 191, 36, 0.2); color: var(--tertiary); border: 1px solid var(--tertiary); }
+    .group-tag.g5 { background-color: rgba(251, 113, 133, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+
+    /* BACK BUTTON */
+    .back-btn {
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+        font-family: inherit;
+        transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+        background: var(--gradient-warm);
+        color: #fff;
+        border-color: transparent;
+        transform: translateX(-2px);
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+    }
+
+    body.rtl .back-btn:hover {
+        transform: translateX(2px);
+    }
+
+    .hidden { display: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+        .header-title h1 { font-size: 1.15rem; }
+        .header-title p { font-size: 0.75rem; }
+        main { padding: 0 1rem; }
+        .section { padding: 1rem; }
+        .cation-detail { padding: 1.25rem; }
+        .quiz-card { padding: 1.25rem; }
+    }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;header&gt;
+    &lt;div class=&quot;header-inner&quot;&gt;
+        &lt;div class=&quot;header-title&quot;&gt;
+            &lt;h1 data-en=&quot;Chemistry Master Guide&quot; data-ar=&quot;دليل الكيمياء الشامل&quot;&gt;Chemistry Master Guide&lt;/h1&gt;
+            &lt;p data-en=&quot;Cation Analysis - Bilingual Reference | Strict Standard Curriculum&quot; data-ar=&quot;تحليل الكاتيونات - مرجع ثنائي اللغة | منهج معياري صارم&quot;&gt;Cation Analysis - Bilingual Reference | Strict Standard Curriculum&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;toggle-wrapper&quot;&gt;
+            &lt;span class=&quot;toggle-label active&quot; id=&quot;label-en&quot; onclick=&quot;setLanguage(&#x27;en&#x27;)&quot;&gt;English&lt;/span&gt;
+            &lt;div class=&quot;toggle-track&quot; onclick=&quot;toggleLanguage()&quot;&gt;
+                &lt;div class=&quot;toggle-knob&quot; id=&quot;toggle-knob&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;span class=&quot;toggle-label&quot; id=&quot;label-ar&quot; onclick=&quot;setLanguage(&#x27;ar&#x27;)&quot;&gt;العربية&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;nav&gt;
+    &lt;div class=&quot;nav-inner&quot;&gt;
+        &lt;button class=&quot;nav-btn active&quot; onclick=&quot;showView(&#x27;home&#x27;)&quot; data-en=&quot;Home&quot; data-ar=&quot;الرئيسية&quot;&gt;Home&lt;/button&gt;
+        &lt;button class=&quot;nav-btn&quot; onclick=&quot;showView(&#x27;cations&#x27;)&quot; data-en=&quot;Cations List&quot; data-ar=&quot;قائمة الكاتيونات&quot;&gt;Cations List&lt;/button&gt;
+        &lt;button class=&quot;nav-btn&quot; onclick=&quot;showView(&#x27;flowchart&#x27;)&quot; data-en=&quot;Decision Flowchart&quot; data-ar=&quot;مخطط القرار&quot;&gt;Decision Flowchart&lt;/button&gt;
+        &lt;button class=&quot;nav-btn&quot; onclick=&quot;showView(&#x27;quiz&#x27;)&quot; data-en=&quot;Quiz&quot; data-ar=&quot;اختبار&quot;&gt;Quiz&lt;/button&gt;
+        &lt;button class=&quot;nav-btn&quot; onclick=&quot;showView(&#x27;cheatsheet&#x27;)&quot; data-en=&quot;Cheatsheet&quot; data-ar=&quot;جدول مرجعي&quot;&gt;Cheatsheet&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;
+
+&lt;main&gt;
+
+    &lt;!-- HOME VIEW --&gt;
+    &lt;div id=&quot;view-home&quot;&gt;
+        &lt;div class=&quot;section&quot;&gt;
+            &lt;h2 class=&quot;section-title&quot; data-en=&quot;Welcome to the Chemistry Master Guide&quot; data-ar=&quot;مرحبا بك في دليل الكيمياء الشامل&quot;&gt;Welcome to the Chemistry Master Guide&lt;/h2&gt;
+            &lt;p data-en=&quot;This is a comprehensive, text-only reference guide for cation (basic radical) analysis in qualitative chemistry. All information is presented in plain descriptive text — no Latin symbols or chemical formula notation is used, making the content universally readable.&quot; data-ar=&quot;هذا دليل مرجعي شامل ومكتوب بالكامل لتحليل الكاتيونات (الجذور الأساسية) في الكيمياء النوعية. جميع المعلومات مقدمة بأوصاف نصية واضحة - دون استخدام أي رموز لاتينية أو صيغ كيميائية، مما يجعل المحتوى سهل القراءة للجميع.&quot;&gt;This is a comprehensive, text-only reference guide for cation (basic radical) analysis in qualitative chemistry. All information is presented in plain descriptive text — no Latin symbols or chemical formula notation is used, making the content universally readable.&lt;/p&gt;
+            &lt;p data-en=&quot;Use the language toggle in the header to switch between English and Arabic at any time. Use the navigation bar above to explore cations, follow a decision flowchart, take a quiz, or view the complete cheatsheet table.&quot; data-ar=&quot;استخدم مفتاح تبديل اللغة في الأعلى للتنقل بين الإنجليزية والعربية في أي وقت. استخدم شريط التنقل أعلاه لاستكشاف الكاتيونات، أو اتباع مخطط القرار، أو إجراء اختبار، أو مشاهدة الجدول المرجعي الكامل.&quot;&gt;Use the language toggle in the header to switch between English and Arabic at any time. Use the navigation bar above to explore cations, follow a decision flowchart, take a quiz, or view the complete cheatsheet table.&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;section&quot;&gt;
+            &lt;h2 class=&quot;section-title&quot; data-en=&quot;Analytical Groups Overview&quot; data-ar=&quot;نظرة عامة على المجموعات التحليلية&quot;&gt;Analytical Groups Overview&lt;/h2&gt;
+            &lt;p data-en=&quot;Cation identification is more complex than anion identification because of the large number of basic radicals and the fact that several radicals exist in multiple oxidation states (such as Iron two and Iron three). Cations are systematically classified into analytical groups based on their behavior with specific group reagents.&quot; data-ar=&quot;تحليل الكاتيونات أعقد من تحليل الأنيونات بسبب العدد الكبير من الجذور الأساسية وكون عدة جذور توجد في أكثر من حالة أكسدة (مثل الحديد الثنائي والحديد الثلاثي). تُصنف الكاتيونات بشكل منهجي إلى مجموعات تحليلية بناءً على سلوكها مع كواشف المجموعة المحددة.&quot;&gt;Cation identification is more complex than anion identification because of the large number of basic radicals and the fact that several radicals exist in multiple oxidation states (such as Iron two and Iron three). Cations are systematically classified into analytical groups based on their behavior with specific group reagents.&lt;/p&gt;
+
+            &lt;div class=&quot;intro-grid&quot;&gt;
+                &lt;div class=&quot;intro-card&quot; style=&quot;border-left: 4px solid #94a3b8;&quot;&gt;
+                    &lt;h3 data-en=&quot;Group I (Silver Group)&quot; data-ar=&quot;المجموعة الأولى (مجموعة الفضة)&quot;&gt;Group I (Silver Group)&lt;/h3&gt;
+                    &lt;p data-en=&quot;Cations precipitated as insoluble chlorides using dilute Hydrochloric Acid. Includes Silver (one positive), Mercury (one positive), and Lead (two positive).&quot; data-ar=&quot;كاتيونات تترسب على شكل كلوريدات غير قابلة للذوبان باستخدام حمض الهيدروكلوريك المخفف. تشمل الفضة (أحادي الشحنة)، الزئبق (أحادي الشحنة)، والرصاص (ثنائي الشحنة).&quot;&gt;Cations precipitated as insoluble chlorides using dilute Hydrochloric Acid. Includes Silver (one positive), Mercury (one positive), and Lead (two positive).&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;intro-card&quot; style=&quot;border-left: 4px solid #22d3ee;&quot;&gt;
+                    &lt;h3 data-en=&quot;Group II (Copper Group)&quot; data-ar=&quot;المجموعة الثانية (مجموعة النحاس)&quot;&gt;Group II (Copper Group)&lt;/h3&gt;
+                    &lt;p data-en=&quot;Cations precipitated as sulfides using Hydrogen Sulfide gas in acidic medium. Includes Copper (two positive).&quot; data-ar=&quot;كاتيونات تترسب على شكل كبريتيدات باستخدام غاز كبريتيد الهيدروجين في وسط حمضي. تشمل النحاس (ثنائي الشحنة).&quot;&gt;Cations precipitated as sulfides using Hydrogen Sulfide gas in acidic medium. Includes Copper (two positive).&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;intro-card&quot; style=&quot;border-left: 4px solid #fbbf24;&quot;&gt;
+                    &lt;h3 data-en=&quot;Group III (Iron Group)&quot; data-ar=&quot;المجموعة الثالثة (مجموعة الحديد)&quot;&gt;Group III (Iron Group)&lt;/h3&gt;
+                    &lt;p data-en=&quot;Cations precipitated as hydroxides using Ammonium Hydroxide. Includes Aluminium (three positive), Iron (two positive), and Iron (three positive).&quot; data-ar=&quot;كاتيونات تترسب على شكل هيدروكسيدات باستخدام هيدروكسيد الأمونيوم. تشمل الألومنيوم (ثلاثي الشحنة)، الحديد (ثنائي الشحنة)، والحديد (ثلاثي الشحنة).&quot;&gt;Cations precipitated as hydroxides using Ammonium Hydroxide. Includes Aluminium (three positive), Iron (two positive), and Iron (three positive).&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;intro-card&quot; style=&quot;border-left: 4px solid #fb7185;&quot;&gt;
+                    &lt;h3 data-en=&quot;Group V (Calcium Group)&quot; data-ar=&quot;المجموعة الخامسة (مجموعة الكالسيوم)&quot;&gt;Group V (Calcium Group)&lt;/h3&gt;
+                    &lt;p data-en=&quot;Cations precipitated as carbonates using Ammonium Carbonate solution. Includes Calcium (two positive).&quot; data-ar=&quot;كاتيونات تترسب على شكل كربونات باستخدام محلول كربونات الأمونيوم. تشمل الكالسيوم (ثنائي الشحنة).&quot;&gt;Cations precipitated as carbonates using Ammonium Carbonate solution. Includes Calcium (two positive).&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;section&quot;&gt;
+            &lt;h2 class=&quot;section-title&quot; data-en=&quot;Why Text-Only?&quot; data-ar=&quot;لماذا نص فقط؟&quot;&gt;Why Text-Only?&lt;/h2&gt;
+            &lt;p data-en=&quot;By avoiding Latin chemical symbols, this guide is accessible to readers at all levels and is ideal for building conceptual understanding before introducing formula notation. Every test, observation, and reaction is described in plain language.&quot; data-ar=&quot;من خلال تجنب الرموز الكيميائية اللاتينية، يصبح هذا الدليل متاحا للقراء على جميع المستويات ومثاليا لبناء الفهم المفاهيمي قبل تقديم الصيغ. كل اختبار وملاحظة وتفاعل موصوف بلغة واضحة وبسيطة.&quot;&gt;By avoiding Latin chemical symbols, this guide is accessible to readers at all levels and is ideal for building conceptual understanding before introducing formula notation. Every test, observation, and reaction is described in plain language.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- CATIONS LIST VIEW --&gt;
+    &lt;div id=&quot;view-cations&quot; class=&quot;hidden&quot;&gt;
+        &lt;div class=&quot;section&quot;&gt;
+            &lt;h2 class=&quot;section-title&quot; data-en=&quot;Cations Reference List&quot; data-ar=&quot;قائمة مرجعية للكاتيونات&quot;&gt;Cations Reference List&lt;/h2&gt;
+            &lt;p data-en=&quot;Click on any cation to view detailed analysis information including preliminary tests, confirmatory tests, observations, and reaction descriptions.&quot; data-ar=&quot;انقر على أي كاتيون لعرض معلومات التحليل التفصيلية بما في ذلك الاختبارات الأولية، اختبارات التأكيد، الملاحظات، ووصف التفاعلات.&quot;&gt;Click on any cation to view detailed analysis information including preliminary tests, confirmatory tests, observations, and reaction descriptions.&lt;/p&gt;
+
+            &lt;div class=&quot;cation-grid&quot; id=&quot;cation-grid&quot;&gt;
+                &lt;!-- Cations inserted by JavaScript --&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- CATION DETAIL VIEW --&gt;
+    &lt;div id=&quot;view-cation-detail&quot; class=&quot;hidden&quot;&gt;
+        &lt;button class=&quot;back-btn&quot; onclick=&quot;showView(&#x27;cations&#x27;)&quot; data-en=&quot;← Back to Cations List&quot; data-ar=&quot;← العودة إلى قائمة الكاتيونات&quot;&gt;← Back to Cations List&lt;/button&gt;
+        &lt;div class=&quot;cation-detail&quot; id=&quot;cation-detail-content&quot;&gt;
+            &lt;!-- Cation detail inserted by JavaScript --&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- FLOWCHART VIEW --&gt;
+    &lt;div id=&quot;view-flowchart&quot; class=&quot;hidden&quot;&gt;
+        &lt;div class=&quot;section&quot;&gt;
+            &lt;h2 class=&quot;section-title&quot; data-en=&quot;Systematic Cation Decision Flowchart&quot; data-ar=&quot;مخطط القرار المنهجي للكاتيونات&quot;&gt;Systematic Cation Decision Flowchart&lt;/h2&gt;
+            &lt;p data-en=&quot;Follow each step to systematically identify an unknown basic radical using group reagents.&quot; data-ar=&quot;اتبع كل خطوة لتحديد الجذر الأساسي المجهول بشكل منهجي باستخدام كواشف المجموعات.&quot;&gt;Follow each step to systematically identify an unknown basic radical using group reagents.&lt;/p&gt;
+            &lt;div id=&quot;flow-container&quot;&gt;
+                &lt;!-- Flowchart inserted by JavaScript --&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- QUIZ VIEW --&gt;
+    &lt;div id=&quot;view-quiz&quot; class=&quot;hidden&quot;&gt;
+        &lt;div class=&quot;quiz-card&quot; id=&quot;quiz-card&quot;&gt;
+            &lt;!-- Quiz inserted by JavaScript --&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- CHEATSHEET VIEW --&gt;
+    &lt;div id=&quot;view-cheatsheet&quot; class=&quot;hidden&quot;&gt;
+        &lt;div class=&quot;section&quot;&gt;
+            &lt;h2 class=&quot;section-title&quot; data-en=&quot;Complete Cation Cheatsheet&quot; data-ar=&quot;الجدول المرجعي الكامل للكاتيونات&quot;&gt;Complete Cation Cheatsheet&lt;/h2&gt;
+            &lt;p data-en=&quot;A complete at-a-glance reference table covering all cations in the standard curriculum.&quot; data-ar=&quot;جدول مرجعي شامل يغطي جميع الكاتيونات في المنهج المعياري.&quot;&gt;A complete at-a-glance reference table covering all cations in the standard curriculum.&lt;/p&gt;
+            &lt;div class=&quot;table-wrapper&quot; id=&quot;cheatsheet-table&quot;&gt;
+                &lt;!-- Cheatsheet inserted by JavaScript --&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+&lt;/main&gt;
+
+&lt;script&gt;
+    /* ===========================
+       BILINGUAL CONTENT DATA
+       =========================== */
+
+    const cations = [
+        {
+            id: &quot;silver&quot;,
+            nameEn: &quot;Silver (I)&quot;,
+            nameAr: &quot;الفضة (أحادي)&quot;,
+            chargeEn: &quot;one positive charge&quot;,
+            chargeAr: &quot;شحنة موجبة واحدة&quot;,
+            group: &quot;first&quot;,
+            groupTitleEn: &quot;Analytical Group I&quot;,
+            groupTitleAr: &quot;المجموعة التحليلية الأولى&quot;,
+            theoryEn: &quot;Precipitated as an insoluble chloride using dilute Hydrochloric Acid as the group reagent. Silver chloride is sparingly soluble in water, appearing as a white curdy precipitate.&quot;,
+            theoryAr: &quot;يترسب على شكل كلوريد غير قابل للذوبان باستخدام حمض الهيدروكلوريك المخفف ككاشف للمجموعة. كلوريد الفضة قليل الذوبان في الماء ويظهر كراسب أبيض متكتل.&quot;
+        },
+        {
+            id: &quot;mercury1&quot;,
+            nameEn: &quot;Mercury (I)&quot;,
+            nameAr: &quot;الزئبق (أحادي)&quot;,
+            chargeEn: &quot;one positive charge (exists as a paired dimer)&quot;,
+            chargeAr: &quot;شحنة موجبة واحدة (يوجد على شكل ثنائي مزدوج)&quot;,
+            group: &quot;first&quot;,
+            groupTitleEn: &quot;Analytical Group I&quot;,
+            groupTitleAr: &quot;المجموعة التحليلية الأولى&quot;,
+            theoryEn: &quot;Precipitated as an insoluble chloride using dilute Hydrochloric Acid as the group reagent. Mercury (I) chloride is sparingly soluble in water, appearing as a white precipitate.&quot;,
+            theoryAr: &quot;يترسب على شكل كلوريد غير قابل للذوبان باستخدام حمض الهيدروكلوريك المخفف ككاشف للمجموعة. كلوريد الزئبق الأحادي قليل الذوبان في الماء ويظهر كراسب أبيض.&quot;
+        },
+        {
+            id: &quot;lead&quot;,
+            nameEn: &quot;Lead (II)&quot;,
+            nameAr: &quot;الرصاص (ثنائي)&quot;,
+            chargeEn: &quot;two positive charges&quot;,
+            chargeAr: &quot;شحتان موجبتان&quot;,
+            group: &quot;first&quot;,
+            groupTitleEn: &quot;Analytical Group I&quot;,
+            groupTitleAr: &quot;المجموعة التحليلية الأولى&quot;,
+            theoryEn: &quot;Precipitated as an insoluble chloride using dilute Hydrochloric Acid as the group reagent. Lead (II) chloride is sparingly soluble in water, forming a white precipitate that dissolves on heating.&quot;,
+            theoryAr: &quot;يترسب على شكل كلوريد غير قابل للذوبان باستخدام حمض الهيدروكلوريك المخفف ككاشف للمجموعة. كلوريد الرصاص الثنائي قليل الذوبان في الماء ويشكل راسبا أبيض يذوب عند التسخين.&quot;
+        },
+        {
+            id: &quot;copper&quot;,
+            nameEn: &quot;Copper (II)&quot;,
+            nameAr: &quot;النحاس (ثنائي)&quot;,
+            chargeEn: &quot;two positive charges&quot;,
+            chargeAr: &quot;شحتان موجبتان&quot;,
+            group: &quot;second&quot;,
+            groupTitleEn: &quot;Analytical Group II&quot;,
+            groupTitleAr: &quot;المجموعة التحليلية الثانية&quot;,
+            preliminaryReagentEn: &quot;Dilute Hydrochloric Acid plus Hydrogen Sulfide gas&quot;,
+            preliminaryReagentAr: &quot;حمض الهيدروكلوريك المخفف مع غاز كبريتيد الهيدروجين&quot;,
+            preliminaryProcEn: &quot;To the salt solution, add dilute Hydrochloric Acid and pass Hydrogen Sulfide gas through the solution.&quot;,
+            preliminaryProcAr: &quot;أضف حمض الهيدروكلوريك المخفف إلى محلول الملح ومرر غاز كبريتيد الهيدروجين خلال المحلول.&quot;,
+            preliminaryObsEn: &quot;A black precipitate of Copper (II) Sulfide is formed.&quot;,
+            preliminaryObsAr: &quot;يتكون راسب أسود من كبريتيد النحاس الثنائي.&quot;,
+            preliminaryInfEn: &quot;Copper (II) cation is indicated. The black precipitate is soluble in hot Nitric Acid.&quot;,
+            preliminaryInfAr: &quot;يدل على وجود كاتيون النحاس الثنائي. الراسب الأسود قابل للذوبان في حمض النيتريك الساخن.&quot;,
+            preliminaryReactionEn: &quot;Copper (II) salt solution reacts with Hydrogen Sulfide gas to produce a black Copper (II) Sulfide precipitate and dilute Sulfuric Acid in solution.&quot;,
+            preliminaryReactionAr: &quot;محلول ملح النحاس الثنائي يتفاعل مع غاز كبريتيد الهيدروجين لينتج راسبا أسود من كبريتيد النحاس الثنائي وحمض الكبريتيك المخفف في المحلول.&quot;,
+            confirmatory: [
+                {
+                    titleEn: &quot;Solubility in Hot Nitric Acid&quot;,
+                    titleAr: &quot;الذوبان في حمض النيتريك الساخن&quot;,
+                    procEn: &quot;Collect the black Copper Sulfide precipitate and heat it with dilute Nitric Acid.&quot;,
+                    procAr: &quot;اجمع راسب كبريتيد النحاس الأسود وسخنه مع حمض النيتريك المخفف.&quot;,
+                    obsEn: &quot;The black precipitate dissolves completely, yielding a blue solution.&quot;,
+                    obsAr: &quot;الراسب الأسود يذوب تماما، مكونا محلول أزرق.&quot;,
+                    infEn: &quot;Copper (II) sulfide dissolves, oxidizing the sulfide and releasing soluble copper ions into solution.&quot;,
+                    infAr: &quot;كبريتيد النحاس الثنائي يذوب، مع أكسدة الكبريتيد وتحرير أيونات النحاس القابلة للذوبان في المحلول.&quot;,
+                    reactionEn: &quot;Copper (II) Sulfide reacts with hot dilute Nitric Acid to yield soluble Copper (II) Nitrate solution, elemental Sulfur precipitate, Nitrogen monoxide gas, and water.&quot;,
+                    reactionAr: &quot;كبريتيد النحاس الثنائي يتفاعل مع حمض النيتريك المخفف الساخن ليعطي محلول نترات النحاس الثنائي القابل للذوبان، وراسب الكبريت العنصري، وغاز أحادي أكسيد النيتروجين، والماء.&quot;
+                }
+            ]
+        },
+        {
+            id: &quot;aluminium&quot;,
+            nameEn: &quot;Aluminium&quot;,
+            nameAr: &quot;الألومنيوم&quot;,
+            chargeEn: &quot;three positive charges&quot;,
+            chargeAr: &quot;ثلاث شحنات موجبة&quot;,
+            group: &quot;third&quot;,
+            groupTitleEn: &quot;Analytical Group III&quot;,
+            groupTitleAr: &quot;المجموعة التحليلية الثالثة&quot;,
+            preliminaryReagentEn: &quot;Ammonium Hydroxide solution&quot;,
+            preliminaryReagentAr: &quot;محلول هيدروكسيد الأمونيوم&quot;,
+            preliminaryProcEn: &quot;To the salt solution, add Ammonium Hydroxide solution.&quot;,
+            preliminaryProcAr: &quot;أضف محلول هيدروكسيد الأمونيوم إلى محلول الملح.&quot;,
+            preliminaryObsEn: &quot;A white gelatinous precipitate is formed, soluble in dilute acids and in caustic soda solution.&quot;,
+            preliminaryObsAr: &quot;يتكون راسب أبيض هلامي، قابل للذوبان في الأحماض المخففة وفي محلول الصودا الكاوية.&quot;,
+            preliminaryInfEn: &quot;Aluminium Hydroxide precipitate is formed.&quot;,
+            preliminaryInfAr: &quot;يتكون راسب هيدروكسيد الألومنيوم.&quot;,
+            preliminaryReactionEn: &quot;Aluminium salt solution reacts with Ammonium Hydroxide to yield a white gelatinous Aluminium Hydroxide precipitate and soluble Ammonium salt in solution.&quot;,
+            preliminaryReactionAr: &quot;محلول ملح الألومنيوم يتفاعل مع هيدروكسيد الأمونيوم ليعطي راسبا أبيض هلاميا من هيدروكسيد الألومنيوم وملح أمونيوم قابل للذوبان في المحلول.&quot;,
+            confirmatory: [
+                {
+                    titleEn: &quot;Sodium Hydroxide Distinction Test&quot;,
+                    titleAr: &quot;اختبار التمييز بهيدروكسيد الصوديوم&quot;,
+                    procEn: &quot;To the salt solution, add Sodium Hydroxide solution dropwise, then add in excess.&quot;,
+                    procAr: &quot;أضف محلول هيدروكسيد الصوديوم إلى محلول الملح قطرة قطرة، ثم أضف بكمية زائدة.&quot;,
+                    obsEn: &quot;A white gelatinous precipitate forms initially, which completely DISSOLVES in excess Sodium Hydroxide.&quot;,
+                    obsAr: &quot;يتكون راسب أبيض هلامي في البداية، ثم يذوب تماما عند إضافة هيدروكسيد الصوديوم بكمية زائدة.&quot;,
+                    infEn: &quot;Aluminium Hydroxide is amphoteric; it reacts with excess Sodium Hydroxide to form water-soluble Sodium Meta-Aluminate.&quot;,
+                    infAr: &quot;هيدروكسيد الألومنيوم amphoteric (مذبذب)؛ يتفاعل مع هيدروكسيد الصوديوم الزائد ليشكل ميتاألومينات الصوديوم القابلة للذوبان في الماء.&quot;,
+                    reactionEn: &quot;Aluminium salt reacts with Sodium Hydroxide to give white gelatinous Aluminium Hydroxide precipitate. With EXCESS Sodium Hydroxide, Aluminium Hydroxide dissolves to form soluble Sodium Meta-Aluminate and water.&quot;,
+                    reactionAr: &quot;ملح الألومنيوم يتفاعل مع هيدروكسيد الصوديوم ليعطي راسبا أبيض هلاميا من هيدروكسيد الألومنيوم. مع هيدروكسيد الصوديوم الزائد، هيدروكسيد الألومنيوم يذوب ليشكل ميتاألومينات الصوديوم القابلة للذوبان والماء.&quot;
+                }
+            ]
+        },
+        {
+            id: &quot;iron2&quot;,
+            nameEn: &quot;Iron (II)&quot;,
+            nameAr: &quot;الحديد (ثنائي)&quot;,
+            chargeEn: &quot;two positive charges&quot;,
+            chargeAr: &quot;شحتان موجبتان&quot;,
+            group: &quot;third&quot;,
+            groupTitleEn: &quot;Analytical Group III&quot;,
+            groupTitleAr: &quot;المجموعة التحليلية الثالثة&quot;,
+            preliminaryReagentEn: &quot;Ammonium Hydroxide solution&quot;,
+            preliminaryReagentAr: &quot;محلول هيدروكسيد الأمونيوم&quot;,
+            preliminaryProcEn: &quot;To the salt solution, add Ammonium Hydroxide solution.&quot;,
+            preliminaryProcAr: &quot;أضف محلول هيدروكسيد الأمونيوم إلى محلول الملح.&quot;,
+            preliminaryObsEn: &quot;A white precipitate is formed which turns white-green when exposed to air.&quot;,
+            preliminaryObsAr: &quot;يتكون راسب أبيض يتحول إلى أبيض-أخضر عند تعرضه للهواء.&quot;,
+            preliminaryInfEn: &quot;Iron (II) Hydroxide is formed, slowly oxidizing in contact with atmospheric oxygen.&quot;,
+            preliminaryInfAr: &quot;يتكون هيدروكسيد الحديد الثنائي، ويتأكسد ببطء عند تعرضه للأكسجين الجوي.&quot;,
+            preliminaryReactionEn: &quot;Iron (II) salt solution reacts with Ammonium Hydroxide to yield a white-green Iron (II) Hydroxide precipitate and soluble Ammonium salt in solution.&quot;,
+            preliminaryReactionAr: &quot;محلول ملح الحديد الثنائي يتفاعل مع هيدروكسيد الأمونيوم ليعطي راسبا أبيض-أخضر من هيدروكسيد الحديد الثنائي وملح أمونيوم قابل للذوبان في المحلول.&quot;,
+            confirmatory: [
+                {
+                    titleEn: &quot;Sodium Hydroxide Test&quot;,
+                    titleAr: &quot;اختبار هيدروكسيد الصوديوم&quot;,
+                    procEn: &quot;To the salt solution, add Sodium Hydroxide solution.&quot;,
+                    procAr: &quot;أضف محلول هيدروكسيد الصوديوم إلى محلول الملح.&quot;,
+                    obsEn: &quot;A greenish-white precipitate is formed.&quot;,
+                    obsAr: &quot;يتكون راسب أبيض مائل للخضرة.&quot;,
+                    infEn: &quot;Iron (II) Hydroxide is confirmed.&quot;,
+                    infAr: &quot;يتم تأكيد وجود هيدروكسيد الحديد الثنائي.&quot;,
+                    reactionEn: &quot;Iron (II) salt reacts with Sodium Hydroxide to give greenish-white Iron (II) Hydroxide precipitate and soluble Sodium salt in solution.&quot;,
+                    reactionAr: &quot;ملح الحديد الثنائي يتفاعل مع هيدروكسيد الصوديوم ليعطي راسبا أبيض مائلا للخضرة من هيدروكسيد الحديد الثنائي وملح صوديوم قابل للذوبان في المحلول.&quot;
+                }
+            ]
+        },
+        {
+            id: &quot;iron3&quot;,
+            nameEn: &quot;Iron (III)&quot;,
+            nameAr: &quot;الحديد (ثلاثي)&quot;,
+            chargeEn: &quot;three positive charges&quot;,
+            chargeAr: &quot;ثلاث شحنات موجبة&quot;,
+            group: &quot;third&quot;,
+            groupTitleEn: &quot;Analytical Group III&quot;,
+            groupTitleAr: &quot;المجموعة التحليلية الثالثة&quot;,
+            preliminaryReagentEn: &quot;Ammonium Hydroxide solution&quot;,
+            preliminaryReagentAr: &quot;محلول هيدروكسيد الأمونيوم&quot;,
+            preliminaryProcEn: &quot;To the salt solution, add Ammonium Hydroxide solution.&quot;,
+            preliminaryProcAr: &quot;أضف محلول هيدروكسيد الأمونيوم إلى محلول الملح.&quot;,
+            preliminaryObsEn: &quot;A reddish-brown precipitate is formed, soluble in acids.&quot;,
+            preliminaryObsAr: &quot;يتكون راسب بني محمر، قابل للذوبان في الأحماض.&quot;,
+            preliminaryInfEn: &quot;Iron (III) Hydroxide precipitate is formed.&quot;,
+            preliminaryInfAr: &quot;يتكون راسب هيدروكسيد الحديد الثلاثي.&quot;,
+            preliminaryReactionEn: &quot;Iron (III) salt solution reacts with Ammonium Hydroxide to yield a reddish-brown Iron (III) Hydroxide precipitate and soluble Ammonium salt in solution.&quot;,
+            preliminaryReactionAr: &quot;محلول ملح الحديد الثلاثي يتفاعل مع هيدروكسيد الأمونيوم ليعطي راسبا بنيا محمرا من هيدروكسيد الحديد الثلاثي وملح أمونيوم قابل للذوبان في المحلول.&quot;,
+            confirmatory: [
+                {
+                    titleEn: &quot;Sodium Hydroxide Test&quot;,
+                    titleAr: &quot;اختبار هيدروكسيد الصوديوم&quot;,
+                    procEn: &quot;To the salt solution, add Sodium Hydroxide solution.&quot;,
+                    procAr: &quot;أضف محلول هيدروكسيد الصوديوم إلى محلول الملح.&quot;,
+                    obsEn: &quot;A reddish-brown precipitate is formed.&quot;,
+                    obsAr: &quot;يتكون راسب بني محمر.&quot;,
+                    infEn: &quot;Iron (III) Hydroxide is confirmed.&quot;,
+                    infAr: &quot;يتم تأكيد وجود هيدروكسيد الحديد الثلاثي.&quot;,
+                    reactionEn: &quot;Iron (III) salt reacts with Sodium Hydroxide to give reddish-brown Iron (III) Hydroxide precipitate and soluble Sodium salt in solution.&quot;,
+                    reactionAr: &quot;ملح الحديد الثلاثي يتفاعل مع هيدروكسيد الصوديوم ليعطي راسبا بنيا محمرا من هيدروكسيد الحديد الثلاثي وملح صوديوم قابل للذوبان في المحلول.&quot;
+                }
+            ]
+        },
+        {
+            id: &quot;calcium&quot;,
+            nameEn: &quot;Calcium&quot;,
+            nameAr: &quot;الكالسيوم&quot;,
+            chargeEn: &quot;two positive charges&quot;,
+            chargeAr: &quot;شحتان موجبتان&quot;,
+            group: &quot;fifth&quot;,
+            groupTitleEn: &quot;Analytical Group V&quot;,
+            groupTitleAr: &quot;المجموعة التحليلية الخامسة&quot;,
+            preliminaryReagentEn: &quot;Ammonium Carbonate solution&quot;,
+            preliminaryReagentAr: &quot;محلول كربونات الأمونيوم&quot;,
+            preliminaryProcEn: &quot;To the salt solution, add Ammonium Carbonate solution.&quot;,
+            preliminaryProcAr: &quot;أضف محلول كربونات الأمونيوم إلى محلول الملح.&quot;,
+            preliminaryObsEn: &quot;A white precipitate is formed, soluble in dilute Hydrochloric Acid or in water containing dissolved Carbon Dioxide.&quot;,
+            preliminaryObsAr: &quot;يتكون راسب أبيض، قابل للذوبان في حمض الهيدروكلوريك المخفف أو في الماء المحتوي على ثاني أكسيد الكربون المذاب.&quot;,
+            preliminaryInfEn: &quot;Calcium Carbonate precipitate is formed.&quot;,
+            preliminaryInfAr: &quot;يتكون راسب كربونات الكالسيوم.&quot;,
+            preliminaryReactionEn: &quot;Calcium salt solution reacts with Ammonium Carbonate to yield a white Calcium Carbonate precipitate and soluble Ammonium salt in solution. The Calcium Carbonate further dissolves in water containing dissolved Carbon Dioxide to form soluble Calcium Bicarbonate.&quot;,
+            preliminaryReactionAr: &quot;محلول ملح الكالسيوم يتفاعل مع كربونات الأمونيوم ليعطي راسبا أبيض من كربونات الكالسيوم وملح أمونيوم قابل للذوبان في المحلول. كربونات الكالسيوم تذوب كذلك في الماء المحتوي على ثاني أكسيد الكربون المذاب لتشكل بيكربونات الكالسيوم القابلة للذوبان.&quot;,
+            confirmatory: [
+                {
+                    titleEn: &quot;Dilute Sulfuric Acid Test&quot;,
+                    titleAr: &quot;اختبار حمض الكبريتيك المخفف&quot;,
+                    procEn: &quot;To the salt solution, add dilute Sulfuric Acid.&quot;,
+                    procAr: &quot;أضف حمض الكبريتيك المخفف إلى محلول الملح.&quot;,
+                    obsEn: &quot;A white precipitate is formed.&quot;,
+                    obsAr: &quot;يتكون راسب أبيض.&quot;,
+                    infEn: &quot;Calcium Sulfate precipitate is formed.&quot;,
+                    infAr: &quot;يتكون راسب كبريتات الكالسيوم.&quot;,
+                    reactionEn: &quot;Calcium salt reacts with dilute Sulfuric Acid to give white Calcium Sulfate precipitate and Hydrochloric Acid in solution.&quot;,
+                    reactionAr: &quot;ملح الكالسيوم يتفاعل مع حمض الكبريتيك المخفف ليعطي راسبا أبيض من كبريتات الكالسيوم وحمض الهيدروكلوريك في المحلول.&quot;
+                },
+                {
+                    titleEn: &quot;Dry Flame Test&quot;,
+                    titleAr: &quot;اختبار اللهب الجاف&quot;,
+                    procEn: &quot;Dip a platinum wire loop in concentrated Hydrochloric Acid, touch the solid salt, and place it in the Bunsen burner flame.&quot;,
+                    procAr: &quot;اغمس حلقة سلك بلاتيني في حمض الهيدروكلوريك المركز، والمس الملح الصلب، ثم ضعه في لهب موقد بنزن.&quot;,
+                    obsEn: &quot;The volatile calcium cation imparts a highly characteristic BRICK-RED color to the flame.&quot;,
+                    obsAr: &quot;كاتيون الكالسيوم المتطاير يمنح اللهب لونا مميزا جدا أحمر-طوبيا.&quot;,
+                    infEn: &quot;Calcium ions are confirmed.&quot;,
+                    infAr: &quot;يتم تأكيد وجود أيونات الكالسيوم.&quot;,
+                    reactionEn: &quot;When heated in a flame, volatile calcium ions become excited and emit a characteristic brick-red color.&quot;,
+                    reactionAr: &quot;عند تسخينها في اللهب، تصبح أيونات الكالسيوم المتطايرة في حالة إثارة وتصدر لونا مميزا أحمر-طوبيا.&quot;
+                }
+            ]
+        }
+    ];
+
+    /* ===========================
+       QUIZ QUESTIONS
+       =========================== */
+
+    const quizPool = [
+        {
+            qEn: &quot;Why is the analytical identification of basic radicals (cations) more complicated than acidic radicals (anions)?&quot;,
+            qAr: &quot;لماذا تحليل الجذور الأساسية (الكاتيونات) أعقد من تحليل الجذور الحمضية (الأنيونات)؟&quot;,
+            optsEn: [
+                &quot;Cations have no specific group reagents&quot;,
+                &quot;Great number of basic radicals exist, and some possess multiple oxidation states&quot;,
+                &quot;Cation metallic chlorides are extremely volatile&quot;,
+                &quot;Ammonium hydroxide is toxic and blocks reactions&quot;
+            ],
+            optsAr: [
+                &quot;الكاتيونات ليس لها كواشف مجموعات محددة&quot;,
+                &quot;يوجد عدد كبير من الجذور الأساسية، وبعضها يملك أكثر من حالة أكسدة&quot;,
+                &quot;كلوريدات الكاتيونات المعدنية متطايرة جدا&quot;,
+                &quot;هيدروكسيد الأمونيوم سام ويمنع التفاعلات&quot;
+            ],
+            correct: 1,
+            expEn: &quot;Basic radical detection is more complicated due to the presence of a great number of basic radicals, and because some radicals have multiple oxidation states (such as Iron two and Iron three).&quot;,
+            expAr: &quot;تحليل الجذور الأساسية أعقد بسبب وجود عدد كبير من الجذور الأساسية، ولأن بعض الجذور لها أكثر من حالة أكسدة (مثل الحديد الثنائي والحديد الثلاثي).&quot;
+        },
+        {
+            qEn: &quot;What is the correct group reagent for the third analytical group containing Aluminium, Iron (II), and Iron (III)?&quot;,
+            qAr: &quot;ما هو الكاشف الصحيح للمجموعة التحليلية الثالثة التي تحتوي على الألومنيوم، الحديد الثنائي، والحديد الثلاثي؟&quot;,
+            optsEn: [
+                &quot;Dilute Hydrochloric Acid&quot;,
+                &quot;Hydrogen Sulfide in acidic medium&quot;,
+                &quot;Ammonium Hydroxide solution&quot;,
+                &quot;Ammonium Carbonate&quot;
+            ],
+            optsAr: [
+                &quot;حمض الهيدروكلوريك المخفف&quot;,
+                &quot;كبريتيد الهيدروجين في الوسط الحمضي&quot;,
+                &quot;محلول هيدروكسيد الأمونيوم&quot;,
+                &quot;كربونات الأمونيوم&quot;
+            ],
+            correct: 2,
+            expEn: &quot;The group reagent for the third analytical group is Ammonium Hydroxide, which precipitates the hydroxides of Aluminium, Iron (II), and Iron (III).&quot;,
+            expAr: &quot;كاشف المجموعة التحليلية الثالثة هو هيدروكسيد الأمونيوم، الذي يرسب هيدروكسيدات الألومنيوم، الحديد الثنائي، والحديد الثلاثي.&quot;
+        },
+        {
+            qEn: &quot;Which cation forms a white gelatinous precipitate with Sodium Hydroxide that dissolves completely in excess caustic soda?&quot;,
+            qAr: &quot;أي كاتيون يشكل راسبا أبيض هلاميا مع هيدروكسيد الصوديوم يذوب تماما في الصودا الكاوية الزائدة؟&quot;,
+            optsEn: [&quot;Aluminium&quot;, &quot;Iron (II)&quot;, &quot;Iron (III)&quot;, &quot;Calcium&quot;],
+            optsAr: [&quot;الألومنيوم&quot;, &quot;الحديد الثنائي&quot;, &quot;الحديد الثلاثي&quot;, &quot;الكالسيوم&quot;],
+            correct: 0,
+            expEn: &quot;Aluminium reacts with Sodium Hydroxide to yield white gelatinous Aluminium Hydroxide, which dissolves in excess Sodium Hydroxide to form soluble Sodium Meta-Aluminate.&quot;,
+            expAr: &quot;الألومنيوم يتفاعل مع هيدروكسيد الصوديوم ليعطي هيدروكسيد الألومنيوم الأبيض الهلامي، الذي يذوب في هيدروكسيد الصوديوم الزائد ليشكل ميتاألومينات الصوديوم القابلة للذوبان.&quot;
+        },
+        {
+            qEn: &quot;What is the color of the precipitate formed by adding Sodium Hydroxide to an Iron (II) salt solution?&quot;,
+            qAr: &quot;ما هو لون الراسب المتكون بإضافة هيدروكسيد الصوديوم إلى محلول ملح الحديد الثنائي؟&quot;,
+            optsEn: [&quot;Reddish-brown&quot;, &quot;Pure white&quot;, &quot;Greenish-white&quot;, &quot;Black&quot;],
+            optsAr: [&quot;بني محمر&quot;, &quot;أبيض نقي&quot;, &quot;أبيض مائل للخضرة&quot;, &quot;أسود&quot;],
+            correct: 2,
+            expEn: &quot;Treating Iron (II) with Sodium Hydroxide forms a highly diagnostic greenish-white precipitate of Iron (II) Hydroxide.&quot;,
+            expAr: &quot;معالجة الحديد الثنائي بهيدروكسيد الصوديوم تشكل راسبا مميزا أبيض مائلا للخضرة من هيدروكسيد الحديد الثنائي.&quot;
+        },
+        {
+            qEn: &quot;Imparting a bright brick-red color to the Bunsen burner flame during a dry test confirms which basic radical?&quot;,
+            qAr: &quot;منح لون أحمر-طوبي ساطع لهب موقد بنزن أثناء اختبار جاف يؤكد أي جذر أساسي؟&quot;,
+            optsEn: [&quot;Aluminium&quot;, &quot;Copper (II)&quot;, &quot;Iron (III)&quot;, &quot;Calcium&quot;],
+            optsAr: [&quot;الألومنيوم&quot;, &quot;النحاس الثنائي&quot;, &quot;الحديد الثلاثي&quot;, &quot;الكالسيوم&quot;],
+            correct: 3,
+            expEn: &quot;Volatile calcium cations impart a highly characteristic brick-red color to the Bunsen burner flame.&quot;,
+            expAr: &quot;كاتيونات الكالسيوم المتطايرة تمنح لهب موقد بنزن لونا مميزا جدا أحمر-طوبيا.&quot;
+        },
+        {
+            qEn: &quot;Which analytical group does Copper (II) belong to, and what is its group reagent?&quot;,
+            qAr: &quot;أي مجموعة تحليلية ينتمي إليها النحاس الثنائي، وما هو كاشف مجموعته؟&quot;,
+            optsEn: [
+                &quot;Group I; reagent is dilute Hydrochloric Acid&quot;,
+                &quot;Group II; reagent is Hydrogen Sulfide gas in presence of dilute Hydrochloric Acid&quot;,
+                &quot;Group III; reagent is Ammonium Hydroxide&quot;,
+                &quot;Group V; reagent is Ammonium Carbonate&quot;
+            ],
+            optsAr: [
+                &quot;المجموعة الأولى؛ الكاشف هو حمض الهيدروكلوريك المخفف&quot;,
+                &quot;المجموعة الثانية؛ الكاشف هو غاز كبريتيد الهيدروجين بوجود حمض الهيدروكلوريك المخفف&quot;,
+                &quot;المجموعة الثالثة؛ الكاشف هو هيدروكسيد الأمونيوم&quot;,
+                &quot;المجموعة الخامسة؛ الكاشف هو كربونات الأمونيوم&quot;
+            ],
+            correct: 1,
+            expEn: &quot;Copper (II) is a member of the second Analytical Group and can be precipitated as a black Sulfide using Hydrogen Sulfide in acidic medium.&quot;,
+            expAr: &quot;النحاس الثنائي عضو في المجموعة التحليلية الثانية، ويمكن ترسيبه على شكل كبريتيد أسود باستخدام كبريتيد الهيدروجين في الوسط الحمضي.&quot;
+        }
+    ];
+
+    /* ===========================
+       LANGUAGE &amp; VIEW LOGIC
+       =========================== */
+
+    let currentLang = &#x27;en&#x27;;
+    let quizState = { currentQuestion: 0, score: 0, questions: [] };
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        document.body.classList.toggle(&#x27;rtl&#x27;, lang === &#x27;ar&#x27;);
+
+        document.getElementById(&#x27;label-en&#x27;).classList.toggle(&#x27;active&#x27;, lang === &#x27;en&#x27;);
+        document.getElementById(&#x27;label-ar&#x27;).classList.toggle(&#x27;active&#x27;, lang === &#x27;ar&#x27;);
+
+        const knob = document.getElementById(&#x27;toggle-knob&#x27;);
+        if (lang === &#x27;ar&#x27;) {
+            knob.style.left = &#x27;auto&#x27;;
+            knob.style.right = &#x27;27px&#x27;;
+        } else {
+            knob.style.right = &#x27;auto&#x27;;
+            knob.style.left = &#x27;3px&#x27;;
+        }
+
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll(&#x27;[data-en]&#x27;).forEach(el =&gt; {
+            const text = el.getAttribute(&#x27;data-&#x27; + lang);
+            if (text) el.textContent = text;
+        });
+
+        const activeView = document.querySelector(&#x27;.nav-btn.active&#x27;).getAttribute(&#x27;onclick&#x27;).match(/&#x27;(\w+)&#x27;/)[1];
+        showView(activeView);
+    }
+
+    function toggleLanguage() {
+        setLanguage(currentLang === &#x27;en&#x27; ? &#x27;ar&#x27; : &#x27;en&#x27;);
+    }
+
+    function showView(viewName) {
+        const views = [&#x27;home&#x27;, &#x27;cations&#x27;, &#x27;cation-detail&#x27;, &#x27;flowchart&#x27;, &#x27;quiz&#x27;, &#x27;cheatsheet&#x27;];
+        views.forEach(v =&gt; {
+            document.getElementById(&#x27;view-&#x27; + v).classList.add(&#x27;hidden&#x27;);
+        });
+        document.getElementById(&#x27;view-&#x27; + viewName).classList.remove(&#x27;hidden&#x27;);
+
+        document.querySelectorAll(&#x27;.nav-btn&#x27;).forEach((btn, idx) =&gt; {
+            btn.classList.remove(&#x27;active&#x27;);
+            const btnView = [&#x27;home&#x27;, &#x27;cations&#x27;, &#x27;flowchart&#x27;, &#x27;quiz&#x27;, &#x27;cheatsheet&#x27;][idx];
+            if (btnView === viewName) btn.classList.add(&#x27;active&#x27;);
+        });
+
+        if (viewName === &#x27;cations&#x27;) renderCationsGrid();
+        if (viewName === &#x27;cation-detail&#x27;) renderCationDetail(lastSelectedCationId);
+        if (viewName === &#x27;flowchart&#x27;) renderFlowchart();
+        if (viewName === &#x27;quiz&#x27;) startQuiz();
+        if (viewName === &#x27;cheatsheet&#x27;) renderCheatsheet();
+
+        window.scrollTo({ top: 0, behavior: &#x27;smooth&#x27; });
+    }
+
+    /* ===========================
+       RENDER FUNCTIONS
+       =========================== */
+
+    function getGroupClass(group) {
+        return group === &#x27;first&#x27; ? &#x27;g1&#x27; : group === &#x27;second&#x27; ? &#x27;g2&#x27; : group === &#x27;third&#x27; ? &#x27;g3&#x27; : &#x27;g5&#x27;;
+    }
+
+    function renderCationsGrid() {
+        const grid = document.getElementById(&#x27;cation-grid&#x27;);
+        grid.innerHTML = &#x27;&#x27;;
+        cations.forEach(c =&gt; {
+            const card = document.createElement(&#x27;div&#x27;);
+            card.className = &#x27;cation-card &#x27; + getGroupClass(c.group);
+            card.onclick = () =&gt; {
+                lastSelectedCationId = c.id;
+                showView(&#x27;cation-detail&#x27;);
+            };
+            card.innerHTML = `
+                &lt;h3&gt;${currentLang === &#x27;en&#x27; ? c.nameEn : c.nameAr}&lt;/h3&gt;
+                &lt;div class=&quot;cation-meta&quot;&gt;
+                    &lt;span class=&quot;group-tag ${getGroupClass(c.group)}&quot;&gt;${currentLang === &#x27;en&#x27; ? c.groupTitleEn : c.groupTitleAr}&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;cation-desc&quot;&gt;
+                    ${currentLang === &#x27;en&#x27; ? c.chargeEn : c.chargeAr}
+                &lt;/div&gt;
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    let lastSelectedCationId = &#x27;copper&#x27;;
+
+    function renderCationDetail(id) {
+        const c = cations.find(x =&gt; x.id === id);
+        if (!c) return;
+        const container = document.getElementById(&#x27;cation-detail-content&#x27;);
+        const gc = getGroupClass(c.group);
+
+        let html = `
+            &lt;div class=&quot;detail-header&quot;&gt;
+                &lt;span class=&quot;group-badge ${gc}&quot;&gt;${currentLang === &#x27;en&#x27; ? c.groupTitleEn : c.groupTitleAr}&lt;/span&gt;
+                &lt;h2&gt;${currentLang === &#x27;en&#x27; ? c.nameEn : c.nameAr}&lt;/h2&gt;
+            &lt;/div&gt;
+        `;
+
+        if (c.id === &#x27;silver&#x27; || c.id === &#x27;mercury1&#x27; || c.id === &#x27;lead&#x27;) {
+            html += `
+                &lt;div class=&quot;detail-block&quot;&gt;
+                    &lt;h4&gt;${currentLang === &#x27;en&#x27; ? &#x27;Group Reagent Description&#x27; : &#x27;وصف كاشف المجموعة&#x27;}&lt;/h4&gt;
+                    &lt;div class=&quot;value&quot;&gt;${currentLang === &#x27;en&#x27; ? c.theoryEn : c.theoryAr}&lt;/div&gt;
+                &lt;/div&gt;
+            `;
+        } else {
+            html += `
+                &lt;div class=&quot;detail-grid&quot;&gt;
+                    &lt;div class=&quot;detail-block&quot;&gt;
+                        &lt;h4&gt;${currentLang === &#x27;en&#x27; ? &#x27;Preliminary (Main) Test&#x27; : &#x27;الاختبار الأولي (الرئيسي)&#x27;}&lt;/h4&gt;
+                        &lt;div class=&quot;label&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Reagent&#x27; : &#x27;الكاشف&#x27;}&lt;/div&gt;
+                        &lt;div class=&quot;value&quot;&gt;${currentLang === &#x27;en&#x27; ? c.preliminaryReagentEn : c.preliminaryReagentAr}&lt;/div&gt;
+                        &lt;div class=&quot;label&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Procedure&#x27; : &#x27;الإجراء&#x27;}&lt;/div&gt;
+                        &lt;div class=&quot;value&quot;&gt;${currentLang === &#x27;en&#x27; ? c.preliminaryProcEn : c.preliminaryProcAr}&lt;/div&gt;
+                        &lt;div class=&quot;observation&quot;&gt;&lt;strong&gt;${currentLang === &#x27;en&#x27; ? &#x27;Observation: &#x27; : &#x27;الملاحظة: &#x27;}&lt;/strong&gt;${currentLang === &#x27;en&#x27; ? c.preliminaryObsEn : c.preliminaryObsAr}&lt;/div&gt;
+                        &lt;div class=&quot;label&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Inference&#x27; : &#x27;الاستنتاج&#x27;}&lt;/div&gt;
+                        &lt;div class=&quot;value&quot;&gt;${currentLang === &#x27;en&#x27; ? c.preliminaryInfEn : c.preliminaryInfAr}&lt;/div&gt;
+                        &lt;div class=&quot;label&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Reaction Description&#x27; : &#x27;وصف التفاعل&#x27;}&lt;/div&gt;
+                        &lt;div class=&quot;reaction&quot;&gt;${currentLang === &#x27;en&#x27; ? c.preliminaryReactionEn : c.preliminaryReactionAr}&lt;/div&gt;
+                    &lt;/div&gt;
+            `;
+
+            c.confirmatory.forEach((test, idx) =&gt; {
+                html += `
+                    &lt;div class=&quot;detail-block&quot;&gt;
+                        &lt;h4&gt;${currentLang === &#x27;en&#x27; ? &#x27;Confirmatory Test &#x27; + (idx + 1) + &#x27;: &#x27; + test.titleEn : &#x27;اختبار التأكيد &#x27; + (idx + 1) + &#x27;: &#x27; + test.titleAr}&lt;/h4&gt;
+                        &lt;div class=&quot;label&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Procedure&#x27; : &#x27;الإجراء&#x27;}&lt;/div&gt;
+                        &lt;div class=&quot;value&quot;&gt;${currentLang === &#x27;en&#x27; ? test.procEn : test.procAr}&lt;/div&gt;
+                        &lt;div class=&quot;observation&quot;&gt;&lt;strong&gt;${currentLang === &#x27;en&#x27; ? &#x27;Observation: &#x27; : &#x27;الملاحظة: &#x27;}&lt;/strong&gt;${currentLang === &#x27;en&#x27; ? test.obsEn : test.obsAr}&lt;/div&gt;
+                        &lt;div class=&quot;label&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Inference&#x27; : &#x27;الاستنتاج&#x27;}&lt;/div&gt;
+                        &lt;div class=&quot;value&quot;&gt;${currentLang === &#x27;en&#x27; ? test.infEn : test.infAr}&lt;/div&gt;
+                        &lt;div class=&quot;label&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Reaction Description&#x27; : &#x27;وصف التفاعل&#x27;}&lt;/div&gt;
+                        &lt;div class=&quot;reaction&quot;&gt;${currentLang === &#x27;en&#x27; ? test.reactionEn : test.reactionAr}&lt;/div&gt;
+                    &lt;/div&gt;
+                `;
+            });
+
+            html += `&lt;/div&gt;`;
+        }
+
+        container.innerHTML = html;
+    }
+
+    /* ===========================
+       FLOWCHART
+       =========================== */
+
+    function renderFlowchart() {
+        const container = document.getElementById(&#x27;flow-container&#x27;);
+        container.innerHTML = `
+            &lt;div class=&quot;flow-step&quot;&gt;
+                &lt;span class=&quot;step-num&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;STEP 1&#x27; : &#x27;الخطوة 1&#x27;}&lt;/span&gt;
+                &lt;h4&gt;${currentLang === &#x27;en&#x27; ? &#x27;Add Group Reagent I (Dilute Hydrochloric Acid)&#x27; : &#x27;أضف كاشف المجموعة الأولى (حمض الهيدروكلوريك المخفف)&#x27;}&lt;/h4&gt;
+                &lt;div class=&quot;value&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Take the salt solution and add dilute Hydrochloric Acid. Observe what happens.&#x27; : &#x27;خذ محلول الملح وأضف حمض الهيدروكلوريك المخفف. لاحظ ما يحدث.&#x27;}&lt;/div&gt;
+                &lt;div class=&quot;flow-options&quot;&gt;
+                    &lt;button class=&quot;flow-opt&quot; onclick=&quot;flowResult(&#x27;group1&#x27;)&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Yes, white precipitate of chlorides forms&#x27; : &#x27;نعم، يتكون راسب أبيض من الكلوريدات&#x27;}&lt;/button&gt;
+                    &lt;button class=&quot;flow-opt&quot; onclick=&quot;flowNext(2)&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;No reaction / no precipitate&#x27; : &#x27;لا تفاعل / لا راسب&#x27;}&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div id=&quot;flow-next&quot;&gt;&lt;/div&gt;
+        `;
+    }
+
+    function flowResult(result) {
+        const next = document.getElementById(&#x27;flow-next&#x27;);
+        let html = &#x27;&#x27;;
+        if (result === &#x27;group1&#x27;) {
+            html = `
+                &lt;div class=&quot;flow-result&quot;&gt;
+                    &lt;strong&gt;${currentLang === &#x27;en&#x27; ? &#x27;Group I Detected!&#x27; : &#x27;تم اكتشاف المجموعة الأولى!&#x27;}&lt;/strong&gt;&lt;br&gt;
+                    ${currentLang === &#x27;en&#x27; ? &#x27;The cation is Silver (one positive), Mercury (one positive), or Lead (two positive). Sparingly soluble metal chlorides precipitate in Hydrochloric Acid medium.&#x27; : &#x27;الكاتيون هو الفضة (أحادي)، الزئبق (أحادي)، أو الرصاص (ثنائي). كلوريدات المعادن قليلة الذوبان تترسب في وسط حمض الهيدروكلوريك.&#x27;}
+                &lt;/div&gt;
+            `;
+        } else if (result === &#x27;group2&#x27;) {
+            html = `
+                &lt;div class=&quot;flow-result&quot;&gt;
+                    &lt;strong&gt;${currentLang === &#x27;en&#x27; ? &#x27;Group II Detected!&#x27; : &#x27;تم اكتشاف المجموعة الثانية!&#x27;}&lt;/strong&gt;&lt;br&gt;
+                    ${currentLang === &#x27;en&#x27; ? &#x27;The cation is Copper (II). The black Sulfide precipitate is highly soluble in hot Nitric Acid.&#x27; : &#x27;الكاتيون هو النحاس (ثنائي). راسب الكبريتيد الأسود قابل للذوبان جدا في حمض النيتريك الساخن.&#x27;}
+                &lt;/div&gt;
+            `;
+        } else if (result === &#x27;aluminium&#x27;) {
+            html = `
+                &lt;div class=&quot;flow-result&quot;&gt;
+                    &lt;strong&gt;${currentLang === &#x27;en&#x27; ? &#x27;Group III: Aluminium Detected!&#x27; : &#x27;المجموعة الثالثة: تم اكتشاف الألومنيوم!&#x27;}&lt;/strong&gt;&lt;br&gt;
+                    ${currentLang === &#x27;en&#x27; ? &#x27;Confirm with Sodium Hydroxide test: white gelatinous precipitate dissolves completely in excess Sodium Hydroxide.&#x27; : &#x27;أكد باختبار هيدروكسيد الصوديوم: الراسب الأبيض الهلامي يذوب تماما في هيدروكسيد الصوديوم الزائد.&#x27;}
+                &lt;/div&gt;
+            `;
+        } else if (result === &#x27;iron2&#x27;) {
+            html = `
+                &lt;div class=&quot;flow-result&quot;&gt;
+                    &lt;strong&gt;${currentLang === &#x27;en&#x27; ? &#x27;Group III: Iron (II) Detected!&#x27; : &#x27;المجموعة الثالثة: تم اكتشاف الحديد (ثنائي)!&#x27;}&lt;/strong&gt;&lt;br&gt;
+                    ${currentLang === &#x27;en&#x27; ? &#x27;Confirm with Sodium Hydroxide: greenish-white precipitate forms.&#x27; : &#x27;أكد بهيدروكسيد الصوديوم: يتكون راسب أبيض مائل للخضرة.&#x27;}
+                &lt;/div&gt;
+            `;
+        } else if (result === &#x27;iron3&#x27;) {
+            html = `
+                &lt;div class=&quot;flow-result&quot;&gt;
+                    &lt;strong&gt;${currentLang === &#x27;en&#x27; ? &#x27;Group III: Iron (III) Detected!&#x27; : &#x27;المجموعة الثالثة: تم اكتشاف الحديد (ثلاثي)!&#x27;}&lt;/strong&gt;&lt;br&gt;
+                    ${currentLang === &#x27;en&#x27; ? &#x27;Confirm with Sodium Hydroxide: reddish-brown precipitate forms.&#x27; : &#x27;أكد بهيدروكسيد الصوديوم: يتكون راسب بني محمر.&#x27;}
+                &lt;/div&gt;
+            `;
+        } else if (result === &#x27;calcium&#x27;) {
+            html = `
+                &lt;div class=&quot;flow-result&quot;&gt;
+                    &lt;strong&gt;${currentLang === &#x27;en&#x27; ? &#x27;Group V: Calcium Detected!&#x27; : &#x27;المجموعة الخامسة: تم اكتشاف الكالسيوم!&#x27;}&lt;/strong&gt;&lt;br&gt;
+                    ${currentLang === &#x27;en&#x27; ? &#x27;Confirm via Sulfuric Acid test (white precipitate) and dry flame test (brick-red color).&#x27; : &#x27;أكد باختبار حمض الكبريتيك (راسب أبيض) واختبار اللهب الجاف (لون أحمر-طوبي).&#x27;}
+                &lt;/div&gt;
+            `;
+        } else if (result === &#x27;unknown&#x27;) {
+            html = `
+                &lt;div class=&quot;flow-result unknown&quot;&gt;
+                    &lt;strong&gt;${currentLang === &#x27;en&#x27; ? &#x27;Analysis Inconclusive&#x27; : &#x27;التحليل غير حاسم&#x27;}&lt;/strong&gt;&lt;br&gt;
+                    ${currentLang === &#x27;en&#x27; ? &#x27;The cation is not present in the studied analytical groups.&#x27; : &#x27;الكاتيون غير موجود في المجموعات التحليلية المدروسة.&#x27;}
+                &lt;/div&gt;
+            `;
+        }
+        next.innerHTML = html;
+    }
+
+    function flowNext(step) {
+        const next = document.getElementById(&#x27;flow-next&#x27;);
+        let html = &#x27;&#x27;;
+        if (step === 2) {
+            html = `
+                &lt;div class=&quot;flow-step&quot;&gt;
+                    &lt;span class=&quot;step-num&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;STEP 2&#x27; : &#x27;الخطوة 2&#x27;}&lt;/span&gt;
+                    &lt;h4&gt;${currentLang === &#x27;en&#x27; ? &#x27;Add Group Reagent II (Hydrogen Sulfide gas in acidic medium)&#x27; : &#x27;أضف كاشف المجموعة الثانية (غاز كبريتيد الهيدروجين في الوسط الحمضي)&#x27;}&lt;/h4&gt;
+                    &lt;div class=&quot;value&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Pass Hydrogen Sulfide gas into your Hydrochloric Acid salt solution. What do you observe?&#x27; : &#x27;مرر غاز كبريتيد الهيدروجين في محلول ملح حمض الهيدروكلوريك. ماذا تلاحظ؟&#x27;}&lt;/div&gt;
+                    &lt;div class=&quot;flow-options&quot;&gt;
+                        &lt;button class=&quot;flow-opt&quot; onclick=&quot;flowResult(&#x27;group2&#x27;)&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Thick black precipitate forms&#x27; : &#x27;يتكون راسب أسود سميك&#x27;}&lt;/button&gt;
+                        &lt;button class=&quot;flow-opt&quot; onclick=&quot;flowNext(3)&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;No reaction / no black precipitate&#x27; : &#x27;لا تفاعل / لا راسب أسود&#x27;}&lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            `;
+        } else if (step === 3) {
+            html = `
+                &lt;div class=&quot;flow-step&quot;&gt;
+                    &lt;span class=&quot;step-num&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;STEP 3&#x27; : &#x27;الخطوة 3&#x27;}&lt;/span&gt;
+                    &lt;h4&gt;${currentLang === &#x27;en&#x27; ? &#x27;Add Group Reagent III (Ammonium Hydroxide)&#x27; : &#x27;أضف كاشف المجموعة الثالثة (هيدروكسيد الأمونيوم)&#x27;}&lt;/h4&gt;
+                    &lt;div class=&quot;value&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Add Ammonium Hydroxide solution to a fresh salt solution. What do you observe?&#x27; : &#x27;أضف محلول هيدروكسيد الأمونيوم إلى محلول ملح طازج. ماذا تلاحظ؟&#x27;}&lt;/div&gt;
+                    &lt;div class=&quot;flow-options&quot;&gt;
+                        &lt;button class=&quot;flow-opt&quot; onclick=&quot;flowResult(&#x27;aluminium&#x27;)&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;White gelatinous precipitate forms&#x27; : &#x27;يتكون راسب أبيض هلامي&#x27;}&lt;/button&gt;
+                        &lt;button class=&quot;flow-opt&quot; onclick=&quot;flowResult(&#x27;iron2&#x27;)&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;White precipitate turning green in air&#x27; : &#x27;راسب أبيض يتحول إلى أخضر في الهواء&#x27;}&lt;/button&gt;
+                        &lt;button class=&quot;flow-opt&quot; onclick=&quot;flowResult(&#x27;iron3&#x27;)&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Reddish-brown precipitate forms&#x27; : &#x27;يتكون راسب بني محمر&#x27;}&lt;/button&gt;
+                        &lt;button class=&quot;flow-opt&quot; onclick=&quot;flowNext(5)&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;No reaction&#x27; : &#x27;لا تفاعل&#x27;}&lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            `;
+        } else if (step === 5) {
+            html = `
+                &lt;div class=&quot;flow-step&quot;&gt;
+                    &lt;span class=&quot;step-num&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;STEP 5&#x27; : &#x27;الخطوة 5&#x27;}&lt;/span&gt;
+                    &lt;h4&gt;${currentLang === &#x27;en&#x27; ? &#x27;Add Group Reagent V (Ammonium Carbonate)&#x27; : &#x27;أضف كاشف المجموعة الخامسة (كربونات الأمونيوم)&#x27;}&lt;/h4&gt;
+                    &lt;div class=&quot;value&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Add Ammonium Carbonate solution. Do you see any precipitate?&#x27; : &#x27;أضف محلول كربونات الأمونيوم. هل ترى أي راسب؟&#x27;}&lt;/div&gt;
+                    &lt;div class=&quot;flow-options&quot;&gt;
+                        &lt;button class=&quot;flow-opt&quot; onclick=&quot;flowResult(&#x27;calcium&#x27;)&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Yes, a white precipitate forms&#x27; : &#x27;نعم، يتكون راسب أبيض&#x27;}&lt;/button&gt;
+                        &lt;button class=&quot;flow-opt&quot; onclick=&quot;flowResult(&#x27;unknown&#x27;)&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;No reaction&#x27; : &#x27;لا تفاعل&#x27;}&lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            `;
+        }
+        next.innerHTML = html;
+        next.scrollIntoView({ behavior: &#x27;smooth&#x27;, block: &#x27;nearest&#x27; });
+    }
+
+    /* ===========================
+       QUIZ
+       =========================== */
+
+    function startQuiz() {
+        quizState.currentQuestion = 0;
+        quizState.score = 0;
+        quizState.questions = [...quizPool].sort(() =&gt; 0.5 - Math.random()).slice(0, 5);
+        renderQuizCard();
+    }
+
+    function renderQuizCard() {
+        const q = quizState.questions[quizState.currentQuestion];
+        const card = document.getElementById(&#x27;quiz-card&#x27;);
+
+        let html = `
+            &lt;div class=&quot;quiz-header&quot;&gt;
+                &lt;span&gt;${currentLang === &#x27;en&#x27; ? &#x27;Question &#x27; + (quizState.currentQuestion + 1) + &#x27; of 5&#x27; : &#x27;السؤال &#x27; + (quizState.currentQuestion + 1) + &#x27; من 5&#x27;}&lt;/span&gt;
+                &lt;span&gt;${currentLang === &#x27;en&#x27; ? &#x27;Score: &#x27; + quizState.score + &#x27;/&#x27; + quizState.currentQuestion : &#x27;الدرجة: &#x27; + quizState.score + &#x27;/&#x27; + quizState.currentQuestion}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;quiz-question&quot;&gt;${currentLang === &#x27;en&#x27; ? q.qEn : q.qAr}&lt;/div&gt;
+            &lt;div id=&quot;quiz-opts&quot;&gt;
+        `;
+        const opts = currentLang === &#x27;en&#x27; ? q.optsEn : q.optsAr;
+        opts.forEach((opt, idx) =&gt; {
+            html += `
+                &lt;div class=&quot;quiz-option&quot; onclick=&quot;submitQuiz(${idx})&quot;&gt;
+                    &lt;span class=&quot;opt-letter&quot;&gt;${String.fromCharCode(65 + idx)}&lt;/span&gt;
+                    &lt;span&gt;${opt}&lt;/span&gt;
+                &lt;/div&gt;
+            `;
+        });
+        html += `&lt;/div&gt;&lt;div id=&quot;quiz-feedback&quot;&gt;&lt;/div&gt;`;
+        card.innerHTML = html;
+    }
+
+    function submitQuiz(selectedIdx) {
+        const q = quizState.questions[quizState.currentQuestion];
+        const isCorrect = selectedIdx === q.correct;
+        const opts = document.querySelectorAll(&#x27;.quiz-option&#x27;);
+
+        opts.forEach((opt, idx) =&gt; {
+            opt.style.pointerEvents = &#x27;none&#x27;;
+            if (idx === q.correct) opt.classList.add(&#x27;correct&#x27;);
+            else if (idx === selectedIdx) opt.classList.add(&#x27;incorrect&#x27;);
+        });
+
+        if (isCorrect) quizState.score++;
+
+        const fb = document.getElementById(&#x27;quiz-feedback&#x27;);
+        fb.innerHTML = `
+            &lt;div style=&quot;margin-top:1rem; font-weight:700; color:${isCorrect ? &#x27;#34d399&#x27; : &#x27;#fb7185&#x27;};&quot;&gt;
+                ${isCorrect 
+                    ? (currentLang === &#x27;en&#x27; ? &#x27;✓ Correct Answer!&#x27; : &#x27;✓ إجابة صحيحة!&#x27;)
+                    : (currentLang === &#x27;en&#x27; ? &#x27;✗ Incorrect. The correct answer was &#x27; + String.fromCharCode(65 + q.correct) + &#x27;.&#x27; 
+                       : &#x27;✗ غير صحيح. الإجابة الصحيحة كانت &#x27; + String.fromCharCode(65 + q.correct) + &#x27;.&#x27;)}
+            &lt;/div&gt;
+            &lt;div class=&quot;quiz-explanation&quot;&gt;${currentLang === &#x27;en&#x27; ? q.expEn : q.expAr}&lt;/div&gt;
+            &lt;button class=&quot;quiz-btn&quot; onclick=&quot;nextQuiz()&quot;&gt;${quizState.currentQuestion === 4 
+                ? (currentLang === &#x27;en&#x27; ? &#x27;See Final Score&#x27; : &#x27;عرض النتيجة النهائية&#x27;)
+                : (currentLang === &#x27;en&#x27; ? &#x27;Next Question →&#x27; : &#x27;السؤال التالي ←&#x27;)}&lt;/button&gt;
+        `;
+    }
+
+    function nextQuiz() {
+        quizState.currentQuestion++;
+        if (quizState.currentQuestion &lt; 5) {
+            renderQuizCard();
+        } else {
+            renderQuizResults();
+        }
+    }
+
+    function renderQuizResults() {
+        const card = document.getElementById(&#x27;quiz-card&#x27;);
+        const percent = Math.round((quizState.score / 5) * 100);
+        let msg = &#x27;&#x27;;
+        let color = &#x27;#fb7185&#x27;;
+        if (percent &gt;= 80) {
+            msg = currentLang === &#x27;en&#x27; ? &#x27;Excellent! You have mastered cation qualitative analysis.&#x27; : &#x27;ممتاز! لقد أتقنت تحليل الكاتيونات النوعي.&#x27;;
+            color = &#x27;#34d399&#x27;;
+        } else if (percent &gt;= 60) {
+            msg = currentLang === &#x27;en&#x27; ? &#x27;Good attempt! Review basic radicals and their group reagents.&#x27; : &#x27;محاولة جيدة! راجع الجذور الأساسية وكواشف مجموعاتها.&#x27;;
+            color = &#x27;#fbbf24&#x27;;
+        } else {
+            msg = currentLang === &#x27;en&#x27; ? &#x27;Please study the standard reactions and try again.&#x27; : &#x27;يرجى دراسة التفاعلات المعيارية والمحاولة مرة أخرى.&#x27;;
+        }
+        card.innerHTML = `
+            &lt;div class=&quot;quiz-final-result&quot;&gt;
+                &lt;div class=&quot;result-title&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Quiz Completed!&#x27; : &#x27;اكتمل الاختبار!&#x27;}&lt;/div&gt;
+                &lt;div class=&quot;result-percent&quot;&gt;${percent}%&lt;/div&gt;
+                &lt;p class=&quot;result-score&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;You scored &#x27; + quizState.score + &#x27; out of 5.&#x27; : &#x27;حصلت على &#x27; + quizState.score + &#x27; من 5.&#x27;}&lt;/p&gt;
+                &lt;p class=&quot;result-msg&quot;&gt;${msg}&lt;/p&gt;
+                &lt;button class=&quot;quiz-btn&quot; onclick=&quot;startQuiz()&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Try Again&#x27; : &#x27;حاول مرة أخرى&#x27;}&lt;/button&gt;
+            &lt;/div&gt;
+        `;
+    }
+
+    /* ===========================
+       CHEATSHEET
+       =========================== */
+
+    function renderCheatsheet() {
+        const wrapper = document.getElementById(&#x27;cheatsheet-table&#x27;);
+        let html = `&lt;table&gt;&lt;thead&gt;&lt;tr&gt;
+            &lt;th&gt;${currentLang === &#x27;en&#x27; ? &#x27;Cation&#x27; : &#x27;الكاتيون&#x27;}&lt;/th&gt;
+            &lt;th&gt;${currentLang === &#x27;en&#x27; ? &#x27;Group&#x27; : &#x27;المجموعة&#x27;}&lt;/th&gt;
+            &lt;th&gt;${currentLang === &#x27;en&#x27; ? &#x27;Preliminary Test&#x27; : &#x27;الاختبار الأولي&#x27;}&lt;/th&gt;
+            &lt;th&gt;${currentLang === &#x27;en&#x27; ? &#x27;Confirmatory Test&#x27; : &#x27;اختبار التأكيد&#x27;}&lt;/th&gt;
+        &lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;`;
+
+        cations.forEach(c =&gt; {
+            const gc = getGroupClass(c.group);
+            html += `&lt;tr&gt;
+                &lt;td class=&quot;table-cation&quot;&gt;
+                    &lt;div&gt;${currentLang === &#x27;en&#x27; ? c.nameEn : c.nameAr}&lt;/div&gt;
+                    &lt;div style=&quot;font-size:0.78rem; color:#8b8aad; font-weight:400;&quot;&gt;${currentLang === &#x27;en&#x27; ? c.chargeEn : c.chargeAr}&lt;/div&gt;
+                &lt;/td&gt;
+                &lt;td&gt;&lt;span class=&quot;group-tag ${gc}&quot;&gt;${currentLang === &#x27;en&#x27; ? c.groupTitleEn : c.groupTitleAr}&lt;/span&gt;&lt;/td&gt;
+                &lt;td&gt;`;
+
+            if (c.id === &#x27;silver&#x27; || c.id === &#x27;mercury1&#x27; || c.id === &#x27;lead&#x27;) {
+                html += `&lt;div style=&quot;font-size:0.85rem; color:#8b8aad; font-style:italic;&quot;&gt;${currentLang === &#x27;en&#x27; ? c.theoryEn : c.theoryAr}&lt;/div&gt;`;
+            } else {
+                html += `
+                    &lt;strong style=&quot;font-size:0.85rem; color:#f5f3ff;&quot;&gt;${currentLang === &#x27;en&#x27; ? c.preliminaryReagentEn : c.preliminaryReagentAr}&lt;/strong&gt;
+                    &lt;div class=&quot;observation&quot; style=&quot;font-size:0.82rem; margin:4px 0;&quot;&gt;&lt;strong&gt;${currentLang === &#x27;en&#x27; ? &#x27;Obs: &#x27; : &#x27;الملاحظة: &#x27;}&lt;/strong&gt;${currentLang === &#x27;en&#x27; ? c.preliminaryObsEn : c.preliminaryObsAr}&lt;/div&gt;
+                    &lt;div style=&quot;font-size:0.82rem; color:#c4b5fd;&quot;&gt;${currentLang === &#x27;en&#x27; ? c.preliminaryInfEn : c.preliminaryInfAr}&lt;/div&gt;
+                `;
+            }
+
+            html += `&lt;/td&gt;&lt;td&gt;`;
+
+            if (c.confirmatory &amp;&amp; c.confirmatory.length &gt; 0) {
+                c.confirmatory.forEach(test =&gt; {
+                    html += `
+                        &lt;div style=&quot;margin-bottom:8px; padding-bottom:6px; border-bottom:1px dashed #2a2d5e;&quot;&gt;
+                            &lt;strong style=&quot;font-size:0.85rem; color:#f5f3ff;&quot;&gt;${currentLang === &#x27;en&#x27; ? test.titleEn : test.titleAr}&lt;/strong&gt;
+                            &lt;div class=&quot;observation&quot; style=&quot;font-size:0.82rem; margin:4px 0;&quot;&gt;&lt;strong&gt;${currentLang === &#x27;en&#x27; ? &#x27;Obs: &#x27; : &#x27;الملاحظة: &#x27;}&lt;/strong&gt;${currentLang === &#x27;en&#x27; ? test.obsEn : test.obsAr}&lt;/div&gt;
+                            &lt;div style=&quot;font-size:0.82rem; color:#c4b5fd;&quot;&gt;${currentLang === &#x27;en&#x27; ? test.infEn : test.infAr}&lt;/div&gt;
+                        &lt;/div&gt;
+                    `;
+                });
+            } else {
+                html += `&lt;span style=&quot;color:#8b8aad; font-style:italic; font-size:0.85rem;&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;No separate confirmatory test&#x27; : &#x27;لا يوجد اختبار تأكيد منفصل&#x27;}&lt;/span&gt;`;
+            }
+
+            html += `&lt;/td&gt;&lt;/tr&gt;`;
+        });
+
+        html += `&lt;/tbody&gt;&lt;/table&gt;`;
+        wrapper.innerHTML = html;
+    }
+
+    /* ===========================
+       INITIALIZATION
+       =========================== */
+    window.addEventListener(&#x27;DOMContentLoaded&#x27;, () =&gt; {
+        setLanguage(&#x27;en&#x27;);
+        showView(&#x27;home&#x27;);
+    });
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+" style="display:block; width:100%; height: calc(100vh - 190px); min-height: 760px; border:0; background:#0a0e27;"></iframe>
+  </div>
+</section>
+<!-- CATIONS_DASHBOARD_EMBED_END -->
+<div class="brandfoot"><span class="fline1"><span class="fname">أ/ أيمن منصور — مستشار الكيمياء</span><span class="sep">|</span><span class="fname2">Prof./ Ayman Mansour — Chemistry Consultant</span></span><span class="fline2"><span class="fphone">📞 / WhatsApp: <b>01068018005</b> · <b>01287996430</b></span><span class="sep">|</span><span>كيمياء ٢٠٢٦ • Chemistry 2026</span></span></div>
+
+<div id="security-overlay" class="security-overlay">
+    <div style="font-size:3rem">🛡</div>
+    <div>Screen Recording / Copying Disabled</div>
+    <div class="ar">تم تعطيل تصوير الشاشة / النسخ</div>
+</div>
+
+<script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => { e.preventDefault(); });
+    document.addEventListener('keydown', e => {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 's' || e.key === 'u' || e.key === 'a')) {
+            e.preventDefault();
+        }
+    });
+    document.addEventListener('keyup', e => {
+        if (e.key === 'PrintScreen') { try { navigator.clipboard.writeText(''); } catch(_){} }
+    });
+    window.addEventListener('blur', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'flex';
+    });
+    window.addEventListener('focus', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'none';
+    });
+</script>
+
+<script id="cations-frame-focus-compat">
+(function(){
+  function hideIfFrame(){
+    var frame = document.getElementById('cationsFrame');
+    var overlay = document.getElementById('security-overlay');
+    if (frame && overlay && document.activeElement === frame) overlay.style.display = 'none';
+  }
+  window.addEventListener('blur', function(){ setTimeout(hideIfFrame, 0); }, true);
+  document.addEventListener('focusin', hideIfFrame, true);
+})();
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a109d42d8e51787a',t:'MTc4MjI4NDE0Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a10bd797fb51e1d8',t:'MTc4MjMwNTI1OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

@@ -1,0 +1,2506 @@
+<html dir="ltr" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Essay Questions - English only</title><style>
+:root{--bg:#0f172a;--card:#1e293b;--ink:#f8fafc;--muted:#94a3b8;--line:#334155;--blue:#38bdf8;--violet:#818cf8;--green:#10b981;--red:#ef4444;--yellow:#fef08a;--bronze:#cd7f32}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 15%,rgba(56,189,248,.10),transparent 35%),var(--bg);color:var(--ink);font-family:Inter,Arial,Tahoma,sans-serif;line-height:1.7;padding:28px;direction:ltr}.container{max-width:1050px;margin:auto}.top{background:linear-gradient(135deg,rgba(56,189,248,.18),rgba(129,140,248,.12));border:1px solid rgba(56,189,248,.35);border-radius:22px;padding:22px 26px;margin-bottom:24px;box-shadow:0 16px 35px rgba(0,0,0,.25)}h1{margin:0 0 8px;color:#fff;font-size:30px}.meta{color:var(--muted);font-weight:800}.nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.nav a{color:#fff;text-decoration:none;background:rgba(56,189,248,.16);border:1px solid rgba(56,189,248,.35);border-radius:999px;padding:7px 12px;font-weight:900}.page{background:rgba(30,41,59,.96);border:1px solid var(--line);border-radius:18px;margin:18px 0;padding:22px;box-shadow:0 12px 28px rgba(0,0,0,.24);overflow:hidden}.source-label{display:inline-block;margin-bottom:10px;padding:6px 12px;border-radius:999px;background:linear-gradient(135deg,var(--blue),var(--violet));color:#07111f;font-weight:900}.question-title,.qtitle,h2{color:var(--blue);border-bottom:1px solid var(--line);padding-bottom:8px}.question-box,.question,.question-text{background:rgba(15,23,42,.54);border-left:5px solid var(--blue);border-radius:14px;padding:14px 16px;color:var(--yellow);font-size:18px;font-weight:700;margin:12px 0}.options-list,.options{list-style:none;padding:0;margin:14px 0;display:grid;gap:10px}.option-item,.option{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.045);border:1px solid rgba(148,163,184,.24);border-radius:14px;padding:12px}.option-label-ar,.option-label{min-width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;font-weight:900}.answer-box,.answer,.explanation,.feedback,.source-answer{background:rgba(16,185,129,.10);border:1px solid rgba(16,185,129,.35);border-radius:14px;padding:14px;margin-top:14px;color:#dcfce7;display:block!important;opacity:1!important;visibility:visible!important}.explanation-title{display:block!important;opacity:1!important;visibility:visible!important;color:#93c5fd;font-weight:900;margin-top:12px}.explanation-content{display:block!important;opacity:1!important;visibility:visible!important}.diagram,.diagram-container,.svg-container,.diagram-box{margin:16px 0;padding:10px;background:#0f172a;border:1px solid rgba(148,163,184,.25);border-radius:14px;overflow:auto;text-align:center}svg{max-width:100%;height:auto}.en-line{direction:ltr;text-align:left;display:block;color:#dbeafe}.ar-line{direction:rtl;text-align:right;display:block}.page-footer{color:var(--muted);font-size:13px;margin-top:12px}.show-answer-btn,.show-essay,button,input[type="checkbox"]{display:none!important}table{width:100%;border-collapse:collapse;margin:12px 0}td,th{border:1px solid var(--line);padding:8px}th{color:var(--blue)}.chem-ltr,.chem-eq{direction:ltr;unicode-bidi:isolate;font-family:Arial,sans-serif}@media print{body{background:white;color:#000;padding:0}.page{break-inside:avoid;background:#fff;color:#000}.top{background:#fff}.question-box{color:#000}.source-label{color:#000}}
+
+/* === Premium answer/explanation theme (Model-10 inspired) === */
+.answer-box,.answer,.source-answer,.feedback{
+  position:relative!important;
+  display:block!important;
+  margin:1.35rem 0 1rem!important;
+  padding:1rem 1.25rem 1rem 1.35rem!important;
+  border-radius:18px!important;
+  background:linear-gradient(135deg,rgba(16,185,129,.98),rgba(52,211,153,.92) 48%,rgba(14,165,233,.82))!important;
+  color:#ffffff!important;
+  border:1px solid rgba(167,243,208,.7)!important;
+  box-shadow:0 16px 36px rgba(16,185,129,.22), inset 0 1px 0 rgba(255,255,255,.25)!important;
+  font-weight:900!important;
+  line-height:1.8!important;
+}
+.answer-box::before,.answer::before,.source-answer::before,.feedback::before{
+  content:"✓";
+  display:inline-grid;
+  place-items:center;
+  width:30px;height:30px;
+  margin-inline-end:.65rem;
+  border-radius:50%;
+  background:#064e3b;
+  color:#bbf7d0;
+  box-shadow:0 0 0 4px rgba(255,255,255,.18);
+  font-weight:1000;
+}
+.explanation-title{
+  display:flex!important;
+  align-items:center!important;
+  gap:.65rem!important;
+  margin:1.25rem 0 .75rem!important;
+  padding:.75rem 1rem!important;
+  border-radius:16px!important;
+  background:linear-gradient(135deg,rgba(56,189,248,.20),rgba(129,140,248,.14))!important;
+  color:#7dd3fc!important;
+  border:1px solid rgba(125,211,252,.38)!important;
+  box-shadow:0 10px 26px rgba(56,189,248,.12)!important;
+  font-size:1.12rem!important;
+  font-weight:1000!important;
+}
+.explanation-title::before{content:"📚";filter:drop-shadow(0 4px 8px rgba(56,189,248,.35));}
+.explanation-content,.explanation{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  margin:.75rem 0 1.15rem!important;
+  padding:1.2rem 1.35rem!important;
+  border-radius:18px!important;
+  background:linear-gradient(135deg,rgba(15,23,42,.82),rgba(30,41,59,.78))!important;
+  color:#e2e8f0!important;
+  border:1px solid rgba(148,163,184,.25)!important;
+  border-left:6px solid #38bdf8!important;
+  box-shadow:0 14px 32px rgba(2,6,23,.24)!important;
+  line-height:1.85!important;
+}
+html[dir="rtl"] .explanation-content, html[dir="rtl"] .explanation{
+  border-left:1px solid rgba(148,163,184,.25)!important;
+  border-right:6px solid #38bdf8!important;
+}
+.explanation-content strong,.explanation strong{color:#fef08a!important;font-weight:1000!important;}
+.explanation-content h3,.explanation h3{color:#7dd3fc!important;margin-top:0!important;}
+.explanation-content li,.explanation li{margin:.35rem 0!important;}
+.math-chem,.chemical-formula,.chem-ltr,.chem-eq,.ion-chip,.electron-config{
+  direction:ltr!important;
+  unicode-bidi:isolate!important;
+  display:inline-block;
+  padding:.08rem .34rem;
+  margin:0 .05rem;
+  border-radius:8px;
+  background:rgba(56,189,248,.12);
+  border:1px solid rgba(56,189,248,.22);
+  color:#dbeafe!important;
+  font-family:"Segoe UI",Arial,sans-serif!important;
+  font-weight:900!important;
+  letter-spacing:.01em;
+}
+.math-chem sup,.chemical-formula sup,.chem-ltr sup{font-size:.72em;line-height:0;vertical-align:super;color:#fde68a;}
+.math-chem sub,.chemical-formula sub,.chem-ltr sub{font-size:.72em;line-height:0;vertical-align:sub;color:#bfdbfe;}
+.hund-note{border-color:rgba(251,191,36,.35)!important;background:rgba(251,191,36,.10)!important;color:#fde68a!important;}
+
+
+/* === Hund orbital boxes: force d orbitals to be HORIZONTAL, never vertical === */
+.orbital-diagram{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:10px!important;
+  width:100%!important;
+  margin:14px auto!important;
+  direction:ltr!important;
+  unicode-bidi:isolate!important;
+  writing-mode:horizontal-tb!important;
+}
+.orbital-box{
+  width:46px!important;
+  height:42px!important;
+  display:inline-flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:2px!important;
+  border:2px solid rgba(125,211,252,.72)!important;
+  border-radius:10px!important;
+  background:#0f172a!important;
+  color:#fef08a!important;
+  font-size:25px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  vertical-align:middle!important;
+  direction:ltr!important;
+  unicode-bidi:isolate!important;
+  writing-mode:horizontal-tb!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 8px 18px rgba(2,6,23,.22)!important;
+}
+.orbital-box span,.up-arrow,.down-arrow{
+  display:inline!important;
+  position:static!important;
+  float:none!important;
+  margin:0!important;
+  padding:0!important;
+  line-height:1!important;
+  writing-mode:horizontal-tb!important;
+}
+.orbital-box .up-arrow + .down-arrow{margin-left:-1px!important;}
+
+
+/* === Original Ayman Mansour header / footer / watermark style added without changing question content === */
+body.am-branded{padding-top:118px!important;}
+.am-watermark{
+  position:fixed;inset:0;pointer-events:none;z-index:0;opacity:1;
+  background-repeat:repeat;background-size:450px 300px;
+}
+html[dir="ltr"] .am-watermark{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='300'%3E%3Ctext x='50%25' y='50%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='Arial,sans-serif' font-size='27' font-weight='900' fill='%23ffffff' opacity='0.13'%3EProf./ Ayman Mansour%3C/text%3E%3C/svg%3E");
+}
+html[dir="rtl"] .am-watermark{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='300'%3E%3Ctext x='50%25' y='50%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='Arial,Tahoma,sans-serif' font-size='27' font-weight='900' fill='%23ffffff' opacity='0.13'%3E%D8%A3/%20%D8%A3%D9%8A%D9%85%D9%86%20%D9%85%D9%86%D8%B5%D9%88%D8%B1%3C/text%3E%3C/svg%3E");
+}
+.container,.top,.page{position:relative;z-index:1;}
+.am-brandbar{
+  position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:2000;
+  width:min(1120px,calc(100% - 28px));min-height:82px;
+  display:flex;align-items:center;gap:14px;
+  padding:10px 16px;border-radius:22px;
+  background:linear-gradient(135deg,rgba(15,23,42,.96),rgba(30,41,59,.94));
+  border:1px solid rgba(56,189,248,.34);
+  box-shadow:0 16px 42px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.07);
+  backdrop-filter:blur(10px);
+}
+.am-brandbar .am-blogo{
+  width:58px;height:58px;border-radius:17px;flex:0 0 58px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,#38bdf8,#818cf8 58%,#facc15);
+  color:#07111f;font-size:30px;font-weight:1000;
+  box-shadow:0 12px 24px rgba(56,189,248,.32);
+}
+.am-brandbar .am-bnames{line-height:1.28;min-width:210px;}
+.am-brandbar .am-bar{font-size:20px;font-weight:1000;color:#facc15;}
+.am-brandbar .am-ben{font-size:13px;font-weight:800;color:#7dd3fc;letter-spacing:.35px;}
+.am-brandbar .am-bpage{margin-inline-start:auto;text-align:center;line-height:1.45;min-width:240px;}
+.am-brandbar .am-pa{font-size:16px;font-weight:1000;color:#e2e8f0;}
+.am-brandbar .am-pe{font-size:12px;font-weight:800;color:#94a3b8;}
+.am-brandbar .am-bexam{text-align:end;line-height:1.4;}
+.am-brandbar .am-x1{font-size:15px;font-weight:1000;color:#4ade80;}
+.am-brandbar .am-x2{font-size:11px;color:#94a3b8;font-weight:800;}
+.am-brandfoot{
+  position:relative;z-index:1;margin:34px auto 10px;width:min(1120px,calc(100% - 28px));
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 14px;
+  padding:14px 18px;border-radius:20px;
+  background:linear-gradient(135deg,rgba(15,23,42,.96),rgba(30,41,59,.92));
+  border:1px solid rgba(148,163,184,.22);
+  color:#cbd5e1;font-weight:800;text-align:center;
+  box-shadow:0 16px 36px rgba(0,0,0,.30);
+}
+.am-brandfoot b{color:#facc15}.am-brandfoot .am-sep{color:#334155}
+@media(max-width:820px){body.am-branded{padding-top:168px!important}.am-brandbar{flex-wrap:wrap;justify-content:center;text-align:center}.am-brandbar .am-bpage{margin:0;order:3;flex-basis:100%;}.am-brandbar .am-bexam{text-align:center}.am-brandbar .am-bnames{min-width:0}.am-brandbar .am-bar{font-size:16px}.am-brandbar .am-blogo{width:48px;height:48px;flex-basis:48px}}
+@media print{body.am-branded{padding-top:0!important}.am-brandbar,.am-brandfoot,.am-watermark{position:static!important;box-shadow:none!important}.am-watermark{display:none!important}}
+
+
+/* === Actual original logo + professor photo === */
+.am-brandbar img.am-bphoto,
+.am-brandbar img.am-blogo{
+  width:74px!important;height:74px!important;flex:0 0 74px!important;
+  border:3px solid #facc15!important;background:#fff!important;
+  box-shadow:0 0 16px rgba(250,204,21,.42)!important;
+  display:block!important;
+}
+.am-brandbar img.am-bphoto{border-radius:50%!important;object-fit:cover!important;}
+.am-brandbar img.am-blogo{border-radius:12px!important;object-fit:contain!important;padding:3px!important;border-color:#38bdf8!important;box-shadow:0 0 14px rgba(56,189,248,.45)!important;}
+@media(max-width:820px){.am-brandbar img.am-bphoto,.am-brandbar img.am-blogo{width:52px!important;height:52px!important;flex-basis:52px!important}}
+
+
+/* === Click-to-reveal answers: answers stay hidden until the student chooses/clicks === */
+section.page.has-hidden-answer:not(.answered) .answer-box,
+section.page.has-hidden-answer:not(.answered) .answer,
+section.page.has-hidden-answer:not(.answered) .feedback,
+section.page.has-hidden-answer:not(.answered) .source-answer,
+section.page.has-hidden-answer:not(.answered) .explanation-title,
+section.page.has-hidden-answer:not(.answered) .explanation-content,
+section.page.has-hidden-answer:not(.answered) .explanation{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+}
+section.page.has-hidden-answer .option-item,
+section.page.has-hidden-answer .option,
+section.page.has-hidden-answer [data-option],
+section.page.has-hidden-answer [data-letter],
+section.page.has-hidden-answer .question-box,
+section.page.has-hidden-answer .question,
+section.page.has-hidden-answer .question-text{
+  cursor:pointer!important;
+}
+section.page.has-hidden-answer .option-item.selected,
+section.page.has-hidden-answer .option.selected,
+section.page.has-hidden-answer [data-option].selected,
+section.page.has-hidden-answer [data-letter].selected{
+  background:linear-gradient(135deg,rgba(56,189,248,.25),rgba(129,140,248,.18))!important;
+  border-color:#38bdf8!important;
+  box-shadow:0 0 0 3px rgba(56,189,248,.14),0 14px 30px rgba(56,189,248,.22)!important;
+  transform:translateY(-1px);
+}
+section.page.has-hidden-answer.answered .answer-box,
+section.page.has-hidden-answer.answered .answer,
+section.page.has-hidden-answer.answered .feedback,
+section.page.has-hidden-answer.answered .source-answer,
+section.page.has-hidden-answer.answered .explanation-title,
+section.page.has-hidden-answer.answered .explanation-content,
+section.page.has-hidden-answer.answered .explanation{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+
+
+/* === Correct / wrong option colors after answer reveal === */
+section.page.has-hidden-answer.answered .option-item.correct,
+section.page.has-hidden-answer.answered .option.correct,
+section.page.has-hidden-answer.answered [data-option].correct,
+section.page.has-hidden-answer.answered [data-letter].correct{
+  background:linear-gradient(135deg,rgba(16,185,129,.30),rgba(34,197,94,.20))!important;
+  border-color:#10b981!important;
+  color:#dcfce7!important;
+  box-shadow:0 0 0 3px rgba(16,185,129,.18),0 14px 30px rgba(16,185,129,.22)!important;
+}
+section.page.has-hidden-answer.answered .option-item.incorrect,
+section.page.has-hidden-answer.answered .option.incorrect,
+section.page.has-hidden-answer.answered [data-option].incorrect,
+section.page.has-hidden-answer.answered [data-letter].incorrect{
+  background:linear-gradient(135deg,rgba(239,68,68,.30),rgba(248,113,113,.18))!important;
+  border-color:#ef4444!important;
+  color:#fee2e2!important;
+  box-shadow:0 0 0 3px rgba(239,68,68,.16),0 14px 30px rgba(239,68,68,.20)!important;
+}
+section.page.has-hidden-answer.answered .option-item.correct .option-label-ar,
+section.page.has-hidden-answer.answered .option.correct .option-label-ar,
+section.page.has-hidden-answer.answered [data-option].correct .option-label-ar,
+section.page.has-hidden-answer.answered [data-letter].correct .option-label-ar,
+section.page.has-hidden-answer.answered .option-item.correct .option-label,
+section.page.has-hidden-answer.answered .option.correct .option-label{
+  background:linear-gradient(135deg,#10b981,#22c55e)!important;
+  color:#fff!important;
+}
+section.page.has-hidden-answer.answered .option-item.incorrect .option-label-ar,
+section.page.has-hidden-answer.answered .option.incorrect .option-label-ar,
+section.page.has-hidden-answer.answered [data-option].incorrect .option-label-ar,
+section.page.has-hidden-answer.answered [data-letter].incorrect .option-label-ar,
+section.page.has-hidden-answer.answered .option-item.incorrect .option-label,
+section.page.has-hidden-answer.answered .option.incorrect .option-label{
+  background:linear-gradient(135deg,#ef4444,#f97316)!important;
+  color:#fff!important;
+}
+
+/* === Options text: bold white only (no content/SVG changes) === */
+section.page .options-list .option-item,
+section.page .options .option,
+section.page .option-item,
+section.page .option,
+section.page [data-option],
+section.page [data-letter],
+section.page .option-text-ar,
+section.page .option-text,
+section.page .bubble-options button,
+section.page table tr[data-option] td,
+section.page table tr[data-letter] td{
+  color:#ffffff!important;
+  font-weight:900!important;
+}
+section.page .option-item *,
+section.page .option *,
+section.page [data-option] *,
+section.page [data-letter] *,
+section.page .option-text-ar *,
+section.page .option-text *{
+  color:#ffffff!important;
+  font-weight:900!important;
+}
+section.page .option-label-ar,
+section.page .option-label,
+section.page .bubble{
+  color:#ffffff!important;
+  font-weight:1000!important;
+}
+
+</style>
+<style id="am-attractive-index-style-v2">
+/* === Attractive unified index/header/footer style — AR/EN === */
+:root{
+  --am-navy:#070b14;--am-card:#0f172a;--am-card2:#111c31;--am-line:rgba(125,211,252,.24);
+  --am-sky:#38bdf8;--am-violet:#a78bfa;--am-gold:#fbbf24;--am-green:#34d399;--am-red:#fb7185;
+  --am-ink:#f8fafc;--am-muted:#a7b6ca;
+}
+body.am-branded{background-color:var(--am-navy)!important;color:var(--am-ink);margin:0;}
+.am-brandbar{
+  position:fixed!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;z-index:2000!important;display:flex!important;align-items:center!important;
+  top:12px!important;width:min(1180px,calc(100% - 28px))!important;min-height:88px!important;
+  border-radius:26px!important;padding:12px 18px!important;gap:14px!important;
+  background:linear-gradient(135deg,rgba(7,11,20,.92),rgba(15,23,42,.94) 50%,rgba(17,24,39,.92))!important;
+  border:1px solid rgba(56,189,248,.36)!important;
+  box-shadow:0 18px 48px rgba(0,0,0,.46), inset 0 1px 0 rgba(255,255,255,.08)!important;
+  backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+}
+.am-brandbar:before{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;background:linear-gradient(90deg,rgba(56,189,248,.55),rgba(167,139,250,.45),rgba(251,191,36,.38));opacity:.32;z-index:-1;filter:blur(10px);}
+.am-brandbar .am-bnames{line-height:1.28!important;min-width:210px!important}.am-brandbar .am-bpage{margin-inline-start:auto!important;text-align:center!important;line-height:1.42!important;min-width:170px!important}.am-brandbar .am-bexam{text-align:end!important;line-height:1.4!important}.am-brandbar .am-bar,.am-brandbar .am-ben,.am-brandbar .am-pa,.am-brandbar .am-pe,.am-brandbar .am-x1,.am-brandbar .am-x2{font-family:Inter,Cairo,Tahoma,Arial,sans-serif!important;}
+.am-brandbar .am-bar{font-weight:1000!important;color:#facc15!important;font-size:clamp(15px,1.6vw,21px)!important;}
+.am-brandbar .am-ben{font-weight:900!important;color:#7dd3fc!important;font-size:clamp(11px,1vw,14px)!important;}
+.am-brandbar .am-pa{font-weight:1000!important;color:#fff!important;font-size:clamp(15px,1.4vw,19px)!important;}
+.am-brandbar .am-pe{font-weight:900!important;color:#c4b5fd!important;font-size:clamp(11px,1vw,13px)!important;}
+.am-brandbar .am-x1{font-weight:1000!important;color:#86efac!important;}
+.am-brandbar .am-x2{font-weight:850!important;color:#cbd5e1!important;}
+.am-brandbar img.am-bphoto,.am-brandbar img.am-blogo{width:70px!important;height:70px!important;flex:0 0 70px!important;}
+.am-brandbar img.am-bphoto{border-radius:50%!important;object-fit:cover!important;border:3px solid var(--am-gold)!important;box-shadow:0 0 0 4px rgba(251,191,36,.12),0 0 22px rgba(251,191,36,.36)!important;}
+.am-brandbar img.am-blogo{border-radius:18px!important;object-fit:contain!important;background:#fff!important;padding:4px!important;border:3px solid var(--am-sky)!important;box-shadow:0 0 0 4px rgba(56,189,248,.12),0 0 22px rgba(56,189,248,.36)!important;}
+.am-course-index-panel{position:relative;z-index:3;width:min(1180px,calc(100% - 28px));margin:122px auto 26px!important;padding:18px;border-radius:28px;background:linear-gradient(135deg,rgba(15,23,42,.92),rgba(17,24,39,.88));border:1px solid rgba(125,211,252,.28);box-shadow:0 22px 52px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.07);overflow:hidden;font-family:Inter,Cairo,Tahoma,Arial,sans-serif;color:var(--am-ink);}
+.am-course-index-panel:before{content:"";position:absolute;inset:-80px -80px auto auto;width:220px;height:220px;background:radial-gradient(circle,rgba(56,189,248,.22),transparent 62%);pointer-events:none}.am-course-index-panel:after{content:"";position:absolute;left:-80px;bottom:-100px;width:230px;height:230px;background:radial-gradient(circle,rgba(167,139,250,.18),transparent 64%);pointer-events:none}
+.am-index-hero{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;margin-bottom:14px}.am-index-kicker{display:inline-flex;gap:8px;align-items:center;width:max-content;padding:6px 12px;border-radius:999px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.28);color:#bae6fd;font-weight:950;font-size:12px}.am-index-title{margin:8px 0 4px;font-size:clamp(22px,3vw,36px);font-weight:1000;letter-spacing:-.03em;background:linear-gradient(90deg,#7dd3fc,#c4b5fd,#fde68a);-webkit-background-clip:text;background-clip:text;color:transparent}.am-index-sub{margin:0;color:#cbd5e1;font-weight:750;line-height:1.6}.am-index-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}.am-index-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;color:white!important;font-weight:950;border-radius:999px;padding:9px 13px;background:linear-gradient(135deg,rgba(56,189,248,.26),rgba(167,139,250,.20));border:1px solid rgba(125,211,252,.32);box-shadow:0 10px 24px rgba(0,0,0,.18);transition:.18s ease}.am-index-btn:hover{transform:translateY(-2px);border-color:rgba(251,191,36,.55);box-shadow:0 14px 32px rgba(56,189,248,.18)}.am-section-heading{position:relative;z-index:1;margin:16px 0 10px;color:#e0f2fe;font-size:16px;font-weight:1000;display:flex;align-items:center;gap:9px}.am-section-heading .am-count{font-size:12px;color:#07111f;background:linear-gradient(135deg,#7dd3fc,#fbbf24);border-radius:999px;padding:3px 8px;font-weight:1000}.am-parts-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(7,minmax(112px,1fr));gap:10px}.am-part-card{position:relative;min-height:128px;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;color:#fff!important;border-radius:20px;padding:14px;background:linear-gradient(135deg,rgba(56,189,248,.14),rgba(167,139,250,.10) 58%,rgba(251,191,36,.08));border:1px solid rgba(148,163,184,.24);box-shadow:0 14px 28px rgba(0,0,0,.22);overflow:hidden;transition:.18s ease}.am-part-card:before{content:attr(data-no);position:absolute;inset:auto 10px 4px auto;font-size:54px;line-height:1;font-weight:1000;color:rgba(255,255,255,.06)}html[dir="rtl"] .am-part-card:before{inset:auto auto 4px 10px}.am-part-card:hover{transform:translateY(-4px);border-color:rgba(125,211,252,.55);box-shadow:0 18px 34px rgba(56,189,248,.16)}.am-part-name{font-size:15px;line-height:1.35;font-weight:1000}.am-part-alt{color:#cbd5e1;font-size:12px;line-height:1.35;font-weight:800}.am-part-chip{align-self:flex-start;margin-top:10px;border-radius:999px;padding:4px 8px;color:#07111f;background:linear-gradient(135deg,#7dd3fc,#86efac);font-size:11px;font-weight:1000}.am-model-chip-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(10,minmax(54px,1fr));gap:8px}.am-model-chip{display:flex;align-items:center;justify-content:center;text-decoration:none;color:#e0f2fe!important;min-height:44px;border-radius:15px;background:rgba(255,255,255,.055);border:1px solid rgba(148,163,184,.20);font-weight:1000;transition:.18s ease}.am-model-chip:hover{transform:translateY(-2px);background:rgba(56,189,248,.14);border-color:rgba(56,189,248,.45)}.am-model-chip.active{color:#07111f!important;background:linear-gradient(135deg,#38bdf8,#fbbf24);border-color:transparent;box-shadow:0 10px 24px rgba(56,189,248,.24)}.am-brandfoot{width:min(1180px,calc(100% - 28px))!important;margin:34px auto 14px!important;border-radius:22px!important;background:linear-gradient(135deg,rgba(15,23,42,.95),rgba(17,24,39,.90))!important;border:1px solid rgba(56,189,248,.28)!important;color:#e5e7eb!important;box-shadow:0 14px 34px rgba(0,0,0,.30)!important;font-family:Inter,Cairo,Tahoma,Arial,sans-serif!important;font-weight:850!important;display:flex!important;flex-wrap:wrap!important;gap:8px 12px!important;align-items:center!important;justify-content:center!important;padding:14px 18px!important;text-align:center!important}.global-lang-switcher{position:relative!important;z-index:4!important;width:min(1180px,calc(100% - 28px))!important;margin:12px auto!important;text-align:center!important}.global-lang-switcher a{display:inline-flex!important;gap:8px!important;align-items:center!important;justify-content:center!important;color:#07111f!important;background:linear-gradient(135deg,#7dd3fc,#fbbf24)!important;text-decoration:none!important;border-radius:999px!important;padding:9px 15px!important;font-weight:1000!important;box-shadow:0 12px 26px rgba(56,189,248,.20)!important}
+@media (max-width:1100px){.am-parts-grid{grid-template-columns:repeat(3,1fr)}.am-model-chip-grid{grid-template-columns:repeat(5,1fr)}.am-brandbar{position:relative!important;top:auto!important;left:auto!important;right:auto!important;transform:none!important;margin:12px auto!important}.am-course-index-panel{margin-top:18px!important}.am-index-hero{grid-template-columns:1fr}.am-index-actions{justify-content:flex-start}body.am-branded{padding-top:10px!important}}
+@media (max-width:700px){.am-parts-grid{grid-template-columns:1fr}.am-model-chip-grid{grid-template-columns:repeat(2,1fr)}.am-course-index-panel{padding:14px;border-radius:22px}.am-brandbar{display:grid!important;grid-template-columns:62px 62px 1fr!important;align-items:center!important}.am-brandbar .am-bexam,.am-brandbar .am-bpage{grid-column:1/-1;text-align:center!important}.am-brandbar img.am-bphoto,.am-brandbar img.am-blogo{width:58px!important;height:58px!important;flex-basis:58px!important}}
+@media print{.am-course-index-panel{break-inside:avoid;box-shadow:none!important}.am-index-actions,.global-lang-switcher{display:none!important}.am-brandbar{position:relative!important;top:auto!important;left:auto!important;transform:none!important}.am-course-index-panel{margin-top:14px!important}}
+</style>
+
+<!-- AM_MOBILE_TABLET_PROTECTION_V1 -->
+<style id="am-mobile-tablet-protection-style">
+/* Mobile/tablet responsive hardening + light content protection. Text/SVG content is not changed. */
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+html,body{max-width:100%;overflow-x:hidden;}
+*,*::before,*::after{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+img,svg,canvas,video{max-width:100%!important;height:auto;}
+svg{overflow:visible;}
+table{max-width:100%;border-collapse:collapse;}
+pre,code{white-space:pre-wrap;word-break:break-word;}
+/* protection on touch devices / casual copy; keeps form fields usable */
+body,body *{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+input,textarea,select,[contenteditable="true"]{-webkit-user-select:text!important;-moz-user-select:text!important;-ms-user-select:text!important;user-select:text!important;}
+img,svg{user-drag:none;-webkit-user-drag:none;}
+@media (hover:none) and (pointer:coarse){
+  a,button,.option,.option-item,[data-option],[data-letter],.bubble,.am-index-btn,.am-model-chip,.am-part-card,.pill,.chapter-card{touch-action:manipulation;}
+}
+@media (max-width:1180px){
+  body{max-width:100%!important;overflow-x:hidden!important;}
+  body:not(:has(.typical-index-head)){padding-left:10px!important;padding-right:10px!important;}
+  .container,main,.main,.content,.wrapper,.quiz-container,.page,section.page,article.problem{
+    width:min(100%,980px)!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important;
+  }
+  section.page,.page,article.problem{border-radius:16px!important;overflow-wrap:anywhere;}
+  .question-box,.question,.question-text,.answer-box,.answer,.explanation,.explanation-content,.feedback{overflow-wrap:anywhere;word-break:normal;}
+  .diagram,.diagram-container,.svg-container,.diagram-box{max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;}
+  table{display:block!important;width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;}
+  .options,.options-list,.bubble-options{grid-template-columns:1fr!important;width:100%!important;}
+  .option,.option-item,[data-option],[data-letter]{min-height:44px!important;}
+  .am-brandbar:not(.typical-index-head){position:relative!important;top:auto!important;left:auto!important;right:auto!important;transform:none!important;width:min(100%,980px)!important;margin:10px auto 12px!important;}
+  .am-course-index-panel{width:min(100%,980px)!important;margin-top:14px!important;}
+  .side,.answers,.sidebar,.right-sidebar,.left-sidebar,.bubble-sheet-sidebar,#bubbleSheetSidebar,.model4-sidebar{
+    position:relative!important;inset:auto!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+    width:min(100%,980px)!important;height:auto!important;max-height:280px!important;margin:10px auto!important;overflow:auto!important;
+    border-radius:16px!important;z-index:8!important;box-shadow:0 12px 26px rgba(0,0,0,.28)!important;
+  }
+  .model4-nav-controls,.nav-controls,.floating-nav{
+    position:fixed!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;bottom:8px!important;
+    width:min(96vw,520px)!important;z-index:3000!important;border-radius:18px!important;
+  }
+}
+@media (max-width:760px){
+  body{font-size:15px!important;line-height:1.6!important;}
+  h1{font-size:clamp(22px,7vw,32px)!important;} h2{font-size:clamp(19px,6vw,28px)!important;} h3{font-size:clamp(17px,5vw,23px)!important;}
+  .page,section.page,article.problem,.container,.top{padding:14px!important;}
+  .am-parts-grid,.chapter-grid{grid-template-columns:1fr!important;gap:14px!important;}
+  .am-model-chip-grid{grid-template-columns:repeat(2,1fr)!important;}
+  .model-nav{gap:8px!important;}.pill{min-width:calc(50% - 8px)!important;font-size:15px!important;}
+  .chapter-card{min-height:210px!important;padding:22px!important;}
+  .am-brandbar:not(.typical-index-head){display:grid!important;grid-template-columns:58px 58px 1fr!important;gap:8px!important;padding:10px!important;border-radius:18px!important;}
+  .am-brandbar:not(.typical-index-head) img.am-bphoto,.am-brandbar:not(.typical-index-head) img.am-blogo{width:54px!important;height:54px!important;flex-basis:54px!important;}
+  .am-brandbar:not(.typical-index-head) .am-bpage,.am-brandbar:not(.typical-index-head) .am-bexam{grid-column:1/-1!important;text-align:center!important;min-width:0!important;}
+  .am-brandfoot{font-size:12px!important;padding:10px!important;}
+  .global-lang-switcher{bottom:10px!important;right:10px!important;left:auto!important;}
+}
+@media (max-width:430px){
+  .pill{min-width:100%!important}.am-model-chip-grid{grid-template-columns:1fr!important}.top-badge{display:none!important;}
+  .icon{width:52px!important;height:52px!important;font-size:26px!important;}.badge{font-size:12px!important;}
+}
+@media print{
+  body,body *{-webkit-user-select:text!important;user-select:text!important;}
+  .am-mobile-only-hide{display:none!important;}
+}
+</style>
+<!-- /AM_MOBILE_TABLET_PROTECTION_V1 -->
+
+
+
+<!-- AM_DEEP_PROTECTION_V1 -->
+<style id="am-deep-protection-style">
+/* Deep protection: print, copy, screenshot, code. Text/SVG unchanged. No repeat. */
+@media print{
+  body,body *{display:none!important;visibility:hidden!important;opacity:0!important;}
+  body:after{content:"\26a0\fe0f Protected \2014 Printing is disabled";position:fixed;inset:0;z-index:9999999;
+    display:flex!important;visibility:visible!important;opacity:1!important;
+    align-items:center;justify-content:center;background:#0b1220;color:#ef4444;
+    font-family:Arial,sans-serif;font-size:clamp(18px,4vw,32px);font-weight:900;text-align:center;}
+}
+body,body *{-webkit-touch-callout:none!important;-webkit-user-select:none!important;
+  -moz-user-select:none!important;-ms-user-select:none!important;user-select:none!important;}
+input,textarea,select,[contenteditable="true"]{-webkit-user-select:text!important;-moz-user-select:text!important;
+  -ms-user-select:text!important;user-select:text!important;}
+img,svg{user-drag:none!important;-webkit-user-drag:none!important;pointer-events:none!important;}
+.am-deep-shield{position:fixed;inset:0;z-index:9999998;pointer-events:none;
+  background:transparent;mix-blend-mode:overlay;}
+</style>
+
+</head><body class="am-branded"><div class="am-watermark"></div><div class="am-brandbar" dir="ltr"><img alt="Prof. Ayman Mansour photo" class="am-bphoto" src="data:image/jpeg;base64,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"/><img alt="Ayman Mansour logo" class="am-blogo" src="data:image/jpeg;base64,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"/><div class="am-bnames"><div class="am-bar">بروف/ أيمن منصور — مستشار الكيمياء</div><div class="am-ben">Prof./ Ayman Mansour — Chemistry Consultant</div></div>
+<div class="am-bpage"><div class="am-pa">Essay Questions</div><div class="am-pe">الأسئلة المقالية</div></div>
+<div class="am-bexam"><div class="am-x1">كيمياء ٢٠٢٦ — Chemistry 2026</div><div class="am-x2">نماذج تفاعلية · شرح تفصيلي · مراجعة شاملة</div></div></div>
+<!-- AM_COURSE_INDEX_PANEL_V2 -->
+<nav class="am-course-index-panel" id="am-course-index-panel" aria-label="Chemistry course index">
+  <div class="am-index-hero">
+    <div>
+      <span class="am-index-kicker">✦ Unified AR/EN Style</span>
+      <h2 class="am-index-title">Chemistry 2026 Index</h2>
+      <p class="am-index-sub">Unified navigation for the 10 models + 7 parts without changing the content.</p>
+    </div>
+    <div class="am-index-actions">
+      <a class="am-index-btn" href="index.html">⌂ Main Index</a>
+      <a class="am-index-btn" href="essay-questions-ar.html">AR · العربية</a>
+      
+    </div>
+  </div>
+  <div class="am-section-heading">7 Parts by Name <span class="am-count">7</span></div>
+  <div class="am-parts-grid"><a class="am-part-card" data-no="01" href="01_transition_elements.html"><span class="am-part-name">Transition Elements</span><span class="am-part-alt">العناصر الانتقالية</span><span class="am-part-chip">Part 1</span></a><a class="am-part-card" data-no="02" href="02_chemical_analysis.html"><span class="am-part-name">Chemical Analysis</span><span class="am-part-alt">التحليل الكيميائي</span><span class="am-part-chip">Part 2</span></a><a class="am-part-card" data-no="03" href="03_chemical_equilibrium.html"><span class="am-part-name">Chemical Equilibrium</span><span class="am-part-alt">الاتزان الكيميائي</span><span class="am-part-chip">Part 3</span></a><a class="am-part-card" data-no="04" href="04_electrochemistry.html"><span class="am-part-name">Electrochemistry</span><span class="am-part-alt">الكيمياء الكهربية</span><span class="am-part-chip">Part 4</span></a><a class="am-part-card" data-no="05" href="05_organic_chemistry.html"><span class="am-part-name">Organic Chemistry</span><span class="am-part-alt">الكيمياء العضوية</span><span class="am-part-chip">Part 5</span></a><a class="am-part-card" data-no="06" href="06_essay_questions.html"><span class="am-part-name">Essay Questions</span><span class="am-part-alt">الأسئلة المقالية</span><span class="am-part-chip">Part 6</span></a><a class="am-part-card" data-no="07" href="07_Calculation problems.html"><span class="am-part-name">Calculation Problems</span><span class="am-part-alt">مسائل الحسابات</span><span class="am-part-chip">Part 7</span></a></div>
+  <div class="am-section-heading">10 Guiding Models <span class="am-count">10</span></div>
+  <div class="am-model-chip-grid"><a class="am-model-chip" href="model 1.html">Model 1</a><a class="am-model-chip" href="model 2.html">Model 2</a><a class="am-model-chip" href="model 3.html">Model 3</a><a class="am-model-chip" href="model 4.html">Model 4</a><a class="am-model-chip" href="model 5.html">Model 5</a><a class="am-model-chip" href="model 6.html">Model 6</a><a class="am-model-chip" href="model 7.html">Model 7</a><a class="am-model-chip" href="model 8.html">Model 8</a><a class="am-model-chip" href="model 9.html">Model 9</a><a class="am-model-chip" href="model 10.html">Model 10</a></div>
+</nav>
+<!-- /AM_COURSE_INDEX_PANEL_V2 --><div class="container"><header class="top"><h1>Essay Questions</h1><div class="meta">Extracted questions: 20 — from models 1 to 10 — English only</div><div class="nav"><a href="01_transition_elements.html">Transition Elements</a><a href="02_chemical_analysis.html">Chemical Analysis</a><a href="04_electrochemistry.html">Electrochemistry</a><a href="03_chemical_equilibrium.html">Chemical Equilibrium</a><a href="05_organic_chemistry.html">Organic Chemistry</a><a href="06_essay_questions.html">Essay Questions</a></div></header><section class="page extracted" id="model1-question45"><div class="source-label">Model 1 — Question 45 — Essay Questions</div>
+<h2 class="question-title">Question 45</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+<strong>Essay Question</strong><br/>
+        The following diagram represents some of iron and its compounds reactions:<br/>
+<svg height="100%" style="display: block" viewbox="0 0 950 360" width="100%" xmlns="http://w3.org">
+ Background Layout in Dark High-Contrast Palette 
+<rect fill="#0f172a" height="360" rx="16" width="950"></rect>
+ Subtle Grid Lines 
+<g fill="none" opacity="0.2" stroke="#334155" stroke-dasharray="4 8" stroke-width="1">
+<path d="M0 90 h950 M0 180 h950 M0 270 h950"></path>
+<path d="M237 v360 M475 v360 M712 v360"></path>
+</g>
+ ==================== REACTION PATHWAYS (ARROWS &amp; LABELS) ==================== 
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+ A -&gt; C: H₂SO₄ / Dil. 
+<path d="M 170 85 L 390 85" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="390,85 378,78 382,85 378,92"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="280" y="55">H₂SO₄</text>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="280" y="75">Dil.</text>
+ B -&gt; C: H₂SO₄ / Dil. 
+<path d="M 680 85 L 490 85" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="490,85 502,92 498,85 502,78"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="585" y="55">H₂SO₄</text>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="585" y="75">Dil.</text>
+ C -&gt; D: Δ 
+<path d="M 440 120 L 440 245" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="440,245 433,233 440,237 447,233"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="18" font-weight="800" text-anchor="start" x="458" y="185">Δ</text>
+ B -&gt; D: Process (1) 
+<path d="M 720 120 L 495 255" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="495,255 508,250 502,253 498,247"></polygon>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="15" font-weight="900" text-anchor="middle" transform="rotate(31, 615, 175)" x="615" y="175">Process (1)</text>
+ D -&gt; A: Process (2) 
+<path d="M 385 255 L 160 120" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="160,120 172,128 168,122 174,117"></polygon>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="15" font-weight="900" text-anchor="middle" transform="rotate(31, 265, 175)" x="265" y="175">Process (2)</text>
+</g>
+ ==================== COMPOUNDS NODES ==================== 
+ Node A 
+<g transform="translate(60, 50)">
+<rect fill="#1e293b" height="70" rx="6" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="900" text-anchor="middle" x="55" y="44">A</text>
+</g>
+ Node C 
+<g transform="translate(385, 50)">
+<rect fill="#1e293b" height="70" rx="6" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="900" text-anchor="middle" x="55" y="44">C</text>
+</g>
+ Node B (Black) 
+<g transform="translate(680, 50)">
+<rect fill="#1e293b" height="70" rx="6" stroke="#334155" stroke-width="2" width="190"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="95" y="44">B (Black)</text>
+</g>
+ Node D 
+<g transform="translate(385, 245)">
+<rect fill="#1e293b" height="70" rx="6" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="900" text-anchor="middle" x="55" y="44">D</text>
+</g>
+</svg>
+        (a) Mention the names of each of the processes (1) and (2)<br/>
+        (b) Write the chemical formula for each of (C) and (D)
+    </div>
+<div class="answer-box">✓ Model Answer</div>
+<div class="explanation-title">📚 Detailed Explanation</div>
+<div class="explanation-content">
+<h3 class="e-h">Iron Reaction Pathway</h3>
+<p>By tracking the reactions visually:</p>
+<ul class="e-l">
+<li class="e-s"><strong>Compound (B)</strong> is a black oxide that reacts with dilute H<sub>2</sub>SO<sub>4</sub>. It must be <strong>FeO</strong> (Iron II Oxide).</li>
+<li class="e-s">Reacting FeO with dilute H<sub>2</sub>SO<sub>4</sub> gives <strong>Compound (C)</strong>, which is <strong>FeSO<sub>4</sub></strong>.</li>
+<li class="e-s">Heating FeSO<sub>4</sub> strongly yields <strong>Compound (D)</strong>, which is <strong>Fe<sub>2</sub>O<sub>3</sub></strong>.</li>
+<li class="e-s"><strong>Element (A)</strong> is elemental Iron (Fe), which also reacts with dil. H<sub>2</sub>SO<sub>4</sub> to give FeSO<sub>4</sub>.</li>
+</ul>
+<p><strong>(a) Process Names:</strong><br/>
+        - Process (1) converts FeO to Fe<sub>2</sub>O<sub>3</sub>. This is an <strong>Oxidation</strong> reaction.<br/>
+        - Process (2) converts Fe<sub>2</sub>O<sub>3</sub> down to elemental Fe. This is a <strong>Reduction</strong> reaction.</p>
+<p><strong>(b) Chemical Formulas:</strong><br/>
+        - Compound (C): <span class="e-eq">FeSO<sub>4</sub></span><br/>
+        - Compound (D): <span class="e-eq">Fe<sub>2</sub>O<sub>3</sub></span></p>
+</div>
+<div class="page-footer">Question 45</div>
+</section>
+<section class="page extracted" id="model1-question46"><div class="source-label">Model 1 — Question 46 — Essay Questions</div>
+<h2 class="question-title">Question 46</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+<strong>Essay Question</strong><br/>
+        Study the following diagram:<br/>
+<svg height="100%" style="display: block" viewbox="0 0 950 360" width="100%" xmlns="http://w3.org">
+ Background Layout in Dark High-Contrast Palette 
+<rect fill="#0f172a" height="360" rx="16" width="950"></rect>
+ Subtle Grid Lines 
+<g fill="none" opacity="0.2" stroke="#334155" stroke-dasharray="4 8" stroke-width="1">
+<path d="M0 90 h950 M0 180 h950 M0 270 h950"></path>
+<path d="M237 v360 M475 v360 M712 v360"></path>
+</g>
+ ==================== REACTION PATHWAYS (ARROWS &amp; LABELS) ==================== 
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+ A -&gt; B: Alcoholic fermentation 
+<path d="M 140 180 L 240 180" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="240,180 228,173 232,180 228,187"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="14" font-weight="800" text-anchor="middle" x="190" y="155">Alcoholic</text>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="14" font-weight="800" text-anchor="middle" x="190" y="205">fermentation</text>
+ B -&gt; D: (C) 
+<path d="M 340 180 L 440 180" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="440,180 428,173 432,180 428,187"></polygon>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="15" font-weight="900" text-anchor="middle" x="390" y="160">(C)</text>
+ D -&gt; E: H₂O₂ 
+<path d="M 540 180 L 640 180" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="640,180 628,173 632,180 628,187"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="590" y="160">H₂O₂</text>
+ E -&gt; F: (E) 
+<path d="M 790 180 L 850 180" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="850,180 838,173 842,180 838,187"></polygon>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="15" font-weight="900" text-anchor="middle" x="820" y="160">(E)</text>
+</g>
+ ==================== COMPOUNDS NODES ==================== 
+ Node A 
+<g transform="translate(40, 145)">
+<rect fill="#1e293b" height="70" rx="6" stroke="#334155" stroke-width="2" width="100"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="50" y="44">(A)</text>
+</g>
+ Node B 
+<g transform="translate(240, 145)">
+<rect fill="#1e293b" height="70" rx="6" stroke="#334155" stroke-width="2" width="100"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="50" y="44">(B)</text>
+</g>
+ Node D 
+<g transform="translate(440, 145)">
+<rect fill="#1e293b" height="70" rx="6" stroke="#334155" stroke-width="2" width="100"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="50" y="44">(D)</text>
+</g>
+ Node Formula (CₙH₂ₙ₊₂O₂) 
+<g transform="translate(640, 145)">
+<rect fill="#1e293b" height="70" rx="6" stroke="#334155" stroke-width="2" width="150"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="900" text-anchor="middle" x="75" y="43">CₙH₂ₙ₊₂O₂</text>
+</g>
+ Node F 
+<g transform="translate(850, 145)">
+<rect fill="#1e293b" height="70" rx="6" stroke="#334155" stroke-width="2" width="80"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="40" y="44">(F)</text>
+</g>
+</svg>
+
+        - If you know that (F) is a dibasic carboxylic acid<br/>
+        (a) Write the names of organic compounds (A) and (D)<br/>
+        (b) Name the compounds (C) and (E)
+    </div>
+<div class="answer-box">✓ Model Answer</div>
+<div class="explanation-title">📚 Detailed Explanation</div>
+<div class="explanation-content">
+<h3 class="e-h">Synthesis of Oxalic Acid</h3>
+<p>Let's map out this sequence from the end backward:</p>
+<ul class="e-l">
+<li class="e-s">Compound (F) is a dibasic acid produced from oxidation. It is <strong>Oxalic acid</strong>.</li>
+<li class="e-s">It is prepared by the complete oxidation of (E), which must be <strong>Ethylene glycol</strong>.</li>
+<li class="e-s">Ethylene glycol is prepared by oxidizing (D) with H<sub>2</sub>O<sub>2</sub>. Thus, (D) is <strong>Ethene</strong>.</li>
+<li class="e-s">Ethene is prepared by dehydrating (C), so (C) is <strong>Ethanol</strong>.</li>
+<li class="e-s">Ethanol is produced by the alcoholic fermentation of (B), which is <strong>Glucose</strong>.</li>
+<li class="e-s">Glucose comes from the hydrolysis of (A), which is <strong>Sucrose</strong>.</li>
+</ul>
+<div class="e-hl">
+<strong>Answers:</strong><br/>
+            (a) (A): Sucrose (Cane Sugar) | (D): Ethene (Ethylene)<br/>
+            (b) (C): Ethanol (Ethyl alcohol) | (E): Ethylene glycol (1,2-ethanediol)
+        </div>
+</div>
+<div class="page-footer">Question 46</div>
+</section>
+<section class="page extracted" id="model2-question45"><div class="source-label">Model 2 — Question 45 — Essay Questions</div>
+<h2 class="question-title">Question 45 (Essay)</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+        The following figure shows three solutions (A, B, and C) of hydrofluoric acid at room temperature:<br/>
+<div style="text-align: center; margin: 15px 0">
+<div style="width: 100%; overflow-x: auto; white-space: nowrap; padding-bottom: 12px; background: #0f172a; border-radius: 16px">
+<div style="min-width: 900px; padding: 10px">
+<svg height="250" style="display: block" viewbox="0 0 900 250" width="900" xmlns="http://w3.org">
+ Background Layout 
+<rect fill="#0f172a" height="250" rx="16" width="900"></rect>
+ Subtle Matrix Grid Lines 
+<g fill="none" opacity="0.25" stroke="#334155" stroke-dasharray="4 8" stroke-width="1">
+<path d="M0 62.5 h900 M0 125 h900 M0 187.5 h900"></path>
+<path d="M225 0 v250 M450 0 v250 M675 0 v250"></path>
+</g>
+ ==================== CONTAINER A ==================== 
+<g transform="translate(45, 15)">
+ Liquid Level Fill 
+<path d="M 5 35 L 5 130 Q 5 150 75 150 Q 145 150 145 130 L 145 35 Z" fill="#38bdf8" opacity="0.15"></path>
+<ellipse cx="75" cy="35" fill="#38bdf8" opacity="0.3" rx="70" ry="15"></ellipse>
+ Cylinder Structure 
+<path d="M 5 25 L 5 130 Q 5 150 75 150 Q 145 150 145 130 L 145 25" fill="none" stroke="#64748b" stroke-linecap="round" stroke-width="2.5"></path>
+<ellipse cx="75" cy="25" fill="none" rx="70" ry="15" stroke="#64748b" stroke-width="2.5"></ellipse>
+<ellipse cx="75" cy="130" fill="#1e293b" opacity="0.8" rx="70" ry="16" stroke="#64748b" stroke-width="1.2"></ellipse>
+ Blue Label Badge 
+<g transform="translate(60, 8)">
+<rect fill="#2563eb" height="22" rx="4" width="30"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="900" text-anchor="middle" x="15" y="16">A</text>
+</g>
+ Species Labels 
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="75" y="55">HF<tspan fill="#94a3b8" font-size="11" font-weight="500"> (aq)</tspan></text>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="38" y="90">F⁻<tspan fill="#94a3b8" font-size="11" font-weight="500">(aq)</tspan></text>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="110" y="90">OH⁻<tspan fill="#94a3b8" font-size="11" font-weight="500">(aq)</tspan></text>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="75" y="122">H₃O⁺<tspan fill="#94a3b8" font-size="11" font-weight="500">(aq)</tspan></text>
+ Data Parameters Below 
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="15" font-weight="700" text-anchor="middle" x="75" y="185">M = 0.4M</text>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="14" font-weight="700" text-anchor="middle" x="75" y="212">Ka = 6.7 × 10⁻⁴</text>
+</g>
+ ==================== CONTAINER B ==================== 
+<g transform="translate(345, 15)">
+ Liquid Level Fill 
+<path d="M 5 35 L 5 130 Q 5 150 75 150 Q 145 150 145 130 L 145 35 Z" fill="#38bdf8" opacity="0.15"></path>
+<ellipse cx="75" cy="35" fill="#38bdf8" opacity="0.3" rx="70" ry="15"></ellipse>
+ Cylinder Structure 
+<path d="M 5 25 L 5 130 Q 5 150 75 150 Q 145 150 145 130 L 145 25" fill="none" stroke="#64748b" stroke-linecap="round" stroke-width="2.5"></path>
+<ellipse cx="75" cy="25" fill="none" rx="70" ry="15" stroke="#64748b" stroke-width="2.5"></ellipse>
+<ellipse cx="75" cy="130" fill="#1e293b" opacity="0.8" rx="70" ry="16" stroke="#64748b" stroke-width="1.2"></ellipse>
+ Blue Label Badge 
+<g transform="translate(60, 8)">
+<rect fill="#2563eb" height="22" rx="4" width="30"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="900" text-anchor="middle" x="15" y="16">B</text>
+</g>
+ Species Labels 
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="75" y="55">HF<tspan fill="#94a3b8" font-size="11" font-weight="500"> (aq)</tspan></text>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="38" y="90">F⁻<tspan fill="#94a3b8" font-size="11" font-weight="500">(aq)</tspan></text>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="110" y="90">OH⁻<tspan fill="#94a3b8" font-size="11" font-weight="500">(aq)</tspan></text>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="75" y="122">H₃O⁺<tspan fill="#94a3b8" font-size="11" font-weight="500">(aq)</tspan></text>
+ Data Parameters Below 
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="15" font-weight="700" text-anchor="middle" x="75" y="185">M = 0.28M</text>
+</g>
+ ==================== CONTAINER C ==================== 
+<g transform="translate(645, 15)">
+ Liquid Level Fill 
+<path d="M 5 35 L 5 130 Q 5 150 75 150 Q 145 150 145 130 L 145 35 Z" fill="#38bdf8" opacity="0.15"></path>
+<ellipse cx="75" cy="35" fill="#38bdf8" opacity="0.3" rx="70" ry="15"></ellipse>
+ Cylinder Structure 
+<path d="M 5 25 L 5 130 Q 5 150 75 150 Q 145 150 145 130 L 145 25" fill="none" stroke="#64748b" stroke-linecap="round" stroke-width="2.5"></path>
+<ellipse cx="75" cy="25" fill="none" rx="70" ry="15" stroke="#64748b" stroke-width="2.5"></ellipse>
+<ellipse cx="75" cy="130" fill="#1e293b" opacity="0.8" rx="70" ry="16" stroke="#64748b" stroke-width="1.2"></ellipse>
+ Blue Label Badge 
+<g transform="translate(60, 8)">
+<rect fill="#2563eb" height="22" rx="4" width="30"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="900" text-anchor="middle" x="15" y="16">C</text>
+</g>
+ Species Labels 
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="75" y="55">HF<tspan fill="#94a3b8" font-size="11" font-weight="500"> (aq)</tspan></text>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="38" y="90">F⁻<tspan fill="#94a3b8" font-size="11" font-weight="500">(aq)</tspan></text>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="110" y="90">OH⁻<tspan fill="#94a3b8" font-size="11" font-weight="500">(aq)</tspan></text>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="75" y="122">H₃O⁺<tspan fill="#94a3b8" font-size="11" font-weight="500">(aq)</tspan></text>
+ Data Parameters Below 
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="15" font-weight="700" text-anchor="middle" x="75" y="185">M = 0.02M</text>
+</g>
+</svg>
+</div>
+</div>
+</div>
+<strong>Study the figure and then answer:</strong><br/>
+        (1) Which solution has the highest pH value?<br/>
+        (2) Which solution has the highest fluoride ions concentration?<br/>
+        (3) What is the K<sub>a</sub> value of the solution (B)?<br/>
+        (4) Which acid solution has a dissociation percentage = 4.9%?
+    </div>
+<div class="explanation-title">📚 Detailed Explanation &amp; Essay Answers</div>
+<div class="explanation-content">
+<h3>(1) Highest pH Value</h3>
+<p><strong>Solution C (0.02M)</strong>. In a weak acid, dilution decreases the hydronium ion concentration [H<sub>3</sub>O<sup>+</sup>], which consequently increases the pH value.</p>
+<h3>(2) Highest Fluoride Ion Concentration</h3>
+<p><strong>Solution A (0.4M)</strong>. Higher initial analytical concentration results in a larger total concentration of dissociated F<sup>-</sup> ions at equilibrium, because <code>[F<sup>-</sup>] = √(K<sub>a</sub> × C<sub>a</sub>)</code>.</p>
+<h3>(3) K<sub>a</sub> Value of Solution B</h3>
+<p><strong>6.7 × 10<sup>-4</sup></strong>. The acid dissociation constant (K<sub>a</sub>) is temperature-dependent and remains constant for the same acid at room temperature.</p>
+<h3>(4) Finding Solution with Dissociation Percentage = 4.9%</h3>
+<div class="diagram-box">
+<code>α = 4.9% = 0.049</code><br/>
+<code>α = √(K<sub>a</sub> / C<sub>a</sub>)</code><br/>
+<code>C<sub>a</sub> = K<sub>a</sub> / α<sup>2</sup> = (6.7 × 10<sup>-4</sup>) / (0.049)<sup>2</sup> ≈ 0.28 M</code>
+</div>
+<p>This matches <strong>Solution B</strong>.</p>
+</div>
+<div class="page-footer">Question 45</div>
+</section>
+<section class="page extracted" id="model2-question46"><div class="source-label">Model 2 — Question 46 — Essay Questions</div>
+<h2 class="question-title">Question 46 (Essay)</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+        Study the following diagram:<br/>
+<div style="text-align: center; margin: 15px 0">
+<div style="width: 100%; overflow-x: auto; white-space: nowrap; padding-bottom: 12px; background: #0f172a; border-radius: 16px">
+<div style="min-width: 1000px; padding: 10px">
+<svg height="240" style="display: block" viewbox="0 0 1000 240" width="1000" xmlns="http://w3.org">
+ Background Layout 
+<rect fill="#0f172a" height="240" rx="16" width="1000"></rect>
+ Subtle Matrix Grid Lines 
+<g fill="none" opacity="0.25" stroke="#334155" stroke-dasharray="4 8" stroke-width="1">
+<path d="M0 60 h1000 M0 120 h1000 M0 180 h1000"></path>
+<path d="M200 0 v240 M400 0 v240 M600 0 v240 M800 0 v240"></path>
+</g>
+ Definition of Arrow Markers 
+<defs>
+<marker id="arrow-3" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="6" refy="5" viewbox="0 0 10 10">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8"></path>
+</marker>
+</defs>
+ ==================== BOX 1: A ==================== 
+<g transform="translate(25, 35)">
+<rect fill="#1e293b" height="140" rx="12" stroke="#64748b" stroke-width="2" width="160"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="800" text-anchor="middle" x="80" y="60">CH<tspan dy="5" font-size="15">2</tspan><tspan dy="-5" font-size="22">O</tspan><tspan dy="5" font-size="15">2</tspan></text>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="18" font-weight="800" text-anchor="middle" x="80" y="110">(A)</text>
+</g>
+ REACTION ARROW 1 
+<g transform="translate(185, 105)">
+<path d="M 5 0 H 115" fill="none" marker-end="url(#arrow-3)" stroke="#38bdf8" stroke-width="3"></path>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="15" font-weight="800" text-anchor="middle" x="60" y="-20">2H<tspan dy="4" font-size="11">2</tspan></text>
+<text dy="-4" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="60" y="-2">CuCrO₄</text>
+</g>
+ ==================== BOX 2: B ==================== 
+<g transform="translate(305, 35)">
+<rect fill="#1e293b" height="140" rx="12" stroke="#64748b" stroke-width="2" width="140"></rect>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="20" font-weight="800" text-anchor="middle" x="70" y="85">(B)</text>
+</g>
+ REACTION ARROW 2 
+<g transform="translate(445, 105)">
+<path d="M 5 0 H 105" fill="none" marker-end="url(#arrow-3)" stroke="#38bdf8" stroke-width="3"></path>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="700" text-anchor="middle" x="55" y="-20">Compound</text>
+<text dy="2" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="15" font-weight="800" text-anchor="middle" x="55" y="0">(A)</text>
+</g>
+ ==================== BOX 3: C ==================== 
+<g transform="translate(550, 35)">
+<rect fill="#1e293b" height="140" rx="12" stroke="#64748b" stroke-width="2" width="140"></rect>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="20" font-weight="800" text-anchor="middle" x="70" y="85">(C)</text>
+</g>
+ REACTION ARROW 3 
+<g transform="translate(690, 105)">
+<path d="M 5 0 H 115" fill="none" marker-end="url(#arrow-3)" stroke="#38bdf8" stroke-width="3"></path>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="60" y="-15">NH<tspan dy="4" font-size="12">3</tspan></text>
+</g>
+ ==================== BOX 4: D ==================== 
+<g transform="translate(810, 35)">
+<rect fill="#1e293b" height="140" rx="12" stroke="#38bdf8" stroke-width="2.5" width="165"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="800" text-anchor="middle" x="82.5" y="60">C<tspan dy="5" font-size="15">n</tspan><tspan dy="-5" font-size="22">H</tspan><tspan dy="5" font-size="15">2n+1</tspan><tspan dy="-5" font-size="22">ON</tspan></text>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="18" font-weight="800" text-anchor="middle" x="82.5" y="110">(D)</text>
+</g>
+</svg>
+</div>
+</div>
+</div>
+<strong>Answer the following questions:</strong><br/>
+        1- What is the common name for compound (A)?<br/>
+        2- Write the structural formula of the compound formed from the reaction of Compound (B) with C<sub>7</sub>H<sub>6</sub>O<sub>3</sub> (salicylic acid)?<br/>
+        3- What is the IUPAC name for compound (C)?<br/>
+        4- Write the structural formula of compound (D).
+    </div>
+<div class="explanation-title">📚 Detailed Explanation &amp; Essay Answers</div>
+<div class="explanation-content">
+<h3>Step-by-Step Pathway</h3>
+<ul>
+<li><strong>A:</strong> Formic acid (CH<sub>2</sub>O<sub>2</sub>)</li>
+<li><strong>B:</strong> Methanol (CH<sub>3</sub>OH)</li>
+<li><strong>C:</strong> Methyl formate (HCOOCH<sub>3</sub>)</li>
+<li><strong>D:</strong> Formamide (HCONH<sub>2</sub>)</li>
+</ul>
+<h3>Answers:</h3>
+<p><strong>1- Common Name for Compound (A):</strong> Formic acid</p>
+<p><strong>2- Structural Formula of the ester formed (Methyl salicylate / Oil of Wintergreen):</strong></p>
+<div class="diagram-box text-center">
+<div style="width: 100%; overflow-x: auto; white-space: nowrap; padding-bottom: 12px; background: #0f172a; border-radius: 16px">
+<div style="min-width: 500px; padding: 10px; display: flex; justify-content: center">
+<svg height="320" style="display: block" viewbox="0 0 500 320" width="500" xmlns="http://w3.org">
+ Base Background Canvas 
+<rect fill="#0f172a" height="320" rx="16" width="500"></rect>
+ Matrix Blueprint Grid Lines 
+<g fill="none" opacity="0.25" stroke="#334155" stroke-dasharray="4 8" stroke-width="1">
+<path d="M0 80 h500 M0 160 h500 M0 240 h500"></path>
+<path d="M125 0 v320 M250 0 v320 M375 0 v320"></path>
+</g>
+ Center Title Block 
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="800" text-anchor="middle" x="250" y="35">Methyl Salicylate</text>
+ Chemical Structure Display Group (Centered) 
+<g transform="translate(160, 65)">
+ Benzene Ring (Hexagon Paths) 
+ Outer Frame 
+<polygon fill="#1e293b" points="90,40 142,70 142,130 90,160 38,130 38,70" stroke="#64748b" stroke-linejoin="round" stroke-width="2.5"></polygon>
+ Inner Alternating Double Bonds 
+<line stroke="#64748b" stroke-width="2" x1="86" x2="132" y1="48" y2="75"></line>
+<line stroke="#64748b" stroke-width="2" x1="134" x2="90" y1="125" y2="150"></line>
+<line stroke="#64748b" stroke-width="2" x1="46" x2="46" y1="125" y2="75"></line>
+ Phenolic Hydroxyl Group (-OH) at Position 1 
+ Bond line 
+<line stroke="#64748b" stroke-width="2" x1="38" x2="12" y1="70" y2="55"></line>
+ Functional group text 
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="end" x="10" y="52">HO</text>
+ Ester Linkage Group (-COOCH3) at Position 2 
+ Bond to Carbonyl Carbon 
+<line stroke="#64748b" stroke-width="2" x1="90" x2="90" y1="40" y2="12"></line>
+ Carbonyl Double Bond to Oxygen (=O) 
+<line stroke="#ef4444" stroke-width="2" x1="86" x2="68" y1="12" y2="2"></line>
+<line stroke="#ef4444" stroke-width="2" x1="90" x2="72" y1="15" y2="5"></line>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="15" font-weight="800" text-anchor="end" x="65" y="0">O</text>
+ Bond from Carbonyl Carbon to Bridge Oxygen 
+<line stroke="#64748b" stroke-width="2" x1="90" x2="114" y1="12" y2="-2"></line>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="start" x="122" y="0">O</text>
+ Bond from Bridge Oxygen to Methyl Group (-CH3) 
+<line stroke="#64748b" stroke-width="2" x1="135" x2="155" y1="-2" y2="-12"></line>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="start" x="160" y="-12">CH<tspan dy="4" font-size="11">3</tspan></text>
+</g>
+ Lower Parameter Box Information 
+<g transform="translate(100, 255)">
+<rect fill="#1e293b" height="45" rx="8" stroke="#334155" stroke-width="1.5" width="300"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="700" text-anchor="middle" x="150" y="27">
+          Molecular Formula: <tspan fill="#38bdf8">C₈H₈O₃</tspan>
+</text>
+</g>
+</svg>
+</div>
+</div>
+</div>
+<p><strong>3- IUPAC Name for Compound (C):</strong> Methyl methanoate</p>
+<p><strong>4- Structural Formula of Compound (D):</strong></p>
+<div class="diagram-box">
+<code>H–CO–NH<sub>2</sub></code> (Formamide)
+        </div>
+</div>
+<div class="page-footer">Question 46</div>
+</section>
+<section class="page extracted" id="model3-question45"><div class="source-label">Model 3 — Question 45 — Essay Questions</div>
+<h2 class="question-title">Question 45 (Essay)</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+<div class="q45-unique-block" id="q45-unique-section" style="display: block; visibility: visible; opacity: 1">
+<style>
+    /* Scoped Specific CSS to Prevent Element Disappearance */
+    #q45-unique-section .q45-toggle-trigger {
+      display: none !important;
+    }
+    #q45-unique-section  {
+      display: none;
+      opacity: 0;
+      overflow: hidden;
+      margin-top: 16px;
+      transition: opacity 0.3s ease;
+    }
+    /* When checked, show the target box explicitly */
+    #q45-unique-section .q45-toggle-trigger{
+      display: block !important;
+      opacity: 1 !important;
+    }
+    #q45-unique-section .q45-toggle-label {
+      display: inline-block;
+      cursor: pointer;
+      user-select: none;
+    }
+  </style>
+
+    Study the following figure showing a <strong>Lithium (Li⁺) Cell</strong> and a <strong>Lead Accumulator</strong> (consisting of 2 cells):
+
+    <div style="width: 100%; overflow-x: auto; white-space: nowrap; padding-bottom: 12px; background: #0f172a; border-radius: 16px; margin-bottom: 16px; display: block">
+<div style="min-width: 900px; padding: 10px; display: block">
+<svg height="340" style="display: block" viewbox="0 0 900 340" width="900" xmlns="http://w3.org">
+ Background Layout 
+<rect fill="#0f172a" height="340" rx="16" width="900"></rect>
+ Subtle Matrix Grid Lines &amp; Section Dividers 
+<g fill="none" opacity="0.25" stroke="#334155" stroke-dasharray="4 8" stroke-width="1">
+<path d="M0 85 h900 M0 170 h900 M0 255 h900"></path>
+<path d="M420 0 v340"></path>
+</g>
+<g fill="none" opacity="0.3" stroke="#38bdf8" stroke-width="1.5">
+<path d="M420 0 v340"></path>
+</g>
+ ==================== EXTERNAL CONNECTIONS (WIRES) ==================== 
+<g fill="none" stroke-linecap="round">
+ Wire 1: From Y to terminal A (-) 
+<path d="M 125 105 C 100 40, 500 20, 620 105" stroke="#64748b" stroke-width="3"></path>
+ Wire 2: From X to terminal B (+) 
+<path d="M 285 105 C 240 60, 600 40, 710 105" stroke="#ef4444" stroke-width="3"></path>
+</g>
+ ==================== LEFT COMPARTMENT: Li+ CELL ==================== 
+<g transform="translate(60, 105)">
+<rect fill="#38bdf8" height="180" opacity="0.15" width="80" x="80"></rect>
+<rect fill="#1e293b" height="180" rx="4" stroke="#334155" stroke-width="1.5" width="80" x="0"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="40" y="96">Y</text>
+<rect fill="none" height="180" opacity="0.6" stroke="#38bdf8" stroke-dasharray="4 4" stroke-width="1.5" width="80" x="80"></rect>
+<rect fill="#1e293b" height="180" rx="4" stroke="#334155" stroke-width="1.5" width="80" x="160"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="200" y="96">X</text>
+<circle cx="120" cy="70" fill="#38bdf8" r="5"></circle>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="10" font-weight="800" text-anchor="middle" x="120" y="62">Li⁺</text>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="900" text-anchor="middle" x="120" y="215">Li⁺ Cell</text>
+</g>
+ ==================== RIGHT COMPARTMENT: LEAD ACCUMULATOR ==================== 
+<g transform="translate(540, 105)">
+<rect fill="#1e293b" height="105" rx="6" stroke="#334155" stroke-width="1.5" width="230" x="30" y="45"></rect>
+<polygon fill="#1e293b" opacity="0.7" points="30,45 60,25 290,25 260,45" stroke="#334155" stroke-width="1.5"></polygon>
+<polygon fill="#0f172a" opacity="0.5" points="260,45 290,25 290,130 260,150" stroke="#334155" stroke-width="1.5"></polygon>
+ Terminal A Group (-) 
+<g transform="translate(65, 0)">
+<rect fill="#0f172a" height="40" rx="4" stroke="#38bdf8" stroke-width="2" width="36"></rect>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="18" y="26">−</text>
+<text fill="#94a3b8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="18" y="65">A</text>
+</g>
+ Terminal B Group (+) 
+<g transform="translate(155, 0)">
+<rect fill="#0f172a" height="40" rx="4" stroke="#ef4444" stroke-width="2" width="36"></rect>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="20" font-weight="900" text-anchor="middle" x="18" y="26">+</text>
+<text fill="#94a3b8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="18" y="65">B</text>
+</g>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="15" font-weight="800" text-anchor="middle" x="145" y="185">Lead accumulator</text>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="15" font-weight="800" text-anchor="middle" x="145" y="208">consists of 2 cells</text>
+</g>
+</svg>
+</div>
+</div>
+<strong>Answer the following questions:</strong><br/>
+    (a) Identify the anode and cathode in the lithium battery.<br/>
+    (b) Identify (lead battery or lithium cell) where spontaneous reactions occur.
+  </div></div>
+ Isolated CSS Checkbox Controller Structure 
+<input class="q45-toggle-trigger" id="q45-trigger-element" type="checkbox"/>
+<label class="q45-toggle-label answer-box" for="q45-trigger-element">
+    ✓ Show Answer
+  </label>
+<div class="explanation-title">📚 Detailed Explanation</div>
+<div class="explanation-content">
+<p><strong>(a) Anode and Cathode of the Lithium Battery:</strong></p>
+<ul>
+<li>The Li⁺ cell is connected to the lead accumulator for <strong>charging</strong> (it acts as an electrolytic cell).</li>
+<li>Electrode <strong>(Y)</strong> → connected to <strong>negative (−) terminal A</strong> → <strong>Cathode (Reduction)</strong>: Li⁺ + e⁻ → Li</li>
+<li>Electrode <strong>(X)</strong> → connected to <strong>positive (+) terminal B</strong> → <strong>Anode (Oxidation)</strong></li>
+</ul>
+<p><strong>(b) Spontaneous Reactions:</strong></p>
+<ul>
+<li>The <strong>Lead Accumulator</strong> is the source of electric current → <strong>spontaneous (galvanic) reactions occur inside it</strong>.</li>
+<li>The lithium cell is being charged (non-spontaneous/electrolytic process).</li>
+</ul>
+</div>
+</section>
+<section class="page extracted" id="model3-question46"><div class="source-label">Model 3 — Question 46 — Essay Questions</div>
+<h2 class="question-title">Question 46 (Essay)</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+    From the following diagram:
+
+    <svg height="140" style="display: block; margin: auto" viewbox="0 0 760 140" width="760" xmlns="http://w3.org">
+ Background Layout 
+<rect fill="#0f172a" height="140" rx="16" width="760"></rect>
+ Subtle Matrix Grid Lines 
+<g fill="none" opacity="0.25" stroke="#334155" stroke-dasharray="4 8" stroke-width="1">
+<path d="M0 70 h760"></path>
+<path d="M190 0 v140 M380 0 v140 M570 0 v140"></path>
+</g>
+ Definition of Arrow Markers 
+<defs>
+<marker id="flow-arrow-2" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="6" refy="5" viewbox="0 0 10 10">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8"></path>
+</marker>
+</defs>
+ Box A 
+<g transform="translate(30, 45)">
+<rect fill="#1e293b" height="50" rx="6" stroke="#38bdf8" stroke-width="2" width="80"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="900" text-anchor="middle" x="40" y="32">A</text>
+</g>
+ Arrow 1: NaOH Excess 
+<g transform="translate(110, 70)">
+<line marker-end="url(#flow-arrow-2)" stroke="#38bdf8" stroke-linecap="round" stroke-width="2.5" x1="5" x2="90" y1="0" y2="0"></line>
+<text fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="800" text-anchor="middle" x="45" y="-14">NaOH</text>
+<text fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="13" font-weight="800" text-anchor="middle" x="45" y="14">Excess</text>
+</g>
+ Box B 
+<g transform="translate(205, 45)">
+<rect fill="#1e293b" height="50" rx="6" stroke="#38bdf8" stroke-width="2" width="75"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="900" text-anchor="middle" x="37.5" y="32">B</text>
+</g>
+ Arrow 2: Process (C) 
+<g transform="translate(280, 70)">
+<line marker-end="url(#flow-arrow-2)" stroke="#38bdf8" stroke-linecap="round" stroke-width="2.5" x1="5" x2="105" y1="0" y2="0"></line>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="14" font-weight="800" text-anchor="middle" x="55" y="-12">Process</text>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="14" font-weight="800" text-anchor="middle" x="55" y="15">(C)</text>
+</g>
+ Box D 
+<g transform="translate(390, 45)">
+<rect fill="#1e293b" height="50" rx="6" stroke="#38bdf8" stroke-width="2" width="90"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="900" text-anchor="middle" x="45" y="32">D</text>
+</g>
+ Arrow 3: Process (E) pointing LEFT 
+<g transform="translate(480, 70)">
+<line marker-end="url(#flow-arrow-2)" stroke="#38bdf8" stroke-linecap="round" stroke-width="2.5" x1="85" x2="5" y1="0" y2="0"></line>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="14" font-weight="800" text-anchor="middle" x="45" y="-12">Process</text>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="14" font-weight="800" text-anchor="middle" x="45" y="15">(E)</text>
+</g>
+ Box F 
+<g transform="translate(570, 45)">
+<rect fill="#1e293b" height="50" rx="6" stroke="#38bdf8" stroke-width="2" width="160"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="900" text-anchor="middle" x="80" y="32">(F)</text>
+</g>
+</svg>
+</div>
+<p>If organic compound <strong>(A)</strong> is used as a preservative for frozen fruit, and organic compound <strong>(F)</strong> is produced by the catalytic hydration of <strong>propyne</strong>.</p>
+<p><strong>(1)</strong> Write the structural formulas for compounds <strong>(B)</strong> and <strong>(D)</strong>.<br/>
+<strong>(2)</strong> Write the names of chemical processes <strong>(C)</strong> and <strong>(E)</strong>.</p>
+<div class="answer-box">✓ Model Answer</div>
+<div class="explanation-title">📚 Detailed Explanation</div>
+<div class="explanation-content">
+<p><strong>Step 1 — Identify (F):</strong> Catalytic hydration of propyne:</p>
+<div class="chem-eq">CH≡C–CH₃ + H₂O <span class="arrow"><sup>HgSO₄/H₂SO₄</sup>→</span> CH₃–CO–CH₃</div>
+<p><strong>F = Acetone (Propanone)</strong></p>
+<p><strong>Step 2 — Identify (A):</strong> Preservative for frozen fruit = <strong>Benzoic acid (C₆H₅COOH)</strong></p>
+<p><strong>Step 3 — Identify (B):</strong></p>
+<div class="chem-eq">C₆H₅COOH + NaOH → <strong>C₆H₅COONa</strong> + H₂O</div>
+<p><strong>B = Sodium benzoate (C₆H₅COONa)</strong></p>
+<p><strong>Step 4 — Identify (D):</strong> Since (F = Acetone) converts to (D) by process (E), (D) must be <strong>Propan-2-ol (Isopropyl alcohol)</strong>:</p>
+<div class="chem-eq">CH₃COCH₃ + H₂ <span class="arrow"><sup>Ni/Δ</sup>→</span> CH₃CH(OH)CH₃</div>
+<p><strong>D = Propan-2-ol</strong></p>
+<hr/>
+<p><strong>(1) Structural Formulas:</strong></p>
+<ul>
+<li><strong>(B) Sodium benzoate:</strong> C₆H₅–COO⁻Na⁺</li>
+<li><strong>(D) Propan-2-ol:</strong> CH₃–CH(OH)–CH₃</li>
+</ul>
+<p><strong>(2) Chemical Processes:</strong></p>
+<ul>
+<li><strong>Process (E):</strong> <strong>Reduction (Catalytic Hydrogenation)</strong> — Acetone → Propan-2-ol</li>
+<li><strong>Process (C):</strong> Conversion of Sodium benzoate (B) → Propan-2-ol (D) involves multiple steps; overall the process can be classified as <strong>dry distillation then halogenation then hydrolysis</strong>.</li>
+</ul>
+<table class="info-table">
+<tr><th>Compound / Process</th><th>Identity</th></tr>
+<tr><td>A</td><td>Benzoic acid (C₆H₅COOH)</td></tr>
+<tr><td>B</td><td>Sodium benzoate (C₆H₅COONa)</td></tr>
+<tr><td>D</td><td>Propan-2-ol [CH₃CH(OH)CH₃]</td></tr>
+<tr><td>F</td><td>Acetone (CH₃COCH₃)</td></tr>
+<tr><td>Process (E)</td><td>Reduction (Hydrogenation)</td></tr>
+</table>
+</div>
+</section>
+<section class="page question-section extracted" data-qnum="45" id="model4-question45" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 800px; margin: 2rem auto; padding: 1.5rem; border: 1px solid var(--border-color, #ccc); border-radius: 8px; background: rgba(255,255,255,0.02);"><div class="source-label">Model 4 — Question 45 — Essay Questions</div><h2 class="question-title" style="color: #b91c1c; border-bottom: 2px solid #CD7F32; padding-bottom: 0.5rem; margin-bottom: 1rem; font-size: 1.5rem">
+        45. Study the following diagram and answer:
+    </h2><div class="question-graphic" style="width: 100%; max-width: 650px; margin: 1.5rem auto; background: #ffffff; border-radius: 8px; padding: 10px; border: 1px solid #e2e8f0">
+<svg height="100%" viewbox="0 0 800 320" width="100%" xmlns="http://w3.org">
+ Background 
+<rect fill="#111827" height="100%" width="100%"></rect>
+ Styles 
+<style>
+    .box { stroke: #60a5fa; stroke-width: 2.5; fill: #1f2937; }
+    .text-main { fill: #f3f4f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 18px; font-weight: bold; }
+    .text-chem { fill: #f3f4f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 16px; font-weight: bold; }
+    .text-variable { fill: #ef4444; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 22px; font-weight: bold; }
+    .line { stroke: #60a5fa; stroke-width: 2.5; fill: none; }
+    .arrow-head { fill: #60a5fa; }
+  </style>
+ Boxes 
+ (COO)2 Fe Box 
+<rect class="box" height="50" rx="4" width="180" x="70" y="40"></rect>
+<text class="text-main" text-anchor="middle" x="160" y="72">(COO)<tspan dy="5" font-size="13">2</tspan><tspan dy="-5"> Fe</tspan></text>
+ X Box 
+<rect class="box" height="50" rx="4" width="60" x="580" y="40"></rect>
+<text class="text-variable" text-anchor="middle" x="610" y="73">X</text>
+ Y Box 
+<rect class="box" height="50" rx="4" width="60" x="580" y="220"></rect>
+<text class="text-variable" text-anchor="middle" x="610" y="253">Y</text>
+ Z Box 
+<rect class="box" height="50" rx="4" width="60" x="250" y="220"></rect>
+<text class="text-variable" text-anchor="middle" x="280" y="253">Z</text>
+ Reaction Pathways (Lines and Inline Arrowheads) 
+ 1. Top Horizontal Arrow (Points Right) 
+<path class="line" d="M 250,65 L 565,65"></path>
+<polygon class="arrow-head" points="575,65 563,59 563,71"></polygon>
+<text class="text-chem" text-anchor="middle" x="400" y="55">Δ / absence of air</text>
+ 2. Right Vertical Arrow (Points Down) 
+<path class="line" d="M 610,90 L 610,205"></path>
+<polygon class="arrow-head" points="610,215 604,203 616,203"></polygon>
+<text class="text-chem" text-anchor="start" x="625" y="135">+H<tspan dy="5" font-size="12">2</tspan><tspan dy="-5">SO</tspan><tspan dy="5" font-size="12">4</tspan></text>
+<text class="text-chem" text-anchor="start" x="625" y="160">dil.</text>
+ 3. Bottom Horizontal Arrow (Points Left) 
+<path class="line" d="M 580,245 L 325,245"></path>
+<polygon class="arrow-head" points="315,245 327,239 327,251"></polygon>
+<text class="text-chem" text-anchor="middle" x="450" y="235">Δ</text>
+ 4. Diagonal Arrow (Points Up-Right) 
+<path class="line" d="M 310,220 L 562,86"></path>
+<polygon class="arrow-head" points="0,0 -12,-6 -12,6" transform="translate(570,82) rotate(-28)"></polygon>
+<text class="text-chem" text-anchor="middle" transform="rotate(-28, 420, 140)" x="420" y="140">+M/Δ</text>
+</svg>
+</div><div class="essay-requirements" style="margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.7; color: var(--text-main, #1a202c); font-weight: 600">
+<div style="color: #e9ebf1; margin-bottom: 0.5rem">1- Write the chemical formula of the compounds (M, X, Y).</div>
+<div style="color: hsl(223, 54%, 95%), 54%, 95%)">2- Write the chemical formula of the compound with the highest magnetic moment in the above diagram.</div>
+</div><div class="answer-box" style="background: rgba(16, 185, 129, 0.08); border-left: 4px solid #10b981; padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem">
+<div style="color: #10b981; font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem">✓ Model Answers:</div>
+<ul style="margin: 0; padding-left: 1.2rem; color: #1a202c; font-weight: 600">
+<li style="margin-bottom: 0.25rem">Part 1: <span style="color: #0ea5e9">M</span> = CO (or H₂),  <span style="color: #0ea5e9">X</span> = FeO,  <span style="color: #0ea5e9">Y</span> = FeSO₄</li>
+<li>Part 2: Highest Magnetic Moment = <span style="color: #CD7F32; font-family:'Times New Roman', serif; font-size: 1.2rem">Fe₂O₃</span> (Compound Z)</li>
+</ul>
+</div><div class="explanation-box" style="background: rgba(14, 165, 233, 0.03); border-left: 4px solid #0ea5e9; padding: 1rem; border-radius: 0 4px 4px 0">
+<div class="explanation-title" style="color: #0ea5e9; font-weight: bold; margin-bottom: 0.75rem; font-size: 1.1rem">📚 Detailed Chemical Explanation</div>
+<div class="explanation-content" style="line-height: 1.6; color: var(--text-muted, #555); font-size: 1rem">
+<ul style="margin: 0; padding-left: 1.2rem">
+<li style="margin-bottom: 0.5rem">
+<strong>Reaction 1:</strong> Heating Iron(II) Oxalate in the absence of air results in thermal decomposition yielding Iron(II) Oxide, hence <strong style="color: #b91c1c">X is FeO</strong>.
+                </li>
+<li style="margin-bottom: 0.5rem">
+<strong>Reaction 2:</strong> Reacting FeO with dilute H₂SO₄ produces Iron(II) Sulfate, meaning <strong style="color: #b91c1c">Y is FeSO₄</strong>.
+                </li>
+<li style="margin-bottom: 0.5rem">
+<strong>Reaction 3:</strong> Severe heating of FeSO₄ leads to its decomposition into Iron(III) Oxide, which implies <strong style="color: #b91c1c">Z is Fe₂O₃</strong>.
+                </li>
+<li style="margin-bottom: 0.75rem">
+<strong>Reaction 4:</strong> Reducing Fe₂O₃ back to FeO at 400-700°C requires a reducing agent like Carbon Monoxide, so <strong style="color: #b91c1c">M is CO</strong> (or H₂).
+                </li>
+<li>
+<strong>Magnetic Moment:</strong> <span style="font-family:'Times New Roman', serif; font-weight:bold">Fe³⁺</span> ions in <span style="color: #CD7F32; font-weight:bold">Fe₂O₃</span> have a <span style="font-family:'Times New Roman', serif; font-weight:bold">3d⁵</span> configuration containing <strong>5 unpaired electrons</strong> (the maximum possible), giving it the highest magnetic moment compared to <span style="font-family:'Times New Roman', serif; font-weight:bold">Fe²⁺ (3d⁶)</span> which has only 4 unpaired electrons.
+                </li>
+</ul>
+</div>
+</div>
+</section>
+<section class="page question-section extracted" data-qnum="46" id="model4-question46" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 800px; margin: 2rem auto; padding: 1.5rem; border: 1px solid var(--border-color, #ccc); border-radius: 8px; background: rgba(255,255,255,0.02);"><div class="source-label">Model 4 — Question 46 — Essay Questions</div><h2 class="question-title" style="color: #b91c1c; border-bottom: 2px solid #CD7F32; padding-bottom: 0.5rem; margin-bottom: 1rem; font-size: 1.5rem">
+        46. Study the following diagram and answer:
+    </h2><div class="question-graphic" style="width: 100%; max-width: 750px; margin: 1.5rem auto; background: #ffffff; border-radius: 8px; padding: 15px; border: 1px solid #e2e8f0">
+<svg height="100%" viewbox="0 0 960 180" width="100%" xmlns="http://w3.org">
+ Background 
+<rect fill="#111827" height="100%" width="100%"></rect>
+ Styles 
+<style>
+    .box { stroke: #60a5fa; stroke-width: 2.5; fill: #1f2937; }
+    .text-chem { fill: #f87171; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 18px; font-weight: bold; }
+    .text-condition { fill: #f87171; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 15px; font-weight: bold; }
+    .text-italic { font-style: italic; font-weight: normal; }
+    .line { stroke: #60a5fa; stroke-width: 2.5; fill: none; }
+    .arrow-head { fill: #60a5fa; }
+  </style>
+ Box 1: Para methyl toluene 
+<rect class="box" height="90" rx="4" width="200" x="20" y="35"></rect>
+<text class="text-chem" text-anchor="middle" x="120" y="73">Para methyl</text>
+<text class="text-chem" text-anchor="middle" x="120" y="100">toluene</text>
+ Arrow 1 (Drawn directly without relying on markers) 
+<path class="line" d="M 220,80 L 335,80"></path>
+<path class="arrow-head" d="M 342,80 L 330,74 L 330,86 Z"></path>
+<text class="text-condition text-italic" text-anchor="middle" x="278" y="55">complete</text>
+<text class="text-condition text-italic" text-anchor="middle" x="278" y="72">oxidation</text>
+ Box 2: (A) 
+<rect class="box" height="70" rx="4" width="130" x="345" y="45"></rect>
+<text class="text-chem" text-anchor="middle" x="415" y="88">(A)</text>
+ Arrow 2 (Drawn directly without relying on markers) 
+<path class="line" d="M 475,80 L 550,80"></path>
+<path class="arrow-head" d="M 557,80 L 545,74 L 545,86 Z"></path>
+<text class="text-condition" text-anchor="middle" x="512" y="68">NaOH</text>
+ Box 3: (B) 
+<rect class="box" height="70" rx="4" width="130" x="560" y="45"></rect>
+<text class="text-chem" text-anchor="middle" x="625" y="88">(B)</text>
+ Arrow 3 (Drawn directly without relying on markers) 
+<path class="line" d="M 690,80 L 790,80"></path>
+<path class="arrow-head" d="M 797,80 L 785,74 L 785,86 Z"></path>
+<text class="text-condition" text-anchor="middle" x="740" y="68">NaOH/CaO</text>
+ Box 4: (C) 
+<rect class="box" height="70" rx="4" width="130" x="800" y="45"></rect>
+<text class="text-chem" text-anchor="middle" x="865" y="88">(C)</text>
+</svg>
+</div><div class="essay-requirements" style="margin-bottom: 1.5rem; font-size: 1.15rem; line-height: 1.7; color: var(--text-main, #1a202c); font-weight: 600">
+<div style="color: #f6f7f8; margin-bottom: 0.5rem">1- Write the structural formula of the compounds (A, B, C).</div>
+<div style="color: hsl(225, 27%, 94%)">2- Mention one use of the compound (A).</div>
+</div><div class="answer-box" style="background: rgba(16, 185, 129, 0.08); border-left: 4px solid #10b981; padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem">
+<div style="color: #10b981; font-weight: bold; font-size: 1.1rem; margin-bottom: 0.75rem">✓ Model Answers:</div><div style="font-weight: bold; margin-bottom: 0.5rem; color: #1a202c">1- Structural Formulas:</div>
+<ul style="margin: 0 0 1rem 0; padding-left: 1.2rem; color: #1a202c; line-height: 1.6">
+<li><strong style="color: #0ea5e9">(A): Terephthalic acid</strong> <span style="color: #666; font-size:0.95rem">[p-C₆H₄(COOH)₂]</span></li>
+<li><strong style="color: hsl(236, 93%, 42%)">(B): Sodium terephthalate</strong> <span style="color: #666; font-size:0.95rem">[p-C₆H₄(COONa)₂]</span></li>
+<li><strong style="color: #0c72d7">(C): Benzene</strong> <span style="color: #666; font-size:0.95rem">[C₆H₆]</span></li>
+</ul><div style="font-weight: bold; color: #1a202c">2- Use of Compound (A):</div>
+<p style="margin: 0.25rem 0 0 1.2rem; color: #CD7F32; font-weight: bold">
+            It is used in reaction with ethylene glycol to prepare Dacron fibers (used for making synthetic heart valves and blood vessels).
+        </p>
+</div><div class="explanation-box" style="background: rgba(14, 165, 233, 0.03); border-left: 4px solid #0ea5e9; padding: 1rem; border-radius: 0 4px 4px 0">
+<div class="explanation-title" style="color: #0ea5e9; font-weight: bold; margin-bottom: 0.5rem; font-size: 1.1rem">📚 Detailed Chemical Explanation</div>
+<div class="explanation-content" style="line-height: 1.6; color: var(--text-muted, #555)">
+<ul style="margin: 0; padding-left: 1.2rem">
+<li style="margin-bottom: 0.5rem">
+<strong>Step 1 (Complete Oxidation):</strong> <em>Para-methyl toluene</em><span> (also known as p-xylene) undergoes complete oxidation of its two methyl groups (<span class="math-chem">-CH<sub>3</sub></span>) to form two carboxylic groups (<span class="math-chem">-COOH</span>), yielding </span><strong>Terephthalic acid (A)</strong>.
+                </li>
+<li style="margin-bottom: 0.5rem">
+<strong>Step 2 (Neutralization):</strong><span> Reacting terephthalic acid with sodium hydroxide (<span class="math-chem">NaOH</span>) neutralizes the acid groups to produce its salt, </span><strong>Sodium terephthalate (B)</strong>.
+                </li>
+<li style="margin-bottom: 0.5rem">
+<strong>Step 3 (Soda-Lime Dry Distillation):</strong><span> Performing dry distillation on sodium terephthalate using soda-lime (<span class="math-chem">NaOH/CaO</span>) eliminates the carboxylate salts (decarboxylation) to finally produce </span><strong>Benzene (C)</strong>.
+                </li>
+</ul>
+</div>
+</div>
+</section>
+<section class="page extracted" id="model5-question45"><div class="source-label">Model 5 — Question 45 — Essay Questions</div>
+<h2 class="question-title">Question 45 (Essay)</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+
+        You have four test tubes containing different salt solutions:<br/>
+<div style="text-align: center; margin: 25px 0; overflow-x: auto">
+<svg height="150" viewbox="0 0 450 150" width="450" xmlns="http://www.w3.org/2000/svg">
+<style>
+                    .tube { fill: none; stroke: #0bef16; stroke-width: 2px; }
+                    .liquid { fill: hwb(205 4% 24%); opacity: 0.7; }
+                    .label-top { font-family: sans-serif; font-weight: bold; font-size: 16px; fill: #e80d0d; text-anchor: middle; }
+                    .label-bot { font-family: sans-serif; font-weight: bold; font-size: 13px; fill: #dc0c0c; text-anchor: middle; }
+                </style>
+ A 
+<g transform="translate(45, 30)">
+<text class="label-top" x="15" y="-15">A</text>
+<path class="tube" d="M 0 0 V 60 A 15 15 0 0 0 30 60 V 0"></path>
+<path class="liquid" d="M 2 30 V 60 A 13 13 0 0 0 28 60 V 30 Z"></path>
+<text class="label-bot" x="15" y="95">Ca(HCO₃)₂</text>
+</g>
+ B 
+<g transform="translate(145, 30)">
+<text class="label-top" x="15" y="-15">B</text>
+<path class="tube" d="M 0 0 V 60 A 15 15 0 0 0 30 60 V 0"></path>
+<path class="liquid" d="M 2 30 V 60 A 13 13 0 0 0 28 60 V 30 Z"></path>
+<text class="label-bot" x="15" y="95">Al(NO₃)₃</text>
+</g>
+ C 
+<g transform="translate(245, 30)">
+<text class="label-top" x="15" y="-15">C</text>
+<path class="tube" d="M 0 0 V 60 A 15 15 0 0 0 30 60 V 0"></path>
+<path class="liquid" d="M 2 30 V 60 A 13 13 0 0 0 28 60 V 30 Z"></path>
+<text class="label-bot" x="15" y="95">FeSO₄</text>
+</g>
+ D 
+<g transform="translate(345, 30)">
+<text class="label-top" x="15" y="-15">D</text>
+<path class="tube" d="M 0 0 V 60 A 15 15 0 0 0 30 60 V 0"></path>
+<path class="liquid" d="M 2 30 V 60 A 13 13 0 0 0 28 60 V 30 Z"></path>
+<text class="label-bot" x="15" y="95">KCl</text>
+</g>
+</svg>
+</div>
+<ol>
+<li>Write the chemical name of the reagent used to distinguish between the solid Salts of the four solutions by one experiment.</li>
+<li>Which of the four solutions gives a precipitate with an excess of sodium Hydroxide solution?</li>
+<li>Which of the above solutions gives a gas and a precipitate when dilute sulphuric Acid is added?</li>
+<li>Which of the above salts cannot detects its cation by a normal chemical reagent?</li>
+</ol>
+</div>
+<div class="answer-box">✓ Model Answers</div>
+<div class="explanation-content">
+<ol>
+<li><strong>Concentrated Sulfuric Acid (H<sub>2</sub>SO<sub>4</sub>):</strong> Will cause effervescence (CO<sub>2</sub>) with A, brown fumes (NO<sub>2</sub>) with B, acidic fumes (HCl) with D, and no reaction with C.</li>
+<li><strong>FeSO<sub>4</sub> (Solution C):</strong> Forms a greenish-white precipitate of Fe(OH)<sub>2</sub> which <em>does not</em> dissolve in excess NaOH. (Al<sup>3+</sup> in B forms a precipitate that dissolves in excess).</li>
+<li><strong>Ca(HCO<sub>3</sub>)<sub>2</sub> (Solution A):</strong> Reacting with dil. H<sub>2</sub>SO<sub>4</sub> yields CO<sub>2</sub> gas and sparingly soluble CaSO<sub>4</sub> (precipitate).</li>
+<li><strong>KCl (Solution D):</strong> Potassium (K<sup>+</sup>) salts are highly soluble; detection usually requires a physical flame test (violet flame) rather than standard chemical precipitation.</li>
+</ol>
+</div>
+<div class="page-footer">Question 45</div>
+</section>
+<section class="page extracted" id="model5-question46"><div class="source-label">Model 5 — Question 46 — Essay Questions</div>
+<h2 class="question-title">Question 46 (Essay)</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+    From the following diagram:<br/>
+<div style="text-align: center; margin: 30px 0; overflow-x: auto">
+<svg height="220" viewbox="0 0 740 220" width="740" xmlns="http://w3.org">
+<defs>
+<marker id="flow-arrow" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="8" refy="5" viewbox="0 0 10 10">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#333"></path>
+</marker>
+</defs>
+<style>
+                .box { fill: #fff; stroke: #333; stroke-width: 1.5px; rx: 6px; }
+                .box-text { font-family: sans-serif; font-weight: bold; font-size: 15px; fill: #fd0d0d; text-anchor: middle; alignment-baseline: middle; }
+                .cond-text { font-family: sans-serif; font-weight: bold; font-size: 14px; fill: #fa0909; text-anchor: middle; }
+                .line { stroke: #348aed; stroke-width: 1.5px; fill: none; }
+                .circle-shape { fill: #f9f9f9; stroke: #33a1f6; stroke-width: 1.5px; }
+                
+                /* تنسيق مخصص لصندوق الإجابة يظهر بشكل رائع في المتصفح */
+                .answer-box { margin-top: 25px; padding: 15px; background-color: #f4f9f4; border-left: 5px solid #2e7d32; font-family: sans-serif; }
+                .answer-title { color: #2e7d32; font-weight: bold; margin-bottom: 10px; font-size: 16px; }
+                .answer-item { margin-bottom: 12px; line-height: 1.6; color: #3a6ef1; }
+                .chem-formula { font-weight: bold; color: #1565c0; font-family: 'Times New Roman', serif; font-size: 16px; }
+            </style>
+ Shapes and Label Texts 
+<rect class="box" height="30" width="55" x="10" y="90"></rect>
+<text class="box-text" x="37" y="111">C₆H₆</text>
+<circle class="circle-shape" cx="160" cy="105" r="16"></circle>
+<text class="box-text" x="160" y="111">X</text>
+<circle class="circle-shape" cx="290" cy="105" r="16"></circle>
+<text class="box-text" x="290" y="111">Y</text>
+<circle class="circle-shape" cx="420" cy="105" r="16"></circle>
+<text class="box-text" x="420" y="111">Z</text>
+<circle class="circle-shape" cx="550" cy="105" r="16"></circle>
+<text class="box-text" x="550" y="111">M</text>
+<rect class="box" height="30" width="45" x="670" y="35"></rect>
+<text class="box-text" x="692" y="56">E</text>
+<rect class="box" height="30" width="45" x="670" y="145"></rect>
+<text class="box-text" x="692" y="166">F</text>
+ Connectors and Flow Conditions 
+<path class="line" d="M 65 105 L 135 105" marker-end="url(#flow-arrow)"></path>
+<text class="cond-text" x="100" y="97">+ Cl₂</text>
+<text class="cond-text" x="100" y="120">FeCl₃</text>
+<path class="line" d="M 176 105 L 265 105" marker-end="url(#flow-arrow)"></path>
+<text class="cond-text" x="220" y="97">+ CH₃Cl</text>
+<text class="cond-text" x="220" y="120">Anhydrous</text>
+<text class="cond-text" x="220" y="135">AlCl₃</text>
+<path class="line" d="M 306 105 L 395 105" marker-end="url(#flow-arrow)"></path>
+<text class="cond-text" x="350" y="97">NaOH</text>
+<text class="cond-text" x="350" y="120">Δ / press.</text>
+<path class="line" d="M 436 105 L 525 105" marker-end="url(#flow-arrow)"></path>
+<text class="cond-text" x="480" y="97">O₂</text>
+<text class="cond-text" x="480" y="120">V₂O₅/400°C</text>
+<path class="line" d="M 566 105 L 610 105 L 610 50 L 660 50" marker-end="url(#flow-arrow)"></path>
+<text class="cond-text" text-anchor="middle" x="610" y="40">+ CH₃COOH</text>
+<path class="line" d="M 566 105 L 610 105 L 610 160 L 660 160" marker-end="url(#flow-arrow)"></path>
+<text class="cond-text" text-anchor="middle" x="610" y="150">+ CH₃OH</text>
+</svg>
+</div>
+
+    If you know that compound (E) is used as a medicinal drug and is recommended to be taken with plenty of water to prevent stomach ulcers:<br/>
+    - Write the chemical formulas of compounds (Z) and (Y).<br/>
+    - Write the chemical formula of the acid produced by the acidic hydrolysis of Compound (F).<br/><div class="answer-box">✓ Model Answers</div>
+<div class="explanation-content">
+<ol>
+<strong>1. Chemical formulas of compounds (Z) and (Y):</strong><br/>
+            - Compound Z (p-cresol): <span class="chem-formula">C<sub>7</sub>H<sub>8</sub>O</span> (or CH<sub>3</sub>C<sub>6</sub>H<sub>4</sub>OH)<br/>
+            - Compound Y (p-chlorotoluene): <span class="chem-formula">C<sub>7</sub>H<sub>7</sub>Cl</span> (or CH<sub>3</sub>C<sub>6</sub>H<sub>4</sub>Cl)
+        </ol></div>
+<div class="answer-item">
+<strong>2. Chemical formula of the acid produced by the acidic hydrolysis of Compound (F):</strong><br/>
+            - Salicylic acid: <span class="chem-formula">C<sub>7</sub>H<sub>6</sub>O<sub>3</sub></span> (or HOC<sub>6</sub>H<sub>5</sub>COOH)
+        </div>
+<div class="answer-item">
+<strong>3. One use of compound (F) (Methyl salicylate):</strong><br/>
+            - Used as a topical analgesic (pain reliever) in medical ointments, liniments, and counter-irritant rubs to soothe muscle pain and joint stiffness.
+        
+</div>
+</div></section>
+<section class="page extracted" id="model6-question45"><div class="source-label">Model 6 — Question 45 — Essay Questions</div>
+<h2 class="question-title">Question 45</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+<strong>Question 45:</strong> Given the following diagram:
+       <svg height="100%" style="display: block" viewbox="0 0 950 540" width="100%" xmlns="http://w3.org">
+ Background Layout in Dark High-Contrast Palette 
+<rect fill="#0f172a" height="540" rx="16" width="950"></rect>
+ Subtle Grid Lines 
+<g fill="none" opacity="0.2" stroke="#334155" stroke-dasharray="4 8" stroke-width="1">
+<path d="M0 135 h950 M0 270 h950 M0 405 h950"></path>
+<path d="M237 v540 M475 v540 M712 v540"></path>
+</g>
+ ==================== REACTION PATHWAYS (ARROWS &amp; LABELS) ==================== 
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+ A -&gt; B: After a period of time in air / Process (1) 
+<path d="M 190 100 L 400 100" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="400,100 388,93 392,100 388,107"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="13" font-weight="800" text-anchor="middle" x="295" y="65">After a period of time in air</text>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="14" font-weight="900" text-anchor="middle" x="295" y="85">Process (1)</text>
+ B -&gt; C: NaOH 
+<path d="M 510 100 L 710 100" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="710,100 698,93 702,100 698,107"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="15" font-weight="800" text-anchor="middle" x="610" y="85">NaOH</text>
+ C -&gt; D: Process (2) 
+<path d="M 770 135 L 770 235" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="770,235 763,223 770,227 777,223"></polygon>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="14" font-weight="900" text-anchor="start" x="835" y="190">Process (2)</text>
+ A -&gt; D: Process (3) 
+<path d="M 190 120 L 710 255" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="710,255 697,250 703,253 707,247"></polygon>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="14" font-weight="900" text-anchor="middle" transform="rotate(14.5, 440, 175)" x="440" y="175">Process (3)</text>
+ D -&gt; E: CO / 400°C : 700°C 
+<path d="M 755 305 L 755 405" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="755,405 748,393 755,397 762,393"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="13" font-weight="800" text-anchor="end" x="740" y="360">CO / 400°C : 700°C</text>
+ E -&gt; D: O₂ / Δ 
+<path d="M 785 405 L 785 305" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="785,305 778,317 785,313 792,317"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="14" font-weight="800" text-anchor="start" x="800" y="360">O₂ / Δ</text>
+ E -&gt; F: Dil. / HCl 
+<path d="M 710 440 L 190 440" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="190,440 202,447 198,440 202,433"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="15" font-weight="800" text-anchor="middle" x="450" y="425">Dil. / HCl</text>
+ F -&gt; A: Conc. H₂SO₄ 
+<path d="M 135 405 L 135 135" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="135,135 128,147 135,143 142,147"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="15" font-weight="800" text-anchor="middle" transform="rotate(-90, 115, 275)" x="115" y="275">Conc. H₂SO₄</text>
+</g>
+ ==================== COMPOUNDS NODES (A - F) ==================== 
+ Node A 
+<g transform="translate(80, 65)">
+<rect fill="#1e293b" height="70" rx="8" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="900" text-anchor="middle" x="55" y="43">A</text>
+</g>
+ Node B 
+<g transform="translate(400, 65)">
+<rect fill="#1e293b" height="70" rx="8" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="900" text-anchor="middle" x="55" y="43">B</text>
+</g>
+ Node C 
+<g transform="translate(710, 65)">
+<rect fill="#1e293b" height="70" rx="8" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="900" text-anchor="middle" x="55" y="43">C</text>
+</g>
+ Node D 
+<g transform="translate(710, 235)">
+<rect fill="#1e293b" height="70" rx="8" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="900" text-anchor="middle" x="55" y="43">D</text>
+</g>
+ Node E 
+<g transform="translate(710, 405)">
+<rect fill="#1e293b" height="70" rx="8" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="900" text-anchor="middle" x="55" y="43">E</text>
+</g>
+ Node F 
+<g transform="translate(80, 405)">
+<rect fill="#1e293b" height="70" rx="8" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="900" text-anchor="middle" x="55" y="43">F</text>
+</g>
+</svg>
+</div>
+        (1) Write the chemical formulas for (F, B).<br/>
+        (2) What is the name of process (3)?
+    
+<div class="answer-box">
+<strong>Answers to 45:</strong><br/>
+        1) F = FeCl2 (Iron II Chloride), B = Fe2(SO₄)3 (Magnetic III Sulfate).<br/>
+        2) Process (3) is <strong>heating</strong>.
+    </div>
+<div class="page-footer">Question 45</div>
+</section>
+<section class="page extracted" id="model6-question46"><div class="source-label">Model 6 — Question 46 — Essay Questions</div>
+<h2 class="question-title">Question 46</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)" style="margin-top:40px">
+<strong>Question 46:</strong> From the following diagram (knowing C &amp; B are isomers):
+       <svg height="100%" style="display: block" viewbox="0 0 950 320" width="100%" xmlns="http://w3.org">
+ Background Layout in Dark High-Contrast Palette 
+<rect fill="#0f172a" height="320" rx="16" width="950"></rect>
+ Subtle Grid Lines 
+<g fill="none" opacity="0.2" stroke="#334155" stroke-dasharray="4 8" stroke-width="1">
+<path d="M0 80 h950 M0 160 h950 M0 240 h950"></path>
+<path d="M237 v320 M475 v320 M712 v320"></path>
+</g>
+ ==================== REACTION PATHWAYS (ARROWS &amp; LABELS) ==================== 
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+ A -&gt; B: Hydrolysis 
+<path d="M 280 75 L 415 75" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="415,75 403,68 407,75 403,82"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="350" y="55">Hydrolysis</text>
+ Plus Sign between B and C 
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="800" text-anchor="middle" x="575" y="83">+</text>
+ B -&gt; D: Process (1) 
+<path d="M 485 110 L 485 165" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="485,165 478,153 485,157 492,153"></polygon>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="15" font-weight="900" text-anchor="middle" x="415" y="145">Process (1)</text>
+ D -&gt; Y: H₂SO₄ (180°C) 
+<path d="M 420 205 L 185 205" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="185,205 197,212 193,205 197,198"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="15" font-weight="800" text-anchor="middle" x="300" y="190">H₂SO₄ (180°C)</text>
+ D -&gt; (X): H₂SO₄ (140°C) 
+<path d="M 550 205 L 785 205" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="785,205 773,198 777,205 773,212"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="15" font-weight="800" text-anchor="middle" x="670" y="190">H₂SO₄ (140°C)</text>
+</g>
+ ==================== COMPOUNDS NODES ==================== 
+ Node A 
+<g transform="translate(160, 40)">
+<rect fill="#1e293b" height="70" rx="12" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="55" y="43">A</text>
+</g>
+ Node B 
+<g transform="translate(430, 40)">
+<rect fill="#1e293b" height="70" rx="12" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="55" y="43">B</text>
+</g>
+ Node C 
+<g transform="translate(615, 40)">
+<rect fill="#1e293b" height="70" rx="12" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="55" y="43">C</text>
+</g>
+ Node Y 
+<g transform="translate(60, 170)">
+<rect fill="#1e293b" height="70" rx="12" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="55" y="43">Y</text>
+</g>
+ Node D 
+<g transform="translate(430, 170)">
+<rect fill="#1e293b" height="70" rx="12" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="55" y="43">D</text>
+</g>
+ Node (X) 
+<g transform="translate(800, 170)">
+<rect fill="#1e293b" height="70" rx="12" stroke="#334155" stroke-width="2" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="55" y="43">(X)</text>
+</g>
+</svg>
+</div>
+        1- Write the chemical formulas for (X) and (C).<br/>
+        2- Name process number (1).
+    
+<div class="answer-box">
+<strong>Answers to 46:</strong><br/>
+        1)Sucrose (A) hydrolysis yields Glucose and Fructose (isomers). Fermentation of Glucose (D) yields Ethanol(D).<br/> 
+        2)Since D reacts at 140°C to form an ether (X) and at 180°C to form an alkene (Y), D must be an alcohol (EthanoL).<br/>
+        3) Process 1 is Biological process is Fermentation.
+    </div>
+<div class="explanation-content" style="margin-top: 15px">
+<p><strong>Chemistry Breakdown for 46:</strong><br/>
+        Sucrose (A) hydrolysis yields Glucose and Fructose (isomers). Fermentation of Glucose (B) yields Ethanol(D).<br/>
+        Ethanol (D) + H₂SO₄ at 180°C → Ethene (Y).<br/>
+        Ethanol (D) + H₂SO₄ at 140°C → Diethyl ether (X).<br/>
+</p></div>
+<div class="page-footer">End of Examination Guide</div>
+</section>
+<section class="page extracted" id="model7-question45"><div class="source-label">Model 7 — Question 45 — Essay Questions</div>
+<h2 class="question-title">Question 45 (Essay)</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+        The opposite figure shows an experiment to detect the anion of salt (X) and the cation (Z).
+        <br/><br/>
+<svg height="100%" style="display: block" viewbox="0 0 950 480" width="100%" xmlns="http://w3.org">
+ Background Layout in Dark High-Contrast Palette 
+<rect fill="#0f172a" height="480" rx="16" width="950"></rect>
+ Subtle Grid Lines 
+<g fill="none" opacity="0.2" stroke="#334155" stroke-dasharray="4 8" stroke-width="1">
+<path d="M0 120 h950 M0 240 h950 M0 360 h950"></path>
+<path d="M237 v480 M475 v480 M712 v480"></path>
+</g>
+ ==================== DELIVERY TUBE (GLASS BRIDGE) ==================== 
+<path d="M 280 200 L 280 150 C 280 110, 510 110, 510 150 L 510 320" fill="none" stroke="#475569" stroke-linecap="round" stroke-width="12"></path>
+<path d="M 280 200 L 280 150 C 280 110, 510 110, 510 150 L 510 320" fill="none" stroke="#1e293b" stroke-linecap="round" stroke-width="6"></path>
+ ==================== TEST TUBE 1 (LEFT) ==================== 
+<g id="left-tube" transform="translate(210, 180)">
+ Tube Body Contour 
+<path d="M 20 0 L 20 220 C 20 250, 120 250, 120 220 L 120 0" fill="#1e293b" stroke="#475569" stroke-width="3"></path>
+ Liquid Solution 
+<path d="M 21 140 L 21 220 C 21 248, 119 248, 119 220 L 119 140 Z" fill="#38bdf8" opacity="0.25"></path>
+<line opacity="0.5" stroke="#38bdf8" stroke-width="1.5" x1="21" x2="119" y1="140" y2="140"></line>
+ Rubber Stopper / Cork 
+<polygon fill="#ca8a04" opacity="0.8" points="20,0 120,0 110,35 30,35"></polygon>
+ Thistle / Dropping Funnel Tube 
+<path d="M 35 -60 L 35 120 M 47 -60 L 47 120" stroke="#64748b" stroke-width="2"></path>
+ Salt (X) Solid Precipitate at Bottom 
+<path d="M 22 210 Q 70 195 118 210 L 118 225 C 118 248, 22 248, 22 225 Z" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"></path>
+ Gas (Y) Bubbles 
+<circle cx="45" cy="160" fill="#38bdf8" r="6" stroke="#0284c7" stroke-width="1"></circle>
+<circle cx="60" cy="180" fill="#38bdf8" r="7" stroke="#0284c7" stroke-width="1"></circle>
+<circle cx="85" cy="155" fill="#38bdf8" r="5" stroke="#0284c7" stroke-width="1"></circle>
+<circle cx="95" cy="175" fill="#38bdf8" r="6" stroke="#0284c7" stroke-width="1"></circle>
+ Falling Droplets from Funnel 
+<ellipse cx="41" cy="45" fill="#38bdf8" rx="2" ry="4"></ellipse>
+<ellipse cx="41" cy="85" fill="#38bdf8" rx="2" ry="4"></ellipse>
+</g>
+ ==================== DROPPER / PIPETTE (TOP LEFT) ==================== 
+<g id="dropper" transform="translate(60, 40)">
+ Rubber Bulb 
+<path d="M 10 10 C 0 25, 25 50, 40 40 L 70 70 L 85 55 L 55 25 C 45 10, 25 0, 10 10 Z" fill="#ef4444" stroke="#dc2626" stroke-width="2"></path>
+ Glass Body 
+<path d="M 70 70 L 160 160 L 175 170 L 165 150 L 85 55" fill="#64748b" opacity="0.7" stroke="#94a3b8" stroke-width="2"></path>
+ Liquid Inside Dropper 
+<path d="M 120 120 L 163 163 L 161 149 Z" fill="#38bdf8"></path>
+</g>
+ ==================== TEST TUBE 2 (RIGHT) ==================== 
+<g id="right-tube" transform="translate(440, 180)">
+ Tube Body Contour 
+<path d="M 20 0 L 20 220 C 20 250, 120 250, 120 220 L 120 0" fill="#1e293b" stroke="#475569" stroke-width="3"></path>
+ Liquid Salt Solution (ZCl₂) 
+<path d="M 21 80 L 21 220 C 21 248, 119 248, 119 220 L 119 80 Z" fill="#38bdf8" opacity="0.2"></path>
+<line opacity="0.4" stroke="#38bdf8" stroke-width="1.5" x1="21" x2="119" y1="80" y2="80"></line>
+ Black ppt. (W) Solid at Bottom 
+<path d="M 35 215 C 35 190, 105 190, 105 215 C 105 240, 35 240, 35 215 Z" fill="#020617" stroke="#334155" stroke-width="2"></path>
+</g>
+ ==================== LABELS AND POINTERS ==================== 
+ HCl(aq) Label 
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="800" x="310" y="115">HCl<tspan dy="4" font-size="13">(aq)</tspan></text>
+ gas (Y) Pointer and Label 
+<g id="label-gas-y">
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="800" text-anchor="end" x="140" y="335">gas (Y)</text>
+<path d="M 150 330 L 260 330" fill="none" stroke="#38bdf8" stroke-linecap="round" stroke-width="2"></path>
+<polygon fill="#38bdf8" points="260,330 248,324 252,330 248,336"></polygon>
+</g>
+ salt (X) Pointer and Label 
+<g id="label-salt-x">
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="800" text-anchor="middle" x="270" y="445">salt (X)</text>
+<path d="M 270 425 L 270 395" fill="none" stroke="#38bdf8" stroke-linecap="round" stroke-width="2"></path>
+<polygon fill="#38bdf8" points="270,395 264,407 270,403 276,407"></polygon>
+</g>
+ Salt solution (ZCl₂) Pointer and Label 
+<g id="label-solution-zcl2">
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="800" text-anchor="start" x="640" y="285">Salt solution (ZCl₂)</text>
+<path d="M 630 280 L 525 280" fill="none" stroke="#38bdf8" stroke-linecap="round" stroke-width="2"></path>
+<polygon fill="#38bdf8" points="525,280 537,286 533,280 537,274"></polygon>
+</g>
+ Black ppt. (W) Pointer and Label 
+<g id="label-ppt-w">
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="18" font-weight="900" text-anchor="middle" x="510" y="445">Black ppt. (W)</text>
+<path d="M 510 425 L 510 395" fill="none" stroke="#ef4444" stroke-linecap="round" stroke-width="2"></path>
+<polygon fill="#ef4444" points="510,395 504,407 510,403 516,407"></polygon>
+</g>
+</svg>
+<br/><br/>
+        Study the figure well and then answer the following questions:
+        <br/><br/>
+<strong>(1)</strong> Write the chemical formula for each of:
+        <br/>
+        (a) Salt (ZCl₂)
+        <br/>
+        (b) Black precipitate (W)
+        <br/><br/>
+<strong>(2)</strong> Write the chemical formula for two other salts (instead of salt ZCl₂) that exhibit the same observations. The anion of either must be nitrate.
+    </div>
+<div class="answer-box">✓ Answers</div>
+<div class="explanation-title">📚 Detailed Explanation</div>
+<div class="explanation-content">
+<h3>Analysis</h3>
+<p>Salt X reacts with HCl to release gas Y. Gas Y passes into ZCl₂ solution → forms black precipitate W.</p>
+<p>Black precipitate + ZCl₂ suggests <strong>metal sulfides</strong> (PbS, CuS are black).</p>
+<p>So gas Y = H₂S, and salt X is a sulfide (e.g., Na₂S, FeS).</p>
+<h3>Answer (1):</h3>
+<p><strong>(a) Salt ZCl₂:</strong> <span class="good">PbCl₂</span> (or CuCl₂)</p>
+<p><strong>(b) Black precipitate W:</strong> <span class="good">PbS</span> (or CuS)</p>
+<h3>Answer (2): Two Other Nitrate Salts</h3>
+<p>• <strong>Pb(NO₃)₂</strong> — Pb²⁺ + H₂S → PbS↓ (black)</p>
+<p>• <strong>Cu(NO₃)₂</strong> — Cu²⁺ + H₂S → CuS↓ (black)</p>
+</div>
+<div class="page-footer">Question 45</div>
+</section>
+<section class="page extracted" id="model7-question46"><div class="source-label">Model 7 — Question 46 — Essay Questions</div>
+<h2 class="question-title">Question 46 (Essay)</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+        The following table shows the chemical formulas of organic compounds:
+      <svg height="100%" style="display: block" viewbox="0 0 950 380" width="100%" xmlns="http://w3.org">
+ Background Layout in Dark High-Contrast Palette 
+<rect fill="#0f172a" height="380" rx="16" width="950"></rect>
+ Outer Table Border 
+<rect fill="none" height="350" rx="8" stroke="#475569" stroke-width="2.5" width="920" x="15" y="15"></rect>
+ Grid Separation Lines 
+<g fill="none" stroke="#475569" stroke-width="2">
+ Horizontal Divider 
+<path d="M 15 190 L 935 190"></path>
+ Vertical Dividers 
+<path d="M 321.6 15 L 321.6 365"></path>
+<path d="M 628.3 15 L 628.3 365"></path>
+</g>
+ ==================== ROW 1 ==================== 
+ Cell (A): Cyclohexene 
+<g id="cell-a">
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="18" font-weight="900" x="35" y="45">(A)</text>
+ Hexagon Structure with Double Bond 
+<g fill="none" stroke="#ffffff" stroke-linejoin="round" stroke-width="2.5" transform="translate(168, 105)">
+<polygon points="0,-40 34.6,-20 34.6,20 0,40 -34.6,20 -34.6,-20"></polygon>
+ Inner Double Bond on the left vertical side 
+<line stroke="#ffffff" stroke-width="2" x1="-27.6" x2="-27.6" y1="-16.5" y2="16.5"></line>
+</g>
+</g>
+ Cell (B): Ethene (CH2=CH2) 
+<g id="cell-b">
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="18" font-weight="900" x="341.6" y="45">(B)</text>
+ Formula with Double Bond 
+<g fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="800" text-anchor="middle" transform="translate(475, 105)">
+<text x="-45" y="7">CH<tspan dy="5" font-size="14">2</tspan></text>
+<line stroke="#ffffff" stroke-width="2.5" x1="-15" x2="15" y1="-3" y2="-3"></line>
+<line stroke="#ffffff" stroke-width="2.5" x1="-15" x2="15" y1="3" y2="3"></line>
+<text x="45" y="2">CH<tspan dy="5" font-size="14">2</tspan></text>
+</g>
+</g>
+ Cell (C): Propene (CH3-CH=CH2) 
+<g id="cell-c">
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="18" font-weight="900" x="648.3" y="45">(C)</text>
+ Formula 
+<g fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="800" text-anchor="middle" transform="translate(781.6, 105)">
+ CH3 
+<text x="-70" y="7">CH<tspan dy="5" font-size="14">3</tspan></text>
+ Single Bond 
+<line stroke="#ffffff" stroke-width="2.5" x1="-45" x2="-20" y1="0" y2="0"></line>
+ CH 
+<text x="0" y="2">CH</text>
+ Double Bond 
+<line stroke="#ffffff" stroke-width="2.5" x1="20" x2="45" y1="-3" y2="-3"></line>
+<line stroke="#ffffff" stroke-width="2.5" x1="20" x2="45" y1="3" y2="3"></line>
+ CH2 
+<text x="70" y="2">CH<tspan dy="5" font-size="14">2</tspan></text>
+</g>
+</g>
+ ==================== ROW 2 ==================== 
+ Cell (D): Ethyne (CH≡CH) 
+<g id="cell-d">
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="18" font-weight="900" x="35" y="220">(D)</text>
+ Formula with Triple Bond 
+<g fill="#ffffff" font-family="system-ui, sans-serif" font-size="20" font-weight="800" text-anchor="middle" transform="translate(168, 280)">
+<text x="-40" y="7">CH</text>
+<line stroke="#ffffff" stroke-width="2.5" x1="-15" x2="15" y1="-6" y2="-6"></line>
+<line stroke="#ffffff" stroke-width="2.5" x1="-15" x2="15" y1="0" y2="0"></line>
+<line stroke="#ffffff" stroke-width="2.5" x1="-15" x2="15" y1="6" y2="6"></line>
+<text x="40" y="2">CH</text>
+</g>
+</g>
+ Cell (E): Benzene Ring 
+<g id="cell-e">
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="18" font-weight="900" x="341.6" y="220">(E)</text>
+ Benzene Structure 
+<g fill="none" stroke="#ffffff" stroke-linejoin="round" stroke-width="2.5" transform="translate(475, 280)">
+<polygon points="0,-40 34.6,-20 34.6,20 0,40 -34.6,20 -34.6,-20"></polygon>
+<circle cx="0" cy="0" r="22" stroke="#ffffff" stroke-dasharray="5 3" stroke-width="2"></circle>
+</g>
+</g>
+ Cell (F): Toluene 
+<g id="cell-f">
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="18" font-weight="900" x="648.3" y="220">(F)</text>
+ Toluene Structure 
+<g fill="none" stroke="#ffffff" stroke-linejoin="round" stroke-width="2.5" transform="translate(781.6, 290)">
+ Benzene Ring 
+<polygon points="0,-35 30.3,-17.5 30.3,17.5 0,35 -30.3,17.5 -30.3,-17.5"></polygon>
+<circle cx="0" cy="0" r="19" stroke="#ffffff" stroke-dasharray="5 3" stroke-width="2"></circle>
+ Methyl Group Bond &amp; Text 
+<line stroke="#ffffff" stroke-width="2.5" x1="0" x2="0" y1="-35" y2="-58"></line>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="18" font-weight="800" stroke="none" text-anchor="middle" x="0" y="-66">
+        CH<tspan dy="4" font-size="13">3</tspan>
+</text>
+</g>
+</g>
+</svg>
+
+        Write the IUPAC name for each of the following:
+        <br/><br/>
+        a) The compound formed by reacting 1 mol of one of the above compounds with 2 mol of bromine to produce a saturated compound.
+        <br/>
+        b) The compound formed by reacting HBr with one of the above compounds according to Markownikoff's rule in the first step.
+        <br/>
+        c) The two compounds formed by reacting 2 mol of one of the above compounds with 2 mol of chlorine under suitable conditions to give two mono-chloro isomers.
+    </div>
+<div class="answer-box">✓ Answers</div>
+<div class="explanation-title">📚 Detailed Explanation</div>
+<div class="explanation-content">
+<h3>Part (a): 1 mol compound + 2 mol Br₂ → saturated</h3>
+<p>Requires a triple bond: <strong>D: CH≡CH (acetylene)</strong></p>
+<p>CH≡CH + 2Br₂ → CHBr₂-CHBr₂</p>
+<p>IUPAC name: <strong>1,1,2,2-Tetrabromoethane</strong></p>
+<h3>Part (b): HBr + compound (Markovnikov)</h3>
+<p>Using <strong>C: CH₃-CH=CH₂ (propene)</strong></p>
+<p>CH₃-CH=CH₂ + HBr → CH₃-CHBr-CH₃ (H adds to C with more H; Br to C with less H)</p>
+<p>IUPAC name: <strong>2-Bromopropane</strong></p>
+<h3>Part (c): 2 mol compound + 2 mol Cl₂ → two mono-chloro isomers</h3>
+<p>Using <strong>F: Toluene</strong> with Cl₂/FeCl₃ (substitution on ring, ortho/para directing by -CH₃)</p>
+<p>Products (two isomers):</p>
+<p>• <strong>2-Chloromethyl benzene</strong> (ortho)</p>
+<p>• <strong>4-Chloromethyl benzene</strong> (para)</p>
+<p>Or alternatively named: 2-Chloro toluene and 4-Chloro toluene</p>
+</div>
+<div class="page-footer">Question 46</div>
+</section>
+<section class="page extracted" id="model8-question45"><div class="source-label">Model 8 — Question 45 — Essay Questions</div>
+<h2 class="question-title">Question 45 — Structured</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+    The following scheme shows <strong>iron and its compounds</strong>. Study it carefully and answer the questions below.
+    <svg height="100%" style="display: block" viewbox="0 0 950 340" width="100%" xmlns="http://w3.org">
+ Background Layout in Dark High-Contrast Palette 
+<rect fill="#0f172a" height="340" rx="16" width="950"></rect>
+ Subtle Background Grid Lines 
+<g fill="none" opacity="0.2" stroke="#334155" stroke-dasharray="4 8" stroke-width="1">
+<path d="M0 85 h950 M0 170 h950 M0 255 h950"></path>
+<path d="M237 v340 M475 v340 M712 v340"></path>
+</g>
+ ==================== REACTION PATHWAYS (ARROWS &amp; LABELS) ==================== 
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+ A -&gt; B: Reduction / 800°C 
+<path d="M 230 65 L 475 65" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="475,65 463,58 467,65 463,72"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="350" y="35">Reduction</text>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="350" y="55">800 °C</text>
+ A -&gt; D: Conc. H₂SO₄ 
+<path d="M 180 120 L 180 220" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="180,220 173,208 180,212 187,208"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="end" x="165" y="155">Conc.</text>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="end" x="165" y="175">H₂SO₄</text>
+ B -&gt; C: X(g) / Δ 
+<path d="M 585 65 L 795 65" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="795,65 783,58 787,65 783,72"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="690" y="50">X<tspan dy="4" font-size="12">(g)</tspan><tspan dy="-4" font-size="16"> / Δ</tspan></text>
+ C -&gt; Fe(OH)₃: NaOH 
+<path d="M 850 120 L 850 220" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="850,220 843,208 850,212 857,208"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="start" x="865" y="170">NaOH</text>
+ D -&gt; Fe(OH)₃: (Z) 
+<path d="M 235 255 L 740 255" stroke="#CD7F32" stroke-width="3"></path>
+<polygon fill="#CD7F32" points="740,255 728,248 732,255 728,262"></polygon>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="16" font-weight="900" text-anchor="middle" x="487" y="240">(Z)</text>
+</g>
+ ==================== COMPOUNDS NODES ==================== 
+ Node A 
+<g transform="translate(15, 20)">
+<rect fill="#1e293b" height="100" rx="12" stroke="#334155" stroke-width="2.5" width="215"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="107.5" y="42">(A)</text>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="18" font-weight="800" text-anchor="middle" x="107.5" y="75">Red Oxide</text>
+</g>
+ Node B 
+<g transform="translate(475, 35)">
+<rect fill="#1e293b" height="70" rx="12" stroke="#334155" stroke-width="2.5" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="55" y="44">(B)</text>
+</g>
+ Node C 
+<g transform="translate(795, 35)">
+<rect fill="#1e293b" height="70" rx="12" stroke="#334155" stroke-width="2.5" width="110"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="55" y="44">(C)</text>
+</g>
+ Node D 
+<g transform="translate(45, 220)">
+<rect fill="#1e293b" height="70" rx="12" stroke="#334155" stroke-width="2.5" width="190"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="95" y="44">(D)</text>
+</g>
+ Node Fe(OH)₃ 
+<g transform="translate(740, 220)">
+<rect fill="#1e293b" height="70" rx="12" stroke="#334155" stroke-width="2.5" width="180"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="22" font-weight="900" text-anchor="middle" x="90" y="44">Fe(OH)₃</text>
+</g>
+</svg>
+</div>
+<div class="answer-box">✓ Model Answer (Structured Question)</div>
+<div class="explanation-title">📝 Model Answers</div>
+<div class="explanation-content">
+<p><strong>(a) Chemical formulas of C and D:</strong></p>
+<ul>
+<li><strong>(A)</strong> = Fe<sub>2</sub>O<sub>3</sub> (red oxide of iron)</li>
+<li><strong>(B)</strong> = Fe (iron metal, from reduction of Fe<sub>2</sub>O<sub>3</sub> at 800°C)</li>
+<li><strong>(C)</strong> = FeCl<sub>3</sub> (iron reacts with X = Cl<sub>2</sub> gas/Δ → FeCl<sub>3</sub>)</li>
+<li><strong>(D)</strong> = Fe<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub> (Fe<sub>2</sub>O<sub>3</sub> + conc. H<sub>2</sub>SO<sub>4</sub> → Fe<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub> + H<sub>2</sub>O)</li>
+<li><strong>(Z)</strong> = NaOH (added to D to give Fe(OH)<sub>3</sub>)</li>
+</ul>
+<p><strong>(b) Intermetallic alloy for (B) = Fe:</strong> <strong>Steel</strong> (Fe + C) or <strong>Stainless steel</strong> (Fe + Cr + Ni)</p>
+<p><strong>(c) Name of (C) when X<sub>(g)</sub> replaced by dilute HCl<sub>(aq)</sub>:</strong><br/>
+    Fe + 2HCl<sub>(dilute)</sub> → FeCl<sub>2</sub> + H<sub>2</sub>↑ → Compound = <strong>Iron(II) chloride (Ferrous chloride)</strong></p>
+</div>
+</section>
+<section class="page extracted" id="model8-question46"><div class="source-label">Model 8 — Question 46 — Essay Questions</div>
+<h2 class="question-title">Question 46 — Structured</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+    Study the following scheme and answer the questions:
+    <div class="svg-wrap">
+<svg height="100%" style="display: block" viewbox="0 0 950 240" width="100%" xmlns="http://w3.org">
+ Background Layout in Dark High-Contrast Palette 
+<rect fill="#0f172a" height="240" rx="16" width="950"></rect>
+ Subtle Background Grid Lines 
+<g fill="none" opacity="0.2" stroke="#334155" stroke-dasharray="4 8" stroke-width="1">
+<path d="M0 60 h950 M0 120 h950 M0 180 h950"></path>
+<path d="M237 v240 M475 v240 M712 v240"></path>
+</g>
+ ==================== REACTION PATHWAYS (ARROWS &amp; LABELS) ==================== 
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+ X -&gt; Y: Catalytic Hydration 
+<path d="M 120 70 L 275 70" stroke="#cd7f32" stroke-width="3"></path>
+<polygon fill="#cd7f32" points="275,70 263,63 267,70 263,77"></polygon>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="195" y="45">Catalytic</text>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="195" y="65">Hydration</text>
+ Y -&gt; Z: (W) / Anhydrous ZnCl₂ 
+<path d="M 575 70 L 740 70" stroke="#cd7f32" stroke-width="3"></path>
+<polygon fill="#cd7f32" points="740,70 728,63 732,70 728,77"></polygon>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="16" font-weight="900" text-anchor="middle" x="657" y="40">(W)</text>
+<text fill="#38bdf8" font-family="system-ui, sans-serif" font-size="15" font-weight="800" text-anchor="middle" x="657" y="62">Anhydrous ZnCl₂</text>
+ X -&gt; Z: Bottom path via (W) 
+<path d="M 70 115 L 70 190 L 815 190 L 815 120" stroke="#cd7f32" stroke-width="3"></path>
+<polygon fill="#cd7f32" points="815,120 808,132 815,124 822,132"></polygon>
+<text fill="#ef4444" font-family="system-ui, sans-serif" font-size="16" font-weight="900" text-anchor="middle" x="442" y="175">(W)</text>
+</g>
+ ==================== COMPOUNDS NODES ==================== 
+ Node X 
+<g transform="translate(25, 25)">
+<rect fill="#1e293b" height="90" rx="12" stroke="#334155" stroke-width="2.5" width="95"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="900" text-anchor="middle" x="47.5" y="55">X</text>
+</g>
+ Node Y 
+<g transform="translate(275, 25)">
+<rect fill="#1e293b" height="90" rx="12" stroke="#334155" stroke-width="2.5" width="300"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="900" text-anchor="middle" x="150" y="42">(Y)</text>
+<text fill="#94a3b8" font-family="system-ui, sans-serif" font-size="16" font-weight="800" text-anchor="middle" x="150" y="72">Simplest tertiary alcohol</text>
+</g>
+ Node Z 
+<g transform="translate(740, 25)">
+<rect fill="#1e293b" height="95" rx="12" stroke="#334155" stroke-width="2.5" width="180"></rect>
+<text fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="900" text-anchor="middle" x="90" y="55">(Z)</text>
+</g>
+</svg>
+</div>
+</div>
+<div class="answer-box">✓ Model Answer (Structured Question)</div>
+<div class="explanation-title">📝 Model Answers</div>
+<div class="explanation-content">
+<p><strong>Identification:</strong></p>
+<ul>
+<li><strong>(Y)</strong> = Simplest tertiary alcohol = <strong>2-methylpropan-2-ol</strong> [(CH<sub>3</sub>)<sub>3</sub>COH]</li>
+<li><strong>(X)</strong> = Alkene that gives Y by catalytic hydration = <strong>2-methylpropene</strong> [(CH<sub>3</sub>)<sub>2</sub>C=CH<sub>2</sub>]</li>
+<li><strong>(W)</strong> = HCl (hydrogen chloride)</li>
+<li><strong>(Z)</strong> = Product = <strong>2-chloro-2-methylpropane</strong> [(CH<sub>3</sub>)<sub>3</sub>CCl]</li>
+</ul>
+<p><strong>IUPAC Names:</strong></p>
+<ul>
+<li><strong>X:</strong> 2-methylpropene (isobutylene)</li>
+<li><strong>Z:</strong> 2-chloro-2-methylpropane (tert-butyl chloride)</li>
+</ul>
+<p><strong>Structural formulas of saturated isomers of X (C<sub>4</sub>H<sub>8</sub>):</strong></p>
+<div class="svg-wrap">
+<svg font-family="Times New Roman,serif" height="110" viewbox="0 0 110 110" width="110">
+<line stroke="#333" stroke-width="1.5" x1="20" x2="90" y1="20" y2="20"></line>
+<line stroke="#333" stroke-width="1.5" x1="90" x2="90" y1="20" y2="90"></line>
+<line stroke="#333" stroke-width="1.5" x1="90" x2="20" y1="90" y2="90"></line>
+<line stroke="#333" stroke-width="1.5" x1="20" x2="20" y1="90" y2="20"></line>
+<circle cx="20" cy="20" fill="#333" r="3"></circle>
+<circle cx="90" cy="20" fill="#333" r="3"></circle>
+<circle cx="90" cy="90" fill="#333" r="3"></circle>
+<circle cx="20" cy="90" fill="#333" r="3"></circle>
+<text font-size="11" text-anchor="middle" x="55" y="107">Cyclobutane</text>
+</svg>
+<svg font-family="Times New Roman,serif" height="110" viewbox="0 0 130 110" width="130">
+<line stroke="#333" stroke-width="1.5" x1="35" x2="75" y1="75" y2="75"></line>
+<line stroke="#333" stroke-width="1.5" x1="35" x2="55" y1="75" y2="40"></line>
+<line stroke="#333" stroke-width="1.5" x1="75" x2="55" y1="75" y2="40"></line>
+<circle cx="35" cy="75" fill="#333" r="3"></circle>
+<circle cx="75" cy="75" fill="#333" r="3"></circle>
+<circle cx="55" cy="40" fill="#333" r="3"></circle>
+<line stroke="#333" stroke-width="1.5" x1="75" x2="115" y1="75" y2="75"></line>
+<text fill="#333" font-size="11" x="115" y="79">CH₃</text>
+<text font-size="11" text-anchor="middle" x="65" y="107">Methylcyclopropane</text>
+</svg>
+</div>
+</div>
+</section>
+<section class="page extracted" id="model9-question45"><div class="source-label">Model 9 — Question 45 — Essay Questions</div>
+<h2 class="question-title">Question 45 — Essay</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+    The following diagram represents the chemical reactions of some salts:
+    <svg height="100%" style="background-color: #0f172a; max-height: 30vh" viewbox="0 0 850 200" width="100%" xmlns="http://w3.org">
+<defs>
+<marker id="arrow-right45" markerheight="6" markerwidth="6" orient="auto" refx="6" refy="5" viewbox="0 0 10 10">
+<path d="M 0 1 L 10 5 L 0 9 z" fill="#22c55e"></path>
+</marker>
+<style>
+          .nr45{fill:none;stroke:#38bdf8;stroke-width:2.5px;}
+          .nt45{fill:#f43f5e;font-size:18px;font-weight:bold;font-family:system-ui;text-anchor:middle;dominant-baseline:middle;}
+          .al45{stroke:#22c55e;stroke-width:3px;fill:none;}
+          .pt45{fill:#e2e8f0;font-size:12px;font-family:system-ui;text-anchor:middle;dominant-baseline:middle;}
+        </style>
+</defs>
+<g><rect class="nr45" height="55" rx="4" width="90" x="10" y="55"></rect><text class="nt45" x="55" y="85">X(s)</text></g>
+<path class="al45" d="M 105 82 L 185 82" marker-end="url(#arrow-right45)"></path>
+<text class="pt45" x="145" y="62">+ HCl</text>
+<g><rect class="nr45" height="55" rx="4" width="90" x="195" y="55"></rect><text class="nt45" x="240" y="85">Y(aq)</text></g>
+<path class="al45" d="M 290 82 L 370 82" marker-end="url(#arrow-right45)"></path>
+<text class="pt45" x="330" y="62">+ Z(g)</text>
+<path class="al45" d="M 240 110 L 240 155" marker-end="url(#arrow-right45)"></path>
+<text class="pt45" x="290" y="135">+ NH₃</text>
+<g><rect class="nr45" height="40" rx="4" width="100" x="190" y="155"></rect><text class="nt45" style="font-size:13px" x="240" y="178">B white ppt</text></g>
+<g><rect class="nr45" height="55" rx="4" width="90" x="380" y="55"></rect><text class="nt45" x="425" y="85">Z(g)</text></g>
+<path class="al45" d="M 425 110 L 425 155" marker-end="url(#arrow-right45)"></path>
+<text class="pt45" x="490" y="135">+ Cu(NO₃)₂</text>
+<g><rect class="nr45" height="40" rx="4" width="100" x="375" y="155"></rect><text class="nt45" style="font-size:13px" x="425" y="178">A black ppt</text></g>
+</svg>
+    Precipitate (B) is white; turns greenish white on exposure to air.<br/><br/>
+<strong>1- Write the chemical formula of Salt (X):</strong><br/>
+<strong>2- Write the chemical formula of Salt (Y):</strong><br/>
+<strong>3- Write the chemical names of precipitates (A) and (B):</strong>
+</div>
+<div class="answer-box">✓ Model Answer Below</div>
+<div class="explanation-title">📚 Detailed Explanation</div>
+<div class="explanation-content">
+<h3>Analysis</h3>
+<div style="text-align: center; font-weight: bold; background-color: #000000; color: #ffffff; padding: 12px; border-radius: 5px; font-family: monospace; font-size: 1.1em">
+      Z = H₂S → Cu²⁺ + H₂S → CuS (black, A)<br/>
+      Y = FeCl₂ → + NH₃ → Fe(OH)₂ (white→greenish, B)<br/>
+      X = FeS → FeS + 2HCl → FeCl₂ + H₂S↑
+    </div>
+<ul>
+<li><strong>Salt (X):</strong> FeS — Iron(II) sulfide</li>
+<li><strong>Salt (Y):</strong> FeCl₂ — Iron(II) chloride</li>
+<li><strong>Precipitate (A):</strong> CuS — Copper(II) sulfide (black)</li>
+<li><strong>Precipitate (B):</strong> Fe(OH)₂ — Iron(II) hydroxide (white, turns greenish in air)</li>
+</ul>
+</div>
+</section>
+<section class="page extracted" id="model9-question46"><div class="source-label">Model 9 — Question 46 — Essay Questions</div>
+<h2 class="question-title">Question 46 — Essay</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)">
+    The following diagram represents some reactions in organic compounds:
+    <svg height="100%" style="background-color: #0f172a; max-height: 30vh" viewbox="0 0 850 200" width="100%" xmlns="http://w3.org">
+<defs>
+<marker id="arrow-right46" markerheight="6" markerwidth="6" orient="auto" refx="6" refy="5" viewbox="0 0 10 10">
+<path d="M 0 1 L 10 5 L 0 9 z" fill="#22c55e"></path>
+</marker>
+<style>
+          .nr46{fill:none;stroke:#38bdf8;stroke-width:2.5px;}
+          .nt46{fill:#f43f5e;font-size:16px;font-weight:bold;font-family:system-ui;text-anchor:middle;dominant-baseline:middle;}
+          .al46{stroke:#22c55e;stroke-width:3px;fill:none;}
+          .pt46{fill:#e2e8f0;font-size:11px;font-family:system-ui;text-anchor:middle;dominant-baseline:middle;}
+        </style>
+</defs>
+<g><rect class="nr46" height="50" rx="4" width="80" x="10" y="30"></rect><text class="nt46" x="50" y="58">X</text></g>
+<path class="al46" d="M 95 55 L 165 55" marker-end="url(#arrow-right46)"></path>
+<text class="pt46" x="130" y="40">Neutralisation</text>
+<g><rect class="nr46" height="50" rx="4" width="80" x="175" y="30"></rect><text class="nt46" x="215" y="58">Y</text></g>
+<path class="al46" d="M 260 55 L 330 55" marker-end="url(#arrow-right46)"></path>
+<text class="pt46" x="295" y="40">Dry distill.</text>
+<g><rect class="nr46" height="50" rx="4" width="150" x="340" y="30"></rect><text class="nt46" x="415" y="58">CH₃CH₂OH</text></g>
+<g><rect class="nr46" height="50" rx="4" width="80" x="10" y="120"></rect><text class="nt46" x="50" y="148">Z</text></g>
+<path class="al46" d="M 95 145 L 165 145" marker-end="url(#arrow-right46)"></path>
+<text class="pt46" x="130" y="130">Hydration</text>
+<g><rect class="nr46" height="50" rx="4" width="80" x="175" y="120"></rect><text class="nt46" x="215" y="148">L</text></g>
+<path class="al46" d="M 260 130 L 340 80" marker-end="url(#arrow-right46)"></path>
+<text class="pt46" x="305" y="100">Reduction</text>
+</svg>
+<strong>1-</strong> State the IUPAC name of the isomer of the compound from adding excess HBr to compound (Z).<br/>
+<strong>2-</strong> State the IUPAC name of the product from the reduction of compound (X).<br/>
+<strong>3-</strong> Write the structural formulas for compounds (Y) and (L).
+  </div>
+<div class="answer-box">✓ Model Answer Below</div>
+<div class="explanation-title">📚 Detailed Explanation</div>
+<div class="explanation-content">
+<h3>Identifying the Compounds</h3>
+<div style="text-align: center; font-weight: bold; background-color: #000000; color: #ffffff; padding: 12px; border-radius: 5px; font-family: monospace; font-size: 1.1em">
+      Z = CH≡CH (acetylene) → L = CH₃CHO (ethanal)<br/>
+      X = CH₃COOH (acetic acid), Y = CH₃COONa
+    </div>
+<h3>Answers</h3>
+<ul>
+<li><strong>1.</strong> Excess HBr to Z (CH≡CH) → CH₃CHBr₂ (1,1-dibromoethane). Its isomer = <strong>1,2-dibromoethane</strong>.</li>
+<li><strong>2.</strong> Reduction of X (CH₃COOH) → <strong>Ethanol</strong>.</li>
+<li><strong>3.</strong> Y (Sodium acetate): CH₃COONa   |   L (Ethanal): CH₃CHO</li>
+</ul>
+</div>
+</section>
+<section class="page extracted" id="model10-question45"><div class="source-label">Model 10 — Question 45 — Essay Questions</div>
+<h2 class="question-title">Question 45 — Essay</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)"><span class="chem-eq">(A) →(heat, no air) (C) →(dil H₂SO₄) (E)</span><br/><span class="chem-eq">(C) →(O₂/Δ) (D) →(conc H₂SO₄/Δ) (F) →(NaOH) (B)</span><br/>
+(1) Names of compounds that yield (D) on strong heating.<br/>(2) Iron compound from (D) + conc. HCl.<br/>(3) Formula of (F).</div>
+<div class="svg-card">
+<svg viewbox="0 0 950 240" width="100%" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#0f172a" height="240" rx="16" width="950"></rect>
+<g fill="none" stroke="#cd7f32" stroke-width="3">
+<path d="M100 60 L240 60"></path><polygon fill="#cd7f32" points="240,60 228,53 232,60 228,67"></polygon>
+<path d="M350 60 L490 60"></path><polygon fill="#cd7f32" points="490,60 478,53 482,60 478,67"></polygon>
+<path d="M290 85 L290 150"></path><polygon fill="#cd7f32" points="290,150 283,138 290,142 297,138"></polygon>
+<path d="M350 160 L490 160"></path><polygon fill="#cd7f32" points="490,160 478,153 482,160 478,167"></polygon>
+<path d="M590 160 L730 160"></path><polygon fill="#cd7f32" points="730,160 718,153 722,160 718,167"></polygon></g>
+<text fill="#38bdf8" font-size="13" text-anchor="middle" x="170" y="42">Heat (no air)</text>
+<text fill="#38bdf8" font-size="13" text-anchor="middle" x="420" y="48">dil H₂SO₄</text>
+<text fill="#38bdf8" font-size="13" x="320" y="125">O₂/Δ</text>
+<text fill="#38bdf8" font-size="13" text-anchor="middle" x="420" y="148">conc H₂SO₄/Δ</text>
+<text fill="#38bdf8" font-size="13" text-anchor="middle" x="660" y="148">NaOH</text>
+<g transform="translate(40,35)"><rect fill="#1e293b" height="50" rx="10" stroke="#334155" stroke-width="2.5" width="60"></rect><text fill="#fff" font-size="18" text-anchor="middle" x="30" y="33">A</text></g>
+<g transform="translate(240,35)"><rect fill="#1e293b" height="50" rx="10" stroke="#334155" stroke-width="2.5" width="60"></rect><text fill="#fff" font-size="18" text-anchor="middle" x="30" y="33">C</text></g>
+<g transform="translate(490,35)"><rect fill="#1e293b" height="50" rx="10" stroke="#334155" stroke-width="2.5" width="60"></rect><text fill="#fff" font-size="18" text-anchor="middle" x="30" y="33">E</text></g>
+<g transform="translate(240,135)"><rect fill="#1e293b" height="50" rx="10" stroke="#334155" stroke-width="2.5" width="60"></rect><text fill="#fff" font-size="18" text-anchor="middle" x="30" y="33">D</text></g>
+<g transform="translate(490,135)"><rect fill="#1e293b" height="50" rx="10" stroke="#334155" stroke-width="2.5" width="60"></rect><text fill="#fff" font-size="18" text-anchor="middle" x="30" y="33">F</text></g>
+<g transform="translate(730,135)"><rect fill="#1e293b" height="50" rx="10" stroke="#334155" stroke-width="2.5" width="60"></rect><text fill="#fff" font-size="18" text-anchor="middle" x="30" y="33">B</text></g>
+</svg></div>
+<div class="explanation-title">📝 Model Answers</div>
+<div class="explanation-content">
+<p><strong>Identification:</strong> A=FeCO₃, C=FeO, D=Fe₂O₃, E=FeSO₄, F=Fe₂(SO₄)₃, B=Fe(OH)₃.</p>
+<p><strong>(1)</strong> Compounds giving Fe₂O₃ on heating: <strong>Iron(III) hydroxide</strong> and <strong>hydrated iron(III) oxide</strong>.</p>
+<p><strong>(2)</strong> Fe₂O₃ + conc. HCl → <strong>Iron(III) chloride (ferric chloride)</strong>.</p>
+<p><strong>(3)</strong> Formula of F = <strong>Fe₂(SO₄)₃</strong>.</p>
+</div>
+</section>
+<section class="page extracted" id="model10-question46"><div class="source-label">Model 10 — Question 46 — Essay Questions</div>
+<h2 class="question-title">Question 46 — Essay</h2>
+<div class="question-box" onclick="window.__amRevealAnswer&amp;&amp;window.__amRevealAnswer(this)"><span class="chem-eq">X →(complete oxidation) Y →(CH₄O, conc H₂SO₄) Z</span><br/><span class="chem-eq">X →(CH₂O₂, conc H₂SO₄) L</span><br/>Y is used in rayon; Z and L are isomers. Write formulas of X, Y, Z, L.</div>
+<div class="svg-card">
+<svg viewbox="0 0 950 230" width="100%" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#0f172a" height="230" rx="16" width="950"></rect>
+<g fill="none" stroke="#cd7f32" stroke-width="3">
+<path d="M110 110 L250 60"></path><polygon fill="#cd7f32" points="250,60 238,60 244,66 236,72"></polygon>
+<path d="M360 60 L510 60"></path><polygon fill="#cd7f32" points="510,60 498,53 502,60 498,67"></polygon>
+<path d="M110 115 L250 170"></path><polygon fill="#cd7f32" points="250,170 238,164 242,170 238,177"></polygon></g>
+<text fill="#38bdf8" font-size="13" x="185" y="70">Complete oxidation</text>
+<text fill="#38bdf8" font-size="13" text-anchor="middle" x="435" y="45">CH₄O / conc H₂SO₄</text>
+<text fill="#38bdf8" font-size="13" x="185" y="170">CH₂O₂ / conc H₂SO₄</text>
+<g transform="translate(40,85)"><rect fill="#1e293b" height="50" rx="10" stroke="#334155" stroke-width="2.5" width="60"></rect><text fill="#fff" font-size="18" text-anchor="middle" x="30" y="33">X</text></g>
+<g transform="translate(250,35)"><rect fill="#1e293b" height="50" rx="10" stroke="#334155" stroke-width="2.5" width="60"></rect><text fill="#fff" font-size="18" text-anchor="middle" x="30" y="33">Y</text></g>
+<g transform="translate(510,35)"><rect fill="#1e293b" height="50" rx="10" stroke="#334155" stroke-width="2.5" width="60"></rect><text fill="#fff" font-size="18" text-anchor="middle" x="30" y="33">Z</text></g>
+<g transform="translate(250,145)"><rect fill="#1e293b" height="50" rx="10" stroke="#334155" stroke-width="2.5" width="60"></rect><text fill="#fff" font-size="18" text-anchor="middle" x="30" y="33">L</text></g>
+</svg></div>
+<div class="explanation-title">📝 Model Answers</div>
+<div class="explanation-content">
+<ul>
+<li><strong>Y</strong> = acetic acid (rayon) = <strong>CH₃COOH</strong></li>
+<li><strong>X</strong> = ethanol = <strong>C₂H₅OH</strong></li>
+<li><strong>Z</strong> = methyl acetate = <strong>CH₃COOCH₃</strong></li>
+<li><strong>L</strong> = ethyl methanoate = <strong>HCOOC₂H₅</strong></li>
+</ul>
+<p>Z and L are isomers, both <strong>C₃H₆O₂</strong>.</p>
+</div>
+</section></div><!-- AYMAN_CHART_BRAND_FOOTER_V2 -->
+<div class="global-lang-switcher"><!-- GLOBAL_LANGUAGE_SWITCHER_BOTTOM_V2 --><a href="essay-questions-ar.html">العربية</a></div>
+<div class="am-brandfoot">
+  <span><b>بروف/ أيمن منصور</b> — مستشار الكيمياء</span><span class="am-sep">|</span>
+  <span><b>Prof./ Ayman Mansour</b> — Chemistry Consultant</span><span class="am-sep">|</span>
+  <span>📞 / WhatsApp: <b>01068018005</b> · <b>01287996430</b></span><span class="am-sep">|</span>
+  <span>كيمياء ٢٠٢٦ • Chemistry 2026</span>
+</div>
+<script id="click-to-reveal-answers-js">
+(function(){
+  var letterMap = { 'a':'a','b':'b','c':'c','d':'d', 'A':'a','B':'b','C':'c','D':'d', 'أ':'a','ا':'a','ب':'b','ج':'c','د':'d' };
+  function norm(x){
+    if(!x) return '';
+    x = String(x).trim();
+    if(letterMap[x]) return letterMap[x];
+    var first = x.charAt(0);
+    return letterMap[first] || x.toLowerCase();
+  }
+  function getCorrectLetter(section){
+    var d = section.getAttribute('data-answer') || section.getAttribute('data-correct') || '';
+    if(d) return norm(d);
+    var ans = section.querySelector('.answer-box,.answer,.source-answer,.feedback');
+    var txt = ans ? ans.textContent : '';
+    var patterns = [
+      /Correct\s*Answer\s*:?\s*\(?\s*([ABCDabcd])\s*\)?/i,
+      /الإجابة\s*الصحيحة\s*:?\s*\(?\s*([أابجددABCDabcd])\s*\)?/i,
+      /الإجابة\s*:?\s*\(?\s*([أابجددABCDabcd])\s*\)?/i,
+      /Answer\s*:?\s*\(?\s*([ABCDabcd])\s*\)?/i,
+      /\(([ABCDabcdأابجدد])\)/
+    ];
+    for(var i=0;i<patterns.length;i++){
+      var m = txt.match(patterns[i]);
+      if(m && m[1]) return norm(m[1]);
+    }
+    return '';
+  }
+  function optionLetter(el){
+    var d = el.getAttribute('data-letter') || el.getAttribute('data-option') || el.getAttribute('data-answer') || '';
+    if(d) return norm(d);
+    var lab = el.querySelector('.option-label-ar,.option-label,.bubble');
+    if(lab) return norm(lab.textContent);
+    var txt = (el.textContent || '').trim();
+    var m = txt.match(/^\s*([ABCDabcdأابجدد])\s*[\)\.\-:：]/) || txt.match(/^\s*([أابجدد])\s*/);
+    return m ? norm(m[1]) : '';
+  }
+  function allOptions(section){
+    var arr = Array.prototype.slice.call(section.querySelectorAll('.option-item,.option,[data-option],[data-letter]'));
+    return arr.filter(function(el){ return el.closest('section.page') === section; });
+  }
+  function mark(section, selected){
+    var correct = getCorrectLetter(section);
+    var opts = allOptions(section);
+    opts.forEach(function(o){ o.classList.remove('correct','incorrect'); });
+    if(!correct) return;
+    opts.forEach(function(o){
+      var l = optionLetter(o);
+      if(l && l === correct) o.classList.add('correct');
+    });
+    if(selected){
+      var sl = optionLetter(selected);
+      if(sl && sl !== correct) selected.classList.add('incorrect');
+      if(sl && sl === correct) selected.classList.add('correct');
+    }
+  }
+  function reveal(section, target){
+    if(!section) return;
+    section.classList.add('answered');
+    if(target){
+      var group = target.closest('.options-list,.options,table,tbody,.bubble-options') || section;
+      group.querySelectorAll('.selected').forEach(function(el){ el.classList.remove('selected'); });
+      target.classList.add('selected');
+    }
+    mark(section, target || null);
+  }
+  function init(){
+    document.querySelectorAll('section.page').forEach(function(section){
+      if(section.querySelector('.answer-box,.answer,.feedback,.source-answer,.explanation-title,.explanation-content,.explanation')){
+        section.classList.add('has-hidden-answer');
+      }
+    });
+    document.addEventListener('click', function(e){
+      var selectable = e.target.closest('.option-item,.option,[data-option],[data-letter]');
+      if(selectable){
+        var sec = selectable.closest('section.page');
+        if(sec && sec.classList.contains('has-hidden-answer')) reveal(sec, selectable);
+        return;
+      }
+      var trigger = e.target.closest('section.page.has-hidden-answer .question-box, section.page.has-hidden-answer .question, section.page.has-hidden-answer .question-text');
+      if(trigger){
+        reveal(trigger.closest('section.page'), null);
+      }
+    }, false);
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+
+<script id="robust-answer-reveal-js">
+(function(){
+  var letterMap={'a':'a','b':'b','c':'c','d':'d','A':'a','B':'b','C':'c','D':'d','أ':'a','ا':'a','ب':'b','ج':'c','د':'d'};
+  function norm(x){ if(!x) return ''; x=String(x).trim(); if(letterMap[x]) return letterMap[x]; var f=x.charAt(0); return letterMap[f]||x.toLowerCase(); }
+  function correct(section){
+    var d=section.getAttribute('data-answer')||section.getAttribute('data-correct')||''; if(d) return norm(d);
+    var box=section.querySelector('.answer-box,.answer,.source-answer,.feedback'); var txt=box?box.textContent:'';
+    var ps=[/Correct\s*Answer\s*:?\s*\(?\s*([ABCDabcd])\s*\)?/i,/الإجابة\s*الصحيحة\s*:?\s*\(?\s*([أابجددABCDabcd])\s*\)?/i,/الإجابة\s*:?\s*\(?\s*([أابجددABCDabcd])\s*\)?/i,/Answer\s*:?\s*\(?\s*([ABCDabcd])\s*\)?/i,/\(([ABCDabcdأابجدد])\)/];
+    for(var i=0;i<ps.length;i++){var m=txt.match(ps[i]); if(m&&m[1]) return norm(m[1]);}
+    return '';
+  }
+  function optLetter(el){
+    var d=el.getAttribute('data-letter')||el.getAttribute('data-option')||el.getAttribute('data-answer')||''; if(d) return norm(d);
+    var lab=el.querySelector('.option-label-ar,.option-label,.bubble'); if(lab) return norm(lab.textContent);
+    var txt=(el.textContent||'').trim(); var m=txt.match(/^\s*([ABCDabcdأابجدد])\s*[\)\.\-:：]/)||txt.match(/^\s*([أابجدد])\s*/); return m?norm(m[1]):'';
+  }
+  function opts(section){return Array.prototype.slice.call(section.querySelectorAll('.option-item,.option,[data-option],[data-letter]')).filter(function(el){return el.closest('section.page')===section;});}
+  function mark(section, selected){
+    var c=correct(section), os=opts(section);
+    os.forEach(function(o){o.classList.remove('correct','incorrect')});
+    if(c){os.forEach(function(o){if(optLetter(o)===c)o.classList.add('correct')});}
+    if(selected){
+      var group=selected.closest('.options-list,.options,table,tbody,.bubble-options')||section;
+      group.querySelectorAll('.selected').forEach(function(el){el.classList.remove('selected')});
+      selected.classList.add('selected');
+      var l=optLetter(selected); if(c && l && l!==c) selected.classList.add('incorrect'); if(c && l===c) selected.classList.add('correct');
+    }
+  }
+  function revealFrom(el){
+    var section=el && el.closest ? el.closest('section.page') : null; if(!section) return;
+    section.classList.add('has-hidden-answer');
+    section.classList.add('answered');
+    var selected=el.closest('.option-item,.option,[data-option],[data-letter]');
+    mark(section, selected || null);
+  }
+  window.__amRevealAnswer = revealFrom;
+  function init(){
+    document.querySelectorAll('section.page').forEach(function(section){
+      if(section.querySelector('.answer-box,.answer,.feedback,.source-answer,.explanation-title,.explanation-content,.explanation')) section.classList.add('has-hidden-answer');
+    });
+  }
+  function handler(e){
+    var el=e.target.closest && e.target.closest('.option-item,.option,[data-option],[data-letter],section.page.has-hidden-answer .question-box,section.page.has-hidden-answer .question,section.page.has-hidden-answer .question-text');
+    if(el) revealFrom(el);
+  }
+  ['click','pointerup','touchend'].forEach(function(ev){document.addEventListener(ev, handler, true);});
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init); else init();
+  try{ new MutationObserver(init).observe(document.documentElement,{childList:true,subtree:true}); }catch(e){}
+  setTimeout(init,300); setTimeout(init,1000); setTimeout(init,2500);
+})();
+</script>
+
+<!-- AM_ONE_QUESTION_PER_PAGE_V1 -->
+<style id="am-one-question-style">
+/* One-question-per-page controller for the 7 parts only. Question text/SVG/content is not changed. */
+body.am-one-question-ready .am-qpage{display:none!important;}
+body.am-one-question-ready .am-qpage.am-qpage-active{display:block!important;animation:amQFade .18s ease both;}
+@keyframes amQFade{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}
+.am-oneq-toolbar{position:relative;z-index:1500;width:min(1050px,calc(100% - 28px));margin:16px auto;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:12px 14px;border-radius:18px;background:linear-gradient(135deg,rgba(15,23,42,.94),rgba(17,24,39,.90));border:1px solid rgba(56,189,248,.28);box-shadow:0 14px 32px rgba(0,0,0,.24);font-family:Inter,Cairo,Tahoma,Arial,sans-serif;color:#f8fafc}.am-oneq-toolbar.bottom{margin-top:22px}.am-oneq-toolbar button,.am-oneq-toolbar select{border:1px solid rgba(56,189,248,.32);border-radius:12px;background:rgba(56,189,248,.12);color:#f8fafc;font-weight:900;padding:9px 12px;cursor:pointer;outline:none}.am-oneq-toolbar button:hover,.am-oneq-toolbar select:hover{border-color:#38bdf8;background:rgba(56,189,248,.20)}.am-oneq-toolbar button:disabled{opacity:.42;cursor:not-allowed}.am-oneq-toolbar select{min-width:150px;max-width:min(520px,90vw);background:#0f172a}.am-oneq-count{font-weight:1000;color:#bae6fd;padding:0 8px;white-space:nowrap}.am-oneq-hint{width:100%;text-align:center;color:#94a3b8;font-size:12px;font-weight:750;margin-top:-2px}.am-oneq-jump{display:flex;gap:6px;max-width:100%;overflow:auto;padding:2px 0}.am-oneq-dot{min-width:34px;height:32px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;text-decoration:none;color:#dbeafe!important;background:rgba(255,255,255,.055);border:1px solid rgba(148,163,184,.18);font-size:12px;font-weight:950}.am-oneq-dot.active{color:#07111f!important;background:linear-gradient(135deg,#38bdf8,#fbbf24);border-color:transparent}
+body.am-question-mode #am-course-index-panel{max-height:0!important;min-height:0!important;margin:0 auto!important;padding-top:0!important;padding-bottom:0!important;border-width:0!important;opacity:0!important;transform:translateY(-55px)!important;overflow:hidden!important;pointer-events:none!important;transition:all .28s ease!important;}
+body.am-question-mode .am-brandbar{transform:translateX(-50%) translateY(-115%)!important;opacity:.15!important;pointer-events:none!important;transition:all .28s ease!important;}
+@media(max-width:1100px){body.am-question-mode .am-brandbar{display:none!important}}
+@media(max-width:700px){.am-oneq-toolbar{gap:7px;padding:10px}.am-oneq-toolbar button,.am-oneq-toolbar select{padding:8px 10px}.am-oneq-jump{display:none}}
+@media print{body.am-one-question-ready .am-qpage{display:block!important}.am-oneq-toolbar{display:none!important}}
+</style>
+<script id="am-one-question-script">
+(function(){
+  if(window.__amOneQuestionPartsApplied) return;
+  window.__amOneQuestionPartsApplied = true;
+  function ready(fn){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', fn); else fn(); }
+  ready(function(){
+    var isAr = (document.documentElement.dir || '').toLowerCase()==='rtl' || /\blang-ar\b/.test(document.body.className);
+    var prevText = isAr ? 'السابق' : 'Previous';
+    var nextText = isAr ? 'التالي' : 'Next';
+    var qText = isAr ? 'السؤال' : 'Question';
+    var ofText = isAr ? 'من' : 'of';
+    var hintText = isAr ? 'يظهر سؤال واحد فقط في كل صفحة — استخدم التالي/السابق أو القائمة.' : 'Only one question is shown per page — use Next/Previous or the list.';
+
+    var pages = [];
+    var articles = Array.prototype.slice.call(document.querySelectorAll('article.problem'));
+    if(!articles.length) articles = Array.prototype.slice.call(document.querySelectorAll('article')).filter(function(a){ return a.querySelector('.question,.question-box,.question-text') || /Question|السؤال|Model|نموذج/i.test(a.textContent || ''); });
+
+    if(articles.length > 5 && document.querySelectorAll('section.page').length <= 2){
+      pages = articles;
+    } else {
+      pages = Array.prototype.slice.call(document.querySelectorAll('section.page')).filter(function(sec){
+        return !sec.closest('.am-course-index-panel') && !sec.classList.contains('am-course-index-panel');
+      });
+    }
+    if(pages.length <= 1) return;
+
+    pages.forEach(function(p,i){
+      p.classList.add('am-qpage');
+      if(!p.id) p.id = 'am-question-' + (i+1);
+      p.setAttribute('data-am-qindex', String(i));
+    });
+
+    function titleFor(p,i){
+      var h = p.querySelector('h1,h2,h3,.question-title,.qtitle');
+      var t = h ? (h.textContent || '').replace(/\s+/g,' ').trim() : '';
+      if(!t) t = qText + ' ' + (i+1);
+      if(t.length > 64) t = t.slice(0,61) + '...';
+      return (i+1) + ' - ' + t;
+    }
+
+    function makeToolbar(which){
+      var bar = document.createElement('div');
+      bar.className = 'am-oneq-toolbar ' + (which || 'top');
+      bar.innerHTML = '<button type="button" class="am-oneq-prev"></button><span class="am-oneq-count"></span><select class="am-oneq-select" aria-label="Question list"></select><button type="button" class="am-oneq-next"></button><div class="am-oneq-jump"></div><div class="am-oneq-hint"></div>';
+      bar.querySelector('.am-oneq-prev').textContent = '‹ ' + prevText;
+      bar.querySelector('.am-oneq-next').textContent = nextText + ' ›';
+      bar.querySelector('.am-oneq-hint').textContent = hintText;
+      var sel = bar.querySelector('select');
+      pages.forEach(function(p,i){ var opt=document.createElement('option'); opt.value=String(i); opt.textContent=titleFor(p,i); sel.appendChild(opt); });
+      var jump = bar.querySelector('.am-oneq-jump');
+      pages.forEach(function(p,i){ var a=document.createElement('a'); a.href='#'+p.id; a.className='am-oneq-dot'; a.textContent=String(i+1); a.setAttribute('data-go',String(i)); jump.appendChild(a); });
+      bar.addEventListener('click', function(e){
+        var dot = e.target.closest('[data-go]');
+        if(dot){ e.preventDefault(); show(parseInt(dot.getAttribute('data-go'),10), true); return; }
+        if(e.target.closest('.am-oneq-prev')) show(current-1, true);
+        if(e.target.closest('.am-oneq-next')) show(current+1, true);
+      });
+      sel.addEventListener('change', function(){ show(parseInt(sel.value,10), true); });
+      return bar;
+    }
+
+    var topBar = makeToolbar('top');
+    var bottomBar = makeToolbar('bottom');
+    var first = pages[0];
+    var before = document.getElementById('am-course-index-panel') || document.querySelector('.container .top') || document.querySelector('.top') || first;
+    if(before && before.parentNode){
+      if(before === first) before.parentNode.insertBefore(topBar, first);
+      else before.parentNode.insertBefore(topBar, before.nextSibling);
+    } else document.body.insertBefore(topBar, document.body.firstChild);
+    var last = pages[pages.length-1];
+    if(last && last.parentNode) last.parentNode.insertBefore(bottomBar, last.nextSibling);
+
+    var bars = [topBar,bottomBar];
+    var current = 0;
+    function setControls(){
+      bars.forEach(function(bar){
+        bar.querySelector('.am-oneq-count').textContent = qText + ' ' + (current+1) + ' ' + ofText + ' ' + pages.length;
+        bar.querySelector('.am-oneq-prev').disabled = current <= 0;
+        bar.querySelector('.am-oneq-next').disabled = current >= pages.length-1;
+        bar.querySelector('select').value = String(current);
+        Array.prototype.forEach.call(bar.querySelectorAll('.am-oneq-dot'), function(d,i){ d.classList.toggle('active', i===current); });
+      });
+    }
+    function show(idx, scrollIt){
+      if(scrollIt || location.hash) document.body.classList.add('am-question-mode');
+      if(isNaN(idx)) idx = 0;
+      if(idx < 0) idx = 0;
+      if(idx >= pages.length) idx = pages.length-1;
+      current = idx;
+      pages.forEach(function(p,i){ p.classList.toggle('am-qpage-active', i===idx); });
+      setControls();
+      var id = pages[idx].id;
+      if(history && history.replaceState) history.replaceState(null, '', '#'+id);
+      if(scrollIt){
+        setTimeout(function(){
+          var y = topBar.getBoundingClientRect().top + window.pageYOffset - 12;
+          window.scrollTo({top: Math.max(0,y), behavior:'smooth'});
+        }, 80);
+      }
+    }
+    function indexFromHash(){
+      var h = decodeURIComponent((location.hash || '').replace(/^#/,''));
+      if(!h) return 0;
+      var target = document.getElementById(h);
+      if(!target) return 0;
+      var p = target.classList && target.classList.contains('am-qpage') ? target : target.closest('.am-qpage');
+      if(!p) return 0;
+      var n = parseInt(p.getAttribute('data-am-qindex'),10);
+      return isNaN(n) ? 0 : n;
+    }
+    document.body.classList.add('am-one-question-ready');
+    show(indexFromHash(), false);
+    window.addEventListener('hashchange', function(){ show(indexFromHash(), true); });
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('a[href^="#"]');
+      if(!a) return;
+      var id = decodeURIComponent(a.getAttribute('href').slice(1));
+      var t = document.getElementById(id);
+      if(!t) return;
+      var p = t.classList && t.classList.contains('am-qpage') ? t : t.closest('.am-qpage');
+      if(p){ e.preventDefault(); show(parseInt(p.getAttribute('data-am-qindex'),10), true); }
+    }, true);
+  });
+})();
+</script>
+<!-- /AM_ONE_QUESTION_PER_PAGE_V1 -->
+
+
+
+<script id="am-deep-protection-js">
+(function(){
+  if(window.__amDeepProtectionApplied) return;
+  window.__amDeepProtectionApplied = true;
+
+  function block(e){
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  }
+
+  // === Right-click ===
+  document.addEventListener('contextmenu', block, true);
+
+  // === Copy/Cut/Paste ===
+  document.addEventListener('copy', block, true);
+  document.addEventListener('cut', block, true);
+  document.addEventListener('paste', block, true);
+
+  // === Keyboard shortcuts for dev tools / view source ===
+  document.addEventListener('keydown', function(e){
+    // F12, Ctrl+U, Ctrl+S, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+Shift+S
+    if(e.key === 'F12' ||
+       (e.ctrlKey && e.key === 'u') ||
+       (e.ctrlKey && e.key === 's') ||
+       (e.ctrlKey && e.key === 'U') ||
+       (e.ctrlKey && e.key === 'S') ||
+       (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+       (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+       (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+       (e.ctrlKey && e.shiftKey && e.key === 'S') ||
+       (e.metaKey && e.altKey && e.key === 'I') ||
+       (e.metaKey && e.altKey && e.key === 'J') ||
+       (e.metaKey && e.altKey && e.key === 'C') ||
+       (e.metaKey && e.shiftKey && e.key === 'I') ||
+       (e.metaKey && e.shiftKey && e.key === 'J') ||
+       (e.metaKey && e.shiftKey && e.key === 'C') ||
+       (e.metaKey && e.altKey && e.key === 'i') ||
+       (e.metaKey && e.altKey && e.key === 'j') ||
+       (e.metaKey && e.altKey && e.key === 'c') ||
+       e.key === 'PrintScreen' ||
+       e.key === 'Print' ||
+       e.code === 'PrintScreen'){
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+  }, true);
+
+  // === Print prevention (JS) ===
+  window.addEventListener('beforeprint', function(e){
+    document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:#0b1220;color:#ef4444;font-family:Arial,sans-serif;font-size:28px;font-weight:900;text-align:center;">\u26a0\ufe0f Printing is disabled</div>';
+  }, true);
+  window.addEventListener('afterprint', function(e){
+    window.location.reload();
+  }, true);
+
+  // === Screenshot detection via blur ===
+  (function(){
+    var overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:9999999;display:none;align-items:center;justify-content:center;background:rgba(11,18,32,0.96);color:#ef4444;font-family:Arial,sans-serif;font-size:clamp(18px,4vw,32px);font-weight:900;text-align:center;';
+    overlay.textContent = '\u26a0\ufe0f Protected';
+    document.body.appendChild(overlay);
+    var hidden = false;
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden){ hidden=true; overlay.style.display='flex'; }
+      else { hidden=false; setTimeout(function(){ overlay.style.display='none'; }, 600); }
+    });
+    window.addEventListener('blur', function(){
+      setTimeout(function(){
+        if(document.hidden || !document.hasFocus()){
+          overlay.style.display = 'flex';
+        }
+      }, 120);
+    });
+    window.addEventListener('focus', function(){
+      setTimeout(function(){ overlay.style.display='none'; }, 600);
+    });
+  })();
+
+  // === Block drag/drop of content ===
+  document.addEventListener('dragstart', block, true);
+  document.addEventListener('drop', block, true);
+
+  // === Block selectstart on body (keeps forms usable) ===
+  document.addEventListener('selectstart', function(e){
+    if(!e.target.closest('input,textarea,select,[contenteditable]')){
+      e.preventDefault();
+    }
+  }, true);
+
+  console.log('%cProtected','font-size:24px;color:#ef4444;font-weight:900;');
+})();
+</script>
+
+</body></html>

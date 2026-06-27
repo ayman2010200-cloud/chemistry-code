@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IUPAC: Alcohols, Aromatics, Phenols, Acids & Esters | الأيوباك</title>
+  <style>
+    :root{--bg:#050816;--panel:#0b1024;--text:#eef4ff;--muted:#9aa8c7;--cyan:#35d5ff;--purple:#9d6cff;--green:#39e58c;--yellow:#ffd166;--red:#ff5f7e;--orange:#ff9f43;--shadow:0 25px 70px rgba(0,0,0,.42);--radius:26px}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at 15% 10%,rgba(53,213,255,.20),transparent 28%),radial-gradient(circle at 82% 6%,rgba(157,108,255,.20),transparent 32%),radial-gradient(circle at 50% 100%,rgba(57,229,140,.10),transparent 34%),var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}body[dir="rtl"]{font-family:Tahoma,Arial,sans-serif}.page{width:min(1180px,92vw);margin:auto;padding:32px 0 60px}
+    header{display:grid;grid-template-columns:1.25fr .75fr;gap:24px;align-items:center;margin-bottom:28px}.hero,.hero-art,.card,.comparison{background:linear-gradient(145deg,rgba(17,24,50,.90),rgba(8,12,30,.88));border:1px solid rgba(255,255,255,.10);border-radius:var(--radius);box-shadow:var(--shadow);position:relative;overflow:hidden}.hero{padding:34px}.hero::before{content:"";position:absolute;inset:-120px auto auto -120px;width:310px;height:310px;background:radial-gradient(circle,rgba(53,213,255,.24),transparent 70%)}.hero>*{position:relative;z-index:1}
+    h1{margin:0 0 12px;font-size:clamp(2rem,5vw,4.8rem);line-height:1.02;letter-spacing:-.055em}body[dir="rtl"] h1{letter-spacing:0}.gradient-text{background:linear-gradient(90deg,var(--cyan),var(--purple),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}.lead{color:var(--muted);font-size:1.06rem;line-height:1.75;max-width:760px;margin:0}.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:24px}.switch{border:1px solid rgba(255,255,255,.14);background:#080d20;border-radius:999px;padding:6px;display:flex;gap:6px;width:max-content}.switch button{color:var(--muted);background:transparent;border:0;padding:10px 16px;border-radius:999px;cursor:pointer;font-weight:800;transition:.25s}.switch button.active{color:#05101b;background:linear-gradient(135deg,var(--cyan),var(--green));box-shadow:0 10px 30px rgba(53,213,255,.22)}.tag{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--muted);padding:10px 14px;border-radius:999px;font-weight:700;font-size:.9rem}.hero-art{min-height:330px;padding:22px;display:grid;place-items:center}svg{max-width:100%;height:auto;display:block}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:22px}.card{padding:24px;box-shadow:0 18px 45px rgba(0,0,0,.30)}.card::after{content:"";position:absolute;inset:auto -70px -90px auto;width:210px;height:210px;background:radial-gradient(circle,rgba(157,108,255,.13),transparent 70%)}.card>*{position:relative;z-index:1}.card h2{display:flex;align-items:center;gap:12px;margin:0 0 12px;font-size:1.45rem}.icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:rgba(53,213,255,.10);border:1px solid rgba(53,213,255,.25);flex:0 0 auto}.card p{color:var(--muted);line-height:1.72;margin:0 0 16px}.formula{margin:16px 0;padding:16px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(0,0,0,.18);font-family:"SFMono-Regular",Consolas,monospace;color:#eaf7ff;font-weight:800;overflow:auto;direction:ltr;text-align:left}.reaction-visual{min-height:150px;border:1px solid rgba(255,255,255,.10);border-radius:20px;background:radial-gradient(circle at 50% 20%,rgba(53,213,255,.10),rgba(0,0,0,.10));display:grid;place-items:center;margin:16px 0;padding:14px}
+    .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.pill{padding:9px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.04);color:#dbe7ff;font-size:.88rem;font-weight:750}.pill.green{border-color:rgba(57,229,140,.35);color:#a8ffd2}.pill.yellow{border-color:rgba(255,209,102,.42);color:#ffe3a1}.pill.red{border-color:rgba(255,95,126,.42);color:#ffc2cd}.pill.cyan{border-color:rgba(53,213,255,.42);color:#b9f4ff}.pill.purple{border-color:rgba(157,108,255,.42);color:#d8c9ff}.pill.orange{border-color:rgba(255,159,67,.42);color:#ffd1a3}
+    .comparison{margin-top:22px;padding:24px}.comparison h2{margin:0 0 18px;font-size:1.55rem}.table-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px}.search{flex:1;min-width:240px;border:1px solid rgba(255,255,255,.13);background:rgba(0,0,0,.20);color:var(--text);border-radius:999px;padding:13px 16px;font-weight:700;outline:none}.search::placeholder{color:#6f7d9c}.filter-btn{border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.04);color:var(--muted);border-radius:999px;padding:11px 14px;font-weight:800;cursor:pointer}.filter-btn.active{background:linear-gradient(135deg,var(--cyan),var(--green));color:#06101c;border-color:transparent}
+    table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:18px;border:1px solid rgba(255,255,255,.10)}th,td{padding:13px;border-bottom:1px solid rgba(255,255,255,.09);color:#dbe7ff;vertical-align:top;line-height:1.55}th{background:rgba(53,213,255,.10);color:#fff;text-align:left;position:sticky;top:0;z-index:2}body[dir="rtl"] th{text-align:right}tr:last-child td{border-bottom:0}.formula-cell{font-family:Consolas,"SFMono-Regular",monospace;direction:ltr;text-align:left;font-weight:800;color:#eaf7ff}.num{color:var(--cyan);font-weight:900;cursor:pointer;text-decoration:underline;transition:.2s}.num:hover{color:#fff;transform:scale(1.2;display:inline-block)}.badge{display:inline-block;padding:7px 10px;border-radius:999px;font-weight:900;font-size:.82rem;border:1px solid rgba(255,255,255,.13)}.alcohol{color:#b9f4ff;border-color:rgba(53,213,255,.35)}.aromatic{color:#d8c9ff;border-color:rgba(157,108,255,.42)}.phenol{color:#ffe3a1;border-color:rgba(255,209,102,.42)}.acid{color:#ffc2cd;border-color:rgba(255,95,126,.42)}.ester{color:#a8ffd2;border-color:rgba(57,229,140,.35)}
+    
+    /* Modal Styles */
+    .modal{display:none;position:fixed;inset:0;z-index:1000;background:rgba(5,8,22,.98);backdrop-filter:blur(25px);align-items:center;justify-content:center;padding:20px;animation:fadeIn .3s ease}
+    .modal-content{background:linear-gradient(145deg,rgba(17,24,50,.98),rgba(8,12,30,.98));border:3px solid rgba(53,213,255,.3);border-radius:var(--radius);width:min(900px,95vw);padding:60px;position:relative;box-shadow:0 0 150px rgba(53,213,255,.15);text-align:center}
+    .modal-close{position:absolute;top:20px;right:20px;color:var(--muted);font-size:32px;cursor:pointer;width:40px;height:40px;display:grid;place-items:center;border-radius:50%;transition:.2s}.modal-close:hover{background:rgba(255,255,255,.1);color:#fff}
+    .modal-title{margin:0 0 40px;font-size:3rem;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent;text-transform:uppercase;letter-spacing:3px;font-weight:900}
+    .struct-box{background:rgba(0,0,0,.4);border:2px solid rgba(255,255,255,.05);border-radius:40px;padding:40px;margin-bottom:40px;display:grid;place-items:center;min-height:500px;box-shadow:inset 0 0 100px rgba(0,0,0,.7)}
+    .formula-large{font-family:Consolas,monospace;font-size:2.2rem;color:#eaf7ff;padding:25px;background:rgba(255,255,255,.03);border-radius:20px;border:2px solid rgba(255,255,255,.1);direction:ltr;text-align:center;box-shadow:0 15px 40px rgba(0,0,0,0.5);font-weight:800}
+    .formula-label{display:block;color:var(--muted);font-size:1.1rem;margin-bottom:15px;text-transform:uppercase;letter-spacing:2px}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    
+    .footer-note{color:var(--muted);text-align:center;margin:28px 0 0;line-height:1.7}.lang-ar{display:none}body.ar .lang-en{display:none}body.ar .lang-ar{display:initial}body.ar .block.lang-ar{display:block}.block.lang-en{display:block}body.ar .block.lang-en{display:none}.pulse{animation:pulse 1.5s infinite ease-in-out;transform-origin:center}.dash{stroke-dasharray:8 10;animation:dash 1.15s linear infinite}.float{animation:float 3s ease-in-out infinite;transform-origin:center}@keyframes pulse{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}@keyframes dash{to{stroke-dashoffset:-36}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    @media(max-width:900px){header,.grid{grid-template-columns:1fr}.hero-art{min-height:250px}}@media(max-width:620px){.page{width:min(94vw,1180px);padding-top:18px}.hero,.card,.comparison{padding:18px}th,td{padding:11px;font-size:.9rem}table{display:block;overflow-x:auto}.search{min-width:100%}.filter-btn{flex:1}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <section class="hero">
+        <h1><span class="lang-en">IUPAC Functional Compounds</span><span class="lang-ar">مركبات عضوية وظيفية IUPAC</span><br><span class="gradient-text">100 Examples</span></h1>
+        <p class="lead lang-en block"> 100 organic compounds: alcohols, benzene aromatics, phenols, aliphatic/aromatic carboxylic acids, and esters with Kekulé/structural formulas.</p>
+        <p class="lead lang-ar block"> 100 مركب عضوي: الكحولات، ومركبات البنزين العطرية، والفينولات، والأحماض الأليفاتية والعطرية، والإسترات مع صيغ كيكوله/الصيغ البنائية.</p>
+        <div class="toolbar"><div class="switch"><button id="enBtn" class="active" onclick="setLang('en')">English</button><button id="arBtn" onclick="setLang('ar')">العربية</button></div><span class="tag lang-en">20 examples each family</span><span class="tag lang-ar">20 مثال لكل عائلة</span><span class="tag lang-en">Kekulé benzene formulas</span><span class="tag lang-ar">صيغ كيكوله للبنزين</span></div>
+      </section>
+      <section class="hero-art">
+        <svg viewBox="0 0 520 420" role="img" aria-label="Functional organic compounds visual">
+          <defs><linearGradient id="g1" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#35d5ff"/><stop offset="1" stop-color="#9d6cff"/></linearGradient><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#39e58c"/><stop offset="1" stop-color="#35d5ff"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+          <rect width="520" height="420" rx="36" fill="#070b1d"/><circle cx="90" cy="70" r="56" fill="#35d5ff" opacity=".10"/><circle cx="430" cy="78" r="76" fill="#9d6cff" opacity=".12"/><circle cx="260" cy="350" r="102" fill="#39e58c" opacity=".07"/>
+          <g filter="url(#glow)"><path d="M175 94 L260 48 L345 94 L345 188 L260 235 L175 188 Z" fill="none" stroke="url(#g1)" stroke-width="8" stroke-linejoin="round"/><path d="M196 107 L260 72 L324 107 M324 175 L260 211 L196 175" fill="none" stroke="#ffd166" stroke-width="5" stroke-linecap="round"/><path d="M345 94 L420 54" stroke="#39e58c" stroke-width="7" stroke-linecap="round"/><path d="M345 188 L424 232" stroke="#ff5f7e" stroke-width="7" stroke-linecap="round"/><path d="M175 188 L94 232" stroke="#35d5ff" stroke-width="7" stroke-linecap="round"/><path d="M175 94 L96 52" stroke="#9d6cff" stroke-width="7" stroke-linecap="round"/></g>
+          <g font-family="Consolas,monospace" font-weight="800"><text x="410" y="52" fill="#39e58c" font-size="22">OH</text><text x="418" y="244" fill="#ff5f7e" font-size="22">COOH</text><text x="46" y="244" fill="#35d5ff" font-size="22">ROH</text><text x="58" y="52" fill="#9d6cff" font-size="22">R</text><text x="120" y="342" fill="#eaf7ff" font-size="24">alcohol • phenol • acid • ester</text><text x="166" y="378" fill="#9aa8c7" font-size="19">benzene Kekulé ring</text></g>
+          <g class="float"><circle cx="260" cy="48" r="9" fill="#35d5ff"/><circle cx="345" cy="188" r="9" fill="#ff5f7e"/><circle cx="175" cy="188" r="9" fill="#ffd166"/><circle cx="420" cy="54" r="8" fill="#39e58c"/></g>
+        </svg>
+      </section>
+    </header>
+
+    <main>
+      <section class="grid">
+        <article class="card"><h2><span class="icon"><svg width="28" height="28" viewBox="0 0 28 28"><path d="M5 15h11" stroke="#35d5ff" stroke-width="3" stroke-linecap="round"/><path d="M16 15l6-7" stroke="#35d5ff" stroke-width="3" stroke-linecap="round"/><text x="14" y="24" fill="#35d5ff" font-size="10" font-weight="900">OH</text></svg></span><span class="lang-en">Alcohols</span><span class="lang-ar">الكحولات</span></h2><p class="lang-en block">Alcohols contain the hydroxyl group –OH attached to an aliphatic carbon. The suffix is usually <b>-ol</b>.</p><p class="lang-ar block">الكحولات تحتوي على مجموعة الهيدروكسيل –OH متصلة بكربون أليفاتي. اللاحقة غالبًا <b>-ol</b>.</p><div class="formula">Example: CH₃CH₂OH = ethanol<br>General: R–OH</div></article>
+        <article class="card"><h2><span class="icon"><svg width="28" height="28" viewBox="0 0 28 28"><path d="M14 4l9 5v10l-9 5-9-5V9z" fill="none" stroke="#9d6cff" stroke-width="2.5"/><path d="M10 9h8M10 19h8" stroke="#ffd166" stroke-width="2" stroke-linecap="round"/></svg></span><span class="lang-en">Aromatic Benzene Compounds</span><span class="lang-ar">مركبات البنزين العطرية</span></h2><p class="lang-en block">Aromatic compounds contain a benzene ring. In Kekulé formulas, benzene is drawn as a six-membered ring with alternating double bonds.</p><p class="lang-ar block">المركبات العطرية تحتوي على حلقة بنزين. في صيغة كيكوله تُرسم حلقة سداسية بروابط مزدوجة متبادلة.</p><div class="formula">Benzene Kekulé: C₆H₆ ring with alternating C=C<br>Phenyl group: C₆H₅– or Ph–</div></article>
+        <article class="card"><h2><span class="icon"><svg width="28" height="28" viewBox="0 0 28 28"><path d="M14 4l8 5v10l-8 5-8-5V9z" fill="none" stroke="#ffd166" stroke-width="2.5"/><path d="M22 9l3-3" stroke="#39e58c" stroke-width="2.5" stroke-linecap="round"/><text x="19" y="7" fill="#39e58c" font-size="8" font-weight="900">OH</text></svg></span><span class="lang-en">Phenols</span><span class="lang-ar">الفينولات</span></h2><p class="lang-en block">Phenols have –OH directly attached to an aromatic ring. They are more acidic than aliphatic alcohols.</p><p class="lang-ar block">الفينولات تحتوي على –OH متصلة مباشرة بحلقة عطرية. وهي أكثر حموضة من الكحولات الأليفاتية.</p><div class="formula">Phenol: C₆H₅OH / Ph–OH</div></article>
+        <article class="card"><h2><span class="icon"><svg width="28" height="28" viewBox="0 0 28 28"><path d="M5 15h9" stroke="#ff5f7e" stroke-width="3" stroke-linecap="round"/><path d="M14 15l5-6M14 15l5 6" stroke="#ff5f7e" stroke-width="3" stroke-linecap="round"/><text x="17" y="9" fill="#ff5f7e" font-size="8" font-weight="900">O</text><text x="18" y="24" fill="#ff5f7e" font-size="8" font-weight="900">OH</text></svg></span><span class="lang-en">Carboxylic Acids & Esters</span><span class="lang-ar">الأحماض الكربوكسيلية والإسترات</span></h2><p class="lang-en block">Carboxylic acids contain –COOH. Esters contain –COO– and are named as alkyl alkanoates.</p><p class="lang-ar block">الأحماض الكربوكسيلية تحتوي على –COOH. الإسترات تحتوي على –COO– وتسمى ألكيل ألكانوات.</p><div class="formula">Acid: R–COOH<br>Ester: R–COO–R′</div></article>
+      </section>
+
+      <section class="comparison">
+        <h2><span class="lang-en">100 IUPAC Examples with Kekulé / Structural Formulas</span><span class="lang-ar">100 مثال IUPAC مع صيغ كيكوله / صيغ بنائية</span></h2>
+        <div class="table-tools">
+          <input id="searchBox" class="search" oninput="renderTable()" placeholder="Search name, formula, family..." />
+          <button class="filter-btn active" data-filter="all" onclick="setFilter('all')"><span class="lang-en">All</span><span class="lang-ar">الكل</span></button>
+          <button class="filter-btn" data-filter="alcohol" onclick="setFilter('alcohol')"><span class="lang-en">Alcohols</span><span class="lang-ar">كحولات</span></button>
+          <button class="filter-btn" data-filter="aromatic" onclick="setFilter('aromatic')"><span class="lang-en">Aromatics</span><span class="lang-ar">عطرية</span></button>
+          <button class="filter-btn" data-filter="phenol" onclick="setFilter('phenol')"><span class="lang-en">Phenols</span><span class="lang-ar">فينولات</span></button>
+          <button class="filter-btn" data-filter="acid" onclick="setFilter('acid')"><span class="lang-en">Acids</span><span class="lang-ar">أحماض</span></button>
+          <button class="filter-btn" data-filter="ester" onclick="setFilter('ester')"><span class="lang-en">Esters</span><span class="lang-ar">إسترات</span></button>
+        </div>
+        <table><thead><tr><th>#</th><th><span class="lang-en">Family</span><span class="lang-ar">العائلة</span></th><th><span class="lang-en">IUPAC Name</span><span class="lang-ar">اسم IUPAC</span></th><th><span class="lang-en">Kekulé / Structural Formula</span><span class="lang-ar">صيغة كيكوله / الصيغة البنائية</span></th><th><span class="lang-en">Key</span><span class="lang-ar">المفتاح</span></th></tr></thead><tbody id="compoundBody"></tbody></table>
+      </section>
+
+      <section class="comparison"><h2><span class="lang-en">Fast Naming Rules</span><span class="lang-ar">قواعد تسمية سريعة</span></h2><table><thead><tr><th><span class="lang-en">Class</span><span class="lang-ar">النوع</span></th><th><span class="lang-en">Rule</span><span class="lang-ar">القاعدة</span></th><th><span class="lang-en">Example</span><span class="lang-ar">مثال</span></th></tr></thead><tbody><tr><td>Alcohol</td><td><span class="lang-en">Longest chain containing –OH; suffix -ol; give –OH lowest number.</span><span class="lang-ar">أطول سلسلة تحتوي –OH؛ اللاحقة -ol؛ أعطِ –OH أصغر رقم.</span></td><td>CH₃CH(OH)CH₃ = propan-2-ol</td></tr><tr><td>Aromatic</td><td><span class="lang-en">Use benzene as parent or phenyl as substituent.</span><span class="lang-ar">استخدم benzene كأصل أو phenyl كمستبدل.</span></td><td>C₆H₅CH₃ = methylbenzene</td></tr><tr><td>Phenol</td><td><span class="lang-en">–OH on benzene ring gives parent phenol; number other substituents.</span><span class="lang-ar">وجود –OH على حلقة البنزين يعطي الأصل phenol؛ رقّم المستبدلات الأخرى.</span></td><td>2-methylphenol</td></tr><tr><td>Acid</td><td><span class="lang-en">Carboxyl carbon is C-1; suffix -oic acid.</span><span class="lang-ar">كربون الكربوكسيل هو رقم 1؛ اللاحقة -oic acid.</span></td><td>CH₃COOH = ethanoic acid</td></tr><tr><td>Ester</td><td><span class="lang-en">Name alkyl group first, then carboxylate part as alkanoate.</span><span class="lang-ar">سمِّ مجموعة الألكيل أولًا ثم جزء الحمض كـ alkanoate.</span></td><td>CH₃COOCH₂CH₃ = ethyl ethanoate</td></tr></tbody></table></section>
+    </main>
+    
+    <!-- Structural Formula Modal -->
+    <div id="modal" class="modal" onclick="closeModal(event)">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle" class="modal-title"></h2>
+        <div id="modalVisual" class="struct-box"></div>
+        <div id="modalFormula" class="formula-large"></div>
+      </div>
+    </div>
+
+    </div>
+
+  <script>
+    const familyLabels={alcohol:{en:'Alcohol',ar:'كحول'},aromatic:{en:'Aromatic benzene',ar:'بنزين عطري'},phenol:{en:'Phenol',ar:'فينول'},acid:{en:'Carboxylic acid',ar:'حمض كربوكسيلي'},ester:{en:'Ester',ar:'إستر'}};
+    const keys={alcohol:{en:'–OH, suffix -ol',ar:'مجموعة –OH، اللاحقة -ol'},aromatic:{en:'benzene Kekulé ring / phenyl group',ar:'حلقة بنزين كيكوله / مجموعة فينيل'},phenol:{en:'Ar–OH, hydroxyl on benzene',ar:'Ar–OH، هيدروكسيل على البنزين'},acid:{en:'–COOH, suffix -oic acid',ar:'–COOH، اللاحقة -oic acid'},ester:{en:'–COO–, alkyl alkanoate',ar:'–COO–، ألكيل ألكانوات'}};
+    const compounds=[
+      {t:'alcohol',n:'methanol',f:'CH₃–OH'},{t:'alcohol',n:'ethanol',f:'CH₃CH₂–OH'},{t:'alcohol',n:'propan-1-ol',f:'CH₃CH₂CH₂–OH'},{t:'alcohol',n:'propan-2-ol',f:'CH₃CH(OH)CH₃'},{t:'alcohol',n:'butan-1-ol',f:'CH₃CH₂CH₂CH₂–OH'},
+      {t:'alcohol',n:'butan-2-ol',f:'CH₃CH(OH)CH₂CH₃'},{t:'alcohol',n:'2-methylpropan-1-ol',f:'(CH₃)₂CHCH₂–OH'},{t:'alcohol',n:'2-methylpropan-2-ol',f:'(CH₃)₃C–OH'},{t:'alcohol',n:'pentan-1-ol',f:'CH₃(CH₂)₄–OH'},{t:'alcohol',n:'pentan-2-ol',f:'CH₃CH(OH)CH₂CH₂CH₃'},
+      {t:'alcohol',n:'pentan-3-ol',f:'CH₃CH₂CH(OH)CH₂CH₃'},{t:'alcohol',n:'2-methylbutan-1-ol',f:'CH₃CH(CH₃)CH₂CH₂–OH'},{t:'alcohol',n:'3-methylbutan-1-ol',f:'CH₃CH₂CH(CH₃)CH₂–OH'},{t:'alcohol',n:'hexan-1-ol',f:'CH₃(CH₂)₅–OH'},{t:'alcohol',n:'hexan-2-ol',f:'CH₃CH(OH)(CH₂)₃CH₃'},
+      {t:'alcohol',n:'cyclohexanol',f:'cyclo-C₆H₁₁–OH'},{t:'alcohol',n:'ethane-1,2-diol',f:'HO–CH₂CH₂–OH'},{t:'alcohol',n:'propane-1,2-diol',f:'CH₃CH(OH)CH₂–OH'},{t:'alcohol',n:'propane-1,2,3-triol',f:'HOCH₂CH(OH)CH₂OH'},{t:'alcohol',n:'phenylmethanol',f:'C₆H₅–CH₂OH'},
+
+      {t:'aromatic',n:'benzene',f:'Kekulé C₆H₆ ring: ⌬ with alternating C=C'},{t:'aromatic',n:'methylbenzene',f:'C₆H₅–CH₃'},{t:'aromatic',n:'ethylbenzene',f:'C₆H₅–CH₂CH₃'},{t:'aromatic',n:'propylbenzene',f:'C₆H₅–CH₂CH₂CH₃'},{t:'aromatic',n:'propan-2-ylbenzene',f:'C₆H₅–CH(CH₃)₂'},
+      {t:'aromatic',n:'ethenylbenzene',f:'C₆H₅–CH=CH₂'},{t:'aromatic',n:'phenylethyne',f:'C₆H₅–C≡CH'},{t:'aromatic',n:'chlorobenzene',f:'C₆H₅–Cl'},{t:'aromatic',n:'bromobenzene',f:'C₆H₅–Br'},{t:'aromatic',n:'iodobenzene',f:'C₆H₅–I'},
+      {t:'aromatic',n:'nitrobenzene',f:'C₆H₅–NO₂'},{t:'aromatic',n:'methoxybenzene',f:'C₆H₅–OCH₃'},{t:'aromatic',n:'benzaldehyde',f:'C₆H₅–CHO'},{t:'aromatic',n:'acetophenone',f:'C₆H₅–COCH₃'},{t:'aromatic',n:'1,2-dimethylbenzene',f:'o-C₆H₄(CH₃)₂'},
+      {t:'aromatic',n:'1,3-dimethylbenzene',f:'m-C₆H₄(CH₃)₂'},{t:'aromatic',n:'1,4-dimethylbenzene',f:'p-C₆H₄(CH₃)₂'},{t:'aromatic',n:'1,2-dichlorobenzene',f:'o-C₆H₄Cl₂'},{t:'aromatic',n:'1,3-dichlorobenzene',f:'m-C₆H₄Cl₂'},{t:'aromatic',n:'1,4-dichlorobenzene',f:'p-C₆H₄Cl₂'},
+
+      {t:'phenol',n:'phenol',f:'C₆H₅–OH'},{t:'phenol',n:'2-methylphenol',f:'o-CH₃–C₆H₄–OH'},{t:'phenol',n:'3-methylphenol',f:'m-CH₃–C₆H₄–OH'},{t:'phenol',n:'4-methylphenol',f:'p-CH₃–C₆H₄–OH'},{t:'phenol',n:'2-ethylphenol',f:'o-C₂H₅–C₆H₄–OH'},
+      {t:'phenol',n:'4-ethylphenol',f:'p-C₂H₅–C₆H₄–OH'},{t:'phenol',n:'2-chlorophenol',f:'o-Cl–C₆H₄–OH'},{t:'phenol',n:'3-chlorophenol',f:'m-Cl–C₆H₄–OH'},{t:'phenol',n:'4-chlorophenol',f:'p-Cl–C₆H₄–OH'},{t:'phenol',n:'2-bromophenol',f:'o-Br–C₆H₄–OH'},
+      {t:'phenol',n:'4-bromophenol',f:'p-Br–C₆H₄–OH'},{t:'phenol',n:'2-nitrophenol',f:'o-NO₂–C₆H₄–OH'},{t:'phenol',n:'3-nitrophenol',f:'m-NO₂–C₆H₄–OH'},{t:'phenol',n:'4-nitrophenol',f:'p-NO₂–C₆H₄–OH'},{t:'phenol',n:'benzene-1,2-diol',f:'HO–C₆H₄–OH (1,2)'},
+      {t:'phenol',n:'benzene-1,3-diol',f:'HO–C₆H₄–OH (1,3)'},{t:'phenol',n:'benzene-1,4-diol',f:'HO–C₆H₄–OH (1,4)'},{t:'phenol',n:'2-methoxyphenol',f:'o-CH₃O–C₆H₄–OH'},{t:'phenol',n:'4-methoxyphenol',f:'p-CH₃O–C₆H₄–OH'},{t:'phenol',n:'2,4,6-trichlorophenol',f:'2,4,6-Cl₃–C₆H₂–OH'},
+
+      {t:'acid',n:'methanoic acid',f:'H–COOH'},{t:'acid',n:'ethanoic acid',f:'CH₃–COOH'},{t:'acid',n:'propanoic acid',f:'CH₃CH₂–COOH'},{t:'acid',n:'butanoic acid',f:'CH₃CH₂CH₂–COOH'},{t:'acid',n:'2-methylpropanoic acid',f:'(CH₃)₂CH–COOH'},
+      {t:'acid',n:'pentanoic acid',f:'CH₃(CH₂)₃–COOH'},{t:'acid',n:'hexanoic acid',f:'CH₃(CH₂)₄–COOH'},{t:'acid',n:'heptanoic acid',f:'CH₃(CH₂)₅–COOH'},{t:'acid',n:'octanoic acid',f:'CH₃(CH₂)₆–COOH'},{t:'acid',n:'nonanoic acid',f:'CH₃(CH₂)₇–COOH'},
+      {t:'acid',n:'decanoic acid',f:'CH₃(CH₂)₈–COOH'},{t:'acid',n:'ethanedioic acid',f:'HOOC–COOH'},{t:'acid',n:'propanedioic acid',f:'HOOC–CH₂–COOH'},{t:'acid',n:'butanedioic acid',f:'HOOC–CH₂CH₂–COOH'},{t:'acid',n:'2-hydroxypropanoic acid',f:'CH₃CH(OH)–COOH'},
+      {t:'acid',n:'benzoic acid',f:'C₆H₅–COOH'},{t:'acid',n:'2-methylbenzoic acid',f:'o-CH₃–C₆H₄–COOH'},{t:'acid',n:'3-methylbenzoic acid',f:'m-CH₃–C₆H₄–COOH'},{t:'acid',n:'4-methylbenzoic acid',f:'p-CH₃–C₆H₄–COOH'},{t:'acid',n:'benzene-1,4-dicarboxylic acid',f:'p-C₆H₄(COOH)₂'},
+
+      {t:'ester',n:'methyl methanoate',f:'H–COO–CH₃'},{t:'ester',n:'ethyl methanoate',f:'H–COO–CH₂CH₃'},{t:'ester',n:'methyl ethanoate',f:'CH₃–COO–CH₃'},{t:'ester',n:'ethyl ethanoate',f:'CH₃–COO–CH₂CH₃'},{t:'ester',n:'propyl ethanoate',f:'CH₃–COO–CH₂CH₂CH₃'},
+      {t:'ester',n:'propan-2-yl ethanoate',f:'CH₃–COO–CH(CH₃)₂'},{t:'ester',n:'butyl ethanoate',f:'CH₃–COO–CH₂CH₂CH₂CH₃'},{t:'ester',n:'methyl propanoate',f:'CH₃CH₂–COO–CH₃'},{t:'ester',n:'ethyl propanoate',f:'CH₃CH₂–COO–CH₂CH₃'},{t:'ester',n:'methyl butanoate',f:'CH₃CH₂CH₂–COO–CH₃'},
+      {t:'ester',n:'ethyl butanoate',f:'CH₃CH₂CH₂–COO–CH₂CH₃'},{t:'ester',n:'methyl pentanoate',f:'CH₃(CH₂)₃–COO–CH₃'},{t:'ester',n:'ethyl pentanoate',f:'CH₃(CH₂)₃–COO–CH₂CH₃'},{t:'ester',n:'methyl benzoate',f:'C₆H₅–COO–CH₃'},{t:'ester',n:'ethyl benzoate',f:'C₆H₅–COO–CH₂CH₃'},
+      {t:'ester',n:'phenyl ethanoate',f:'CH₃–COO–C₆H₅'},{t:'ester',n:'benzyl ethanoate',f:'CH₃–COO–CH₂C₆H₅'},{t:'ester',n:'methyl 2-hydroxybenzoate',f:'o-HO–C₆H₄–COO–CH₃'},{t:'ester',n:'ethyl 4-aminobenzoate',f:'p-H₂N–C₆H₄–COO–CH₂CH₃'},{t:'ester',n:'dimethyl benzene-1,4-dicarboxylate',f:'p-C₆H₄(COOCH₃)₂'}
+    ];
+    let currentLang='en',currentFilter='all';
+    function setLang(lang){currentLang=lang;const b=document.body,h=document.documentElement,en=document.getElementById('enBtn'),ar=document.getElementById('arBtn'),s=document.getElementById('searchBox');if(lang==='ar'){b.classList.add('ar');b.setAttribute('dir','rtl');h.setAttribute('lang','ar');h.setAttribute('dir','rtl');ar.classList.add('active');en.classList.remove('active');s.placeholder='ابحث بالاسم أو الصيغة أو العائلة...'}else{b.classList.remove('ar');b.setAttribute('dir','ltr');h.setAttribute('lang','en');h.setAttribute('dir','ltr');en.classList.add('active');ar.classList.remove('active');s.placeholder='Search name, formula, family...'}renderTable()}
+    function setFilter(filter){currentFilter=filter;document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.filter===filter));renderTable()}
+    function renderTable(){const body=document.getElementById('compoundBody');const q=(document.getElementById('searchBox').value||'').toLowerCase().trim();const rows=compounds.map((c,i)=>({...c,index:i+1})).filter(c=>{const mf=currentFilter==='all'||c.t===currentFilter;const ms=!q||c.n.toLowerCase().includes(q)||c.f.toLowerCase().includes(q)||familyLabels[c.t].en.toLowerCase().includes(q)||familyLabels[c.t].ar.includes(q);return mf&&ms});body.innerHTML=rows.map(c=>`<tr><td class="num" onclick="openModal(${c.index})">${c.index}</td><td><span class="badge ${c.t}">${familyLabels[c.t][currentLang]}</span></td><td><b>${c.n}</b></td><td class="formula-cell">${c.f}</td><td>${keys[c.t][currentLang]}</td></tr>`).join('')||`<tr><td colspan="5">${currentLang==='ar'?'لا توجد نتائج':'No results found'}</td></tr>`}
+    renderTable();
+
+    function closeModal(e){document.getElementById('modal').style.display='none'}
+
+    function openModal(index){
+      const compound = compounds[index-1];
+      const modal = document.getElementById('modal');
+      const title = document.getElementById('modalTitle');
+      const visual = document.getElementById('modalVisual');
+      const formula = document.getElementById('modalFormula');
+
+      title.innerText = compound.n.toUpperCase();
+      formula.innerHTML = `<span class="formula-label">Molecular Formula</span>${compound.f}`;
+      visual.innerHTML = generateStructureSVG(compound);
+      modal.style.display = 'flex';
+    }
+
+    function generateStructureSVG(c) {
+      const size = 600;
+      const cx = size/2, cy = size/2;
+      const colors = {
+        C: '#ffffff', // White for Carbon
+        H: '#9aa8c7', // Muted for Hydrogen
+        O: '#ff5f7e', // Red for Oxygen
+        alcohol: '#35d5ff',
+        aromatic: '#9d6cff',
+        phenol: '#ffd166',
+        acid: '#ff5f7e',
+        ester: '#39e58c'
+      };
+      
+      let svg = `<svg viewBox="0 0 ${size} ${size}" width="550" height="550" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="atom-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>`;
+
+      if (c.t === 'aromatic' || c.t === 'phenol') {
+        const r = 80;
+        const pts = [];
+        for(let i=0; i<6; i++) {
+          const angle = (i * 60 - 90) * Math.PI / 180;
+          pts.push({x: cx + r*Math.cos(angle), y: cy + r*Math.sin(angle)});
+        }
+        // Benzene Ring Bonds
+        for(let i=0; i<6; i++) {
+          const p1 = pts[i], p2 = pts[(i+1)%6];
+          svg += `<line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}" stroke="#555" stroke-width="5" stroke-linecap="round" />`;
+        }
+        // Alternating Double Bonds
+        for(let i=0; i<6; i+=2) {
+          const p1 = pts[i], p2 = pts[(i+1)%6];
+          const dx = p2.x - p1.x, dy = p2.y - p1.y;
+          const nx = -dy * 0.18, ny = dx * 0.18;
+          svg += `<line x1="${p1.x+nx}" y1="${p1.y+ny}" x2="${p2.x+nx}" y2="${p2.y+ny}" stroke="#888" stroke-width="5" />`;
+        }
+        // Carbon Atoms (C)
+        pts.forEach((p) => {
+          svg += `<circle cx="${p.x}" cy="${p.y}" r="18" fill="${colors.C}" filter="url(#atom-glow)" />`;
+          svg += `<text x="${p.x}" y="${p.y+6}" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="14" fill="#000">C</text>`;
+        });
+
+        // Functional Group
+        const fgColor = colors[c.t] || colors.aromatic;
+        const fgText = (c.t === 'phenol') ? 'OH' : 'R';
+        const p0 = pts[0];
+        svg += `<line x1="${p0.x}" y1="${p0.y}" x2="${p0.x-50}" y2="${p0.y-50}" stroke="${fgColor}" stroke-width="6" stroke-linecap="round" />`;
+        svg += `<circle cx="${p0.x-55}" cy="${p0.y-55}" r="22" fill="${fgColor}" filter="url(#atom-glow)" />`;
+        svg += `<text x="${p0.x-55}" y="${p0.y-50}" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="16" fill="#000">${fgText}</text>`;
+        
+        // Hydrogen Atoms (H)
+        for(let i=1; i<6; i++) {
+          const p = pts[i];
+          const angle = (i * 60 - 90) * Math.PI / 180;
+          svg += `<line x1="${p.x}" y1="${p.y}" x2="${p.x + 40*Math.cos(angle)}" y2="${p.y + 40*Math.sin(angle)}" stroke="#444" stroke-width="3" />`;
+          svg += `<circle cx="${p.x + 45*Math.cos(angle)}" cy="${p.y + 45*Math.sin(angle)}" r="12" fill="${colors.H}" filter="url(#atom-glow)" />`;
+          svg += `<text x="${p.x + 45*Math.cos(angle)}" y="${p.y + 45*Math.sin(angle)+4}" text-anchor="middle" font-family="Arial" font-size="12" fill="#000">H</text>`;
+        }
+      } else {
+        // Aliphatic Chain
+        const chainLen = 5;
+        const startX = cx - 150, startY = cy;
+        const stepX = 70, stepY = 40;
+        
+        for(let i=0; i<chainLen; i++) {
+          const x = startX + i*stepX;
+          const y = startY + (i%2===0 ? 0 : -stepY);
+          
+          // Atom C
+          svg += `<circle cx="${x}" cy="${y}" r="18" fill="${colors.C}" filter="url(#atom-glow)" />`;
+          svg += `<text x="${x}" y="${y+6}" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="14" fill="#000">C</text>`;
+          
+          // Hydrogens (H)
+          svg += `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+30}" stroke="#444" stroke-width="3" />`;
+          svg += `<circle cx="${x}" cy="${y+40}" r="12" fill="${colors.H}" filter="url(#atom-glow)" />`;
+          svg += `<text x="${x}" y="${y+44}" text-anchor="middle" font-family="Arial" font-size="12" fill="#000">H</text>`;
+          if(i > 0) {
+            svg += `<line x1="${x}" y1="${y}" x2="${x}" y2="${y-30}" stroke="#444" stroke-width="3" />`;
+            svg += `<circle cx="${x}" cy="${y-40}" r="12" fill="${colors.H}" filter="url(#atom-glow)" />`;
+            svg += `<text x="${x}" y="${y-36}" text-anchor="middle" font-family="Arial" font-size="12" fill="#000">H</text>`;
+          }
+
+          // Bond to next C
+          if(i < chainLen - 1) {
+            const nextX = startX + (i+1)*stepX;
+            const nextY = startY + ((i+1)%2===0 ? 0 : -stepY);
+            svg += `<line x1="${x}" y1="${y}" x2="${nextX}" y2="${nextY}" stroke="#555" stroke-width="5" stroke-linecap="round" />`;
+          }
+        }
+        
+        // Functional Group at the end
+        const lastX = startX + (chainLen-1)*stepX;
+        const lastY = startY + ((chainLen-1)%2===0 ? 0 : -stepY);
+        let fgColor = colors.alcohol, fgText = 'OH';
+        if(c.t === 'acid') { fgColor = colors.acid; fgText = 'COOH'; }
+        else if(c.t === 'ester') { fgColor = colors.ester; fgText = 'COOR'; }
+        
+        svg += `<line x1="${lastX}" y1="${lastY}" x2="${lastX+50}" y2="${lastY}" stroke="${fgColor}" stroke-width="6" stroke-linecap="round" />`;
+        svg += `<circle cx="${lastX+60}" cy="${lastY}" r="25" fill="${fgColor}" filter="url(#atom-glow)" />`;
+        svg += `<text x="${lastX+60}" y="${lastY+6}" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="16" fill="#000">${fgText}</text>`;
+      }
+      
+      svg += `</svg>`;
+      return svg;
+    }
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a10f1d856cd98aa0',t:'MTc4MjMzOTU3OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a114a9757b41e1b0',t:'MTc4MjM5Nzc0MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

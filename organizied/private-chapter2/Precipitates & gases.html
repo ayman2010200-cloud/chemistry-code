@@ -1,0 +1,2402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organic Chemistry Equations Book — All Chart Reactions</title>
+<style>
+    :root {
+        --bg-main: #0b0f19;
+        --bg-card: #111827;
+        --border-color: #1f2937;
+        --gold: #fbbf24;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        padding: 28px 10px 70px;
+        background: radial-gradient(1200px 600px at 50% -10%, #101a33 0%, var(--bg-main) 60%);
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        color: #f8fafc;
+        min-height: 100vh;
+    }
+    h1 {
+        margin: 0 0 6px;
+        font-size: 30px;
+        font-weight: 800;
+        text-align: center;
+        background: linear-gradient(90deg, #7dd3fc, #c084fc, #fbbf24);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    .subtitle {
+        margin: 0 0 20px 0;
+        color: #94a3b8;
+        font-size: 14.5px;
+        text-align: center;
+        max-width: 100%;
+        width: 100%;
+        line-height: 1.55;
+    }
+    .subtitle b { color: #e2e8f0; }
+
+    /* ===== toolbar ===== */
+    .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 12px 18px;
+        margin: 0 0 18px 0;
+        max-width: 100%;
+        width: 100%;
+        position: sticky;
+        top: 10px;
+        z-index: 20;
+        box-shadow: 0 10px 30px rgba(0,0,0,.45);
+    }
+    .toolbar input {
+        background: #0d1117;
+        border: 1px solid #2b3648;
+        color: #e2e8f0;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 13.5px;
+        width: 250px;
+        outline: none;
+        font-family: inherit;
+    }
+    .toolbar input:focus { border-color: #38bdf8; }
+    .btn {
+        background: #1b2435;
+        border: 1px solid #2b3648;
+        color: #cbd5e1;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all .15s;
+        user-select: none;
+    }
+    .btn:hover { background: #243049; color: #fff; }
+    .btn.gold { background: #3a2e08; border-color: #8a6d12; color: #fde68a; }
+    .count { font-size: 13px; color: #64748b; font-weight: 600; }
+
+    /* ===== chapter nav ===== */
+    .chapnav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 7px;
+        margin: 0 0 26px 0;
+        max-width: 100%;
+        width: 100%;
+    }
+    .chapnav a {
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: .4px;
+        text-transform: uppercase;
+        color: #cbd5e1;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        padding: 6px 13px;
+        text-decoration: none;
+        transition: all .15s;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+    .chapnav a:hover { border-color: var(--ch); color: #fff; }
+    .chapnav .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ch); }
+
+    /* ===== book ===== */
+    .book { max-width: 100%; width: 100%; margin: 0; }
+
+    .chapter { margin-bottom: 34px; }
+    .chap-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: linear-gradient(90deg, color-mix(in srgb, var(--ch) 16%, #121a2a) 0%, #0e1422 70%);
+        border: 1px solid color-mix(in srgb, var(--ch) 45%, #1f2937);
+        border-left: 6px solid var(--ch);
+        border-radius: 12px;
+        padding: 14px 20px;
+        margin-bottom: 12px;
+    }
+    .chap-head .icon {
+        width: 40px; height: 40px;
+        border-radius: 10px;
+        background: color-mix(in srgb, var(--ch) 20%, #0b0f19);
+        border: 1.5px solid var(--ch);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 19px;
+    }
+    .chap-head h2 { margin: 0; font-size: 21px; font-weight: 800; color: #fff; }
+    .chap-head .sub { font-size: 12.5px; color: #94a3b8; margin-top: 2px; }
+    .chap-head .n {
+        margin-left: auto;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--ch);
+        border: 1.5px solid var(--ch);
+        border-radius: 999px;
+        padding: 4px 14px;
+        white-space: nowrap;
+    }
+
+    /* equation card */
+    .eq {
+        background: linear-gradient(160deg, #121a2a 0%, #0d1117 80%);
+        border: 1px solid #1d2738;
+        border-left: 4px solid var(--ch);
+        border-radius: 12px;
+        padding: 14px 18px 13px;
+        margin-bottom: 10px;
+        transition: border-color .15s, box-shadow .15s;
+    }
+    .eq:hover {
+        border-color: color-mix(in srgb, var(--ch) 55%, #1d2738);
+        box-shadow: 0 6px 20px rgba(0,0,0,.4), 0 0 12px color-mix(in srgb, var(--ch) 18%, transparent);
+    }
+    .eq.hidden { display: none; }
+    .eq-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 9px;
+        flex-wrap: wrap;
+    }
+    .eq-num {
+        width: 26px; height: 26px;
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--ch) 22%, #0b0f19);
+        border: 1.5px solid var(--ch);
+        color: var(--ch);
+        font-size: 12px;
+        font-weight: 800;
+        display: flex; align-items: center; justify-content: center;
+        flex: 0 0 auto;
+    }
+    .eq-name { font-size: 14.5px; font-weight: 800; color: #fff; }
+    .eq-tag {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .6px;
+        text-transform: uppercase;
+        color: var(--ch);
+        background: color-mix(in srgb, var(--ch) 14%, transparent);
+        border-radius: 999px;
+        padding: 3px 10px;
+    }
+    /* origin-chapter chip shown in "by type" view */
+    .eq-chip {
+        margin-left: auto;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        color: var(--cc);
+        border: 1px solid color-mix(in srgb, var(--cc) 55%, transparent);
+        background: color-mix(in srgb, var(--cc) 10%, transparent);
+        border-radius: 999px;
+        padding: 3px 10px;
+        white-space: nowrap;
+    }
+    .seg { display: flex; gap: 0; }
+    .seg .btn { border-radius: 0; }
+    .seg .btn:first-child { border-radius: 8px 0 0 8px; }
+    .seg .btn:last-child { border-radius: 0 8px 8px 0; border-left: none; }
+
+    /* the equation line itself — size controlled by A− / A+ buttons */
+    :root { --eqfs: 21px; }
+    .eq-line {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 4px 12px;
+        font-size: var(--eqfs);
+        font-weight: 700;
+        color: #e8edf5;
+        padding: 10px 4px 5px;
+        line-height: 1.9;
+        width: 100%;
+    }
+    .eq-line .sp { color: #e8edf5; }
+    .eq-line .plus { color: #64748b; font-weight: 600; }
+    .arrowbox {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 6px;
+        min-width: 86px;
+    }
+    .arrowbox .cond {
+        font-size: calc(var(--eqfs) * 0.56);
+        font-weight: 700;
+        color: #7dd3fc;
+        font-family: Consolas, 'Courier New', monospace;
+        margin-bottom: -3px;
+        text-align: center;
+        max-width: 230px;
+        line-height: 1.35;
+    }
+    .arrowbox .arr { color: var(--gold); font-size: calc(var(--eqfs) * 1.18); line-height: .8; }
+
+    /* ===== Kekulé ring structures inside equations ===== */
+    .eq-line .ringwrap { display: inline-flex; align-items: center; }
+    .eq-line svg.ring { display: block; }
+    svg.ring line { stroke: #dbe3ef; stroke-width: 1.7; stroke-linecap: round; }
+    .eq-line .spn {
+        font-size: calc(var(--eqfs) * 0.6);
+        color: #8fa1ba;
+        font-weight: 600;
+        align-self: flex-end;
+        padding-bottom: 6px;
+    }
+    .eq-note {
+        font-size: 12px;
+        color: #8fa1ba;
+        margin-top: 7px;
+        padding-top: 7px;
+        border-top: 1px dashed #1d2738;
+    }
+    .eq-note b { color: #cbd5e1; }
+    .hl { background: #3a2e08; color: #fde68a; border-radius: 3px; padding: 0 3px; }
+
+    .empty {
+        text-align: center;
+        color: #64748b;
+        font-size: 15px;
+        padding: 50px 0;
+    }
+
+    .topbtn {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        width: 46px; height: 46px;
+        border-radius: 50%;
+        background: #1b2435;
+        border: 1.5px solid #2b3648;
+        color: #cbd5e1;
+        font-size: 19px;
+        cursor: pointer;
+        z-index: 30;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 8px 22px rgba(0,0,0,.5);
+    }
+    .topbtn:hover { background: #243049; color: #fff; }
+
+    /* ===== print (light) mode ===== */
+    @media print {
+        body { background: #fff !important; color: #111 !important; padding: 10px; }
+        .toolbar, .chapnav, .topbtn, .subtitle { display: none !important; }
+        h1 { color: #111 !important; -webkit-text-fill-color: #111; background: none; }
+        .chap-head { background: #f3f4f6 !important; border-color: #999 !important; }
+        .chap-head h2 { color: #111 !important; }
+        .chap-head .sub { color: #444 !important; }
+        .eq { background: #fff !important; border: 1px solid #bbb !important; break-inside: avoid; }
+        .eq-line, .eq-line .sp { color: #111 !important; }
+        .eq-name { color: #111 !important; }
+        .arrowbox .cond { color: #1d4ed8 !important; }
+        .arrowbox .arr { color: #b45309 !important; }
+        .eq-note { color: #444 !important; }
+    }
+
+/* ================= BRAND / TEACHER IDENTITY ================= */
+.brandbar {
+  display: flex; align-items: center; gap: 18px;
+  background: linear-gradient(90deg, #101a33 0%, #0f172a 60%, #1a1430 100%);
+  border: 1px solid #facc15aa; border-radius: 16px;
+  padding: 12px 22px; margin: 0 0 18px 0;
+  max-width: 100%; width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 8px 28px rgba(0,0,0,.5), 0 0 18px #facc1522;
+  position: relative; z-index: 10;
+}
+.brandbar .bphoto {
+  width: 74px; height: 74px; border-radius: 50%;
+  border: 3px solid #facc15; object-fit: cover; flex: 0 0 auto;
+  box-shadow: 0 0 16px #facc1566; background: #fff;
+}
+.brandbar .bnames { line-height: 1.3; }
+.brandbar .bar { font-size: 21px; font-weight: 800; color: #facc15; }
+.brandbar .ben { font-size: 13px; font-weight: 700; color: #7dd3fc; letter-spacing: .5px; }
+.brandbar .bpage {
+  margin-inline-start: auto; text-align: center; line-height: 1.45;
+}
+.brandbar .bpage .pa { font-size: 16px; font-weight: 800; color: #e2e8f0; direction: rtl; }
+.brandbar .bpage .pe { font-size: 11.5px; font-weight: 600; color: #94a3b8; }
+.brandbar .bexam { text-align: end; line-height: 1.4; }
+.brandbar .bexam .x1 { font-size: 15px; font-weight: 800; color: #4ade80; direction: rtl; }
+.brandbar .bexam .x2 { font-size: 10.5px; color: #64748b; direction: rtl; }
+@media (max-width: 900px){ .brandbar{flex-wrap:wrap; justify-content:center; text-align:center;} .brandbar .bpage{margin:0;} }
+
+/* watermark: faint photo + repeated bilingual name */
+#wmark {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+}
+#wmark .wphoto {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%,-50%);
+  width: min(56vmin, 520px); height: min(56vmin, 520px);
+  border-radius: 50%;
+  background-size: cover; background-position: center;
+  opacity: .045; filter: grayscale(60%);
+}
+body > *:not(#wmark){ position: relative; z-index: 1; }
+
+.brandfoot {
+  margin: 26px 0 0 0; max-width: 100%; width: 100%;
+  border-top: 1px dashed #facc1555;
+  padding: 12px 8px 4px;
+  display: flex; flex-wrap: wrap; gap: 6px 24px;
+  align-items: center; justify-content: center;
+  font-size: 12.5px; color: #94a3b8; text-align: center;
+  box-sizing: border-box;
+}
+.brandfoot b { color: #facc15; }
+.brandfoot .sep { color: #334155; }
+@media print { #wmark .wphoto { opacity: .05; } .brandbar{box-shadow:none;} }
+#wmark{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='300'%3E%3Ctext x='50%25' y='44%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='26' font-weight='bold' fill='%23ffffff' opacity='0.13'%3EProf./ Ayman Mansour%3C/text%3E%3Ctext x='50%25' y='60%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='22' font-weight='bold' fill='%23ffffff' opacity='0.10'%3E%D8%A3/ %D8%A3%D9%8A%D9%85%D9%86 %D9%85%D9%86%D8%B5%D9%88%D8%B1%3C/text%3E%3C/svg%3E");background-repeat:repeat;z-index:9999;}
+
+/* ===== model-2 security overlay ===== */
+.security-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #0b1220; color: #ef4444;
+    display: none; justify-content: center; align-items: center; flex-direction: column;
+    z-index: 999999; font-size: 1.6rem; font-weight: 800; text-align: center; gap: 8px;
+}
+.security-overlay .ar { font-size: 1.3rem; color: #f87171; direction: rtl; }
+body { user-select: none; }
+input, select, textarea { user-select: text; }
+
+.brandfoot { flex-direction: column; gap: 8px; }
+.brandfoot .fline1, .brandfoot .fline2 {
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+  align-items: center; justify-content: center;
+}
+.brandfoot .fname { color: #facc15; font-size: 15px; font-weight: 800; direction: rtl; }
+.brandfoot .fname2 { color: #7dd3fc; font-size: 13px; font-weight: 700; }
+.brandfoot .fphone {
+  color: #4ade80; font-weight: 700; font-size: 13px;
+  background: #4ade8011; border: 1px solid #4ade8044;
+  border-radius: 999px; padding: 4px 14px;
+}
+.brandfoot .fphone b { color: #86efac; letter-spacing: 1px; }
+
+/* ===== Arabic mode ===== */
+body.lang-ar .eq-name { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; }
+body.lang-ar .eq-tag { direction: rtl; }
+body.lang-ar .arrowbox .cond { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; font-size: calc(var(--eqfs) * 0.52); }
+body.lang-ar .eq-top { flex-direction: row; }
+
+body.lang-ar #pgTitle, body.lang-ar #pgSub { direction: rtl; font-family:'Segoe UI',Tahoma,sans-serif; }
+body.lang-ar .chap-head h2, body.lang-ar .chap-head .sub { direction: rtl; text-align: right; }
+body.lang-ar .chapnav a { direction: rtl; }
+
+.brandbar .blogo {
+  width: 78px; height: 68px; border-radius: 12px;
+  object-fit: contain; background: #fff; flex: 0 0 auto;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 14px rgba(56,189,248,.45);
+  padding: 3px;
+}
+</style>
+</head>
+<body>
+
+
+<div id="wmark"><div class="wphoto" style="background-image:url(data:image/jpeg;base64,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)"></div></div>
+<div class="brandbar"><img class="blogo" src="data:image/jpeg;base64,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" alt="Chemistry Code"><img class="bphoto" src="data:image/jpeg;base64,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" alt="teacher"><div class="bnames"><div class="bar">بروف/ أيمن منصور — مستشار الكيماء</div><div class="ben">Prof./ Ayman Mansour — Chemistry Consultant</div></div><div class="bpage"><div class="pa"> </div><div class="pe"></div></div><div class="bexam"><div class="x1">كود الكيمياء — Chemistry Code</div></div></div>
+
+</script>
+
+
+<!-- ANIONS2_DASHBOARD_EMBED_START -->
+<section id="anions2-dashboard" style="max-width:100%; width:100%; margin: 0 0 26px 0; position: relative; z-index: 2;">
+  <div style="background: linear-gradient(160deg, #121a2a 0%, #0d1117 80%); border: 1px solid #1d2738; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.45);">
+    <iframe id="anions2Frame" title="Anions Observations Engine" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Chemistry Master - Anions Observations (English / العربية)&lt;/title&gt;
+    &lt;style&gt;
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-input: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #384252;
+            
+            --accent-cyan: #38bdf8;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-yellow: #eab308;
+            --accent-orange: #f97316;
+            --accent-violet: #8b5cf6;
+            --accent-brown: #78350f;
+            --accent-pink: #ec4899;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        body.lang-ar {
+            font-family: &#x27;Segoe UI&#x27;, &#x27;Arabic Typesetting&#x27;, &#x27;Traditional Arabic&#x27;, Tahoma, sans-serif;
+        }
+
+        header {
+            background-color: #0b0f19;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-area svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--accent-cyan);
+        }
+
+        .logo-title h1 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, var(--text-main) 30%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-title p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-btn:hover {
+            color: var(--text-main);
+            background-color: var(--bg-card);
+        }
+
+        .nav-btn.active {
+            color: #fff;
+            background-color: var(--bg-input);
+            border-color: var(--border-color);
+        }
+
+        /* Language Toggle Button */
+        .lang-toggle {
+            background: linear-gradient(135deg, #1e3a5f, #0f172a);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .lang-toggle:hover {
+            background: var(--accent-cyan);
+            color: #0b0f19;
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+            transform: scale(1.05);
+        }
+
+        .lang-toggle .globe-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        .container {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            min-height: calc(100vh - 65px);
+            overflow: hidden;
+        }
+
+        body.lang-ar .container {
+            direction: rtl;
+        }
+
+        /* SIDEBAR (Interactive Matrix Lookup) */
+        .sidebar {
+            background-color: #0b0f19;
+            border-right: 1px solid var(--border-color);
+            padding: 1.5rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            overflow-y: auto;
+        }
+
+        body.lang-ar .sidebar {
+            border-right: none;
+            border-left: 1px solid var(--border-color);
+        }
+
+        .sidebar-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        body.lang-ar .sidebar-title {
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        .lookup-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .lookup-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        body.lang-ar .lookup-label {
+            text-transform: none;
+        }
+
+        .lookup-btn-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+        }
+
+        .lookup-btn {
+            background-color: rgba(30, 41, 59, 0.4);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        body.lang-ar .lookup-btn {
+            text-align: right;
+        }
+
+        .lookup-btn:hover {
+            border-color: var(--accent-cyan);
+            background-color: var(--bg-card);
+        }
+
+        .lookup-btn.active {
+            background-color: rgba(56, 189, 248, 0.15);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .lookup-btn-agno3 {
+            border-left: 3px solid var(--accent-violet);
+        }
+
+        .lookup-btn-agno3:hover {
+            border-left-color: var(--accent-cyan);
+        }
+
+        .lookup-btn-agno3.active {
+            border-left-color: var(--accent-violet);
+            background-color: rgba(139, 92, 246, 0.15);
+            border-color: var(--accent-violet);
+            color: var(--accent-violet);
+        }
+
+        .color-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        /* MAIN CONTENT WORKSPACE */
+        .main-workspace {
+            padding: 2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        body.lang-ar .section-header h2 {
+            letter-spacing: 0;
+        }
+
+        .section-header p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* GRID LAYOUTS FOR CARDS */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .observation-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+
+        .observation-card:hover {
+            transform: translateY(-2px);
+            border-color: #475569;
+        }
+
+        .observation-card.active {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+        }
+
+        .card-preview {
+            height: 140px;
+            background-color: #0b0f19;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .card-details {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .card-formula {
+            font-family: &#x27;Courier New&#x27;, Courier, monospace;
+            font-weight: 700;
+            font-size: 0.85rem;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 2px 6px;
+            border-radius: 4px;
+            align-self: start;
+        }
+
+        body.lang-ar .card-formula {
+            font-family: &#x27;Courier New&#x27;, Courier, monospace;
+            direction: ltr;
+            unicode-bidi: embed;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .card-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* FULL SIZE SHOWCASE AREA */
+        .showcase-area {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 850px) {
+            .showcase-area {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: none;
+            }
+        }
+
+        /* SVG LABORATORY VISUALIZER */
+        .visualizer-screen {
+            background-color: #0b0f19;
+            border-radius: 12px;
+            height: 380px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .tube-holder {
+            width: 120px;
+            height: 280px;
+            position: relative;
+            transform-origin: bottom center;
+            z-index: 3;
+        }
+
+        .tube-holder.heating {
+            animation: boil-wiggle 0.5s infinite alternate;
+        }
+
+        @keyframes boil-wiggle {
+            0% { transform: rotate(-1.5deg); }
+            100% { transform: rotate(1.5deg); }
+        }
+
+        .svg-fluid {
+            transition: fill 0.6s ease, d 0.6s ease;
+        }
+
+        .svg-ppt {
+            transition: fill 0.6s ease;
+        }
+
+        .bub-group {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .bub-group.active {
+            opacity: 1;
+        }
+
+        .bub-circle {
+            fill: rgba(255, 255, 255, 0.4);
+            animation: rise-bub 1.5s infinite linear;
+        }
+
+        @keyframes rise-bub {
+            0% { transform: translateY(180px); opacity: 0; }
+            10% { opacity: 0.6; }
+            50% { transform: translateY(100px) translateX(4px); }
+            90% { transform: translateY(20px) translateX(-4px); opacity: 0.6; }
+            100% { transform: translateY(0px); opacity: 0; }
+        }
+
+        .gas-cloud {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 50px;
+            border-radius: 50%;
+            filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.5s, background 0.5s;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .gas-cloud.active {
+            opacity: 0.85;
+            animation: billow-gas 2.5s infinite ease-in-out;
+        }
+
+        @keyframes billow-gas {
+            0% { transform: translateX(-50%) translateY(0) scale(1); opacity: 0.2; }
+            50% { transform: translateX(-40%) translateY(-25px) scale(1.2); opacity: 0.8; }
+            100% { transform: translateX(-60%) translateY(-50px) scale(1.4); opacity: 0; }
+        }
+
+        .paper-indicator {
+            position: absolute;
+            top: 25px;
+            left: 62%;
+            width: 45px;
+            height: 15px;
+            background-color: #cbd5e1;
+            border: 1px solid #94a3b8;
+            border-radius: 2px;
+            opacity: 0;
+            transform: rotate(20deg);
+            transition: all 0.5s ease;
+            z-index: 6;
+            transform-origin: left center;
+        }
+
+        .paper-indicator.active {
+            opacity: 1;
+            transform: rotate(-10deg) translate(-10px, 15px);
+        }
+
+        .glass-rod {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 130px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0.1) 90%);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 3px;
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 7;
+        }
+
+        .glass-rod.active {
+            opacity: 1;
+            top: -15px;
+        }
+
+        .flame-container {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 2;
+        }
+
+        .flame-container.active {
+            opacity: 1;
+        }
+
+        .burner-mouth {
+            width: 14px;
+            height: 35px;
+            background: linear-gradient(90deg, #64748b, #475569);
+            border-radius: 2px;
+        }
+
+        .flame-fire {
+            width: 16px;
+            height: 30px;
+            background: radial-gradient(circle at bottom, #38bdf8 20%, #f97316 60%, transparent 90%);
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -26px;
+            transform-origin: bottom center;
+            animation: wiggle-fire 0.15s infinite alternate;
+        }
+
+        @keyframes wiggle-fire {
+            0% { transform: scaleX(0.9) scaleY(0.95); }
+            100% { transform: scaleX(1.1) scaleY(1.05); }
+        }
+
+        /* INFO CONTENT AREA */
+        .info-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .info-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .info-type {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid;
+        }
+
+        body.lang-ar .info-type {
+            text-transform: none;
+        }
+
+        .info-type.ppt-type { border-color: var(--accent-green); background-color: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
+        .info-type.sol-type { border-color: var(--accent-pink); background-color: rgba(236, 72, 153, 0.15); color: var(--accent-pink); }
+        .info-type.gas-type { border-color: var(--accent-orange); background-color: rgba(249, 115, 22, 0.15); color: var(--accent-orange); }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .info-field {
+            background-color: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .info-field-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        body.lang-ar .info-field-label {
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .info-field-val {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .chemical-eq {
+            background-color: #0f172a;
+            border: 1px dashed var(--border-color);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: &#x27;Courier New&#x27;, Courier, monospace;
+            font-size: 0.9rem;
+            color: #38bdf8;
+            overflow-x: auto;
+            line-height: 1.45;
+            direction: ltr;
+            unicode-bidi: embed;
+            text-align: left;
+        }
+
+        .action-bar {
+            display: flex;
+            gap: 8px;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            background-color: rgba(30, 41, 59, 0.6);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-action:hover {
+            border-color: var(--accent-cyan);
+            background-color: var(--bg-card);
+        }
+
+        .btn-primary-action {
+            background-color: rgba(56, 189, 248, 0.15);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .btn-primary-action:hover {
+            background-color: var(--accent-cyan);
+            color: #0b0f19;
+        }
+
+        /* MATRIX TABLE VIEW */
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .matrix-table th {
+            background-color: #0b0f19;
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            padding: 10px 16px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        body.lang-ar .matrix-table th {
+            text-transform: none;
+        }
+
+        .matrix-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            line-height: 1.45;
+            vertical-align: top;
+        }
+
+        .matrix-table tr:hover {
+            background-color: rgba(30, 41, 59, 0.4);
+        }
+
+        body.lang-ar .matrix-table td .chemical-eq {
+            text-align: left;
+            direction: ltr;
+        }
+
+        .formula-tag {
+            font-family: &#x27;Courier New&#x27;, Courier, monospace;
+            font-weight: 700;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #38bdf8;
+            direction: ltr;
+            unicode-bidi: embed;
+        }
+
+        /* Latin-symbol preservation marker */
+        .latin-only {
+            direction: ltr;
+            unicode-bidi: embed;
+            font-family: &#x27;Courier New&#x27;, Courier, monospace;
+        }
+
+        /* Responsive header */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .logo-area {
+                justify-content: center;
+            }
+            nav {
+                justify-content: center;
+            }
+            .lang-toggle {
+                align-self: center;
+            }
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;div class=&quot;logo-area&quot;&gt;
+            &lt;svg viewBox=&quot;0 0 24 24&quot;&gt;
+                &lt;path d=&quot;M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M11,17H13V11H11V17M11,9H13V7H11V9Z&quot;/&gt;
+            &lt;/svg&gt;
+            &lt;div class=&quot;logo-title&quot;&gt;
+                &lt;h1 id=&quot;main-title&quot;&gt;ANIONS OBSERVATIONS ENGINE&lt;/h1&gt;
+                &lt;p id=&quot;main-subtitle&quot;&gt;Precipitates, Solution Colors &amp;amp; Gases (Standard PDF Data)&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;nav&gt;
+            &lt;button class=&quot;nav-btn active&quot; onclick=&quot;switchMainTab(&#x27;precipitates&#x27;)&quot;&gt;
+                &lt;svg width=&quot;14&quot; height=&quot;14&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M19,2H5C3.89,2 3,2.89 3,4V20C3,21.11 3.89,22 5,22H19C20.11,22 21,21.11 21,20V4C21,2.89 20.11,2 19,2M19,20H5V4H19V20Z&quot;/&gt;&lt;/svg&gt;
+                &lt;span data-en=&quot;Precipitates (PPT)&quot; data-ar=&quot;الرواسب (PPT)&quot;&gt;Precipitates (PPT)&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button class=&quot;nav-btn&quot; onclick=&quot;switchMainTab(&#x27;solutions&#x27;)&quot;&gt;
+                &lt;svg width=&quot;14&quot; height=&quot;14&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z&quot;/&gt;&lt;/svg&gt;
+                &lt;span data-en=&quot;Solution &amp;amp; Indicators&quot; data-ar=&quot;المحاليل والكشافات&quot;&gt;Solution &amp;amp; Indicators&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button class=&quot;nav-btn&quot; onclick=&quot;switchMainTab(&#x27;gases&#x27;)&quot;&gt;
+                &lt;svg width=&quot;14&quot; height=&quot;14&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M12 20C7.6 20 4 16.4 4 12S7.6 4 12 4 20 7.6 20 12 16.4 20 12 20Z&quot;/&gt;&lt;/svg&gt;
+                &lt;span data-en=&quot;Gases &amp;amp; Gas Tests&quot; data-ar=&quot;الغازات واختباراتها&quot;&gt;Gases &amp;amp; Gas Tests&lt;/span&gt;
+            &lt;/button&gt;
+        &lt;/nav&gt;
+        &lt;button class=&quot;lang-toggle&quot; id=&quot;langToggleBtn&quot; onclick=&quot;toggleLanguage()&quot;&gt;
+            &lt;svg class=&quot;globe-icon&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+                &lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;10&quot;/&gt;
+                &lt;line x1=&quot;2&quot; y1=&quot;12&quot; x2=&quot;22&quot; y2=&quot;12&quot;/&gt;
+                &lt;path d=&quot;M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z&quot;/&gt;
+            &lt;/svg&gt;
+            &lt;span id=&quot;langToggleText&quot;&gt;AR&lt;/span&gt;
+        &lt;/button&gt;
+    &lt;/header&gt;
+
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;!-- SIDEBAR FILTER MATRIX --&gt;
+        &lt;aside class=&quot;sidebar&quot;&gt;
+            &lt;div class=&quot;sidebar-title&quot; data-en=&quot;Quick Observation Filter&quot; data-ar=&quot;فلتر الملاحظات السريع&quot;&gt;Quick Observation Filter&lt;/div&gt;
+
+            &lt;div class=&quot;lookup-group&quot;&gt;
+                &lt;span class=&quot;lookup-label&quot; data-en=&quot;Filter by PPT Color&quot; data-ar=&quot;تصفية حسب لون الراسب&quot;&gt;Filter by PPT Color&lt;/span&gt;
+                &lt;div class=&quot;lookup-btn-grid&quot;&gt;
+                    &lt;button class=&quot;lookup-btn&quot; onclick=&quot;filterByObs(&#x27;ppt&#x27;, &#x27;white&#x27;)&quot;&gt;
+                        &lt;span class=&quot;color-dot&quot; style=&quot;background-color: #ffffff;&quot;&gt;&lt;/span&gt;
+                        &lt;span data-en=&quot;White PPT&quot; data-ar=&quot;راسب أبيض&quot;&gt;White PPT&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button class=&quot;lookup-btn&quot; onclick=&quot;filterByObs(&#x27;ppt&#x27;, &#x27;yellow&#x27;)&quot;&gt;
+                        &lt;span class=&quot;color-dot&quot; style=&quot;background-color: #facc15;&quot;&gt;&lt;/span&gt;
+                        &lt;span data-en=&quot;Yellow / Yellowish PPT&quot; data-ar=&quot;راسب أصفر / مصفر&quot;&gt;Yellow / Yellowish PPT&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button class=&quot;lookup-btn&quot; onclick=&quot;filterByObs(&#x27;ppt&#x27;, &#x27;black&#x27;)&quot;&gt;
+                        &lt;span class=&quot;color-dot&quot; style=&quot;background-color: #1e293b;&quot;&gt;&lt;/span&gt;
+                        &lt;span data-en=&quot;Black PPT&quot; data-ar=&quot;راسب أسود&quot;&gt;Black PPT&lt;/span&gt;
+                    &lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class=&quot;lookup-group&quot;&gt;
+                &lt;span class=&quot;lookup-label&quot; data-en=&quot;Filter by Solution Color&quot; data-ar=&quot;تصفية حسب لون المحلول&quot;&gt;Filter by Solution Color&lt;/span&gt;
+                &lt;div class=&quot;lookup-btn-grid&quot;&gt;
+                    &lt;button class=&quot;lookup-btn&quot; onclick=&quot;filterByObs(&#x27;sol&#x27;, &#x27;purple&#x27;)&quot;&gt;
+                        &lt;span class=&quot;color-dot&quot; style=&quot;background-color: #a855f7;&quot;&gt;&lt;/span&gt;
+                        &lt;span data-en=&quot;Purple Permanganate&quot; data-ar=&quot;برمنجنات بنفسجية&quot;&gt;Purple Permanganate&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button class=&quot;lookup-btn&quot; onclick=&quot;filterByObs(&#x27;sol&#x27;, &#x27;blue-green&#x27;)&quot;&gt;
+                        &lt;span class=&quot;color-dot&quot; style=&quot;background-color: #14b8a6;&quot;&gt;&lt;/span&gt;
+                        &lt;span data-en=&quot;Blue-Green Copper&quot; data-ar=&quot;نحاس أزرق-أخضر&quot;&gt;Blue-Green Copper&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button class=&quot;lookup-btn&quot; onclick=&quot;filterByObs(&#x27;sol&#x27;, &#x27;orange-green&#x27;)&quot;&gt;
+                        &lt;span class=&quot;color-dot&quot; style=&quot;background-color: #f97316;&quot;&gt;&lt;/span&gt;
+                        &lt;span data-en=&quot;Dichromate Paper&quot; data-ar=&quot;ورق ثنائي الكرومات&quot;&gt;Dichromate Paper&lt;/span&gt;
+                    &lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class=&quot;lookup-group&quot;&gt;
+                &lt;span class=&quot;lookup-label&quot; data-en=&quot;Filter by Gas Test&quot; data-ar=&quot;تصفية حسب اختبار الغاز&quot;&gt;Filter by Gas Test&lt;/span&gt;
+                &lt;div class=&quot;lookup-btn-grid&quot;&gt;
+                    &lt;button class=&quot;lookup-btn&quot; onclick=&quot;filterByObs(&#x27;gas&#x27;, &#x27;limewater&#x27;)&quot;&gt;
+                        &lt;span data-en=&quot;Lime Water Test&quot; data-ar=&quot;اختبار ماء الجير&quot;&gt;Lime Water Test&lt;/span&gt;&lt;/button&gt;
+                    &lt;button class=&quot;lookup-btn&quot; onclick=&quot;filterByObs(&#x27;gas&#x27;, &#x27;starch&#x27;)&quot;&gt;
+                        &lt;span data-en=&quot;Starch Paper Test&quot; data-ar=&quot;اختبار ورق النشا&quot;&gt;Starch Paper Test&lt;/span&gt;&lt;/button&gt;
+                    &lt;button class=&quot;lookup-btn&quot; onclick=&quot;filterByObs(&#x27;gas&#x27;, &#x27;ammonia&#x27;)&quot;&gt;
+                        &lt;span data-en=&quot;Ammonia Rod Test&quot; data-ar=&quot;اختبار قضيب الأمونيا&quot;&gt;Ammonia Rod Test&lt;/span&gt;&lt;/button&gt;
+                    &lt;button class=&quot;lookup-btn&quot; onclick=&quot;filterByObs(&#x27;gas&#x27;, &#x27;leadacetate&#x27;)&quot;&gt;
+                        &lt;span data-en=&quot;Lead Acetate Test&quot; data-ar=&quot;اختبار خلات الرصاص&quot;&gt;Lead Acetate Test&lt;/span&gt;&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- SILVER NITRATE (AgNO₃) TEST PANEL --&gt;
+            &lt;div class=&quot;lookup-group&quot; style=&quot;border-top: 1px solid var(--border-color); padding-top: 1rem;&quot;&gt;
+                &lt;span class=&quot;lookup-label&quot; style=&quot;color: var(--accent-violet); display:flex; align-items:center; gap:6px;&quot;&gt;
+                    &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;path d=&quot;M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5&quot;/&gt;&lt;/svg&gt;
+                    &lt;span data-en=&quot;Silver Nitrate Tests (AgNO₃)&quot; data-ar=&quot;اختبارات نترات الفضة (AgNO₃)&quot;&gt;Silver Nitrate Tests (AgNO₃)&lt;/span&gt;
+                &lt;/span&gt;
+                &lt;div class=&quot;lookup-btn-grid&quot;&gt;
+                    &lt;button class=&quot;lookup-btn lookup-btn-agno3&quot; onclick=&quot;filterBySilverNitrate(&#x27;sulphide&#x27;)&quot;&gt;
+                        &lt;span class=&quot;color-dot&quot; style=&quot;background-color: #1e293b;&quot;&gt;&lt;/span&gt;
+                        &lt;span data-en=&quot;Sulphide S²⁻ → Ag₂S (Black)&quot; data-ar=&quot;كبريتيد S²⁻ ← Ag₂S (أسود)&quot;&gt;Sulphide S²⁻ → Ag₂S (Black)&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button class=&quot;lookup-btn lookup-btn-agno3&quot; onclick=&quot;filterBySilverNitrate(&#x27;sulphite&#x27;)&quot;&gt;
+                        &lt;span class=&quot;color-dot&quot; style=&quot;background: linear-gradient(90deg, #ffffff 50%, #1e293b 50%);&quot;&gt;&lt;/span&gt;
+                        &lt;span data-en=&quot;Sulphite SO₃²⁻ → Ag₂SO₃ (White→Black)&quot; data-ar=&quot;كبريتيت SO₃²⁻ ← Ag₂SO₃ (أبيض→أسود)&quot;&gt;Sulphite SO₃²⁻ → Ag₂SO₃ (White→Black)&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button class=&quot;lookup-btn lookup-btn-agno3&quot; onclick=&quot;filterBySilverNitrate(&#x27;chloride&#x27;)&quot;&gt;
+                        &lt;span class=&quot;color-dot&quot; style=&quot;background-color: #ffffff;&quot;&gt;&lt;/span&gt;
+                        &lt;span data-en=&quot;Chloride Cl⁻ → AgCl (White)&quot; data-ar=&quot;كلوريد Cl⁻ ← AgCl (أبيض)&quot;&gt;Chloride Cl⁻ → AgCl (White)&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button class=&quot;lookup-btn lookup-btn-agno3&quot; onclick=&quot;filterBySilverNitrate(&#x27;bromide&#x27;)&quot;&gt;
+                        &lt;span class=&quot;color-dot&quot; style=&quot;background-color: #fef08a;&quot;&gt;&lt;/span&gt;
+                        &lt;span data-en=&quot;Bromide Br⁻ → AgBr (Yellowish)&quot; data-ar=&quot;بروميد Br⁻ ← AgBr (مصفر)&quot;&gt;Bromide Br⁻ → AgBr (Yellowish)&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button class=&quot;lookup-btn lookup-btn-agno3&quot; onclick=&quot;filterBySilverNitrate(&#x27;iodide&#x27;)&quot;&gt;
+                        &lt;span class=&quot;color-dot&quot; style=&quot;background-color: #eab308;&quot;&gt;&lt;/span&gt;
+                        &lt;span data-en=&quot;Iodide I⁻ → AgI (Yellow)&quot; data-ar=&quot;يوديد I⁻ ← AgI (أصفر)&quot;&gt;Iodide I⁻ → AgI (Yellow)&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button class=&quot;lookup-btn lookup-btn-agno3&quot; onclick=&quot;filterBySilverNitrate(&#x27;phosphate&#x27;)&quot;&gt;
+                        &lt;span class=&quot;color-dot&quot; style=&quot;background-color: #facc15;&quot;&gt;&lt;/span&gt;
+                        &lt;span data-en=&quot;Phosphate PO₄³⁻ → Ag₃PO₄ (Yellow)&quot; data-ar=&quot;فوسفات PO₄³⁻ ← Ag₃PO₄ (أصفر)&quot;&gt;Phosphate PO₄³⁻ → Ag₃PO₄ (Yellow)&lt;/span&gt;
+                    &lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;button class=&quot;btn-action&quot; onclick=&quot;resetSidebarFilters()&quot; style=&quot;margin-top: 1rem;&quot;&gt;
+                &lt;span data-en=&quot;Reset Filter Lookups&quot; data-ar=&quot;إعادة ضبط الفلاتر&quot;&gt;Reset Filter Lookups&lt;/span&gt;
+            &lt;/button&gt;
+        &lt;/aside&gt;
+
+        &lt;!-- MAIN LAB WORKSPACE --&gt;
+        &lt;main class=&quot;main-workspace&quot;&gt;
+            
+            &lt;!-- SHOWCASE SECTION --&gt;
+            &lt;section class=&quot;showcase-area&quot; id=&quot;detail-showcase-box&quot;&gt;
+                &lt;div class=&quot;visualizer-screen&quot;&gt;
+                    &lt;div class=&quot;glass-rod&quot; id=&quot;ammo-glass-rod&quot;&gt;&lt;/div&gt;
+                    &lt;div class=&quot;paper-indicator&quot; id=&quot;indicator-paper&quot;&gt;&lt;/div&gt;
+                    &lt;div class=&quot;gas-cloud&quot; id=&quot;gas-vapor-cloud&quot;&gt;&lt;/div&gt;
+                    &lt;div class=&quot;tube-holder&quot; id=&quot;test-tube-holder&quot;&gt;
+                        &lt;svg viewBox=&quot;0 0 100 250&quot; width=&quot;100%&quot; height=&quot;100%&quot;&gt;
+                            &lt;defs&gt;
+                                &lt;clipPath id=&quot;inner-tube-clip&quot;&gt;
+                                    &lt;path d=&quot;M 25 20 l 0 190 a 25 25 0 0 0 50 0 l 0 -190 Z&quot; /&gt;
+                                &lt;/clipPath&gt;
+                            &lt;/defs&gt;
+                            &lt;path class=&quot;svg-fluid&quot; id=&quot;fluid-element&quot; d=&quot;M 25 110 l 0 100 a 25 25 0 0 0 50 0 l 0 -100 Z&quot; fill=&quot;rgba(255, 255, 255, 0.15)&quot; clip-path=&quot;url(#inner-tube-clip)&quot; /&gt;
+                            &lt;path class=&quot;svg-ppt&quot; id=&quot;ppt-element&quot; d=&quot;M 25 190 l 0 20 a 25 25 0 0 0 50 0 l 0 -20 Z&quot; fill=&quot;transparent&quot; clip-path=&quot;url(#inner-tube-clip)&quot; /&gt;
+                            &lt;rect id=&quot;brown-ring-element&quot; x=&quot;25&quot; y=&quot;148&quot; width=&quot;50&quot; height=&quot;8&quot; fill=&quot;transparent&quot; /&gt;
+                            &lt;g id=&quot;cu-filings-group&quot; style=&quot;display:none;&quot;&gt;
+                                &lt;path d=&quot;M 40 210 l 8 -5 l 5 3 Z&quot; fill=&quot;#b45309&quot; /&gt;
+                                &lt;path d=&quot;M 45 215 l 5 -7 l 6 4 Z&quot; fill=&quot;#92400e&quot; /&gt;
+                                &lt;path d=&quot;M 52 212 l 7 -3 l 3 5 Z&quot; fill=&quot;#b45309&quot; /&gt;
+                            &lt;/g&gt;
+                            &lt;g class=&quot;bub-group&quot; id=&quot;bub-element&quot;&gt;
+                                &lt;circle class=&quot;bub-circle&quot; cx=&quot;35&quot; cy=&quot;190&quot; r=&quot;2.5&quot; style=&quot;animation-delay: 0.1s&quot; /&gt;
+                                &lt;circle class=&quot;bub-circle&quot; cx=&quot;45&quot; cy=&quot;180&quot; r=&quot;1.5&quot; style=&quot;animation-delay: 0.6s&quot; /&gt;
+                                &lt;circle class=&quot;bub-circle&quot; cx=&quot;50&quot; cy=&quot;195&quot; r=&quot;2&quot; style=&quot;animation-delay: 1.1s&quot; /&gt;
+                                &lt;circle class=&quot;bub-circle&quot; cx=&quot;55&quot; cy=&quot;175&quot; r=&quot;1.8&quot; style=&quot;animation-delay: 0.4s&quot; /&gt;
+                                &lt;circle class=&quot;bub-circle&quot; cx=&quot;60&quot; cy=&quot;185&quot; r=&quot;2.2&quot; style=&quot;animation-delay: 0.9s&quot; /&gt;
+                            &lt;/g&gt;
+                            &lt;path d=&quot;M 25 20 l 0 190 a 25 25 0 0 0 50 0 l 0 -190&quot; fill=&quot;none&quot; stroke=&quot;#94a3b8&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; /&gt;
+                            &lt;ellipse cx=&quot;50&quot; cy=&quot;20&quot; rx=&quot;27&quot; ry=&quot;5&quot; fill=&quot;none&quot; stroke=&quot;#94a3b8&quot; stroke-width=&quot;3&quot; /&gt;
+                        &lt;/svg&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;flame-container&quot; id=&quot;burner-flame&quot;&gt;
+                        &lt;div class=&quot;flame-fire&quot;&gt;&lt;/div&gt;
+                        &lt;div class=&quot;burner-mouth&quot;&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class=&quot;info-content&quot; id=&quot;showcase-info-panel&quot;&gt;
+                    &lt;!-- Dynamically populated --&gt;
+                &lt;/div&gt;
+            &lt;/section&gt;
+
+            &lt;!-- CARDS GRID/TABLE VIEW CONTAINER --&gt;
+            &lt;div id=&quot;observation-cards-container&quot;&gt;
+                &lt;!-- Dynamically populated --&gt;
+            &lt;/div&gt;
+
+        &lt;/main&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        // ========== BILINGUAL TRANSLATION DATA ==========
+        let currentLang = &#x27;en&#x27;;
+
+        const i18n = {
+            // Header
+            &quot;main-title&quot;: { en: &quot;ANIONS OBSERVATIONS ENGINE&quot;, ar: &quot;محرك ملاحظات الأنيونات&quot; },
+            &quot;main-subtitle&quot;: { en: &quot;Precipitates, Solution Colors &amp; Gases (Standard PDF Data)&quot;, ar: &quot;الرواسب وألوان المحاليل والغازات (بيانات PDF قياسية)&quot; },
+
+            // Section header titles &amp; descriptions
+            &quot;section-precipitates-title&quot;: { en: &quot;Precipitates &amp; Colors&quot;, ar: &quot;الرواسب والألوان&quot; },
+            &quot;section-precipitates-desc&quot;: { en: &quot;Standard solid precipitates formed in qualitative tests, sorted by solubility properties.&quot;, ar: &quot;الرواسب الصلبة القياسية المتكونة في الاختبارات النوعية، مرتبة حسب خصائص الذوبان.&quot; },
+            &quot;section-solutions-title&quot;: { en: &quot;Solutions, Papers &amp; Indicators&quot;, ar: &quot;المحاليل والأوراق والكشافات&quot; },
+            &quot;section-solutions-desc&quot;: { en: &quot;Diagnostic liquid color changes, indicators, and paper tests wet with reagents.&quot;, ar: &quot;تغيرات الألوان التشخيصية للمحاليل والكشافات واختبارات الأوراق المبللة بالكواشف.&quot; },
+            &quot;section-gases-title&quot;: { en: &quot;Gases &amp; Diagnostic Chemical Tests&quot;, ar: &quot;الغازات والاختبارات الكيميائية التشخيصية&quot; },
+            &quot;section-gases-desc&quot;: { en: &quot;Physical properties of evolved gases and their specific diagnostic indicators.&quot;, ar: &quot;الخواص الفيزيائية للغازات المتصاعدة وكشافاتها التشخيصية المحددة.&quot; },
+
+            // Sidebar reset
+            &quot;Reset Filter Lookups&quot;: { en: &quot;Reset Filter Lookups&quot;, ar: &quot;إعادة ضبط الفلاتر&quot; },
+
+            // Info field labels
+            &quot;Precipitate Color&quot;: { en: &quot;Precipitate Color&quot;, ar: &quot;لون الراسب&quot; },
+            &quot;Diagnostic Solubility&quot;: { en: &quot;Diagnostic Solubility&quot;, ar: &quot;الذوبان التشخيصي&quot; },
+            &quot;Transition Color&quot;: { en: &quot;Transition Color&quot;, ar: &quot;لون التحول&quot; },
+            &quot;Physical Observation&quot;: { en: &quot;Physical Observation&quot;, ar: &quot;الملاحظة الفيزيائية&quot; },
+            &quot;Gas Odour&quot;: { en: &quot;Gas Odour&quot;, ar: &quot;رائحة الغاز&quot; },
+            &quot;Evolved Color&quot;: { en: &quot;Evolved Color&quot;, ar: &quot;لون الغاز المتصاعد&quot; },
+            &quot;Diagnostic Evolved Gas Test&quot;: { en: &quot;Diagnostic Evolved Gas Test&quot;, ar: &quot;اختبار الغاز المتصاعد التشخيصي&quot; },
+            &quot;Chemical Origin&quot;: { en: &quot;Chemical Origin&quot;, ar: &quot;الأصل الكيميائي&quot; },
+            &quot;Chemical Reactions &amp; Balance Equations&quot;: { en: &quot;Chemical Reactions &amp; Balance Equations&quot;, ar: &quot;التفاعلات الكيميائية والمعادلات الموزونة&quot; },
+
+            // Category badges
+            &quot;Precipitate&quot;: { en: &quot;Precipitate&quot;, ar: &quot;راسب&quot; },
+            &quot;Solution Color / Indicator&quot;: { en: &quot;Solution Color / Indicator&quot;, ar: &quot;لون محلول / كاشف&quot; },
+            &quot;Evolved Gas&quot;: { en: &quot;Evolved Gas&quot;, ar: &quot;غاز متصاعد&quot; },
+
+            // Action buttons
+            &quot;Apply Heat (Δ)&quot;: { en: &quot;Apply Heat (Δ)&quot;, ar: &quot;تسخين (Δ)&quot; },
+            &quot;Run Diagnostic Test&quot;: { en: &quot;Run Diagnostic Test&quot;, ar: &quot;تشغيل الاختبار التشخيصي&quot; },
+            &quot;Add Reducing Extract&quot;: { en: &quot;Add Reducing Extract&quot;, ar: &quot;إضافة مستخلص مختزل&quot; },
+            &quot;Expose Indicator Paper&quot;: { en: &quot;Expose Indicator Paper&quot;, ar: &quot;تعريض ورق الكاشف&quot; },
+            &quot;Add Ammonia Glass Rod&quot;: { en: &quot;Add Ammonia Glass Rod&quot;, ar: &quot;إضافة قضيب زجاجي بالأمونيا&quot; },
+            &quot;Pass into Lime Water&quot;: { en: &quot;Pass into Lime Water&quot;, ar: &quot;تمرير في ماء الجير&quot; },
+            &quot;Expose to Sunlight&quot;: { en: &quot;Expose to Sunlight&quot;, ar: &quot;التعرض لأشعة الشمس&quot; },
+            &quot;Reset Observation&quot;: { en: &quot;Reset Observation&quot;, ar: &quot;إعادة ضبط الملاحظة&quot; },
+
+            // Matrix table headers
+            &quot;Observation Species&quot;: { en: &quot;Observation Species&quot;, ar: &quot;النوع المرصود&quot; },
+            &quot;Analytical Origin&quot;: { en: &quot;Analytical Origin&quot;, ar: &quot;الأصل التحليلي&quot; },
+            &quot;Diagnostic PDF Reactions &amp; Equations&quot;: { en: &quot;Diagnostic PDF Reactions &amp; Equations&quot;, ar: &quot;التفاعلات والمعادلات التشخيصية (PDF)&quot; },
+            &quot;No matching species found in standard PDFs.&quot;: { en: &quot;No matching species found in standard PDFs.&quot;, ar: &quot;لم يتم العثور على أنواع مطابقة في PDF القياسية.&quot; },
+
+            // Data item titles and origins, etc. — will be handled by data layer
+        };
+
+        // ========== BILINGUAL DATA (titles, origins, solubility, observations, etc.) ==========
+        // Each item has en/ar versions; formulas and chemical equations are kept as-is (Latin)
+        const bilingualLabData = {
+            precipitates: [
+                {
+                    id: &quot;ba3_po4_2&quot;,
+                    title: { en: &quot;Barium Phosphate Precipitate&quot;, ar: &quot;راسب فوسفات الباريوم&quot; },
+                    formula: &quot;Ba₃(PO₄)₂&quot;,
+                    color: &quot;white&quot;,
+                    origin: { en: &quot;Main experiment of Phosphate (PO₄³⁻) by adding Barium Chloride (BaCl₂).&quot;, ar: &quot;التجربة الرئيسية للفوسفات (PO₄³⁻) بإضافة كلوريد الباريوم (BaCl₂).&quot; },
+                    solubility: { en: &quot;Soluble in dilute HCl (which distinguishes it from Barium Sulphate).&quot;, ar: &quot;يذوب في حمض الهيدروكلوريك المخفف (وهو ما يميزه عن كبريتات الباريوم).&quot; },
+                    reaction: &quot;2Na&lt;sub&gt;3&lt;/sub&gt;PO&lt;sub&gt;4&lt;/sub&gt;(aq) + 3BaCl&lt;sub&gt;2&lt;/sub&gt;(aq) &amp;rarr; Ba&lt;sub&gt;3&lt;/sub&gt;(PO&lt;sub&gt;4&lt;/sub&gt;)&lt;sub&gt;2&lt;/sub&gt;(s)&amp;darr; (White ppt) + 6NaCl(aq)&quot;,
+                    visual: { liquid: &quot;rgba(241, 245, 249, 0.4)&quot;, ppt: &quot;rgba(255, 255, 255, 0.95)&quot;, ring: false, bub: &quot;none&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false }
+                },
+                {
+                    id: &quot;baso4&quot;,
+                    title: { en: &quot;Barium Sulphate Precipitate&quot;, ar: &quot;راسب كبريتات الباريوم&quot; },
+                    formula: &quot;BaSO₄&quot;,
+                    color: &quot;white&quot;,
+                    origin: { en: &quot;Main experiment of Sulphate (SO₄²⁻) by adding Barium Chloride (BaCl₂).&quot;, ar: &quot;التجربة الرئيسية للكبريتات (SO₄²⁻) بإضافة كلوريد الباريوم (BaCl₂).&quot; },
+                    solubility: { en: &quot;Completely insoluble in dilute HCl (strict diagnostic difference).&quot;, ar: &quot;غير قابل للذوبان تمامًا في حمض HCl المخفف (فرق تشخيصي صارم).&quot; },
+                    reaction: &quot;Na&lt;sub&gt;2&lt;/sub&gt;SO&lt;sub&gt;4&lt;/sub&gt;(aq) + BaCl&lt;sub&gt;2&lt;/sub&gt;(aq) &amp;rarr; BaSO&lt;sub&gt;4&lt;/sub&gt;(s)&amp;darr; (White ppt) + 2NaCl(aq)&quot;,
+                    visual: { liquid: &quot;rgba(241, 245, 249, 0.4)&quot;, ppt: &quot;rgba(255, 255, 255, 0.95)&quot;, ring: false, bub: &quot;none&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false }
+                },
+                {
+                    id: &quot;agcl&quot;,
+                    title: { en: &quot;Silver Chloride Precipitate&quot;, ar: &quot;راسب كلوريد الفضة&quot; },
+                    formula: &quot;AgCl&quot;,
+                    color: &quot;white&quot;,
+                    origin: { en: &quot;Confirmatory test of Chloride (Cl⁻) by adding Silver Nitrate (AgNO₃).&quot;, ar: &quot;الاختبار التأكيدي للكلوريد (Cl⁻) بإضافة نترات الفضة (AgNO₃).&quot; },
+                    solubility: { en: &quot;Soluble in ammonia solution, insoluble in dilute Nitric acid (HNO₃). Turns violet in sunlight.&quot;, ar: &quot;يذوب في محلول الأمونيا، لا يذوب في حمض النيتريك المخفف (HNO₃). يتحول للون البنفسجي في ضوء الشمس.&quot; },
+                    reaction: &quot;NaCl(aq) + AgNO&lt;sub&gt;3&lt;/sub&gt;(aq) &amp;rarr; AgCl(s)&amp;darr; (White ppt) + NaNO&lt;sub&gt;3&lt;/sub&gt;(aq)&quot;,
+                    visual: { liquid: &quot;rgba(241, 245, 249, 0.4)&quot;, ppt: &quot;rgba(248, 250, 252, 0.95)&quot;, ring: false, bub: &quot;none&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false, canSunlight: true }
+                },
+                {
+                    id: &quot;agbr&quot;,
+                    title: { en: &quot;Silver Bromide Precipitate&quot;, ar: &quot;راسب بروميد الفضة&quot; },
+                    formula: &quot;AgBr&quot;,
+                    color: &quot;yellowish-white&quot;,
+                    origin: { en: &quot;Confirmatory test of Bromide (Br⁻) by adding Silver Nitrate (AgNO₃).&quot;, ar: &quot;الاختبار التأكيدي للبروميد (Br⁻) بإضافة نترات الفضة (AgNO₃).&quot; },
+                    solubility: { en: &quot;Dissolves slowly in ammonia solution. Turns dark in sunlight.&quot;, ar: &quot;يذوب ببطء في محلول الأمونيا. يصبح داكنًا في الضوء.&quot; },
+                    reaction: &quot;NaBr(aq) + AgNO&lt;sub&gt;3&lt;/sub&gt;(aq) &amp;rarr; AgBr(s)&amp;darr; (Yellowish white ppt) + NaNO&lt;sub&gt;3&lt;/sub&gt;(aq)&quot;,
+                    visual: { liquid: &quot;rgba(241, 245, 249, 0.4)&quot;, ppt: &quot;rgba(254, 254, 215, 0.9)&quot;, ring: false, bub: &quot;none&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false, canSunlight: true }
+                },
+                {
+                    id: &quot;agi&quot;,
+                    title: { en: &quot;Silver Iodide Precipitate&quot;, ar: &quot;راسب يوديد الفضة&quot; },
+                    formula: &quot;AgI&quot;,
+                    color: &quot;yellow&quot;,
+                    origin: { en: &quot;Confirmatory test of Iodide (I⁻) by adding Silver Nitrate (AgNO₃).&quot;, ar: &quot;الاختبار التأكيدي لليوديد (I⁻) بإضافة نترات الفضة (AgNO₃).&quot; },
+                    solubility: { en: &quot;Completely insoluble in ammonia solution (diagnostic differentiator).&quot;, ar: &quot;غير قابل للذوبان تمامًا في محلول الأمونيا (مميِّز تشخيصي).&quot; },
+                    reaction: &quot;NaI(aq) + AgNO&lt;sub&gt;3&lt;/sub&gt;(aq) &amp;rarr; AgI(s)&amp;darr; (Yellow ppt) + NaNO&lt;sub&gt;3&lt;/sub&gt;(aq)&quot;,
+                    visual: { liquid: &quot;rgba(241, 245, 249, 0.4)&quot;, ppt: &quot;rgba(253, 224, 71, 0.95)&quot;, ring: false, bub: &quot;none&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false }
+                },
+                {
+                    id: &quot;ag3po4&quot;,
+                    title: { en: &quot;Silver Phosphate Precipitate&quot;, ar: &quot;راسب فوسفات الفضة&quot; },
+                    formula: &quot;Ag₃PO₄&quot;,
+                    color: &quot;yellow&quot;,
+                    origin: { en: &quot;Confirmatory test of Phosphate (PO₄³⁻) by adding Silver Nitrate (AgNO₃).&quot;, ar: &quot;الاختبار التأكيدي للفوسفات (PO₄³⁻) بإضافة نترات الفضة (AgNO₃).&quot; },
+                    solubility: { en: &quot;Soluble in ammonia solution and nitric acid.&quot;, ar: &quot;يذوب في محلول الأمونيا وحمض النيتريك.&quot; },
+                    reaction: &quot;Na&lt;sub&gt;3&lt;/sub&gt;PO&lt;sub&gt;4&lt;/sub&gt;(aq) + 3AgNO&lt;sub&gt;3&lt;/sub&gt;(aq) &amp;rarr; Ag&lt;sub&gt;3&lt;/sub&gt;PO&lt;sub&gt;4&lt;/sub&gt;(s)&amp;darr; (Yellow ppt) + 3NaNO&lt;sub&gt;3&lt;/sub&gt;(aq)&quot;,
+                    visual: { liquid: &quot;rgba(241, 245, 249, 0.4)&quot;, ppt: &quot;rgba(250, 204, 21, 0.95)&quot;, ring: false, bub: &quot;none&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false }
+                },
+                {
+                    id: &quot;ag2s&quot;,
+                    title: { en: &quot;Silver Sulphide Precipitate&quot;, ar: &quot;راسب كبريتيد الفضة&quot; },
+                    formula: &quot;Ag₂S&quot;,
+                    color: &quot;black&quot;,
+                    origin: { en: &quot;Confirmatory test of Sulphide (S²⁻) by adding Silver Nitrate (AgNO₃).&quot;, ar: &quot;الاختبار التأكيدي للكبريتيد (S²⁻) بإضافة نترات الفضة (AgNO₃).&quot; },
+                    solubility: { en: &quot;Insoluble black precipitate.&quot;, ar: &quot;راسب أسود غير قابل للذوبان.&quot; },
+                    reaction: &quot;Na&lt;sub&gt;2&lt;/sub&gt;S(aq) + 2AgNO&lt;sub&gt;3&lt;/sub&gt;(aq) &amp;rarr; Ag&lt;sub&gt;2&lt;/sub&gt;S(s)&amp;darr; (Black ppt) + 2NaNO&lt;sub&gt;3&lt;/sub&gt;(aq)&quot;,
+                    visual: { liquid: &quot;rgba(241, 245, 249, 0.4)&quot;, ppt: &quot;rgba(30, 41, 59, 0.95)&quot;, ring: false, bub: &quot;none&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false }
+                },
+                {
+                    id: &quot;ag2so3&quot;,
+                    title: { en: &quot;Silver Sulphite Precipitate (Heat Reaction)&quot;, ar: &quot;راسب كبريتيت الفضة (تفاعل التسخين)&quot; },
+                    formula: &quot;Ag₂SO₃&quot;,
+                    color: &quot;white-black&quot;,
+                    origin: { en: &quot;Confirmatory test of Sulphite (SO₃²⁻) by adding Silver Nitrate (AgNO₃) and heating.&quot;, ar: &quot;الاختبار التأكيدي للكبريتيت (SO₃²⁻) بإضافة نترات الفضة (AgNO₃) والتسخين.&quot; },
+                    solubility: { en: &quot;Forms white silver sulphite which decomposes to black Silver Sulphide / silver on heating.&quot;, ar: &quot;يكون كبريتيت فضة أبيض يتحلل إلى كبريتيد فضة أسود / فضة عند التسخين.&quot; },
+                    reaction: &quot;Na&lt;sub&gt;2&lt;/sub&gt;SO&lt;sub&gt;3&lt;/sub&gt;(aq) + 2AgNO&lt;sub&gt;3&lt;/sub&gt;(aq) &amp;rarr; Ag&lt;sub&gt;2&lt;/sub&gt;SO&lt;sub&gt;3&lt;/sub&gt;(s)&amp;darr; (White ppt) + 2NaNO&lt;sub&gt;3&lt;/sub&gt;(aq)&lt;br&gt;Ag₂SO₃(s) &amp;xrightarrow{heat} black silver complex / sulphide&quot;,
+                    visual: { liquid: &quot;rgba(241, 245, 249, 0.4)&quot;, ppt: &quot;rgba(255,255,255,0.9)&quot;, ring: false, bub: &quot;none&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false, canHeat: true, heatState: &quot;rgba(30, 41, 59, 0.95)&quot; }
+                },
+                {
+                    id: &quot;mgco3&quot;,
+                    title: { en: &quot;Magnesium Carbonate Precipitate&quot;, ar: &quot;راسب كربونات الماغنسيوم&quot; },
+                    formula: &quot;MgCO₃&quot;,
+                    color: &quot;white&quot;,
+                    origin: { en: &quot;Confirmatory test of Carbonate (on cold) / Bicarbonate (after heating) by adding MgSO₄.&quot;, ar: &quot;الاختبار التأكيدي للكربونات (على البارد) / البيكربونات (بعد التسخين) بإضافة MgSO₄.&quot; },
+                    solubility: { en: &quot;Soluble in dilute HCl with effervescence.&quot;, ar: &quot;يذوب في حمض HCl المخفف مع تصاعد فقاعات.&quot; },
+                    reaction: &quot;Na&lt;sub&gt;2&lt;/sub&gt;CO&lt;sub&gt;3&lt;/sub&gt;(aq) + MgSO&lt;sub&gt;4&lt;/sub&gt;(aq) &amp;rarr; Na&lt;sub&gt;2&lt;/sub&gt;SO&lt;sub&gt;4&lt;/sub&gt;(aq) + MgCO&lt;sub&gt;3&lt;/sub&gt;(s)&amp;darr; (White ppt)&lt;br&gt;&lt;b&gt;For Bicarbonate (after heating):&lt;/b&gt;&lt;br&gt;Mg(HCO&lt;sub&gt;3&lt;/sub&gt;)&lt;sub&gt;2&lt;/sub&gt;(aq) &amp;xrightarrow{&amp;Delta;} MgCO&lt;sub&gt;3&lt;/sub&gt;(s)&amp;darr; + H&lt;sub&gt;2&lt;/sub&gt;O(l) + CO&lt;sub&gt;2&lt;/sub&gt;(g)&quot;,
+                    visual: { liquid: &quot;rgba(241, 245, 249, 0.4)&quot;, ppt: &quot;rgba(255, 255, 255, 0.95)&quot;, ring: false, bub: &quot;none&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false }
+                },
+                {
+                    id: &quot;pbso4&quot;,
+                    title: { en: &quot;Lead(II) Sulphate Precipitate&quot;, ar: &quot;راسب كبريتات الرصاص (II)&quot; },
+                    formula: &quot;PbSO₄&quot;,
+                    color: &quot;white&quot;,
+                    origin: { en: &quot;Confirmatory test of Sulphate (SO₄²⁻) by adding Lead Acetate solution.&quot;, ar: &quot;الاختبار التأكيدي للكبريتات (SO₄²⁻) بإضافة محلول خلات الرصاص.&quot; },
+                    solubility: { en: &quot;White precipitate formed.&quot;, ar: &quot;يتكون راسب أبيض.&quot; },
+                    reaction: &quot;Na&lt;sub&gt;2&lt;/sub&gt;SO&lt;sub&gt;4&lt;/sub&gt;(aq) + (CH&lt;sub&gt;3&lt;/sub&gt;COO)&lt;sub&gt;2&lt;/sub&gt;Pb(aq) &amp;rarr; PbSO&lt;sub&gt;4&lt;/sub&gt;(s)&amp;darr; (White ppt) + 2CH&lt;sub&gt;3&lt;/sub&gt;COONa(aq)&quot;,
+                    visual: { liquid: &quot;rgba(241, 245, 249, 0.4)&quot;, ppt: &quot;rgba(255, 255, 255, 0.95)&quot;, ring: false, bub: &quot;none&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false }
+                },
+                {
+                    id: &quot;s_colloid&quot;,
+                    title: { en: &quot;Colloidal Sulphur Suspension&quot;, ar: &quot;معلق الكبريت الغروي&quot; },
+                    formula: &quot;S(s)&quot;,
+                    color: &quot;yellow&quot;,
+                    origin: { en: &quot;Main experiment of Thiosulphate (S₂O₃²⁻) by adding dilute HCl.&quot;, ar: &quot;التجربة الرئيسية للثيوكبريتات (S₂O₃²⁻) بإضافة حمض HCl المخفف.&quot; },
+                    solubility: { en: &quot;Slowly forms yellow-white turbidity in suspension.&quot;, ar: &quot;يتكون ببطء عكارة صفراء-بيضاء معلقة.&quot; },
+                    reaction: &quot;Na&lt;sub&gt;2&lt;/sub&gt;S&lt;sub&gt;2&lt;/sub&gt;O&lt;sub&gt;3&lt;/sub&gt;(s) + 2HCl(aq) &amp;rarr; 2NaCl(aq) + H&lt;sub&gt;2&lt;/sub&gt;O(l) + SO&lt;sub&gt;2&lt;/sub&gt;(g) + S(s)&amp;darr; (Colloidal sulphur)&quot;,
+                    visual: { liquid: &quot;rgba(234, 179, 8, 0.3)&quot;, ppt: &quot;rgba(234, 179, 8, 0.6)&quot;, ring: false, bub: &quot;slow&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false }
+                }
+            ],
+            solutions: [
+                {
+                    id: &quot;kmno4_decolor&quot;,
+                    title: { en: &quot;Acidified KMnO₄ Decolorization&quot;, ar: &quot;إزالة لون KMnO₄ المحمض&quot; },
+                    formula: &quot;KMnO₄ &amp;rarr; Mn²⁺&quot;,
+                    color: &quot;purple&quot;,
+                    origin: { en: &quot;Confirmatory test for Nitrite (NO₂⁻) or Sulphite (SO₃²⁻) redox reactions.&quot;, ar: &quot;الاختبار التأكيدي لأكسدة-اختزال النتريت (NO₂⁻) أو الكبريتيت (SO₃²⁻).&quot; },
+                    observation: { en: &quot;The vibrant purple color of Potassium Permanganate is completely removed, becoming colorless.&quot;, ar: &quot;اللون البنفسجي الزاهي لبرمنجنات البوتاسيوم يُزال بالكامل، ليصبح عديم اللون.&quot; },
+                    reaction: &quot;5NaNO&lt;sub&gt;2&lt;/sub&gt;(aq) + 2KMnO&lt;sub&gt;4&lt;/sub&gt;(aq) + 3H&lt;sub&gt;2&lt;/sub&gt;SO&lt;sub&gt;4&lt;/sub&gt;(aq) &amp;rarr; 5NaNO&lt;sub&gt;3&lt;/sub&gt;(aq) + K&lt;sub&gt;2&lt;/sub&gt;SO&lt;sub&gt;4&lt;/sub&gt;(aq) + 2MnSO&lt;sub&gt;4&lt;/sub&gt;(aq) + 3H&lt;sub&gt;2&lt;/sub&gt;O(l)&quot;,
+                    visual: { liquid: &quot;rgba(168, 85, 247, 0.85)&quot;, ppt: &quot;none&quot;, ring: false, bub: &quot;none&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false, canAction: true, actionType: &quot;decolor&quot;, actionColor: &quot;rgba(255, 255, 255, 0.15)&quot;, message: { en: &quot;Redox reaction removes the purple color, leaving a completely colorless solution of Mn²⁺ ions.&quot;, ar: &quot;تفاعل الأكسدة والاختزال يزيل اللون البنفسجي، تاركًا محلولًا عديم اللون تمامًا من أيونات Mn²⁺.&quot; } }
+                },
+                {
+                    id: &quot;dichromate_paper_green&quot;,
+                    title: { en: &quot;Acidified Potassium Dichromate Test&quot;, ar: &quot;اختبار ثنائي كرومات البوتاسيوم المحمض&quot; },
+                    formula: &quot;Cr₂O₇²⁻ (Orange) &amp;rarr; Cr³⁺ (Green)&quot;,
+                    color: &quot;orange-green&quot;,
+                    origin: { en: &quot;Main experiment paper test for Sulphur Dioxide (SO₂) gas.&quot;, ar: &quot;اختبار ورقي رئيسي لغاز ثاني أكسيد الكبريت (SO₂).&quot; },
+                    observation: { en: &quot;A paper wet with yellow-orange Acidified Potassium Dichromate turns green when exposed to SO₂ gas.&quot;, ar: &quot;ورقة مبللة بثنائي كرومات البوتاسيوم المحمض البرتقالي تتحول للأخضر عند التعرض لغاز SO₂.&quot; },
+                    reaction: &quot;K&lt;sub&gt;2&lt;/sub&gt;Cr&lt;sub&gt;2&lt;/sub&gt;O&lt;sub&gt;7&lt;/sub&gt;(aq) + 3SO&lt;sub&gt;2&lt;/sub&gt;(g) + H&lt;sub&gt;2&lt;/sub&gt;SO&lt;sub&gt;4&lt;/sub&gt;(aq) &amp;rarr; K&lt;sub&gt;2&lt;/sub&gt;SO&lt;sub&gt;4&lt;/sub&gt;(aq) + Cr&lt;sub&gt;2&lt;/sub&gt;(SO&lt;sub&gt;4&lt;/sub&gt;)&lt;sub&gt;3&lt;/sub&gt;(aq) + H&lt;sub&gt;2&lt;/sub&gt;O(l)&quot;,
+                    visual: { liquid: &quot;rgba(255,255,255,0.15)&quot;, ppt: &quot;none&quot;, ring: false, bub: &quot;slow&quot;, gas: &quot;none&quot;, paper: &quot;dichromate_orange&quot;, rod: false, canAction: true, actionType: &quot;paper_turn&quot;, paperColor: &quot;rgba(16, 185, 129, 0.95)&quot;, message: { en: &quot;Sulphur dioxide gas reduces the orange chromium(VI) ions on the wet paper into green chromium(III) sulphate.&quot;, ar: &quot;غاز ثاني أكسيد الكبريت يختزل أيونات الكروم (VI) البرتقالية على الورقة المبللة إلى كبريتات الكروم (III) الخضراء.&quot; } }
+                },
+                {
+                    id: &quot;iodine_decolor&quot;,
+                    title: { en: &quot;Iodine Solution Decolorization&quot;, ar: &quot;إزالة لون محلول اليود&quot; },
+                    formula: &quot;I₂ (Brown) &amp;rarr; I⁻ (Colorless)&quot;,
+                    color: &quot;brown&quot;,
+                    origin: { en: &quot;Confirmatory test of Thiosulphate (S₂O₃²⁻).&quot;, ar: &quot;الاختبار التأكيدي للثيوكبريتات (S₂O₃²⁻).&quot; },
+                    observation: { en: &quot;The deep brown colour of iodine is completely removed.&quot;, ar: &quot;اللون البني الغامق لليود يُزال بالكامل.&quot; },
+                    reaction: &quot;2Na&lt;sub&gt;2&lt;/sub&gt;S&lt;sub&gt;2&lt;/sub&gt;O&lt;sub&gt;3&lt;/sub&gt;(aq) + I&lt;sub&gt;2&lt;/sub&gt;(aq) &amp;rarr; Na&lt;sub&gt;2&lt;/sub&gt;S&lt;sub&gt;4&lt;/sub&gt;O&lt;sub&gt;6&lt;/sub&gt;(aq) + 2NaI(aq)&quot;,
+                    visual: { liquid: &quot;rgba(120, 53, 15, 0.8)&quot;, ppt: &quot;none&quot;, ring: false, bub: &quot;none&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false, canAction: true, actionType: &quot;decolor&quot;, actionColor: &quot;rgba(255, 255, 255, 0.15)&quot;, message: { en: &quot;Thiosulphate reduces deep brown Iodine (I₂) into colorless Iodide (I⁻) and sodium tetrathionate.&quot;, ar: &quot;الثيوكبريتات يختزل اليود البني الغامق (I₂) إلى يوديد عديم اللون (I⁻) ورباعي ثيونات الصوديوم.&quot; } }
+                },
+                {
+                    id: &quot;copper_nitrate_blue&quot;,
+                    title: { en: &quot;Copper Filings Oxidation Solution&quot;, ar: &quot;محلول أكسدة برادة النحاس&quot; },
+                    formula: &quot;Cu(NO₃)₂&quot;,
+                    color: &quot;blue-green&quot;,
+                    origin: { en: &quot;Main experiment of Nitrate (NO₃⁻) on heating with conc. H₂SO₄ and copper.&quot;, ar: &quot;التجربة الرئيسية للنترات (NO₃⁻) بالتسخين مع H₂SO₄ المركز والنحاس.&quot; },
+                    observation: { en: &quot;Adding copper filings yields a rapid increase of brown NO₂ vapors, and the solution inside turns a beautiful blue-green.&quot;, ar: &quot;إضافة برادة النحاس يعطي زيادة سريعة في أبخرة NO₂ البنية، ويتحول المحلول إلى أزرق-أخضر جميل.&quot; },
+                    reaction: &quot;Cu + 4HNO&lt;sub&gt;3&lt;/sub&gt;(l) &amp;rarr; Cu(NO&lt;sub&gt;3&lt;/sub&gt;)&lt;sub&gt;2&lt;/sub&gt;(aq) + 2H&lt;sub&gt;2&lt;/sub&gt;O(l) + 2NO&lt;sub&gt;2&lt;/sub&gt;(g)&quot;,
+                    visual: { liquid: &quot;rgba(20, 184, 166, 0.55)&quot;, ppt: &quot;none&quot;, ring: false, bub: &quot;slow&quot;, gas: &quot;brown_dense&quot;, paper: &quot;none&quot;, rod: false, cu_filings: true }
+                },
+                {
+                    id: &quot;nitrite_cold_blue&quot;,
+                    title: { en: &quot;Nitrite Pale Blue Liquid in Cold&quot;, ar: &quot;سائل النتريت الأزرق الباهت على البارد&quot; },
+                    formula: &quot;HNO₂ (Nitrous Acid)&quot;,
+                    color: &quot;pale blue&quot;,
+                    origin: { en: &quot;Main experiment of Nitrite (NO₂⁻) in the cold upon adding dilute HCl.&quot;, ar: &quot;التجربة الرئيسية للنتريت (NO₂⁻) على البارد عند إضافة HCl المخفف.&quot; },
+                    observation: { en: &quot;A pale blue liquid is formed in the cold due to nitrous acid formation, which decomposes on warming.&quot;, ar: &quot;يتكون سائل أزرق باهت على البارد بسبب تكوين حمض النتروز، الذي يتحلل عند التسخين.&quot; },
+                    reaction: &quot;NaNO&lt;sub&gt;2&lt;/sub&gt;(s) + HCl(aq) &amp;rarr; NaCl(aq) + HNO&lt;sub&gt;2&lt;/sub&gt;(aq)&lt;br&gt;3HNO&lt;sub&gt;2&lt;/sub&gt;(aq) &amp;rarr; HNO&lt;sub&gt;3&lt;/sub&gt;(aq) + H&lt;sub&gt;2&lt;/sub&gt;O(l) + 2NO(g)&quot;,
+                    visual: { liquid: &quot;rgba(186, 230, 253, 0.6)&quot;, ppt: &quot;none&quot;, ring: false, bub: &quot;slow&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false }
+                },
+                {
+                    id: &quot;brown_ring_junction&quot;,
+                    title: { en: &quot;Nitrate Brown Ring Interface&quot;, ar: &quot;الحلقة البنية للنترات (الواجهة)&quot; },
+                    formula: &quot;FeSO₄.NO&quot;,
+                    color: &quot;brown ring&quot;,
+                    origin: { en: &quot;Confirmatory test of Nitrate (NO₃⁻) by layering conc. H₂SO₄ under freshly prepared FeSO₄ and salt extract.&quot;, ar: &quot;الاختبار التأكيدي للنترات (NO₃⁻) بإضافة H₂SO₄ المركز تحت FeSO₄ المحضر حديثًا ومستخلص الملح.&quot; },
+                    observation: { en: &quot;A sharp, dark brown ring appears at the liquid-liquid interface. Disappears on heating or shaking.&quot;, ar: &quot;تظهر حلقة بنية داكنة حادة عند السطح البيني للسائلين. تختفي بالتسخين أو الرج.&quot; },
+                    reaction: &quot;FeSO&lt;sub&gt;4&lt;/sub&gt;(aq) + NO(g) &amp;rarr; FeSO&lt;sub&gt;4&lt;/sub&gt;.NO(s)&quot;,
+                    visual: { liquid: &quot;brown_ring_state&quot;, ppt: &quot;none&quot;, ring: true, bub: &quot;none&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false }
+                }
+            ],
+            gases: [
+                {
+                    id: &quot;co2_gas&quot;,
+                    title: { en: &quot;Carbon Dioxide Gas&quot;, ar: &quot;غاز ثاني أكسيد الكربون&quot; },
+                    formula: &quot;CO₂&quot;,
+                    smell: { en: &quot;Odorless&quot;, ar: &quot;عديم الرائحة&quot; },
+                    color: &quot;Colorless&quot;,
+                    test: { en: &quot;Turns Lime Water milky for a short time, which clears on passing the gas for a long time.&quot;, ar: &quot;يُعكر ماء الجير لفترة قصيرة، ثم يصفى عند تمرير الغاز لفترة طويلة.&quot; },
+                    reaction: &quot;CO&lt;sub&gt;2&lt;/sub&gt;(g) + Ca(OH)&lt;sub&gt;2&lt;/sub&gt;(aq) &amp;rarr; CaCO&lt;sub&gt;3&lt;/sub&gt;(s)&amp;darr; (White ppt) + H&lt;sub&gt;2&lt;/sub&gt;O(l)&lt;br&gt;CaCO&lt;sub&gt;3&lt;/sub&gt; + CO&lt;sub&gt;2&lt;/sub&gt; + H&lt;sub&gt;2&lt;/sub&gt;O &amp;rarr; Ca(HCO&lt;sub&gt;3&lt;/sub&gt;)&lt;sub&gt;2&lt;/sub&gt; (Soluble)&quot;,
+                    visual: { liquid: &quot;rgba(255,255,255,0.15)&quot;, ppt: &quot;none&quot;, ring: false, bub: &quot;rapid&quot;, gas: &quot;none&quot;, paper: &quot;none&quot;, rod: false, canAction: true, actionType: &quot;limewater&quot;, message: { en: &quot;Passing CO₂ gas into Lime Water Ca(OH)₂ produces a milky white turbidity of CaCO₃, which dissolves to form clear Calcium Bicarbonate on excess CO₂.&quot;, ar: &quot;تمرير غاز CO₂ في ماء الجير Ca(OH)₂ يُنتج عكارة بيضاء حليبية من CaCO₃، والتي تذوب لتكوين بيكربونات الكالسيوم الشفافة مع زيادة CO₂.&quot; } }
+                },
+                {
+                    id: &quot;so2_gas&quot;,
+                    title: { en: &quot;Sulphur Dioxide Gas&quot;, ar: &quot;غاز ثاني أكسيد الكبريت&quot; },
+                    formula: &quot;SO₂&quot;,
+                    smell: { en: &quot;Irritating smell (burning sulphur)&quot;, ar: &quot;رائحة مزعجة (كبريت محترق)&quot; },
+                    color: &quot;Colorless&quot;,
+                    test: { en: &quot;Turns a paper wet with acidified potassium dichromate to green.&quot;, ar: &quot;يُحوّل الورق المبلل بثنائي كرومات البوتاسيوم المحمض إلى اللون الأخضر.&quot; },
+                    reaction: &quot;K&lt;sub&gt;2&lt;/sub&gt;Cr&lt;sub&gt;2&lt;/sub&gt;O&lt;sub&gt;7&lt;/sub&gt;(aq) + 3SO&lt;sub&gt;2&lt;/sub&gt;(g) + H&lt;sub&gt;2&lt;/sub&gt;SO&lt;sub&gt;4&lt;/sub&gt;(aq) &amp;rarr; K&lt;sub&gt;2&lt;/sub&gt;SO&lt;sub&gt;4&lt;/sub&gt;(aq) + Cr&lt;sub&gt;2&lt;/sub&gt;(SO&lt;sub&gt;4&lt;/sub&gt;)&lt;sub&gt;3&lt;/sub&gt;(aq) + H&lt;sub&gt;2&lt;/sub&gt;O(l)&quot;,
+                    visual: { liquid: &quot;rgba(255,255,255,0.15)&quot;, ppt: &quot;none&quot;, ring: false, bub: &quot;slow&quot;, gas: &quot;none&quot;, paper: &quot;dichromate_orange&quot;, rod: false, canAction: true, actionType: &quot;paper_turn&quot;, paperColor: &quot;rgba(16, 185, 129, 0.95)&quot;, message: { en: &quot;SO₂ gas has an irritating smell and reduces orange dichromate ions on the wet paper into green Chromium(III) Sulphate.&quot;, ar: &quot;غاز SO₂ له رائحة مزعجة ويختزل أيونات ثنائي الكرومات البرتقالية على الورق المبلل إلى كبريتات الكروم (III) الخضراء.&quot; } }
+                },
+                {
+                    id: &quot;h2s_gas&quot;,
+                    title: { en: &quot;Hydrogen Sulphide Gas&quot;, ar: &quot;غاز كبريتيد الهيدروجين&quot; },
+                    formula: &quot;H₂S&quot;,
+                    smell: { en: &quot;Bad offensive smell (rotten eggs)&quot;, ar: &quot;رائحة كريهة (بيض فاسد)&quot; },
+                    color: &quot;Colorless&quot;,
+                    test: { en: &quot;Turns a paper wet with Lead Acetate to black.&quot;, ar: &quot;يُحوّل الورق المبلل بخلات الرصاص إلى اللون الأسود.&quot; },
+                    reaction: &quot;(CH&lt;sub&gt;3&lt;/sub&gt;COO)&lt;sub&gt;2&lt;/sub&gt;Pb(aq) + H&lt;sub&gt;2&lt;/sub&gt;S(g) &amp;rarr; PbS(s)&amp;darr; (Black ppt) + 2CH&lt;sub&gt;3&lt;/sub&gt;COOH(aq)&quot;,
+                    visual: { liquid: &quot;rgba(255,255,255,0.15)&quot;, ppt: &quot;none&quot;, ring: false, bub: &quot;slow&quot;, gas: &quot;none&quot;, paper: &quot;lead_acetate_white&quot;, rod: false, canAction: true, actionType: &quot;paper_turn&quot;, paperColor: &quot;rgba(30, 41, 59, 0.95)&quot;, message: { en: &quot;H₂S gas has an offensive bad smell, and reacts with lead acetate on the indicator paper to form black Lead Sulphide (PbS).&quot;, ar: &quot;غاز H₂S له رائحة كريهة، ويتفاعل مع خلات الرصاص على ورق الكاشف ليكون كبريتيد الرصاص الأسود (PbS).&quot; } }
+                },
+                {
+                    id: &quot;hcl_gas&quot;,
+                    title: { en: &quot;Hydrogen Chloride Gas&quot;, ar: &quot;غاز كلوريد الهيدروجين&quot; },
+                    formula: &quot;HCl&quot;,
+                    smell: { en: &quot;Pungent smell&quot;, ar: &quot;رائحة نفاذة&quot; },
+                    color: &quot;Colorless&quot;,
+                    test: { en: &quot;Gives dense white fumes with a glass rod wet with Ammonia solution.&quot;, ar: &quot;يعطي أبخرة بيضاء كثيفة مع قضيب زجاجي مبلل بمحلول الأمونيا.&quot; },
+                    reaction: &quot;HCl(g) + NH&lt;sub&gt;3&lt;/sub&gt;(g) &amp;rarr; NH&lt;sub&gt;4&lt;/sub&gt;Cl(s) (Dense white fumes)&quot;,
+                    visual: { liquid: &quot;rgba(255,255,255,0.15)&quot;, ppt: &quot;none&quot;, ring: false, bub: &quot;slow&quot;, gas: &quot;white&quot;, paper: &quot;none&quot;, rod: true, canAction: true, actionType: &quot;fumes_NH4Cl&quot;, message: { en: &quot;Holding a glass rod wet with ammonia solution near the HCl gas generates heavy, billowing white fumes of solid Ammonium Chloride.&quot;, ar: &quot;وضع قضيب زجاجي مبلل بالأمونيا بالقرب من غاز HCl يُنتج أبخرة بيضاء كثيفة من كلوريد الأمونيوم الصلب.&quot; } }
+                },
+                {
+                    id: &quot;hbr_gas&quot;,
+                    title: { en: &quot;Hydrogen Bromide &amp; Bromine Gas&quot;, ar: &quot;غاز بروميد الهيدروجين والبروم&quot; },
+                    formula: &quot;HBr &amp; Br₂&quot;,
+                    smell: { en: &quot;Pungent smell&quot;, ar: &quot;رائحة نفاذة&quot; },
+                    color: &quot;Orange-red fumes&quot;,
+                    test: { en: &quot;Turns a paper wet with starch to yellow. (Evolves during conc H₂SO₄ treatment).&quot;, ar: &quot;يُحوّل الورق المبلل بالنشا إلى اللون الأصفر (يتصاعد أثناء المعالجة بـ H₂SO₄ المركز).&quot; },
+                    reaction: &quot;2HBr(g) + H&lt;sub&gt;2&lt;/sub&gt;SO&lt;sub&gt;4&lt;/sub&gt;(l) &amp;rarr; 2H&lt;sub&gt;2&lt;/sub&gt;O(l) + SO&lt;sub&gt;2&lt;/sub&gt;(g) + Br&lt;sub&gt;2&lt;/sub&gt;(v)&quot;,
+                    visual: { liquid: &quot;rgba(255,255,255,0.15)&quot;, ppt: &quot;none&quot;, ring: false, bub: &quot;slow&quot;, gas: &quot;red_brown&quot;, paper: &quot;starch_white&quot;, rod: false, canAction: true, actionType: &quot;paper_turn&quot;, paperColor: &quot;rgba(234, 179, 8, 0.85)&quot;, message: { en: &quot;Colorless HBr is partially oxidised by concentrated sulphuric acid into free Bromine (Br₂) orange-red vapors, which dye starch indicator paper yellow.&quot;, ar: &quot;يتأكسد HBr عديم اللون جزئيًا بحمض الكبريتيك المركز إلى أبخرة بروم حرة (Br₂) برتقالية-حمراء، وتصبغ ورق النشا الكاشف باللون الأصفر.&quot; } }
+                },
+                {
+                    id: &quot;hi_gas&quot;,
+                    title: { en: &quot;Hydrogen Iodide &amp; Iodine Gas&quot;, ar: &quot;غاز يوديد الهيدروجين واليود&quot; },
+                    formula: &quot;HI &amp; I₂&quot;,
+                    smell: { en: &quot;Pungent smell&quot;, ar: &quot;رائحة نفاذة&quot; },
+                    color: &quot;Violet fumes&quot;,
+                    test: { en: &quot;Turns a paper wet with starch to blue. (Evolves quickly during conc H₂SO₄ treatment).&quot;, ar: &quot;يُحوّل الورق المبلل بالنشا إلى اللون الأزرق (يتصاعد بسرعة أثناء المعالجة بـ H₂SO₄ المركز).&quot; },
+                    reaction: &quot;2HI(g) + H&lt;sub&gt;2&lt;/sub&gt;SO&lt;sub&gt;4&lt;/sub&gt;(l) &amp;rarr; 2H&lt;sub&gt;2&lt;/sub&gt;O(l) + SO&lt;sub&gt;2&lt;/sub&gt;(g) + I&lt;sub&gt;2&lt;/sub&gt;(v)&quot;,
+                    visual: { liquid: &quot;rgba(255,255,255,0.15)&quot;, ppt: &quot;none&quot;, ring: false, bub: &quot;slow&quot;, gas: &quot;violet&quot;, paper: &quot;starch_white&quot;, rod: false, canAction: true, actionType: &quot;paper_turn&quot;, paperColor: &quot;rgba(30, 58, 138, 0.9)&quot;, message: { en: &quot;HI is rapidly oxidised by concentrated sulphuric acid into free Iodine (I₂) violet fumes, which turn starch indicator paper deep dark blue.&quot;, ar: &quot;يتأكسد HI بسرعة بحمض الكبريتيك المركز إلى أبخرة يود حرة (I₂) بنفسجية، وتُحوّل ورق النشا الكاشف إلى أزرق غامق.&quot; } }
+                },
+                {
+                    id: &quot;no2_gas&quot;,
+                    title: { en: &quot;Nitrogen Dioxide Gas&quot;, ar: &quot;غاز ثاني أكسيد النيتروجين&quot; },
+                    formula: &quot;NO₂&quot;,
+                    smell: { en: &quot;Irritating smell&quot;, ar: &quot;رائحة مزعجة&quot; },
+                    color: &quot;Reddish-brown fumes&quot;,
+                    test: { en: &quot;Nitrous acid decomposes to colorless NO which oxidises to reddish-brown NO₂ at the mouth of the tube. From nitrates, adding copper filings triggers dense brown NO₂ evolution.&quot;, ar: &quot;حمض النتروز يتحلل إلى NO عديم اللون الذي يتأكسد إلى NO₂ بني محمر عند فوهة الأنبوب. من النترات، إضافة برادة النحاس تُحفز تصاعد NO₂ البني الكثيف.&quot; },
+                    reaction: &quot;2NO(g) + O&lt;sub&gt;2&lt;/sub&gt;(air) &amp;rarr; 2NO&lt;sub&gt;2&lt;/sub&gt;(g)&lt;br&gt;Cu + 4HNO&lt;sub&gt;3&lt;/sub&gt;(l) &amp;rarr; Cu(NO&lt;sub&gt;3&lt;/sub&gt;)&lt;sub&gt;2&lt;/sub&gt;(aq) + 2H&lt;sub&gt;2&lt;/sub&gt;O(l) + 2NO&lt;sub&gt;2&lt;/sub&gt;(g)&quot;,
+                    visual: { liquid: &quot;rgba(255,255,255,0.15)&quot;, ppt: &quot;none&quot;, ring: false, bub: &quot;slow&quot;, gas: &quot;brown_dense&quot;, paper: &quot;none&quot;, rod: false }
+                }
+            ]
+        };
+
+        // ========== LANGUAGE TOGGLE ==========
+        function toggleLanguage() {
+            currentLang = currentLang === &#x27;en&#x27; ? &#x27;ar&#x27; : &#x27;en&#x27;;
+            document.getElementById(&#x27;langToggleText&#x27;).textContent = currentLang === &#x27;en&#x27; ? &#x27;AR&#x27; : &#x27;EN&#x27;;
+            
+            // Switch body direction for Arabic
+            document.body.classList.toggle(&#x27;lang-ar&#x27;, currentLang === &#x27;ar&#x27;);
+            document.documentElement.lang = currentLang;
+            
+            // Update all data-i18n elements
+            updateUI();
+            
+            // Re-render current tab content
+            switchMainTab(currentCategory);
+        }
+
+        // ========== I18N HELPER ==========
+        function t(textOrObj) {
+            if (typeof textOrObj === &#x27;string&#x27;) {
+                // Check i18n dict
+                if (i18n[textOrObj]) {
+                    return i18n[textOrObj][currentLang];
+                }
+                return textOrObj;
+            }
+            if (textOrObj &amp;&amp; typeof textOrObj === &#x27;object&#x27; &amp;&amp; textOrObj.en &amp;&amp; textOrObj.ar) {
+                return textOrObj[currentLang];
+            }
+            return textOrObj || &#x27;&#x27;;
+        }
+
+        function updateUI() {
+            // Update all elements with data-en/data-ar
+            document.querySelectorAll(&#x27;[data-en]&#x27;).forEach(el =&gt; {
+                const key = el.getAttribute(&#x27;data-&#x27; + currentLang);
+                if (key) {
+                    el.innerHTML = key;
+                }
+            });
+
+            // Update header title/subtitle
+            const titleEl = document.getElementById(&#x27;main-title&#x27;);
+            const subEl = document.getElementById(&#x27;main-subtitle&#x27;);
+            if (titleEl) titleEl.textContent = t(&quot;main-title&quot;);
+            if (subEl) subEl.textContent = t(&quot;main-subtitle&quot;);
+        }
+
+        // ========== ORIGINAL APPLICATION LOGIC (adapted for bilingual) ==========
+        let currentCategory = &#x27;precipitates&#x27;;
+        let currentActiveId = &#x27;ba3_po4_2&#x27;;
+
+        window.addEventListener(&#x27;DOMContentLoaded&#x27;, () =&gt; {
+            updateUI();
+            switchMainTab(&#x27;precipitates&#x27;);
+        });
+
+        function switchMainTab(category) {
+            currentCategory = category;
+            
+            document.querySelectorAll(&#x27;.nav-btn&#x27;).forEach(btn =&gt; btn.classList.remove(&#x27;active&#x27;));
+            const idx = [&#x27;precipitates&#x27;, &#x27;solutions&#x27;, &#x27;gases&#x27;].indexOf(category);
+            document.querySelectorAll(&#x27;.nav-btn&#x27;)[idx].classList.add(&#x27;active&#x27;);
+
+            const items = bilingualLabData[category];
+            if (items &amp;&amp; items.length &gt; 0) {
+                currentActiveId = items[0].id;
+                renderCardsList();
+                activateShowcase(currentActiveId);
+            }
+        }
+
+        function renderCardsList() {
+            const container = document.getElementById(&#x27;observation-cards-container&#x27;);
+            const items = bilingualLabData[currentCategory];
+
+            let titleKey = &#x27;section-precipitates-title&#x27;;
+            let descKey = &#x27;section-precipitates-desc&#x27;;
+            if (currentCategory === &#x27;solutions&#x27;) {
+                titleKey = &#x27;section-solutions-title&#x27;;
+                descKey = &#x27;section-solutions-desc&#x27;;
+            } else if (currentCategory === &#x27;gases&#x27;) {
+                titleKey = &#x27;section-gases-title&#x27;;
+                descKey = &#x27;section-gases-desc&#x27;;
+            }
+
+            let cardsHTML = &#x27;&#x27;;
+            items.forEach(item =&gt; {
+                const isActive = item.id === currentActiveId ? &#x27;active&#x27; : &#x27;&#x27;;
+                let visualHint = &#x27;&#x27;;
+
+                if (currentCategory === &#x27;precipitates&#x27;) {
+                    visualHint = `&lt;span class=&quot;color-dot&quot; style=&quot;background-color: ${getPptColorHex(item.color)}; border: 1px solid #94a3b8;&quot;&gt;&lt;/span&gt; ${item.color.toUpperCase()}`;
+                } else if (currentCategory === &#x27;solutions&#x27;) {
+                    visualHint = `&lt;span class=&quot;color-dot&quot; style=&quot;background-color: ${getSolColorHex(item.color)};&quot;&gt;&lt;/span&gt; ${item.color.toUpperCase()}`;
+                } else {
+                    visualHint = `&lt;span class=&quot;formula-tag&quot;&gt;${t(item.smell)}&lt;/span&gt;`;
+                }
+
+                cardsHTML += `
+                    &lt;div class=&quot;observation-card ${isActive}&quot; id=&quot;card-${item.id}&quot; onclick=&quot;activateShowcase(&#x27;${item.id}&#x27;)&quot;&gt;
+                        &lt;div class=&quot;card-details&quot;&gt;
+                            &lt;div style=&quot;display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px;&quot;&gt;
+                                &lt;span class=&quot;card-formula&quot;&gt;${item.formula}&lt;/span&gt;
+                                &lt;span style=&quot;font-size:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:4px;&quot;&gt;
+                                    ${visualHint}
+                                &lt;/span&gt;
+                            &lt;/div&gt;
+                            &lt;h3 class=&quot;card-title&quot; style=&quot;margin-top:4px;&quot;&gt;${t(item.title)}&lt;/h3&gt;
+                            &lt;p class=&quot;card-desc&quot;&gt;${t(item.origin).substring(0, 90)}...&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                `;
+            });
+
+            container.innerHTML = `
+                &lt;div class=&quot;section-header&quot; style=&quot;margin: 2rem 0 1rem 0;&quot;&gt;
+                    &lt;h2&gt;${t(titleKey)}&lt;/h2&gt;
+                    &lt;p&gt;${t(descKey)}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;cards-grid&quot;&gt;
+                    ${cardsHTML}
+                &lt;/div&gt;
+            `;
+        }
+
+        function getPptColorHex(colorName) {
+            if (colorName === &#x27;white&#x27;) return &#x27;#ffffff&#x27;;
+            if (colorName === &#x27;yellowish-white&#x27;) return &#x27;#fef08a&#x27;;
+            if (colorName === &#x27;yellow&#x27;) return &#x27;#eab308&#x27;;
+            if (colorName === &#x27;black&#x27;) return &#x27;#0f172a&#x27;;
+            if (colorName === &#x27;white-black&#x27;) return &#x27;linear-gradient(90deg, #ffffff 50%, #0f172a 50%)&#x27;;
+            return &#x27;#cbd5e1&#x27;;
+        }
+
+        function getSolColorHex(colorName) {
+            if (colorName === &#x27;purple&#x27;) return &#x27;#a855f7&#x27;;
+            if (colorName === &#x27;orange-green&#x27;) return &#x27;#f97316&#x27;;
+            if (colorName === &#x27;brown&#x27;) return &#x27;#b45309&#x27;;
+            if (colorName === &#x27;blue-green&#x27;) return &#x27;#14b8a6&#x27;;
+            if (colorName === &#x27;pale blue&#x27;) return &#x27;#bae6fd&#x27;;
+            if (colorName === &#x27;brown ring&#x27;) return &#x27;#451a03&#x27;;
+            return &#x27;#cbd5e1&#x27;;
+        }
+
+        function activateShowcase(itemId) {
+            currentActiveId = itemId;
+
+            document.querySelectorAll(&#x27;.observation-card&#x27;).forEach(card =&gt; card.classList.remove(&#x27;active&#x27;));
+            const selectedCard = document.getElementById(`card-${itemId}`);
+            if (selectedCard) selectedCard.classList.add(&#x27;active&#x27;);
+
+            const items = bilingualLabData[currentCategory];
+            const item = items.find(x =&gt; x.id === itemId);
+            if (!item) return;
+
+            const infoPanel = document.getElementById(&#x27;showcase-info-panel&#x27;);
+            
+            let badgeClass = &#x27;ppt-type&#x27;;
+            let badgeTextKey = &#x27;Precipitate&#x27;;
+            let detailFields = &#x27;&#x27;;
+
+            if (currentCategory === &#x27;precipitates&#x27;) {
+                badgeClass = &#x27;ppt-type&#x27;;
+                badgeTextKey = &#x27;Precipitate&#x27;;
+                detailFields = `
+                    &lt;div class=&quot;info-field&quot;&gt;
+                        &lt;span class=&quot;info-field-label&quot;&gt;${t(&quot;Precipitate Color&quot;)}&lt;/span&gt;
+                        &lt;span class=&quot;info-field-val&quot; style=&quot;font-weight:700; text-transform:uppercase; color: var(--accent-green);&quot;&gt;${item.color}&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;info-field&quot;&gt;
+                        &lt;span class=&quot;info-field-label&quot;&gt;${t(&quot;Diagnostic Solubility&quot;)}&lt;/span&gt;
+                        &lt;span class=&quot;info-field-val&quot;&gt;${t(item.solubility)}&lt;/span&gt;
+                    &lt;/div&gt;
+                `;
+            } else if (currentCategory === &#x27;solutions&#x27;) {
+                badgeClass = &#x27;sol-type&#x27;;
+                badgeTextKey = &#x27;Solution Color / Indicator&#x27;;
+                detailFields = `
+                    &lt;div class=&quot;info-field&quot;&gt;
+                        &lt;span class=&quot;info-field-label&quot;&gt;${t(&quot;Transition Color&quot;)}&lt;/span&gt;
+                        &lt;span class=&quot;info-field-val&quot; style=&quot;font-weight:700; text-transform:uppercase; color: var(--accent-pink);&quot;&gt;${item.color}&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;info-field&quot;&gt;
+                        &lt;span class=&quot;info-field-label&quot;&gt;${t(&quot;Physical Observation&quot;)}&lt;/span&gt;
+                        &lt;span class=&quot;info-field-val&quot;&gt;${t(item.observation)}&lt;/span&gt;
+                    &lt;/div&gt;
+                `;
+            } else {
+                badgeClass = &#x27;gas-type&#x27;;
+                badgeTextKey = &#x27;Evolved Gas&#x27;;
+                detailFields = `
+                    &lt;div class=&quot;info-field&quot;&gt;
+                        &lt;span class=&quot;info-field-label&quot;&gt;${t(&quot;Gas Odour&quot;)}&lt;/span&gt;
+                        &lt;span class=&quot;info-field-val&quot; style=&quot;font-weight:700; color: var(--accent-orange);&quot;&gt;${t(item.smell)}&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;info-field&quot;&gt;
+                        &lt;span class=&quot;info-field-label&quot;&gt;${t(&quot;Evolved Color&quot;)}&lt;/span&gt;
+                        &lt;span class=&quot;info-field-val&quot;&gt;${item.color}&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;info-field&quot; style=&quot;grid-column: span 2;&quot;&gt;
+                        &lt;span class=&quot;info-field-label&quot;&gt;${t(&quot;Diagnostic Evolved Gas Test&quot;)}&lt;/span&gt;
+                        &lt;span class=&quot;info-field-val&quot; style=&quot;font-weight:600; color: var(--accent-cyan);&quot;&gt;${t(item.test)}&lt;/span&gt;
+                    &lt;/div&gt;
+                `;
+            }
+
+            let actionButtonsHTML = &#x27;&#x27;;
+            if (item.visual.canHeat) {
+                actionButtonsHTML = `
+                    &lt;button class=&quot;btn-action btn-primary-action&quot; onclick=&quot;runShowcaseAnimation(&#x27;heat&#x27;)&quot;&gt;
+                        &lt;svg width=&quot;12&quot; height=&quot;12&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M11,17H13V11H11V17M11,9H13V7H11V9Z&quot;/&gt;&lt;/svg&gt;
+                        ${t(&quot;Apply Heat (Δ)&quot;)}
+                    &lt;/button&gt;
+                `;
+            } else if (item.visual.canAction) {
+                let actLabelKey = &#x27;Run Diagnostic Test&#x27;;
+                if (item.visual.actionType === &#x27;decolor&#x27;) actLabelKey = &#x27;Add Reducing Extract&#x27;;
+                else if (item.visual.actionType === &#x27;paper_turn&#x27;) actLabelKey = &#x27;Expose Indicator Paper&#x27;;
+                else if (item.visual.actionType === &#x27;fumes_NH4Cl&#x27;) actLabelKey = &#x27;Add Ammonia Glass Rod&#x27;;
+                else if (item.visual.actionType === &#x27;limewater&#x27;) actLabelKey = &#x27;Pass into Lime Water&#x27;;
+
+                actionButtonsHTML = `
+                    &lt;button class=&quot;btn-action btn-primary-action&quot; onclick=&quot;runShowcaseAnimation(&#x27;action&#x27;)&quot;&gt;
+                        ${t(actLabelKey)}
+                    &lt;/button&gt;
+                `;
+            } else if (item.visual.canSunlight) {
+                actionButtonsHTML = `
+                    &lt;button class=&quot;btn-action btn-primary-action&quot; onclick=&quot;runShowcaseAnimation(&#x27;sunlight&#x27;)&quot;&gt;
+                        ${t(&quot;Expose to Sunlight&quot;)}
+                    &lt;/button&gt;
+                `;
+            }
+
+            infoPanel.innerHTML = `
+                &lt;div class=&quot;info-header&quot;&gt;
+                    &lt;div&gt;
+                        &lt;span class=&quot;info-type ${badgeClass}&quot;&gt;${t(badgeTextKey)}&lt;/span&gt;
+                        &lt;h3 class=&quot;info-title&quot; style=&quot;margin-top:6px;&quot;&gt;${t(item.title)}&lt;/h3&gt;
+                    &lt;/div&gt;
+                    &lt;span class=&quot;formula-tag&quot; style=&quot;font-size:1.4rem; padding: 4px 12px; border-radius:8px;&quot;&gt;${item.formula}&lt;/span&gt;
+                &lt;/div&gt;
+
+                &lt;div class=&quot;info-grid&quot;&gt;
+                    &lt;div class=&quot;info-field&quot; style=&quot;grid-column: span 2;&quot;&gt;
+                        &lt;span class=&quot;info-field-label&quot;&gt;${t(&quot;Chemical Origin&quot;)}&lt;/span&gt;
+                        &lt;span class=&quot;info-field-val&quot;&gt;${t(item.origin)}&lt;/span&gt;
+                    &lt;/div&gt;
+                    ${detailFields}
+                &lt;/div&gt;
+
+                &lt;div&gt;
+                    &lt;span class=&quot;info-field-label&quot;&gt;${t(&quot;Chemical Reactions &amp; Balance Equations&quot;)}&lt;/span&gt;
+                    &lt;div class=&quot;chemical-eq&quot;&gt;${item.reaction}&lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class=&quot;action-bar&quot; id=&quot;showcase-action-bar&quot;&gt;
+                    ${actionButtonsHTML}
+                    &lt;button class=&quot;btn-action&quot; onclick=&quot;resetShowcaseVisualizer()&quot;&gt;${t(&quot;Reset Observation&quot;)}&lt;/button&gt;
+                &lt;/div&gt;
+            `;
+
+            resetShowcaseVisualizer();
+            applyVisualState(item.visual);
+        }
+
+        function applyVisualState(vis) {
+            const fluid = document.getElementById(&#x27;fluid-element&#x27;);
+            const ppt = document.getElementById(&#x27;ppt-element&#x27;);
+            const ring = document.getElementById(&#x27;brown-ring-element&#x27;);
+            const bub = document.getElementById(&#x27;bub-element&#x27;);
+            const vapor = document.getElementById(&#x27;gas-vapor-cloud&#x27;);
+            const paper = document.getElementById(&#x27;indicator-paper&#x27;);
+            const rod = document.getElementById(&#x27;ammo-glass-rod&#x27;);
+            const cu_filings = document.getElementById(&#x27;cu-filings-group&#x27;);
+
+            if (vis.liquid === &#x27;brown_ring_state&#x27;) {
+                fluid.setAttribute(&#x27;fill&#x27;, &#x27;url(#brownRingGradShowcase)&#x27;);
+                injectRingGradient();
+            } else {
+                fluid.setAttribute(&#x27;fill&#x27;, vis.liquid);
+            }
+
+            if (vis.ppt !== &#x27;none&#x27;) {
+                ppt.setAttribute(&#x27;fill&#x27;, vis.ppt);
+            } else {
+                ppt.setAttribute(&#x27;fill&#x27;, &#x27;transparent&#x27;);
+            }
+
+            if (vis.ring) {
+                ring.setAttribute(&#x27;fill&#x27;, &#x27;rgba(120, 53, 15, 0.95)&#x27;);
+            } else {
+                ring.setAttribute(&#x27;fill&#x27;, &#x27;transparent&#x27;);
+            }
+
+            if (vis.bub === &#x27;rapid&#x27;) {
+                bub.classList.add(&#x27;active&#x27;);
+                document.querySelectorAll(&#x27;.bub-circle&#x27;).forEach(b =&gt; b.style.animationDuration = &#x27;0.7s&#x27;);
+            } else if (vis.bub === &#x27;slow&#x27;) {
+                bub.classList.add(&#x27;active&#x27;);
+                document.querySelectorAll(&#x27;.bub-circle&#x27;).forEach(b =&gt; b.style.animationDuration = &#x27;1.8s&#x27;);
+            } else {
+                bub.classList.remove(&#x27;active&#x27;);
+            }
+
+            if (vis.gas !== &#x27;none&#x27;) {
+                vapor.classList.add(&#x27;active&#x27;);
+                if (vis.gas === &#x27;white&#x27;) {
+                    vapor.style.background = &#x27;radial-gradient(circle, rgba(255,255,255,0.4) 15%, transparent 65%)&#x27;;
+                } else if (vis.gas === &#x27;brown&#x27;) {
+                    vapor.style.background = &#x27;radial-gradient(circle, rgba(139,94,60,0.5) 15%, transparent 65%)&#x27;;
+                } else if (vis.gas === &#x27;brown_dense&#x27;) {
+                    vapor.style.background = &#x27;radial-gradient(circle, rgba(120,53,15,0.7) 20%, transparent 70%)&#x27;;
+                } else if (vis.gas === &#x27;red_brown&#x27;) {
+                    vapor.style.background = &#x27;radial-gradient(circle, rgba(185,110,60,0.6) 20%, transparent 70%)&#x27;;
+                } else if (vis.gas === &#x27;violet&#x27;) {
+                    vapor.style.background = &#x27;radial-gradient(circle, rgba(139,92,246,0.6) 20%, transparent 70%)&#x27;;
+                }
+            } else {
+                vapor.classList.remove(&#x27;active&#x27;);
+            }
+
+            if (vis.cu_filings) {
+                cu_filings.style.display = &#x27;block&#x27;;
+            } else {
+                cu_filings.style.display = &#x27;none&#x27;;
+            }
+
+            if (vis.paper !== &#x27;none&#x27;) {
+                paper.classList.add(&#x27;active&#x27;);
+                if (vis.paper === &#x27;dichromate_orange&#x27;) {
+                    paper.style.backgroundColor = &#x27;rgba(249, 115, 22, 0.95)&#x27;;
+                } else if (vis.paper === &#x27;lead_acetate_white&#x27;) {
+                    paper.style.backgroundColor = &#x27;#f1f5f9&#x27;;
+                } else if (vis.paper === &#x27;starch_white&#x27;) {
+                    paper.style.backgroundColor = &#x27;#f8fafc&#x27;;
+                }
+            } else {
+                paper.classList.remove(&#x27;active&#x27;);
+            }
+
+            if (vis.rod) {
+                rod.classList.add(&#x27;active&#x27;);
+            } else {
+                rod.classList.remove(&#x27;active&#x27;);
+            }
+        }
+
+        function resetShowcaseVisualizer() {
+            const fluid = document.getElementById(&#x27;fluid-element&#x27;);
+            const ppt = document.getElementById(&#x27;ppt-element&#x27;);
+            const ring = document.getElementById(&#x27;brown-ring-element&#x27;);
+            const bub = document.getElementById(&#x27;bub-element&#x27;);
+            const vapor = document.getElementById(&#x27;gas-vapor-cloud&#x27;);
+            const paper = document.getElementById(&#x27;indicator-paper&#x27;);
+            const rod = document.getElementById(&#x27;ammo-glass-rod&#x27;);
+            const cu_filings = document.getElementById(&#x27;cu-filings-group&#x27;);
+            const burner = document.getElementById(&#x27;burner-flame&#x27;);
+            const tube = document.getElementById(&#x27;test-tube-holder&#x27;);
+
+            bub.classList.remove(&#x27;active&#x27;);
+            vapor.classList.remove(&#x27;active&#x27;);
+            paper.classList.remove(&#x27;active&#x27;);
+            rod.classList.remove(&#x27;active&#x27;);
+            cu_filings.style.display = &#x27;none&#x27;;
+            burner.classList.remove(&#x27;active&#x27;);
+            tube.classList.remove(&#x27;heating&#x27;);
+
+            fluid.style.transition = &#x27;none&#x27;;
+            paper.style.transition = &#x27;none&#x27;;
+
+            const items = bilingualLabData[currentCategory];
+            const item = items.find(x =&gt; x.id === currentActiveId);
+            if (item) {
+                applyVisualState(item.visual);
+            } else {
+                fluid.setAttribute(&#x27;fill&#x27;, &#x27;rgba(255, 255, 255, 0.15)&#x27;);
+                ppt.setAttribute(&#x27;fill&#x27;, &#x27;transparent&#x27;);
+                ring.setAttribute(&#x27;fill&#x27;, &#x27;transparent&#x27;);
+            }
+        }
+
+        function runShowcaseAnimation(actionType) {
+            const items = bilingualLabData[currentCategory];
+            const item = items.find(x =&gt; x.id === currentActiveId);
+            if (!item) return;
+
+            const fluid = document.getElementById(&#x27;fluid-element&#x27;);
+            const ppt = document.getElementById(&#x27;ppt-element&#x27;);
+            const paper = document.getElementById(&#x27;indicator-paper&#x27;);
+            const vapor = document.getElementById(&#x27;gas-vapor-cloud&#x27;);
+            const burner = document.getElementById(&#x27;burner-flame&#x27;);
+            const tube = document.getElementById(&#x27;test-tube-holder&#x27;);
+
+            if (actionType === &#x27;heat&#x27;) {
+                burner.classList.add(&#x27;active&#x27;);
+                tube.classList.add(&#x27;heating&#x27;);
+
+                setTimeout(() =&gt; {
+                    if (item.id === &#x27;ag2so3&#x27;) {
+                        ppt.setAttribute(&#x27;fill&#x27;, item.visual.heatState);
+                    }
+                    burner.classList.remove(&#x27;active&#x27;);
+                    tube.classList.remove(&#x27;heating&#x27;);
+                }, 2500);
+
+            } else if (actionType === &#x27;sunlight&#x27;) {
+                setTimeout(() =&gt; {
+                    if (item.id === &#x27;agcl&#x27;) {
+                        ppt.setAttribute(&#x27;fill&#x27;, &#x27;rgba(100, 116, 139, 0.95)&#x27;);
+                    } else if (item.id === &#x27;agbr&#x27;) {
+                        ppt.setAttribute(&#x27;fill&#x27;, &#x27;rgba(71, 85, 105, 0.95)&#x27;);
+                    }
+                }, 1500);
+
+            } else if (actionType === &#x27;action&#x27;) {
+                if (item.visual.actionType === &#x27;decolor&#x27;) {
+                    fluid.style.transition = &#x27;fill 2s ease&#x27;;
+                    fluid.setAttribute(&#x27;fill&#x27;, item.visual.actionColor);
+                } else if (item.visual.actionType === &#x27;paper_turn&#x27;) {
+                    paper.style.transition = &#x27;background-color 2s ease&#x27;;
+                    paper.style.backgroundColor = item.visual.paperColor;
+                } else if (item.visual.actionType === &#x27;fumes_NH4Cl&#x27;) {
+                    vapor.classList.add(&#x27;active&#x27;);
+                    vapor.style.background = &#x27;radial-gradient(circle, rgba(255,255,255,0.7) 10%, transparent 65%)&#x27;;
+                } else if (item.visual.actionType === &#x27;limewater&#x27;) {
+                    fluid.style.transition = &#x27;fill 1.5s ease&#x27;;
+                    fluid.setAttribute(&#x27;fill&#x27;, &#x27;rgba(255, 255, 255, 0.85)&#x27;);
+                }
+            }
+        }
+
+        function injectRingGradient() {
+            const svg = document.querySelector(&#x27;#test-tube-holder svg&#x27;);
+            let defs = svg.querySelector(&#x27;defs&#x27;);
+            if (!defs) {
+                defs = document.createElementNS(&#x27;http://www.w3.org/2000/svg&#x27;, &#x27;defs&#x27;);
+                svg.appendChild(defs);
+            }
+
+            if (!document.getElementById(&#x27;brownRingGradShowcase&#x27;)) {
+                defs.innerHTML += `
+                    &lt;linearGradient id=&quot;brownRingGradShowcase&quot; x1=&quot;0%&quot; y1=&quot;0%&quot; x2=&quot;0%&quot; y2=&quot;100%&quot;&gt;
+                        &lt;stop offset=&quot;0%&quot; stop-color=&quot;rgba(186, 230, 253, 0.5)&quot; /&gt;
+                        &lt;stop offset=&quot;50%&quot; stop-color=&quot;rgba(186, 230, 253, 0.5)&quot; /&gt;
+                        &lt;stop offset=&quot;52%&quot; stop-color=&quot;rgba(69, 26, 3, 0.95)&quot; /&gt;
+                        &lt;stop offset=&quot;58%&quot; stop-color=&quot;rgba(69, 26, 3, 0.95)&quot; /&gt;
+                        &lt;stop offset=&quot;60%&quot; stop-color=&quot;rgba(30, 58, 138, 0.7)&quot; /&gt;
+                        &lt;stop offset=&quot;100%&quot; stop-color=&quot;rgba(30, 58, 138, 0.85)&quot; /&gt;
+                    &lt;/linearGradient&gt;
+                `;
+            }
+        }
+
+        // ========== MATRIX LOOKUP SYSTEM (bilingual) ==========
+        function filterByObs(type, colorKey) {
+            const container = document.getElementById(&#x27;observation-cards-container&#x27;);
+            
+            let matchedItems = [];
+            let filterTitle = &#x27;&#x27;;
+            let filterDesc = &#x27;&#x27;;
+
+            if (type === &#x27;ppt&#x27;) {
+                filterTitle = currentLang === &#x27;en&#x27; ? `Matrix Lookup: ${colorKey.toUpperCase()} Precipitates` 
+                    : `بحث المصفوفة: الرواسب ${colorKey === &#x27;white&#x27; ? &#x27;البيضاء&#x27; : colorKey === &#x27;yellow&#x27; ? &#x27;الصفراء&#x27; : &#x27;السوداء&#x27;}`;
+                filterDesc = currentLang === &#x27;en&#x27; ? `These specific solid precipitates and their diagnostic reactions appear in your PDF manuals.`
+                    : `هذه الرواسب الصلبة المحددة وتفاعلاتها التشخيصية تظهر في أدلة PDF الخاصة بك.`;
+
+                Object.values(bilingualLabData).forEach(cat =&gt; {
+                    cat.forEach(item =&gt; {
+                        if (item.color === colorKey || (colorKey === &#x27;black&#x27; &amp;&amp; item.color === &#x27;white-black&#x27;)) {
+                            matchedItems.push(item);
+                        }
+                    });
+                });
+            } else if (type === &#x27;sol&#x27;) {
+                filterTitle = currentLang === &#x27;en&#x27; ? `Matrix Lookup: ${colorKey.toUpperCase()} Solutions / Indicators`
+                    : `بحث المصفوفة: المحاليل / الكشافات ${colorKey === &#x27;purple&#x27; ? &#x27;البنفسجية&#x27; : colorKey === &#x27;blue-green&#x27; ? &#x27;الزرقاء-الخضراء&#x27; : &#x27;البرتقالية-الخضراء&#x27;}`;
+                filterDesc = currentLang === &#x27;en&#x27; ? `Chemical solution indicators matching ${colorKey} transition from PDF standard manuals.`
+                    : `كشافات المحاليل الكيميائية المطابقة للون ${colorKey} من أدلة PDF القياسية.`;
+
+                Object.values(bilingualLabData).forEach(cat =&gt; {
+                    cat.forEach(item =&gt; {
+                        if (item.color === colorKey) {
+                            matchedItems.push(item);
+                        }
+                    });
+                });
+            } else if (type === &#x27;gas&#x27;) {
+                const gasNames = { limewater: &#x27;Lime Water&#x27;, starch: &#x27;Starch Paper&#x27;, ammonia: &#x27;Ammonia Rod&#x27;, leadacetate: &#x27;Lead Acetate&#x27; };
+                const gasNamesAr = { limewater: &#x27;ماء الجير&#x27;, starch: &#x27;ورق النشا&#x27;, ammonia: &#x27;قضيب الأمونيا&#x27;, leadacetate: &#x27;خلات الرصاص&#x27; };
+                filterTitle = currentLang === &#x27;en&#x27; 
+                    ? `Matrix Lookup: ${gasNames[colorKey] || colorKey} Diagnostic Gas Tests`
+                    : `بحث المصفوفة: اختبارات ${gasNamesAr[colorKey] || colorKey} التشخيصية للغازات`;
+                filterDesc = currentLang === &#x27;en&#x27; 
+                    ? `Evolved gas chemical tests utilizing this specific diagnostic reagent/method.`
+                    : `الاختبارات الكيميائية للغازات المتصاعدة باستخدام هذا الكاشف/الأسلوب التشخيصي المحدد.`;
+
+                Object.values(bilingualLabData).forEach(cat =&gt; {
+                    cat.forEach(item =&gt; {
+                        if (item.visual &amp;&amp; item.visual.actionType &amp;&amp; item.visual.actionType.includes(colorKey)) {
+                            matchedItems.push(item);
+                        } else if (colorKey === &#x27;limewater&#x27; &amp;&amp; item.id === &#x27;co2_gas&#x27;) {
+                            matchedItems.push(item);
+                        } else if (colorKey === &#x27;starch&#x27; &amp;&amp; (item.id === &#x27;hbr_gas&#x27; || item.id === &#x27;hi_gas&#x27;)) {
+                            matchedItems.push(item);
+                        } else if (colorKey === &#x27;ammonia&#x27; &amp;&amp; item.id === &#x27;hcl_gas&#x27;) {
+                            matchedItems.push(item);
+                        } else if (colorKey === &#x27;leadacetate&#x27; &amp;&amp; item.id === &#x27;h2s_gas&#x27;) {
+                            matchedItems.push(item);
+                        }
+                    });
+                });
+            }
+
+            document.querySelectorAll(&#x27;.lookup-btn&#x27;).forEach(btn =&gt; btn.classList.remove(&#x27;active&#x27;));
+            if (window.event) window.event.currentTarget.classList.add(&#x27;active&#x27;);
+
+            let rows = &#x27;&#x27;;
+            matchedItems.forEach(item =&gt; {
+                rows += `
+                    &lt;tr&gt;
+                        &lt;td style=&quot;font-weight:700; color:var(--accent-cyan); width:20%;&quot;&gt;
+                            ${t(item.title)}&lt;br&gt;
+                            &lt;span class=&quot;formula-tag&quot; style=&quot;margin-top:4px; display:inline-block;&quot;&gt;${item.formula}&lt;/span&gt;
+                        &lt;/td&gt;
+                        &lt;td style=&quot;width:30%; color:var(--text-muted);&quot;&gt;${t(item.origin)}&lt;/td&gt;
+                        &lt;td style=&quot;width:50%;&quot;&gt;
+                            &lt;div class=&quot;chemical-eq&quot; style=&quot;padding:6px 10px; font-size:0.8rem; margin-bottom:4px;&quot;&gt;${item.reaction}&lt;/div&gt;
+                            &lt;span style=&quot;font-size:0.8rem; color:var(--accent-yellow); font-weight:600;&quot;&gt;${currentLang === &#x27;en&#x27; ? &#x27;Standard physical outcome from PDF files.&#x27; : &#x27;نتيجة فيزيائية قياسية من ملفات PDF.&#x27;}&lt;/span&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                `;
+            });
+
+            container.innerHTML = `
+                &lt;div class=&quot;section-header&quot; style=&quot;margin: 2rem 0 1rem 0;&quot;&gt;
+                    &lt;h2&gt;${filterTitle}&lt;/h2&gt;
+                    &lt;p&gt;${filterDesc}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div style=&quot;background-color: var(--bg-card); border:1px solid var(--border-color); border-radius:12px; overflow-x:auto;&quot;&gt;
+                    &lt;table class=&quot;matrix-table&quot;&gt;
+                        &lt;thead&gt;
+                            &lt;tr&gt;
+                                &lt;th&gt;${t(&quot;Observation Species&quot;)}&lt;/th&gt;
+                                &lt;th&gt;${t(&quot;Analytical Origin&quot;)}&lt;/th&gt;
+                                &lt;th&gt;${t(&quot;Diagnostic PDF Reactions &amp; Equations&quot;)}&lt;/th&gt;
+                            &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                            ${rows.length &gt; 0 ? rows : `&lt;tr&gt;&lt;td colspan=&quot;3&quot; style=&quot;text-align:center; padding:2rem; color:var(--text-muted);&quot;&gt;${t(&quot;No matching species found in standard PDFs.&quot;)}&lt;/td&gt;&lt;/tr&gt;`}
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                &lt;/div&gt;
+            `;
+            
+            container.scrollIntoView({ behavior: &#x27;smooth&#x27; });
+        }
+
+        function resetSidebarFilters() {
+            document.querySelectorAll(&#x27;.lookup-btn&#x27;).forEach(btn =&gt; btn.classList.remove(&#x27;active&#x27;));
+            switchMainTab(currentCategory);
+        }
+
+        // ========== SILVER NITRATE (AgNO₃) TEST FILTER ==========
+        function filterBySilverNitrate(anion) {
+            const container = document.getElementById(&#x27;observation-cards-container&#x27;);
+            
+            // Map anion to item ID(s)
+            const anionMap = {
+                &#x27;sulphide&#x27;: &#x27;ag2s&#x27;,
+                &#x27;sulphite&#x27;: &#x27;ag2so3&#x27;,
+                &#x27;chloride&#x27;: &#x27;agcl&#x27;,
+                &#x27;bromide&#x27;: &#x27;agbr&#x27;,
+                &#x27;iodide&#x27;: &#x27;agi&#x27;,
+                &#x27;phosphate&#x27;: &#x27;ag3po4&#x27;
+            };
+
+            const itemId = anionMap[anion];
+            if (!itemId) return;
+
+            // Find the item in the precipitates data
+            const items = bilingualLabData.precipitates;
+            const item = items.find(x =&gt; x.id === itemId);
+            if (!item) return;
+
+            // Update active states
+            document.querySelectorAll(&#x27;.lookup-btn-agno3&#x27;).forEach(btn =&gt; btn.classList.remove(&#x27;active&#x27;));
+            if (window.event) window.event.currentTarget.classList.add(&#x27;active&#x27;);
+            
+            // Build anion display name
+            const anionNames = {
+                &#x27;sulphide&#x27;: { en: &#x27;Sulphide (S²⁻)&#x27;, ar: &#x27;كبريتيد (S²⁻)&#x27; },
+                &#x27;sulphite&#x27;: { en: &#x27;Sulphite (SO₃²⁻)&#x27;, ar: &#x27;كبريتيت (SO₃²⁻)&#x27; },
+                &#x27;chloride&#x27;: { en: &#x27;Chloride (Cl⁻)&#x27;, ar: &#x27;كلوريد (Cl⁻)&#x27; },
+                &#x27;bromide&#x27;: { en: &#x27;Bromide (Br⁻)&#x27;, ar: &#x27;بروميد (Br⁻)&#x27; },
+                &#x27;iodide&#x27;: { en: &#x27;Iodide (I⁻)&#x27;, ar: &#x27;يوديد (I⁻)&#x27; },
+                &#x27;phosphate&#x27;: { en: &#x27;Phosphate (PO₄³⁻)&#x27;, ar: &#x27;فوسفات (PO₄³⁻)&#x27; }
+            };
+            const pptColors = {
+                &#x27;sulphide&#x27;: &#x27;Black&#x27;,
+                &#x27;sulphite&#x27;: &#x27;White → Black (on heat)&#x27;,
+                &#x27;chloride&#x27;: &#x27;White&#x27;,
+                &#x27;bromide&#x27;: &#x27;Yellowish-white&#x27;,
+                &#x27;iodide&#x27;: &#x27;Yellow&#x27;,
+                &#x27;phosphate&#x27;: &#x27;Yellow&#x27;
+            };
+            const pptColorsAr = {
+                &#x27;sulphide&#x27;: &#x27;أسود&#x27;,
+                &#x27;sulphite&#x27;: &#x27;أبيض ← أسود (بالتسخين)&#x27;,
+                &#x27;chloride&#x27;: &#x27;أبيض&#x27;,
+                &#x27;bromide&#x27;: &#x27;أبيض مصفر&#x27;,
+                &#x27;iodide&#x27;: &#x27;أصفر&#x27;,
+                &#x27;phosphate&#x27;: &#x27;أصفر&#x27;
+            };
+
+            const anionName = currentLang === &#x27;en&#x27; ? anionNames[anion].en : anionNames[anion].ar;
+            const colorName = currentLang === &#x27;en&#x27; ? pptColors[anion] : pptColorsAr[anion];
+            const filterTitle = currentLang === &#x27;en&#x27; 
+                ? `Silver Nitrate Test: ${anionName} → ${item.formula}`
+                : `اختبار نترات الفضة: ${anionName} → ${item.formula}`;
+            const filterDesc = currentLang === &#x27;en&#x27;
+                ? `Confirmatory test: Adding Silver Nitrate (AgNO₃) to a solution containing ${anionName} produces a distinctive ${colorName.toLowerCase()} precipitate of ${item.formula}.`
+                : `الاختبار التأكيدي: إضافة نترات الفضة (AgNO₃) إلى محلول يحتوي على ${anionName} يُنتج راسبًا ${colorName.toLowerCase()} مميزًا من ${item.formula}.`;
+
+            container.innerHTML = `
+                &lt;div class=&quot;section-header&quot; style=&quot;margin: 2rem 0 1rem 0;&quot;&gt;
+                    &lt;h2&gt;${filterTitle}&lt;/h2&gt;
+                    &lt;p&gt;${filterDesc}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div style=&quot;background-color: var(--bg-card); border:1px solid var(--border-color); border-radius:12px; overflow-x:auto;&quot;&gt;
+                    &lt;table class=&quot;matrix-table&quot;&gt;
+                        &lt;thead&gt;
+                            &lt;tr&gt;
+                                &lt;th&gt;${t(&quot;Observation Species&quot;)}&lt;/th&gt;
+                                &lt;th&gt;${t(&quot;Analytical Origin&quot;)}&lt;/th&gt;
+                                &lt;th&gt;${t(&quot;Diagnostic PDF Reactions &amp; Equations&quot;)}&lt;/th&gt;
+                            &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                            &lt;tr&gt;
+                                &lt;td style=&quot;font-weight:700; color:var(--accent-cyan); width:20%;&quot;&gt;
+                                    ${t(item.title)}&lt;br&gt;
+                                    &lt;span class=&quot;formula-tag&quot; style=&quot;margin-top:4px; display:inline-block;&quot;&gt;${item.formula}&lt;/span&gt;
+                                &lt;/td&gt;
+                                &lt;td style=&quot;width:30%; color:var(--text-muted);&quot;&gt;${t(item.origin)}&lt;/td&gt;
+                                &lt;td style=&quot;width:50%;&quot;&gt;
+                                    &lt;div class=&quot;chemical-eq&quot; style=&quot;padding:6px 10px; font-size:0.8rem; margin-bottom:4px;&quot;&gt;${item.reaction}&lt;/div&gt;
+                                    &lt;span style=&quot;font-size:0.8rem; color:var(--accent-yellow); font-weight:600;&quot;&gt;
+                                        ${currentLang === &#x27;en&#x27; ? `Precipitate color: ${colorName}. ${item.visual.canHeat ? &#x27;Turns black on heating.&#x27; : item.visual.canSunlight ? &#x27;Turns violet/grey in sunlight.&#x27; : &#x27;&#x27;}` 
+                                        : `لون الراسب: ${colorName}. ${item.visual.canHeat ? &#x27;يتحول للأسود بالتسخين.&#x27; : item.visual.canSunlight ? &#x27;يتحول للبنفسجي/الرمادي في ضوء الشمس.&#x27; : &#x27;&#x27;}`}
+                                    &lt;/span&gt;
+                                &lt;/td&gt;
+                            &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                &lt;/div&gt;
+                &lt;div style=&quot;margin-top: 1rem; display: flex; gap: 8px; flex-wrap: wrap;&quot;&gt;
+                    &lt;button class=&quot;btn-action btn-primary-action&quot; onclick=&quot;switchMainTab(&#x27;precipitates&#x27;); activateShowcase(&#x27;${itemId}&#x27;)&quot;&gt;
+                        &lt;svg width=&quot;14&quot; height=&quot;14&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M11,17H13V11H11V17M11,9H13V7H11V9Z&quot;/&gt;&lt;/svg&gt;
+                        ${currentLang === &#x27;en&#x27; ? &#x27;View Full Details &amp; Simulation&#x27; : &#x27;عرض التفاصيل والمحاكاة كاملة&#x27;}
+                    &lt;/button&gt;
+                    &lt;button class=&quot;btn-action&quot; onclick=&quot;resetSidebarFilters()&quot;&gt;
+                        ${t(&quot;Reset Filter Lookups&quot;)}
+                    &lt;/button&gt;
+                &lt;/div&gt;
+            `;
+            
+            container.scrollIntoView({ behavior: &#x27;smooth&#x27; });
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;" style="display:block; width:100%; height: calc(100vh - 190px); min-height: 760px; border:0; background:#0f172a;"></iframe>
+  </div>
+</section>
+<!-- ANIONS2_DASHBOARD_EMBED_END -->
+<div class="brandfoot"><span class="fline1"><span class="fname">أ/ أيمن منصور — مستشار الكيمياء</span><span class="sep">|</span><span class="fname2">Prof./ Ayman Mansour — Chemistry Consultant</span></span><span class="fline2"><span class="fphone">📞 / WhatsApp: <b>01068018005</b> · <b>01287996430</b></span><span class="sep">|</span><span>كيمياء ٢٠٢٦ • Chemistry 2026</span></span></div>
+
+<div id="security-overlay" class="security-overlay">
+    <div style="font-size:3rem">🛡</div>
+    <div>Screen Recording / Copying Disabled</div>
+    <div class="ar">تم تعطيل تصوير الشاشة / النسخ</div>
+</div>
+
+<script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => { e.preventDefault(); });
+    document.addEventListener('keydown', e => {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 's' || e.key === 'u' || e.key === 'a')) {
+            e.preventDefault();
+        }
+    });
+    document.addEventListener('keyup', e => {
+        if (e.key === 'PrintScreen') { try { navigator.clipboard.writeText(''); } catch(_){} }
+    });
+    window.addEventListener('blur', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'flex';
+    });
+    window.addEventListener('focus', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'none';
+    });
+</script>
+
+<script id="anions2-frame-focus-compat">
+(function(){
+  function hideIfFrame(){
+    var frame = document.getElementById('anions2Frame');
+    var overlay = document.getElementById('security-overlay');
+    if (frame && overlay && document.activeElement === frame) overlay.style.display = 'none';
+  }
+  window.addEventListener('blur', function(){ setTimeout(hideIfFrame, 0); }, true);
+  document.addEventListener('focusin', hideIfFrame, true);
+})();
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a109d42d8e51787a',t:'MTc4MjI4NDE0Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a10bdd317955e1b5',t:'MTc4MjMwNTQ4Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

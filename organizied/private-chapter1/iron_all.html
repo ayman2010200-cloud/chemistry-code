@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iron Chemistry — Complete Bilingual Edition</title>
+<style>
+    :root {
+        --bg-main: #0b0f19;
+        --bg-card: #111827;
+        --border-color: #1f2937;
+        --gold: #fbbf24;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        padding: 28px 10px 70px;
+        background: radial-gradient(1200px 600px at 50% -10%, #101a33 0%, var(--bg-main) 60%);
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        color: #f8fafc;
+        min-height: 100vh;
+    }
+    h1 {
+        margin: 0 0 6px;
+        font-size: 30px;
+        font-weight: 800;
+        text-align: center;
+        background: linear-gradient(90deg, #7dd3fc, #c084fc, #fbbf24);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    .subtitle {
+        margin: 0 0 20px 0;
+        color: #94a3b8;
+        font-size: 14.5px;
+        text-align: center;
+        max-width: 100%;
+        width: 100%;
+        line-height: 1.55;
+    }
+    .subtitle b { color: #e2e8f0; }
+
+    /* ===== toolbar ===== */
+    .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 12px 18px;
+        margin: 0 0 18px 0;
+        max-width: 100%;
+        width: 100%;
+        position: sticky;
+        top: 10px;
+        z-index: 20;
+        box-shadow: 0 10px 30px rgba(0,0,0,.45);
+    }
+    .toolbar input {
+        background: #0d1117;
+        border: 1px solid #2b3648;
+        color: #e2e8f0;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 13.5px;
+        width: 250px;
+        outline: none;
+        font-family: inherit;
+    }
+    .toolbar input:focus { border-color: #38bdf8; }
+    .btn {
+        background: #1b2435;
+        border: 1px solid #2b3648;
+        color: #cbd5e1;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all .15s;
+        user-select: none;
+    }
+    .btn:hover { background: #243049; color: #fff; }
+    .btn.gold { background: #3a2e08; border-color: #8a6d12; color: #fde68a; }
+    .count { font-size: 13px; color: #64748b; font-weight: 600; }
+
+    /* ===== chapter nav ===== */
+    .chapnav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 7px;
+        margin: 0 0 26px 0;
+        max-width: 100%;
+        width: 100%;
+    }
+    .chapnav a {
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: .4px;
+        text-transform: uppercase;
+        color: #cbd5e1;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        padding: 6px 13px;
+        text-decoration: none;
+        transition: all .15s;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+    .chapnav a:hover { border-color: var(--ch); color: #fff; }
+    .chapnav .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ch); }
+
+    /* ===== book ===== */
+    .book { max-width: 100%; width: 100%; margin: 0; }
+
+    .chapter { margin-bottom: 34px; }
+    .chap-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: linear-gradient(90deg, color-mix(in srgb, var(--ch) 16%, #121a2a) 0%, #0e1422 70%);
+        border: 1px solid color-mix(in srgb, var(--ch) 45%, #1f2937);
+        border-left: 6px solid var(--ch);
+        border-radius: 12px;
+        padding: 14px 20px;
+        margin-bottom: 12px;
+    }
+    .chap-head .icon {
+        width: 40px; height: 40px;
+        border-radius: 10px;
+        background: color-mix(in srgb, var(--ch) 20%, #0b0f19);
+        border: 1.5px solid var(--ch);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 19px;
+    }
+    .chap-head h2 { margin: 0; font-size: 21px; font-weight: 800; color: #fff; }
+    .chap-head .sub { font-size: 12.5px; color: #94a3b8; margin-top: 2px; }
+    .chap-head .n {
+        margin-left: auto;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--ch);
+        border: 1.5px solid var(--ch);
+        border-radius: 999px;
+        padding: 4px 14px;
+        white-space: nowrap;
+    }
+
+    /* equation card */
+    .eq {
+        background: linear-gradient(160deg, #121a2a 0%, #0d1117 80%);
+        border: 1px solid #1d2738;
+        border-left: 4px solid var(--ch);
+        border-radius: 12px;
+        padding: 14px 18px 13px;
+        margin-bottom: 10px;
+        transition: border-color .15s, box-shadow .15s;
+    }
+    .eq:hover {
+        border-color: color-mix(in srgb, var(--ch) 55%, #1d2738);
+        box-shadow: 0 6px 20px rgba(0,0,0,.4), 0 0 12px color-mix(in srgb, var(--ch) 18%, transparent);
+    }
+    .eq.hidden { display: none; }
+    .eq-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 9px;
+        flex-wrap: wrap;
+    }
+    .eq-num {
+        width: 26px; height: 26px;
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--ch) 22%, #0b0f19);
+        border: 1.5px solid var(--ch);
+        color: var(--ch);
+        font-size: 12px;
+        font-weight: 800;
+        display: flex; align-items: center; justify-content: center;
+        flex: 0 0 auto;
+    }
+    .eq-name { font-size: 14.5px; font-weight: 800; color: #fff; }
+    .eq-tag {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .6px;
+        text-transform: uppercase;
+        color: var(--ch);
+        background: color-mix(in srgb, var(--ch) 14%, transparent);
+        border-radius: 999px;
+        padding: 3px 10px;
+    }
+    /* origin-chapter chip shown in "by type" view */
+    .eq-chip {
+        margin-left: auto;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        color: var(--cc);
+        border: 1px solid color-mix(in srgb, var(--cc) 55%, transparent);
+        background: color-mix(in srgb, var(--cc) 10%, transparent);
+        border-radius: 999px;
+        padding: 3px 10px;
+        white-space: nowrap;
+    }
+    .seg { display: flex; gap: 0; }
+    .seg .btn { border-radius: 0; }
+    .seg .btn:first-child { border-radius: 8px 0 0 8px; }
+    .seg .btn:last-child { border-radius: 0 8px 8px 0; border-left: none; }
+
+    /* the equation line itself — size controlled by A− / A+ buttons */
+    :root { --eqfs: 21px; }
+    .eq-line {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 4px 12px;
+        font-size: var(--eqfs);
+        font-weight: 700;
+        color: #e8edf5;
+        padding: 10px 4px 5px;
+        line-height: 1.9;
+        width: 100%;
+    }
+    .eq-line .sp { color: #e8edf5; }
+    .eq-line .plus { color: #64748b; font-weight: 600; }
+    .arrowbox {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 6px;
+        min-width: 86px;
+    }
+    .arrowbox .cond {
+        font-size: calc(var(--eqfs) * 0.56);
+        font-weight: 700;
+        color: #7dd3fc;
+        font-family: Consolas, 'Courier New', monospace;
+        margin-bottom: -3px;
+        text-align: center;
+        max-width: 230px;
+        line-height: 1.35;
+    }
+    .arrowbox .arr { color: var(--gold); font-size: calc(var(--eqfs) * 1.18); line-height: .8; }
+
+    /* ===== Kekulé ring structures inside equations ===== */
+    .eq-line .ringwrap { display: inline-flex; align-items: center; }
+    .eq-line svg.ring { display: block; }
+    svg.ring line { stroke: #dbe3ef; stroke-width: 1.7; stroke-linecap: round; }
+    .eq-line .spn {
+        font-size: calc(var(--eqfs) * 0.6);
+        color: #8fa1ba;
+        font-weight: 600;
+        align-self: flex-end;
+        padding-bottom: 6px;
+    }
+    .eq-note {
+        font-size: 12px;
+        color: #8fa1ba;
+        margin-top: 7px;
+        padding-top: 7px;
+        border-top: 1px dashed #1d2738;
+    }
+    .eq-note b { color: #cbd5e1; }
+    .hl { background: #3a2e08; color: #fde68a; border-radius: 3px; padding: 0 3px; }
+
+    .empty {
+        text-align: center;
+        color: #64748b;
+        font-size: 15px;
+        padding: 50px 0;
+    }
+
+    .topbtn {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        width: 46px; height: 46px;
+        border-radius: 50%;
+        background: #1b2435;
+        border: 1.5px solid #2b3648;
+        color: #cbd5e1;
+        font-size: 19px;
+        cursor: pointer;
+        z-index: 30;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 8px 22px rgba(0,0,0,.5);
+    }
+    .topbtn:hover { background: #243049; color: #fff; }
+
+    /* ===== print (light) mode ===== */
+    @media print {
+        body { background: #fff !important; color: #111 !important; padding: 10px; }
+        .toolbar, .chapnav, .topbtn, .subtitle { display: none !important; }
+        h1 { color: #111 !important; -webkit-text-fill-color: #111; background: none; }
+        .chap-head { background: #f3f4f6 !important; border-color: #999 !important; }
+        .chap-head h2 { color: #111 !important; }
+        .chap-head .sub { color: #444 !important; }
+        .eq { background: #fff !important; border: 1px solid #bbb !important; break-inside: avoid; }
+        .eq-line, .eq-line .sp { color: #111 !important; }
+        .eq-name { color: #111 !important; }
+        .arrowbox .cond { color: #1d4ed8 !important; }
+        .arrowbox .arr { color: #b45309 !important; }
+        .eq-note { color: #444 !important; }
+    }
+
+/* ================= BRAND / TEACHER IDENTITY ================= */
+.brandbar {
+  display: flex; align-items: center; gap: 18px;
+  background: linear-gradient(90deg, #101a33 0%, #0f172a 60%, #1a1430 100%);
+  border: 1px solid #facc15aa; border-radius: 16px;
+  padding: 12px 22px; margin: 0 0 18px 0;
+  max-width: 100%; width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 8px 28px rgba(0,0,0,.5), 0 0 18px #facc1522;
+  position: relative; z-index: 10;
+}
+.brandbar .bphoto {
+  width: 74px; height: 74px; border-radius: 50%;
+  border: 3px solid #facc15; object-fit: cover; flex: 0 0 auto;
+  box-shadow: 0 0 16px #facc1566; background: #fff;
+}
+.brandbar .bnames { line-height: 1.3; }
+.brandbar .bar { font-size: 21px; font-weight: 800; color: #facc15; }
+.brandbar .ben { font-size: 13px; font-weight: 700; color: #7dd3fc; letter-spacing: .5px; }
+.brandbar .bpage {
+  margin-inline-start: auto; text-align: center; line-height: 1.45;
+}
+.brandbar .bpage .pa { font-size: 16px; font-weight: 800; color: #e2e8f0; direction: rtl; }
+.brandbar .bpage .pe { font-size: 11.5px; font-weight: 600; color: #94a3b8; }
+.brandbar .bexam { text-align: end; line-height: 1.4; }
+.brandbar .bexam .x1 { font-size: 15px; font-weight: 800; color: #4ade80; direction: rtl; }
+.brandbar .bexam .x2 { font-size: 10.5px; color: #64748b; direction: rtl; }
+@media (max-width: 900px){ .brandbar{flex-wrap:wrap; justify-content:center; text-align:center;} .brandbar .bpage{margin:0;} }
+
+/* watermark: faint photo + repeated bilingual name */
+#wmark {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+}
+#wmark .wphoto {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%,-50%);
+  width: min(56vmin, 520px); height: min(56vmin, 520px);
+  border-radius: 50%;
+  background-size: cover; background-position: center;
+  opacity: .045; filter: grayscale(60%);
+}
+body > *:not(#wmark){ position: relative; z-index: 1; }
+
+.brandfoot {
+  margin: 26px 0 0 0; max-width: 100%; width: 100%;
+  border-top: 1px dashed #facc1555;
+  padding: 12px 8px 4px;
+  display: flex; flex-wrap: wrap; gap: 6px 24px;
+  align-items: center; justify-content: center;
+  font-size: 12.5px; color: #94a3b8; text-align: center;
+  box-sizing: border-box;
+}
+.brandfoot b { color: #facc15; }
+.brandfoot .sep { color: #334155; }
+@media print { #wmark .wphoto { opacity: .05; } .brandbar{box-shadow:none;} }
+#wmark{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='300'%3E%3Ctext x='50%25' y='44%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='26' font-weight='bold' fill='%23ffffff' opacity='0.13'%3EProf./ Ayman Mansour%3C/text%3E%3Ctext x='50%25' y='60%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='22' font-weight='bold' fill='%23ffffff' opacity='0.10'%3E%D8%A3/ %D8%A3%D9%8A%D9%85%D9%86 %D9%85%D9%86%D8%B5%D9%88%D8%B1%3C/text%3E%3C/svg%3E");background-repeat:repeat;z-index:9999;}
+
+/* ===== model-2 security overlay ===== */
+.security-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #0b1220; color: #ef4444;
+    display: none; justify-content: center; align-items: center; flex-direction: column;
+    z-index: 999999; font-size: 1.6rem; font-weight: 800; text-align: center; gap: 8px;
+}
+.security-overlay .ar { font-size: 1.3rem; color: #f87171; direction: rtl; }
+input, select, textarea { user-select: text; }
+
+.brandfoot { flex-direction: column; gap: 8px; }
+.brandfoot .fline1, .brandfoot .fline2 {
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+  align-items: center; justify-content: center;
+}
+.brandfoot .fname { color: #facc15; font-size: 15px; font-weight: 800; direction: rtl; }
+.brandfoot .fname2 { color: #7dd3fc; font-size: 13px; font-weight: 700; }
+.brandfoot .fphone {
+  color: #4ade80; font-weight: 700; font-size: 13px;
+  background: #4ade8011; border: 1px solid #4ade8044;
+  border-radius: 999px; padding: 4px 14px;
+}
+.brandfoot .fphone b { color: #86efac; letter-spacing: 1px; }
+
+/* ===== Arabic mode ===== */
+body.lang-ar .eq-name { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; }
+body.lang-ar .eq-tag { direction: rtl; }
+body.lang-ar .arrowbox .cond { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; font-size: calc(var(--eqfs) * 0.52); }
+body.lang-ar .eq-top { flex-direction: row; }
+
+body.lang-ar #pgTitle, body.lang-ar #pgSub { direction: rtl; font-family:'Segoe UI',Tahoma,sans-serif; }
+body.lang-ar .chap-head h2, body.lang-ar .chap-head .sub { direction: rtl; text-align: right; }
+body.lang-ar .chapnav a { direction: rtl; }
+
+.brandbar .blogo {
+  width: 78px; height: 68px; border-radius: 12px;
+  object-fit: contain; background: #fff; flex: 0 0 auto;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 14px rgba(56,189,248,.45);
+  padding: 3px;
+}
+
+
+/* ================= CUSTOM CSS START =================
+
+/* ===== Imported Iron Complete Edition CSS - scoped ===== */
+.iron-all{
+    --bg-1:#04060f;
+    --bg-2:#08102a;
+    --panel:rgba(15, 22, 48, .55);
+    --panel-2:rgba(20, 28, 60, .65);
+    --text:#eaf2ff;
+    --muted:#9fb0d9;
+    --neon-1:#22d3ee;
+    --neon-2:#a78bfa;
+    --neon-3:#34d399;
+    --neon-4:#fb7185;
+    --neon-5:#facc15;
+    --line:rgba(255,255,255,.08);
+    --shadow:0 18px 50px rgba(0,0,0,.55);
+  }.iron-all *{box-sizing:border-box}.iron-all,.iron-all{margin:0;padding:0}.iron-all{
+    font-family:Inter,"Segoe UI",Tahoma,Roboto,Arial,sans-serif;
+    color:var(--text);min-height:100vh;
+    background:
+      radial-gradient(circle at 10% 10%, rgba(34,211,238,.12), transparent 25%),
+      radial-gradient(circle at 90% 5%, rgba(167,139,250,.14), transparent 28%),
+      radial-gradient(circle at 50% 90%, rgba(52,211,153,.08), transparent 25%),
+      linear-gradient(180deg,var(--bg-1),var(--bg-2));
+    padding:32px 18px 120px;overflow-x:hidden;
+  }.iron-all::before{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px) 0 0/40px 40px,
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px) 0 0/40px 40px;
+    mask-image: radial-gradient(ellipse at center, #000 35%, transparent 75%);
+    pointer-events:none;z-index:0;
+  }.iron-all .container{position:relative;z-index:2;max-width:1500px;margin:auto}.iron-all .hero{
+    text-align:center;padding:34px 22px;border-radius:28px;
+    background:var(--panel);border:1px solid var(--line);
+    box-shadow:var(--shadow);backdrop-filter:blur(14px);
+    position:relative;overflow:hidden;
+  }.iron-all .hero::before{
+    content:"";position:absolute;inset:-1px;border-radius:28px;padding:1px;
+    background:linear-gradient(120deg,var(--neon-1),var(--neon-2),var(--neon-3),var(--neon-2),var(--neon-1));
+    background-size:300% 300%;
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+    animation:borderShift 10s linear infinite;pointer-events:none;
+  }@keyframes borderShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}.iron-all .hero h1{
+    margin:0;font-size:clamp(28px,4vw,50px);letter-spacing:.5px;
+    background:linear-gradient(90deg,#fff,var(--neon-1),#fff,var(--neon-2),#fff);
+    background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    animation:shine 8s linear infinite;
+  }@keyframes shine{0%{background-position:0% 50%}100%{background-position:300% 50%}}.iron-all .hero p{margin:10px 0 0;color:var(--muted);font-size:15px}.iron-all .section{
+    margin-top:28px;padding:22px;border-radius:24px;
+    background:var(--panel-2);border:1px solid var(--line);
+    box-shadow:var(--shadow);backdrop-filter:blur(12px);
+  }.iron-all .section h2{margin:0 0 18px;font-size:24px;color:#fff;display:flex;align-items:center;gap:12px}.iron-all .section h2::before{
+    content:"";width:10px;height:28px;border-radius:999px;
+    background:linear-gradient(180deg,var(--neon-1),var(--neon-2));
+    box-shadow:0 0 14px var(--neon-1);
+  }.iron-all[dir="rtl"] .section h2{flex-direction:row-reverse}.iron-all .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:18px}.iron-all .card{
+    position:relative;border-radius:22px;padding:18px 16px 16px;
+    background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.08);transition:.25s ease;overflow:hidden;
+  }.iron-all .card:hover{
+    transform:translateY(-4px);border-color:rgba(34,211,238,.4);
+    box-shadow:0 18px 40px rgba(0,0,0,.45),
+      0 0 0 1px rgba(34,211,238,.15) inset,
+      0 0 30px rgba(34,211,238,.18);
+  }.iron-all .card::after{
+    content:"";position:absolute;right:-50px;bottom:-50px;width:160px;height:160px;
+    background:radial-gradient(circle, rgba(167,139,250,.18),transparent 70%);
+    pointer-events:none;
+  }.iron-all .title{color:#fff;font-size:16px;font-weight:700;margin:0 0 12px;display:flex;align-items:center;gap:8px}.iron-all[dir="rtl"] .title{flex-direction:row-reverse;text-align:right}.iron-all .dot{width:8px;height:8px;border-radius:50%;background:var(--neon-1);box-shadow:0 0 10px var(--neon-1)}.iron-all .dot.p{background:var(--neon-2);box-shadow:0 0 10px var(--neon-2)}.iron-all .dot.g{background:var(--neon-3);box-shadow:0 0 10px var(--neon-3)}.iron-all .dot.r{background:var(--neon-4);box-shadow:0 0 10px var(--neon-4)}.iron-all .dot.y{background:var(--neon-5);box-shadow:0 0 10px var(--neon-5)}.iron-all .eqbox{
+    margin-top:12px;padding:18px 14px;border-radius:18px;
+    background:linear-gradient(180deg,rgba(34,211,238,.06),rgba(167,139,250,.05)),#0a1024;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 0 0 1px rgba(34,211,238,.06) inset,0 8px 24px rgba(0,0,0,.35);
+    text-align:center;
+  }.iron-all .formula{
+    font-size:22px;color:#fff;font-weight:600;
+    font-family:"Cambria Math","Times New Roman",serif;
+    margin:8px 0;letter-spacing:.5px;
+    text-shadow:0 0 12px rgba(34,211,238,.25);
+    direction: ltr !important;
+    text-align: center !important;
+    unicode-bidi: embed;
+}.iron-all .formula .arrow{color:var(--neon-1);margin:0 8px;font-weight:700}.iron-all .text-name{
+    font-size:14px;color:#cfe1ff;margin-top:6px;line-height:1.5;
+    padding-top:8px;border-top:1px dashed rgba(255,255,255,.1);
+  }.iron-all .cond{
+    display:inline-block;margin-top:10px;padding:4px 12px;border-radius:999px;
+    background:rgba(34,211,238,.1);color:var(--neon-1);font-size:12.5px;font-weight:600;
+    border:1px solid rgba(34,211,238,.25);
+  }.iron-all .cond.p{background:rgba(167,139,250,.1);color:var(--neon-2);border-color:rgba(167,139,250,.25)}.iron-all .cond.g{background:rgba(52,211,153,.1);color:var(--neon-3);border-color:rgba(52,211,153,.25)}.iron-all .cond.r{background:rgba(251,113,133,.1);color:var(--neon-4);border-color:rgba(251,113,133,.25)}.iron-all .cond.y{background:rgba(250,204,21,.1);color:var(--neon-5);border-color:rgba(250,204,21,.25)}.iron-all .eq-divider{
+    height:1px;margin:14px 0;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+  }.iron-all .lang-switch{
+    position:fixed;bottom:22px;left:50%;transform:translateX(-50%);
+    display:flex;gap:10px;padding:8px;border-radius:999px;
+    background:rgba(10,16,36,.85);border:1px solid var(--line);
+    box-shadow:0 12px 35px rgba(0,0,0,.5),0 0 25px rgba(34,211,238,.15);
+    backdrop-filter:blur(10px);z-index:50;
+  }.iron-all .lang-switch button{
+    background:transparent;color:#fff;border:none;cursor:pointer;
+    font-size:14px;font-weight:700;padding:10px 20px;border-radius:999px;transition:.2s ease;
+  }.iron-all .lang-switch button.active{
+    background:linear-gradient(90deg,var(--neon-1),var(--neon-2));
+    color:#0a1024;box-shadow:0 0 20px rgba(34,211,238,.5);
+  }.iron-all .footer{text-align:center;color:var(--muted);margin-top:30px;font-size:13px}@media (max-width:700px){.iron-all .section{padding:16px}.iron-all .card{padding:14px}.iron-all .formula{font-size:18px}.iron-all .text-name{font-size:13px}
+  }
+
+
+/* The imported Iron Complete Edition is scoped under .iron-all so it will not override the template. */
+.iron-all {
+  width: 100%;
+  margin: 18px 0 22px;
+  border: 1px solid rgba(250, 204, 21, .22);
+  border-radius: 18px;
+  overflow-x: hidden;
+  position: relative;
+  isolation: isolate;
+  box-shadow: 0 18px 45px rgba(0,0,0,.48), 0 0 22px rgba(250,204,21,.08);
+}
+.iron-all::before { z-index: 0; }
+.iron-all .container { position: relative; z-index: 1; }
+.iron-all .lang-switch {
+  position: sticky;
+  left: auto;
+  bottom: 18px;
+  transform: none;
+  width: max-content;
+  max-width: 92%;
+  margin: 26px auto 20px;
+}
+@media (max-width: 700px) {
+  .iron-all { padding-left: 10px; padding-right: 10px; }
+  .iron-all .grid { grid-template-columns: 1fr; }
+  .iron-all .lang-switch { width: max-content; max-width: 92%; }
+}
+
+================= CUSTOM CSS END ================= */
+</style>
+</head>
+<body>
+
+<div id="wmark"><div class="wphoto" style="background-image:url(data:image/jpeg;base64,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)"></div></div>
+<div class="brandbar"><img class="blogo" src="data:image/jpeg;base64,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" alt="Chemistry Code"><img class="bphoto" src="data:image/jpeg;base64,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" alt="teacher"><div class="bnames"><div class="bar">بروف/ أيمن منصور — مستشار الكيماء</div><div class="ben">Prof./ Ayman Mansour — Chemistry Consultant</div></div><div class="bpage"><div class="pa"> </div><div class="pe"></div></div><div class="bexam"><div class="x1">كود الكيمياء — Chemistry Code</div></div></div>
+
+
+<!-- ================= IMPORTED IRON COMPLETE EDITION START ================= -->
+<section id="ironAllRoot" class="iron-all" dir="ltr" lang="en">
+<div class="container">
+<!-- LANGUAGE TOGGLE -->
+<div class="lang-switch">
+  <button id="btn-en" class="active" onclick="setLang('en')">English</button>
+  <button id="btn-ar" onclick="setLang('ar')">العربية</button>
+</div>
+  <div class="hero">
+    <h1 data-en="Iron Chemistry — Complete Edition" data-ar="كيمياء الحديد — النسخة الكاملة">Iron Chemistry — Complete Edition</h1>
+    <p data-en="Chemical equations with names • English & Arabic • toggle at the bottom"
+       data-ar="معادلات كيميائية مع الأسماء • إنجليزي وعربي • زر التبديل في الأسفل">
+       Chemical equations with names • English & Arabic • toggle at the bottom
+    </p>
+  </div>
+
+  <!-- ================= SECTION 1 ================= -->
+  <section class="section">
+    <h2 data-en="1. Effect of Heat on Iron Compounds" data-ar="١. تأثير الحرارة على مركبات الحديد">1. Effect of Heat on Iron Compounds</h2>
+    <div class="grid">
+
+      <div class="card">
+        <div class="title"><span class="dot"></span><span data-en="Iron(II) Oxalate" data-ar="أوكسالات الحديد II">Iron(II) Oxalate</span></div>
+
+        <div class="eqbox">
+          <div class="formula">(COO)₂Fe <span class="arrow">→</span> FeO + CO₂ + CO</div>
+          <div class="text-name"
+            data-en="Iron(II) Oxalate → Iron(II) Oxide + Carbon Dioxide + Carbon Monoxide"
+            data-ar="أوكسالات الحديد II ← أكسيد الحديد II + ثاني أكسيد الكربون + أول أكسيد الكربون">
+            Iron(II) Oxalate → Iron(II) Oxide + Carbon Dioxide + Carbon Monoxide
+          </div>
+          <div class="cond" data-en="Δ, absence of air" data-ar="Δ، في غياب الهواء">Δ, absence of air</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">2FeO + ½O₂ <span class="arrow">→</span> Fe₂O₃</div>
+          <div class="text-name"
+            data-en="Iron(II) Oxide + Oxygen → Iron(III) Oxide"
+            data-ar="أكسيد الحديد II + الأكسجين ← أكسيد الحديد III">
+            Iron(II) Oxide + Oxygen → Iron(III) Oxide
+          </div>
+          <div class="cond" data-en="Δ, presence of air" data-ar="Δ، في وجود الهواء">Δ, presence of air</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title"><span class="dot p"></span><span data-en="Iron(II) Carbonate (Siderite)" data-ar="كربونات الحديد II (السدريت)">Iron(II) Carbonate (Siderite)</span></div>
+
+        <div class="eqbox">
+          <div class="formula">FeCO₃ <span class="arrow">→</span> FeO + CO₂</div>
+          <div class="text-name"
+            data-en="Iron(II) Carbonate → Iron(II) Oxide + Carbon Dioxide"
+            data-ar="كربونات الحديد II ← أكسيد الحديد II + ثاني أكسيد الكربون">
+            Iron(II) Carbonate → Iron(II) Oxide + Carbon Dioxide
+          </div>
+          <div class="cond p" data-en="Δ, no air" data-ar="Δ، بدون هواء">Δ, no air</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">2FeCO₃ + O₂ <span class="arrow">→</span> Fe₂O₃ + 2CO₂</div>
+          <div class="text-name"
+            data-en="Iron(II) Carbonate + Oxygen → Iron(III) Oxide + Carbon Dioxide"
+            data-ar="كربونات الحديد II + الأكسجين ← أكسيد الحديد III + ثاني أكسيد الكربون">
+            Iron(II) Carbonate + Oxygen → Iron(III) Oxide + Carbon Dioxide
+          </div>
+          <div class="cond p" data-en="Δ, presence of air" data-ar="Δ، في وجود الهواء">Δ, presence of air</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title"><span class="dot g"></span><span data-en="Limonite" data-ar="الليمونيت">Limonite</span></div>
+        <div class="eqbox">
+          <div class="formula">2Fe₂O₃·3H₂O <span class="arrow">→</span> 2Fe₂O₃ + 3H₂O</div>
+          <div class="text-name"
+            data-en="Hydrated Iron(III) Oxide → Iron(III) Oxide + Water"
+            data-ar="أكسيد الحديد III المائي ← أكسيد الحديد III + الماء">
+            Hydrated Iron(III) Oxide → Iron(III) Oxide + Water
+          </div>
+          <div class="cond g" data-en="Δ, above 200°C" data-ar="Δ، فوق 200°م">Δ, above 200°C</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title"><span class="dot r"></span><span data-en="Iron(II) Sulphate" data-ar="كبريتات الحديد II">Iron(II) Sulphate</span></div>
+        <div class="eqbox">
+          <div class="formula">2FeSO₄ <span class="arrow">→</span> Fe₂O₃ + SO₂ + SO₃</div>
+          <div class="text-name"
+            data-en="Iron(II) Sulphate → Iron(III) Oxide + Sulphur Dioxide + Sulphur Trioxide"
+            data-ar="كبريتات الحديد II ← أكسيد الحديد III + ثاني أكسيد الكبريت + ثالث أكسيد الكبريت">
+            Iron(II) Sulphate → Iron(III) Oxide + Sulphur Dioxide + Sulphur Trioxide
+          </div>
+          <div class="cond r" data-en="Δ" data-ar="Δ بالتسخين">Δ</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title"><span class="dot y"></span><span data-en="Iron(III) Hydroxide" data-ar="هيدروكسيد الحديد III">Iron(III) Hydroxide</span></div>
+        <div class="eqbox">
+          <div class="formula">2Fe(OH)₃ <span class="arrow">→</span> Fe₂O₃ + 3H₂O</div>
+          <div class="text-name"
+            data-en="Iron(III) Hydroxide → Iron(III) Oxide + Water"
+            data-ar="هيدروكسيد الحديد III ← أكسيد الحديد III + الماء">
+            Iron(III) Hydroxide → Iron(III) Oxide + Water
+          </div>
+          <div class="cond y" data-en="Δ, above 200°C" data-ar="Δ، فوق 200°م">Δ, above 200°C</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SECTION 2 ================= -->
+  <section class="section">
+    <h2 data-en="2. Reduction of Iron Oxides" data-ar="٢. اختزال أكاسيد الحديد">2. Reduction of Iron Oxides</h2>
+    <div class="grid">
+
+      <div class="card">
+        <div class="title"><span class="dot"></span><span data-en="A) Reduction by Carbon Monoxide" data-ar="أ) الاختزال بأول أكسيد الكربون">A) Reduction by Carbon Monoxide</span></div>
+
+        <div class="eqbox">
+          <div class="formula">C₍s₎ + O₂₍g₎ <span class="arrow">→</span> CO₂₍g₎</div>
+          <div class="text-name"
+            data-en="Carbon + Oxygen → Carbon Dioxide"
+            data-ar="الكربون + الأكسجين ← ثاني أكسيد الكربون">
+            Carbon + Oxygen → Carbon Dioxide
+          </div>
+          <div class="cond" data-en="Δ" data-ar="Δ">Δ</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">2CO₂₍g₎ + C₍s₎ <span class="arrow">→</span> 2CO₍g₎</div>
+          <div class="text-name"
+            data-en="Carbon Dioxide + Carbon → Carbon Monoxide"
+            data-ar="ثاني أكسيد الكربون + الكربون ← أول أكسيد الكربون">
+            Carbon Dioxide + Carbon → Carbon Monoxide
+          </div>
+          <div class="cond" data-en="Δ" data-ar="Δ">Δ</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">Fe₂O₃₍s₎ + 3CO₍g₎ <span class="arrow">→</span> 2Fe₍s₎ + 3CO₂₍g₎</div>
+          <div class="text-name"
+            data-en="Iron(III) Oxide + Carbon Monoxide → Iron + Carbon Dioxide"
+            data-ar="أكسيد الحديد III + أول أكسيد الكربون ← الحديد + ثاني أكسيد الكربون">
+            Iron(III) Oxide + Carbon Monoxide → Iron + Carbon Dioxide
+          </div>
+          <div class="cond" data-en="Δ, above 700°C — blast furnace" data-ar="Δ، فوق 700°م — الفرن العالي">Δ, above 700°C — blast furnace</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title"><span class="dot p"></span><span data-en="B) Reduction by Water Gas (CO + H₂)" data-ar="ب) الاختزال بغاز الماء (CO + H₂)">B) Reduction by Water Gas (CO + H₂)</span></div>
+
+        <div class="eqbox">
+          <div class="formula">2CH₄₍g₎ + CO₂₍g₎ + H₂O₍v₎ <span class="arrow">→</span> 3CO₍g₎ + 5H₂₍g₎</div>
+          <div class="text-name"
+            data-en="Methane + Carbon Dioxide + Water Vapor → Carbon Monoxide + Hydrogen"
+            data-ar="الميثان + ثاني أكسيد الكربون + بخار الماء ← أول أكسيد الكربون + الهيدروجين">
+            Methane + Carbon Dioxide + Water Vapor → Carbon Monoxide + Hydrogen
+          </div>
+          <div class="cond p" data-en="Δ" data-ar="Δ">Δ</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">2Fe₂O₃₍s₎ + 3CO₍g₎ + 3H₂₍g₎ <span class="arrow">→</span> 4Fe₍s₎ + 3CO₂₍g₎ + 3H₂O₍v₎</div>
+          <div class="text-name"
+            data-en="Iron(III) Oxide + Carbon Monoxide + Hydrogen → Iron + Carbon Dioxide + Water Vapor"
+            data-ar="أكسيد الحديد III + أول أكسيد الكربون + الهيدروجين ← الحديد + ثاني أكسيد الكربون + بخار الماء">
+            Iron(III) Oxide + Carbon Monoxide + Hydrogen → Iron + Carbon Dioxide + Water Vapor
+          </div>
+          <div class="cond p" data-en="Δ, Midrex furnace" data-ar="Δ، فرن ميدركس">Δ, Midrex furnace</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SECTION 3 ================= -->
+  <section class="section">
+    <h2 data-en="3. Reactions of Iron" data-ar="٣. تفاعلات الحديد">3. Reactions of Iron</h2>
+    <div class="grid">
+
+      <div class="card">
+        <div class="title"><span class="dot g"></span><span data-en="Combination & Oxidation" data-ar="تفاعلات الاتحاد والأكسدة">Combination & Oxidation</span></div>
+
+        <div class="eqbox">
+          <div class="formula">3Fe + 2O₂ <span class="arrow">→</span> Fe₃O₄</div>
+          <div class="text-name"
+            data-en="Iron + Oxygen → Ferrosoferric Oxide"
+            data-ar="الحديد + الأكسجين ← أكسيد الحديد المغناطيسي">
+            Iron + Oxygen → Ferrosoferric Oxide
+          </div>
+          <div class="cond g" data-en="Δ" data-ar="Δ">Δ</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">3Fe + 4H₂O <span class="arrow">→</span> Fe₃O₄ + 4H₂</div>
+          <div class="text-name"
+            data-en="Iron + Water → Ferrosoferric Oxide + Hydrogen"
+            data-ar="الحديد + الماء ← أكسيد الحديد المغناطيسي + الهيدروجين">
+            Iron + Water → Ferrosoferric Oxide + Hydrogen
+          </div>
+          <div class="cond g" data-en="At 500°C" data-ar="عند 500°م">At 500°C</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">2Fe + 3Cl₂ <span class="arrow">→</span> 2FeCl₃</div>
+          <div class="text-name"
+            data-en="Iron + Chlorine → Iron(III) Chloride (oxidizing agent)"
+            data-ar="الحديد + الكلور ← كلوريد الحديد III (عامل مؤكسد)">
+            Iron + Chlorine → Iron(III) Chloride (oxidizing agent)
+          </div>
+          <div class="cond g" data-en="Δ" data-ar="Δ">Δ</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">Fe + S <span class="arrow">→</span> FeS</div>
+          <div class="text-name"
+            data-en="Iron + Sulphur → Iron(II) Sulphide (Fe is reducing agent)"
+            data-ar="الحديد + الكبريت ← كبريتيد الحديد II (الحديد عامل مختزل)">
+            Iron + Sulphur → Iron(II) Sulphide (Fe is reducing agent)
+          </div>
+          <div class="cond g" data-en="Δ" data-ar="Δ">Δ</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title"><span class="dot r"></span><span data-en="Iron with Acids" data-ar="الحديد مع الأحماض">Iron with Acids</span></div>
+
+        <div class="eqbox">
+          <div class="formula">Fe + 2HCl <span class="arrow">→</span> FeCl₂ + H₂</div>
+          <div class="text-name"
+            data-en="Iron + Hydrochloric Acid → Iron(II) Chloride + Hydrogen"
+            data-ar="الحديد + حمض الهيدروكلوريك ← كلوريد الحديد II + الهيدروجين">
+            Iron + Hydrochloric Acid → Iron(II) Chloride + Hydrogen
+          </div>
+          <div class="cond r" data-en="Dilute — Fe is reducing agent" data-ar="مخفف — الحديد عامل مختزل">Dilute — Fe is reducing agent</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">Fe + HNO₃ <span class="arrow">→</span> No reaction</div>
+          <div class="text-name"
+            data-en="Iron + Nitric Acid → No reaction (passivity)"
+            data-ar="الحديد + حمض النيتريك ← لا يحدث تفاعل (الخمول)">
+            Iron + Nitric Acid → No reaction (passivity)
+          </div>
+          <div class="cond r" data-en="Concentrated" data-ar="مركز">Concentrated</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">Fe + H₂SO₄ <span class="arrow">→</span> FeSO₄ + H₂</div>
+          <div class="text-name"
+            data-en="Iron + Sulphuric Acid → Iron(II) Sulphate + Hydrogen"
+            data-ar="الحديد + حمض الكبريتيك ← كبريتات الحديد II + الهيدروجين">
+            Iron + Sulphuric Acid → Iron(II) Sulphate + Hydrogen
+          </div>
+          <div class="cond r" data-en="Dilute — Fe is reducing agent" data-ar="مخفف — الحديد عامل مختزل">Dilute — Fe is reducing agent</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">3Fe + 8H₂SO₄ <span class="arrow">→</span> FeSO₄ + Fe₂(SO₄)₃ + 4SO₂ + 8H₂O</div>
+          <div class="text-name"
+            data-en="Iron + Sulphuric Acid → Iron(II) Sulphate + Iron(III) Sulphate + Sulphur Dioxide + Water"
+            data-ar="الحديد + حمض الكبريتيك ← كبريتات الحديد II + كبريتات الحديد III + ثاني أكسيد الكبريت + الماء">
+            Iron + Sulphuric Acid → Iron(II) Sulphate + Iron(III) Sulphate + Sulphur Dioxide + Water
+          </div>
+          <div class="cond r" data-en="Concentrated, hot" data-ar="مركز ساخن">Concentrated, hot</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SECTION 4 ================= -->
+  <section class="section">
+    <h2 data-en="4. Oxidation of Impurities (S, P)" data-ar="٤. أكسدة الشوائب (الكبريت والفوسفور)">4. Oxidation of Impurities (S, P)</h2>
+    <div class="grid">
+
+      <div class="card">
+        <div class="title"><span class="dot y"></span><span data-en="Sulphur & Phosphorus" data-ar="الكبريت والفوسفور">Sulphur & Phosphorus</span></div>
+
+        <div class="eqbox">
+          <div class="formula">S₍s₎ + O₂₍g₎ <span class="arrow">→</span> SO₂₍g₎</div>
+          <div class="text-name"
+            data-en="Sulphur + Oxygen → Sulphur Dioxide"
+            data-ar="الكبريت + الأكسجين ← ثاني أكسيد الكبريت">
+            Sulphur + Oxygen → Sulphur Dioxide
+          </div>
+          <div class="cond y" data-en="Δ" data-ar="Δ">Δ</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">4P₍s₎ + 5O₂₍g₎ <span class="arrow">→</span> 2P₂O₅₍g₎</div>
+          <div class="text-name"
+            data-en="Phosphorus + Oxygen → Phosphorus Pentoxide"
+            data-ar="الفوسفور + الأكسجين ← خامس أكسيد الفوسفور">
+            Phosphorus + Oxygen → Phosphorus Pentoxide
+          </div>
+          <div class="cond y" data-en="Δ" data-ar="Δ">Δ</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SECTION 5 ================= -->
+  <section class="section">
+    <h2 data-en="5. Acid Reactions of Iron Oxides" data-ar="٥. تفاعلات أكاسيد الحديد مع الأحماض">5. Acid Reactions of Iron Oxides</h2>
+    <div class="grid">
+
+      <div class="card">
+        <div class="title"><span class="dot"></span><span data-en="Iron(II) Oxide" data-ar="أكسيد الحديد II">Iron(II) Oxide</span></div>
+
+        <div class="eqbox">
+          <div class="formula">FeO + H₂SO₄ <span class="arrow">→</span> FeSO₄ + H₂O</div>
+          <div class="text-name"
+            data-en="Iron(II) Oxide + Sulphuric Acid → Iron(II) Sulphate + Water"
+            data-ar="أكسيد الحديد II + حمض الكبريتيك ← كبريتات الحديد II + الماء">
+            Iron(II) Oxide + Sulphuric Acid → Iron(II) Sulphate + Water
+          </div>
+          <div class="cond" data-en="Dilute" data-ar="مخفف">Dilute</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">FeO + 2HCl <span class="arrow">→</span> FeCl₂ + H₂O</div>
+          <div class="text-name"
+            data-en="Iron(II) Oxide + Hydrochloric Acid → Iron(II) Chloride + Water"
+            data-ar="أكسيد الحديد II + حمض الهيدروكلوريك ← كلوريد الحديد II + الماء">
+            Iron(II) Oxide + Hydrochloric Acid → Iron(II) Chloride + Water
+          </div>
+          <div class="cond" data-en="Dilute" data-ar="مخفف">Dilute</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title"><span class="dot p"></span><span data-en="Iron(III) Oxide" data-ar="أكسيد الحديد III">Iron(III) Oxide</span></div>
+
+        <div class="eqbox">
+          <div class="formula">Fe₂O₃ + 3H₂SO₄ <span class="arrow">→</span> Fe₂(SO₄)₃ + 3H₂O</div>
+          <div class="text-name"
+            data-en="Iron(III) Oxide + Sulphuric Acid → Iron(III) Sulphate + Water"
+            data-ar="أكسيد الحديد III + حمض الكبريتيك ← كبريتات الحديد III + الماء">
+            Iron(III) Oxide + Sulphuric Acid → Iron(III) Sulphate + Water
+          </div>
+          <div class="cond p" data-en="Concentrated" data-ar="مركز">Concentrated</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">Fe₂O₃ + 6HCl <span class="arrow">→</span> 2FeCl₃ + 3H₂O</div>
+          <div class="text-name"
+            data-en="Iron(III) Oxide + Hydrochloric Acid → Iron(III) Chloride + Water"
+            data-ar="أكسيد الحديد III + حمض الهيدروكلوريك ← كلوريد الحديد III + الماء">
+            Iron(III) Oxide + Hydrochloric Acid → Iron(III) Chloride + Water
+          </div>
+          <div class="cond p" data-en="Concentrated" data-ar="مركز">Concentrated</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title"><span class="dot g"></span><span data-en="Magnetite (Fe₃O₄)" data-ar="المغنتيت (Fe₃O₄)">Magnetite (Fe₃O₄)</span></div>
+
+        <div class="eqbox">
+          <div class="formula">Fe₃O₄ + 4H₂SO₄ <span class="arrow">→</span> Fe₂(SO₄)₃ + FeSO₄ + 4H₂O</div>
+          <div class="text-name"
+            data-en="Ferrosoferric Oxide + Sulphuric Acid → Iron(III) Sulphate + Iron(II) Sulphate + Water"
+            data-ar="أكسيد الحديد المغناطيسي + حمض الكبريتيك ← كبريتات الحديد III + كبريتات الحديد II + الماء">
+            Ferrosoferric Oxide + Sulphuric Acid → Iron(III) Sulphate + Iron(II) Sulphate + Water
+          </div>
+          <div class="cond g" data-en="Concentrated" data-ar="مركز">Concentrated</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">Fe₃O₄ + 8HCl <span class="arrow">→</span> 2FeCl₃ + FeCl₂ + 4H₂O</div>
+          <div class="text-name"
+            data-en="Ferrosoferric Oxide + Hydrochloric Acid → Iron(III) Chloride + Iron(II) Chloride + Water"
+            data-ar="أكسيد الحديد المغناطيسي + حمض الهيدروكلوريك ← كلوريد الحديد III + كلوريد الحديد II + الماء">
+            Ferrosoferric Oxide + Hydrochloric Acid → Iron(III) Chloride + Iron(II) Chloride + Water
+          </div>
+          <div class="cond g" data-en="Concentrated" data-ar="مركز">Concentrated</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SECTION 6 ================= -->
+  <section class="section">
+    <h2 data-en="6. Partial Reduction / Interconversion of Iron Oxides" data-ar="٦. الاختزال الجزئي وتحولات أكاسيد الحديد">6. Partial Reduction / Interconversion of Iron Oxides</h2>
+    <div class="grid">
+
+      <div class="card">
+        <div class="title"><span class="dot r"></span><span data-en="Using Hydrogen and Carbon Monoxide" data-ar="باستخدام الهيدروجين وأول أكسيد الكربون">Using Hydrogen and Carbon Monoxide</span></div>
+
+        <div class="eqbox">
+          <div class="formula">Fe₂O₃₍s₎ + H₂₍g₎ <span class="arrow">→</span> 2FeO₍s₎ + H₂O₍v₎</div>
+          <div class="text-name"
+            data-en="Iron(III) Oxide + Hydrogen → Iron(II) Oxide + Water Vapor"
+            data-ar="أكسيد الحديد III + الهيدروجين ← أكسيد الحديد II + بخار الماء">
+            Iron(III) Oxide + Hydrogen → Iron(II) Oxide + Water Vapor
+          </div>
+          <div class="cond r" data-en="Δ, 400–700°C" data-ar="Δ، 400–700°م">Δ, 400–700°C</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">Fe₃O₄₍s₎ + H₂₍g₎ <span class="arrow">→</span> 3FeO₍s₎ + H₂O₍v₎</div>
+          <div class="text-name"
+            data-en="Ferrosoferric Oxide + Hydrogen → Iron(II) Oxide + Water Vapor"
+            data-ar="أكسيد الحديد المغناطيسي + الهيدروجين ← أكسيد الحديد II + بخار الماء">
+            Ferrosoferric Oxide + Hydrogen → Iron(II) Oxide + Water Vapor
+          </div>
+          <div class="cond r" data-en="Δ, 400–700°C" data-ar="Δ، 400–700°م">Δ, 400–700°C</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">Fe₃O₄₍s₎ + CO₍g₎ <span class="arrow">→</span> 3FeO₍s₎ + CO₂₍g₎</div>
+          <div class="text-name"
+            data-en="Ferrosoferric Oxide + Carbon Monoxide → Iron(II) Oxide + Carbon Dioxide"
+            data-ar="أكسيد الحديد المغناطيسي + أول أكسيد الكربون ← أكسيد الحديد II + ثاني أكسيد الكربون">
+            Ferrosoferric Oxide + Carbon Monoxide → Iron(II) Oxide + Carbon Dioxide
+          </div>
+          <div class="cond r" data-en="Δ, 400–700°C" data-ar="Δ، 400–700°م">Δ, 400–700°C</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">3Fe₂O₃₍s₎ + CO₍g₎ <span class="arrow">→</span> 2Fe₃O₄₍s₎ + CO₂₍g₎</div>
+          <div class="text-name"
+            data-en="Iron(III) Oxide + Carbon Monoxide → Ferrosoferric Oxide + Carbon Dioxide"
+            data-ar="أكسيد الحديد III + أول أكسيد الكربون ← أكسيد الحديد المغناطيسي + ثاني أكسيد الكربون">
+            Iron(III) Oxide + Carbon Monoxide → Ferrosoferric Oxide + Carbon Dioxide
+          </div>
+          <div class="cond r" data-en="230–380°C" data-ar="230–380°م">230–380°C</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title"><span class="dot y"></span><span data-en="Oxidation of Magnetite" data-ar="أكسدة المغنتيت">Oxidation of Magnetite</span></div>
+
+        <div class="eqbox">
+          <div class="formula">2Fe₃O₄₍s₎ + ½O₂₍g₎ <span class="arrow">→</span> 3Fe₂O₃₍s₎</div>
+          <div class="text-name"
+            data-en="Ferrosoferric Oxide + Oxygen → Iron(III) Oxide"
+            data-ar="أكسيد الحديد المغناطيسي + الأكسجين ← أكسيد الحديد III">
+            Ferrosoferric Oxide + Oxygen → Iron(III) Oxide
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SECTION 7 ================= -->
+  <section class="section">
+    <h2 data-en="7. Preparation and Conversion Reactions" data-ar="٧. تفاعلات التحضير والتحويل">7. Preparation and Conversion Reactions</h2>
+    <div class="grid">
+
+      <div class="card">
+        <div class="title"><span class="dot"></span><span data-en="Iron(III) Hydroxide from Iron(III) Chloride" data-ar="تحضير هيدروكسيد الحديد III من كلوريد الحديد III">Iron(III) Hydroxide from Iron(III) Chloride</span></div>
+
+        <div class="eqbox">
+          <div class="formula">FeCl₃₍aq₎ + 3NH₄OH₍aq₎ <span class="arrow">→</span> 3NH₄Cl₍aq₎ + Fe(OH)₃₍s₎</div>
+          <div class="text-name"
+            data-en="Iron(III) Chloride + Ammonium Hydroxide → Ammonium Chloride + Iron(III) Hydroxide"
+            data-ar="كلوريد الحديد III + هيدروكسيد الأمونيوم ← كلوريد الأمونيوم + هيدروكسيد الحديد III">
+            Iron(III) Chloride + Ammonium Hydroxide → Ammonium Chloride + Iron(III) Hydroxide
+          </div>
+          <div class="cond" data-en="Fe(OH)₃ — reddish-brown precipitate" data-ar="Fe(OH)₃ — راسب بني محمر">Fe(OH)₃ — reddish-brown precipitate</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title"><span class="dot p"></span><span data-en="Three Iron Oxides from Iron" data-ar="تحضير أكاسيد الحديد الثلاثة من الحديد">Three Iron Oxides from Iron</span></div>
+
+        <div class="eqbox">
+          <div class="formula">3Fe + 2O₂ <span class="arrow">→</span> Fe₃O₄</div>
+          <div class="text-name"
+            data-en="Iron + Oxygen → Ferrosoferric Oxide"
+            data-ar="الحديد + الأكسجين ← أكسيد الحديد المغناطيسي">
+            Iron + Oxygen → Ferrosoferric Oxide
+          </div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">Fe₃O₄ + H₂ <span class="arrow">→</span> 3FeO + H₂O</div>
+          <div class="text-name"
+            data-en="Ferrosoferric Oxide + Hydrogen → Iron(II) Oxide + Water"
+            data-ar="أكسيد الحديد المغناطيسي + الهيدروجين ← أكسيد الحديد II + الماء">
+            Ferrosoferric Oxide + Hydrogen → Iron(II) Oxide + Water
+          </div>
+          <div class="cond p" data-en="Δ, 400–700°C" data-ar="Δ، 400–700°م">Δ, 400–700°C</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">2FeO + O₂ <span class="arrow">→</span> Fe₂O₃</div>
+          <div class="text-name"
+            data-en="Iron(II) Oxide + Oxygen → Iron(III) Oxide"
+            data-ar="أكسيد الحديد II + الأكسجين ← أكسيد الحديد III">
+            Iron(II) Oxide + Oxygen → Iron(III) Oxide
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title"><span class="dot g"></span><span data-en="Iron(III) Oxide from Iron(III) Chloride" data-ar="تحضير أكسيد الحديد III من كلوريد الحديد III">Iron(III) Oxide from Iron(III) Chloride</span></div>
+
+        <div class="eqbox">
+          <div class="formula">FeCl₃ + 3NH₄OH <span class="arrow">→</span> 3NH₄Cl + Fe(OH)₃</div>
+          <div class="text-name"
+            data-en="Iron(III) Chloride + Ammonium Hydroxide → Ammonium Chloride + Iron(III) Hydroxide"
+            data-ar="كلوريد الحديد III + هيدروكسيد الأمونيوم ← كلوريد الأمونيوم + هيدروكسيد الحديد III">
+            Iron(III) Chloride + Ammonium Hydroxide → Ammonium Chloride + Iron(III) Hydroxide
+          </div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">2Fe(OH)₃ <span class="arrow">→</span> Fe₂O₃ + 3H₂O</div>
+          <div class="text-name"
+            data-en="Iron(III) Hydroxide → Iron(III) Oxide + Water"
+            data-ar="هيدروكسيد الحديد III ← أكسيد الحديد III + الماء">
+            Iron(III) Hydroxide → Iron(III) Oxide + Water
+          </div>
+          <div class="cond g" data-en="Δ, above 200°C" data-ar="Δ، فوق 200°م">Δ, above 200°C</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title"><span class="dot y"></span><span data-en="Iron(II) Hydroxide from Iron(III) Hydroxide" data-ar="تحضير هيدروكسيد الحديد II من هيدروكسيد الحديد III">Iron(II) Hydroxide from Iron(III) Hydroxide</span></div>
+
+        <div class="eqbox">
+          <div class="formula">2Fe(OH)₃ <span class="arrow">→</span> Fe₂O₃ + 3H₂O</div>
+          <div class="text-name"
+            data-en="Iron(III) Hydroxide → Iron(III) Oxide + Water"
+            data-ar="هيدروكسيد الحديد III ← أكسيد الحديد III + الماء">
+            Iron(III) Hydroxide → Iron(III) Oxide + Water
+          </div>
+          <div class="cond y" data-en="Δ, above 200°C" data-ar="Δ، فوق 200°م">Δ, above 200°C</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">Fe₂O₃ + H₂ <span class="arrow">→</span> 2FeO + H₂O</div>
+          <div class="text-name"
+            data-en="Iron(III) Oxide + Hydrogen → Iron(II) Oxide + Water"
+            data-ar="أكسيد الحديد III + الهيدروجين ← أكسيد الحديد II + الماء">
+            Iron(III) Oxide + Hydrogen → Iron(II) Oxide + Water
+          </div>
+          <div class="cond y" data-en="Δ, 400–700°C" data-ar="Δ، 400–700°م">Δ, 400–700°C</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">FeO + H₂SO₄ <span class="arrow">→</span> FeSO₄ + H₂O</div>
+          <div class="text-name"
+            data-en="Iron(II) Oxide + Sulphuric Acid → Iron(II) Sulphate + Water"
+            data-ar="أكسيد الحديد II + حمض الكبريتيك ← كبريتات الحديد II + الماء">
+            Iron(II) Oxide + Sulphuric Acid → Iron(II) Sulphate + Water
+          </div>
+          <div class="cond y" data-en="Dilute" data-ar="مخفف">Dilute</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">FeSO₄ + 2NaOH <span class="arrow">→</span> Na₂SO₄ + Fe(OH)₂</div>
+          <div class="text-name"
+            data-en="Iron(II) Sulphate + Sodium Hydroxide → Sodium Sulphate + Iron(II) Hydroxide"
+            data-ar="كبريتات الحديد II + هيدروكسيد الصوديوم ← كبريتات الصوديوم + هيدروكسيد الحديد II">
+            Iron(II) Sulphate + Sodium Hydroxide → Sodium Sulphate + Iron(II) Hydroxide
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SECTION 8 ================= -->
+  <section class="section">
+    <h2 data-en="8. Role of Reducing Agents in Furnaces" data-ar="٨. دور العوامل المختزلة في الأفران">8. Role of Reducing Agents in Furnaces</h2>
+    <div class="grid">
+
+      <div class="card">
+        <div class="title"><span class="dot r"></span><span data-en="A) Coke Coal in Blast Furnace" data-ar="أ) فحم الكوك في الفرن العالي">A) Coke Coal in Blast Furnace</span></div>
+
+        <div class="eqbox">
+          <div class="formula">C + O₂ <span class="arrow">→</span> CO₂</div>
+          <div class="text-name"
+            data-en="Carbon + Oxygen → Carbon Dioxide"
+            data-ar="الكربون + الأكسجين ← ثاني أكسيد الكربون">
+            Carbon + Oxygen → Carbon Dioxide
+          </div>
+          <div class="cond r" data-en="Δ" data-ar="Δ">Δ</div>
+        </div>
+
+        <div class="eqbox">
+          <div class="formula">2CO₂ + C <span class="arrow">→</span> 2CO</div>
+          <div class="text-name"
+            data-en="Carbon Dioxide + Carbon → Carbon Monoxide"
+            data-ar="ثاني أكسيد الكربون + الكربون ← أول أكسيد الكربون">
+            Carbon Dioxide + Carbon → Carbon Monoxide
+          </div>
+          <div class="cond r" data-en="Role: producing CO" data-ar="الدور: إنتاج أول أكسيد الكربون">Role: producing CO</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title"><span class="dot y"></span><span data-en="B) Natural Gas in Midrex Furnace" data-ar="ب) الغاز الطبيعي في فرن ميدركس">B) Natural Gas in Midrex Furnace</span></div>
+
+        <div class="eqbox">
+          <div class="formula">2CH₄ + CO₂ + H₂O <span class="arrow">→</span> 3CO + 5H₂</div>
+          <div class="text-name"
+            data-en="Methane + Carbon Dioxide + Water → Carbon Monoxide + Hydrogen"
+            data-ar="الميثان + ثاني أكسيد الكربون + الماء ← أول أكسيد الكربون + الهيدروجين">
+            Methane + Carbon Dioxide + Water → Carbon Monoxide + Hydrogen
+          </div>
+          <div class="cond y" data-en="Role: producing water gas" data-ar="الدور: إنتاج غاز الماء">Role: producing water gas</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="footer">
+    <div data-en="Premium Edition • Equations + Names • EN / AR" data-ar="النسخة المميزة • معادلات + أسماء • EN / AR">Premium Edition • Equations + Names • EN / AR</div>
+  </div>
+
+</div>
+
+
+</section>
+<!-- ================= IMPORTED IRON COMPLETE EDITION END ================= -->
+
+<div class="brandfoot"><span class="fline1"><span class="fname">أ/ أيمن منصور — مستشار الكيمياء</span><span class="sep">|</span><span class="fname2">Prof./ Ayman Mansour — Chemistry Consultant</span></span><span class="fline2"><span class="fphone">📞 / WhatsApp: <b>01068018005</b> · <b>01287996430</b></span><span class="sep">|</span><span>كيمياء ٢٠٢٦ • Chemistry 2026</span></span></div>
+
+<div id="security-overlay" class="security-overlay">
+    <div style="font-size:3rem">🛡</div>
+    <div>Screen Recording / Copying Disabled</div>
+    <div class="ar">تم تعطيل تصوير الشاشة / النسخ</div>
+</div>
+
+<script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => { e.preventDefault(); });
+    document.addEventListener('keydown', e => {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 's' || e.key === 'u' || e.key === 'a')) {
+            e.preventDefault();
+        }
+    });
+    document.addEventListener('keyup', e => {
+        if (e.key === 'PrintScreen') { try { navigator.clipboard.writeText(''); } catch(_){} }
+    });
+    window.addEventListener('blur', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'flex';
+    });
+    window.addEventListener('focus', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'none';
+    });
+</script>
+
+
+<script id="custom-js">
+/* ================= CUSTOM JS START ================= */
+/* ===== Imported Iron Complete Edition JS ===== */
+function setLang(lang){
+  document.getElementById('ironAllRoot').querySelectorAll('[data-en]').forEach(el=>{
+    el.textContent = el.getAttribute('data-' + lang);
+  });
+  const ironAllRoot = document.getElementById('ironAllRoot');
+  if (ironAllRoot) {
+    ironAllRoot.setAttribute('lang', lang);
+    ironAllRoot.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+  }
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+}
+/* ================= CUSTOM JS END ================= */
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a10205dc8bd0a630',t:'MTc4MjIwMjI5NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

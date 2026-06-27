@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organic compounds Chemistry </title>
+<style>
+    :root {
+        --bg-main: #0b0f19;
+        --bg-card: #111827;
+        --border-color: #1f2937;
+        --gold: #fbbf24;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        padding: 28px 18px 60px;
+        background: radial-gradient(1200px 600px at 50% -10%, #101a33 0%, var(--bg-main) 60%);
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        color: #f8fafc;
+        min-height: 100vh;
+    }
+    h1 {
+        margin: 0 0 6px;
+        font-size: 30px;
+        font-weight: 800;
+        text-align: center;
+        background: linear-gradient(90deg, #7dd3fc, #c084fc, #fbbf24);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    .subtitle {
+        margin: 0 auto 20px;
+        color: #94a3b8;
+        font-size: 14.5px;
+        text-align: center;
+        max-width: 760px;
+        line-height: 1.55;
+    }
+    .subtitle b { color: #e2e8f0; }
+
+    /* toolbar */
+    .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 12px 18px;
+        margin: 0 auto 14px;
+        max-width: 1500px;
+    }
+    .toolbar input {
+        background: #0d1117;
+        border: 1px solid #2b3648;
+        color: #e2e8f0;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 13.5px;
+        width: 230px;
+        outline: none;
+        font-family: inherit;
+    }
+    .toolbar input:focus { border-color: #38bdf8; }
+    .btn {
+        background: #1b2435;
+        border: 1px solid #2b3648;
+        color: #cbd5e1;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all .15s;
+        user-select: none;
+    }
+    .btn:hover { background: #243049; color: #fff; }
+    .btn.gold { background: #3a2e08; border-color: #8a6d12; color: #fde68a; }
+    .count { font-size: 13px; color: #64748b; font-weight: 600; }
+
+    /* filter pills */
+    .filters {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 7px;
+        margin: 0 auto 22px;
+        max-width: 1500px;
+    }
+    .pill {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .4px;
+        text-transform: uppercase;
+        color: #cbd5e1;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        padding: 5px 12px;
+        cursor: pointer;
+        transition: all .15s;
+        user-select: none;
+    }
+    .pill:hover { border-color: #3b4a66; }
+    .pill.active { background: #1d2a40; border-color: var(--pc); color: #fff; }
+    .pill.muted { opacity: .35; }
+    .pill .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--pc); }
+
+    /* grid */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+        gap: 18px;
+        max-width: 1500px;
+        margin: 0 auto;
+    }
+
+    /* flip card */
+    .fcard { perspective: 1200px; height: 372px; }
+    .fcard.hidden { display: none; }
+    .fcard .inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform .55s cubic-bezier(.2,.7,.3,1);
+        cursor: pointer;
+    }
+    .fcard.flip .inner { transform: rotateY(180deg); }
+    .face {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        border-radius: 14px;
+        background: linear-gradient(160deg, #121a2a 0%, #0d1117 70%);
+        border: 1.6px solid var(--cc);
+        box-shadow: 0 10px 26px rgba(0,0,0,.5);
+        display: flex;
+        flex-direction: column;
+        padding: 14px;
+        overflow: hidden;
+    }
+    .fcard:hover .face { box-shadow: 0 12px 30px rgba(0,0,0,.6), 0 0 14px color-mix(in srgb, var(--cc) 35%, transparent); }
+    .face.back {
+        transform: rotateY(180deg);
+        background:
+            radial-gradient(420px 240px at 110% -10%, color-mix(in srgb, var(--cc) 34%, transparent) 0%, transparent 60%),
+            radial-gradient(300px 200px at -15% 115%, color-mix(in srgb, var(--cc) 18%, transparent) 0%, transparent 55%),
+            linear-gradient(160deg, color-mix(in srgb, var(--cc) 16%, #131b2b) 0%, #10141d 75%);
+        border-width: 2.2px;
+    }
+    .face.back::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 12px;
+        pointer-events: none;
+        border: 1px dashed color-mix(in srgb, var(--cc) 45%, transparent);
+        margin: 5px;
+    }
+
+    /* front */
+    .badge {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .4px;
+        color: var(--cc);
+        border: 1.3px solid var(--cc);
+        background: #0b0f19;
+        border-radius: 999px;
+        padding: 3px 9px;
+    }
+    .qmark {
+        position: absolute;
+        top: 9px;
+        left: 13px;
+        font-size: 15px;
+        color: #3b4a66;
+        font-weight: 800;
+    }
+    .struct {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 16px;
+    }
+    .struct svg { width: 100%; max-height: 230px; }
+    .formula-chip {
+        align-self: center;
+        font-size: 17px;
+        font-weight: 800;
+        color: #fff;
+        background: #0b0f19;
+        border: 1px solid #2b3648;
+        border-radius: 10px;
+        padding: 7px 18px;
+        margin: 6px 0 4px;
+    }
+    .fliphint {
+        text-align: center;
+        font-size: 10.5px;
+        color: #475569;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-top: 7px;
+    }
+
+    /* back */
+    .back h2 {
+        margin: 22px 0 2px;
+        font-size: 19.5px;
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.25;
+    }
+    .back .common {
+        font-size: 13.5px;
+        color: var(--cc);
+        font-weight: 700;
+        margin-bottom: 2px;
+    }
+    .back .bf {
+        font-size: 13px;
+        color: #94a3b8;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .back .gchip {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        font-size: 9.5px;
+        font-weight: 800;
+        letter-spacing: .6px;
+        text-transform: uppercase;
+        color: var(--cc);
+        border: 1.3px solid var(--cc);
+        background: #0b0f19;
+        border-radius: 999px;
+        padding: 3px 9px;
+    }
+    .back h4 {
+        margin: 4px 0 7px;
+        font-size: 10.5px;
+        font-weight: 800;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: color-mix(in srgb, var(--cc) 75%, #94a3b8);
+        border-bottom: 1px solid color-mix(in srgb, var(--cc) 35%, #1d2738);
+        padding-bottom: 5px;
+    }
+    .back ul {
+        margin: 0;
+        padding-left: 17px;
+        font-size: 12.6px;
+        line-height: 1.6;
+        color: #cbd5e1;
+    }
+    .back li { margin-bottom: 5px; }
+    .back li::marker { color: var(--cc); }
+    .lblrow { display:flex; gap:6px; margin-bottom: 10px; flex-wrap: wrap; }
+    .lbl {
+        font-size: 9.5px;
+        font-weight: 800;
+        letter-spacing: .8px;
+        text-transform: uppercase;
+        border-radius: 5px;
+        padding: 3px 8px;
+    }
+    .lbl.iupac { background: #142035; color: #7dd3fc; }
+    .lbl.sgb { background: #11331f; color: #4ade80; text-transform: none; }
+    .lbl.pib { background: #331127; color: #f472b6; text-transform: none; }
+    .sigpi {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 6px;
+    }
+    .sigpi span {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: .5px;
+        border-radius: 999px;
+        padding: 3px 12px;
+        border: 1px solid;
+    }
+    .sigpi .sg { color: #4ade80; border-color: #4ade8055; background: #4ade8011; }
+    .sigpi .pi { color: #f472b6; border-color: #f472b655; background: #f472b611; }
+    .sigpi .nw { color: #94a3b8; border-color: #94a3b855; background: #94a3b811; font-size: 10px; }
+    .empty {
+        text-align: center;
+        color: #64748b;
+        font-size: 15px;
+        padding: 60px 0;
+        grid-column: 1 / -1;
+    }
+
+    /* ============ EXPANDED (ZOOM) VIEW — double-click ============ */
+    #overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(4, 7, 14, .82);
+        backdrop-filter: blur(6px);
+        z-index: 50;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 3vh 3vw;
+    }
+    #overlay.show { display: flex; animation: ovIn .25s ease-out; }
+    @keyframes ovIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .bigcard {
+        width: min(76vw, 1150px);
+        height: 76vh;
+        perspective: 2200px;
+        position: relative;
+    }
+    .bigcard .binner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform .6s cubic-bezier(.2,.7,.3,1);
+        cursor: pointer;
+    }
+    .bigcard.flip .binner { transform: rotateY(180deg); }
+    .bface {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        border-radius: 22px;
+        border: 2.5px solid var(--cc);
+        box-shadow: 0 30px 80px rgba(0,0,0,.75), 0 0 40px color-mix(in srgb, var(--cc) 28%, transparent);
+        display: flex;
+        flex-direction: column;
+        padding: 30px 38px;
+        overflow: hidden;
+        background: linear-gradient(160deg, #121a2a 0%, #0d1117 70%);
+    }
+    .bface.bback {
+        transform: rotateY(180deg);
+        background:
+            radial-gradient(700px 420px at 110% -10%, color-mix(in srgb, var(--cc) 34%, transparent) 0%, transparent 60%),
+            radial-gradient(520px 360px at -15% 115%, color-mix(in srgb, var(--cc) 18%, transparent) 0%, transparent 55%),
+            linear-gradient(160deg, color-mix(in srgb, var(--cc) 16%, #131b2b) 0%, #10141d 75%);
+    }
+    .bface.bback::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 18px;
+        pointer-events: none;
+        border: 1.5px dashed color-mix(in srgb, var(--cc) 45%, transparent);
+        margin: 9px;
+    }
+
+    /* big front */
+    .bface .bbadge {
+        position: absolute;
+        top: 18px; right: 22px;
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--cc);
+        border: 2px solid var(--cc);
+        background: #0b0f19;
+        border-radius: 999px;
+        padding: 6px 18px;
+    }
+    .bface .bq { position: absolute; top: 16px; left: 24px; font-size: 26px; color: #3b4a66; font-weight: 800; }
+    .bstruct { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; }
+    .bstruct svg { width: 88%; height: 92%; }
+    .bformula {
+        align-self: center;
+        font-size: 30px;
+        font-weight: 800;
+        color: #fff;
+        background: #0b0f19;
+        border: 1.5px solid #2b3648;
+        border-radius: 14px;
+        padding: 10px 34px;
+        margin-top: 8px;
+    }
+    .bsigpi { display: flex; justify-content: center; gap: 14px; margin-top: 14px; }
+    .bsigpi span {
+        font-size: 17px; font-weight: 800; letter-spacing: .5px;
+        border-radius: 999px; padding: 6px 24px; border: 1.5px solid;
+    }
+    .bsigpi .sg { color: #4ade80; border-color: #4ade8055; background: #4ade8011; }
+    .bsigpi .pi { color: #f472b6; border-color: #f472b655; background: #f472b611; }
+    .bsigpi .nw { color: #94a3b8; border-color: #94a3b855; background: #94a3b811; }
+    .bhint { text-align: center; font-size: 13px; color: #475569; letter-spacing: 2px; text-transform: uppercase; margin-top: 14px; }
+
+    /* big back */
+    .bback h2 { margin: 26px 0 6px; font-size: 40px; font-weight: 800; color: #fff; line-height: 1.15; }
+    .bback .bcommon { font-size: 23px; color: var(--cc); font-weight: 700; margin-bottom: 4px; }
+    .bback .bbf { font-size: 19px; color: #94a3b8; font-weight: 600; margin-bottom: 18px; }
+    .bback .blbls { display: flex; gap: 10px; margin-bottom: 22px; flex-wrap: wrap; }
+    .bback .blbls span {
+        font-size: 13.5px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase;
+        border-radius: 8px; padding: 6px 16px;
+    }
+    .bback .blbls .sgb, .bback .blbls .pib { text-transform: none; }
+    .bback h4 {
+        margin: 6px 0 14px; font-size: 15px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+        color: color-mix(in srgb, var(--cc) 75%, #94a3b8);
+        border-bottom: 1.5px solid color-mix(in srgb, var(--cc) 35%, #1d2738);
+        padding-bottom: 10px;
+    }
+    .bback ul { margin: 0; padding-left: 26px; font-size: 19px; line-height: 1.8; color: #e2e8f0; }
+    .bback li { margin-bottom: 12px; }
+    .bback li::marker { color: var(--cc); }
+
+    .bclose {
+        position: absolute;
+        top: -14px; right: -14px;
+        width: 44px; height: 44px;
+        border-radius: 50%;
+        background: #1b2435;
+        border: 2px solid var(--cc);
+        color: #fff;
+        font-size: 19px;
+        font-weight: 800;
+        cursor: pointer;
+        z-index: 5;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 6px 18px rgba(0,0,0,.6);
+        transition: background .15s;
+    }
+    .bclose:hover { background: #2b3a55; }
+    .bnav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px; height: 70px;
+        border-radius: 12px;
+        background: rgba(27, 36, 53, .85);
+        border: 1.5px solid #2b3648;
+        color: #cbd5e1;
+        font-size: 23px;
+        cursor: pointer;
+        z-index: 5;
+        display: flex; align-items: center; justify-content: center;
+        transition: all .15s;
+        user-select: none;
+    }
+    .bnav:hover { background: #243049; color: #fff; border-color: var(--cc); }
+    .bnav.prev { left: -68px; }
+    .bnav.next { right: -68px; }
+    @media (max-width: 1320px) {
+        .bnav.prev { left: 8px; }
+        .bnav.next { right: 8px; }
+    }
+
+/* ================= BRAND / TEACHER IDENTITY ================= */
+.brandbar {
+  display: flex; align-items: center; gap: 18px;
+  background: linear-gradient(90deg, #101a33 0%, #0f172a 60%, #1a1430 100%);
+  border: 1px solid #facc15aa; border-radius: 16px;
+  padding: 12px 22px; margin: 0 auto 18px;
+  max-width: 1640px; width: 100%;
+  box-shadow: 0 8px 28px rgba(0,0,0,.5), 0 0 18px #facc1522;
+  position: relative; z-index: 10;
+}
+.brandbar .bphoto {
+  width: 74px; height: 74px; border-radius: 50%;
+  border: 3px solid #facc15; object-fit: cover; flex: 0 0 auto;
+  box-shadow: 0 0 16px #facc1566; background: #fff;
+}
+.brandbar .bnames { line-height: 1.3; }
+.brandbar .bar { font-size: 21px; font-weight: 800; color: #facc15; }
+.brandbar .ben { font-size: 13px; font-weight: 700; color: #7dd3fc; letter-spacing: .5px; }
+.brandbar .bpage {
+  margin-inline-start: auto; text-align: center; line-height: 1.45;
+}
+.brandbar .bpage .pa { font-size: 16px; font-weight: 800; color: #e2e8f0; direction: rtl; }
+.brandbar .bpage .pe { font-size: 11.5px; font-weight: 600; color: #94a3b8; }
+.brandbar .bexam { text-align: end; line-height: 1.4; }
+.brandbar .bexam .x1 { font-size: 15px; font-weight: 800; color: #4ade80; direction: rtl; }
+.brandbar .bexam .x2 { font-size: 10.5px; color: #64748b; direction: rtl; }
+@media (max-width: 900px){ .brandbar{flex-wrap:wrap; justify-content:center; text-align:center;} .brandbar .bpage{margin:0;} }
+
+/* watermark: faint photo + repeated bilingual name */
+#wmark {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+}
+#wmark .wphoto {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%,-50%);
+  width: min(56vmin, 520px); height: min(56vmin, 520px);
+  border-radius: 50%;
+  background-size: cover; background-position: center;
+  opacity: .045; filter: grayscale(60%);
+}
+body > *:not(#wmark){ position: relative; z-index: 1; }
+
+.brandfoot {
+  margin: 26px auto 0; max-width: 1640px; width: 100%;
+  border-top: 1px dashed #facc1555;
+  padding: 12px 8px 4px;
+  display: flex; flex-wrap: wrap; gap: 6px 24px;
+  align-items: center; justify-content: center;
+  font-size: 12.5px; color: #94a3b8; text-align: center;
+}
+.brandfoot b { color: #facc15; }
+.brandfoot .sep { color: #334155; }
+@media print { #wmark .wphoto { opacity: .05; } .brandbar{box-shadow:none;} }
+#wmark{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='300'%3E%3Ctext x='50%25' y='44%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='26' font-weight='bold' fill='%23ffffff' opacity='0.13'%3EProf./ Ayman Mansour%3C/text%3E%3Ctext x='50%25' y='60%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='22' font-weight='bold' fill='%23ffffff' opacity='0.10'%3E%D8%A3/ %D8%A3%D9%8A%D9%85%D9%86 %D9%85%D9%86%D8%B5%D9%88%D8%B1%3C/text%3E%3C/svg%3E");background-repeat:repeat;z-index:9999;}
+
+/* ===== model-2 security overlay ===== */
+.security-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #0b1220; color: #ef4444;
+    display: none; justify-content: center; align-items: center; flex-direction: column;
+    z-index: 999999; font-size: 1.6rem; font-weight: 800; text-align: center; gap: 8px;
+}
+.security-overlay .ar { font-size: 1.3rem; color: #f87171; direction: rtl; }
+body { user-select: none; }
+input, select, textarea { user-select: text; }
+
+.brandfoot { flex-direction: column; gap: 8px; }
+.brandfoot .fline1, .brandfoot .fline2 {
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+  align-items: center; justify-content: center;
+}
+.brandfoot .fname { color: #facc15; font-size: 15px; font-weight: 800; direction: rtl; }
+.brandfoot .fname2 { color: #7dd3fc; font-size: 13px; font-weight: 700; }
+.brandfoot .fphone {
+  color: #4ade80; font-weight: 700; font-size: 13px;
+  background: #4ade8011; border: 1px solid #4ade8044;
+  border-radius: 999px; padding: 4px 14px;
+}
+.brandfoot .fphone b { color: #86efac; letter-spacing: 1px; }
+
+body.lang-ar .bk-iupac { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; }
+body.lang-ar .back .gchip { direction: rtl; }
+body.lang-ar .pill { direction: rtl; }
+
+body.lang-ar .uses-ul { direction: rtl; padding-right: 17px; padding-left: 0; font-family:'Segoe UI',Tahoma,sans-serif; }
+body.lang-ar .back h4 { direction: rtl; text-align: right; }
+body.lang-ar .fliphint { direction: rtl; }
+
+.brandbar .blogo {
+  width: 78px; height: 68px; border-radius: 12px;
+  object-fit: contain; background: #fff; flex: 0 0 auto;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 14px rgba(56,189,248,.45);
+  padding: 3px;
+}
+</style>
+</head>
+<body>
+
+<div id="wmark"><div class="wphoto" style="background-image:url(data:image/jpeg;base64,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)"></div></div>
+<div class="brandbar"><img class="blogo" src="data:image/jpeg;base64,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" alt="Chemistry Code"><img class="bphoto" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7LooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACory5trO3e5u54oIUGWkkYKoHuTXD/Fn4peHfh7p5a9lF1qLj9zZRsN5Pq390V8b/ABQ+J3ijx5fNLqd68VkCfKsoiViUfTufc0FKLZ9W+L/2gPh9oLPFb30urTrxts1yuf8AePFeYa1+1bdAN/ZfheBBnhricscfQAV80BJJCCBxxVqPTJ5Ii4JI9AKXNFGipNntcv7VHjbzAU0nRgmehRzkf99V0mgftXTbkXW/C8ZX+J7Wcj9GFfNNxp8sYUMDnHpTYrK4Y4WMnj0p80RezfY+9PA/xt+H/ipkhg1YWF03AgvB5ZJ9Aeh/OvSEZXQOjBlIyCDkGvzEkguLYhirDHSvTfhJ8avFPgq6hgeeTUtIziSzmfO0dyhPQ/pRo9iXFo+76KxPBHinR/GHh+DWtFuVmglHzL/FG3dWHYituggKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACvNf2gPiVF8PPCu+1KSaxe5js4j/AA+shHoP516VXw78e9TvfG/xmv7CFmaG1l+ywDPCqvBI/HJpN2Vy6cOZ2OHij1vxjq1xfzzS3VxIxeW4lJJJNb1j4AvJh86KuO5PWvU9A8OWmhaZBaRRqXVRuIHJNbEMQOBtH5VwVMRK+h7lHBxtqeSWXgS4ilyACo6jFbdp4OjUbANjdSpHevSooCvUUrW6k5x1rB1pM64YWCPNbrwI08gkd05A4ArQs/BljAmGRXbHPFdvJER0GKheIjJBqHVkzVYaCeiOH1Lwfp06FViVD0ry3xd4Xn0aaSaNS0OenpXvc4OSeffFYuu6dDf2ksLgHeMDI6VVOu4Mwr4ONSO2pwHwL+It94C8Uw3O930u4YJe2+cgqT94D1HWvvGxuoL2zhvLWRZYJ0EkbjoykZBr83dc06TStVmtmOCjfpX2d+ynr8mtfCyC1nkLy6bM1tknJ2dV/n+letGSkro+cqQcXZnrVFFFUZBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFADZW2ROw7KTXxR8NNPOo/EXXNUmG8rPI2T2Jc19skAgg9DXyx4DsYtO8V+K7MKFePUHGPbcf8ayq/CdeE+M6CZC0xz1FWbdOOAKil/1pGantwx4U15b3PpINcqJQMdh+VDDjp+lPZHUetREMTjNTYu5C64b5hULp2yPzq08WT3JpjWwdTg81EjRNWMySFCcZrPuINrHjitm4heM4IqnOvUEc1nZhe55L8VtJAuEv1jxkbWPrXsn7FMxGmeILXsJYpMe5BFcD8SEU6SoYZUv3Fd7+xfbskXiSYjC+ZEg+uGNethJNwsz53MYpVG0fRdFFFdh5YUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAV896tp66b8aPEsONq3cUdyg+uM/rX0G7KilmICgZJPavDPGeoWWo/F157AMRFpe2SUjhiG4x6gVFTVWOnC3U7o5fxZ4j0/Qp3SZjJOvzGJeTj3rD074m2PmJ52mXaRt1YIeKl8R3WiaPe3F5fgy3E7b9gXe7+gArm9c8czFY7a38Ijy+CrODyCCd3yqQOnTPeuJKOyR67lJJNux6rpPiLSdXtxJZzZHcHgitCTy8grIpz2BryLw/rElw+Y7FrMk4bbyOa7e3DNZlnLEjnOa5puzPRoq6NrVb9bSB5UiMjgfKoPWvN73xR4zurhhYWsEIB4Xbk/nWnf3Ls4T944J6FuB9axNQj8TtBLJp008cqsNiRBVBXnPJz7VVJqRjiINK+poWkvjsN9ouJIShGdhww/lxWvperNfo0dxGIrmLiQDofeuO0648fWlgst47XT8B4ZlT5hjnDL79K6bw8xvSLvymhlK4kjb7wqahNK++pnfEZTJ4eaTbu2tXpH7Gu0+GtdcDlrtMn/AIDXB+O42PhK+UKSQu7gZxg1o/BfXNX8F+HZZrYpLFdKJ3hdehxxg/SunD1I046nFisNUxFTlhufU1FYXgLxCnijwvaawsXlNKCHjznaw6it2u9NNXR404SpycZboKKKKZAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAFPXYGudFvbdSQ0kDqCDjqDXgXh6xZLWS7kldriKJock5/i/+tX0QwDKVPQjBrw6/tpNO1HUtMYAEXLMPdTyK5q+kos9nLJJ06lP0Zys2i7ruW+lKvIx5+X7o9BRNZNJbGFigU+kYzXRRQEt5Y55rP1q6+xP5VugeUnGfQ1w9T1oQVjFg02O1jMccWBnJLcGtaOMpaYxwR0qCMyzTK8rbs8Gtqe2dECFT93OPbFTJaG8NGc0bZZXUgDIOK0fsKrGPkx9KzWiffJMjlQp6Vb0nWd04tZlyjDG70NZxLlG5L9jVsAg8dNxp4sYYd0qoocjk1pm2D528nrxVC6aSNvLZqkzkijLCsttNG67lZcEHnIqpol1FdadND5SwjmNR3wOlacfMbd+tc9EyN4gu/IP+jQKGcjpvxyK2mrRRGE1nI9s/Z63/wDCv1DdBcyBfpmvRa5f4V6edM8CabAy7XePzXHuxzXUV6tJWgkfL42aniJyXdhRRRWhyhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFedfE3Tli1m21FAAJUKv7kV6LWH400t9T0rbEu6SJt6juazqx5onVg6vs6qd9HoeRNcC2Z3JGBznNc7LcxSzNczuF352Kew9as+JUnW2uYWUiSIEFfXFeA+JPEmsS6tcJGszBZQoAJPyjjjFcMKfNJnvTxPs4LQ9P1nxGdLmEsc8csWfmiP3h7g1cfx4s+lG6igmY7CAM8/nXiSz3t9c7bgSKr43EjnP+cVehm1O306a2UEKH+XC8kVcqUWrXMo4uo3ex21j4nutXulhN39kiU5dFIORnvXoOkJZNCDHKjkjg7q+eIWubVmlSBxI4weMHpUn9vatZqRbeaSCD8uTtrN0V0ZccZOK95H03Zal5V0YnxvUdD3HrVS+uBLNkjnNeV/DXxTqWtapaW1wrGRQwYt124r0yGFiGk9ScZrnnFxdmdMayqxvEuW64tWcd6NF0gX19a2MEYQy3IaQKPvc8mtrw3oMuuW32GKYQyS7hvIztHrXpPhDwdbaFILiSQXFyF2h9uAK6o0ZT5exwvGQoKV373Q6W2iWC3jgQYWNQo+gFSUUV6J883cKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPKPivoxtNSOpRRgxXIw3HAb3ryKx0LT4bi5McMZkkkLYH8OfSvqbXdMt9X0yWyuFBVx8p/unsa+dfFuk3XhvxAFuIwI9213/AJH6VxV6bWqPawOIUlyy3RxfiSKDSpS9xpQuI2PEir0+prEbxV4XZDG9hKCpwMAV6bdy232R/N2NGyk8jNeQ6rpmmG586IIqtKAG9Sc1jTs1qd1Xmi7wZq/8JB4bjRETTZZWlPy8Dn8q6PQdJN1ukksYre1ZcogX5s+9Q+AdN0i3BkmtYzMGIUnmur1C9gtbd5C44BOB2rCo0nZG9JO15swNC0uz07xPNJa2yozJgt1//VXVqSI/lGcngVzfhlZJnk1OUkLMfkUnnHrW5LcYVdh20nvqTsm0em/C5VTU1i4JWE5x6nGa9Krxb4a38unyXWqypJLb28LNLtGWYYzgD1xzXq3hjX9I8S6PDq2i3sd3aSj5XTsfQjsfavWovmgmfOYyPLVaNOiiitTlCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAryr44WUF1LEsi5LQ/1r1WvKfjJd+VrljCytslidVYDjcuDg/gT+RqKmkTfDK9RHzJrlxr2lag1pdCaS3Q/K4UlWWucvNcVd3mBcFvMQeh6V7y9tHcFldVPXtWLc+D9InP73T4Wyf7tcPto31R7DoVLaM8k07xFex3SPbb3YOcBcn9K9C0Cz1XWJI7vUi0cW3/VD+I+/wCVdFp/h3TrA5trKKM+yitSMMF8uNQOwwKynOLehtSpyiveZVVI7dBGvbsO1Mtob3V74abpUXmzk4d+dkQ9WPb6da6jQfA2o6i4ub6RrK3YZ5H7xh7Dt9TXoGiaHYaNZLaWECxoOSerOfUnuaunhpT1lojDEY6NP3YaspaDpSaJoSWfnGZwCZZSMeYx68dhXhHwa8fJ4J8f31pJMRoV5dukkY6R/Mdrj6V6/wDF/wARDw14Lv7xHVbmSMw24J5Ltxx9OtfH8czNOTu3c8n1Ne1h6Ss10PArVG5Xe5+j1tPDc28dxbyLLFIoZHU5DA9CKkr5a+AXxig8O2w0DxPcP/ZoP+j3B+YwE/wn/Z/lX0romuaPrdstzpOpWt7EwyDDIG/TtWdSm4OzBNM0KKKKgYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFYfijxd4b8M25m1zWLWzAGQjv85+ijmvGvGH7TGj2xkg8M6TNfOOBPcny4/wA5P6VcacpbITaR9A1ma34h0PRIjLq2rWdko/56yhT+XWvi3xb8cviBrbsja01hA3/LKzXyxj69f1rgJr++1O6M19dzzknLNJIWJ/E1vHCt7sh1EfX/jH9oLwrpkE40KKXV5owQJANkO76nk/gKb4Mu5fiD8ObTVdVZUubx5JRIg/1TBzgqPTt9K+Q7+ea58uztRlm+VFH86+u/gfps+i/DHRtMuyPNjg3k+zEt/WqqUYQVh05yvc5bU9PvdJ1GS2ukCsOVZfuuPUUkcw8sluAO+elRfFP4yeF7NZ9Ht7GfV5omx9oidUSNx/dY5Jx9MVyPwt+IWh654wg0zXrNrKK4O2GQyAoZM8K/HAPr6149bAz5/d2PdoZlDk9/dHpOhaDe6w2bcBbcHDzyDj6Ad67/QfDem6TiSOPzrnGPOkGSPoOgrXhiESCNUCKvAUDAH4VJit6WGhT82cOIxtStpshuKjnZUjLscAdSe1TAV5j+0N4r/4R7wVPa20pS9vR5MeDyFPU/lXTGPM7I42zxH49+Mj4n8WPZ2kn/Ev08mOIA/ff+J682jOxQo6nmo5D+8LFiT70wMck54HrXpRgoqxzt3JrucoqoCCxOfwrR0TWNS02dZ7C9ntJRyHikKn9K5xpjLOzg8dB9KlWY561DkFj33wT8evFWj7IdTkXWLccHzziQD2Yf1r2fwv8cvBOrKiXtxJpU7dVnGUz/vCviSCYk5zVmK6I71m6MJeRak0fovpmraZqkIl07ULa7Q9DFKG/lVyvzx0zWr2wkWS0u57dx3ikKn9K9F8MfGvxxpBRTqgv4h/yzu13/r1rOWFf2WNVF1PsmivEfB37QejXxSDxFYSadIeDNEd8f4jqP1r17Q9b0nXLQXWk6hb3kR/iicHH1HaueVOUd0WmmaFFFFQMKKKKACiiigAooooAKKKKACiiigAoorx/wCO3xmtfBBbRNGSO811k3NuOY7YHoW9W9BVQg5uyE2krs9D8Y+LvD/hHTje69qUNqmCUQnLv7KvU181fEj9ovWtUaWy8Kxf2VZnIFw4BncevoteNeKvEmr+ItTk1LWb+a7uH6s7Zx7Adh7VgySH+9XoU8LGGstWYyqN7Ghqmq3upXT3V9dzXMznLSSuWY/iapSy4Q1VDEt16U1zuzk1uZieZySeavLMFVccDsKzgKezfuyV7dKS0Geofs+eGW8TeLJ7iSI/ZrQKHY9Bk5Ir6E+LmpjSfBdxbWjtFcXii1h2HBUHAJH0Fcp+zZb2uh/CmLU3iaSe9leVxGuXPOAPyFdTLpc2uarb6rq1vtRSfKtnbIUdv8a4qkm2dEUrHyLrtlcWF9LYXSNFcQttdWHPt+lVYsQkFR8y989D6iu4+O0iP8VNZEEiFYzHGyhfussag1ynhTRLnxFraabbyRRuwLEuccDritJx0uzJb2R9Kfs3fFQeILZfCevXB/tWBP8AQ53/AOXiMfwk/wB9f1Fe359a8W+Hfwv0vwhbRXbut7qTgSNcMPuegX0r1jSb77TH5UgxKo6/3q55R6o2WxeuZVhhaRugFfHH7Q3ihtf8dT2sTk2+nkxDngv/ABH+Q/CvdPj543k0Lw1d2+mzMk4AjaYD7jt0Ue+Mk+gFfIcsjSMXdmd3O5mY5JJ6k1vQhZXIm+hFPMyKWILfSqp8yR90jcdlU8VYlIzzVd9yZIGQOTW7MwBCk05W5qIEEZHQ0oPeoAtxvgE96kjk5qkHPQVYi6U0Nl6JyTirMcvSqEbBakWTHOa0JNWO6IwMmtjw/wCJtV0K7F3pWoXFnMveJyM/Ud65QTAc5qeI/wATcmjcD6i+Gf7QKTtDYeMIQhbCi+iHH1de31Fe/Wdzb3lrHdWsyTQSKGSRGyrD1Br864ZTkc4r6b/ZF8R3NzZ6n4cuJXeO2Cz24Y52AnDAe2cVyV6EUuaJrCd9Ge/UUUVxmgUUUUAFFFFABRRRQAUUUUAYXj/xBD4W8G6pr02MWluzoD/E/RR+ZFfnvq+p3erand6nfTNNc3UzSyuxySTX1L+2b4kFp4Z03w1DJiS+m8+YA/8ALNOn5k/pXyVG/wArf7xr0sHC0ebuYVX0EmYkGoHPHNPYhiecYqBzyea6WZDS3BxSZNIDRSGPU80khxG30zSA89KWQFhsHVuBUy2HHc+wfgTavD8MdFSQY3xlwPbNdzfTw2NvLeTMFht4mlcnoAoyf5VleA7Maf4R0i0AwIbOJT9doz+teWftMeOmsbb/AIRDTJcTXEe6+dTyqH7qD0J6n2rkinJ2RvJ2VzwzWNQk1jWb/VpyTLeXDzMT/tMSP04qx4Ole08V6bdRPtYXKqx/2ScH9CayoV+QDI46AVteDLOS/wDFWnWsWCWmGSf4cck/pXRUhaBzQk3I+s/ANzLq+lmd2Y28b+XGx/iAHJ/OulmKIdy4UKM5HYVj+CYobXw9BbWoxEg2qfX3rD+Mnib/AIRfwPd3sbD7VMRb249Xbv8AgK4oJs7JOx4H8dfFI1vxNJptrITZWcjbsdHlPBP4Dj8683fJQ4ODT5pHmmeSRizuSzMe5Jyaic4wBXcopKxzSldkbMejjB/nVa5diREhwzcsfQVPKwwST8oHNVYiSpkI5c5/Cp8gTHgBVCjoKD2FC8mnKvNFgHxLhxmrIIqNQMilHWqSFckDZoz82KYoO6kmbb8ndqoRLD87Fu3aryngVStSFABqdm+XHvipKRciccEV7n+yLcMvxDuYeglsWz+BBrwW2zjOeBXtX7Jc3/F0417NZTD9BUVfgaKjufX9FFFeYbhRRRQAUUUUAFFFFABRRUGoXKWVhcXkpASCJpGJPYDNAHxR+1Dr/wDbfxY1GNJN0GnhbSPngFRlv/Hia8ihcFZB6SGtnxZftf6/qF/JktcXEkpJPPzMTXP2rZeZfRs17SjyJRONu92SuODiqznoDViQ8daqv9+hjQ4UDk0inrTlIz1oAUjBq3pMX2jWLGDGfMuEGPxFVM5Nb/w6tftnj3RbbGd90vH41FT4WVHc+05Lu20bw/JfXTBLe0tzJIT2Cr0/Svi3xXrFz4g8RX2r3bFp7qYzN7Keg/AYFfSP7SGsjTPhwbBXxJqFwsOP9hfmc/oK+XgMN6lDxxyw9aeFp6cxNeWtiVVXlR93tXUfDJGPiuGRAd6xPwO2RgH9TXL7hjaCOeh7Cu3+Ee1dTuJcZlYJCo92bk/pV4pctJmdC7mj6p0KJbTRLSBR0iHT1r53/aa8TjU/FEPh62kD2+lLmUjvOw5H4DA/GvefEOsW/h3wzdavdECGxt94B/iYDCqPqcV8Y6leTX99cX1wS01xK0sh/wBpjk1yUIdTqqSKpOaicjNPkOBUBOTXQYle9bKCEdXOD9KaRg4FIDvkeYE88L9BTgMtnFQtQHIOamVeRTFHzVYQZIpgCjFOjXJJpVHHNSxDapbGaaAaCACc9KqBvMlL/lUl0x2BR1Y4qFf3YAApNjRbiIGCxwKVpQSSOg6e5qurZTdMcAdF9akjBbEko2qv3RSGi9CcRDPevXf2U5tnxcsVz963mX/x2vGEkaU5xhRXrP7MchT4x6KM4Deav/jhqJu8WXHc+3aKKK802CiiigAooooAKKKKACvOf2j/ABAPD3wm1WVH2z3gFpFzzlzg/pmvRq+Xv229f3Xei+HI34iRruYA9z8q/wAjW1CHNUSJm7I+bdRbfKx981nwqVmmPqBU1zN8oZu/GfSok/jPXOK9aWrOYVyQpqv3qWY9qhHrU9R3HYwv0ojPtQTkURdcUMQ8fert/gPCLj4taOrDIRmf8gTXD55r0j9miPzPirCzYxHbyH6cVlV2LhudF+07rRvvGttpSPvg062CuoPAkk+Yk/Qba8nHCEk5Ze/94Vt/EDVI9X8a6zqSEtFcXkgBJ5IB2r+gFYWSM5PzJwcdMV2U48sUjlm7ybHrgYHY8r7GvQ/gZbi88XWkDAn995j/AEUZrzkEBSO3Uetev/szQINX1TV7ghYLO3O5j2zyT+QrDFu8UjXDr3rm3+1F4hdYdO8MwSACT/S7kA+nCA+2cn8q8F79a2vHevyeJfFeoay+QtxKfKQnOyMcKPyArBJOaiMbItu7GyMCTVe6OIggOGfj8O9Sk5aqzESSmTt0X6VTEIijAAGAOlSAelAFPQc1NgHRryKsKMCmIvepVx0HPFIBOnNPB+THrTM5OKZdSCKBjnnHFMCFW8yVmb7qnC012Ak+XLGkXAjRR1xzU0SYOcdaW40EcWf3shJPp2p8uW5P5U4cjmkxmVSTxmlIpFi1RUTnrXpf7Osoj+MHh5vWcr+aEV5jI/zhe9egfAqQxfFfw0V6/bUB/GiStBoa3PvSiiivKNwooooAKKKKACiiigAr4K/aL17+3/ixrVykm+GCX7NEQcjbGMcfjmvtvx1rCeH/AAdq+tSHAtLSSQf7wHH64r85NSuZLm5luJGLSysXcnuSck/rXdgo6uRlVfQpyYzzTYd4DBsYzwRSF0LlTx9aYmfn547V2dTEJSM0zIpsh5oHSgB1CHBPrSMcChOeaGBKOSBXefAy/Gma3ruq45tdLuGX3O0AfqRXApy4HvWjoV69tpuqRI5VrrERx1I3gkfpWU9XFeZUXZNibtx3MSd/3z6GkUkEZ+8vGPam7snOMZ6j0NCvjGByOvvXc5WOVJjyeGPUYyK9F8L6uPD3wW1d42xd6vci0jPdV25c/wDfPH415tKcRt2B6Vf1C+aaxs7JWzFbKxC9t7Hk/kBXHV1qJG9PRMoluQAc8U2Rj260vQZNR5B69qoZHcNhNo4LfypoAAwKaWLu0hHB+79KeAc1KAcv3hUnQ8ikRfpSnqfpQwJA49O1PQ5ye1V9w59qkQ4Tr1pXAlGRVS9O9o4h67jVhXABJ7VmRS+dezMvRflFJvVIaLsYVQWPWgEnHFQNPGnU5NRPcu5xGDj1p8yGXjIMgZpxlXdu7CswH5hvbc3oDVqG3eQjzPkTrjuam9xlm1JlmMvRR0r0D4Kvt+K3honjOoRD82rhDhAqIMCu0+CyySfFfwvHEjSP/aUR2qMnAOSfwAJpTejGtz9A6KKK8w3CiiigAooooAKKKKAPFP2xtdOl/C1dNicrLql0sXB6ovzN/IV8UztkGv0f+Ing7R/HPhe40HWYsxSDdFKo+eCQfddT6j9RkHrXwJ8UvA+t/D/xRLoesxer21yo/d3MeeHX+o6g8V6GEnHl5epjUTvc5NwrdR+NNiDANk5H9aHOFzTY2JYium+pmDdaKVgT0+tIKdhAelOj6U0+lEfegCVOGBpdM+aN89C5wfemr1zT9OUixVv7zEilGN6i8iZu0S0eBnH3utNA5DHr0Y0m/K57HrTgeME10SaaMldEV4xWEBehYAVKpwvvUEw33ESAfKuXNSk+lc0kua5tHYVySBiobg4Cxjjd972FSZGcscAVXRt2XJGW9ewpXGSRx7iAAcCpRGFpkTqAMMPzpxkB5zQA7BU8qaYSSeFx+NKZASeeaRjxkAn8KQETZBPzYz6ClWX5tgJwO/rTHaRgcJjPQk0yIMrElg30qOo+hYuX2QM+egzWfabo7Xj7znezHjrTtXmK2chz1GKitpiVUAZwAM0m7yH0JERiOELk9zU0cDY/fSbV/urUglVEG4jd6ClUAje5PsKqyFclt0iUgRJz6mrQPQcE96po/OFGB7VPHhQT2qkFyYbnkUAEknAAGSa+yv2YvhOfCGlDxPr9uBr19H+6icc2cJ/h9nbv6Dj1rlP2YPgw0LWvjrxbalZOJdMsZV5X0mcHv3Udup5xj6Yrjr1b+6jaMeoUUUVymgUUUUAFFFFABRRRQAVy3xO8CaD8QfDUmi65Bnq1tcoB5ttJjh0P8x0I611NFNNp3QH5xfFn4d+Ifh1r50zW4N8EhJtL2MHyrlB3B7N6qeR9MGuJEgWUDua/Tnxp4W0Lxj4fn0LxDYR3tlMOVbhkbs6t1Vh2Ir4a+O3wL8R/Di+fVLIS6v4aLZS8RMvbjPCzKOn++PlPseK7adfm0e5jKFjzJfm70EYoQALmldgTXYtjJjTSp3pCc5pU6GgBQ2FP0NS2hxZQqOPlqB/9U/sppdObdawjIPyDHsaqn8RE9i2vYdh1FOYhfciiMDOc9etJMorRkiR9WcjrS0qDagyKXgkk4wK53uaIq3pyUgXgyH5j6Cp2TGBtHSq0P7yYzkdThR7Vc3fMKlFDUj44UcU4qRxipQQB14NRsw4GTwaAGOx55qKZ/wDa7Us0gyarzsGz60mwEZsKcGlVtqGoetSMcIKgfQzdek/0dVz941bs42Fuu3rgA1naxl5Ik9/61qQzCMYxxUR1kw6EscYT5nO408EuRmqz3UY7ZNXvDdlqviHWINI0PTLjUL+dsRwQJuY+/sB3J4FaKSQrDoUJYIqkseFAGSTX1T+zj8Bmt3t/F3jqzAlGJLHS5R9w9RJKPX0Tt1PPA6f4B/ATT/Bv2fxB4oEOo+IQA8cY+aCyP+z/AHnH97t29T7nXNVr30iawp21YUUUVymoUUUUAFFFFABRRRQAUUUUAFFFFABTZo45onimjWSN1KujDIYHqCO4p1FAHzb8aP2ZrHVPP1n4fNFp962XfTJDi3lPfy2/5Zn2Py/7tfKXiHRNX8O6rJpWu6dc6dfRffhnQq2PUdiPcZFfp/XPeOvBXhjxtpZ07xNpFvfxDPluwxJEfVHHzKfofrXVSxMo6S1RnKmnsfmlkdqEOc19G/E39lrXNMaW+8C3w1i15P2K6ZY7hB6K3Cv+O0/Wvn7V9J1TRNTk07WdOutPu4/vwXMRjcfge3vXbCpGezMXFrcqH/Vyf7ppuiDdp8Jz26+tPPMb/wC6ar6E3/EujyeAxH61UXaZMvhNJg3agKWcFj+FJuJwecj+H1pyD5ic8dvatZaIzjq7D2J6AVDeNtjWH+KQ4P071Oi5JPpVVWEsry9Rnav0Fcz7G1hyjCjHQcCplNRKMmpkwOTTGKw4qtM4TnOafPJgEVSckmpbGPaTd+NRueTTRx9aRmqWwsKDSyvhRTSQFyaqXU4APOOPWlfQCtetuu4vQGpJZxyM13Pwz+DHxE+IVzDcaRocltpjHnUb7MMGPVSRl/8AgINfWvwk/Zk8E+D3h1LXx/wk2rphg9zHi2ib/Yi5B+rZ+grn9olctRufM/wY+A/jP4jSxXzwPougtgtqF1GcyD/pkhwX+vC+/avtv4VfDLwn8N9I+xeHbHE8igXN7Nhp7gj+83Yf7IwB6V2SqqqFUBVAwABwBS1jKbkWopBRRRUFBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFZHijwx4e8UWJsvEOjWWpwY4W4iDFfdT1U+4IrXooTsB86+OP2VPDV+JZ/Ces3ejSsDtt7gfaIM+gOQ6j8WrwzWP2dfil4XidW0aPWbZWJE2mSiXj12HD/pX37RW8MROLvuRKmmrH5iX9hqGmXBg1KxurGdThkuIWjY/gwFQx/d+vSv041HT7DUrc2+o2NteQnrHPEsin8CCK4fW/gt8L9WJa48H2ELn+O13W5H/fsgVu8ZzbozVHl6n5/XrmK38sffk+UAfrTIl2oFA4FfZHir9mf4cCJr22k1y1dRhVjvFZR/32jH9a8S8bfDTQtDkYWl5qbgHA82SM/wAkFaQmmDjY8oC96SRsYGa3b/SLeBgqSTHnuR/hVzS/C9he3UUcs90oY87WX/4mqbEcY7bs81G3C8mvpzwD8APBmtmM3uoa7hsZCXESj/0XXquk/s3fCexYNLot1qBH/P3eyMD+ClR+lYSqqJSi2fBLMAQO/aun8LfDnx54pdRoXhTVbtGP+uMBji/77fC/rX6E+HvAPgnw8VbRfCmjWTr0kjtE3/8AfRGf1rpaylX7IpQPjPwX+yZ4r1ApL4s1yy0aHqYbUfaJvpnhB+bV7x8PfgD8NPBrR3MGiDVr9ORd6mROwPqqkbF/Bc+9eqUVlKcmWopCKAqhVAAAwAO1LRRUDCiiigAooooAKKKKACiiigAooooA/9k=" alt="teacher"><div class="bnames"><div class="bar">أ/ أيمن منصور — مستشار الكيمياء</div><div class="ben">Prof./ Ayman Mansour — Chemistry Consultant</div></div><div class="bpage"><div class="pa">بطاقات المركبات العضوية</div><div class="pe">Compound Flashcards</div></div><div class="bexam"><div class="x1">كيمياء ٢٠٢٦ — Chemistry 2026</div></div></div>
+
+
+<h1>Organic Compound Flashcards</h1>
+<p class="subtitle">All <b id="totalN">40</b> compounds of the conversion roadmap — each card shows the
+<b>Kekulé structural formula</b> on the front. <b>Click a card to flip it</b> · <b>double-click to expand it
+to ¾ of the page</b> (← → arrows browse, Esc closes). Colours match the functional-group system of the map.</p>
+
+<div class="toolbar">
+    <input id="search" placeholder="🔍 search name or formula…" autocomplete="off">
+    <button class="btn" id="btnLang">🌐 عربي</button>
+    <button class="btn gold" id="btnFlipAll">↻ Flip all</button>
+    <button class="btn" id="btnShuffle">🔀 Shuffle</button>
+    <button class="btn" id="btnReset">⟲ Reset</button>
+    <span class="count" id="count"></span>
+</div>
+
+<div class="filters" id="filters"></div>
+<div class="grid" id="grid"></div>
+
+<!-- expanded card overlay (double-click a card) -->
+<div id="overlay">
+    <div class="bigcard" id="bigcard">
+        <button class="bclose" id="bclose" title="Close (Esc)">✕</button>
+        <div class="bnav prev" id="bprev" title="Previous card (←)">‹</div>
+        <div class="bnav next" id="bnext" title="Next card (→)">›</div>
+        <div class="binner" id="binner"></div>
+    </div>
+</div>
+
+<script>
+/* ============ functional-group palette (same as the map) ============ */
+const TYPES = {
+    start: {c:'#facc15', n:'Starting material',     sym:'CaC₂'},
+    alkane:{c:'#38bdf8', n:'Alkanes',               sym:'C–C'},
+    alkene:{c:'#2dd4bf', n:'Alkenes',               sym:'C=C'},
+    alkyne:{c:'#818cf8', n:'Alkynes',               sym:'C≡C'},
+    arene: {c:'#22d3ee', n:'Aromatic hydrocarbons', sym:'Ar–H'},
+    halo:  {c:'#f43f5e', n:'Halogen compounds',     sym:'–X'},
+    ol:    {c:'#34d399', n:'Alcohols',              sym:'–OH'},
+    phoh:  {c:'#a3e635', n:'Phenols',               sym:'Ar–OH'},
+    ether: {c:'#cbd5e1', n:'Ethers',                sym:'–O–'},
+    ald:   {c:'#fb923c', n:'Aldehydes',             sym:'–CHO'},
+    acid:  {c:'#fbbf24', n:'Carboxylic acids',      sym:'–COOH'},
+    sulf:  {c:'#fda4af', n:'Sulphonic acids',       sym:'–SO₃H'},
+    ester: {c:'#c084fc', n:'Esters',                sym:'–COO–'},
+    amide: {c:'#a78bfa', n:'Amides',                sym:'–CONH₂'},
+    nitro: {c:'#e879f9', n:'Nitro compounds',       sym:'–NO₂'},
+    amine: {c:'#4ade80', n:'Aromatic amines',       sym:'–NH₂'},
+    amino: {c:'#fb7185', n:'Amino acids',           sym:'–NH₂ / –COOH'},
+    ket:   {c:'#fdba74', n:'Ketones',               sym:'>C=O'},
+    sugar: {c:'#f472b6', n:'Carbohydrates',         sym:'C(H₂O)ₙ'},
+    poly:  {c:'#94a3b8', n:'Polymers',              sym:'(—)ₙ'},
+    reag:  {c:'#fcd34d', n:'Lab reagents',          sym:'⚗'},
+    salt:  {c:'#60a5fa', n:'Salts of acids',        sym:'–COONa'}
+};
+
+/* ============ tiny Kekulé structure builder ============ */
+function bld(fn){
+    const S = {a:[], b:[], t:[]};
+    const api = {
+        A:(x,y,l)=>{ S.a.push([x,y,l||'']); return S.a.length-1; },
+        B:(i,j,o)=>{ S.b.push({i,j,o:o||1}); },
+        B2:(i,j,cx,cy)=>{ S.b.push({i,j,o:2,cx,cy}); },
+        V:(vb)=>{ S.vb = vb; },
+        T:(x,y,s,sz,col)=>{ S.t.push([x,y,s,sz||14,col||'#c084fc']); },
+        R:(cx,cy,r,arom,rot)=>{
+            rot = rot||0;
+            const v = [];
+            for (let k=0;k<6;k++){
+                const an=(rot+k*60)*Math.PI/180;
+                v.push(api.A(cx+r*Math.cos(an), cy+r*Math.sin(an), ''));
+            }
+            for (let k=0;k<6;k++){
+                S.b.push({i:v[k], j:v[(k+1)%6], o:(arom && k%2===0)?2:1, cx, cy});
+            }
+            return { v, p:(k,d)=>{
+                const an=(rot+k*60)*Math.PI/180;
+                return [cx+(r+d)*Math.cos(an), cy+(r+d)*Math.sin(an)];
+            }};
+        }
+    };
+    fn(api);
+    return S;
+}
+
+function colorFor(l){
+    if (/^Na|^Ca/.test(l)) return '#c084fc';
+    if (/^N/.test(l)) return '#60a5fa';
+    if (/^O|^⁻O|O⁻$|^OH/.test(l)) return '#f87171';
+    if (/Cl/.test(l)) return '#4ade80';
+    if (/Br/.test(l)) return '#fb923c';
+    if (/^S/.test(l)) return '#fde047';
+    if (l === 'H') return '#94a3b8';
+    return '#e8edf5';
+}
+
+const SVGNS = 'http://www.w3.org/2000/svg';
+function renderMol(svg, S){
+    if (S.vb) svg.setAttribute('viewBox', S.vb);
+    const mk=(t,at)=>{ const e=document.createElementNS(SVGNS,t); for(const k in at) e.setAttribute(k,at[k]); svg.appendChild(e); return e; };
+    const line=(x1,y1,x2,y2)=>mk('line',{x1,y1,x2,y2,stroke:'#dbe3ef','stroke-width':1.7,'stroke-linecap':'round'});
+    const gap=(l,ux,uy)=>{
+        if(!l) return 0;
+        const hw=l.length*4.6+3.5, hh=9;
+        return 1/Math.sqrt((ux*ux)/(hw*hw)+(uy*uy)/(hh*hh));
+    };
+    S.b.forEach(b=>{
+        const [x1,y1,l1]=S.a[b.i], [x2,y2,l2]=S.a[b.j];
+        const dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy), ux=dx/L, uy=dy/L;
+        const g1=gap(l1,ux,uy), g2=gap(l2,ux,uy);
+        const ax=x1+ux*g1, ay=y1+uy*g1, bx=x2-ux*g2, by=y2-uy*g2;
+        const px=-uy, py=ux;
+        if (b.o===1){ line(ax,ay,bx,by); }
+        else if (b.o===2){
+            if (b.cx!==undefined){            /* aromatic-ring double: inner offset line */
+                line(ax,ay,bx,by);
+                const mx=(x1+x2)/2,my=(y1+y2)/2;
+                let ox=b.cx-mx, oy=b.cy-my; const ol=Math.hypot(ox,oy); ox/=ol; oy/=ol;
+                const s=.16;
+                line(ax+ox*5.5+(bx-ax)*s, ay+oy*5.5+(by-ay)*s,
+                     bx+ox*5.5-(bx-ax)*s, by+oy*5.5-(by-ay)*s);
+            } else {
+                line(ax+px*2.7,ay+py*2.7,bx+px*2.7,by+py*2.7);
+                line(ax-px*2.7,ay-py*2.7,bx-px*2.7,by-py*2.7);
+            }
+        } else {                              /* triple */
+            line(ax,ay,bx,by);
+            line(ax+px*4.2,ay+py*4.2,bx+px*4.2,by+py*4.2);
+            line(ax-px*4.2,ay-py*4.2,bx-px*4.2,by-py*4.2);
+        }
+    });
+    S.a.forEach(([x,y,l])=>{
+        if(!l) return;
+        const t=mk('text',{x,y,'text-anchor':'middle','dominant-baseline':'central',
+            style:`font-size:13.5px;font-weight:800;font-family:'Segoe UI',sans-serif;fill:${colorFor(l)};`});
+        t.textContent=l;
+    });
+    S.t.forEach(([x,y,s,sz,col])=>{
+        const t=mk('text',{x,y,'text-anchor':'middle','dominant-baseline':'central',
+            style:`font-size:${sz}px;font-weight:800;fill:${col};`});
+        t.textContent=s;
+    });
+}
+
+/* ============ small reusable structure recipes ============ */
+const chainY=85;
+function chain(K, items, x0, step, y){
+    y=y||chainY; let x=x0; let prev=null;
+    for (let i=0;i<items.length;i++){
+        if (typeof items[i]==='string'){
+            const a=K.A(x,y,items[i]);
+            if (prev!==null) K.B(prev.a, a, prev.o);
+            prev={a, o:1};
+            x+=step;
+        } else prev.o=items[i];
+    }
+}
+function carbonyl(K, xc, yc, tail){     /* C(=O)– : returns index of C */
+    const c=K.A(xc,yc,'C');
+    const o=K.A(xc,yc-46,'O');
+    K.B(c,o,2);
+    return c;
+}
+/* Fischer-style vertical chain: rows = 'label' | [left,right] | {co:1} (ketone C=O) */
+function fischer(K, rows, x, y0, dy){
+    x=x||120; y0=y0||16; dy=dy||(140/(rows.length-1));
+    let prev=null;
+    rows.forEach((r,i)=>{
+        const y=y0+i*dy; let c;
+        if (typeof r==='string'){ c=K.A(x,y,r); }
+        else if (r.co){ c=K.A(x,y,'C'); K.B(c,K.A(x+46,y,'O'),2); }
+        else { c=K.A(x,y,'C'); K.B(c,K.A(x-40,y,r[0])); K.B(c,K.A(x+42,y,r[1])); }
+        if (prev!==null) K.B(prev,c);
+        prev=c;
+    });
+}
+
+/* ============ THE 40 COMPOUNDS ============ */
+const CARDS = [
+ {t:'start', f:'CaC₂', iupac:'Calcium carbide', common:'carbide (covalent structure)', sp:[3,2],
+  uses:['Generating oxyacetylene flame for welding metals','Making ethyne (acetylene) by water dripping'],
+  kek:K=>{ const ca=K.A(78,85,'Ca'); const c1=K.A(158,52,'C'), c2=K.A(158,118,'C');
+           K.B(c1,c2,3); K.B(ca,c1); K.B(ca,c2); }},
+
+ {t:'alkane', f:'CH₄', iupac:'Methane', common:'natural gas',
+  sp:[4,0],
+  uses:['Main fuel of natural gas','Source of hydrogen','Making chloromethanes & carbon black'],
+  kek:K=>{ const c=K.A(120,85,'C'); [[120,40],[166,85],[120,130],[74,85]].forEach(p=>K.B(c,K.A(p[0],p[1],'H'))); }},
+
+ {t:'alkane', f:'C₂H₆', iupac:'Ethane', common:'—',
+  sp:[7,0],
+  uses:['-'],
+  kek:K=>chain(K,['CH₃',1,'CH₃'],85,70)},
+
+ {t:'alkane', f:'C₆H₁₂', iupac:'Cyclohexane', common:'—',
+  sp:[18,0],
+  uses:[''],
+  kek:K=>{ K.R(120,85,36,false,-90); }},
+
+ {t:'alkene', f:'C₂H₄', iupac:'Ethene', common:'ethylene',
+  sp:[5,1],
+  uses:['','Industrial ethanol production'],
+  kek:K=>chain(K,['CH₂',2,'CH₂'],85,70)},
+
+ {t:'alkyne', f:'C₂H₂', iupac:'Ethyne', common:'acetylene',
+  sp:[3,2],
+  uses:['Oxy-acetylene welding flame (~3000°C)','Making ethanal, ethanoic acid & benzene',''],
+  kek:K=>chain(K,['H',1,'C',3,'C',1,'H'],50,47)},
+
+ {t:'arene', f:'C₆H₆', iupac:'Benzene', common:'benzol',
+  sp:[12,3],
+  uses:['Making phenol,','Prepared from: coal tar, sodium benzoate (decarboxylation), n-hexane (reforming), phenol (Zn dust)','Saturated by 3 mol H₂ )'],
+  kek:K=>{ K.R(120,85,38,true,-90); }},
+
+ {t:'arene', f:'C₇H₈', iupac:'Methylbenzene ortoluene', common:'',
+  sp:[15,3],
+  uses:['Manufacture of TNT',''],
+  kek:K=>{ const r=K.R(95,85,33,true,0); const m=K.A(...r.p(0,30),'CH₃'); K.B(r.v[0],m); }},
+
+ {t:'halo', f:'C₂H₃Br', iupac:'Bromoethene', common:'vinyl bromide',
+  sp:[5,1],
+  uses:['Flame-retardant copolymers','Intermediate in organic synthesis'],
+  kek:K=>chain(K,['CH₂',2,'CH',1,'Br'],62,59)},
+
+ {t:'halo', f:'CH₃CHBr₂', iupac:'1,1-Dibromoethane', common:'-',
+  sp:[7,0],
+  uses:[''],
+  kek:K=>{ const m=K.A(62,85,'CH₃'), c=K.A(122,85,'CH'); K.B(m,c);
+           K.B(c,K.A(172,48,'Br')); K.B(c,K.A(172,122,'Br')); }},
+
+ {t:'halo', f:'C₂H₂Br₄', iupac:'1,1,2,2-Tetrabromoethane', common:'acetylene tetrabromide',
+  sp:[7,0],
+  uses:[''],
+  kek:K=>{ const h1=K.A(46,85,'H'), c1=K.A(96,85,'C'), c2=K.A(148,85,'C'), h2=K.A(198,85,'H');
+           K.B(h1,c1); K.B(c1,c2); K.B(c2,h2);
+           K.B(c1,K.A(96,38,'Br')); K.B(c1,K.A(96,132,'Br'));
+           K.B(c2,K.A(148,38,'Br')); K.B(c2,K.A(148,132,'Br')); }},
+
+ {t:'halo', f:'C₂H₄Br₂', iupac:'1,2-Dibromoethane', common:'ethylene dibromide',
+  sp:[7,0],
+  uses:[''],
+  kek:K=>chain(K,['Br',1,'CH₂',1,'CH₂',1,'Br'],42,58)},
+
+ {t:'halo', f:'C₂H₅Br', iupac:'Bromoethane', common:'ethyl bromide',
+  sp:[7,0],
+  uses:[''],
+  kek:K=>chain(K,['CH₃',1,'CH₂',1,'Br'],62,59)},
+
+ {t:'halo', f:'CH₃Cl', iupac:'Chloromethane', common:'methyl chloride',
+  sp:[4,0],
+  uses:[''],
+  kek:K=>{ const c=K.A(120,85,'C'); K.B(c,K.A(120,40,'Cl'));
+           [[166,85],[120,130],[74,85]].forEach(p=>K.B(c,K.A(p[0],p[1],'H'))); }},
+
+ {t:'halo', f:'CH₂Cl₂', iupac:'Dichloromethane', common:'methylene chloride',
+  sp:[4,0],
+  uses:[''],
+  kek:K=>{ const c=K.A(120,85,'C'); K.B(c,K.A(120,40,'Cl')); K.B(c,K.A(168,85,'Cl'));
+           K.B(c,K.A(120,130,'H')); K.B(c,K.A(72,85,'H')); }},
+
+ {t:'halo', f:'CHCl₃', iupac:'Trichloromethane', common:'chloroform',
+  sp:[4,0],
+  uses:['Was used as an anaesthetic substance','Replaced by halothane (safer)'],
+  kek:K=>{ const c=K.A(120,85,'C'); K.B(c,K.A(120,40,'Cl')); K.B(c,K.A(168,85,'Cl'));
+           K.B(c,K.A(72,85,'Cl')); K.B(c,K.A(120,130,'H')); }},
+
+ {t:'halo', f:'CCl₄', iupac:'Tetrachloromethane', common:'carbon tetrachloride',
+  sp:[4,0],
+  uses:['organic solvent'],
+  kek:K=>{ const c=K.A(120,85,'C'); [[120,40],[168,85],[120,130],[72,85]].forEach(p=>K.B(c,K.A(p[0],p[1],'Cl'))); }},
+
+ {t:'halo', f:'C₆H₅Cl', iupac:'Chlorobenzene', common:'phenyl chloride',
+  sp:[12,3],
+  uses:['Manufacture of phenol','Solvent','DDT synthesis '],
+  kek:K=>{ const r=K.R(95,85,33,true,0); const x=K.A(...r.p(0,28),'Cl'); K.B(r.v[0],x); }},
+
+ {t:'halo', f:'C₆H₆Cl₆', iupac:'1,2,3,4,5,6-Hexachlorocyclohexane', common:'benzene hexachloride (gammexane)',
+  sp:[18,0],
+  uses:['Insecticide — gammexane ','Made from benzene + 3Cl₂ in UV light (addition)'],
+  kek:K=>{ const r=K.R(120,85,30,false,-90); for(let k=0;k<6;k++){ const x=K.A(...r.p(k,26),'Cl'); K.B(r.v[k],x); } }},
+
+ {t:'halo', f:'C₇H₇Cl', iupac:'1-Chloro-4-methylbenzene', common:'p-chlorotoluene ',
+  sp:[15,3],
+  uses:[''],
+  kek:K=>{ const r=K.R(108,85,31,true,0);
+           const m=K.A(...r.p(0,29),'CH₃'); K.B(r.v[0],m);
+           const cl=K.A(...r.p(3,26),'Cl'); K.B(r.v[3],cl); }},
+
+ {t:'ol', f:'CH₃OH', iupac:'Methanol', common:'methyl alcohol',
+  sp:[5,0],
+  uses:['Making formaldehyde (formalin)','⚠ Highly toxic — causes blindness added to red spirit to use as fuel'],
+  kek:K=>chain(K,['CH₃',1,'OH'],90,62)},
+
+ {t:'ol', f:'C₂H₅OH', iupac:'Ethanol', common:'ethyl alcohol',
+  sp:[8,0],
+  uses:['Sterilising mouth & teeth — disinfectant (70%)','Perfumes & medicine solvent','Thermometers for measuring low temperatures(-110.5°C)','Alcoholic drinks & biofuel'],
+  kek:K=>chain(K,['CH₃',1,'CH₂',1,'OH'],62,59)},
+
+ {t:'ol', f:'C₂H₆O₂', iupac:'Ethane-1,2-diol', common:'ethylene glycol',
+  sp:[9,0],
+  uses:['Car-radiator antifreeze','Making polyester ,Dacron fibres ,hydrlic brake fluids'],
+  kek:K=>{ const a=K.A(92,62,'CH₂'), b=K.A(150,62,'CH₂'); K.B(a,b);
+           K.B(a,K.A(92,122,'OH')); K.B(b,K.A(150,122,'OH')); }},
+
+ {t:'phoh', f:'C₆H₅OH', iupac:'Phenol or hydroxy benzene', common:'carbolic acid',
+  sp:[13,3],
+  uses:['Salicylic-acid derivatives → aspirin & picric acid','Bakelite polymer with formaldehyde'],
+  kek:K=>{ const r=K.R(95,85,33,true,0); const x=K.A(...r.p(0,28),'OH'); K.B(r.v[0],x); }},
+
+ {t:'ether', f:'C₄H₁₀O', iupac:'Ethoxyethane', common:'diethyl ether',
+  sp:[14,0],
+  uses:[''],
+  kek:K=>chain(K,['C₂H₅',1,'O',1,'C₂H₅'],62,59)},
+
+ {t:'ald', f:'CH₃CHO', iupac:'Ethanal', common:'acetaldehyde',
+  sp:[6,1],
+  uses:['Manufacture of ethanoic acid'],
+  kek:K=>{ const m=K.A(64,98,'CH₃'); const c=K.A(124,98,'C'); K.B(m,c);
+           K.B(c,K.A(160,58,'O'),2); K.B(c,K.A(160,138,'H')); }},
+
+ {t:'acid', f:'CH₃COOH', iupac:'Ethanoic acid', common:'acetic acid (vinegar or acetum)',
+  sp:[7,1],
+  uses:['Vinegar (4 % solution)','Making esters, acetate fibre & plastics','Food preservative'],
+  kek:K=>{ const m=K.A(58,95,'CH₃'); const c=K.A(116,95,'C'); K.B(m,c);
+           K.B(c,K.A(152,55,'O'),2); K.B(c,K.A(156,135,'OH')); }},
+
+ {t:'acid', f:'C₆H₅COOH', iupac:'Benzoic acid', common:'benzenecarboxylic acid',
+  sp:[15,4],
+  uses:['Making sodium benzoate & esters'],
+  kek:K=>{ const r=K.R(70,92,30,true,0); const c=K.A(146,92,'C'); K.B(r.v[0],c);
+           K.B(c,K.A(146,46,'O'),2); K.B(c,K.A(198,92,'OH')); }},
+
+ {t:'acid', f:'ClC₆H₄COOH', iupac:'3-Chlorobenzoic acid', common:'m-chlorobenzoic acid',
+  sp:[15,4],
+  uses:[''],
+  kek:K=>{ const r=K.R(76,78,28,true,0); const c=K.A(148,78,'C'); K.B(r.v[0],c);
+           K.B(c,K.A(148,34,'O'),2); K.B(c,K.A(198,78,'OH'));
+           const cl=K.A(...r.p(2,26),'Cl'); K.B(r.v[2],cl); }},
+
+ {t:'sulf', f:'C₆H₅SO₃H', iupac:'Benzenesulphonic acid', common:'—',
+  sp:[16,5],
+  uses:['Synthetic detergents',''],
+  kek:K=>{ const r=K.R(64,85,29,true,0); const s=K.A(136,85,'S'); K.B(r.v[0],s);
+           K.B(s,K.A(136,40,'O'),2); K.B(s,K.A(136,130,'O'),2); K.B(s,K.A(190,85,'OH')); }},
+
+ {t:'ester', f:'CH₃COOCH₃', iupac:'Methyl ethanoate', common:'methyl acetate',
+  sp:[10,1],
+  uses:[''],
+  kek:K=>{ const m=K.A(44,95,'CH₃'); const c=K.A(100,95,'C'); K.B(m,c);
+           K.B(c,K.A(134,55,'O'),2); const o=K.A(138,135,'O'); K.B(c,o); K.B(o,K.A(196,135,'CH₃')); }},
+
+ {t:'ester', f:'C₆H₅COOC₂H₅', iupac:'Ethyl benzoate', common:'—',
+  sp:[21,4],
+  uses:['Perfumes ','Artificial fruit flavouring'],
+  kek:K=>{ const r=K.R(56,92,27,true,0); const c=K.A(124,92,'C'); K.B(r.v[0],c);
+           K.B(c,K.A(124,46,'O'),2); const o=K.A(166,92,'O'); K.B(c,o); K.B(o,K.A(214,92,'C₂H₅')); }},
+
+ {t:'ester', f:'HOC₆H₄COOCH₃', iupac:'Methyl 2-hydroxybenzoate', common:'methyl salicylate (oil of wintergreen)',
+  sp:[19,4],
+  uses:['Marookh oil — absorbed by skin to relieve rheumatic pains',' (oil of wintergreen)'],
+  kek:K=>{ const r=K.R(58,72,27,true,0); const c=K.A(126,72,'C'); K.B(r.v[0],c);
+           K.B(c,K.A(126,28,'O'),2); const o=K.A(168,72,'O'); K.B(c,o); K.B(o,K.A(216,72,'CH₃'));
+           const oh=K.A(...r.p(1,30),'OH'); K.B(r.v[1],oh); }},
+
+ {t:'amide', f:'CH₃CONH₂', iupac:'Ethanamide', common:'acetamide',
+  sp:[8,1],
+  uses:[''],
+  kek:K=>{ const m=K.A(54,95,'CH₃'); const c=K.A(112,95,'C'); K.B(m,c);
+           K.B(c,K.A(148,55,'O'),2); K.B(c,K.A(156,135,'NH₂')); }},
+
+ {t:'amide', f:'C₆H₅CONH₂', iupac:'Benzamide', common:'benzenecarboxamide',
+  sp:[16,4],
+  uses:[''],
+  kek:K=>{ const r=K.R(70,92,30,true,0); const c=K.A(146,92,'C'); K.B(r.v[0],c);
+           K.B(c,K.A(146,46,'O'),2); K.B(c,K.A(200,92,'NH₂')); }},
+
+ {t:'salt', f:'CH₃COONa', iupac:'Sodium ethanoate', common:'sodium acetate',
+  sp:[6,1],
+  uses:['Lab preparation of methane (with soda lime)'],
+  kek:K=>{ const m=K.A(48,95,'CH₃'); const c=K.A(106,95,'C'); K.B(m,c);
+           K.B(c,K.A(141,55,'O'),2); K.B(c,K.A(146,135,'O⁻')); K.T(198,135,'Na⁺',14,'#c084fc'); }},
+
+ {t:'salt', f:'C₆H₅COONa', iupac:'Sodium benzoate', common:'',
+  sp:[14,4],
+  uses:['Preservative foods','Lab preparation of benzene (decarboxylation)'],
+  kek:K=>{ const r=K.R(64,92,28,true,0); const c=K.A(134,92,'C'); K.B(r.v[0],c);
+           K.B(c,K.A(134,48,'O'),2); K.B(c,K.A(182,92,'O⁻')); K.T(226,92,'Na⁺',13,'#c084fc'); }},
+
+ {t:'nitro', f:'C₆H₅NO₂', iupac:'Nitrobenzene', common:'',
+  sp:[14,4],
+  uses:[''],
+  kek:K=>{ const r=K.R(92,85,32,true,0); const x=K.A(...r.p(0,32),'NO₂'); K.B(r.v[0],x); }},
+
+ {t:'nitro', f:'C₆H₃(NO₂)₃', iupac:'1,3,5-Trinitrobenzene', common:'',
+  sp:[18,6],
+  uses:[' explosive '],
+  kek:K=>{ const r=K.R(112,85,30,true,0);
+           [0,2,4].forEach(k=>{ const x=K.A(...r.p(k,32),'NO₂'); K.B(r.v[k],x); }); }},
+
+ {t:'nitro', f:'C₇H₅(NO₂)₃', iupac:'2,4,6-Trinitrotoluene', common:'TNT',
+  sp:[21,6],
+  uses:[' explosive'],
+  kek:K=>{ const r=K.R(112,85,28,true,0);
+           const m=K.A(...r.p(0,28),'CH₃'); K.B(r.v[0],m);
+           [1,3,5].forEach(k=>{ const x=K.A(...r.p(k,32),'NO₂'); K.B(r.v[k],x); }); }},
+
+ /* ================= NEW COMPOUNDS ================= */
+
+ {t:'halo', f:'C₂HBrClF₃', iupac:'2-Bromo-2-chloro-1,1,1-trifluoroethane', common:'halothane',
+  sp:[7,0],
+  uses:['Anaesthetic substance instead of chloroform (safer)'],
+  kek:K=>{ const c1=K.A(92,85,'C'), c2=K.A(150,85,'C'); K.B(c1,c2);
+           K.B(c1,K.A(92,40,'F')); K.B(c1,K.A(46,85,'F')); K.B(c1,K.A(92,130,'F'));
+           K.B(c2,K.A(150,40,'H')); K.B(c2,K.A(202,85,'Cl')); K.B(c2,K.A(150,130,'Br')); }},
+
+ {t:'halo', f:'CH₃CCl₃', iupac:'1,1,1-Trichloroethane', common:'chloroform',
+  sp:[7,0],
+  uses:['Dry-cleaning of clothes'],
+  kek:K=>{ const m=K.A(70,85,'CH₃'), c=K.A(134,85,'C'); K.B(m,c);
+           K.B(c,K.A(134,40,'Cl')); K.B(c,K.A(186,85,'Cl')); K.B(c,K.A(134,130,'Cl')); }},
+
+ {t:'halo', f:'CF₄', iupac:'Tetrafluoromethane', common:'carbon tetrafluoride (Freon-14)',
+  sp:[4,0],
+  uses:['Freon: air-conditioners & fridges','Liquefied propellant gas for perfumes','Cleaner of electronic sets'],
+  kek:K=>{ const c=K.A(120,85,'C'); [[120,40],[168,85],[120,130],[72,85]].forEach(p=>K.B(c,K.A(p[0],p[1],'F'))); }},
+
+ {t:'halo', f:'CF₂ClBr', iupac:'Bromochlorodifluoromethane', common:'',
+  sp:[4,0],
+  uses:[''],
+  kek:K=>{ const c=K.A(120,85,'C'); K.B(c,K.A(120,40,'F')); K.B(c,K.A(70,85,'F'));
+           K.B(c,K.A(172,85,'Cl')); K.B(c,K.A(120,130,'Br')); }},
+
+ {t:'halo', f:'(ClC₆H₄)₂CHCCl₃', iupac:'dichloro,diphenyl,trichloro ethane', common:'DDT',
+  sp:[29,6],
+  uses:[' insecticide ','Poisonous action due to the CH–CCl₃ part','Banned in most countries (accumulates in food chains)'],
+  kek:K=>{ const r1=K.R(52,52,22,true,0), r2=K.R(188,52,22,true,180);
+           const cl1=K.A(...r1.p(3,22),'Cl'); K.B(r1.v[3],cl1);
+           const cl2=K.A(...r2.p(3,22),'Cl'); K.B(r2.v[3],cl2);
+           const ch=K.A(120,80,'CH'); K.B(r1.v[0],ch); K.B(r2.v[0],ch);
+           const cc=K.A(120,122,'C'); K.B(ch,cc);
+           K.B(cc,K.A(68,122,'Cl')); K.B(cc,K.A(172,122,'Cl')); K.B(cc,K.A(120,158,'Cl')); }},
+
+ {t:'ol', f:'C₃H₈O₃', iupac:'Propane-1,2,3-triol', common:'glycerol (glycerine)',
+  sp:[13,0],
+  uses:['Moisturiser in cosmetics & soaps','Making nitroglycerine explosive'],
+  kek:K=>{ const a=K.A(92,40,'CH₂'), b=K.A(92,85,'CH'), c=K.A(92,130,'CH₂');
+           K.B(a,b); K.B(b,c);
+           K.B(a,K.A(152,40,'OH')); K.B(b,K.A(152,85,'OH')); K.B(c,K.A(152,130,'OH')); }},
+
+ {t:'ol', f:'C₄H₁₀O', iupac:'2-Methylpropan-1-ol', common:'isobutyl alcohol',
+  sp:[14,0],
+  uses:[''],
+  kek:K=>{ const m1=K.A(58,45,'CH₃'), m2=K.A(58,125,'CH₃'), ch=K.A(112,85,'CH');
+           K.B(m1,ch); K.B(m2,ch);
+           const c2=K.A(166,85,'CH₂'); K.B(ch,c2); K.B(c2,K.A(216,85,'OH')); }},
+
+ {t:'sugar', f:'C₆H₁₄O₆', iupac:'-1,2,3,4,5,6-hexahydroxyhexane', common:'sorbitol',
+  sp:[25,0],
+  uses:[''],
+  kek:K=>fischer(K,['CH₂OH',['H','OH'],['HO','H'],['H','OH'],['H','OH'],'CH₂OH'])},
+
+ {t:'sugar', f:'C₆H₁₂O₆', iupac:' 2,3,4,5,6-pentahydroxyhexanal', common:'glucose (aldyhdic carbohydrate)',
+  sp:[23,1],
+  uses:['Main energy source of body cells','Fermented to ethanol'],
+  kek:K=>fischer(K,['CHO',['H','OH'],['HO','H'],['H','OH'],['H','OH'],'CH₂OH'])},
+
+ {t:'sugar', f:'C₆H₁₂O₆', iupac:'1,3,4,5,6-pentahydroxyhexan-2-one', common:'fructose ketonic carbohydrate)',
+  sp:[23,1],
+  uses:['Sweetest natural sugar — honey & fruits','Sweetener in soft drinks (HFCS)'],
+  kek:K=>fischer(K,['CH₂OH',{co:1},['HO','H'],['H','OH'],['H','OH'],'CH₂OH'])},
+
+ {t:'acid', f:'CH₃CH(OH)COOH', iupac:'2-Hydroxypropanoic acid', common:'lactic acid',
+  sp:[11,1],
+  uses:['Secreted in muscles after hard effort — causes muscle contraction','Formed in sour milk & yoghurt'],
+  kek:K=>{ const m=K.A(46,80,'CH₃'), ch=K.A(102,80,'CH'); K.B(m,ch);
+           K.B(ch,K.A(102,132,'OH'));
+           const c=K.A(158,80,'C'); K.B(ch,c);
+           K.B(c,K.A(158,34,'O'),2); K.B(c,K.A(208,80,'OH')); }},
+
+ {t:'acid', f:'C₆H₈O₇', iupac:'2-Hydroxypropane-1,2,3-tricarboxylic acid', common:'citric acid',
+  sp:[20,3],
+  uses:['Prevents the growth of bacteria in foods','Sour taste of lemon & citrus fruits','Tribasic, mono-hydroxy aliphatic acid '],
+  kek:K=>{ const l=K.A(36,85,'HOOC'), c1=K.A(88,85,'CH₂'), c=K.A(126,85,'C'),
+                 c2=K.A(164,85,'CH₂'), r=K.A(214,85,'COOH');
+           K.B(l,c1); K.B(c1,c); K.B(c,c2); K.B(c2,r);
+           K.B(c,K.A(126,40,'OH')); K.B(c,K.A(126,132,'COOH')); }},
+
+ {t:'phoh', f:'C₆H₄(OH)₂', iupac:'1,2 dihydroxyBenzene', common:'catechol',
+  sp:[14,3],
+  uses:[''],
+  kek:K=>{ const r=K.R(100,90,32,true,-90);
+           [0,1].forEach(k=>{ const x=K.A(...r.p(k,30),'OH'); K.B(r.v[k],x); }); }},
+
+ {t:'phoh', f:'C₆H₃(OH)₃', iupac:'1,2,3 trihydroxyBenzene', common:'pyrogallol',
+  sp:[15,3],
+  uses:[''],
+  kek:K=>{ const r=K.R(100,90,32,true,-90);
+           [0,1,2].forEach(k=>{ const x=K.A(...r.p(k,30),'OH'); K.B(r.v[k],x); }); }},
+
+ {t:'nitro', f:'C₆H₂(NO₂)₃OH', iupac:'2,4,6-Trinitrophenol', common:'picric acid',
+  sp:[19,6],
+  uses:['Explosive substance ','Treatment of skin burns','Made from phenol + 3HNO₃ (conc. H₂SO₄)'],
+  kek:K=>{ const r=K.R(112,85,28,true,-90);
+           const oh=K.A(...r.p(0,26),'OH'); K.B(r.v[0],oh);
+           [1,3,5].forEach(k=>{ const x=K.A(...r.p(k,32),'NO₂'); K.B(r.v[k],x); }); }},
+
+ {t:'nitro', f:'ClC₆H₄NO₂', iupac:'1-Chloro-3-nitrobenzene', common:'m-chloronitrobenzene',
+  sp:[14,4],
+  uses:[''],
+  kek:K=>{ const r=K.R(104,88,30,true,-90);
+           const n=K.A(...r.p(0,32),'NO₂'); K.B(r.v[0],n);
+           const cl=K.A(...r.p(2,26),'Cl'); K.B(r.v[2],cl); }},
+
+ {t:'arene', f:'C₁₂H₁₀', iupac:'Biphenyl', common:'diphenyl',
+  sp:[23,6],
+  uses:['-'],
+  kek:K=>{ const r1=K.R(64,85,30,true,0), r2=K.R(176,85,30,true,180);
+           K.B(r1.v[0], r2.v[0]); }},
+
+ {t:'arene', f:'C₁₄H₁₀', iupac:'Anthracene', common:'— (from coal tar)',
+  sp:[26,7],
+  uses:[''],
+  kek:K=>{ K.R(71,85,28,true,30); K.R(119.5,85,28,false,30); K.R(168,85,28,true,30); }},
+
+ {t:'amine', f:'C₆H₅NH₂', iupac:'Phenylamine (aniline)', common:'benzenamine',
+  sp:[14,3],
+  uses:[''],
+  kek:K=>{ const r=K.R(95,85,33,true,0); const x=K.A(...r.p(0,30),'NH₂'); K.B(r.v[0],x); }},
+
+ {t:'ester', f:'C₂H₅COOC₆H₅', iupac:'Phenyl propanoate', common:'—',
+  sp:[21,4],
+  uses:['Perfumes & flavourings','Example of ester of phenol'],
+  kek:K=>{ const e=K.A(38,85,'C₂H₅'), c=K.A(92,85,'C'); K.B(e,c);
+           K.B(c,K.A(92,40,'O'),2);
+           const o=K.A(134,85,'O'); K.B(c,o);
+           const r=K.R(196,85,26,true,180); K.B(o,r.v[0]); }},
+
+ {t:'salt', f:'R–C₆H₄–SO₃Na', iupac:'Sodium alkylbenzene sulphonate', common:'synthetic detergent ',
+  sp:[15,5],
+  uses:['Active agent of washing powders & liquids','Works in hard water ','has hydrophilic head and hydrophobic tail (alkyl group)'],
+  kek:K=>{ const r=K.R(86,85,26,true,0);
+           const R0=K.A(...r.p(3,22),'R'); K.B(r.v[3],R0);
+           const s=K.A(150,85,'S'); K.B(r.v[0],s);
+           K.B(s,K.A(150,42,'O'),2); K.B(s,K.A(150,128,'O'),2);
+           K.B(s,K.A(196,85,'O⁻')); K.T(228,85,'Na⁺',12,'#c084fc'); }},
+
+ {t:'poly', f:'(C₂F₄)ₙ', iupac:'Poly(tetrafluoroethene)', common:'Teflon',
+  sp:[6,0],
+  uses:['Non-stick coating of cooking pans','Resists heat '],
+  kek:K=>{ K.T(42,85,'[',34,'#94a3b8');
+           const c1=K.A(92,85,'C'), c2=K.A(148,85,'C'); K.B(c1,c2);
+           K.B(c1,K.A(92,40,'F')); K.B(c1,K.A(92,130,'F'));
+           K.B(c2,K.A(148,40,'F')); K.B(c2,K.A(148,130,'F'));
+           K.T(196,85,']',34,'#94a3b8'); K.T(214,118,'n',14,'#94a3b8'); }},
+
+ {t:'poly', f:'(C₂H₃Cl)ₙ', iupac:'Poly(chloroethene)', common:'PVC (polyvinyl chloride)',
+  sp:[6,0],
+  uses:['Water pipes & window frames','Electric-cable insulation','Floor tiles & artificial leather'],
+  kek:K=>{ K.T(42,85,'[',34,'#94a3b8');
+           const c1=K.A(92,85,'CH₂'), c2=K.A(152,85,'CH'); K.B(c1,c2);
+           K.B(c2,K.A(152,135,'Cl'));
+           K.T(200,85,']',34,'#94a3b8'); K.T(218,118,'n',14,'#94a3b8'); }},
+
+ {t:'poly', f:'(C₃H₆)ₙ', iupac:'Poly(propene)', common:'polypropylene (PP)',
+  sp:[9,0],
+  uses:['Ropes, carpets & woven sacks','Food containers & bottle caps','Car bumpers & medical syringes'],
+  kek:K=>{ K.T(42,85,'[',34,'#94a3b8');
+           const c1=K.A(92,85,'CH₂'), c2=K.A(152,85,'CH'); K.B(c1,c2);
+           K.B(c2,K.A(152,135,'CH₃'));
+           K.T(200,85,']',34,'#94a3b8'); K.T(218,118,'n',14,'#94a3b8'); }},
+
+ {t:'poly', f:'(C₂H₄)ₙ', iupac:'Poly(ethene)', common:'polyethylene (PE)', sp:[6,0],
+  uses:['Plastic bags & cling film','Bottles, buckets & water pipes ',''],
+  kek:K=>{ K.T(42,85,'[',34,'#94a3b8');
+           const c1=K.A(92,85,'CH₂'), c2=K.A(152,85,'CH₂'); K.B(c1,c2);
+           K.T(200,85,']',34,'#94a3b8'); K.T(218,118,'n',14,'#94a3b8'); }},
+
+ {t:'ol', f:'CH₂=CHOH', iupac:'Ethenol', common:'vinyl alcohol', sp:[5,1],
+  uses:['Unstable '],
+  kek:K=>{ const c1=K.A(70,85,'CH₂'), c2=K.A(134,85,'CH'); K.B(c1,c2,2);
+           K.B(c2,K.A(190,85,'OH')); }},
+
+ /* ================= NEW BATCH 2 ================= */
+
+ {t:'amino', f:'H₂NCH₂COOH', iupac:'2-Aminoethanoic acid', common:'glycine (simplest amino acid)', sp:[9,1],
+  uses:['Building block of all proteins'],
+  kek:K=>{ const n=K.A(44,85,'H₂N'), c1=K.A(104,85,'CH₂'); K.B(n,c1);
+           const c=K.A(158,85,'C'); K.B(c1,c);
+           K.B(c,K.A(158,40,'O'),2); K.B(c,K.A(208,85,'OH')); }},
+
+ {t:'acid', f:'C₆H₄(COOH)₂', iupac:'Benzene-1,2-dicarboxylic acid', common:'phthalic acid (ortho)', sp:[18,5],
+  uses:[''],
+  kek:K=>{ const r=K.R(82,92,30,true,-90);
+           const c1=K.A(150,52,'C'); K.B(r.v[0],c1);
+           K.B(c1,K.A(150,16,'O'),2); K.B(c1,K.A(200,52,'OH'));
+           const c2=K.A(166,108,'C'); K.B(r.v[1],c2);
+           K.B(c2,K.A(166,148,'O'),2); K.B(c2,K.A(214,108,'OH')); }},
+
+ {t:'acid', f:'C₆H₄(COOH)₂', iupac:'Benzene-1,4-dicarboxylic acid', common:'terephthalic acid (para)', sp:[18,5],
+  uses:['Monomer of Dacron is inert used in making heart valve,/  polyester'],
+  kek:K=>{ K.V('0 0 280 170'); const r=K.R(140,85,30,true,0);
+           const c1=K.A(212,85,'C'); K.B(r.v[0],c1);
+           K.B(c1,K.A(212,42,'O'),2); K.B(c1,K.A(258,85,'OH'));
+           const c2=K.A(68,85,'C'); K.B(r.v[3],c2);
+           K.B(c2,K.A(68,128,'O'),2); K.B(c2,K.A(24,85,'HO')); }},
+
+ {t:'poly', f:'(C₁₀H₈O₄)ₙ', iupac:'Poly(ethylene terephthalate)', common:'Dacron ', sp:[23,5],
+  uses:['Polyester clothing fibre '],
+  kek:K=>{ K.V('0 0 320 170'); K.T(16,85,'[',32,'#94a3b8');
+           const c1=K.A(46,85,'C'); K.B(c1,K.A(46,45,'O'),2);
+           const r=K.R(106,85,26,true,180); K.B(c1,r.v[3]);
+           const c2=K.A(168,85,'C'); K.B(r.v[0],c2);
+           K.B(c2,K.A(168,45,'O'),2);
+           const o=K.A(204,85,'O'); K.B(c2,o);
+           const e1=K.A(244,85,'CH₂'); K.B(o,e1);
+           const e2=K.A(286,85,'CH₂'); K.B(e1,e2);
+           K.T(305,85,']',32,'#94a3b8'); K.T(314,120,'n',13,'#94a3b8'); }},
+
+ {t:'poly', f:'(C₇H₆O)ₙ', iupac:'Phenol–methanal network polymer', common:'Bakelite', sp:null,
+  uses:['thermoset — dark brown,making ash trys)'],
+  kek:K=>{ K.V('0 0 300 170');
+           const r1=K.R(70,80,27,true,-90), r2=K.R(212,80,27,true,-90);
+           const o1=K.A(...r1.p(0,26),'OH'); K.B(r1.v[0],o1);
+           const o2=K.A(...r2.p(0,26),'OH'); K.B(r2.v[0],o2);
+           const b=K.A(141,105,'CH₂'); K.B(r1.v[1],b); K.B(b,r2.v[5]);
+           const l=K.A(16,105,'CH₂'); K.B(l,r1.v[5]);
+           const rr=K.A(268,105,'CH₂'); K.B(r2.v[1],rr);
+           K.T(141,152,'⋯ 3-D network ⋯',11,'#94a3b8'); }},
+
+ {t:'ester', f:'C₉H₈O₄', iupac:'2-Acetoxybenzoic acid', common:'aspirin (acetylsalicylic acid)', sp:[21,5],
+  uses:['Reduces headache & temperature (fever)','Reduces blood clotting — prevents heart crises','Made from salicylic acid + ethanoic anhydride'],
+  kek:K=>{ K.V('0 0 300 180'); const r=K.R(76,84,28,true,-90);
+           const c1=K.A(142,44,'C'); K.B(r.v[0],c1);
+           K.B(c1,K.A(142,12,'O'),2); K.B(c1,K.A(192,44,'OH'));
+           const o=K.A(152,118,'O'); K.B(r.v[1],o);
+           const c2=K.A(206,118,'C'); K.B(o,c2);
+           K.B(c2,K.A(206,162,'O'),2); K.B(c2,K.A(258,118,'CH₃')); }},
+
+ {t:'amide', f:'C₈H₉NO₂', iupac:'N-(4-Hydroxyphenyl)ethanamide', common:'paracetamol (acetaminophen)', sp:[20,4],
+  uses:['Most-used pain & fever medicine worldwide','Safe for stomach (unlike aspirin) at correct dose'],
+  kek:K=>{ K.V('0 0 300 170'); const r=K.R(96,85,28,true,180);
+           const oh=K.A(36,85,'HO'); K.B(r.v[3],oh);
+           const n=K.A(162,85,'N'); K.B(r.v[0],n); K.B(n,K.A(162,128,'H'));
+           const c=K.A(208,85,'C'); K.B(n,c);
+           K.B(c,K.A(208,42,'O'),2); K.B(c,K.A(256,85,'CH₃')); }},
+
+ {t:'amide', f:'CO(NH₂)₂', iupac:'Carbamide', common:'urea', sp:[7,1],
+  uses:['Most important nitrogen fertiliser ','First organic compound made from inorganic (Wöhler 1828)',''],
+  kek:K=>{ const c=K.A(120,85,'C'); K.B(c,K.A(120,38,'O'),2);
+           K.B(c,K.A(66,118,'H₂N')); K.B(c,K.A(176,118,'NH₂')); }},
+
+ {t:'ket', f:'CH₃COCH₃', iupac:'Propan-2-one', common:'acetone', sp:[9,1],
+  uses:['Nail-polish remover'],
+  kek:K=>{ const m1=K.A(62,98,'CH₃'), c=K.A(120,98,'C'), m2=K.A(178,98,'CH₃');
+           K.B(m1,c); K.B(c,m2); K.B(c,K.A(120,48,'O'),2); }},
+
+ {t:'ald', f:'HCHO', iupac:'Methanal', common:'formaldehyde (formalin 40%)', sp:[3,1],
+  uses:['Making Bakelite '],
+  kek:K=>{ const c=K.A(110,85,'C'); K.B(c,K.A(164,85,'O'),2);
+           K.B(c,K.A(70,52,'H')); K.B(c,K.A(70,118,'H')); }},
+
+ {t:'ald', f:'C₆H₅CHO', iupac:'Benzenecarbaldehyde', common:'benzaldehyde ', sp:[14,4],
+  uses:[''],
+  kek:K=>{ const r=K.R(82,85,30,true,0); const c=K.A(152,85,'C'); K.B(r.v[0],c);
+           K.B(c,K.A(152,40,'O'),2); K.B(c,K.A(198,118,'H')); }},
+
+ {t:'arene', f:'C₁₀H₈', iupac:'Naphthalene', common:'', sp:[19,5],
+  uses:[''],
+  kek:K=>{ K.R(92,85,28,true,30); K.R(140.5,85,28,true,90); }},
+
+ {t:'alkene', f:'C₆H₅CH=CH₂', iupac:'Phenylethene', common:'(vinylbenzene)', sp:[16,4],
+  uses:[''],
+  kek:K=>{ const r=K.R(76,92,30,true,0); const c1=K.A(142,68,'CH'); K.B(r.v[0],c1);
+           const c2=K.A(196,42,'CH₂'); K.B(c1,c2,2); }},
+
+ /* ================= FROM THE USES SHEET (PDF) ================= */
+
+ {t:'halo', f:'CF₂Cl₂', iupac:'Dichlorodifluoromethane', common:'Freon-12 (most famous freon)', sp:[4,0],
+  uses:['Air-conditioners & fridges (refrigerant)','Liquefying propellant for perfume sprays','Cleaner of electronic sets',' damages the ozone layer'],
+  kek:K=>{ const c=K.A(120,85,'C'); K.B(c,K.A(120,40,'F')); K.B(c,K.A(70,85,'F'));
+           K.B(c,K.A(172,85,'Cl')); K.B(c,K.A(120,130,'Cl')); }},
+
+ {t:'ester', f:'C₃H₅(ONO₂)₃', iupac:'Propane-1,2,3-triyl trinitrate', common:'nitroglycerine (TNG)', sp:[19,3],
+  uses:['Widens arteries — treatment of heart problems ','explosive','Made from glycerol + conc. HNO₃/H₂SO₄'],
+  kek:K=>{ K.V('0 0 300 170');
+           const a=K.A(60,35,'CH₂'), b=K.A(60,85,'CH'), c=K.A(60,135,'CH₂');
+           K.B(a,b); K.B(b,c);
+           const o1=K.A(118,35,'O'), o2=K.A(118,85,'O'), o3=K.A(118,135,'O');
+           K.B(a,o1); K.B(b,o2); K.B(c,o3);
+           K.B(o1,K.A(180,35,'NO₂')); K.B(o2,K.A(180,85,'NO₂')); K.B(o3,K.A(180,135,'NO₂')); }},
+
+ {t:'acid', f:'HOC₆H₄COOH', iupac:'2-Hydroxybenzoic acid', common:'salicylic acid', sp:[16,4],
+  uses:['Cosmetics ','Making aspirin (acetylation)','Making marookh oil (methyl salicylate) with CH₃OH'],
+  kek:K=>{ const r=K.R(80,92,30,true,-90);
+           const c1=K.A(148,52,'C'); K.B(r.v[0],c1);
+           K.B(c1,K.A(148,16,'O'),2); K.B(c1,K.A(198,52,'OH'));
+           const oh=K.A(...r.p(1,30),'OH'); K.B(r.v[1],oh); }},
+
+ {t:'reag', f:'CuSO₄', iupac:'inorganicCopper(II) sulphate (anhydrous)', common:'white copper sulphate', sp:null,
+  uses:['Tests presence of hydrogen in organic compounds:','absorbs the water formed on combustion','→ its colour turns from white to BLUE'],
+  kek:K=>{ K.T(74,75,'CuSO₄',22,'#e8edf5'); K.T(74,108,'white',12,'#cbd5e1');
+           K.T(128,75,'→',20,'#fcd34d'); K.T(127,58,'+H₂O',11,'#7dd3fc');
+           K.T(186,75,'CuSO₄·5H₂O',16,'#60a5fa'); K.T(186,108,'blue',12,'#60a5fa'); }},
+
+ {t:'reag', f:'NaOH + CaO', iupac:' inorgani Soda lime', common:'sodalime mixture', sp:null,
+  uses:['Lab preparation of methane (from CH₃COONa) & benzene (from C₆H₅COONa)','CaO (quick lime) reduces the melting point of the mixture','CaO is not a reactant — it only helps fusion as flux substance'],
+  kek:K=>{ K.T(80,70,'NaOH',22,'#e8edf5'); K.T(133,70,'+',18,'#fcd34d');
+           K.T(182,70,'CaO',22,'#e8edf5');
+           K.T(120,112,'(quick lime lowers M.P.)',11.5,'#94a3b8'); }},
+
+ /* ================= LAB TESTS & REAGENTS ================= */
+
+ {t:'reag', f:'Br₂ / H₂O', iupac:'Bromine water test', common:'test for unsaturation (C=C / C≡C)', sp:null,
+  uses:['Alkenes & alkynes DECOLOURISE the orange-brown bromine water (addition)','Alkanes & benzene give NO change (no addition in dark/cold)','Example: CH₂=CH₂ + Br₂ → BrCH₂–CH₂Br (colourless)'],
+  kek:K=>{ K.T(70,62,'Br₂/H₂O',19,'#fb923c'); K.T(70,90,'orange-brown',11,'#fb923c');
+           K.T(128,62,'→',20,'#fcd34d'); K.T(128,44,'+ C=C',11,'#7dd3fc');
+           K.T(186,62,'colourless',15,'#cbd5e1');
+           K.T(120,130,'no change with alkanes / benzene',11,'#94a3b8'); }},
+
+ {t:'reag', f:'KMnO₄ / Na₂CO₃', iupac:'Baeyer\u2019s reagent', common:'cold alkaline potassium permanganate', sp:null,
+  uses:['Second test for unsaturation: VIOLET colour disappears with alkenes/alkynes','Ethene → ethylene glycol (mild oxidation)','Distinguishes alkene or alkynes from alkane in seconds'],
+  kek:K=>{ K.T(66,62,'KMnO₄',19,'#c084fc'); K.T(66,90,'violet',11,'#c084fc');
+           K.T(124,62,'→',20,'#fcd34d'); K.T(124,44,'+ C=C',11,'#7dd3fc');
+           K.T(188,62,'colourless +',13,'#cbd5e1'); K.T(188,84,'brown MnO₂↓',12,'#fb923c');
+           K.T(120,130,'CH₂=CH₂ → CH₂OH–CH₂OH',11.5,'#94a3b8'); }},
+
+ {t:'reag', f:'NaHCO₃', iupac:'Sodium hydrogencarbonate test', common:'test for carboxylic acids', sp:null,
+  uses:['Carboxylic acids give EFFERVESCENCE of CO₂ gas','Distinguishes acids from phenol (phenol gives NO bubbles)','CH₃COOH + NaHCO₃ → CH₃COONa + H₂O + CO₂↑'],
+  kek:K=>{ K.T(68,62,'NaHCO₃',18,'#e8edf5'); K.T(132,62,'→',20,'#fcd34d');
+           K.T(132,44,'+ –COOH',11,'#7dd3fc');
+           K.T(192,62,'CO₂↑',19,'#4ade80'); K.T(192,88,'fizzing',11,'#4ade80');
+           K.T(120,130,'acid ✓  ·  phenol ✗',12,'#94a3b8'); }},
+
+ {t:'reag', f:'FeCl₃', iupac:'Iron(III) chloride test', common:'test for phenols', sp:null,
+  uses:['Phenols give a deep VIOLET colour with neutral FeCl₃','Salicylic acid & aspirin (after hydrolysis) also respond','Alcohols give no colour'],
+  kek:K=>{ K.T(60,62,'FeCl₃',19,'#fbbf24'); K.T(60,90,'yellow',11,'#fbbf24');
+           K.T(118,62,'→',20,'#fcd34d'); K.T(118,44,'+ Ar–OH',11,'#7dd3fc');
+           K.T(182,62,'violet',18,'#c084fc'); K.T(182,88,'complex',11,'#c084fc');
+           K.T(120,130,'phenol ✓  ·  alcohol ✗',12,'#94a3b8'); }},
+
+ {t:'reag', f:'Na (metal)', iupac:'Sodium metal test', common:'test for –OH group', sp:null,
+  uses:['Alcohols, phenols & acids give H₂ gas bubbles with Na','2C₂H₅OH + 2Na → 2C₂H₅ONa + H₂↑','Ethers & hydrocarbons give no reaction'],
+  kek:K=>{ K.T(56,62,'Na',22,'#c084fc'); K.T(106,62,'→',20,'#fcd34d');
+           K.T(106,44,'+ R–OH',11,'#7dd3fc');
+           K.T(172,62,'H₂↑',20,'#4ade80'); K.T(172,88,'bubbles',11,'#4ade80');
+           K.T(120,130,'–OH present (alcohol/phenol/acid)',11,'#94a3b8'); }},
+
+ {t:'reag', f:'lime water', iupac:'Calcium hydroxide solution', common:'test for CO₂ (combustion products)', sp:null,
+  uses:['CO₂ from burning organic compounds turns lime water MILKY','Proves the compound contains CARBON','Ca(OH)₂ + CO₂ → CaCO₃↓ + H₂O'],
+  kek:K=>{ K.T(70,62,'Ca(OH)₂',18,'#e8edf5'); K.T(70,90,'clear',11,'#cbd5e1');
+           K.T(132,62,'→',20,'#fcd34d'); K.T(132,44,'+ CO₂',11,'#7dd3fc');
+           K.T(192,62,'CaCO₃↓',18,'#e8edf5'); K.T(192,88,'milky',11,'#94a3b8');
+           K.T(120,130,'proves carbon in organic compound',11,'#94a3b8'); } },
+
+];
+
+/* ============ render cards ============ */
+const $grid = document.getElementById('grid');
+let order = CARDS.map((_,i)=>i);
+const present = [...new Set(CARDS.map(c=>c.t))];
+
+/* ============ ARABIC MODE (names & families; formulas stay) ============ */
+let LANG = 'en';
+const AR_IUPAC = {
+"Calcium carbide":"كربيد الكالسيوم",
+"Methane":"الميثان","Ethane":"الإيثان","Cyclohexane":"الهكسان الحلقي",
+"Ethene":"الإيثين","Ethyne":"الإيثاين","Benzene":"البنزين",
+"Methylbenzene":"ميثيل البنزين (تولوين)",
+"Bromoethene":"برومو إيثين","1,1-Dibromoethane":"1،1-ثنائي برومو الإيثان",
+"1,1,2,2-Tetrabromoethane":"1،1،2،2-رباعي برومو الإيثان",
+"1,2-Dibromoethane":"1،2-ثنائي برومو الإيثان","Bromoethane":"برومو الإيثان",
+"Chloromethane":"كلورو الميثان","Dichloromethane":"ثنائي كلورو الميثان",
+"Trichloromethane":"ثلاثي كلورو الميثان (كلوروفورم)","Tetrachloromethane":"رابع كلوريد الكربون",
+"Chlorobenzene":"كلورو البنزين",
+"1,2,3,4,5,6-Hexachlorocyclohexane":"سداسي كلورو الهكسان الحلقي (جاميكسان)",
+"1-Chloro-4-methylbenzene":"كلورو تولوين (أرثو/بارا)",
+"Methanol":"الميثانول","Ethanol":"الإيثانول","Ethane-1,2-diol":"جليكول الإيثيلين",
+"Phenol":"الفينول","Ethoxyethane":"الإيثير الإيثيلي",
+"Ethanal":"الإيثانال","Ethanoic acid":"حمض الإيثانويك (الخليك)",
+"Benzoic acid":"حمض البنزويك","3-Chlorobenzoic acid":"3-كلورو حمض البنزويك",
+"Benzenesulphonic acid":"حمض البنزين سلفونيك",
+"Methyl ethanoate":"إيثانوات الميثيل","Ethyl benzoate":"بنزوات الإيثيل",
+"Methyl 2-hydroxybenzoate":"ساليسيلات الميثيل (زيت الماروخ)",
+"Ethanamide":"الأسيتاميد","Benzamide":"البنزاميد",
+"Sodium ethanoate":"إيثانوات الصوديوم","Sodium benzoate":"بنزوات الصوديوم",
+"Nitrobenzene":"نيترو البنزين","1,3,5-Trinitrobenzene":"ثلاثي نيترو البنزين TNB",
+"2,4,6-Trinitrotoluene":"ثلاثي نيترو التولوين TNT",
+"2-Bromo-2-chloro-1,1,1-trifluoroethane":"الهالوثان",
+"1,1,1-Trichloroethane":"1،1،1-ثلاثي كلورو الإيثان",
+"Tetrafluoromethane":"رابع فلوريد الكربون (فريون-14)",
+"Bromochlorodifluoromethane":"هالون 1211",
+"1,1,1-Trichloro-2,2-bis(4-chlorophenyl)ethane":"الـ د.د.ت DDT",
+"Propane-1,2,3-triol":"الجليسرول","2-Methylpropan-1-ol":"كحول الأيزوبيوتيل",
+"Hexane-1,2,3,4,5,6-hexol":"السوربيتول",
+"n-Hexane":"الهكسان العادي",
+"Coal tar":"قطران الفحم"
+};
+
+Object.assign(AR_IUPAC, {
+"(Aldohexose) 2,3,4,5,6-pentahydroxyhexanal":"الجلوكوز (سكر العنب)",
+"(Ketohexose) 1,3,4,5,6-pentahydroxyhexan-2-one":"الفركتوز (سكر الفاكهة)",
+"2-Hydroxypropanoic acid":"حمض اللاكتيك","2-Hydroxypropane-1,2,3-tricarboxylic acid":"حمض الستريك",
+"Benzene-1,2-diol":"الكاتيكول","Benzene-1,2,3-triol":"البيروجالول",
+"2,4,6-Trinitrophenol":"حمض البكريك","1-Chloro-3-nitrobenzene":"ميتا كلورو نيترو بنزين",
+"Biphenyl":"ثنائي الفينيل","Anthracene":"الأنثراسين",
+"Phenylamine (aniline)":"الأنيلين (فينيل أمين)","Phenyl propanoate":"بروبانوات الفينيل",
+"Sodium alkylbenzene sulphonate":"ألكيل بنزين سلفونات الصوديوم (منظف صناعي)",
+"Poly(tetrafluoroethene)":"التفلون PTFE","Poly(chloroethene)":"البولي فينيل كلوريد PVC",
+"Poly(propene)":"البولي بروبيلين","Poly(ethene)":"البولي إيثيلين",
+"Ethenol":"كحول الفينيل (إيثينول)",
+"2-Aminoethanoic acid":"الجلايسين (حمض أمينو أسيتيك)",
+"Benzene-1,2-dicarboxylic acid":"حمض الفثاليك (أرثو)",
+"Benzene-1,4-dicarboxylic acid":"حمض التيرفثاليك (بارا)",
+"Poly(ethylene terephthalate)":"الداكرون PET",
+"Phenol–methanal network polymer":"الباكيليت",
+"2-Acetoxybenzoic acid":"الأسبرين (أسيتيل حمض الساليسيليك)",
+"N-(4-Hydroxyphenyl)ethanamide":"الباراسيتامول",
+"Carbamide":"اليوريا (الكرباميد)","Propan-2-one":"الأسيتون",
+"Methanal":"الميثانال (فورمالدهيد)","Benzenecarbaldehyde":"البنزالدهيد",
+"Naphthalene":"النفثالين","Phenylethene":"الستايرين (فينيل إيثين)",
+"2-Hydroxybenzoic acid":"حمض الساليسيليك",
+"Propane-1,2,3-triyl trinitrate":"النيتروجليسرين",
+"Dichlorodifluoromethane":"الفريون-12",
+"Copper(II) sulphate (anhydrous)":"كبريتات النحاس اللامائية",
+"Soda lime":"الصودا الجيرية",
+"Bromine water test":"اختبار ماء البروم","Baeyer\u2019s reagent":"كاشف باير",
+"Iodoform test":"اختبار اليودوفورم","Tollens\u2019 reagent":"كاشف تولن",
+"Fehling\u2019s / Benedict\u2019s solution":"محلول فهلنج / بندكت",
+"Sodium hydrogencarbonate test":"اختبار بيكربونات الصوديوم",
+"Iron(III) chloride test":"اختبار كلوريد الحديد III",
+"Sodium metal test":"اختبار فلز الصوديوم","Lucas reagent":"كاشف لوكاس",
+"Calcium hydroxide solution":"ماء الجير"
+});
+const AR_FAM = {
+"Starting material":"مادة البدء","Alkanes":"ألكانات","Alkenes":"ألكينات","Alkynes":"ألكاينات",
+"Aromatic hydrocarbons":"هيدروكربونات أروماتية","Halogen compounds":"مركبات هالوجينية",
+"Alcohols":"كحولات","Phenols":"فينولات","Ethers":"إيثرات","Aldehydes":"ألدهيدات",
+"Carboxylic acids":"أحماض كربوكسيلية","Sulphonic acids":"أحماض سلفونية","Esters":"إسترات",
+"Amides":"أميدات","Nitro compounds":"مركبات نيترو","Aromatic amines":"أمينات أروماتية",
+"Amino acids":"أحماض أمينية","Ketones":"كيتونات","Carbohydrates":"كربوهيدرات",
+"Polymers":"بوليمرات","Salts of acids":"أملاح الأحماض","Lab reagents":"كواشف معملية"
+};
+function trIupac(n){ return LANG==='ar' ? (AR_IUPAC[n]||n) : n; }
+function trFam(n){ return LANG==='ar' ? (AR_FAM[n]||n) : n; }
+
+
+/* ===== Arabic: card uses + UI ===== */
+const AR_USES = {
+"Generating acetylene gas for welding & lamps":"توليد غاز الأسيتيلين للحام والمصابيح",
+"Artificial ripening of fruit":"إنضاج الفاكهة صناعياً",
+"Desulphurising molten steel":"إزالة الكبريت من الصلب المنصهر",
+"Main fuel of natural gas":"الوقود الرئيسي للغاز الطبيعي",
+"Source of hydrogen (steam reforming)":"مصدر الهيدروجين (إعادة التشكيل بالبخار)",
+"Making chloromethanes & carbon black":"تحضير كلوريدات الميثان وأسود الكربون",
+"Component of natural gas (fuel)":"مكون من الغاز الطبيعي (وقود)",
+"Cracked industrially to make ethene":"يُكسر صناعياً لإنتاج الإيثين",
+"Making adipic acid & caprolactam for nylon":"تحضير حمض الأديبيك والكابرولاكتام للنايلون",
+"Non-polar laboratory solvent":"مذيب معملي غير قطبي",
+"Ripening of fruits (plant hormone)":"إنضاج الثمار (هرمون نباتي)",
+"Polyethylene (plastic) manufacture":"صناعة البولي إيثيلين (بلاستيك)",
+"Industrial ethanol production":"إنتاج الإيثانول صناعياً",
+"Oxy-acetylene welding flame (~3000°C)":"لهب الأوكسي أسيتيلين للحام (~3000°م)",
+"Making ethanal, ethanoic acid & benzene":"تحضير الإيثانال وحمض الإيثانويك والبنزين",
+"Making styrene, phenol, aniline & dyes":"تحضير الستايرين والفينول والأنيلين والأصباغ",
+"Saturated by 3 mol H₂ → cyclohexane":"يتشبع بـ 3 مول H₂ ← هكسان حلقي",
+"Industrial solvent (carcinogenic — handle with care!)":"مذيب صناعي (مسرطن — تعامل بحذر!)",
+"Solvent in paints, glues & inks":"مذيب في الدهانات والمواد اللاصقة والأحبار",
+"Manufacture of TNT":"صناعة الـ TNT",
+"Octane booster in petrol":"رافع لرقم الأوكتان في البنزين",
+"Was used as an anaesthetic substance":"كان يستخدم كمادة مخدرة",
+"Solvent for fats, oils & rubber":"مذيب للدهون والزيوت والمطاط",
+"Replaced by halothane (safer)":"حل محله الهالوثان (أكثر أماناً)",
+"Anaesthetic substance instead of chloroform (safer)":"مادة مخدرة بدلاً من الكلوروفورم (أكثر أماناً)",
+"Non-flammable & non-irritating":"غير قابل للاشتعال وغير مهيج",
+"Dry-cleaning of clothes":"التنظيف الجاف للملابس",
+"Degreasing metals & electronics":"إزالة الشحوم من المعادن والإلكترونيات",
+"Correction-fluid solvent (restricted now)":"مذيب سائل التصحيح (مقيد حالياً)",
+"Refrigerant gas":"غاز تبريد",
+"Plasma etching of semiconductor chips":"حفر رقائق أشباه الموصلات بالبلازما",
+"Very stable — strong greenhouse gas":"مستقر جداً — غاز دفيئة قوي",
+"Fire-extinguishers for electronics & aircraft":"طفايات حريق للإلكترونيات والطائرات",
+"Phased out — destroys the ozone layer":"أُوقف تدريجياً — يدمر طبقة الأوزون",
+"Air-conditioners & fridges (refrigerant)":"مكيفات الهواء والثلاجات (مادة تبريد)",
+"Liquefying propellant gas for perfume sprays":"غاز دافع مسيل لبخاخات العطور",
+"Cleaner of electronic sets":"منظف للأجهزة الإلكترونية",
+"Powerful insecticide — fought malaria & typhus":"مبيد حشري قوي — حارب الملاريا والتيفوس",
+"Poisonous action due to the CH–CCl₃ part":"التأثير السام يرجع لجزء CH–CCl₃",
+"Banned in most countries (accumulates in food chains)":"محظور في معظم الدول (يتراكم في السلاسل الغذائية)",
+"Insecticide — gammexane (lindane)":"مبيد حشري — جاميكسان (لِيندين)",
+"Made from benzene + 3Cl₂ in UV light (addition)":"يُحضر من البنزين + 3Cl₂ في الضوء فوق البنفسجي (إضافة)"
+};
+
+Object.assign(AR_USES, {
+"Sterilising mouth & teeth — disinfectant (70%)":"تعقيم الفم والأسنان — مطهر (70%)",
+"Perfumes & medicine solvent":"مذيب للعطور والأدوية",
+"Thermometers for measuring low temperatures":"ترمومترات قياس درجات الحرارة المنخفضة",
+"Alcoholic drinks & biofuel":"المشروبات الكحولية والوقود الحيوي",
+"Moisturiser in cosmetics & soaps":"مرطب في مستحضرات التجميل والصابون",
+"Making nitroglycerine (dynamite & heart medicine)":"تحضير النيتروجليسرين (ديناميت ودواء للقلب)",
+"Sweetener & humectant in food":"محلٍ ومرطب في الأغذية",
+"Solvent for paints, lacquers & varnishes":"مذيب للدهانات والورنيشات",
+"Making ester flavourings":"تحضير نكهات الإسترات",
+"Sugar-free sweetener for diabetics":"محلٍ خالٍ من السكر لمرضى السكري",
+"Keeps toothpaste & sweets moist":"يحافظ على رطوبة معجون الأسنان والحلوى",
+"Vitamin C manufacture":"تصنيع فيتامين C",
+"Main energy source of body cells":"مصدر الطاقة الرئيسي لخلايا الجسم",
+"Intravenous drips for patients":"محاليل وريدية للمرضى",
+"Fermented to ethanol":"يتخمر إلى إيثانول",
+"Sweetest natural sugar — honey & fruits":"أحلى سكر طبيعي — العسل والفواكه",
+"Sweetener in soft drinks (HFCS)":"محلٍ في المشروبات الغازية",
+"Formed in sour milk & yoghurt":"يتكون في اللبن الرائب والزبادي",
+"Secreted in muscles after hard effort — causes muscle contraction":"يُفرز في العضلات بعد المجهود الشاق — يسبب تقلص العضلات",
+"Food acidity regulator (E270)":"منظم حموضة غذائي (E270)",
+"Prevents the growth of bacteria in foods":"يمنع نمو البكتيريا في الأغذية",
+"Sour taste of lemon & citrus fruits":"الطعم الحامض لليمون والموالح",
+"Tribasic, mono-hydroxy aliphatic acid (E330)":"حمض أليفاتي ثلاثي القاعدية أحادي الهيدروكسيل (E330)",
+"Disinfectants — carbolic acid":"مطهرات — حمض الكربوليك",
+"Polymers & dyes":"بوليمرات وأصباغ",
+"Salicylic-acid derivatives → aspirin & picric acid":"مشتقات حمض الساليسيليك ← أسبرين وحمض البكريك",
+"Bakelite polymer with formaldehyde":"بوليمر الباكيليت مع الفورمالدهيد",
+"Photographic developer":"مُظهر فوتوغرافي",
+"Antioxidant; precursor of adrenaline & dopamine":"مضاد أكسدة؛ مادة أولية للأدرينالين والدوبامين",
+"Absorbs oxygen in gas analysis":"يمتص الأكسجين في تحليل الغازات",
+"Hair-dye component":"مكون في صبغات الشعر",
+"Explosive substance (lyddite shells)":"مادة متفجرة (قذائف الليديت)",
+"Treatment of skin burns":"علاج حروق الجلد",
+"Made from phenol + 3HNO₃ (conc. H₂SO₄)":"يُحضر من الفينول + 3HNO₃ (H₂SO₄ مركز)",
+"Intermediate for dyes, drugs & pesticides":"وسيط للأصباغ والأدوية والمبيدات",
+"Example of meta-direction by the –NO₂ group":"مثال على التوجيه ميتا لمجموعة –NO₂",
+"Preservative of citrus fruits (E230)":"مادة حافظة للموالح (E230)",
+"Saturated by 6 mol H₂ (π = 6)":"يتشبع بـ 6 مول H₂ (π = 6)",
+"Heat-transfer fluid in industry":"سائل نقل حرارة في الصناعة",
+"Making alizarin & other dyes":"تحضير الأليزارين وأصباغ أخرى",
+"Saturated by 7 mol H₂ (π = 7)":"يتشبع بـ 7 مول H₂ (π = 7)",
+"Component of coal tar":"مكون من قطران الفحم",
+"Moth repellent balls in wardrobes":"كرات طاردة للعث في الدواليب",
+"Saturated by 5 mol H₂ (π = 5)":"يتشبع بـ 5 مول H₂ (π = 5)",
+"Making phthalic anhydride & indigo dye":"تحضير أنهيدريد الفثاليك وصبغة النيلة"
+});
+
+Object.assign(AR_USES, {
+"Making azo dyes & pigments":"تحضير أصباغ الآزو والخضاب",
+"Drugs (paracetamol family)":"أدوية (عائلة الباراسيتامول)",
+"Rubber-processing chemicals":"كيماويات معالجة المطاط",
+"Perfumes & flavourings":"عطور ونكهات",
+"Example of ester of phenol":"مثال على إستر الفينول",
+"Active agent of washing powders & liquids":"المادة الفعالة في مساحيق وسوائل الغسيل",
+"Works in hard water (unlike soap)":"يعمل في الماء العسر (بعكس الصابون)",
+"Biodegradable when chain is linear":"قابل للتحلل الحيوي عندما تكون السلسلة مستقيمة",
+"Non-stick coating of cooking pans":"طلاء غير لاصق لأواني الطهي",
+"Resists heat & almost all chemicals":"يقاوم الحرارة ومعظم الكيماويات",
+"Plumbing thread-seal tape":"شريط إحكام وصلات السباكة",
+"Water pipes & window frames":"مواسير المياه وإطارات النوافذ",
+"Electric-cable insulation":"عزل الكابلات الكهربائية",
+"Floor tiles & artificial leather":"بلاط الأرضيات والجلد الصناعي",
+"Ropes, carpets & woven sacks":"حبال وسجاد وأجولة منسوجة",
+"Food containers & bottle caps":"عبوات أغذية وأغطية زجاجات",
+"Car bumpers & medical syringes":"صدامات سيارات ومحاقن طبية",
+"Plastic bags & cling film (LDPE)":"أكياس بلاستيك وأغشية تغليف (LDPE)",
+"Bottles, buckets & water pipes (HDPE)":"زجاجات وجرادل ومواسير مياه (HDPE)",
+"Most-produced plastic in the world":"أكثر بلاستيك يُنتج في العالم",
+"Unstable — instantly rearranges (tautomerises) to ethanal":"غير ثابت — يتحول فوراً (تصاوغ) إلى إيثانال",
+"Its esters give PVA: glues, paints & water-soluble films":"إستراته تعطي PVA: مواد لاصقة ودهانات وأغشية ذائبة في الماء",
+"Building block of all proteins":"وحدة بناء جميع البروتينات",
+"Sweet taste — flavour enhancer (E640)":"طعم حلو — محسن نكهة (E640)",
+"Making creatine in muscles":"تكوين الكرياتين في العضلات",
+"Making plasticisers (phthalates) for PVC":"تحضير الملدنات (فثالات) للـ PVC",
+"Phthalic anhydride & dyes (phenolphthalein)":"أنهيدريد الفثاليك والأصباغ (فينولفثالين)",
+"Alkyd paint resins":"راتنجات دهانات الألكيد",
+"Monomer of Dacron / PET polyester":"مونومر الداكرون / بوليستر PET",
+"Plastic bottles & polyester clothes fibre":"زجاجات بلاستيك وألياف ملابس بوليستر",
+"Polyester clothing fibre (wash-and-wear)":"ألياف ملابس بوليستر",
+"Soft-drink bottles (PET)":"زجاجات المشروبات الغازية (PET)",
+"Sails, seat-belts & blood-vessel grafts":"أشرعة وأحزمة أمان ورقع أوعية دموية",
+"First fully synthetic plastic (1907)":"أول بلاستيك صناعي بالكامل (1907)",
+"Electric switches, plugs & sockets (insulator)":"مفاتيح وفيش كهربائية (عازل)",
+"Handles of cooking pots (thermoset — never melts again)":"مقابض أواني الطهي (متصلد حرارياً — لا ينصهر ثانية)",
+"Reduces headache & temperature (fever)":"يخفف الصداع ويخفض الحرارة (الحمى)",
+"Reduces blood clotting — prevents heart crises":"يقلل تجلط الدم — يقي من أزمات القلب",
+"Made from salicylic acid + ethanoic anhydride":"يُحضر من حمض الساليسيليك + أنهيدريد الإيثانويك",
+"Most-used pain & fever medicine worldwide":"أكثر دواء مسكن وخافض للحرارة استخداماً في العالم",
+"Safe for stomach (unlike aspirin) at correct dose":"آمن على المعدة (بعكس الأسبرين) بالجرعة الصحيحة",
+"Most important nitrogen fertiliser (46% N)":"أهم سماد نيتروجيني (46% نيتروجين)",
+"First organic compound made from inorganic (Wöhler 1828)":"أول مركب عضوي حُضر من مادة غير عضوية (فولر 1828)",
+"Urea–formaldehyde glues & creams":"مواد لاصقة وكريمات اليوريا-فورمالدهيد",
+"Nail-polish remover":"مزيل طلاء الأظافر",
+"Solvent for plastics & varnishes":"مذيب للبلاستيك والورنيش",
+"Made in body during fasting (ketosis)":"يتكون في الجسم أثناء الصيام (كيتوزية)",
+"Preserving biological specimens":"حفظ العينات البيولوجية",
+"Making Bakelite & urea glues":"تحضير الباكيليت ومواد لاصقة اليوريا",
+"Disinfectant":"مطهر",
+"Almond flavour & perfumes":"نكهة اللوز والعطور",
+"Making dyes & cinnamic acid":"تحضير الأصباغ وحمض السيناميك",
+"Monomer of polystyrene & foam (Styrofoam)":"مونومر البوليسترين والفوم",
+"Synthetic rubber (SBR) for tyres":"مطاط صناعي (SBR) للإطارات"
+});
+
+Object.assign(AR_USES, {
+"Flame-retardant copolymers":"بوليمرات مشتركة مثبطة للهب",
+"Intermediate in organic synthesis":"وسيط في التخليق العضوي",
+"Dense liquid used to separate minerals by flotation":"سائل كثيف لفصل المعادن بالتعويم",
+"Solvent":"مذيب",
+"Former lead scavenger in leaded petrol":"كاسح رصاص سابق في البنزين المرصص",
+"Soil fumigant (restricted)":"مبخر تربة (مقيد)",
+"Ethylating agent in synthesis":"عامل أثيلة في التخليق",
+"Preparation of Grignard reagents in the lab":"تحضير كواشف جرينيارد في المعمل",
+"Manufacture of silicones":"صناعة السيليكونات",
+"Methylating agent":"عامل مثيلة","Former refrigerant":"مادة تبريد سابقة",
+"Paint stripper":"مزيل دهانات","Degreasing & extraction solvent":"مذيب استخلاص وإزالة شحوم",
+"Aerosol propellant":"غاز دافع للأيروسول","Historical general anaesthetic":"مخدر عام تاريخي",
+"Precursor of PTFE refrigerants":"مادة أولية لمبردات PTFE",
+"Former fire-extinguisher liquid & dry-cleaning fluid":"سائل إطفاء وتنظيف جاف سابق",
+"Now restricted (ozone-depleting, toxic)":"مقيد حالياً (مستنفد للأوزون، سام)",
+"Manufacture of phenol":"صناعة الفينول","DDT synthesis (historical)":"تخليق DDT (تاريخي)",
+"Powerful insecticide — lindane (restricted today)":"مبيد حشري قوي — ليندين (مقيد اليوم)",
+"Solvent & fuel additive":"مذيب وإضافة وقود",
+"Making formaldehyde (formalin)":"تحضير الفورمالدهيد (فورمالين)",
+"⚠ Highly toxic — causes blindness":"⚠ سام جداً — يسبب العمى",
+"Antiseptic (70% solution)":"مطهر (محلول 70%)",
+"Solvent in perfumes & medicines":"مذيب في العطور والأدوية",
+"Car-radiator antifreeze":"مانع تجمد لرادياتير السيارات",
+"Making polyester (PET) fibres & bottles":"تحضير ألياف وزجاجات البوليستر",
+"Antiseptics & disinfectants":"مطهرات ومعقمات","Bakelite & epoxy resins":"راتنجات الباكيليت والإيبوكسي",
+"Aspirin synthesis":"تخليق الأسبرين","Laboratory extraction solvent":"مذيب استخلاص معملي",
+"Former general anaesthetic":"مخدر عام سابق","Cold-starting fluid for engines":"سائل بدء تشغيل بارد للمحركات",
+"Manufacture of ethanoic acid":"صناعة حمض الإيثانويك",
+"Silvering of mirrors (reducing agent)":"تفضيض المرايا (عامل مختزل)",
+"Making resins & dyes":"تحضير الراتنجات والأصباغ",
+"Vinegar (4–6% solution)":"الخل (محلول 4–6%)",
+"Making esters, acetate fibre & plastics":"تحضير الإسترات وألياف الأسيتات والبلاستيك",
+"Food preservative":"مادة حافظة للأغذية","Food preservative (E210)":"مادة حافظة (E210)",
+"Making sodium benzoate & esters":"تحضير بنزوات الصوديوم والإسترات",
+"Calibrating calorimeters":"معايرة المسعرات الحرارية",
+"Intermediate in organic synthesis & pharmaceuticals":"وسيط في التخليق العضوي والأدوية",
+"Making phenol by alkali fusion":"تحضير الفينول بالصهر القلوي",
+"Synthetic detergents":"منظفات صناعية","Acid catalyst":"حفاز حمضي",
+"Fast-evaporating solvent in glues & lacquers":"مذيب سريع التبخر في المواد اللاصقة",
+"Marookh oil — absorbed by skin to relieve rheumatic pains":"زيت الماروخ — يمتصه الجلد لتخفيف آلام الروماتيزم",
+"Flavouring agent (oil of wintergreen)":"عامل نكهة (زيت ونترجرين)",
+"Artificial fruit flavouring":"نكهة فواكه صناعية",
+"Plasticiser":"ملدن","Industrial solvent":"مذيب صناعي","Synthesis intermediate":"وسيط تخليق",
+"Intermediate for drugs & dyes":"وسيط للأدوية والأصباغ",
+"Reusable heat pads (\"hot ice\")":"كمادات حرارية قابلة لإعادة الاستخدام (الثلج الساخن)",
+"Buffer solutions & food additive E262":"محاليل منظمة وإضافة غذائية E262",
+"Lab preparation of methane (with soda lime)":"تحضير الميثان معملياً (مع الصودا الجيرية)",
+"Preservative in soft drinks & foods":"مادة حافظة في المشروبات والأغذية",
+"Lab preparation of benzene (decarboxylation)":"تحضير البنزين معملياً (نزع كربوكسيل)",
+"Manufacture of aniline → dyes":"صناعة الأنيلين ← أصباغ",
+"Scent in cheap soaps & polish":"رائحة في الصابون الرخيص والملمعات",
+"High explosive — more powerful and less sensitive than TNT":"متفجر قوي — أقوى وأقل حساسية من TNT",
+"Military explosive":"متفجر حربي",
+"Reference unit of explosive power (kiloton of TNT)":"وحدة قياس القوة التفجيرية (كيلوطن TNT)",
+"Widens arteries — treatment of heart problems (angina)":"يوسع الشرايين — علاج مشاكل القلب (الذبحة)",
+"Main component of dynamite (Nobel)":"المكون الرئيسي للديناميت (نوبل)",
+"Made from glycerol + conc. HNO₃/H₂SO₄":"يُحضر من الجليسرول + HNO₃/H₂SO₄ مركز",
+"Cosmetics specific to skin (peeling, anti-acne)":"مستحضرات تجميل خاصة بالجلد (تقشير، ضد حب الشباب)",
+"Making aspirin (acetylation)":"تحضير الأسبرين (أستلة)",
+"Making marookh oil (methyl salicylate) with CH₃OH":"تحضير زيت الماروخ مع CH₃OH"
+});
+
+Object.assign(AR_USES, {
+"Generating oxyacetylene flame for welding metals":"توليد لهب الأوكسي أسيتيلين للحام المعادن",
+"Making ethyne (acetylene) by water dripping":"تحضير الإيثاين (الأسيتيلين) بتنقيط الماء",
+"Main fuel of natural gas":"الوقود الرئيسي للغاز الطبيعي",
+"Source of hydrogen":"مصدر للهيدروجين",
+"Making chloromethanes & carbon black":"تحضير كلوريدات الميثان وأسود الكربون",
+"Industrial ethanol production":"إنتاج الإيثانول صناعياً",
+"Oxy-acetylene welding flame (~3000°C)":"لهب الأوكسي أسيتيلين للحام (~3000°م)",
+"Making ethanal, ethanoic acid & benzene":"تحضير الإيثانال وحمض الإيثانويك والبنزين",
+"Making phenol,":"تحضير الفينول،",
+"Prepared from: coal tar, sodium benzoate (decarboxylation), n-hexane (reforming), phenol (Zn dust)":"يُحضر من: قطران الفحم، بنزوات الصوديوم (نزع كربوكسيل)، n-هكسان (إعادة التشكيل)، الفينول (مسحوق الزنك)",
+"Saturated by 3 mol H₂ )":"يتشبع بـ 3 مول H₂ )",
+"Manufacture of TNT":"صناعة الـ TNT",
+"Flame-retardant copolymers":"بوليمرات مشتركة مثبطة للهب",
+"Intermediate in organic synthesis":"وسيط في التخليق العضوي",
+"Was used as an anaesthetic substance":"كان يستخدم كمادة مخدرة",
+"Replaced by halothane (safer)":"حل محله الهالوثان (أكثر أماناً)",
+"organic solvent":"مذيب عضوي",
+"Manufacture of phenol":"صناعة الفينول",
+"Solvent":"مذيب",
+"DDT synthesis":"تخليق الـ DDT",
+"Insecticide — gammexane":"مبيد حشري — جاميكسان",
+"Made from benzene + 3Cl₂ in UV light (addition)":"يُحضر من البنزين + 3Cl₂ في الضوء فوق البنفسجي (إضافة)",
+"Making formaldehyde (formalin)":"تحضير الفورمالدهيد (فورمالين)",
+"⚠ Highly toxic — causes blindness added to red spirit to use as fuel":"⚠ سام جداً — يسبب العمى، يُضاف للكحول الأحمر كوقود",
+"Sterilising mouth & teeth — disinfectant (70%)":"تعقيم الفم والأسنان — مطهر (70%)",
+"Perfumes & medicine solvent":"مذيب للعطور والأدوية",
+"Thermometers for measuring low temperatures(-110.5°C)":"ترمومترات قياس درجات الحرارة المنخفضة (-110.5°م)",
+"Alcoholic drinks & biofuel":"المشروبات الكحولية والوقود الحيوي",
+"Car-radiator antifreeze":"مانع تجمد لرادياتير السيارات",
+"Making polyester ,Dacron fibres ,hydrlic brake fluids":"تحضير البوليستر، ألياف الداكرون، سوائل الفرامل الهيدروليكية",
+"Salicylic-acid derivatives → aspirin & picric acid":"مشتقات حمض الساليسيليك ← الأسبرين وحمض البكريك",
+"Bakelite polymer with formaldehyde":"بوليمر الباكيليت مع الفورمالدهيد",
+"Manufacture of ethanoic acid":"صناعة حمض الإيثانويك",
+"Vinegar (4 % solution)":"الخل (محلول 4%)",
+"Making esters, acetate fibre & plastics":"تحضير الإسترات وألياف الأسيتات والبلاستيك",
+"Food preservative":"مادة حافظة للأغذية",
+"Making sodium benzoate & esters":"تحضير بنزوات الصوديوم والإسترات",
+"Synthetic detergents":"منظفات صناعية",
+"Perfumes ":"العطور ",
+"Artificial fruit flavouring":"نكهة فواكه صناعية",
+"Marookh oil — absorbed by skin to relieve rheumatic pains":"زيت الماروخ — يمتصه الجلد لتخفيف آلام الروماتيزم",
+" (oil of wintergreen)":" (زيت وينترجرين)",
+"Lab preparation of methane (with soda lime)":"تحضير الميثان معملياً (مع الصودا الجيرية)",
+"Preservative foods":"حفظ الأغذية",
+"Lab preparation of benzene (decarboxylation)":"تحضير البنزين معملياً (نزع كربوكسيل)",
+" explosive ":" متفجر ",
+"Anaesthetic substance instead of chloroform (safer)":"مادة مخدرة بدلاً من الكلوروفورم (أكثر أماناً)",
+"Dry-cleaning of clothes":"التنظيف الجاف للملابس",
+"Freon: air-conditioners & fridges":"فريون: مكيفات الهواء والثلاجات",
+"Liquefied propellant gas for perfumes":"غاز دافع مسيل لبخاخات العطور",
+"Cleaner of electronic sets":"منظف للأجهزة الإلكترونية",
+" insecticide ":" مبيد حشري ",
+"Poisonous action due to the CH–CCl₃ part":"التأثير السام يرجع لجزء CH–CCl₃",
+"Banned in most countries (accumulates in food chains)":"محظور في معظم الدول (يتراكم في السلاسل الغذائية)",
+"Moisturiser in cosmetics & soaps":"مرطب في مستحضرات التجميل والصابون",
+"Making nitroglycerine explosive":"تحضير النيتروجليسرين (متفجر)",
+"Polyester clothing fibre ":"ألياف ملابس بوليستر ",
+"thermoset — dark brown,making ash trys)":"متصلد حرارياً — بني داكن، صناعة صوانٍ الرماد)",
+"Reduces headache & temperature (fever)":"يخفف الصداع ويخفض الحرارة (الحمى)",
+"Reduces blood clotting — prevents heart crises":"يقلل تجلط الدم — يقي من أزمات القلب",
+"Made from salicylic acid + ethanoic anhydride":"يُحضر من حمض الساليسيليك + أنهيدريد الإيثانويك",
+"Most-used pain & fever medicine worldwide":"أكثر دواء مسكن وخافض للحرارة استخداماً في العالم",
+"Safe for stomach (unlike aspirin) at correct dose":"آمن على المعدة (بعكس الأسبرين) بالجرعة الصحيحة",
+"Most important nitrogen fertiliser ":"أهم سماد نيتروجيني ",
+"First organic compound made from inorganic (Wöhler 1828)":"أول مركب عضوي حُضر من مادة غير عضوية (فولر 1828)",
+"Nail-polish remover":"مزيل طلاء الأظافر",
+"Making Bakelite ":"تحضير الباكيليت ",
+"Air-conditioners & fridges (refrigerant)":"مكيفات الهواء والثلاجات (مادة تبريد)",
+"Liquefying propellant for perfume sprays":"غاز دافع مسيل لبخاخات العطور",
+" damages the ozone layer":" يدمر طبقة الأوزون",
+"Widens arteries — treatment of heart problems ":"يوسع الشرايين — علاج مشاكل القلب ",
+"explosive":"متفجر",
+"Made from glycerol + conc. HNO₃/H₂SO₄":"يُحضر من الجليسرول + HNO₃/H₂SO₄ مركز",
+"Cosmetics ":"مستحضرات التجميل ",
+"Making aspirin (acetylation)":"تحضير الأسبرين (أستلة)",
+"Made from phenol + 3HNO₃ (conc. H₂SO₄)":"يُحضر من الفينول + 3HNO₃ (H₂SO₄ مركز)",
+"Explosive substance ":"مادة متفجرة ",
+"Treatment of skin burns":"علاج حروق الجلد",
+"Bottles, buckets & water pipes":"زجاجات وجرادل ومواسير مياه",
+"Plastic bags & cling film":"أكياس بلاستيك وأغشية تغليف",
+"Resists heat":"يقاوم الحرارة",
+"Car bumpers & medical syringes":"صدامات سيارات ومحاقن طبية",
+"Ropes, carpets & woven sacks":"حبال وسجاد وأجولة منسوجة",
+"Food containers & bottle caps":"عبوات أغذية وأغطية زجاجات",
+"Electric-cable insulation":"عزل الكابلات الكهربائية",
+"Floor tiles & artificial leather":"بلاط الأرضيات والجلد الصناعي",
+"Water pipes & window frames":"مواسير المياه وإطارات النوافذ",
+"Non-stick coating of cooking pans":"طلاء غير لاصق لأواني الطهي",
+"Unstable ":"غير مستقر ",
+"Building block of all proteins":"وحدة بناء جميع البروتينات",
+"Main energy source of body cells":"مصدر الطاقة الرئيسي لخلايا الجسم",
+"Fermented to ethanol":"يتخمر إلى إيثانول",
+"Sweetest natural sugar — honey & fruits":"أحلى سكر طبيعي — العسل والفواكه",
+"Sweetener in soft drinks (HFCS)":"محلٍ في المشروبات الغازية",
+"Secreted in muscles after hard effort — causes muscle contraction":"يُفرز في العضلات بعد المجهود الشاق — يُسبب تقلص العضلات",
+"Formed in sour milk & yoghurt":"يتكون في اللبن الرائب والزبادي",
+"Prevents the growth of bacteria in foods":"يمنع نمو البكتيريا في الأغذية",
+"Sour taste of lemon & citrus fruits":"الطعم الحامض لليمون والموالح",
+"Tribasic, mono-hydroxy aliphatic acid":"حمض أليفاتي ثلاثي القاعدية أحادي الهيدروكسيل",
+"Example of ester of phenol":"مثال على إستر الفينول",
+"Active agent of washing powders & liquids":"المادة الفعالة في مساحيق وسوائل الغسيل",
+"Works in hard water ":"يعمل في الماء العسر ",
+"has hydrophilic head and hydrophobic tail (alkyl group)":"له رأس محب للماء وذيل كاره للماء (مجموعة ألكيل)",
+"Monomer of Dacron is inert used in making heart valve,/  polyester":"مونومر الداكرون خامل يُستخدم في صناعة صمامات القلب، / بوليستر",
+"Tests presence of hydrogen in organic compounds:":"يكشف وجود الهيدروجين في المركبات العضوية:",
+"absorbs the water formed on combustion":"يمتص الماء المتكون عند الاحتراق",
+"→ its colour turns from white to BLUE":"→ يتحول لونه من الأبيض إلى الأزرق",
+"Lab preparation of methane (from CH₃COONa) & benzene (from C₆H₅COONa)":"تحضير الميثان معملياً (من CH₃COONa) والبنزين (من C₆H₅COONa)",
+"CaO (quick lime) reduces the melting point of the mixture":"CaO (الجير الحي) يُخفض درجة انصهار الخليط",
+"CaO is not a reactant — it only helps fusion as flux substance":"CaO ليس متفاعلاً — يساعد فقط على الانصهار كمادة صاهرة",
+"Alkenes & alkynes DECOLOURISE the orange-brown bromine water (addition)":"الألكينات والألكاينات تُزيل لون ماء البروم البرتقالي-البني (إضافة)",
+"Alkanes & benzene give NO change (no addition in dark/cold)":"الألكانات والبنزين لا يحدث لها تغيير (لا إضافة في الظلام/البرودة)",
+"Example: CH₂=CH₂ + Br₂ → BrCH₂–CH₂Br (colourless)":"مثال: CH₂=CH₂ + Br₂ → BrCH₂–CH₂Br (عديم اللون)",
+"Second test for unsaturation: VIOLET colour disappears with alkenes/alkynes":"الاختبار الثاني لغير الإشباع: اللون البنفسجي يختفي مع الألكينات/الألكاينات",
+"Ethene → ethylene glycol (mild oxidation)":"الإيثين ← جليكول الإيثيلين (أكسدة خفيفة)",
+"Distinguishes alkene or alkynes from alkane in seconds":"يميّز الألكين أو الألكاين عن الألكان في ثوانٍ",
+"Carboxylic acids give EFFERVESCENCE of CO₂ gas":"الأحماض الكربوكسيلية تُعطي فوراناً لغاز CO₂",
+"Distinguishes acids from phenol (phenol gives NO bubbles)":"يميّز الأحماض عن الفينول (الفينول لا يُعطي فقاعات)",
+"CH₃COOH + NaHCO₃ → CH₃COONa + H₂O + CO₂↑":"CH₃COOH + NaHCO₃ → CH₃COONa + H₂O + CO₂↑",
+"Phenols give a deep VIOLET colour with neutral FeCl₃":"الفينولات تُعطي لوناً بنفسجياً عميقاً مع FeCl₃ المتعادل",
+"Salicylic acid & aspirin (after hydrolysis) also respond":"حمض الساليسيليك والأسبرين (بعد التحلل المائي) يتفاعلان أيضاً",
+"Alcohols give no colour":"الكحولات لا تُعطي لوناً",
+"Alcohols, phenols & acids give H₂ gas bubbles with Na":"الكحولات والفينولات والأحماض تُعطي فقاعات غاز H₂ مع Na",
+"2C₂H₅OH + 2Na → 2C₂H₅ONa + H₂↑":"2C₂H₅OH + 2Na → 2C₂H₅ONa + H₂↑",
+"Ethers & hydrocarbons give no reaction":"الإيثرات والهيدروكربونات لا تتفاعل",
+"CO₂ from burning organic compounds turns lime water MILKY":"غاز CO₂ من احتراق المركبات العضوية يُحوّل ماء الجير إلى اللون الحليبي",
+"Proves the compound contains CARBON":"يثبت أن المركب يحتوي على الكربون",
+"Ca(OH)₂ + CO₂ → CaCO₃↓ + H₂O":"Ca(OH)₂ + CO₂ → CaCO₃↓ + H₂O"
+});
+
+Object.assign(AR_USES, {
+" explosive":" متفجر",
+"Bottles, buckets & water pipes ":"زجاجات وجرادل ومواسير مياه ",
+"DDT synthesis ":"تخليق الـ DDT ",
+"Insecticide — gammexane ":"مبيد حشري — جاميكسان ",
+"Resists heat ":"يقاوم الحرارة ",
+"Tribasic, mono-hydroxy aliphatic acid ":"حمض أليفاتي ثلاثي القاعدية أحادي الهيدروكسيل "
+});
+function trUse(u){ return LANG==='ar' ? (AR_USES[u]||u) : u; }
+const AR_UI_FC = { uses:'الاستخدامات', flip:'اضغط للقلب ↻', total:'بطاقة' };
+
+
+function renderGrid(){
+    $grid.innerHTML = '';
+    order.forEach(i=>{
+        const c = CARDS[i], T = TYPES[c.t];
+        const card = document.createElement('div');
+        card.className = 'fcard';
+        card.dataset.idx = i;
+        card.style.setProperty('--cc', T.c);
+        card.innerHTML = `
+          <div class="inner">
+            <div class="face front">
+                <span class="qmark">?</span>
+                <span class="badge">${T.sym}</span>
+                <div class="struct"><svg viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg"></svg></div>
+                <div class="formula-chip">${c.f}</div>
+                ${c.sp ? `<div class="sigpi"><span class="sg">σ ${c.sp[0]}</span><span class="pi">π ${c.sp[1]}</span></div>` : `<div class="sigpi"><span class="nw">${c.t==='reag' ? 'lab test ⚗' : 'network polymer'}</span></div>`}
+                <div class="fliphint">${LANG==='ar' ? AR_UI_FC.flip : 'click to flip ↻'}</div>
+            </div>
+            <div class="face back">
+                <span class="gchip">${trFam(T.n)}</span>
+                <h2 class="bk-iupac">${trIupac(c.iupac)}</h2>
+                <div class="common">${c.common}</div>
+                <div class="bf">${c.f}</div>
+                <div class="lblrow"><span class="lbl iupac">IUPAC</span>
+                    <span class="lbl" style="background:${T.c}22;color:${T.c}">${T.sym || T.n}</span>
+                    ${c.sp ? `<span class="lbl sgb">σ ${c.sp[0]}</span><span class="lbl pib">π ${c.sp[1]}</span>` : ''}</div>
+                <h4>${LANG==='ar' ? AR_UI_FC.uses : 'Uses'}</h4>
+                <ul class="uses-ul">${c.uses.map(u=>`<li>${trUse(u)}</li>`).join('')}</ul>
+            </div>
+          </div>`;
+        /* single click = flip · double click = expand to 3/4 page */
+        card.addEventListener('click', ()=>{
+            clearTimeout(card._ct);
+            card._ct = setTimeout(()=>card.classList.toggle('flip'), 230);
+        });
+        card.addEventListener('dblclick', e=>{
+            e.preventDefault();
+            clearTimeout(card._ct);            /* cancel the pending flip */
+            openBig(parseInt(card.dataset.idx));
+        });
+        $grid.appendChild(card);
+        renderMol(card.querySelector('svg'), bld(c.kek));
+    });
+    applyVisibility();
+}
+
+/* ============ filters / search ============ */
+let activeFilter = null, query = '';
+const $filters = document.getElementById('filters');
+present.forEach(k=>{
+    const T = TYPES[k];
+    const d = document.createElement('div');
+    d.className = 'pill';
+    d.dataset.t = k;
+    d.style.setProperty('--pc', T.c);
+    d.innerHTML = `<span class="dot"></span>${trFam(T.n)}`;
+    d.addEventListener('click', ()=>{
+        activeFilter = (activeFilter===k) ? null : k;
+        $filters.querySelectorAll('.pill').forEach(p=>{
+            p.classList.toggle('active', p.dataset.t===activeFilter);
+            p.classList.toggle('muted', activeFilter && p.dataset.t!==activeFilter);
+        });
+        applyVisibility();
+    });
+    $filters.appendChild(d);
+});
+
+function applyVisibility(){
+    let shown = 0;
+    document.querySelectorAll('.fcard').forEach(el=>{
+        const c = CARDS[el.dataset.idx];
+        const okF = !activeFilter || c.t===activeFilter;
+        const q = query.toLowerCase();
+        const okQ = !q || c.iupac.toLowerCase().includes(q) || c.common.toLowerCase().includes(q)
+                 || c.f.toLowerCase().includes(q);
+        el.classList.toggle('hidden', !(okF&&okQ));
+        if (okF&&okQ) shown++;
+    });
+    document.getElementById('count').textContent = shown + ' / ' + CARDS.length + ' cards';
+}
+
+document.getElementById('search').addEventListener('input', e=>{ query=e.target.value; applyVisibility(); });
+document.getElementById('btnFlipAll').addEventListener('click', ()=>{
+    const anyUnflipped = [...document.querySelectorAll('.fcard:not(.hidden)')].some(c=>!c.classList.contains('flip'));
+    document.querySelectorAll('.fcard:not(.hidden)').forEach(c=>c.classList.toggle('flip', anyUnflipped));
+});
+document.getElementById('btnShuffle').addEventListener('click', ()=>{
+    for (let i=order.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; }
+    renderGrid();
+});
+document.getElementById('btnReset').addEventListener('click', ()=>{
+    order = CARDS.map((_,i)=>i); activeFilter=null; query='';
+    document.getElementById('search').value='';
+    $filters.querySelectorAll('.pill').forEach(p=>p.classList.remove('active','muted'));
+    renderGrid();
+});
+
+/* ============ expanded 3/4-page card (double-click) ============ */
+const $overlay = document.getElementById('overlay');
+const $bigcard = document.getElementById('bigcard');
+const $binner  = document.getElementById('binner');
+let bigIdx = null;
+
+function visibleIdxList(){
+    return [...document.querySelectorAll('.fcard:not(.hidden)')].map(el=>parseInt(el.dataset.idx));
+}
+
+function openBig(idx){
+    bigIdx = idx;
+    const c = CARDS[idx], T = TYPES[c.t];
+    $bigcard.style.setProperty('--cc', T.c);
+    $bigcard.classList.remove('flip');
+    $binner.innerHTML = `
+        <div class="bface bfront">
+            <span class="bq">?</span>
+            <span class="bbadge">${T.sym || T.n}</span>
+            <div class="bstruct"><svg viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg"></svg></div>
+            <div class="bformula">${c.f}</div>
+            ${c.sp ? `<div class="bsigpi"><span class="sg">σ ${c.sp[0]}</span><span class="pi">π ${c.sp[1]}</span></div>`
+                   : `<div class="bsigpi"><span class="nw">${c.t==='reag' ? 'lab test ⚗' : 'network polymer'}</span></div>`}
+            <div class="bhint">click to flip ↻ · double-click or Esc to close</div>
+        </div>
+        <div class="bface bback">
+            <h2 class="bk-iupac">${trIupac(c.iupac)}</h2>
+            <div class="bcommon">${c.common}</div>
+            <div class="bbf">${c.f}</div>
+            <div class="blbls">
+                <span style="background:#142035;color:#7dd3fc">IUPAC</span>
+                <span style="background:${T.c}22;color:${T.c}">${T.sym || T.n}</span>
+                ${c.sp ? `<span class="sgb" style="background:#11331f;color:#4ade80">σ ${c.sp[0]}</span>
+                          <span class="pib" style="background:#331127;color:#f472b6">π ${c.sp[1]}</span>` : ''}
+            </div>
+            <h4>${LANG==='ar' ? AR_UI_FC.uses : 'Uses'}</h4>
+            <ul class="uses-ul">${c.uses.map(u=>`<li>${trUse(u)}</li>`).join('')}</ul>
+        </div>`;
+    renderMol($binner.querySelector('svg'), bld(c.kek));
+    $overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+function closeBig(){
+    $overlay.classList.remove('show');
+    document.body.style.overflow = '';
+    bigIdx = null;
+}
+function bigStep(dir){
+    const list = visibleIdxList();
+    if (!list.length || bigIdx===null) return;
+    let pos = list.indexOf(bigIdx);
+    if (pos < 0) pos = 0;
+    openBig(list[(pos + dir + list.length) % list.length]);
+}
+
+/* big card: single click flips, double click closes */
+$binner.addEventListener('click', ()=>{
+    clearTimeout($binner._ct);
+    $binner._ct = setTimeout(()=>$bigcard.classList.toggle('flip'), 230);
+});
+$binner.addEventListener('dblclick', e=>{
+    e.preventDefault();
+    clearTimeout($binner._ct);
+    closeBig();
+});
+document.getElementById('bclose').addEventListener('click', closeBig);
+document.getElementById('bprev').addEventListener('click', e=>{ e.stopPropagation(); bigStep(-1); });
+document.getElementById('bnext').addEventListener('click', e=>{ e.stopPropagation(); bigStep(1); });
+$overlay.addEventListener('click', e=>{ if (e.target === $overlay) closeBig(); });
+document.addEventListener('keydown', e=>{
+    if (!$overlay.classList.contains('show')) return;
+    if (e.key === 'Escape') closeBig();
+    else if (e.key === 'ArrowLeft') bigStep(-1);
+    else if (e.key === 'ArrowRight') bigStep(1);
+    else if (e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); $bigcard.classList.toggle('flip'); }
+});
+
+document.getElementById('btnLang').addEventListener('click', function(){
+    LANG = (LANG === 'en') ? 'ar' : 'en';
+    this.textContent = (LANG === 'en') ? '🌐 عربي' : '🌐 English';
+    this.classList.toggle('gold', LANG === 'ar');
+    document.body.classList.toggle('lang-ar', LANG === 'ar');
+    document.querySelectorAll('#filters .pill').forEach(d=>{
+        const T = TYPES[d.dataset.t];
+        d.innerHTML = `<span class="dot"></span>${trFam(T.n)}`;
+    });
+    renderGrid();
+});
+
+document.getElementById('totalN').textContent = CARDS.length;
+renderGrid();
+</script>
+<div class="brandfoot"><span class="fline1"><span class="fname">أ/ أيمن منصور — مستشار الكيمياء</span><span class="sep">|</span><span class="fname2">Prof./ Ayman Mansour — Chemistry Consultant</span></span><span class="fline2"><span class="fphone">📞 / WhatsApp: <b>01068018005</b> · <b>01287996430</b></span><span class="sep">|</span><span>كيمياء ٢٠٢٦ • Chemistry 2026</span></span></div>
+
+<div id="security-overlay" class="security-overlay">
+    <div style="font-size:3rem">🛡</div>
+    <div>Screen Recording / Copying Disabled</div>
+    <div class="ar">تم تعطيل تصوير الشاشة / النسخ</div>
+</div>
+
+<script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => { e.preventDefault(); });
+    document.addEventListener('keydown', e => {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 's' || e.key === 'u' || e.key === 'a')) {
+            e.preventDefault();
+        }
+    });
+    document.addEventListener('keyup', e => {
+        if (e.key === 'PrintScreen') { try { navigator.clipboard.writeText(''); } catch(_){} }
+    });
+    window.addEventListener('blur', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'flex';
+    });
+    window.addEventListener('focus', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'none';
+    });
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a11640491c6de22c',t:'MTc4MjQxNDQwNA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

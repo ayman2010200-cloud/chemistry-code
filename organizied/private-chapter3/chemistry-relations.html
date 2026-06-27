@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organic Chemistry Equations Book — All Chart Reactions</title>
+<style>
+    :root {
+        --bg-main: #0b0f19;
+        --bg-card: #111827;
+        --border-color: #1f2937;
+        --gold: #fbbf24;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        padding: 28px 10px 70px;
+        background: radial-gradient(1200px 600px at 50% -10%, #101a33 0%, var(--bg-main) 60%);
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        color: #f8fafc;
+        min-height: 100vh;
+    }
+    h1 {
+        margin: 0 0 6px;
+        font-size: 30px;
+        font-weight: 800;
+        text-align: center;
+        background: linear-gradient(90deg, #7dd3fc, #c084fc, #fbbf24);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    .subtitle {
+        margin: 0 0 20px 0;
+        color: #94a3b8;
+        font-size: 14.5px;
+        text-align: center;
+        max-width: 100%;
+        width: 100%;
+        line-height: 1.55;
+    }
+    .subtitle b { color: #e2e8f0; }
+
+    /* ===== toolbar ===== */
+    .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 12px 18px;
+        margin: 0 0 18px 0;
+        max-width: 100%;
+        width: 100%;
+        position: sticky;
+        top: 10px;
+        z-index: 20;
+        box-shadow: 0 10px 30px rgba(0,0,0,.45);
+    }
+    .toolbar input {
+        background: #0d1117;
+        border: 1px solid #2b3648;
+        color: #e2e8f0;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 13.5px;
+        width: 250px;
+        outline: none;
+        font-family: inherit;
+    }
+    .toolbar input:focus { border-color: #38bdf8; }
+    .btn {
+        background: #1b2435;
+        border: 1px solid #2b3648;
+        color: #cbd5e1;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all .15s;
+        user-select: none;
+    }
+    .btn:hover { background: #243049; color: #fff; }
+    .btn.gold { background: #3a2e08; border-color: #8a6d12; color: #fde68a; }
+    .count { font-size: 13px; color: #64748b; font-weight: 600; }
+
+    /* ===== chapter nav ===== */
+    .chapnav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 7px;
+        margin: 0 0 26px 0;
+        max-width: 100%;
+        width: 100%;
+    }
+    .chapnav a {
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: .4px;
+        text-transform: uppercase;
+        color: #cbd5e1;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        padding: 6px 13px;
+        text-decoration: none;
+        transition: all .15s;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+    .chapnav a:hover { border-color: var(--ch); color: #fff; }
+    .chapnav .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ch); }
+
+    /* ===== book ===== */
+    .book { max-width: 100%; width: 100%; margin: 0; }
+
+    .chapter { margin-bottom: 34px; }
+    .chap-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: linear-gradient(90deg, color-mix(in srgb, var(--ch) 16%, #121a2a) 0%, #0e1422 70%);
+        border: 1px solid color-mix(in srgb, var(--ch) 45%, #1f2937);
+        border-left: 6px solid var(--ch);
+        border-radius: 12px;
+        padding: 14px 20px;
+        margin-bottom: 12px;
+    }
+    .chap-head .icon {
+        width: 40px; height: 40px;
+        border-radius: 10px;
+        background: color-mix(in srgb, var(--ch) 20%, #0b0f19);
+        border: 1.5px solid var(--ch);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 19px;
+    }
+    .chap-head h2 { margin: 0; font-size: 21px; font-weight: 800; color: #fff; }
+    .chap-head .sub { font-size: 12.5px; color: #94a3b8; margin-top: 2px; }
+    .chap-head .n {
+        margin-left: auto;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--ch);
+        border: 1.5px solid var(--ch);
+        border-radius: 999px;
+        padding: 4px 14px;
+        white-space: nowrap;
+    }
+
+    /* equation card */
+    .eq {
+        background: linear-gradient(160deg, #121a2a 0%, #0d1117 80%);
+        border: 1px solid #1d2738;
+        border-left: 4px solid var(--ch);
+        border-radius: 12px;
+        padding: 14px 18px 13px;
+        margin-bottom: 10px;
+        transition: border-color .15s, box-shadow .15s;
+    }
+    .eq:hover {
+        border-color: color-mix(in srgb, var(--ch) 55%, #1d2738);
+        box-shadow: 0 6px 20px rgba(0,0,0,.4), 0 0 12px color-mix(in srgb, var(--ch) 18%, transparent);
+    }
+    .eq.hidden { display: none; }
+    .eq-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 9px;
+        flex-wrap: wrap;
+    }
+    .eq-num {
+        width: 26px; height: 26px;
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--ch) 22%, #0b0f19);
+        border: 1.5px solid var(--ch);
+        color: var(--ch);
+        font-size: 12px;
+        font-weight: 800;
+        display: flex; align-items: center; justify-content: center;
+        flex: 0 0 auto;
+    }
+    .eq-name { font-size: 14.5px; font-weight: 800; color: #fff; }
+    .eq-tag {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .6px;
+        text-transform: uppercase;
+        color: var(--ch);
+        background: color-mix(in srgb, var(--ch) 14%, transparent);
+        border-radius: 999px;
+        padding: 3px 10px;
+    }
+    /* origin-chapter chip shown in "by type" view */
+    .eq-chip {
+        margin-left: auto;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        color: var(--cc);
+        border: 1px solid color-mix(in srgb, var(--cc) 55%, transparent);
+        background: color-mix(in srgb, var(--cc) 10%, transparent);
+        border-radius: 999px;
+        padding: 3px 10px;
+        white-space: nowrap;
+    }
+    .seg { display: flex; gap: 0; }
+    .seg .btn { border-radius: 0; }
+    .seg .btn:first-child { border-radius: 8px 0 0 8px; }
+    .seg .btn:last-child { border-radius: 0 8px 8px 0; border-left: none; }
+
+    /* the equation line itself — size controlled by A− / A+ buttons */
+    :root { --eqfs: 21px; }
+    .eq-line {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 4px 12px;
+        font-size: var(--eqfs);
+        font-weight: 700;
+        color: #e8edf5;
+        padding: 10px 4px 5px;
+        line-height: 1.9;
+        width: 100%;
+    }
+    .eq-line .sp { color: #e8edf5; }
+    .eq-line .plus { color: #64748b; font-weight: 600; }
+    .arrowbox {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 6px;
+        min-width: 86px;
+    }
+    .arrowbox .cond {
+        font-size: calc(var(--eqfs) * 0.56);
+        font-weight: 700;
+        color: #7dd3fc;
+        font-family: Consolas, 'Courier New', monospace;
+        margin-bottom: -3px;
+        text-align: center;
+        max-width: 230px;
+        line-height: 1.35;
+    }
+    .arrowbox .arr { color: var(--gold); font-size: calc(var(--eqfs) * 1.18); line-height: .8; }
+
+    /* ===== Kekulé ring structures inside equations ===== */
+    .eq-line .ringwrap { display: inline-flex; align-items: center; }
+    .eq-line svg.ring { display: block; }
+    svg.ring line { stroke: #dbe3ef; stroke-width: 1.7; stroke-linecap: round; }
+    .eq-line .spn {
+        font-size: calc(var(--eqfs) * 0.6);
+        color: #8fa1ba;
+        font-weight: 600;
+        align-self: flex-end;
+        padding-bottom: 6px;
+    }
+    .eq-note {
+        font-size: 12px;
+        color: #8fa1ba;
+        margin-top: 7px;
+        padding-top: 7px;
+        border-top: 1px dashed #1d2738;
+    }
+    .eq-note b { color: #cbd5e1; }
+    .hl { background: #3a2e08; color: #fde68a; border-radius: 3px; padding: 0 3px; }
+
+    .empty {
+        text-align: center;
+        color: #64748b;
+        font-size: 15px;
+        padding: 50px 0;
+    }
+
+    .topbtn {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        width: 46px; height: 46px;
+        border-radius: 50%;
+        background: #1b2435;
+        border: 1.5px solid #2b3648;
+        color: #cbd5e1;
+        font-size: 19px;
+        cursor: pointer;
+        z-index: 30;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 8px 22px rgba(0,0,0,.5);
+    }
+    .topbtn:hover { background: #243049; color: #fff; }
+
+    /* ===== print (light) mode ===== */
+    @media print {
+        body { background: #fff !important; color: #111 !important; padding: 10px; }
+        .toolbar, .chapnav, .topbtn, .subtitle { display: none !important; }
+        h1 { color: #111 !important; -webkit-text-fill-color: #111; background: none; }
+        .chap-head { background: #f3f4f6 !important; border-color: #999 !important; }
+        .chap-head h2 { color: #111 !important; }
+        .chap-head .sub { color: #444 !important; }
+        .eq { background: #fff !important; border: 1px solid #bbb !important; break-inside: avoid; }
+        .eq-line, .eq-line .sp { color: #111 !important; }
+        .eq-name { color: #111 !important; }
+        .arrowbox .cond { color: #1d4ed8 !important; }
+        .arrowbox .arr { color: #b45309 !important; }
+        .eq-note { color: #444 !important; }
+    }
+
+/* ================= BRAND / TEACHER IDENTITY ================= */
+.brandbar {
+  display: flex; align-items: center; gap: 18px;
+  background: linear-gradient(90deg, #101a33 0%, #0f172a 60%, #1a1430 100%);
+  border: 1px solid #facc15aa; border-radius: 16px;
+  padding: 12px 22px; margin: 0 0 18px 0;
+  max-width: 100%; width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 8px 28px rgba(0,0,0,.5), 0 0 18px #facc1522;
+  position: relative; z-index: 10;
+}
+.brandbar .bphoto {
+  width: 74px; height: 74px; border-radius: 50%;
+  border: 3px solid #facc15; object-fit: cover; flex: 0 0 auto;
+  box-shadow: 0 0 16px #facc1566; background: #fff;
+}
+.brandbar .bnames { line-height: 1.3; }
+.brandbar .bar { font-size: 21px; font-weight: 800; color: #facc15; }
+.brandbar .ben { font-size: 13px; font-weight: 700; color: #7dd3fc; letter-spacing: .5px; }
+.brandbar .bpage {
+  margin-inline-start: auto; text-align: center; line-height: 1.45;
+}
+.brandbar .bpage .pa { font-size: 16px; font-weight: 800; color: #e2e8f0; direction: rtl; }
+.brandbar .bpage .pe { font-size: 11.5px; font-weight: 600; color: #94a3b8; }
+.brandbar .bexam { text-align: end; line-height: 1.4; }
+.brandbar .bexam .x1 { font-size: 15px; font-weight: 800; color: #4ade80; direction: rtl; }
+.brandbar .bexam .x2 { font-size: 10.5px; color: #64748b; direction: rtl; }
+@media (max-width: 900px){ .brandbar{flex-wrap:wrap; justify-content:center; text-align:center;} .brandbar .bpage{margin:0;} }
+
+/* watermark: faint photo + repeated bilingual name */
+#wmark {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+}
+#wmark .wphoto {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%,-50%);
+  width: min(56vmin, 520px); height: min(56vmin, 520px);
+  border-radius: 50%;
+  background-size: cover; background-position: center;
+  opacity: .045; filter: grayscale(60%);
+}
+body > *:not(#wmark){ position: relative; z-index: 1; }
+
+.brandfoot {
+  margin: 26px 0 0 0; max-width: 100%; width: 100%;
+  border-top: 1px dashed #facc1555;
+  padding: 12px 8px 4px;
+  display: flex; flex-wrap: wrap; gap: 6px 24px;
+  align-items: center; justify-content: center;
+  font-size: 12.5px; color: #94a3b8; text-align: center;
+  box-sizing: border-box;
+}
+.brandfoot b { color: #facc15; }
+.brandfoot .sep { color: #334155; }
+@media print { #wmark .wphoto { opacity: .05; } .brandbar{box-shadow:none;} }
+#wmark{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='300'%3E%3Ctext x='50%25' y='44%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='26' font-weight='bold' fill='%23ffffff' opacity='0.13'%3EProf./ Ayman Mansour%3C/text%3E%3Ctext x='50%25' y='60%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='22' font-weight='bold' fill='%23ffffff' opacity='0.10'%3E%D8%A3/ %D8%A3%D9%8A%D9%85%D9%86 %D9%85%D9%86%D8%B5%D9%88%D8%B1%3C/text%3E%3C/svg%3E");background-repeat:repeat;z-index:9999;}
+
+/* ===== model-2 security overlay ===== */
+.security-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #0b1220; color: #ef4444;
+    display: none; justify-content: center; align-items: center; flex-direction: column;
+    z-index: 999999; font-size: 1.6rem; font-weight: 800; text-align: center; gap: 8px;
+}
+.security-overlay .ar { font-size: 1.3rem; color: #f87171; direction: rtl; }
+body { user-select: none; }
+input, select, textarea { user-select: text; }
+
+.brandfoot { flex-direction: column; gap: 8px; }
+.brandfoot .fline1, .brandfoot .fline2 {
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+  align-items: center; justify-content: center;
+}
+.brandfoot .fname { color: #facc15; font-size: 15px; font-weight: 800; direction: rtl; }
+.brandfoot .fname2 { color: #7dd3fc; font-size: 13px; font-weight: 700; }
+.brandfoot .fphone {
+  color: #4ade80; font-weight: 700; font-size: 13px;
+  background: #4ade8011; border: 1px solid #4ade8044;
+  border-radius: 999px; padding: 4px 14px;
+}
+.brandfoot .fphone b { color: #86efac; letter-spacing: 1px; }
+
+/* ===== Arabic mode ===== */
+body.lang-ar .eq-name { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; }
+body.lang-ar .eq-tag { direction: rtl; }
+body.lang-ar .arrowbox .cond { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; font-size: calc(var(--eqfs) * 0.52); }
+body.lang-ar .eq-top { flex-direction: row; }
+
+body.lang-ar #pgTitle, body.lang-ar #pgSub { direction: rtl; font-family:'Segoe UI',Tahoma,sans-serif; }
+body.lang-ar .chap-head h2, body.lang-ar .chap-head .sub { direction: rtl; text-align: right; }
+body.lang-ar .chapnav a { direction: rtl; }
+
+.brandbar .blogo {
+  width: 78px; height: 68px; border-radius: 12px;
+  object-fit: contain; background: #fff; flex: 0 0 auto;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 14px rgba(56,189,248,.45);
+  padding: 3px;
+}
+</style>
+
+
+<!-- ===== Inserted chemistry_relations.html styles ===== -->
+<style id="chemistry-relations-styles">
+:root {
+    --bg-main: #0a0f1d;
+    --bg-card: #131b2e;
+    --border-card: #22304e;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-cyan: #06b6d4;
+    --accent-pink: #ec4899;
+    --accent-amber: #f59e0b;
+    --accent-emerald: #10b981;
+    --accent-purple: #8b5cf6;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    padding: 24px;
+    min-height: 100vh;
+    transition: direction 0.3s, font-family 0.3s;
+  }
+
+  body.rtl-mode { font-family: 'Cairo', 'Segoe UI', Tahoma, Arial, sans-serif; }
+
+  .top-navbar {
+    max-width: 1400px; margin: 0 auto 20px auto;
+    display: flex; justify-content: space-between; align-items: center;
+    background: #0f172a; border: 1px solid #334155; padding: 12px 24px; border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .nav-brand {
+    font-size: 18px; font-weight: 800;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .lang-switcher {
+    display: flex; background: #1e293b; border: 1px solid #475569; border-radius: 8px; overflow: hidden; padding: 3px; gap: 4px;
+  }
+
+  .switch-btn {
+    background: transparent; border: none; color: #94a3b8; padding: 6px 16px; font-size: 13px; font-weight: 700; border-radius: 6px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+
+  .switch-btn:hover { color: #fff; }
+  .switch-btn.active { background: linear-gradient(135deg, var(--accent-cyan), #0284c7); color: #fff; box-shadow: 0 2px 10px rgba(6, 182, 212, 0.4); }
+
+  .dashboard-header {
+    max-width: 1400px; margin: 0 auto 32px auto;
+    background: linear-gradient(135deg, #131b2e 0%, #1a243b 100%); border: 1px solid var(--border-card); border-radius: 16px; padding: 28px 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative; overflow: hidden;
+  }
+
+  .dashboard-header::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
+  }
+
+  .header-content { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; }
+
+  .title-section h1 {
+    font-size: 26px; font-weight: 800; letter-spacing: -0.5px;
+    background: linear-gradient(90deg, #fff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; display: flex; align-items: center; gap: 12px;
+  }
+
+  .title-section p { color: var(--text-secondary); font-size: 15px; max-width: 780px; }
+
+  .controls-section { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+  .filter-btn {
+    background: #1e293b; border: 1px solid #334155; color: var(--text-secondary); padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;
+  }
+
+  .filter-btn:hover { background: #273549; color: #fff; }
+  .filter-btn.active { background: var(--accent-cyan); color: #0f172a; border-color: var(--accent-cyan); box-shadow: 0 0 15px rgba(6, 182, 212, 0.4); }
+
+  .download-btn {
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); border: none; color: #fff; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .download-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5); }
+
+  .grid-container {
+    max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px;
+  }
+
+  .graph-card {
+    background-color: var(--bg-card); border: 1px solid var(--border-card); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; position: relative; overflow: hidden;
+  }
+
+  .graph-card:hover { transform: translateY(-4px); border-color: #3b82f6; box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+
+  .card-header { display: flex; flex-direction: column; gap: 8px; }
+  .header-top { display: flex; justify-content: space-between; align-items: center; }
+
+  .category-badge {
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 12px; border: 1px solid;
+  }
+
+  .formula-pill {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 13px; font-weight: 700; color: #38bdf8; background: #0f172a; padding: 4px 10px; border-radius: 6px; border: 1px solid #1e293b; direction: ltr;
+  }
+
+  .card-title { font-size: 17px; font-weight: 700; color: #fff; }
+
+  .chart-container { width: 100%; border-radius: 8px; overflow: hidden; background: #090e1a; border: 1px solid #1e293b; }
+  .graph-svg { width: 100%; height: auto; display: block; }
+
+  .card-footer { background: #0a0f1d; border-radius: 10px; padding: 12px 14px; border: 1px solid #1e293b; margin-top: auto; }
+  .takeaway-title { font-size: 12px; font-weight: 700; color: #e2e8f0; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+  .takeaway-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+
+  .instructions-banner {
+    max-width: 1400px; margin: 0 auto 24px auto; background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 12px; padding: 14px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; color: #22d3ee;
+  }
+
+  @media (max-width: 768px) {
+    body { padding: 12px; }
+    .top-navbar { flex-direction: column; gap: 12px; }
+    .dashboard-header { padding: 20px; }
+    .grid-container { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+
+<div id="wmark"><div class="wphoto" style="background-image:url(data:image/jpeg;base64,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)"></div></div>
+<div class="brandbar"><img class="blogo" src="data:image/jpeg;base64,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" alt="Chemistry Code"><img class="bphoto" src="data:image/jpeg;base64,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" alt="teacher"><div class="bnames"><div class="bar">بروف/ أيمن منصور — مستشار الكيماء</div><div class="ben">Prof./ Ayman Mansour — Chemistry Consultant</div></div><div class="bpage"><div class="pa"> </div><div class="pe"></div></div><div class="bexam"><div class="x1">كود الكيمياء — Chemistry Code</div></div></div>
+
+<!-- ===== Inserted chemistry_relations.html content ===== -->
+<div class="top-navbar">
+  <div class="nav-brand">
+    <span>⚛️</span> Arena.ai Chemistry Agent
+  </div>
+  <div class="lang-switcher">
+    <button class="switch-btn active" id="btn-en" onclick="switchLang('en')"> English</button>
+    <button class="switch-btn" id="btn-ar" onclick="switchLang('ar')">العربية (Arabic)</button>
+  </div>
+</div>
+
+<div class="dashboard-header">
+  <div class="header-content">
+    <div class="title-section">
+      <h1>
+        <span>🧪</span> 
+        <span class="bi-text" data-en="Chemical Equilibrium &amp; Kinetics Master Dashboard" data-ar="لوحة معلومات الاتزان الكيميائي وسرعة التفاعل الشاملة">Chemical Equilibrium &amp; Kinetics Master Dashboard</span>
+      </h1>
+      <p class="bi-text" 
+         data-en="Explore 17 precise mathematical relations in Dark SVG style. Covering Acid-Base pH/pOH, thermodynamics (Kc vs T), reaction progress (complete vs Kc=1, >1, <1 equilibria), reaction speed kinetics (concentration, temperature, surface area), and gas shifts."
+         data-ar="علاقات رياضية وبيانية . تشمل أحماض وقواعد pH/pOH، والديناميكا الحرارية، ومسار التفاعل (التام ومواضع الاتزان Kc=1, >1, <1)، وحركية سرعة التفاعل (مع التركيز والحرارة ومساحة السطح)، وإزاحات الغازات.">
+        Covering Acid-Base pH/pOH, thermodynamics (Kc vs T), reaction progress (complete vs Kc=1, >1, <1 equilibria), reaction speed kinetics (concentration, temperature, surface area), and gas shifts.
+      </p>
+    </div>
+    <div class="controls-section">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="bi-text" data-en="" data-ar=""></span>
+      </a>
+    </div>
+  </div>
+  <div class="controls-section" style="margin-top: 24px;">
+    <button class="filter-btn active bi-text" data-en="All Relations (17)" data-ar="جميع العلاقات (17)" onclick="filterCards('all', this)">All Relations (17)</button>
+    <button class="filter-btn bi-text" data-en="Acid-Base &amp; pH (4)" data-ar="الأحماض والقواعد (4)" onclick="filterCards('Acid-Base', this)">Acid-Base &amp; pH (4)</button>
+    <button class="filter-btn bi-text" data-en="Thermodynamics Kc (2)" data-ar="الديناميكا و Kc (2)" onclick="filterCards('Thermodynamics', this)">Thermodynamics Kc (2)</button>
+    <button class="filter-btn bi-text" data-en="Reaction Progress (4)" data-ar="مسار التفاعل والاتزان (4)" onclick="filterCards('Reaction Progress', this)">Reaction Progress (4)</button>
+    <button class="filter-btn bi-text" data-en="Reaction Speed (4)" data-ar="سرعة التفاعل الحركية (4)" onclick="filterCards('Reaction Speed', this)">Reaction Speed (4)</button>
+    <button class="filter-btn bi-text" data-en="Ionization &amp; Shifts (3)" data-ar="التأين والإزاحات (3)" onclick="filterCards('Ionization', this)">Ionization &amp; Shifts (3)</button>
+  </div>
+</div>
+
+<div class="instructions-banner">
+  <span>💡 <span class="bi-text" data-en="Hover your mouse over any graph chart below to inspect real-time coordinate readings and chemical values!" data-ar="مرر مؤشر الفأرة فوق أي رسم بياني أدناه لفحص القراءات الإحداثية والقيم الكيميائية التفاعلية لحظياً!">Hover your mouse over any graph chart below to inspect real-time coordinate readings and chemical values!</span></span>
+  <span style="font-size:12px; opacity:0.8; font-family:monospace;" class="bi-text" data-en="Standard state: 25°C (298 K)" data-ar="الظروف القياسية: 25° مئوية (298 كلفن)">Standard state: 25°C (298 K)</span>
+</div>
+
+<div class="grid-container" id="grid">
+  
+    <div class="graph-card" data-category="Acid-Base">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#06b6d4; background:#06b6d41a; border-color:#06b6d466;" data-en="Acid-Base" data-ar="الأحماض والقواعد">Acid-Base</span>
+          <span class="formula-pill">pH + pOH = 14</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="1. pH & pOH Relation" data-ar="١. العلاقة بين pH و pOH">1. pH & pOH Relation</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="0" data-ar="0">0</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="7" data-ar="7">7</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="14" data-ar="14">14</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">7</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">14</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="pH (0 to 14) →" data-ar="← الرقم الهيدروجيني pH">pH (0 to 14) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="pOH →" data-ar="قيمة pOH →">pOH →</text>
+    
+    <polyline points="60,30 400,230" fill="none" stroke="#ec4899" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+    <text class="chart-ann bi-text" x="230" y="80" text-anchor="middle" fill="#ec4899" font-size="12" font-weight="bold" font-family="sans-serif" data-en="pH + pOH = 14" data-ar="pH + pOH = 14">pH + pOH = 14</text>
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="ph_poh" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Linear inverse relationship at 25°C (298 K). As pH increases, pOH decreases linearly with a constant slope of -1." data-ar="علاقة خطية عكسية عند 25° مئوية (298 كلفن). مع زيادة الرقم الهيدروجيني pH، ينخفض الرقم الهيدروكسيلي pOH بميل ثابت -1.">Linear inverse relationship at 25°C (298 K). As pH increases, pOH decreases linearly with a constant slope of -1.</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Acid-Base">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#06b6d4; background:#06b6d41a; border-color:#06b6d466;" data-en="Acid-Base" data-ar="الأحماض والقواعد">Acid-Base</span>
+          <span class="formula-pill">pH = -log₁₀[H⁺]</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="2. pH & [H⁺] Relation" data-ar="٢. العلاقة بين pH وتركيز [H⁺]">2. pH & [H⁺] Relation</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="0" data-ar="0">0</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="0.5" data-ar="0.5">0.5</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="1.0" data-ar="1.0">1.0</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">2</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">4</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="[H⁺] Conc. (M) →" data-ar="← التركيز مولار [H⁺]">[H⁺] Conc. (M) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="pH →" data-ar="قيمة pH →">pH →</text>
+    
+    <polyline points="60.0,30.0 65.7,141.2 71.3,156.2 77.0,165.0 82.7,171.2 88.3,176.1 94.0,180.0 99.7,183.4 105.3,186.3 111.0,188.8 116.7,191.1 122.3,193.2 128.0,195.1 133.7,196.8 139.3,198.4 145.0,199.9 150.7,201.3 156.3,202.6 162.0,203.9 167.7,205.0 173.3,206.1 179.0,207.2 184.7,208.2 190.3,209.2 196.0,210.1 201.7,211.0 207.3,211.8 213.0,212.7 218.7,213.5 224.3,214.2 230.0,215.0 235.7,215.7 241.3,216.4 247.0,217.0 252.7,217.7 258.3,218.3 264.0,218.9 269.7,219.5 275.3,220.1 281.0,220.6 286.7,221.2 292.3,221.7 298.0,222.3 303.7,222.8 309.3,223.3 315.0,223.8 320.7,224.2 326.3,224.7 332.0,225.2 337.7,225.6 343.3,226.0 349.0,226.5 354.7,226.9 360.3,227.3 366.0,227.7 371.7,228.1 377.3,228.5 383.0,228.9 388.7,229.3 394.3,229.6 400.0,230.0" fill="none" stroke="#06b6d4" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+    <text class="chart-ann bi-text" x="180" y="80" fill="#06b6d4" font-size="12" font-weight="bold" font-family="sans-serif" data-en="Steep decay as [H⁺] rises" data-ar="انخفاض حاد مع زيادة [H⁺]">Steep decay as [H⁺] rises</text>
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="ph_h" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Logarithmic decay curve. As hydrogen ion concentration [H⁺] increases toward 1.0 M, pH drops sharply toward 0." data-ar="منحنى اضمحلال لوغاريتمي. كلما زاد تركيز أيونات الهيدروجين [H⁺] نحو 1.0 مولار، انخفضت قيمة pH بشكل حاد نحو الصفر.">Logarithmic decay curve. As hydrogen ion concentration [H⁺] increases toward 1.0 M, pH drops sharply toward 0.</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Acid-Base">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#06b6d4; background:#06b6d41a; border-color:#06b6d466;" data-en="Acid-Base" data-ar="الأحماض والقواعد">Acid-Base</span>
+          <span class="formula-pill">pOH = 14 + log₁₀[H⁺]</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="3. pOH & [H⁺] Relation" data-ar="٣. العلاقة بين pOH وتركيز [H⁺]">3. pOH & [H⁺] Relation</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="0" data-ar="0">0</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="0.5" data-ar="0.5">0.5</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="1.0" data-ar="1.0">1.0</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">10</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">12</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">14</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="[H⁺] Conc. (M) →" data-ar="← التركيز مولار [H⁺]">[H⁺] Conc. (M) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="pOH →" data-ar="قيمة pOH →">pOH →</text>
+    
+    <polyline points="60.0,230.0 65.7,118.8 71.3,103.8 77.0,95.0 82.7,88.8 88.3,83.9 94.0,80.0 99.7,76.6 105.3,73.7 111.0,71.2 116.7,68.9 122.3,66.8 128.0,64.9 133.7,63.2 139.3,61.6 145.0,60.1 150.7,58.7 156.3,57.4 162.0,56.1 167.7,55.0 173.3,53.9 179.0,52.8 184.7,51.8 190.3,50.8 196.0,49.9 201.7,49.0 207.3,48.2 213.0,47.3 218.7,46.5 224.3,45.8 230.0,45.0 235.7,44.3 241.3,43.6 247.0,43.0 252.7,42.3 258.3,41.7 264.0,41.1 269.7,40.5 275.3,39.9 281.0,39.4 286.7,38.8 292.3,38.3 298.0,37.7 303.7,37.2 309.3,36.7 315.0,36.2 320.7,35.8 326.3,35.3 332.0,34.8 337.7,34.4 343.3,34.0 349.0,33.5 354.7,33.1 360.3,32.7 366.0,32.3 371.7,31.9 377.3,31.5 383.0,31.1 388.7,30.7 394.3,30.4 400.0,30.0" fill="none" stroke="#8b5cf6" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+    <text class="chart-ann bi-text" x="180" y="80" fill="#8b5cf6" font-size="12" font-weight="bold" font-family="sans-serif" data-en="pOH rises with [H⁺]" data-ar="يزداد pOH مع زيادة [H⁺]">pOH rises with [H⁺]</text>
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="poh_h" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Logarithmic growth curve. As [H⁺] increases, [OH⁻] decreases proportionally, causing pOH to rise logarithmically toward 14." data-ar="منحنى نمو لوغاريتمي. مع زيادة تركيز [H⁺]، ينخفض تركيز [OH⁻] تناسبياً، مما يؤدي إلى ارتفاع قيمة pOH نحو 14.">Logarithmic growth curve. As [H⁺] increases, [OH⁻] decreases proportionally, causing pOH to rise logarithmically toward 14.</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Acid-Base">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#06b6d4; background:#06b6d41a; border-color:#06b6d466;" data-en="Acid-Base" data-ar="الأحماض والقواعد">Acid-Base</span>
+          <span class="formula-pill">pOH = -log₁₀[OH⁻]</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="4. pOH & [OH⁻] Relation" data-ar="٤. العلاقة بين pOH وتركيز [OH⁻]">4. pOH & [OH⁻] Relation</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="0" data-ar="0">0</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="0.5" data-ar="0.5">0.5</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="1.0" data-ar="1.0">1.0</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">2</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">4</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="[OH⁻] Conc. (M) →" data-ar="← التركيز مولار [OH⁻]">[OH⁻] Conc. (M) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="pOH →" data-ar="قيمة pOH →">pOH →</text>
+    
+    <polyline points="60.0,30.0 65.7,141.2 71.3,156.2 77.0,165.0 82.7,171.2 88.3,176.1 94.0,180.0 99.7,183.4 105.3,186.3 111.0,188.8 116.7,191.1 122.3,193.2 128.0,195.1 133.7,196.8 139.3,198.4 145.0,199.9 150.7,201.3 156.3,202.6 162.0,203.9 167.7,205.0 173.3,206.1 179.0,207.2 184.7,208.2 190.3,209.2 196.0,210.1 201.7,211.0 207.3,211.8 213.0,212.7 218.7,213.5 224.3,214.2 230.0,215.0 235.7,215.7 241.3,216.4 247.0,217.0 252.7,217.7 258.3,218.3 264.0,218.9 269.7,219.5 275.3,220.1 281.0,220.6 286.7,221.2 292.3,221.7 298.0,222.3 303.7,222.8 309.3,223.3 315.0,223.8 320.7,224.2 326.3,224.7 332.0,225.2 337.7,225.6 343.3,226.0 349.0,226.5 354.7,226.9 360.3,227.3 366.0,227.7 371.7,228.1 377.3,228.5 383.0,228.9 388.7,229.3 394.3,229.6 400.0,230.0" fill="none" stroke="#ec4899" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+    <text class="chart-ann bi-text" x="180" y="80" fill="#ec4899" font-size="12" font-weight="bold" font-family="sans-serif" data-en="Steep decay as [OH⁻] rises" data-ar="انخفاض حاد مع زيادة [OH⁻]">Steep decay as [OH⁻] rises</text>
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="poh_oh" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Identical logarithmic decay behavior as pH vs [H⁺]. Higher hydroxide ion concentration yields a lower pOH value." data-ar="سلوك اضمحلال لوغاريتمي مطابق لعلاقة pH مع [H⁺]. التركيز الأعلى لأيونات الهيدروكسيد يعطي قيمة pOH أقل.">Identical logarithmic decay behavior as pH vs [H⁺]. Higher hydroxide ion concentration yields a lower pOH value.</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Thermodynamics">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#f59e0b; background:#f59e0b1a; border-color:#f59e0b66;" data-en="Thermodynamics" data-ar="الاتزان والديناميكا">Thermodynamics</span>
+          <span class="formula-pill">ln(K) ∝ -ΔH° / RT</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="5. Kc vs Temperature (Exo vs Endo)" data-ar="٥. ثابت الاتزان Kc مع درجة الحرارة">5. Kc vs Temperature (Exo vs Endo)</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Low" data-ar="منخفض">Low</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Med" data-ar="متوسط">Med</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="High" data-ar="مرتفع">High</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">K</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">2K</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="Temperature (T) →" data-ar="← درجة الحرارة (T)">Temperature (T) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="Kc Constant →" data-ar="ثابت الاتزان Kc →">Kc Constant →</text>
+    
+    
+        <polyline points="60.0,220.0 65.7,219.3 71.3,218.6 77.0,217.9 82.7,217.1 88.3,216.3 94.0,215.4 99.7,214.5 105.3,213.6 111.0,212.7 116.7,211.7 122.3,210.6 128.0,209.6 133.7,208.4 139.3,207.3 145.0,206.0 150.7,204.7 156.3,203.4 162.0,202.0 167.7,200.6 173.3,199.1 179.0,197.5 184.7,195.8 190.3,194.1 196.0,192.3 201.7,190.5 207.3,188.5 213.0,186.5 218.7,184.4 224.3,182.2 230.0,179.9 235.7,177.5 241.3,175.0 247.0,172.4 252.7,169.7 258.3,166.9 264.0,164.0 269.7,160.9 275.3,157.7 281.0,154.4 286.7,150.9 292.3,147.2 298.0,143.5 303.7,139.5 309.3,135.4 315.0,131.1 320.7,126.7 326.3,122.0 332.0,117.2 337.7,112.1 343.3,106.8 349.0,101.3 354.7,95.6 360.3,89.6 366.0,83.4 371.7,76.9 377.3,70.1 383.0,63.0 388.7,55.7 394.3,48.0 400.0,40.0" fill="none" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round" />
+        <polyline points="60.0,40.0 65.7,40.7 71.3,41.4 77.0,42.1 82.7,42.9 88.3,43.7 94.0,44.6 99.7,45.5 105.3,46.4 111.0,47.3 116.7,48.3 122.3,49.4 128.0,50.4 133.7,51.6 139.3,52.7 145.0,54.0 150.7,55.3 156.3,56.6 162.0,58.0 167.7,59.4 173.3,60.9 179.0,62.5 184.7,64.2 190.3,65.9 196.0,67.7 201.7,69.5 207.3,71.5 213.0,73.5 218.7,75.6 224.3,77.8 230.0,80.1 235.7,82.5 241.3,85.0 247.0,87.6 252.7,90.3 258.3,93.1 264.0,96.0 269.7,99.1 275.3,102.3 281.0,105.6 286.7,109.1 292.3,112.8 298.0,116.5 303.7,120.5 309.3,124.6 315.0,128.9 320.7,133.3 326.3,138.0 332.0,142.8 337.7,147.9 343.3,153.2 349.0,158.7 354.7,164.4 360.3,170.4 366.0,176.6 371.7,183.1 377.3,189.9 383.0,197.0 388.7,204.3 394.3,212.0 400.0,220.0" fill="none" stroke="#10b981" stroke-width="3.5" stroke-linecap="round" />
+        
+    
+        <text class="chart-ann bi-text" x="310" y="70" fill="#f59e0b" font-size="12" font-weight="bold" font-family="sans-serif" data-en="Endothermic (ΔH > 0)" data-ar="ماص للحرارة (ΔH > 0)">Endothermic (ΔH > 0)</text>
+        <text class="chart-ann bi-text" x="290" y="195" fill="#10b981" font-size="12" font-weight="bold" font-family="sans-serif" data-en="Exothermic (ΔH < 0)" data-ar="طارد للحرارة (ΔH < 0)">Exothermic (ΔH < 0)</text>
+        
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="kc_temp" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Endothermic reactions (ΔH > 0) gain product yield as T rises (Kc increases). Exothermic reactions (ΔH < 0) lose yield." data-ar="التفاعلات الماصة للحرارة (ΔH > 0) تنزاح للأمام مع ارتفاع الحرارة (يزداد Kc). التفاعلات الطاردة للحرارة تنزاح للخلف.">Endothermic reactions (ΔH > 0) gain product yield as T rises (Kc increases). Exothermic reactions (ΔH < 0) lose yield.</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Thermodynamics">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#f59e0b; background:#f59e0b1a; border-color:#f59e0b66;" data-en="Thermodynamics" data-ar="الاتزان والديناميكا">Thermodynamics</span>
+          <span class="formula-pill">K = Constant at fixed T</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="6. Kc / Kp vs Concentration" data-ar="٦. ثابت الاتزان Kc/Kp مع التركيز والضغط">6. Kc / Kp vs Concentration</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="C₁" data-ar="C₁">C₁</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="C₂" data-ar="C₂">C₂</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="C₃" data-ar="C₃">C₃</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">K</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">2K</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="Conc. [C] or Press. P →" data-ar="← التركيز [C] أو الضغط P">Conc. [C] or Press. P →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="Kc or Kp →" data-ar="ثابت الاتزان Kc أو Kp →">Kc or Kp →</text>
+    
+    <line x1="60" y1="130" x2="400" y2="130" stroke="#f59e0b" stroke-width="4" stroke-dasharray="8 4" stroke-linecap="round" />
+    
+        <rect x="135" y="105" width="190" height="26" rx="13" fill="#451a03" stroke="#f59e0b" stroke-width="1"/>
+        <text class="chart-ann bi-text" x="230" y="122" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif" data-en="STRICTLY CONSTANT VALUE" data-ar="قيمة ثابتة تماماً">STRICTLY CONSTANT VALUE</text>
+        
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="kc_conc" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Classic Exam Trap! Equilibrium constants (Kc or Kp) are strictly independent of concentration, volume, or pressure changes." data-ar="فخ امتحانات شهير! ثوابت الاتزان (Kc أو Kp) لا تتأثر مطلقاً بتغيرات التركيز أو الحجم أو الضغط، وتعتمد فقط على الحرارة.">Classic Exam Trap! Equilibrium constants (Kc or Kp) are strictly independent of concentration, volume, or pressure changes.</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Reaction Progress">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#ec4899; background:#ec48991a; border-color:#ec489966;" data-en="Reaction Progress" data-ar="مسار التفاعل والتركيز">Reaction Progress</span>
+          <span class="formula-pill">Reactants → Products</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="7. Conc. vs Time (Complete Rxn)" data-ar="٧. التركيز والزمن (تفاعل تام غير انعكاسي)">7. Conc. vs Time (Complete Rxn)</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Start" data-ar="البداية">Start</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Mid" data-ar="منتصف">Mid</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="End" data-ar="النهاية">End</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">C</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">2C</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="Time (t) →" data-ar="← الزمن (t)">Time (t) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="Concentration →" data-ar="التركيز →">Concentration →</text>
+    
+    
+        
+        <polyline points="60.0,30.0 65.7,42.9 71.3,55.0 77.0,66.3 82.7,76.8 88.3,86.7 94.0,95.9 99.7,104.6 105.3,112.7 111.0,120.2 116.7,127.3 122.3,133.9 128.0,140.1 133.7,145.9 139.3,151.4 145.0,156.4 150.7,161.2 156.3,165.6 162.0,169.8 167.7,173.6 173.3,177.3 179.0,180.7 184.7,183.9 190.3,186.8 196.0,189.6 201.7,192.2 207.3,194.7 213.0,196.9 218.7,199.1 224.3,201.1 230.0,202.9 235.7,204.7 241.3,206.3 247.0,207.8 252.7,209.3 258.3,210.6 264.0,211.9 269.7,213.0 275.3,214.1 281.0,215.1 286.7,216.1 292.3,217.0 298.0,217.8 303.7,218.6 309.3,219.4 315.0,220.0 320.7,220.7 326.3,221.3 332.0,221.8 337.7,222.4 343.3,222.9 349.0,223.3 354.7,223.8 360.3,224.2 366.0,224.5 371.7,224.9 377.3,225.2 383.0,225.5 388.7,225.8 394.3,226.1 400.0,226.3" fill="none" stroke="#ec4899" stroke-width="3.5" stroke-linecap="round" />
+        <polyline points="60.0,230.0 65.7,217.1 71.3,205.0 77.0,193.7 82.7,183.2 88.3,173.3 94.0,164.1 99.7,155.4 105.3,147.3 111.0,139.8 116.7,132.7 122.3,126.1 128.0,119.9 133.7,114.1 139.3,108.6 145.0,103.6 150.7,98.8 156.3,94.4 162.0,90.2 167.7,86.4 173.3,82.7 179.0,79.3 184.7,76.1 190.3,73.2 196.0,70.4 201.7,67.8 207.3,65.3 213.0,63.1 218.7,60.9 224.3,58.9 230.0,57.1 235.7,55.3 241.3,53.7 247.0,52.2 252.7,50.7 258.3,49.4 264.0,48.1 269.7,47.0 275.3,45.9 281.0,44.9 286.7,43.9 292.3,43.0 298.0,42.2 303.7,41.4 309.3,40.6 315.0,40.0 320.7,39.3 326.3,38.7 332.0,38.2 337.7,37.6 343.3,37.1 349.0,36.7 354.7,36.2 360.3,35.8 366.0,35.5 371.7,35.1 377.3,34.8 383.0,34.5 388.7,34.2 394.3,33.9 400.0,33.7" fill="none" stroke="#06b6d4" stroke-width="3.5" stroke-linecap="round" />
+        
+    
+        <text class="chart-ann bi-text" x="80" y="55" fill="#ec4899" font-size="11" font-weight="bold" data-en="Reactants [R]" data-ar="المتفاعلات [R]">Reactants [R]</text>
+        <text class="chart-ann bi-text" x="80" y="210" fill="#06b6d4" font-size="11" font-weight="bold" data-en="Products [P]" data-ar="النواتج [P]">Products [P]</text>
+        <text class="chart-ann bi-text" x="320" y="125" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle" data-en="" data-ar=""></text>
+        
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="conc_complete" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Irreversible reaction goes to completion. Reactant concentration drops to zero, while product yield reaches theoretical maximum." data-ar="تفاعل غير انعكاسي يسير حتى النهاية. ينخفض تركيز المتفاعلات إلى الصفر، بينما يصل تركيز النواتج إلى حده الأقصى.">Irreversible reaction goes to completion. Reactant concentration drops to zero, while product yield reaches theoretical maximum.</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Reaction Progress">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#ec4899; background:#ec48991a; border-color:#ec489966;" data-en="Reaction Progress" data-ar="مسار التفاعل والتركيز">Reaction Progress</span>
+          <span class="formula-pill">Kc = [Prod] / [React] = 1</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="8. Reversible Rxn (Kc = 1)" data-ar="٨. التفاعل الانعكاسي (Kc = 1)">8. Reversible Rxn (Kc = 1)</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Start" data-ar="البداية">Start</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="teq" data-ar="teq">teq</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Equil." data-ar="اتزان">Equil.</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">C</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">2C</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="Time (t) →" data-ar="← الزمن (t)">Time (t) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="Concentration →" data-ar="التركيز →">Concentration →</text>
+    
+    
+        <line x1="240" y1="30" x2="240" y2="230" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <polyline points="60.0,30.0 65.7,33.1 71.3,36.3 77.0,39.4 82.7,42.6 88.3,45.7 94.0,48.9 99.7,52.0 105.3,55.2 111.0,58.3 116.7,61.5 122.3,64.6 128.0,67.8 133.7,70.9 139.3,74.1 145.0,77.2 150.7,80.4 156.3,83.5 162.0,86.7 167.7,89.8 173.3,93.0 179.0,96.1 184.7,99.3 190.3,102.4 196.0,105.6 201.7,108.7 207.3,111.9 213.0,115.0 218.7,118.1 224.3,121.3 230.0,124.4 235.7,127.6 241.3,130.0 247.0,130.0 252.7,130.0 258.3,130.0 264.0,130.0 269.7,130.0 275.3,130.0 281.0,130.0 286.7,130.0 292.3,130.0 298.0,130.0 303.7,130.0 309.3,130.0 315.0,130.0 320.7,130.0 326.3,130.0 332.0,130.0 337.7,130.0 343.3,130.0 349.0,130.0 354.7,130.0 360.3,130.0 366.0,130.0 371.7,130.0 377.3,130.0 383.0,130.0 388.7,130.0 394.3,130.0 400.0,130.0" fill="none" stroke="#ec4899" stroke-width="3.5" stroke-linecap="round" />
+        <polyline points="60.0,230.0 65.7,226.9 71.3,223.7 77.0,220.6 82.7,217.4 88.3,214.3 94.0,211.1 99.7,208.0 105.3,204.8 111.0,201.7 116.7,198.5 122.3,195.4 128.0,192.2 133.7,189.1 139.3,185.9 145.0,182.8 150.7,179.6 156.3,176.5 162.0,173.3 167.7,170.2 173.3,167.0 179.0,163.9 184.7,160.7 190.3,157.6 196.0,154.4 201.7,151.3 207.3,148.1 213.0,145.0 218.7,141.9 224.3,138.7 230.0,135.6 235.7,132.4 241.3,130.0 247.0,130.0 252.7,130.0 258.3,130.0 264.0,130.0 269.7,130.0 275.3,130.0 281.0,130.0 286.7,130.0 292.3,130.0 298.0,130.0 303.7,130.0 309.3,130.0 315.0,130.0 320.7,130.0 326.3,130.0 332.0,130.0 337.7,130.0 343.3,130.0 349.0,130.0 354.7,130.0 360.3,130.0 366.0,130.0 371.7,130.0 377.3,130.0 383.0,130.0 388.7,130.0 394.3,130.0 400.0,130.0" fill="none" stroke="#06b6d4" stroke-width="3.5" stroke-linecap="round" />
+        
+    
+        <text class="chart-ann bi-text" x="80" y="55" fill="#ec4899" font-size="11" font-weight="bold" data-en="Reactants [R]" data-ar="المتفاعلات [R]">Reactants [R]</text>
+        <text class="chart-ann bi-text" x="80" y="210" fill="#06b6d4" font-size="11" font-weight="bold" data-en="Products [P]" data-ar="النواتج [P]">Products [P]</text>
+        <text class="chart-ann bi-text" x="320" y="115" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle" data-en="[Products] = [Reactants]" data-ar="[النواتج] = [المتفاعلات]">[Products] = [Reactants]</text>
+        
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="conc_kc_eq" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="At equilibrium time teq, reactant and product concentrations become strictly equal ([Prod] = [React]) and remain constant." data-ar="عند الوصول لحالة الاتزان (الزمن teq)، تتساوى تركيزات المتفاعلات والنواتج تماماً ([نواتج] = [متفاعلات]) وتثبت.">At equilibrium time teq, reactant and product concentrations become strictly equal ([Prod] = [React]) and remain constant.</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Reaction Progress">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#ec4899; background:#ec48991a; border-color:#ec489966;" data-en="Reaction Progress" data-ar="مسار التفاعل والتركيز">Reaction Progress</span>
+          <span class="formula-pill">Kc = [Prod] / [React] > 1</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="9. Reversible Rxn (Kc > 1)" data-ar="٩. التفاعل الانعكاسي (Kc > 1)">9. Reversible Rxn (Kc > 1)</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Start" data-ar="البداية">Start</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="teq" data-ar="teq">teq</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Equil." data-ar="اتزان">Equil.</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">C</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">2C</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="Time (t) →" data-ar="← الزمن (t)">Time (t) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="Concentration →" data-ar="التركيز →">Concentration →</text>
+    
+    
+        <line x1="240" y1="30" x2="240" y2="230" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <polyline points="60.0,30.0 65.7,34.7 71.3,39.4 77.0,44.2 82.7,48.9 88.3,53.6 94.0,58.3 99.7,63.1 105.3,67.8 111.0,72.5 116.7,77.2 122.3,81.9 128.0,86.7 133.7,91.4 139.3,96.1 145.0,100.8 150.7,105.6 156.3,110.3 162.0,115.0 167.7,119.7 173.3,124.4 179.0,129.2 184.7,133.9 190.3,138.6 196.0,143.3 201.7,148.1 207.3,152.8 213.0,157.5 218.7,162.2 224.3,166.9 230.0,171.7 235.7,176.4 241.3,180.0 247.0,180.0 252.7,180.0 258.3,180.0 264.0,180.0 269.7,180.0 275.3,180.0 281.0,180.0 286.7,180.0 292.3,180.0 298.0,180.0 303.7,180.0 309.3,180.0 315.0,180.0 320.7,180.0 326.3,180.0 332.0,180.0 337.7,180.0 343.3,180.0 349.0,180.0 354.7,180.0 360.3,180.0 366.0,180.0 371.7,180.0 377.3,180.0 383.0,180.0 388.7,180.0 394.3,180.0 400.0,180.0" fill="none" stroke="#ec4899" stroke-width="3.5" stroke-linecap="round" />
+        <polyline points="60.0,230.0 65.7,224.6 71.3,219.3 77.0,213.9 82.7,208.6 88.3,203.2 94.0,197.9 99.7,192.5 105.3,187.2 111.0,181.8 116.7,176.5 122.3,171.1 128.0,165.8 133.7,160.4 139.3,155.1 145.0,149.7 150.7,144.4 156.3,139.0 162.0,133.7 167.7,128.3 173.3,123.0 179.0,117.6 184.7,112.3 190.3,106.9 196.0,101.6 201.7,96.2 207.3,90.9 213.0,85.5 218.7,80.1 224.3,74.8 230.0,69.4 235.7,64.1 241.3,60.0 247.0,60.0 252.7,60.0 258.3,60.0 264.0,60.0 269.7,60.0 275.3,60.0 281.0,60.0 286.7,60.0 292.3,60.0 298.0,60.0 303.7,60.0 309.3,60.0 315.0,60.0 320.7,60.0 326.3,60.0 332.0,60.0 337.7,60.0 343.3,60.0 349.0,60.0 354.7,60.0 360.3,60.0 366.0,60.0 371.7,60.0 377.3,60.0 383.0,60.0 388.7,60.0 394.3,60.0 400.0,60.0" fill="none" stroke="#06b6d4" stroke-width="3.5" stroke-linecap="round" />
+        
+    
+        <text class="chart-ann bi-text" x="80" y="55" fill="#ec4899" font-size="11" font-weight="bold" data-en="Reactants [R]" data-ar="المتفاعلات [R]">Reactants [R]</text>
+        <text class="chart-ann bi-text" x="80" y="210" fill="#06b6d4" font-size="11" font-weight="bold" data-en="Products [P]" data-ar="النواتج [P]">Products [P]</text>
+        <text class="chart-ann bi-text" x="320" y="120" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle" data-en="[Products] > [Reactants]" data-ar="[النواتج] > [المتفاعلات]">[Products] > [Reactants]</text>
+        
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="conc_kc_gt" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Products favored! At equilibrium, product concentration exceeds reactant concentration. Product curve crosses above reactant curve." data-ar="التفاعل الأمامي هو المفضل! عند الاتزان يكون تركيز النواتج أكبر من المتفاعلات، ويتجاوز منحنى النواتج للأعلى.">Products favored! At equilibrium, product concentration exceeds reactant concentration. Product curve crosses above reactant curve.</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Reaction Progress">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#ec4899; background:#ec48991a; border-color:#ec489966;" data-en="Reaction Progress" data-ar="مسار التفاعل والتركيز">Reaction Progress</span>
+          <span class="formula-pill">Kc = [Prod] / [React] < 1</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="10. Reversible Rxn (Kc < 1)" data-ar="١٠. التفاعل الانعكاسي (Kc < 1)">10. Reversible Rxn (Kc < 1)</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Start" data-ar="البداية">Start</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="teq" data-ar="teq">teq</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Equil." data-ar="اتزان">Equil.</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">C</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">2C</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="Time (t) →" data-ar="← الزمن (t)">Time (t) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="Concentration →" data-ar="التركيز →">Concentration →</text>
+    
+    
+        <line x1="240" y1="30" x2="240" y2="230" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <polyline points="60.0,30.0 65.7,31.6 71.3,33.1 77.0,34.7 82.7,36.3 88.3,37.9 94.0,39.4 99.7,41.0 105.3,42.6 111.0,44.2 116.7,45.7 122.3,47.3 128.0,48.9 133.7,50.5 139.3,52.0 145.0,53.6 150.7,55.2 156.3,56.8 162.0,58.3 167.7,59.9 173.3,61.5 179.0,63.1 184.7,64.6 190.3,66.2 196.0,67.8 201.7,69.4 207.3,70.9 213.0,72.5 218.7,74.1 224.3,75.6 230.0,77.2 235.7,78.8 241.3,80.0 247.0,80.0 252.7,80.0 258.3,80.0 264.0,80.0 269.7,80.0 275.3,80.0 281.0,80.0 286.7,80.0 292.3,80.0 298.0,80.0 303.7,80.0 309.3,80.0 315.0,80.0 320.7,80.0 326.3,80.0 332.0,80.0 337.7,80.0 343.3,80.0 349.0,80.0 354.7,80.0 360.3,80.0 366.0,80.0 371.7,80.0 377.3,80.0 383.0,80.0 388.7,80.0 394.3,80.0 400.0,80.0" fill="none" stroke="#ec4899" stroke-width="3.5" stroke-linecap="round" />
+        <polyline points="60.0,230.0 65.7,228.1 71.3,226.2 77.0,224.3 82.7,222.4 88.3,220.6 94.0,218.7 99.7,216.8 105.3,214.9 111.0,213.0 116.7,211.1 122.3,209.2 128.0,207.3 133.7,205.4 139.3,203.6 145.0,201.7 150.7,199.8 156.3,197.9 162.0,196.0 167.7,194.1 173.3,192.2 179.0,190.3 184.7,188.4 190.3,186.6 196.0,184.7 201.7,182.8 207.3,180.9 213.0,179.0 218.7,177.1 224.3,175.2 230.0,173.3 235.7,171.4 241.3,170.0 247.0,170.0 252.7,170.0 258.3,170.0 264.0,170.0 269.7,170.0 275.3,170.0 281.0,170.0 286.7,170.0 292.3,170.0 298.0,170.0 303.7,170.0 309.3,170.0 315.0,170.0 320.7,170.0 326.3,170.0 332.0,170.0 337.7,170.0 343.3,170.0 349.0,170.0 354.7,170.0 360.3,170.0 366.0,170.0 371.7,170.0 377.3,170.0 383.0,170.0 388.7,170.0 394.3,170.0 400.0,170.0" fill="none" stroke="#06b6d4" stroke-width="3.5" stroke-linecap="round" />
+        
+    
+        <text class="chart-ann bi-text" x="80" y="55" fill="#ec4899" font-size="11" font-weight="bold" data-en="Reactants [R]" data-ar="المتفاعلات [R]">Reactants [R]</text>
+        <text class="chart-ann bi-text" x="80" y="210" fill="#06b6d4" font-size="11" font-weight="bold" data-en="Products [P]" data-ar="النواتج [P]">Products [P]</text>
+        <text class="chart-ann bi-text" x="320" y="125" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle" data-en="[Reactants] > [Products]" data-ar="[المتفاعلات] > [النواتج]">[Reactants] > [Products]</text>
+        
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="conc_kc_lt" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Reactants favored! Equilibrium is reached before much product is formed. Reactant concentration remains higher than products." data-ar="التفاعل العكسي هو المفضل! يصل التفاعل للاتزان قبل تكوين نواتج كبيرة، ويبقى تركيز المتفاعلات أعلى من النواتج.">Reactants favored! Equilibrium is reached before much product is formed. Reactant concentration remains higher than products.</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Reaction Speed">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#10b981; background:#10b9811a; border-color:#10b98166;" data-en="Reaction Speed" data-ar="سرعة التفاعل الحركية">Reaction Speed</span>
+          <span class="formula-pill">Rate = k · [C]¹</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="11. Rate vs Concentration" data-ar="١١. سرعة التفاعل مع التركيز">11. Rate vs Concentration</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="0" data-ar="0">0</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="C" data-ar="C">C</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="2C" data-ar="2C">2C</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">r</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">2r</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="Concentration [C] →" data-ar="← التركيز [C]">Concentration [C] →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="Speed (Rate) →" data-ar="سرعة التفاعل →">Speed (Rate) →</text>
+    
+    <polyline points="60,230 400,30" fill="none" stroke="#06b6d4" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+    <text class="chart-ann bi-text" x="230" y="80" text-anchor="middle" fill="#06b6d4" font-size="12" font-weight="bold" font-family="sans-serif" data-en="Directly proportional (1st Order)" data-ar="تناسب طردي خطي (الرتبة الأولى)">Directly proportional (1st Order)</text>
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="rate_conc" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Higher reactant concentration increases effective collision frequency. For 1st order kinetics, speed is directly linear with [C]." data-ar="زيادة تركيز المتفاعلات تزيد من معدل التصادمات الفعالة. في تفاعلات الرتبة الأولى، تتناسب السرعة طردياً مع التركيز.">Higher reactant concentration increases effective collision frequency. For 1st order kinetics, speed is directly linear with [C].</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Reaction Speed">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#10b981; background:#10b9811a; border-color:#10b98166;" data-en="Reaction Speed" data-ar="سرعة التفاعل الحركية">Reaction Speed</span>
+          <span class="formula-pill">k = A · e^(-Ea / RT)</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="12. Rate vs Temperature" data-ar="١٢. سرعة التفاعل مع الحرارة">12. Rate vs Temperature</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="298K" data-ar="298K">298K</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="310K" data-ar="310K">310K</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="330K" data-ar="330K">330K</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">2x</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">4x</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="Temperature (T) →" data-ar="← درجة الحرارة (T)">Temperature (T) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="Speed (Rate) →" data-ar="سرعة التفاعل →">Speed (Rate) →</text>
+    
+    <polyline points="60.0,230.0 65.7,229.6 71.3,229.3 77.0,228.9 82.7,228.4 88.3,228.0 94.0,227.5 99.7,227.0 105.3,226.5 111.0,225.9 116.7,225.3 122.3,224.7 128.0,224.0 133.7,223.3 139.3,222.5 145.0,221.7 150.7,220.9 156.3,220.0 162.0,219.0 167.7,218.0 173.3,216.9 179.0,215.8 184.7,214.6 190.3,213.3 196.0,211.9 201.7,210.5 207.3,209.0 213.0,207.3 218.7,205.6 224.3,203.8 230.0,201.9 235.7,199.8 241.3,197.7 247.0,195.4 252.7,192.9 258.3,190.3 264.0,187.6 269.7,184.7 275.3,181.6 281.0,178.4 286.7,174.9 292.3,171.2 298.0,167.4 303.7,163.2 309.3,158.9 315.0,154.2 320.7,149.3 326.3,144.1 332.0,138.6 337.7,132.8 343.3,126.6 349.0,120.0 354.7,113.1 360.3,105.7 366.0,97.9 371.7,89.6 377.3,80.8 383.0,71.5 388.7,61.6 394.3,51.1 400.0,40.0" fill="none" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round" />
+    <text class="chart-ann bi-text" x="180" y="80" fill="#f59e0b" font-size="12" font-weight="bold" font-family="sans-serif" data-en="Exponential rise (Arrhenius)" data-ar="تضاعف أسي سريع (أرهينيوس)">Exponential rise (Arrhenius)</text>
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="rate_temp" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Arrhenius Equation. Speed increases exponentially with temperature because significantly more molecules exceed activation energy Ea." data-ar="معادلة أرهينيوس. تتضاعف سرعة التفاعل أسياً مع ارتفاع الحرارة لزيادة نسبة الجزيئات التي تتجاوز طاقة التنشيط Ea.">Arrhenius Equation. Speed increases exponentially with temperature because significantly more molecules exceed activation energy Ea.</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Reaction Speed">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#10b981; background:#10b9811a; border-color:#10b98166;" data-en="Reaction Speed" data-ar="سرعة التفاعل الحركية">Reaction Speed</span>
+          <span class="formula-pill">Rate ∝ Exposed Area</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="13. Rate vs Surface Area" data-ar="١٣. سرعة التفاعل ومساحة السطح">13. Rate vs Surface Area</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Solid" data-ar="كتلة">Solid</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Pieces" data-ar="قطع">Pieces</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Powder" data-ar="مسحوق">Powder</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">r</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">3r</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="Surface Area (Subdivision) →" data-ar="← مساحة السطح (التفتيت)">Surface Area (Subdivision) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="Speed (Rate) →" data-ar="سرعة التفاعل →">Speed (Rate) →</text>
+    
+    <polyline points="60,230 400,30" fill="none" stroke="#10b981" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+    <text class="chart-ann bi-text" x="230" y="80" text-anchor="middle" fill="#10b981" font-size="12" font-weight="bold" font-family="sans-serif" data-en="Powder reacts much faster!" data-ar="المسحوق يتفاعل أسرع بكثير!">Powder reacts much faster!</text>
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="rate_surface" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Subdividing solids (powdering) multiplies exposed surface area, increasing contact collision sites and accelerating reaction rate." data-ar="تفتيت المادة الصلبة (تحويلها لمسحوق) يضاعف مساحة السطح المعرضة للتفاعل، مما يزيد نقاط التلامس ويسرع التفاعل.">Subdividing solids (powdering) multiplies exposed surface area, increasing contact collision sites and accelerating reaction rate.</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Reaction Speed">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#10b981; background:#10b9811a; border-color:#10b98166;" data-en="Reaction Speed" data-ar="سرعة التفاعل الحركية">Reaction Speed</span>
+          <span class="formula-pill">r(forward) = r(reverse)</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="14. Fwd & Rev Rates vs Time" data-ar="١٤. سرعتي التفاعل والوصول للاتزان">14. Fwd & Rev Rates vs Time</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Start" data-ar="البداية">Start</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="teq" data-ar="teq">teq</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="Equil." data-ar="اتزان">Equil.</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">r</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">max</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="Time (t) →" data-ar="← الزمن (t)">Time (t) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="Reaction Rate →" data-ar="سرعة التفاعل →">Reaction Rate →</text>
+    
+    
+        <line x1="240" y1="30" x2="240" y2="230" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <polyline points="60.0,30.0 65.7,33.1 71.3,36.3 77.0,39.4 82.7,42.6 88.3,45.7 94.0,48.9 99.7,52.0 105.3,55.2 111.0,58.3 116.7,61.5 122.3,64.6 128.0,67.8 133.7,70.9 139.3,74.1 145.0,77.2 150.7,80.4 156.3,83.5 162.0,86.7 167.7,89.8 173.3,93.0 179.0,96.1 184.7,99.3 190.3,102.4 196.0,105.6 201.7,108.7 207.3,111.9 213.0,115.0 218.7,118.1 224.3,121.3 230.0,124.4 235.7,127.6 241.3,130.0 247.0,130.0 252.7,130.0 258.3,130.0 264.0,130.0 269.7,130.0 275.3,130.0 281.0,130.0 286.7,130.0 292.3,130.0 298.0,130.0 303.7,130.0 309.3,130.0 315.0,130.0 320.7,130.0 326.3,130.0 332.0,130.0 337.7,130.0 343.3,130.0 349.0,130.0 354.7,130.0 360.3,130.0 366.0,130.0 371.7,130.0 377.3,130.0 383.0,130.0 388.7,130.0 394.3,130.0 400.0,130.0" fill="none" stroke="#06b6d4" stroke-width="3.5" stroke-linecap="round" />
+        <polyline points="60.0,230.0 65.7,226.9 71.3,223.7 77.0,220.6 82.7,217.4 88.3,214.3 94.0,211.1 99.7,208.0 105.3,204.8 111.0,201.7 116.7,198.5 122.3,195.4 128.0,192.2 133.7,189.1 139.3,185.9 145.0,182.8 150.7,179.6 156.3,176.5 162.0,173.3 167.7,170.2 173.3,167.0 179.0,163.9 184.7,160.7 190.3,157.6 196.0,154.4 201.7,151.3 207.3,148.1 213.0,145.0 218.7,141.9 224.3,138.7 230.0,135.6 235.7,132.4 241.3,130.0 247.0,130.0 252.7,130.0 258.3,130.0 264.0,130.0 269.7,130.0 275.3,130.0 281.0,130.0 286.7,130.0 292.3,130.0 298.0,130.0 303.7,130.0 309.3,130.0 315.0,130.0 320.7,130.0 326.3,130.0 332.0,130.0 337.7,130.0 343.3,130.0 349.0,130.0 354.7,130.0 360.3,130.0 366.0,130.0 371.7,130.0 377.3,130.0 383.0,130.0 388.7,130.0 394.3,130.0 400.0,130.0" fill="none" stroke="#8b5cf6" stroke-width="3.5" stroke-linecap="round" />
+        
+    
+        <text class="chart-ann bi-text" x="80" y="55" fill="#06b6d4" font-size="11" font-weight="bold" data-en="Fwd Rate r1" data-ar="سرعة التفاعل الأمامي">Fwd Rate r1</text>
+        <text class="chart-ann bi-text" x="80" y="210" fill="#8b5cf6" font-size="11" font-weight="bold" data-en="Rev Rate r2" data-ar="سرعة التفاعل العكسي">Rev Rate r2</text>
+        <text class="chart-ann bi-text" x="320" y="115" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle" data-en="r1 = r2 at Equilibrium" data-ar="تساوي السرعتين عند الاتزان">r1 = r2 at Equilibrium</text>
+        
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="rate_time_eq" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Forward speed r1 starts high and drops. Reverse speed r2 starts at 0 and grows. At equilibrium time teq, both speeds become equal." data-ar="يبدأ التفاعل الأمامي بأقصى سرعة ويقل مع استهلاك المتفاعلات، بينما يبدأ العكسي من الصفر ويزداد حتى يتساويا عند الاتزان.">Forward speed r1 starts high and drops. Reverse speed r2 starts at 0 and grows. At equilibrium time teq, both speeds become equal.</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Ionization">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#8b5cf6; background:#8b5cf61a; border-color:#8b5cf666;" data-en="Ionization" data-ar="التفكك والتأين">Ionization</span>
+          <span class="formula-pill">α = √(Ka · V)</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="15. Ionization (α) vs Dilution" data-ar="١٥. درجة التأين (α) مع التخفيف (الحجم V)">15. Ionization (α) vs Dilution</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="0" data-ar="0">0</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="50L" data-ar="50L">50L</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="100L" data-ar="100L">100L</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0.5</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">1.0</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="Dilution Volume (V) →" data-ar="← حجم التخفيف (V)">Dilution Volume (V) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="Degree (α) →" data-ar="درجة التأين (α) →">Degree (α) →</text>
+    
+    <polyline points="60.0,230.0 65.7,205.5 71.3,195.3 77.0,187.5 82.7,180.9 88.3,175.2 94.0,169.9 99.7,165.1 105.3,160.6 111.0,156.4 116.7,152.4 122.3,148.6 128.0,145.0 133.7,141.6 139.3,138.2 145.0,135.0 150.7,131.9 156.3,128.9 162.0,125.9 167.7,123.1 173.3,120.3 179.0,117.6 184.7,114.9 190.3,112.4 196.0,109.8 201.7,107.4 207.3,104.9 213.0,102.5 218.7,100.2 224.3,97.9 230.0,95.6 235.7,93.4 241.3,91.2 247.0,89.1 252.7,87.0 258.3,84.9 264.0,82.8 269.7,80.8 275.3,78.8 281.0,76.8 286.7,74.9 292.3,72.9 298.0,71.0 303.7,69.2 309.3,67.3 315.0,65.5 320.7,63.6 326.3,61.8 332.0,60.1 337.7,58.3 343.3,56.6 349.0,54.8 354.7,53.1 360.3,51.4 366.0,49.8 371.7,48.1 377.3,46.4 383.0,44.8 388.7,43.2 394.3,41.6 400.0,40.0" fill="none" stroke="#10b981" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+    <line x1="60" y1="40" x2="400" y2="40" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3 3"/><text class="chart-ann bi-text" x="230" y="32" text-anchor="middle" fill="#10b981" font-size="12" font-weight="bold" font-family="sans-serif" data-en="α → 1.0 (100% at Infinite Dilution)" data-ar="التأين التام عند التخفيف اللانهائي">α → 1.0 (100% at Infinite Dilution)</text>
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="alpha_dilution" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Ostwald's Dilution Law. As volume V increases (dilution), weak electrolyte ionization α increases asymptotically toward 1 (100%)." data-ar="قانون أوستفالد للتخفيف. مع زيادة الحجم V (التخفيف)، تزداد درجة تأين الإلكتروليت الضعيف α مقتربة من 1 (100%).">Ostwald's Dilution Law. As volume V increases (dilution), weak electrolyte ionization α increases asymptotically toward 1 (100%).</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Ionization">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#8b5cf6; background:#8b5cf61a; border-color:#8b5cf666;" data-en="Ionization" data-ar="التفكك والتأين">Ionization</span>
+          <span class="formula-pill">α = √(Ka / C)</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="16. Ionization (α) vs Conc." data-ar="١٦. درجة التأين (α) مع التركيز (C)">16. Ionization (α) vs Conc.</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="0" data-ar="0">0</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="0.5M" data-ar="0.5M">0.5M</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="1.0M" data-ar="1.0M">1.0M</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0.5</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">1.0</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="Concentration (C) →" data-ar="← التركيز (C)">Concentration (C) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="Degree (α) →" data-ar="درجة التأين (α) →">Degree (α) →</text>
+    
+    <polyline points="60.0,40.0 65.7,113.3 71.3,138.4 77.0,152.1 82.7,161.1 88.3,167.5 94.0,172.5 99.7,176.4 105.3,179.6 111.0,182.3 116.7,184.6 122.3,186.6 128.0,188.3 133.7,189.9 139.3,191.3 145.0,192.6 150.7,193.7 156.3,194.7 162.0,195.7 167.7,196.6 173.3,197.4 179.0,198.2 184.7,198.9 190.3,199.6 196.0,200.2 201.7,200.8 207.3,201.3 213.0,201.8 218.7,202.3 224.3,202.8 230.0,203.3 235.7,203.7 241.3,204.1 247.0,204.5 252.7,204.9 258.3,205.2 264.0,205.6 269.7,205.9 275.3,206.2 281.0,206.5 286.7,206.8 292.3,207.1 298.0,207.3 303.7,207.6 309.3,207.9 315.0,208.1 320.7,208.3 326.3,208.6 332.0,208.8 337.7,209.0 343.3,209.2 349.0,209.4 354.7,209.6 360.3,209.8 366.0,210.0 371.7,210.2 377.3,210.3 383.0,210.5 388.7,210.7 394.3,210.8 400.0,211.0" fill="none" stroke="#06b6d4" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+    <text class="chart-ann bi-text" x="180" y="80" fill="#06b6d4" font-size="12" font-weight="bold" font-family="sans-serif" data-en="α drops as Conc. rises" data-ar="تقل α مع زيادة التركيز">α drops as Conc. rises</text>
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="alpha_conc" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Inverse square root relationship. As solute concentration C increases, degree of ionization decreases due to ion association." data-ar="علاقة عكسية مع الجذر التربيعي للتركيز. كلما زاد تركيز المذاب C، انخفضت درجة التأين α بسبب تجاذب الأيونات.">Inverse square root relationship. As solute concentration C increases, degree of ionization decreases due to ion association.</p>
+      </div>
+    </div>
+    
+    <div class="graph-card" data-category="Ionization">
+      <div class="card-header">
+        <div class="header-top">
+          <span class="category-badge bi-text" style="color:#8b5cf6; background:#8b5cf61a; border-color:#8b5cf666;" data-en="Ionization" data-ar="التأين والإزاحات">Ionization</span>
+          <span class="formula-pill">Δng = n(prod) - n(react)</span>
+        </div>
+        <h3 class="card-title bi-text" data-en="17. Pressure & Moles Shift" data-ar="١٧. الضغط وعدد المولات (إزاحة الاتزان)">17. Pressure & Moles Shift</h3>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 430 280" class="graph-svg">
+          
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <rect width="430" height="280" fill="#090e1a" rx="8" />
+    <line x1="128.0" y1="30" x2="128.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="190.0" x2="400" y2="190.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="196.0" y1="30" x2="196.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="150.0" x2="400" y2="150.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="264.0" y1="30" x2="264.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="110.0" x2="400" y2="110.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="332.0" y1="30" x2="332.0" y2="230" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+<line x1="60" y1="70.0" x2="400" y2="70.0" stroke="#1f2d3d" stroke-width="1" stroke-dasharray="4 4" />
+
+    
+    <line x1="60" y1="230" x2="405" y2="230" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="60" y1="230" x2="60" y2="25" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <text class="chart-tick-x bi-text" x="60" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="1 atm" data-ar="1 atm">1 atm</text><text class="chart-tick-x bi-text" x="230.0" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="5 atm" data-ar="5 atm">5 atm</text><text class="chart-tick-x bi-text" x="400" y="246" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="sans-serif" data-en="10 atm" data-ar="10 atm">10 atm</text><text x="52" y="234" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">0%</text><text x="52" y="134.0" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">50%</text><text x="52" y="34" fill="#94a3b8" font-size="11" text-anchor="end" font-family="sans-serif">100%</text>
+    
+    <text class="chart-x-label bi-text" x="230" y="268" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" data-en="System Pressure (P) →" data-ar="← ضغط النظام (P)">System Pressure (P) →</text>
+    <text class="chart-y-label bi-text" x="18" y="130" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle" font-family="sans-serif" transform="rotate(-90 18 130)" data-en="Product Yield (%) →" data-ar="نسبة الناتج (%) →">Product Yield (%) →</text>
+    
+    
+        <polyline points="60.0,192.0 65.7,185.0 71.3,178.4 77.0,172.2 82.7,166.3 88.3,160.8 94.0,155.5 99.7,150.6 105.3,145.9 111.0,141.6 116.7,137.4 122.3,133.5 128.0,129.8 133.7,126.4 139.3,123.1 145.0,120.0 150.7,117.1 156.3,114.3 162.0,111.7 167.7,109.3 173.3,107.0 179.0,104.8 184.7,102.7 190.3,100.8 196.0,99.0 201.7,97.2 207.3,95.6 213.0,94.1 218.7,92.6 224.3,91.3 230.0,90.0 235.7,88.7 241.3,87.6 247.0,86.5 252.7,85.5 258.3,84.5 264.0,83.6 269.7,82.8 275.3,82.0 281.0,81.2 286.7,80.5 292.3,79.8 298.0,79.2 303.7,78.6 309.3,78.0 315.0,77.4 320.7,76.9 326.3,76.5 332.0,76.0 337.7,75.6 343.3,75.2 349.0,74.8 354.7,74.4 360.3,74.1 366.0,73.8 371.7,73.5 377.3,73.2 383.0,72.9 388.7,72.7 394.3,72.5 400.0,72.2" fill="none" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" />
+        <line x1="60" y1="135" x2="400" y2="135" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="6 4" />
+        <polyline points="60.0,78.0 65.7,85.0 71.3,91.6 77.0,97.8 82.7,103.7 88.3,109.2 94.0,114.5 99.7,119.4 105.3,124.1 111.0,128.4 116.7,132.6 122.3,136.5 128.0,140.2 133.7,143.6 139.3,146.9 145.0,150.0 150.7,152.9 156.3,155.7 162.0,158.3 167.7,160.7 173.3,163.0 179.0,165.2 184.7,167.3 190.3,169.2 196.0,171.0 201.7,172.8 207.3,174.4 213.0,175.9 218.7,177.4 224.3,178.7 230.0,180.0 235.7,181.3 241.3,182.4 247.0,183.5 252.7,184.5 258.3,185.5 264.0,186.4 269.7,187.2 275.3,188.0 281.0,188.8 286.7,189.5 292.3,190.2 298.0,190.8 303.7,191.4 309.3,192.0 315.0,192.6 320.7,193.1 326.3,193.5 332.0,194.0 337.7,194.4 343.3,194.8 349.0,195.2 354.7,195.6 360.3,195.9 366.0,196.2 371.7,196.5 377.3,196.8 383.0,197.1 388.7,197.3 394.3,197.5 400.0,197.8" fill="none" stroke="#ec4899" stroke-width="3" stroke-linecap="round" />
+        
+    
+        <text class="chart-ann bi-text" x="310" y="65" fill="#06b6d4" font-size="11" font-weight="bold" font-family="sans-serif" data-en="Δng < 0 (Yield Rises)" data-ar="Δng < 0 (يزداد الناتج)">Δng < 0 (Yield Rises)</text>
+        <text class="chart-ann bi-text" x="310" y="128" fill="#94a3b8" font-size="11" font-weight="bold" font-family="sans-serif" data-en="Δng = 0 (No Effect)" data-ar="Δng = 0 (لا تأثير)">Δng = 0 (No Effect)</text>
+        <text class="chart-ann bi-text" x="310" y="190" fill="#ec4899" font-size="11" font-weight="bold" font-family="sans-serif" data-en="Δng > 0 (Yield Drops)" data-ar="Δng > 0 (يقل الناتج)">Δng > 0 (Yield Drops)</text>
+        
+    
+        <g class="interactive-overlay" style="opacity:0; pointer-events:none;">
+          <line class="cross-x" x1="60" y1="30" x2="60" y2="230" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line class="cross-y" x1="60" y1="130" x2="400" y2="130" stroke="#fff" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle class="cross-dot" cx="60" cy="130" r="5" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+          <rect class="tip-bg" x="70" y="38" width="180" height="26" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <text class="tip-txt" x="160" y="55" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">x: 0, y: 0</text>
+        </g>
+        
+    <rect class="hover-detector" data-id="press_moles" x="60" y="30" width="340" height="200" fill="transparent" style="cursor: crosshair;" />
+    
+        </svg>
+      </div>
+
+      <div class="card-footer">
+        <div class="takeaway-title"><span class="icon">💡</span> <span class="bi-text" data-en="Key Takeaway" data-ar="المفهوم الأساسي">Key Takeaway</span></div>
+        <p class="takeaway-desc bi-text" data-en="Le Chatelier's Principle. Higher pressure favors the side with fewer gas moles. If Δng = 0, pressure has zero effect on yield." data-ar="قاعدة لو شاتيليه. زيادة الضغط تفضل الطرف صاحب عدد المولات الغازية الأقل. إذا كان Δng = 0، فلا تأثير للضغط.">Le Chatelier's Principle. Higher pressure favors the side with fewer gas moles. If Δng = 0, pressure has zero effect on yield.</p>
+      </div>
+    </div>
+    
+</div>
+
+<script>
+
+  let currentLang = 'en';
+
+  function switchLang(lang) {
+    currentLang = lang;
+    const html = document.documentElement;
+    const body = document.body;
+
+    if (lang === 'ar') {
+      html.setAttribute('lang', 'ar');
+      html.setAttribute('dir', 'rtl');
+      body.classList.add('rtl-mode');
+      document.getElementById('btn-en').classList.remove('active');
+      document.getElementById('btn-ar').classList.add('active');
+    } else {
+      html.setAttribute('lang', 'en');
+      html.setAttribute('dir', 'ltr');
+      body.classList.remove('rtl-mode');
+      document.getElementById('btn-ar').classList.remove('active');
+      document.getElementById('btn-en').classList.add('active');
+    }
+
+    document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+      el.textContent = lang === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+    });
+  }
+
+  function filterCards(category, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.querySelectorAll('.graph-card').forEach(card => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Attach interactive hover tooltips
+  document.querySelectorAll('.hover-detector').forEach(detector => {
+    const svg = detector.closest('svg');
+    const overlay = svg.querySelector('.interactive-overlay');
+    if (!overlay) return;
+
+    const crossX = overlay.querySelector('.cross-x');
+    const crossY = overlay.querySelector('.cross-y');
+    const dot = overlay.querySelector('.cross-dot');
+    const tipTxt = overlay.querySelector('.tip-txt');
+    const tipBg = overlay.querySelector('.tip-bg');
+    const gid = detector.dataset.id;
+
+    detector.addEventListener('mouseenter', () => { overlay.style.opacity = '1'; });
+    detector.addEventListener('mouseleave', () => { overlay.style.opacity = '0'; });
+
+    detector.addEventListener('mousemove', (e) => {
+      const rect = detector.getBoundingClientRect();
+      const clientX = e.clientX - rect.left;
+      const t = Math.max(0, Math.min(1, clientX / rect.width));
+      
+      const svgX = 60 + t * 340;
+      let svgY = 130;
+      let label = "";
+
+      if (gid === 'ph_poh') {
+        const ph = t * 14; const poh = 14 - ph; svgY = 30 + t * 200;
+        label = `pH: ${ph.toFixed(1)}, pOH: ${poh.toFixed(1)}`;
+      } else if (gid === 'ph_h') {
+        const h = 0.0001 + t * 0.9999; const ph = -Math.log10(h); svgY = 230 - (ph / 4) * 200;
+        label = `[H⁺]: ${h.toFixed(3)}M, pH: ${ph.toFixed(2)}`;
+      } else if (gid === 'poh_h') {
+        const h = 0.0001 + t * 0.9999; const poh = 14 + Math.log10(h); svgY = 230 - ((poh - 10) / 4) * 200;
+        label = `[H⁺]: ${h.toFixed(3)}M, pOH: ${poh.toFixed(2)}`;
+      } else if (gid === 'poh_oh') {
+        const oh = 0.0001 + t * 0.9999; const poh = -Math.log10(oh); svgY = 230 - (poh / 4) * 200;
+        label = `[OH⁻]: ${oh.toFixed(3)}M, pOH: ${poh.toFixed(2)}`;
+      } else if (gid === 'kc_temp') {
+        const temp = 250 + t * 300; const kEndo = (Math.exp(2.5 * t) - 1) / (Math.exp(2.5) - 1); svgY = 230 - kEndo * 180 - 10;
+        label = currentLang === 'ar' ? `حرارة: ${temp.toFixed(0)}K, يزداد Kc` : `T: ${temp.toFixed(0)}K, Endo Kc ↑`;
+      } else if (gid === 'kc_conc') {
+        svgY = 130; label = currentLang === 'ar' ? `تغير التركيز/الضغط ← Kc ثابت` : `Conc/Press changed → Kc Constant`;
+      } else if (gid === 'conc_complete') {
+        const r = Math.exp(-4 * t); const p = 1 - r; svgY = 230 - p * 200;
+        label = currentLang === 'ar' ? `متفاعلات: ${(r*100).toFixed(0)}%, ناتج: ${(p*100).toFixed(0)}%` : `React: ${(r*100).toFixed(0)}%, Prod: ${(p*100).toFixed(0)}%`;
+      } else if (['conc_kc_eq', 'conc_kc_gt', 'conc_kc_lt'].includes(gid)) {
+        // Fixed: was Python syntax `gid in [...]` and `x if y else z`
+        if (gid === 'conc_kc_eq') {
+          svgY = 130;
+          label = currentLang === 'ar' ? '[نواتج] = [متفاعلات] عند الاتزان' : '[Prod] = [React] at Equil';
+        } else if (gid === 'conc_kc_gt') {
+          svgY = 80;
+          label = currentLang === 'ar' ? '[نواتج] > [متفاعلات] عند الاتزان' : '[Prod] > [React] at Equil';
+        } else {
+          svgY = 180;
+          label = currentLang === 'ar' ? '[متفاعلات] > [نواتج] عند الاتزان' : '[React] > [Prod] at Equil';
+        }
+      } else if (['rate_conc', 'rate_surface'].includes(gid)) {
+        svgY = 230 - t * 200;
+        label = currentLang === 'ar' ? `تناسب طردي خطي مباشر` : `Direct linear rate increase`;
+      } else if (gid === 'rate_temp') {
+        const v = (Math.exp(3.5 * t) - 1) / (Math.exp(3.5) - 1); svgY = 230 - v * 190;
+        label = currentLang === 'ar' ? `تضاعف أسي سريع في السرعة` : `Arrhenius exponential rate rise`;
+      } else if (gid === 'rate_time_eq') {
+        svgY = 130;
+        label = currentLang === 'ar' ? `تساوت السرعتين r1 = r2 عند الاتزان` : `r1 = r2 at Equilibrium`;
+      } else if (gid === 'alpha_dilution') {
+        const vol = t * 100; const alpha = Math.sqrt(t); svgY = 230 - alpha * 190;
+        label = currentLang === 'ar' ? `حجم: ${vol.toFixed(0)}L, α: ${(alpha*100).toFixed(1)}%` : `V: ${vol.toFixed(0)}L, α: ${(alpha*100).toFixed(1)}%`;
+      } else if (gid === 'alpha_conc') {
+        const c = 0.01 + t * 0.99; const alpha = Math.min(1.0, 0.1 / Math.sqrt(c)); svgY = 230 - alpha * 190;
+        label = currentLang === 'ar' ? `تركيز: ${c.toFixed(2)}M, α: ${(alpha*100).toFixed(1)}%` : `C: ${c.toFixed(2)}M, α: ${(alpha*100).toFixed(1)}%`;
+      } else if (gid === 'press_moles') {
+        const p = 1 + t * 9; const yNeg = 0.85 - 0.65 * Math.exp(-3.5 * t); svgY = 230 - yNeg * 190;
+        label = currentLang === 'ar' ? `ضغط: ${p.toFixed(1)}atm, ناتج: ${(yNeg*100).toFixed(1)}%` : `P: ${p.toFixed(1)}atm, Yield: ${(yNeg*100).toFixed(1)}%`;
+      }
+
+      svgY = Math.max(30, Math.min(230, svgY));
+      crossX.setAttribute('x1', svgX); crossX.setAttribute('x2', svgX);
+      crossY.setAttribute('y1', svgY); crossY.setAttribute('y2', svgY);
+      dot.setAttribute('cx', svgX); dot.setAttribute('cy', svgY);
+      tipTxt.textContent = label;
+      
+      let tipX = svgX - 90; if (tipX < 65) tipX = 65; if (tipX > 215) tipX = 215;
+      let tipY = svgY - 35; if (tipY < 32) tipY = svgY + 15;
+      tipBg.setAttribute('x', tipX); tipBg.setAttribute('y', tipY);
+      tipTxt.setAttribute('x', tipX + 90); tipTxt.setAttribute('y', tipY + 17);
+    });
+  });
+
+</script>
+
+<div class="brandfoot"><span class="fline1"><span class="fname">أ/ أيمن منصور — مستشار الكيمياء</span><span class="sep">|</span><span class="fname2">Prof./ Ayman Mansour — Chemistry Consultant</span></span><span class="fline2"><span class="fphone">📞 / WhatsApp: <b>01068018005</b> · <b>01287996430</b></span><span class="sep">|</span><span>كيمياء ٢٠٢٦ • Chemistry 2026</span></span></div>
+
+<div id="security-overlay" class="security-overlay">
+    <div style="font-size:3rem">🛡</div>
+    <div>Screen Recording / Copying Disabled</div>
+    <div class="ar">تم تعطيل تصوير الشاشة / النسخ</div>
+</div>
+
+<script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => { e.preventDefault(); });
+    document.addEventListener('keydown', e => {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 's' || e.key === 'u' || e.key === 'a')) {
+            e.preventDefault();
+        }
+    });
+    document.addEventListener('keyup', e => {
+        if (e.key === 'PrintScreen') { try { navigator.clipboard.writeText(''); } catch(_){} }
+    });
+    window.addEventListener('blur', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'flex';
+    });
+    window.addEventListener('focus', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'none';
+    });
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a109d42d8e51787a',t:'MTc4MjI4NDE0Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1151eb6fcaff31b',t:'MTc4MjQwMjU0Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

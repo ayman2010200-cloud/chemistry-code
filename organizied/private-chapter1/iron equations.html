@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Iron Chemistry Neon SVG Equations</title>
+
+<style>
+:root {
+  --bg1: #020617;
+  --bg2: #0f172a;
+  --card: rgba(15, 23, 42, 0.78);
+  --card2: rgba(30, 41, 59, 0.58);
+  --cyan: #22d3ee;
+  --blue: #38bdf8;
+  --violet: #a78bfa;
+  --pink: #fb7185;
+  --green: #4ade80;
+  --yellow: #facc15;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 15% 15%, rgba(34, 211, 238, 0.20), transparent 30%),
+    radial-gradient(circle at 85% 10%, rgba(167, 139, 250, 0.18), transparent 30%),
+    radial-gradient(circle at 50% 90%, rgba(251, 113, 133, 0.13), transparent 35%),
+    linear-gradient(135deg, var(--bg1), var(--bg2));
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+  pointer-events: none;
+}
+
+.page {
+  width: min(1240px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 46px 0 70px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 42px;
+}
+
+.badge {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  color: var(--cyan);
+  box-shadow:
+    0 0 20px rgba(34, 211, 238, 0.18),
+    inset 0 0 18px rgba(34, 211, 238, 0.06);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+h1 {
+  margin: 22px 0 12px;
+  font-size: clamp(2.2rem, 6vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.07em;
+  background: linear-gradient(90deg, #fff, var(--cyan), var(--violet), var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 22px rgba(34, 211, 238, 0.22));
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.group {
+  position: relative;
+  border-radius: 26px;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(34, 211, 238, 0.95),
+    rgba(167, 139, 250, 0.75),
+    rgba(251, 113, 133, 0.85)
+  );
+  box-shadow:
+    0 0 26px rgba(34, 211, 238, 0.18),
+    0 0 58px rgba(167, 139, 250, 0.12),
+    0 18px 60px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.group::before {
+  content: "";
+  position: absolute;
+  inset: -120px;
+  background:
+    conic-gradient(
+      from 180deg,
+      transparent,
+      rgba(34, 211, 238, 0.22),
+      transparent,
+      rgba(251, 113, 133, 0.20),
+      transparent
+    );
+  animation: rotateGlow 9s linear infinite;
+  opacity: 0.65;
+}
+
+@keyframes rotateGlow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.group-inner {
+  position: relative;
+  z-index: 1;
+  border-radius: 25px;
+  padding: 24px;
+  background:
+    linear-gradient(180deg, rgba(15,23,42,0.92), rgba(2,6,23,0.90)),
+    var(--card);
+  backdrop-filter: blur(18px);
+  min-height: 100%;
+}
+
+.group-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+}
+
+.icon {
+  width: 45px;
+  height: 45px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(34,211,238,0.22), rgba(167,139,250,0.22));
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.16);
+  font-size: 22px;
+}
+
+.group-title {
+  margin: 0;
+  font-size: 1.28rem;
+  letter-spacing: -0.02em;
+}
+
+.group-note {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.eq-card {
+  position: relative;
+  margin: 13px 0;
+  border-radius: 18px;
+  padding: 10px 12px;
+  background:
+    linear-gradient(180deg, rgba(30, 41, 59, 0.72), rgba(15, 23, 42, 0.64));
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow:
+    inset 0 0 22px rgba(255, 255, 255, 0.025),
+    0 0 20px rgba(34, 211, 238, 0.055);
+  overflow: hidden;
+}
+
+.eq-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(34,211,238,0.07), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.8s ease;
+}
+
+.eq-card:hover::after {
+  transform: translateX(100%);
+}
+
+.eq-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 5px 4px;
+  color: var(--cyan);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+svg.eq-svg {
+  width: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.eq-text {
+  font-family: "Cambria Math", "STIX Two Math", "Segoe UI", Arial, sans-serif;
+  fill: #f8fafc;
+  font-weight: 650;
+  dominant-baseline: middle;
+}
+
+.condition {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  fill: #4ade80;
+  font-weight: 800;
+  dominant-baseline: middle;
+  filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.42));
+}
+
+.side-note {
+  fill: #fb7185;
+  font-weight: 800;
+  filter: drop-shadow(0 0 6px rgba(251, 113, 133, 0.34));
+}
+
+.footer {
+  margin-top: 34px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .page {
+    width: min(100% - 18px, 1240px);
+    padding-top: 26px;
+  }
+
+  .group-inner {
+    padding: 18px;
+  }
+
+  .eq-card {
+    padding: 8px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+  <section class="hero">
+    <div class="badge">⚗️ Neon SVG Chemistry Sheet</div>
+    <h1>Iron Chemistry Equations</h1>
+    <p class="subtitle">
+      Premium dark-style reaction cards with perfectly centered SVG arrows and aligned reaction conditions.
+    </p>
+  </section>
+
+  <main class="grid" id="sheet"></main>
+
+  <div class="footer">
+    All reactions are rendered as scalable SVG graphics with centered arrows.
+  </div>
+</div>
+
+<script>
+const groups = [
+  {
+    title: "Effect of Heat",
+    note: "Thermal decomposition of iron compounds",
+    icon: "🔥",
+    equations: [
+      { label: "Iron(II) oxalate", left: "(COO)₂Fe", condition: "Δ / absence of air", right: "FeO + CO₂ + CO" },
+      { label: "Oxidation of FeO", left: "2FeO + ½O₂", condition: "Δ / presence of air", right: "Fe₂O₃" },
+      { label: "Siderite, no air", left: "FeCO₃", condition: "Δ / no air", right: "FeO + CO₂" },
+      { label: "Siderite, air", left: "2FeCO₃ + O₂", condition: "Δ / presence of air", right: "Fe₂O₃ + 2CO₂" },
+      { label: "Limonite", left: "2Fe₂O₃·3H₂O", condition: "Δ", right: "2Fe₂O₃ + 3H₂O" },
+      { label: "Iron(II) sulphate", left: "2FeSO₄", condition: "Δ", right: "Fe₂O₃ + SO₂ + SO₃" },
+      { label: "Iron(III) hydroxide", left: "2Fe(OH)₃", condition: "Δ / >200°C", right: "Fe₂O₃ + 3H₂O" }
+    ]
+  },
+  {
+    title: "Reduction of Iron Oxide",
+    note: "Blast furnace and Midrex-type reducing gases",
+    icon: "🏭",
+    equations: [
+      { label: "Coke combustion", left: "C(s) + O₂(g)", condition: "Δ", right: "CO₂(g)" },
+      { label: "Carbon monoxide formation", left: "CO₂(g) + C(s)", condition: "Δ", right: "2CO(g)" },
+      { label: "Reduction by CO", left: "Fe₂O₃(s) + 3CO(g)", condition: "Δ", right: "2Fe(s) + 3CO₂(g)" },
+      { label: "Water gas production", left: "2CH₄(g) + CO₂(g) + H₂O(v)", condition: "Δ", right: "3CO(g) + 5H₂(g)" },
+      { label: "Reduction by water gas", left: "2Fe₂O₃(s) + 3CO(g) + 3H₂(g)", condition: "Δ", right: "4Fe(s) + 3CO₂(g) + 3H₂O(v)", size: 31 }
+    ]
+  },
+  {
+    title: "Reactions of Iron",
+    note: "Direct reactions with non-metals, steam and acids",
+    icon: "⚙️",
+    equations: [
+      { label: "With oxygen", left: "3Fe + 2O₂", condition: "Δ", right: "Fe₃O₄" },
+      { label: "With steam", left: "3Fe + 4H₂O", condition: "500°C", right: "Fe₃O₄ + 4H₂" },
+      { label: "With chlorine", left: "2Fe + 3Cl₂", condition: "Δ", right: "2FeCl₃", note: "oxidizing agent" },
+      { label: "With sulphur", left: "Fe + S", condition: "Δ", right: "FeS", note: "reducing agent" },
+      { label: "With dilute hydrochloric acid", left: "Fe + 2HCl", condition: "dil.", right: "FeCl₂ + H₂", note: "reducing agent" },
+      { label: "With nitric acid", left: "Fe + HNO₃", condition: "conc.", right: "No reaction", note: "passivity" },
+      { label: "With dilute sulphuric acid", left: "Fe + H₂SO₄", condition: "dil.", right: "FeSO₄ + H₂", note: "reducing agent" },
+      { label: "With hot concentrated sulphuric acid", left: "3Fe + 8H₂SO₄", condition: "conc. / Δ", right: "FeSO₄ + Fe₂(SO₄)₃ + 4SO₂ + 8H₂O", size: 28 }
+    ]
+  },
+  {
+    title: "Oxidation of Impurities",
+    note: "Oxidation of sulphur and phosphorus impurities",
+    icon: "✨",
+    equations: [
+      { label: "Sulphur impurity", left: "S(s) + O₂(g)", condition: "Δ", right: "SO₂(g)" },
+      { label: "Phosphorus impurity", left: "4P(s) + 5O₂(g)", condition: "Δ", right: "2P₂O₅(g)" }
+    ]
+  },
+  {
+    title: "Acid Reactions of Iron Oxides",
+    note: "Formation of iron salts from FeO, Fe₂O₃ and Fe₃O₄",
+    icon: "🧪",
+    equations: [
+      { label: "FeO with sulphuric acid", left: "FeO + H₂SO₄", condition: "dil.", right: "FeSO₄ + H₂O" },
+      { label: "FeO with hydrochloric acid", left: "FeO + 2HCl", condition: "dil.", right: "FeCl₂ + H₂O" },
+      { label: "Fe₂O₃ with sulphuric acid", left: "Fe₂O₃ + 3H₂SO₄", condition: "conc. / Δ", right: "Fe₂(SO₄)₃ + 3H₂O" },
+      { label: "Fe₂O₃ with hydrochloric acid", left: "Fe₂O₃ + 6HCl", condition: "conc. / Δ", right: "2FeCl₃ + 3H₂O" },
+      { label: "Fe₃O₄ with sulphuric acid", left: "Fe₃O₄ + 4H₂SO₄", condition: "conc. / Δ", right: "Fe₂(SO₄)₃ + FeSO₄ + 4H₂O", size: 30 },
+      { label: "Fe₃O₄ with hydrochloric acid", left: "Fe₃O₄ + 8HCl", condition: "conc. / Δ", right: "2FeCl₃ + FeCl₂ + 4H₂O" }
+    ]
+  },
+  {
+    title: "Iron Oxide Interconversions",
+    note: "Reduction and oxidation between FeO, Fe₂O₃ and Fe₃O₄",
+    icon: "🔁",
+    equations: [
+      { label: "Fe₂O₃ to FeO by hydrogen", left: "Fe₂O₃(s) + H₂(g)", condition: "400–700°C", right: "2FeO(s) + H₂O(v)" },
+      { label: "Fe₃O₄ to FeO by hydrogen", left: "Fe₃O₄(s) + H₂(g)", condition: "400–700°C", right: "3FeO(s) + H₂O(v)" },
+      { label: "Fe₃O₄ to FeO by carbon monoxide", left: "Fe₃O₄(s) + CO(g)", condition: "400–700°C", right: "3FeO(s) + CO₂(g)" },
+      { label: "Fe₂O₃ to Fe₃O₄", left: "3Fe₂O₃(s) + CO(g)", condition: "230–380°C", right: "2Fe₃O₄(s) + CO₂(g)" },
+      { label: "Fe₃O₄ to Fe₂O₃", left: "2Fe₃O₄(s) + ½O₂(g)", condition: "Δ", right: "3Fe₂O₃(s)" }
+    ]
+  },
+  {
+    title: "Precipitation and Preparation",
+    note: "Hydroxides and oxides of iron",
+    icon: "💧",
+    equations: [
+      { label: "Iron(III) hydroxide precipitate", left: "FeCl₃(aq) + 3NH₄OH(aq)", condition: "", right: "3NH₄Cl(aq) + Fe(OH)₃(s)", note: "reddish brown", size: 30 },
+      { label: "Iron(III) hydroxide heating", left: "2Fe(OH)₃", condition: "Δ / >200°C", right: "Fe₂O₃ + 3H₂O" },
+      { label: "Iron(II) sulphate to hydroxide", left: "FeSO₄ + 2NaOH", condition: "", right: "Na₂SO₄ + Fe(OH)₂" }
+    ]
+  },
+  {
+    title: "Preparation Pathways",
+    note: "Common routes to iron oxides and hydroxides",
+    icon: "🧬",
+    equations: [
+      { label: "Iron to magnetite", left: "3Fe + 2O₂", condition: "Δ", right: "Fe₃O₄" },
+      { label: "Magnetite to iron(II) oxide", left: "Fe₃O₄ + H₂", condition: "400–700°C", right: "3FeO + H₂O" },
+      { label: "Iron(II) oxide to iron(III) oxide", left: "2FeO + ½O₂", condition: ">200°C", right: "Fe₂O₃" },
+      { label: "Iron(III) chloride to hydroxide", left: "FeCl₃ + 3NH₄OH", condition: "", right: "3NH₄Cl + Fe(OH)₃" },
+      { label: "Iron(III) hydroxide to oxide", left: "2Fe(OH)₃", condition: "Δ / >200°C", right: "Fe₂O₃ + 3H₂O" },
+      { label: "Iron(III) oxide to iron(II) oxide", left: "Fe₂O₃ + H₂", condition: "400–700°C", right: "2FeO + H₂O" },
+      { label: "Iron(II) oxide to sulphate", left: "FeO + H₂SO₄", condition: "dil.", right: "FeSO₄ + H₂O" },
+      { label: "Iron(II) sulphate to hydroxide", left: "FeSO₄ + 2NaOH", condition: "", right: "Na₂SO₄ + Fe(OH)₂" }
+    ]
+  },
+  {
+    title: "Industrial Roles",
+    note: "Coke coal and natural gas functions",
+    icon: "⛓️",
+    equations: [
+      { label: "Role of coke coal", left: "C + O₂", condition: "Δ", right: "CO₂" },
+      { label: "CO production", left: "CO₂ + C", condition: "Δ", right: "2CO" },
+      { label: "Role of natural gas", left: "2CH₄ + CO₂ + H₂O", condition: "Δ", right: "3CO + 5H₂" }
+    ]
+  }
+];
+
+const sheet = document.getElementById("sheet");
+
+function renderEquation(eq, index) {
+  const svgNS = "http://www.w3.org/2000/svg";
+
+  const svg = document.createElementNS(svgNS, "svg");
+  svg.setAttribute("class", "eq-svg");
+  svg.setAttribute("viewBox", "0 0 1000 116");
+  svg.setAttribute("role", "img");
+  svg.setAttribute("aria-label", `${eq.left} gives ${eq.right}`);
+
+  const defs = document.createElementNS(svgNS, "defs");
+
+  const linear = document.createElementNS(svgNS, "linearGradient");
+  linear.setAttribute("id", `grad-${index}`);
+  linear.setAttribute("x1", "0%");
+  linear.setAttribute("y1", "0%");
+  linear.setAttribute("x2", "100%");
+  linear.setAttribute("y2", "0%");
+  linear.innerHTML = `
+    <stop offset="0%" stop-color="#22d3ee"/>
+    <stop offset="50%" stop-color="#a78bfa"/>
+    <stop offset="100%" stop-color="#fb7185"/>
+  `;
+
+  const glow = document.createElementNS(svgNS, "filter");
+  glow.setAttribute("id", `glow-${index}`);
+  glow.setAttribute("x", "-80%");
+  glow.setAttribute("y", "-80%");
+  glow.setAttribute("width", "260%");
+  glow.setAttribute("height", "260%");
+  glow.innerHTML = `
+    <feGaussianBlur stdDeviation="4" result="blur"/>
+    <feMerge>
+      <feMergeNode in="blur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  `;
+
+  const marker = document.createElementNS(svgNS, "marker");
+  marker.setAttribute("id", `arrow-${index}`);
+  marker.setAttribute("markerWidth", "16");
+  marker.setAttribute("markerHeight", "12");
+  marker.setAttribute("refX", "14");
+  marker.setAttribute("refY", "6");
+  marker.setAttribute("orient", "auto");
+  marker.setAttribute("markerUnits", "strokeWidth");
+  marker.innerHTML = `<path d="M0,0 L16,6 L0,12 Z" fill="#fb7185"></path>`;
+
+  defs.appendChild(linear);
+  defs.appendChild(glow);
+  defs.appendChild(marker);
+  svg.appendChild(defs);
+
+  const condition = eq.condition || "";
+  const baseSize = eq.size || 34;
+
+  const left = document.createElementNS(svgNS, "text");
+  left.setAttribute("x", "405");
+  left.setAttribute("y", "70");
+  left.setAttribute("text-anchor", "end");
+  left.setAttribute("class", "eq-text");
+  left.setAttribute("font-size", baseSize);
+  left.textContent = eq.left;
+
+  const right = document.createElementNS(svgNS, "text");
+  right.setAttribute("x", "595");
+  right.setAttribute("y", "70");
+  right.setAttribute("text-anchor", "start");
+  right.setAttribute("class", "eq-text");
+  right.setAttribute("font-size", baseSize);
+  right.textContent = eq.right;
+
+  const arrowLine = document.createElementNS(svgNS, "line");
+  arrowLine.setAttribute("x1", "430");
+  arrowLine.setAttribute("y1", "70");
+  arrowLine.setAttribute("x2", "570");
+  arrowLine.setAttribute("y2", "70");
+  arrowLine.setAttribute("stroke", `url(#grad-${index})`);
+  arrowLine.setAttribute("stroke-width", "6");
+  arrowLine.setAttribute("stroke-linecap", "round");
+  arrowLine.setAttribute("marker-end", `url(#arrow-${index})`);
+  arrowLine.setAttribute("filter", `url(#glow-${index})`);
+
+  const cond = document.createElementNS(svgNS, "text");
+  cond.setAttribute("x", "500");
+  cond.setAttribute("y", "34");
+  cond.setAttribute("text-anchor", "middle");
+  cond.setAttribute("class", "condition");
+  cond.setAttribute("font-size", "22");
+  cond.textContent = condition;
+
+  svg.appendChild(cond);
+  svg.appendChild(left);
+  svg.appendChild(arrowLine);
+  svg.appendChild(right);
+
+  if (eq.note) {
+    const note = document.createElementNS(svgNS, "text");
+    note.setAttribute("x", "500");
+    note.setAttribute("y", "104");
+    note.setAttribute("text-anchor", "middle");
+    note.setAttribute("class", "side-note");
+    note.setAttribute("font-size", "19");
+    note.textContent = `(${eq.note})`;
+    svg.appendChild(note);
+  }
+
+  return svg;
+}
+
+let counter = 0;
+
+groups.forEach(group => {
+  const groupBox = document.createElement("section");
+  groupBox.className = "group";
+
+  const inner = document.createElement("div");
+  inner.className = "group-inner";
+
+  inner.innerHTML = `
+    <div class="group-head">
+      <div class="icon">${group.icon}</div>
+      <div>
+        <h2 class="group-title">${group.title}</h2>
+        <p class="group-note">${group.note}</p>
+      </div>
+    </div>
+  `;
+
+  group.equations.forEach(eq => {
+    const card = document.createElement("div");
+    card.className = "eq-card";
+
+    const label = document.createElement("div");
+    label.className = "eq-label";
+    label.textContent = eq.label;
+
+    card.appendChild(label);
+    card.appendChild(renderEquation(eq, counter++));
+    inner.appendChild(card);
+  });
+
+  groupBox.appendChild(inner);
+  sheet.appendChild(groupBox);
+});
+</script>
+</body>
+</html>

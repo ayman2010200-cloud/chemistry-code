@@ -1,0 +1,40 @@
+Deep scan after mobile/tablet hardening and duplicate-ID repair
+file | bytes | broken_local_links | duplicate_id_count | responsive_blocks | images_without_alt
+01_transition_elements.html | 245952 | 0 | 0 | 1 | 0
+02_chemical_analysis.html | 253767 | 0 | 0 | 1 | 0
+03_chemical_equilibrium.html | 285662 | 0 | 0 | 1 | 0
+04_electrochemistry.html | 313980 | 0 | 0 | 1 | 0
+05_organic_chemistry.html | 465442 | 0 | 0 | 1 | 0
+06_essay_questions.html | 188950 | 0 | 0 | 1 | 0
+07_Calculation problems.html | 375301 | 0 | 0 | 1 | 0
+Calculation problems-ar.html | 367292 | 0 | 0 | 1 | 0
+chemical-analysis-ar.html | 209419 | 0 | 0 | 1 | 0
+chemical-equilibrium-ar.html | 229379 | 0 | 0 | 1 | 0
+electro-chemistry-ar.html | 254775 | 0 | 0 | 1 | 0
+essay-questions-ar.html | 148120 | 0 | 0 | 1 | 0
+index-ar.html | 62156 | 0 | 0 | 1 | 0
+index.html | 62423 | 0 | 0 | 1 | 0
+model 1-ar.html | 227317 | 0 | 0 | 1 | 0
+model 1.html | 332017 | 0 | 0 | 1 | 0
+model 10.html | 332834 | 0 | 0 | 1 | 0
+model 2-ar.html | 304257 | 0 | 0 | 1 | 0
+model 2.html | 333880 | 0 | 0 | 1 | 0
+model 3-ar.html | 354915 | 0 | 0 | 1 | 0
+model 3.html | 383131 | 0 | 0 | 1 | 0
+model 4-ar.html | 204556 | 0 | 0 | 1 | 0
+model 4.html | 347861 | 0 | 0 | 1 | 0
+model 5-ar.html | 269994 | 0 | 0 | 1 | 0
+model 5.html | 300275 | 0 | 0 | 1 | 0
+model 6-ar.html | 262586 | 0 | 0 | 1 | 0
+model 6.html | 345194 | 0 | 0 | 1 | 0
+model 7-ar.html | 257399 | 0 | 0 | 1 | 0
+model 7.html | 344948 | 0 | 0 | 1 | 0
+model 8-ar.html | 207338 | 0 | 0 | 1 | 0
+model 8.html | 344030 | 0 | 0 | 1 | 0
+model 9-ar.html | 186601 | 0 | 0 | 1 | 0
+model 9.html | 300624 | 0 | 0 | 1 | 0
+model-10-ar.html | 312147 | 0 | 0 | 1 | 0
+organic-chemistry-ar.html | 375202 | 0 | 0 | 1 | 0
+transition-elements-ar.html | 200140 | 0 | 0 | 1 | 0
+
+Remaining critical issues: 0

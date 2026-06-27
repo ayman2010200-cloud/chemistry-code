@@ -1,0 +1,2325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top final revison Chemistry Code</title>
+<style>
+    :root {
+        --bg-main: #0b0f19;
+        --bg-card: #111827;
+        --border-color: #1f2937;
+        --gold: #fbbf24;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        padding: 28px 10px 70px;
+        background: radial-gradient(1200px 600px at 50% -10%, #101a33 0%, var(--bg-main) 60%);
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        color: #f8fafc;
+        min-height: 100vh;
+    }
+    h1 {
+        margin: 0 0 6px;
+        font-size: 30px;
+        font-weight: 800;
+        text-align: center;
+        background: linear-gradient(90deg, #7dd3fc, #c084fc, #fbbf24);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    .subtitle {
+        margin: 0 0 20px 0;
+        color: #94a3b8;
+        font-size: 14.5px;
+        text-align: center;
+        max-width: 100%;
+        width: 100%;
+        line-height: 1.55;
+    }
+    .subtitle b { color: #e2e8f0; }
+
+    /* ===== toolbar ===== */
+    .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 12px 18px;
+        margin: 0 0 18px 0;
+        max-width: 100%;
+        width: 100%;
+        position: sticky;
+        top: 10px;
+        z-index: 20;
+        box-shadow: 0 10px 30px rgba(0,0,0,.45);
+    }
+    .toolbar input {
+        background: #0d1117;
+        border: 1px solid #2b3648;
+        color: #e2e8f0;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 13.5px;
+        width: 250px;
+        outline: none;
+        font-family: inherit;
+    }
+    .toolbar input:focus { border-color: #38bdf8; }
+    .btn {
+        background: #1b2435;
+        border: 1px solid #2b3648;
+        color: #cbd5e1;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all .15s;
+        user-select: none;
+    }
+    .btn:hover { background: #243049; color: #fff; }
+    .btn.gold { background: #3a2e08; border-color: #8a6d12; color: #fde68a; }
+    .count { font-size: 13px; color: #64748b; font-weight: 600; }
+
+    /* ===== chapter nav ===== */
+    .chapnav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 7px;
+        margin: 0 0 26px 0;
+        max-width: 100%;
+        width: 100%;
+    }
+    .chapnav a {
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: .4px;
+        text-transform: uppercase;
+        color: #cbd5e1;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        padding: 6px 13px;
+        text-decoration: none;
+        transition: all .15s;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+    .chapnav a:hover { border-color: var(--ch); color: #fff; }
+    .chapnav .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ch); }
+
+    /* ===== book ===== */
+    .book { max-width: 100%; width: 100%; margin: 0; }
+
+    .chapter { margin-bottom: 34px; }
+    .chap-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: linear-gradient(90deg, color-mix(in srgb, var(--ch) 16%, #121a2a) 0%, #0e1422 70%);
+        border: 1px solid color-mix(in srgb, var(--ch) 45%, #1f2937);
+        border-left: 6px solid var(--ch);
+        border-radius: 12px;
+        padding: 14px 20px;
+        margin-bottom: 12px;
+    }
+    .chap-head .icon {
+        width: 40px; height: 40px;
+        border-radius: 10px;
+        background: color-mix(in srgb, var(--ch) 20%, #0b0f19);
+        border: 1.5px solid var(--ch);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 19px;
+    }
+    .chap-head h2 { margin: 0; font-size: 21px; font-weight: 800; color: #fff; }
+    .chap-head .sub { font-size: 12.5px; color: #94a3b8; margin-top: 2px; }
+    .chap-head .n {
+        margin-left: auto;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--ch);
+        border: 1.5px solid var(--ch);
+        border-radius: 999px;
+        padding: 4px 14px;
+        white-space: nowrap;
+    }
+
+    /* equation card */
+    .eq {
+        background: linear-gradient(160deg, #121a2a 0%, #0d1117 80%);
+        border: 1px solid #1d2738;
+        border-left: 4px solid var(--ch);
+        border-radius: 12px;
+        padding: 14px 18px 13px;
+        margin-bottom: 10px;
+        transition: border-color .15s, box-shadow .15s;
+    }
+    .eq:hover {
+        border-color: color-mix(in srgb, var(--ch) 55%, #1d2738);
+        box-shadow: 0 6px 20px rgba(0,0,0,.4), 0 0 12px color-mix(in srgb, var(--ch) 18%, transparent);
+    }
+    .eq.hidden { display: none; }
+    .eq-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 9px;
+        flex-wrap: wrap;
+    }
+    .eq-num {
+        width: 26px; height: 26px;
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--ch) 22%, #0b0f19);
+        border: 1.5px solid var(--ch);
+        color: var(--ch);
+        font-size: 12px;
+        font-weight: 800;
+        display: flex; align-items: center; justify-content: center;
+        flex: 0 0 auto;
+    }
+    .eq-name { font-size: 14.5px; font-weight: 800; color: #fff; }
+    .eq-tag {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .6px;
+        text-transform: uppercase;
+        color: var(--ch);
+        background: color-mix(in srgb, var(--ch) 14%, transparent);
+        border-radius: 999px;
+        padding: 3px 10px;
+    }
+    /* origin-chapter chip shown in "by type" view */
+    .eq-chip {
+        margin-left: auto;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        color: var(--cc);
+        border: 1px solid color-mix(in srgb, var(--cc) 55%, transparent);
+        background: color-mix(in srgb, var(--cc) 10%, transparent);
+        border-radius: 999px;
+        padding: 3px 10px;
+        white-space: nowrap;
+    }
+    .seg { display: flex; gap: 0; }
+    .seg .btn { border-radius: 0; }
+    .seg .btn:first-child { border-radius: 8px 0 0 8px; }
+    .seg .btn:last-child { border-radius: 0 8px 8px 0; border-left: none; }
+
+    /* the equation line itself — size controlled by A− / A+ buttons */
+    :root { --eqfs: 21px; }
+    .eq-line {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 4px 12px;
+        font-size: var(--eqfs);
+        font-weight: 700;
+        color: #e8edf5;
+        padding: 10px 4px 5px;
+        line-height: 1.9;
+        width: 100%;
+    }
+    .eq-line .sp { color: #e8edf5; }
+    .eq-line .plus { color: #64748b; font-weight: 600; }
+    .arrowbox {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 6px;
+        min-width: 86px;
+    }
+    .arrowbox .cond {
+        font-size: calc(var(--eqfs) * 0.56);
+        font-weight: 700;
+        color: #7dd3fc;
+        font-family: Consolas, 'Courier New', monospace;
+        margin-bottom: -3px;
+        text-align: center;
+        max-width: 230px;
+        line-height: 1.35;
+    }
+    .arrowbox .arr { color: var(--gold); font-size: calc(var(--eqfs) * 1.18); line-height: .8; }
+
+    /* ===== Kekulé ring structures inside equations ===== */
+    .eq-line .ringwrap { display: inline-flex; align-items: center; }
+    .eq-line svg.ring { display: block; }
+    svg.ring line { stroke: #dbe3ef; stroke-width: 1.7; stroke-linecap: round; }
+    .eq-line .spn {
+        font-size: calc(var(--eqfs) * 0.6);
+        color: #8fa1ba;
+        font-weight: 600;
+        align-self: flex-end;
+        padding-bottom: 6px;
+    }
+    .eq-note {
+        font-size: 12px;
+        color: #8fa1ba;
+        margin-top: 7px;
+        padding-top: 7px;
+        border-top: 1px dashed #1d2738;
+    }
+    .eq-note b { color: #cbd5e1; }
+    .hl { background: #3a2e08; color: #fde68a; border-radius: 3px; padding: 0 3px; }
+
+    .empty {
+        text-align: center;
+        color: #64748b;
+        font-size: 15px;
+        padding: 50px 0;
+    }
+
+    .topbtn {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        width: 46px; height: 46px;
+        border-radius: 50%;
+        background: #1b2435;
+        border: 1.5px solid #2b3648;
+        color: #cbd5e1;
+        font-size: 19px;
+        cursor: pointer;
+        z-index: 30;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 8px 22px rgba(0,0,0,.5);
+    }
+    .topbtn:hover { background: #243049; color: #fff; }
+
+    /* ===== print (light) mode ===== */
+    @media print {
+        body { background: #fff !important; color: #111 !important; padding: 10px; }
+        .toolbar, .chapnav, .topbtn, .subtitle { display: none !important; }
+        h1 { color: #111 !important; -webkit-text-fill-color: #111; background: none; }
+        .chap-head { background: #f3f4f6 !important; border-color: #999 !important; }
+        .chap-head h2 { color: #111 !important; }
+        .chap-head .sub { color: #444 !important; }
+        .eq { background: #fff !important; border: 1px solid #bbb !important; break-inside: avoid; }
+        .eq-line, .eq-line .sp { color: #111 !important; }
+        .eq-name { color: #111 !important; }
+        .arrowbox .cond { color: #1d4ed8 !important; }
+        .arrowbox .arr { color: #b45309 !important; }
+        .eq-note { color: #444 !important; }
+    }
+
+/* ================= BRAND / TEACHER IDENTITY ================= */
+.brandbar {
+  display: flex; align-items: center; gap: 18px;
+  background: linear-gradient(90deg, #101a33 0%, #0f172a 60%, #1a1430 100%);
+  border: 1px solid #facc15aa; border-radius: 16px;
+  padding: 12px 22px; margin: 0 0 18px 0;
+  max-width: 100%; width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 8px 28px rgba(0,0,0,.5), 0 0 18px #facc1522;
+  position: relative; z-index: 10;
+}
+.brandbar .bphoto {
+  width: 74px; height: 74px; border-radius: 50%;
+  border: 3px solid #facc15; object-fit: cover; flex: 0 0 auto;
+  box-shadow: 0 0 16px #facc1566; background: #fff;
+}
+.brandbar .bnames { line-height: 1.3; }
+.brandbar .bar { font-size: 21px; font-weight: 800; color: #facc15; }
+.brandbar .ben { font-size: 13px; font-weight: 700; color: #7dd3fc; letter-spacing: .5px; }
+.brandbar .bpage {
+  margin-inline-start: auto; text-align: center; line-height: 1.45;
+}
+.brandbar .bpage .pa { font-size: 16px; font-weight: 800; color: #e2e8f0; direction: rtl; }
+.brandbar .bpage .pe { font-size: 11.5px; font-weight: 600; color: #94a3b8; }
+.brandbar .bexam { text-align: end; line-height: 1.4; }
+.brandbar .bexam .x1 { font-size: 15px; font-weight: 800; color: #4ade80; direction: rtl; }
+.brandbar .bexam .x2 { font-size: 10.5px; color: #64748b; direction: rtl; }
+@media (max-width: 900px){ .brandbar{flex-wrap:wrap; justify-content:center; text-align:center;} .brandbar .bpage{margin:0;} }
+
+/* watermark: faint photo + repeated bilingual name */
+#wmark {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+}
+#wmark .wphoto {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%,-50%);
+  width: min(56vmin, 520px); height: min(56vmin, 520px);
+  border-radius: 50%;
+  background-size: cover; background-position: center;
+  opacity: .045; filter: grayscale(60%);
+}
+body > *:not(#wmark){ position: relative; z-index: 1; }
+
+.brandfoot {
+  margin: 26px 0 0 0; max-width: 100%; width: 100%;
+  border-top: 1px dashed #facc1555;
+  padding: 12px 8px 4px;
+  display: flex; flex-wrap: wrap; gap: 6px 24px;
+  align-items: center; justify-content: center;
+  font-size: 12.5px; color: #94a3b8; text-align: center;
+  box-sizing: border-box;
+}
+.brandfoot b { color: #facc15; }
+.brandfoot .sep { color: #334155; }
+@media print { #wmark .wphoto { opacity: .05; } .brandbar{box-shadow:none;} }
+#wmark{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='300'%3E%3Ctext x='50%25' y='44%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='26' font-weight='bold' fill='%23ffffff' opacity='0.13'%3EProf./ Ayman Mansour%3C/text%3E%3Ctext x='50%25' y='60%25' transform='rotate(-30 225 150)' text-anchor='middle' font-family='sans-serif' font-size='22' font-weight='bold' fill='%23ffffff' opacity='0.10'%3E%D8%A3/ %D8%A3%D9%8A%D9%85%D9%86 %D9%85%D9%86%D8%B5%D9%88%D8%B1%3C/text%3E%3C/svg%3E");background-repeat:repeat;z-index:9999;}
+
+/* ===== model-2 security overlay ===== */
+.security-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #0b1220; color: #ef4444;
+    display: none; justify-content: center; align-items: center; flex-direction: column;
+    z-index: 999999; font-size: 1.6rem; font-weight: 800; text-align: center; gap: 8px;
+}
+.security-overlay .ar { font-size: 1.3rem; color: #f87171; direction: rtl; }
+body { user-select: none; }
+input, select, textarea { user-select: text; }
+
+.brandfoot { flex-direction: column; gap: 8px; }
+.brandfoot .fline1, .brandfoot .fline2 {
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+  align-items: center; justify-content: center;
+}
+.brandfoot .fname { color: #facc15; font-size: 15px; font-weight: 800; direction: rtl; }
+.brandfoot .fname2 { color: #7dd3fc; font-size: 13px; font-weight: 700; }
+.brandfoot .fphone {
+  color: #4ade80; font-weight: 700; font-size: 13px;
+  background: #4ade8011; border: 1px solid #4ade8044;
+  border-radius: 999px; padding: 4px 14px;
+}
+.brandfoot .fphone b { color: #86efac; letter-spacing: 1px; }
+
+/* ===== Arabic mode ===== */
+body.lang-ar .eq-name { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; }
+body.lang-ar .eq-tag { direction: rtl; }
+body.lang-ar .arrowbox .cond { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; font-size: calc(var(--eqfs) * 0.52); }
+body.lang-ar .eq-top { flex-direction: row; }
+
+body.lang-ar #pgTitle, body.lang-ar #pgSub { direction: rtl; font-family:'Segoe UI',Tahoma,sans-serif; }
+body.lang-ar .chap-head h2, body.lang-ar .chap-head .sub { direction: rtl; text-align: right; }
+body.lang-ar .chapnav a { direction: rtl; }
+
+.brandbar .blogo {
+  width: 78px; height: 68px; border-radius: 12px;
+  object-fit: contain; background: #fff; flex: 0 0 auto;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 14px rgba(56,189,248,.45);
+  padding: 3px;
+}     :root {
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #334155;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --secondary: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --font-en: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-ar: 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-en);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* Arabic / RTL Customizations */
+        html[dir="rtl"] body {
+            font-family: var(--font-ar);
+        }
+
+        /* Bilingual Display Logic */
+        html[dir="ltr"] .lang-ar { display: none !important; }
+        html[dir="rtl"] .lang-en { display: none !important; }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        header {
+            background-color: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-main);
+            background-color: var(--bg-card);
+        }
+
+        .ip-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .btn-lang {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .btn-lang:hover {
+            background-color: var(--bg-card-hover);
+            border-color: var(--primary);
+        }
+
+        @media (max-width: 1024px) {
+            .nav-links {
+                gap: 8px;
+            }
+            .nav-link {
+                padding: 6px 10px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 16px 20px;
+                gap: 16px;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.25;
+        }
+
+        .hero p.hero-sub {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto 40px;
+        }
+
+        /* Front Page Hero Feature Boxes */
+        .hero-boxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+            max-width: 1050px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        html[dir="rtl"] .hero-boxes {
+            text-align: right;
+        }
+
+        .hero-box {
+            background: linear-gradient(145deg, var(--bg-card), #111827);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .hero-box-free {
+            border-top: 5px solid var(--success);
+        }
+
+        .hero-box-premium {
+            border-top: 5px solid var(--warning);
+        }
+
+        .hero-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .hero-box-free:hover {
+            border-color: var(--success);
+        }
+
+        .hero-box-premium:hover {
+            border-color: var(--warning);
+        }
+
+        .hero-box h3 {
+            font-size: 1.7rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .hero-box p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-success:hover {
+            background-color: #059669;
+            transform: translateY(-2px);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-top: 8px;
+            font-size: 1.05rem;
+        }
+
+        /* Grid Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 16px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        html[dir="ltr"] .card-badge { right: 16px; }
+        html[dir="rtl"] .card-badge { left: 16px; }
+
+        .badge-free {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .badge-premium {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background-color: rgba(99, 102, 241, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .card-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .card-action {
+            width: 100%;
+        }
+
+        .card-action .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Unlock Form Section */
+        .unlock-card {
+            background: linear-gradient(145deg, var(--bg-card), #111827);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 750px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .unlock-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .unlock-card p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .input-code {
+            flex-grow: 1;
+            padding: 16px 20px;
+            border-radius: 8px;
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border);
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+            letter-spacing: 2px;
+            font-weight: 600;
+            outline: none;
+            transition: border 0.2s ease;
+            min-width: 250px;
+        }
+
+        html[dir="rtl"] .input-code {
+            letter-spacing: normal;
+        }
+
+        .input-code:focus {
+            border-color: var(--primary);
+        }
+
+        .ip-lock-info {
+            background-color: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 18px;
+            border-radius: 8px;
+            text-align: left;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        html[dir="rtl"] .ip-lock-info {
+            text-align: right;
+        }
+
+        .ip-lock-info svg {
+            fill: var(--warning);
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .ip-lock-info p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #f1f5f9;
+        }
+
+        /* Payment Section */
+        .payment-container {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+        }
+
+        @media (max-width: 900px) {
+            .payment-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .payment-methods {
+            background-color: #111827;
+            padding: 24px 0;
+        }
+
+        html[dir="ltr"] .payment-methods { border-right: 1px solid var(--border); }
+        html[dir="rtl"] .payment-methods { border-left: 1px solid var(--border); }
+
+        .payment-methods h4 {
+            padding: 0 24px;
+            margin-bottom: 16px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .method-tab {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        html[dir="ltr"] .method-tab { border-left: 4px solid transparent; }
+        html[dir="rtl"] .method-tab { border-right: 4px solid transparent; }
+
+        .method-tab:hover {
+            background-color: rgba(30, 41, 59, 0.5);
+        }
+
+        html[dir="ltr"] .method-tab.active {
+            background-color: var(--bg-card);
+            border-left-color: var(--primary);
+            color: var(--text-main);
+        }
+
+        html[dir="rtl"] .method-tab.active {
+            background-color: var(--bg-card);
+            border-right-color: var(--primary);
+            color: var(--text-main);
+        }
+
+        .method-tab svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        .payment-details {
+            padding: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .payment-details {
+                padding: 24px 16px;
+            }
+        }
+
+        .payment-panel {
+            display: none;
+        }
+
+        .payment-panel.active {
+            display: block;
+        }
+
+        .payment-panel h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+        }
+
+        .payment-panel p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+        }
+
+        .instruction-box {
+            background-color: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+
+        .instruction-box h5 {
+            font-size: 1.15rem;
+            margin-bottom: 14px;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .instruction-box ol {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            color: #e2e8f0;
+            font-size: 1rem;
+        }
+
+        html[dir="ltr"] .instruction-box ol { padding-left: 20px; }
+        html[dir="rtl"] .instruction-box ol { padding-right: 20px; }
+
+        .wallet-number {
+            background-color: #0f172a;
+            padding: 20px 24px;
+            border-radius: 8px;
+            border: 1px dashed var(--primary);
+            margin: 20px 0 30px;
+        }
+
+        .wallet-single {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        html[dir="rtl"] .wallet-single { letter-spacing: normal; }
+
+        .btn-copy {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-copy:hover {
+            background: var(--primary-hover);
+        }
+
+        .upload-proof {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .upload-proof label {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .upload-proof input[type="text"] {
+            padding: 14px 18px;
+            border-radius: 8px;
+            background-color: #0f172a;
+            border: 1px solid var(--border);
+            color: white;
+            outline: none;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .upload-proof input[type="text"]:focus {
+            border-color: var(--primary);
+        }
+
+        /* Features / Protections */
+        .protection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .protection-card {
+            background-color: rgba(30, 41, 59, 0.4);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px 24px;
+            text-align: center;
+        }
+
+        .protection-card svg {
+            width: 44px;
+            height: 44px;
+            fill: var(--success);
+            margin-bottom: 18px;
+        }
+
+        .protection-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .protection-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0b0f19;
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* Notification Toast */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--primary);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.26, 1.55);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        html[dir="ltr"] #toast { right: 30px; }
+        html[dir="rtl"] #toast { left: 30px; }
+
+        #toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        #toast svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--success);
+            flex-shrink: 0;
+        }
+</style>
+</head>
+<body>
+
+
+<div id="wmark"><div class="wphoto" style="background-image:url(data:image/jpeg;base64,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)"></div></div>
+<div class="brandbar"><img class="blogo" src="data:image/jpeg;base64,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" alt="Chemistry Code"><img class="bphoto" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7LooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACory5trO3e5u54oIUGWkkYKoHuTXD/Fn4peHfh7p5a9lF1qLj9zZRsN5Pq390V8b/ABQ+J3ijx5fNLqd68VkCfKsoiViUfTufc0FKLZ9W+L/2gPh9oLPFb30urTrxts1yuf8AePFeYa1+1bdAN/ZfheBBnhricscfQAV80BJJCCBxxVqPTJ5Ii4JI9AKXNFGipNntcv7VHjbzAU0nRgmehRzkf99V0mgftXTbkXW/C8ZX+J7Wcj9GFfNNxp8sYUMDnHpTYrK4Y4WMnj0p80RezfY+9PA/xt+H/ipkhg1YWF03AgvB5ZJ9Aeh/OvSEZXQOjBlIyCDkGvzEkguLYhirDHSvTfhJ8avFPgq6hgeeTUtIziSzmfO0dyhPQ/pRo9iXFo+76KxPBHinR/GHh+DWtFuVmglHzL/FG3dWHYituggKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACvNf2gPiVF8PPCu+1KSaxe5js4j/AA+shHoP516VXw78e9TvfG/xmv7CFmaG1l+ywDPCqvBI/HJpN2Vy6cOZ2OHij1vxjq1xfzzS3VxIxeW4lJJJNb1j4AvJh86KuO5PWvU9A8OWmhaZBaRRqXVRuIHJNbEMQOBtH5VwVMRK+h7lHBxtqeSWXgS4ilyACo6jFbdp4OjUbANjdSpHevSooCvUUrW6k5x1rB1pM64YWCPNbrwI08gkd05A4ArQs/BljAmGRXbHPFdvJER0GKheIjJBqHVkzVYaCeiOH1Lwfp06FViVD0ry3xd4Xn0aaSaNS0OenpXvc4OSeffFYuu6dDf2ksLgHeMDI6VVOu4Mwr4ONSO2pwHwL+It94C8Uw3O930u4YJe2+cgqT94D1HWvvGxuoL2zhvLWRZYJ0EkbjoykZBr83dc06TStVmtmOCjfpX2d+ynr8mtfCyC1nkLy6bM1tknJ2dV/n+letGSkro+cqQcXZnrVFFFUZBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFADZW2ROw7KTXxR8NNPOo/EXXNUmG8rPI2T2Jc19skAgg9DXyx4DsYtO8V+K7MKFePUHGPbcf8ayq/CdeE+M6CZC0xz1FWbdOOAKil/1pGantwx4U15b3PpINcqJQMdh+VDDjp+lPZHUetREMTjNTYu5C64b5hULp2yPzq08WT3JpjWwdTg81EjRNWMySFCcZrPuINrHjitm4heM4IqnOvUEc1nZhe55L8VtJAuEv1jxkbWPrXsn7FMxGmeILXsJYpMe5BFcD8SEU6SoYZUv3Fd7+xfbskXiSYjC+ZEg+uGNethJNwsz53MYpVG0fRdFFFdh5YUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAV896tp66b8aPEsONq3cUdyg+uM/rX0G7KilmICgZJPavDPGeoWWo/F157AMRFpe2SUjhiG4x6gVFTVWOnC3U7o5fxZ4j0/Qp3SZjJOvzGJeTj3rD074m2PmJ52mXaRt1YIeKl8R3WiaPe3F5fgy3E7b9gXe7+gArm9c8czFY7a38Ijy+CrODyCCd3yqQOnTPeuJKOyR67lJJNux6rpPiLSdXtxJZzZHcHgitCTy8grIpz2BryLw/rElw+Y7FrMk4bbyOa7e3DNZlnLEjnOa5puzPRoq6NrVb9bSB5UiMjgfKoPWvN73xR4zurhhYWsEIB4Xbk/nWnf3Ls4T944J6FuB9axNQj8TtBLJp008cqsNiRBVBXnPJz7VVJqRjiINK+poWkvjsN9ouJIShGdhww/lxWvperNfo0dxGIrmLiQDofeuO0648fWlgst47XT8B4ZlT5hjnDL79K6bw8xvSLvymhlK4kjb7wqahNK++pnfEZTJ4eaTbu2tXpH7Gu0+GtdcDlrtMn/AIDXB+O42PhK+UKSQu7gZxg1o/BfXNX8F+HZZrYpLFdKJ3hdehxxg/SunD1I046nFisNUxFTlhufU1FYXgLxCnijwvaawsXlNKCHjznaw6it2u9NNXR404SpycZboKKKKZAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAFPXYGudFvbdSQ0kDqCDjqDXgXh6xZLWS7kldriKJock5/i/+tX0QwDKVPQjBrw6/tpNO1HUtMYAEXLMPdTyK5q+kos9nLJJ06lP0Zys2i7ruW+lKvIx5+X7o9BRNZNJbGFigU+kYzXRRQEt5Y55rP1q6+xP5VugeUnGfQ1w9T1oQVjFg02O1jMccWBnJLcGtaOMpaYxwR0qCMyzTK8rbs8Gtqe2dECFT93OPbFTJaG8NGc0bZZXUgDIOK0fsKrGPkx9KzWiffJMjlQp6Vb0nWd04tZlyjDG70NZxLlG5L9jVsAg8dNxp4sYYd0qoocjk1pm2D528nrxVC6aSNvLZqkzkijLCsttNG67lZcEHnIqpol1FdadND5SwjmNR3wOlacfMbd+tc9EyN4gu/IP+jQKGcjpvxyK2mrRRGE1nI9s/Z63/wDCv1DdBcyBfpmvRa5f4V6edM8CabAy7XePzXHuxzXUV6tJWgkfL42aniJyXdhRRRWhyhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFedfE3Tli1m21FAAJUKv7kV6LWH400t9T0rbEu6SJt6juazqx5onVg6vs6qd9HoeRNcC2Z3JGBznNc7LcxSzNczuF352Kew9as+JUnW2uYWUiSIEFfXFeA+JPEmsS6tcJGszBZQoAJPyjjjFcMKfNJnvTxPs4LQ9P1nxGdLmEsc8csWfmiP3h7g1cfx4s+lG6igmY7CAM8/nXiSz3t9c7bgSKr43EjnP+cVehm1O306a2UEKH+XC8kVcqUWrXMo4uo3ex21j4nutXulhN39kiU5dFIORnvXoOkJZNCDHKjkjg7q+eIWubVmlSBxI4weMHpUn9vatZqRbeaSCD8uTtrN0V0ZccZOK95H03Zal5V0YnxvUdD3HrVS+uBLNkjnNeV/DXxTqWtapaW1wrGRQwYt124r0yGFiGk9ScZrnnFxdmdMayqxvEuW64tWcd6NF0gX19a2MEYQy3IaQKPvc8mtrw3oMuuW32GKYQyS7hvIztHrXpPhDwdbaFILiSQXFyF2h9uAK6o0ZT5exwvGQoKV373Q6W2iWC3jgQYWNQo+gFSUUV6J883cKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPKPivoxtNSOpRRgxXIw3HAb3ryKx0LT4bi5McMZkkkLYH8OfSvqbXdMt9X0yWyuFBVx8p/unsa+dfFuk3XhvxAFuIwI9213/AJH6VxV6bWqPawOIUlyy3RxfiSKDSpS9xpQuI2PEir0+prEbxV4XZDG9hKCpwMAV6bdy232R/N2NGyk8jNeQ6rpmmG586IIqtKAG9Sc1jTs1qd1Xmi7wZq/8JB4bjRETTZZWlPy8Dn8q6PQdJN1ukksYre1ZcogX5s+9Q+AdN0i3BkmtYzMGIUnmur1C9gtbd5C44BOB2rCo0nZG9JO15swNC0uz07xPNJa2yozJgt1//VXVqSI/lGcngVzfhlZJnk1OUkLMfkUnnHrW5LcYVdh20nvqTsm0em/C5VTU1i4JWE5x6nGa9Krxb4a38unyXWqypJLb28LNLtGWYYzgD1xzXq3hjX9I8S6PDq2i3sd3aSj5XTsfQjsfavWovmgmfOYyPLVaNOiiitTlCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAryr44WUF1LEsi5LQ/1r1WvKfjJd+VrljCytslidVYDjcuDg/gT+RqKmkTfDK9RHzJrlxr2lag1pdCaS3Q/K4UlWWucvNcVd3mBcFvMQeh6V7y9tHcFldVPXtWLc+D9InP73T4Wyf7tcPto31R7DoVLaM8k07xFex3SPbb3YOcBcn9K9C0Cz1XWJI7vUi0cW3/VD+I+/wCVdFp/h3TrA5trKKM+yitSMMF8uNQOwwKynOLehtSpyiveZVVI7dBGvbsO1Mtob3V74abpUXmzk4d+dkQ9WPb6da6jQfA2o6i4ub6RrK3YZ5H7xh7Dt9TXoGiaHYaNZLaWECxoOSerOfUnuaunhpT1lojDEY6NP3YaspaDpSaJoSWfnGZwCZZSMeYx68dhXhHwa8fJ4J8f31pJMRoV5dukkY6R/Mdrj6V6/wDF/wARDw14Lv7xHVbmSMw24J5Ltxx9OtfH8czNOTu3c8n1Ne1h6Ss10PArVG5Xe5+j1tPDc28dxbyLLFIoZHU5DA9CKkr5a+AXxig8O2w0DxPcP/ZoP+j3B+YwE/wn/Z/lX0romuaPrdstzpOpWt7EwyDDIG/TtWdSm4OzBNM0KKKKgYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFYfijxd4b8M25m1zWLWzAGQjv85+ijmvGvGH7TGj2xkg8M6TNfOOBPcny4/wA5P6VcacpbITaR9A1ma34h0PRIjLq2rWdko/56yhT+XWvi3xb8cviBrbsja01hA3/LKzXyxj69f1rgJr++1O6M19dzzknLNJIWJ/E1vHCt7sh1EfX/jH9oLwrpkE40KKXV5owQJANkO76nk/gKb4Mu5fiD8ObTVdVZUubx5JRIg/1TBzgqPTt9K+Q7+ea58uztRlm+VFH86+u/gfps+i/DHRtMuyPNjg3k+zEt/WqqUYQVh05yvc5bU9PvdJ1GS2ukCsOVZfuuPUUkcw8sluAO+elRfFP4yeF7NZ9Ht7GfV5omx9oidUSNx/dY5Jx9MVyPwt+IWh654wg0zXrNrKK4O2GQyAoZM8K/HAPr6149bAz5/d2PdoZlDk9/dHpOhaDe6w2bcBbcHDzyDj6Ad67/QfDem6TiSOPzrnGPOkGSPoOgrXhiESCNUCKvAUDAH4VJit6WGhT82cOIxtStpshuKjnZUjLscAdSe1TAV5j+0N4r/4R7wVPa20pS9vR5MeDyFPU/lXTGPM7I42zxH49+Mj4n8WPZ2kn/Ev08mOIA/ff+J682jOxQo6nmo5D+8LFiT70wMck54HrXpRgoqxzt3JrucoqoCCxOfwrR0TWNS02dZ7C9ntJRyHikKn9K5xpjLOzg8dB9KlWY561DkFj33wT8evFWj7IdTkXWLccHzziQD2Yf1r2fwv8cvBOrKiXtxJpU7dVnGUz/vCviSCYk5zVmK6I71m6MJeRak0fovpmraZqkIl07ULa7Q9DFKG/lVyvzx0zWr2wkWS0u57dx3ikKn9K9F8MfGvxxpBRTqgv4h/yzu13/r1rOWFf2WNVF1PsmivEfB37QejXxSDxFYSadIeDNEd8f4jqP1r17Q9b0nXLQXWk6hb3kR/iicHH1HaueVOUd0WmmaFFFFQMKKKKACiiigAooooAKKKKACiiigAoorx/wCO3xmtfBBbRNGSO811k3NuOY7YHoW9W9BVQg5uyE2krs9D8Y+LvD/hHTje69qUNqmCUQnLv7KvU181fEj9ovWtUaWy8Kxf2VZnIFw4BncevoteNeKvEmr+ItTk1LWb+a7uH6s7Zx7Adh7VgySH+9XoU8LGGstWYyqN7Ghqmq3upXT3V9dzXMznLSSuWY/iapSy4Q1VDEt16U1zuzk1uZieZySeavLMFVccDsKzgKezfuyV7dKS0Geofs+eGW8TeLJ7iSI/ZrQKHY9Bk5Ir6E+LmpjSfBdxbWjtFcXii1h2HBUHAJH0Fcp+zZb2uh/CmLU3iaSe9leVxGuXPOAPyFdTLpc2uarb6rq1vtRSfKtnbIUdv8a4qkm2dEUrHyLrtlcWF9LYXSNFcQttdWHPt+lVYsQkFR8y989D6iu4+O0iP8VNZEEiFYzHGyhfussag1ynhTRLnxFraabbyRRuwLEuccDritJx0uzJb2R9Kfs3fFQeILZfCevXB/tWBP8AQ53/AOXiMfwk/wB9f1Fe359a8W+Hfwv0vwhbRXbut7qTgSNcMPuegX0r1jSb77TH5UgxKo6/3q55R6o2WxeuZVhhaRugFfHH7Q3ihtf8dT2sTk2+nkxDngv/ABH+Q/CvdPj543k0Lw1d2+mzMk4AjaYD7jt0Ue+Mk+gFfIcsjSMXdmd3O5mY5JJ6k1vQhZXIm+hFPMyKWILfSqp8yR90jcdlU8VYlIzzVd9yZIGQOTW7MwBCk05W5qIEEZHQ0oPeoAtxvgE96kjk5qkHPQVYi6U0Nl6JyTirMcvSqEbBakWTHOa0JNWO6IwMmtjw/wCJtV0K7F3pWoXFnMveJyM/Ud65QTAc5qeI/wATcmjcD6i+Gf7QKTtDYeMIQhbCi+iHH1de31Fe/Wdzb3lrHdWsyTQSKGSRGyrD1Br864ZTkc4r6b/ZF8R3NzZ6n4cuJXeO2Cz24Y52AnDAe2cVyV6EUuaJrCd9Ge/UUUVxmgUUUUAFFFFABRRRQAUUUUAYXj/xBD4W8G6pr02MWluzoD/E/RR+ZFfnvq+p3erand6nfTNNc3UzSyuxySTX1L+2b4kFp4Z03w1DJiS+m8+YA/8ALNOn5k/pXyVG/wArf7xr0sHC0ebuYVX0EmYkGoHPHNPYhiecYqBzyea6WZDS3BxSZNIDRSGPU80khxG30zSA89KWQFhsHVuBUy2HHc+wfgTavD8MdFSQY3xlwPbNdzfTw2NvLeTMFht4mlcnoAoyf5VleA7Maf4R0i0AwIbOJT9doz+teWftMeOmsbb/AIRDTJcTXEe6+dTyqH7qD0J6n2rkinJ2RvJ2VzwzWNQk1jWb/VpyTLeXDzMT/tMSP04qx4Ole08V6bdRPtYXKqx/2ScH9CayoV+QDI46AVteDLOS/wDFWnWsWCWmGSf4cck/pXRUhaBzQk3I+s/ANzLq+lmd2Y28b+XGx/iAHJ/OulmKIdy4UKM5HYVj+CYobXw9BbWoxEg2qfX3rD+Mnib/AIRfwPd3sbD7VMRb249Xbv8AgK4oJs7JOx4H8dfFI1vxNJptrITZWcjbsdHlPBP4Dj8683fJQ4ODT5pHmmeSRizuSzMe5Jyaic4wBXcopKxzSldkbMejjB/nVa5diREhwzcsfQVPKwwST8oHNVYiSpkI5c5/Cp8gTHgBVCjoKD2FC8mnKvNFgHxLhxmrIIqNQMilHWqSFckDZoz82KYoO6kmbb8ndqoRLD87Fu3aryngVStSFABqdm+XHvipKRciccEV7n+yLcMvxDuYeglsWz+BBrwW2zjOeBXtX7Jc3/F0417NZTD9BUVfgaKjufX9FFFeYbhRRRQAUUUUAFFFFABRRUGoXKWVhcXkpASCJpGJPYDNAHxR+1Dr/wDbfxY1GNJN0GnhbSPngFRlv/Hia8ihcFZB6SGtnxZftf6/qF/JktcXEkpJPPzMTXP2rZeZfRs17SjyJRONu92SuODiqznoDViQ8daqv9+hjQ4UDk0inrTlIz1oAUjBq3pMX2jWLGDGfMuEGPxFVM5Nb/w6tftnj3RbbGd90vH41FT4WVHc+05Lu20bw/JfXTBLe0tzJIT2Cr0/Svi3xXrFz4g8RX2r3bFp7qYzN7Keg/AYFfSP7SGsjTPhwbBXxJqFwsOP9hfmc/oK+XgMN6lDxxyw9aeFp6cxNeWtiVVXlR93tXUfDJGPiuGRAd6xPwO2RgH9TXL7hjaCOeh7Cu3+Ee1dTuJcZlYJCo92bk/pV4pctJmdC7mj6p0KJbTRLSBR0iHT1r53/aa8TjU/FEPh62kD2+lLmUjvOw5H4DA/GvefEOsW/h3wzdavdECGxt94B/iYDCqPqcV8Y6leTX99cX1wS01xK0sh/wBpjk1yUIdTqqSKpOaicjNPkOBUBOTXQYle9bKCEdXOD9KaRg4FIDvkeYE88L9BTgMtnFQtQHIOamVeRTFHzVYQZIpgCjFOjXJJpVHHNSxDapbGaaAaCACc9KqBvMlL/lUl0x2BR1Y4qFf3YAApNjRbiIGCxwKVpQSSOg6e5qurZTdMcAdF9akjBbEko2qv3RSGi9CcRDPevXf2U5tnxcsVz963mX/x2vGEkaU5xhRXrP7MchT4x6KM4Deav/jhqJu8WXHc+3aKKK802CiiigAooooAKKKKACvOf2j/ABAPD3wm1WVH2z3gFpFzzlzg/pmvRq+Xv229f3Xei+HI34iRruYA9z8q/wAjW1CHNUSJm7I+bdRbfKx981nwqVmmPqBU1zN8oZu/GfSok/jPXOK9aWrOYVyQpqv3qWY9qhHrU9R3HYwv0ojPtQTkURdcUMQ8fert/gPCLj4taOrDIRmf8gTXD55r0j9miPzPirCzYxHbyH6cVlV2LhudF+07rRvvGttpSPvg062CuoPAkk+Yk/Qba8nHCEk5Ze/94Vt/EDVI9X8a6zqSEtFcXkgBJ5IB2r+gFYWSM5PzJwcdMV2U48sUjlm7ybHrgYHY8r7GvQ/gZbi88XWkDAn995j/AEUZrzkEBSO3Uetev/szQINX1TV7ghYLO3O5j2zyT+QrDFu8UjXDr3rm3+1F4hdYdO8MwSACT/S7kA+nCA+2cn8q8F79a2vHevyeJfFeoay+QtxKfKQnOyMcKPyArBJOaiMbItu7GyMCTVe6OIggOGfj8O9Sk5aqzESSmTt0X6VTEIijAAGAOlSAelAFPQc1NgHRryKsKMCmIvepVx0HPFIBOnNPB+THrTM5OKZdSCKBjnnHFMCFW8yVmb7qnC012Ak+XLGkXAjRR1xzU0SYOcdaW40EcWf3shJPp2p8uW5P5U4cjmkxmVSTxmlIpFi1RUTnrXpf7Osoj+MHh5vWcr+aEV5jI/zhe9egfAqQxfFfw0V6/bUB/GiStBoa3PvSiiivKNwooooAKKKKACiiigAr4K/aL17+3/ixrVykm+GCX7NEQcjbGMcfjmvtvx1rCeH/AAdq+tSHAtLSSQf7wHH64r85NSuZLm5luJGLSysXcnuSck/rXdgo6uRlVfQpyYzzTYd4DBsYzwRSF0LlTx9aYmfn547V2dTEJSM0zIpsh5oHSgB1CHBPrSMcChOeaGBKOSBXefAy/Gma3ruq45tdLuGX3O0AfqRXApy4HvWjoV69tpuqRI5VrrERx1I3gkfpWU9XFeZUXZNibtx3MSd/3z6GkUkEZ+8vGPam7snOMZ6j0NCvjGByOvvXc5WOVJjyeGPUYyK9F8L6uPD3wW1d42xd6vci0jPdV25c/wDfPH415tKcRt2B6Vf1C+aaxs7JWzFbKxC9t7Hk/kBXHV1qJG9PRMoluQAc8U2Rj260vQZNR5B69qoZHcNhNo4LfypoAAwKaWLu0hHB+79KeAc1KAcv3hUnQ8ikRfpSnqfpQwJA49O1PQ5ye1V9w59qkQ4Tr1pXAlGRVS9O9o4h67jVhXABJ7VmRS+dezMvRflFJvVIaLsYVQWPWgEnHFQNPGnU5NRPcu5xGDj1p8yGXjIMgZpxlXdu7CswH5hvbc3oDVqG3eQjzPkTrjuam9xlm1JlmMvRR0r0D4Kvt+K3honjOoRD82rhDhAqIMCu0+CyySfFfwvHEjSP/aUR2qMnAOSfwAJpTejGtz9A6KKK8w3CiiigAooooAKKKKAPFP2xtdOl/C1dNicrLql0sXB6ovzN/IV8UztkGv0f+Ing7R/HPhe40HWYsxSDdFKo+eCQfddT6j9RkHrXwJ8UvA+t/D/xRLoesxer21yo/d3MeeHX+o6g8V6GEnHl5epjUTvc5NwrdR+NNiDANk5H9aHOFzTY2JYium+pmDdaKVgT0+tIKdhAelOj6U0+lEfegCVOGBpdM+aN89C5wfemr1zT9OUixVv7zEilGN6i8iZu0S0eBnH3utNA5DHr0Y0m/K57HrTgeME10SaaMldEV4xWEBehYAVKpwvvUEw33ESAfKuXNSk+lc0kua5tHYVySBiobg4Cxjjd972FSZGcscAVXRt2XJGW9ewpXGSRx7iAAcCpRGFpkTqAMMPzpxkB5zQA7BU8qaYSSeFx+NKZASeeaRjxkAn8KQETZBPzYz6ClWX5tgJwO/rTHaRgcJjPQk0yIMrElg30qOo+hYuX2QM+egzWfabo7Xj7znezHjrTtXmK2chz1GKitpiVUAZwAM0m7yH0JERiOELk9zU0cDY/fSbV/urUglVEG4jd6ClUAje5PsKqyFclt0iUgRJz6mrQPQcE96po/OFGB7VPHhQT2qkFyYbnkUAEknAAGSa+yv2YvhOfCGlDxPr9uBr19H+6icc2cJ/h9nbv6Dj1rlP2YPgw0LWvjrxbalZOJdMsZV5X0mcHv3Udup5xj6Yrjr1b+6jaMeoUUUVymgUUUUAFFFFABRRRQAVy3xO8CaD8QfDUmi65Bnq1tcoB5ttJjh0P8x0I611NFNNp3QH5xfFn4d+Ifh1r50zW4N8EhJtL2MHyrlB3B7N6qeR9MGuJEgWUDua/Tnxp4W0Lxj4fn0LxDYR3tlMOVbhkbs6t1Vh2Ir4a+O3wL8R/Di+fVLIS6v4aLZS8RMvbjPCzKOn++PlPseK7adfm0e5jKFjzJfm70EYoQALmldgTXYtjJjTSp3pCc5pU6GgBQ2FP0NS2hxZQqOPlqB/9U/sppdObdawjIPyDHsaqn8RE9i2vYdh1FOYhfciiMDOc9etJMorRkiR9WcjrS0qDagyKXgkk4wK53uaIq3pyUgXgyH5j6Cp2TGBtHSq0P7yYzkdThR7Vc3fMKlFDUj44UcU4qRxipQQB14NRsw4GTwaAGOx55qKZ/wDa7Us0gyarzsGz60mwEZsKcGlVtqGoetSMcIKgfQzdek/0dVz941bs42Fuu3rgA1naxl5Ik9/61qQzCMYxxUR1kw6EscYT5nO408EuRmqz3UY7ZNXvDdlqviHWINI0PTLjUL+dsRwQJuY+/sB3J4FaKSQrDoUJYIqkseFAGSTX1T+zj8Bmt3t/F3jqzAlGJLHS5R9w9RJKPX0Tt1PPA6f4B/ATT/Bv2fxB4oEOo+IQA8cY+aCyP+z/AHnH97t29T7nXNVr30iawp21YUUUVymoUUUUAFFFFABRRRQAUUUUAFFFFABTZo45onimjWSN1KujDIYHqCO4p1FAHzb8aP2ZrHVPP1n4fNFp962XfTJDi3lPfy2/5Zn2Py/7tfKXiHRNX8O6rJpWu6dc6dfRffhnQq2PUdiPcZFfp/XPeOvBXhjxtpZ07xNpFvfxDPluwxJEfVHHzKfofrXVSxMo6S1RnKmnsfmlkdqEOc19G/E39lrXNMaW+8C3w1i15P2K6ZY7hB6K3Cv+O0/Wvn7V9J1TRNTk07WdOutPu4/vwXMRjcfge3vXbCpGezMXFrcqH/Vyf7ppuiDdp8Jz26+tPPMb/wC6ar6E3/EujyeAxH61UXaZMvhNJg3agKWcFj+FJuJwecj+H1pyD5ic8dvatZaIzjq7D2J6AVDeNtjWH+KQ4P071Oi5JPpVVWEsry9Rnav0Fcz7G1hyjCjHQcCplNRKMmpkwOTTGKw4qtM4TnOafPJgEVSckmpbGPaTd+NRueTTRx9aRmqWwsKDSyvhRTSQFyaqXU4APOOPWlfQCtetuu4vQGpJZxyM13Pwz+DHxE+IVzDcaRocltpjHnUb7MMGPVSRl/8AgINfWvwk/Zk8E+D3h1LXx/wk2rphg9zHi2ib/Yi5B+rZ+grn9olctRufM/wY+A/jP4jSxXzwPougtgtqF1GcyD/pkhwX+vC+/avtv4VfDLwn8N9I+xeHbHE8igXN7Nhp7gj+83Yf7IwB6V2SqqqFUBVAwABwBS1jKbkWopBRRRUFBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFZHijwx4e8UWJsvEOjWWpwY4W4iDFfdT1U+4IrXooTsB86+OP2VPDV+JZ/Ces3ejSsDtt7gfaIM+gOQ6j8WrwzWP2dfil4XidW0aPWbZWJE2mSiXj12HD/pX37RW8MROLvuRKmmrH5iX9hqGmXBg1KxurGdThkuIWjY/gwFQx/d+vSv041HT7DUrc2+o2NteQnrHPEsin8CCK4fW/gt8L9WJa48H2ELn+O13W5H/fsgVu8ZzbozVHl6n5/XrmK38sffk+UAfrTIl2oFA4FfZHir9mf4cCJr22k1y1dRhVjvFZR/32jH9a8S8bfDTQtDkYWl5qbgHA82SM/wAkFaQmmDjY8oC96SRsYGa3b/SLeBgqSTHnuR/hVzS/C9he3UUcs90oY87WX/4mqbEcY7bs81G3C8mvpzwD8APBmtmM3uoa7hsZCXESj/0XXquk/s3fCexYNLot1qBH/P3eyMD+ClR+lYSqqJSi2fBLMAQO/aun8LfDnx54pdRoXhTVbtGP+uMBji/77fC/rX6E+HvAPgnw8VbRfCmjWTr0kjtE3/8AfRGf1rpaylX7IpQPjPwX+yZ4r1ApL4s1yy0aHqYbUfaJvpnhB+bV7x8PfgD8NPBrR3MGiDVr9ORd6mROwPqqkbF/Bc+9eqUVlKcmWopCKAqhVAAAwAO1LRRUDCiiigAooooAKKKKACiiigAooooA/9k=" alt="teacher"><div class="bnames"><div class="bar">بروف/ أيمن منصور — مستشار الكيماء</div><div class="ben">Prof./ Ayman Mansour — Chemistry Consultant</div></div><div class="bpage"><div class="pa"> </div><div class="pe"></div></div><div class="bexam"><div class="x1">كود الكيمياء — Chemistry Code</div></div></div>
+
+</script>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container navbar">
+            <div class="logo">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7.25 3.22v4.6c0 4.47-3.12 8.65-7.25 9.82-4.13-1.17-7.25-5.35-7.25-9.82V6.4l7.25-3.22zM12 7a3 3 0 0 0-3 3c0 1.3.83 2.4 2 2.82V16h2v-3.18c1.17-.42 2-1.52 2-2.82a3 3 0 0 0-3-3z"/>
+                </svg>
+                <span class="lang-en">Chemistry code</span>
+                <span class="lang-ar">كود الكيمياء</span>
+            </div>
+            <div class="nav-links">
+                <a href="#free-section" class="nav-link">
+                    <span class="lang-en">Free Codes</span>
+                    <span class="lang-ar">أكواد مجانية</span>
+                </a>
+                <a href="#premium-section" class="nav-link">
+                    <span class="lang-en">Premium Codes</span>
+                    <span class="lang-ar">أكواد مدفوعة</span>
+                </a>
+                <a href="#verify-section" class="nav-link">
+                    <span class="lang-en">Verify IP Code</span>
+                    <span class="lang-ar">تفعيل الكود بالـ IP</span>
+                </a>
+                <a href="#payment-section" class="nav-link btn btn-primary" style="padding: 8px 16px; color: white;">
+                    <span class="lang-en">Buy Access</span>
+                    <span class="lang-ar">شراء وصول مدفوع</span>
+                </a>
+                <div class="ip-badge" id="user-ip-badge">
+                    <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/>
+                    </svg>
+                    <span id="ip-display">
+                        <span class="lang-en">Detecting IP...</span>
+                        <span class="lang-ar">جاري فحص الـ IP...</span>
+                    </span>
+                </div>
+                <!-- Language Toggle Switcher -->
+                <button class="btn-lang" onclick="toggleLanguage()">
+                    <span class="lang-en">🌐 العربية</span>
+                    <span class="lang-ar">🌐 English</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero container">
+        <h1>
+            <span class="lang-en"> Chemistry code top final revision (عربي -لغات)<br></span>
+            <span class="lang-ar">منصة المراجعة النهائية للكيمياء عربي ولغات <br> IP   المحمية بنظام فحص الـ</span>
+        </h1>
+        <p class="hero-sub">
+            <span class="lang-en">Explore perfet style revision in short time to all chapters and quesions to get more than you expected. Enjoy our free codes or get an IP-bound license for fully protected premium scripts.</span>
+            <span class="lang-ar">اكتشف افضل نموذج مراجعة في وقت قصير لجميع الفصول والأسئلة للحصول على أكثر مما تتوقع. استمتع بأكوادنا المجانية أو احصل على ترخيص مرتبط بالـ IP للحصول على النسخة المميزة المحمية بالكامل.</span>
+        </p>
+
+        <!-- Front Page Split Navigation Boxes (Free vs Payment) -->
+        <div class="hero-boxes">
+            <!-- Free Gateway Box -->
+            <div class="hero-box hero-box-free">
+                <div>
+                    <h3>
+                        <svg style="width:32px;height:32px;fill:var(--success);flex-shrink:0;" viewBox="0 0 24 24">
+                            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l7.59-7.59L19 7.5z"/>
+                        </svg>
+                        <span class="lang-en">Free revision </span>
+                        <span class="lang-ar">المراجعة المجانية</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Look ,study , very important ,Collected Knowledge and  solved questions  for each cgapter free forever</span>
+                        <span class="lang-ar" > شاهد وذاكر -هامة جدا -معلومات مجمعة واسئلة محلولة مجمعة لكل باب  </p>
+                </div>
+                <a href="#free-section" class="btn btn-success" style="width:100%; justify-content:center; font-size:1.1rem; padding:16px;">
+                    <span class="lang-en">🚀 Explore Free  Now</span>
+                    <span class="lang-ar">🚀 تصفح المجانية الآن</span>
+                </a>
+            </div>
+
+            <!-- Premium & Payment Gateway Box -->
+            <div class="hero-box hero-box-premium">
+                <div>
+                    <h3>
+                        <svg style="width:32px;height:32px;fill:var(--warning);flex-shrink:0;" viewBox="0 0 24 24">
+                            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                        </svg>
+                        <span class="lang-en">Premium IP-Locked Scripts</span>
+                        <span class="lang-ar">الأكواد المدفوعة (حماية IP)</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">All 5 Chapters have all important colleted knowledge according to modern system to bind and study revision more effective and easily in very short time</span>
+                        <span class="lang-ar">جميع الفصول الخمسة تحتوي على جميع المعلومات الهاهة مجمعة وفقاً  للنظام الحديث لربط ودراسة المراجعة بشكل أكثر فعالية وبسهولة في وقت قصير</span>
+                    </p>
+                </div>
+                <a href="#premium-section" class="btn btn-primary" style="width:100%; justify-content:center; font-size:1.1rem; padding:16px;">
+                    <span class="lang-en">💳 View Premium & Buy Pass</span>
+                    <span class="lang-ar">💳 عرض الأكواد المدفوعة والشراء</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Free Codes Section -->
+    <section id="free-section" class="section container">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">
+                    <svg style="width:28px;height:28px;fill:var(--success)" viewBox="0 0 24 24">
+                        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l7.59-7.59L19 7.5z"/>
+                    </svg>
+                    <span class="lang-en">Free forever</span>
+                    <span class="lang-ar">عروض مجانية</span>
+                </h2>
+               
+            </div>
+        </div>
+
+        <div class="grid">
+            <!-- Free Card 1 -->
+            <div class="card">
+                <div class="card-badge badge-free">
+                    <span class="lang-en">Free Access</span>
+                    <span class="lang-ar">وصول مجاني</span>
+                </div>
+                <div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                    </div>
+                    <h3 class="card-title">
+                        <span class="lang-en">ِِAll questions of Electrochemistry </span>
+                        <span class="lang-en">in all 10 guiding models</span>
+                        <span class="lang-ar">جميع أسئلة الكيمياء الكهربائية</span>
+                    <span class="lang-ar">في كل النماذج الاسترشادية ال10</span>
+                    
+                    </h3>
+                   
+                </div>
+                <div class="card-action">
+                    <!-- ========================================================= -->
+                    <!-- 👇 ADD YOUR FREE HTML FILE LINK BELOW (REPLACE HREF) 👇 -->
+                    <!-- ========================================================= -->
+                    <a href="04_electrochemistry.html" target="_blank" class="btn btn-secondary">
+                        <span class="lang-en">View / Download Page</span>
+                        <span class="lang-ar">عرض / تحميل الصفحة</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Free Card 2 -->
+            <div class="card">
+                <div class="card-badge badge-free">
+                    <span class="lang-en">Free Access</span>
+                    <span class="lang-ar">وصول مجاني</span>
+                </div>
+                <div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                    </div>
+                    <h3 class="card-title">
+                        <span class="lang-en">Uses of transition element</span>
+                        <span class="lang-ar">استخدامات العناصر الانتقالية</span>
+                    </h3>
+                    <p class="card-desc">
+                        <span class="lang-en">all ueses of element alone ,ompounds,alloys</span>
+                        <span class="lang-ar">جميع استخدامات العنصر وحده، والمركبات، والسبائك</span>
+                    </p>
+                </div>
+                <div class="card-action">
+                    <!-- ========================================================= -->
+                    <!-- 👇 ADD YOUR FREE HTML FILE LINK BELOW (REPLACE HREF) 👇 -->
+                    <!-- ========================================================= -->
+                    <a href="transition_elements_uses.html" target="_blank" class="btn btn-secondary">
+                        <span class="lang-en">View / Download Page</span>
+                        <span class="lang-ar">عرض / تحميل الصفحة</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Free Card 3 -->
+            <div class="card">
+                <div class="card-badge badge-free">
+                    <span class="lang-en">Free Access</span>
+                    <span class="lang-ar">وصول مجاني</span>
+                </div>
+                <div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+                    </div>
+                    <h3 class="card-title">
+                        <span class="lang-en">Push on each card & record</span>
+                        <span class="lang-ar">اضغط علي الكارت وسجل </span>
+                    </h3>
+                    <p class="card-desc">
+                        <span class="lang-en">All orgianc Compounds ,stutural formula ,molecular formula ,uses ,Number of pi & sigma bonds in one place.</span>
+                        <span class="lang-ar">جميع المركبات العضوية, الصيغة الهيكلية, الصيغة الجزيئية, الاستخدامات, عدد الروابط باي & سيجما في مكان واحد</span>
+                    </p>
+                </div>
+                <div class="card-action">
+                    <!-- ========================================================= -->
+                    <!-- 👇 ADD YOUR FREE HTML FILE LINK BELOW (REPLACE HREF) 👇 -->
+                    <!-- ========================================================= -->
+                    <a href="compounds -uses.html" target="_blank" class="btn btn-secondary">
+                        <span class="lang-en">View / Download Page</span>
+                        <span class="lang-ar">عرض / تحميل الصفحة</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Protected Section -->
+    <section id="premium-section" class="section container">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">
+                    <svg style="width:28px;height:28px;fill:var(--warning)" viewBox="0 0 24 24">
+                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                    </svg>
+                    <span class="lang-en">Premium IP-Protected Codes</span>
+                    <span class="lang-ar">الأكواد المدفوعة المحمية بنظام الـ IP</span>
+                </h2>
+               
+            </div>
+            <a href="#verify-section" class="btn btn-success">
+                <span class="lang-en">Have a Code? Unlock Now</span>
+                <span class="lang-ar">لديك كود؟ تفعيل الآن</span>
+            </a>
+        </div>
+
+        <div class="grid" id="premium-grid">
+            <!-- Premium Card 1 -->
+            <div class="card premium-item">
+                <div class="card-badge badge-premium">
+                    <span class="lang-en">IP Locked</span>
+                    <span class="lang-ar">محمي بالـ IP</span>
+                </div>
+                <div>
+                    <div class="card-icon" style="background-color: rgba(245, 158, 11, 0.1);">
+                        <svg style="fill: var(--warning)" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                    </div>
+                    <h3 class="card-title">
+                        <span class="lang-en">Chapter one </span>
+                        <span class="lang-ar">الباب الاول</span>
+                    </h3>
+                   
+                    <img src="chapter one.jpg" alt="محتويات الباب الاول" width="300">
+</a>
+                </div>
+                
+                <div class="card-action">
+                    <!-- ========================================================================= -->
+                    <!-- 👇 ADD YOUR PAYMENT HTML FILE LINK BELOW (REPLACE FILE NAME IN QUOTES) 👇 -->
+                    <!-- ========================================================================= -->
+                    <button onclick="handlePremiumClick('organizied/private-chapter1/chapter1.html')" class="btn btn-primary premium-btn">
+                        <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                        <span class="lang-en">Unlock to Access</span>
+                        <span class="lang-ar">افتح القفل للوصول</span>
+                    </button>
+                </div>
+            </div>
+    <!-- Premium Card 2 -->
+            <div class="card premium-item">
+                <div class="card-badge badge-premium">
+                    <span class="lang-en">IP Locked</span>
+                    <span class="lang-ar">محمي بالـ IP</span>
+                </div>
+                <div>
+                    <div class="card-icon" style="background-color: rgba(245, 158, 11, 0.1);">
+                        <svg style="fill: var(--warning)" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                    </div>
+                    <h3 class="card-title">
+                        <span class="lang-en">Chapter two </span>
+                        <span class="lang-ar">الباب الثاني</span>
+                    </h3>
+                   
+                    <img src="chapter2.jpg" alt="محتويات الباب الثاني" width="300">
+</a>
+                </div>
+                
+                <div class="card-action">
+                    <!-- ========================================================================= -->
+                    <!-- 👇 ADD YOUR PAYMENT HTML FILE LINK BELOW (REPLACE FILE NAME IN QUOTES) 👇 -->
+                    <!-- ========================================================================= -->
+                    <button onclick="handlePremiumClick('organizied/private-chapter2/chapter2.html')" class="btn btn-primary premium-btn">
+                        <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                        <span class="lang-en">Unlock to Access</span>
+                        <span class="lang-ar">افتح القفل للوصول</span>
+                    </button>
+                </div>
+            </div>    <!-- Premium Card 3 -->
+            <div class="card premium-item">
+                <div class="card-badge badge-premium">
+                    <span class="lang-en">IP Locked</span>
+                    <span class="lang-ar">محمي بالـ IP</span>
+                </div>
+                <div>
+                    <div class="card-icon" style="background-color: rgba(245, 158, 11, 0.1);">
+                        <svg style="fill: var(--warning)" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                    </div>
+                    <h3 class="card-title">
+                        <span class="lang-en">Chapter three </span>
+                        <span class="lang-ar">الباب الثالث</span>
+                    </h3>
+                   
+                    <img src="chapter3.jpg" alt="محتويات الباب الاول" width="300">
+</a>
+                </div>
+                
+                <div class="card-action">
+                    <!-- ========================================================================= -->
+                    <!-- 👇 ADD YOUR PAYMENT HTML FILE LINK BELOW (REPLACE FILE NAME IN QUOTES) 👇 -->
+                    <!-- ========================================================================= -->
+                    <button onclick="handlePremiumClick('organizied/private-chapter3/chapter3.html')" class="btn btn-primary premium-btn">
+                        <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                        <span class="lang-en">Unlock to Access</span>
+                        <span class="lang-ar">افتح القفل للوصول</span>
+                    </button>
+                </div>
+            </div>    <!-- Premium Card 4 -->
+            <div class="card premium-item">
+                <div class="card-badge badge-premium">
+                    <span class="lang-en">IP Locked</span>
+                    <span class="lang-ar">محمي بالـ IP</span>
+                </div>
+                <div>
+                    <div class="card-icon" style="background-color: rgba(245, 158, 11, 0.1);">
+                        <svg style="fill: var(--warning)" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                    </div>
+                    <h3 class="card-title">
+                        <span class="lang-en">Chapter four </span>
+                        <span class="lang-ar">الباب الرابع</span>
+                    </h3>
+                   
+                    <img src="chapter4.jpg" alt="محتويات الباب الرابع" width="300">
+</a>
+                </div>
+                
+                <div class="card-action">
+                    <!-- ========================================================================= -->
+                    <!-- 👇 ADD YOUR PAYMENT HTML FILE LINK BELOW (REPLACE FILE NAME IN QUOTES) 👇 -->
+                    <!-- ========================================================================= -->
+                    <button onclick="handlePremiumClick('organizied/private-chapter4/chapter4.html')" class="btn btn-primary premium-btn">
+                        <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                        <span class="lang-en">Unlock to Access</span>
+                        <span class="lang-ar">افتح القفل للوصول</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Premium Card 5 -->
+            <div class="card premium-item">
+                <div class="card-badge badge-premium">
+                    <span class="lang-en">IP Locked</span>
+                    <span class="lang-ar">محمي بالـ IP</span>
+                </div>
+                <div>
+                    <div class="card-icon" style="background-color: rgba(245, 158, 11, 0.1);">
+                        <svg style="fill: var(--warning)" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>
+                    </div>
+                    <h3 class="card-title">
+                        <span class="lang-en">Chapter five</span>
+                        <span class="lang-ar">الباب الخامس</span>
+                    </h3>
+                   
+                    <img src="chapter5.JPG" alt="محتويات الباب الخامس" width="300">
+</a>
+                </div>
+                <div class="card-action">
+                    <!-- ========================================================================= -->
+                    <!-- 👇 ADD YOUR PAYMENT HTML FILE LINK BELOW (REPLACE FILE NAME IN QUOTES) 👇 -->
+                    <!-- ========================================================================= -->
+                    <button onclick="handlePremiumClick('organizied/private-chapter5/chapter5.html')" class="btn btn-primary premium-btn">
+                        <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                        <span class="lang-en">Unlock to Access</span>
+                        <span class="lang-ar">افتح القفل للوصول</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Premium Card 6 -->
+            <div class="card premium-item">
+                <div class="card-badge badge-premium">
+                    <span class="lang-en">IP Locked</span>
+                    <span class="lang-ar">محمي بالـ IP</span>
+                </div>
+                <div>
+                    <div class="card-icon" style="background-color: rgba(245, 158, 11, 0.1);">
+                        <svg style="fill: var(--warning)" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                    </div>
+                   </h3>
+                    <span class="lang-en">All essy questions of all chapters</span>
+                     <span class="lang-ar">كل الاسئلة المقالية في كل النماذج ال 10</span>
+                     <img src="essay.JPG" alt="محتويات الباب الخامس" width="300">
+</a>
+                    
+                </div>
+                <div class="card-action">
+
+
+                    
+                    <!-- ========================================================================= -->
+                    <!-- 👇 ADD YOUR PAYMENT HTML FILE LINK BELOW (REPLACE FILE NAME IN QUOTES) 👇 -->
+                    <!-- ========================================================================= -->
+                    <button onclick="handlePremiumClick('organizied/private-parts-en/06_essay_questions.html')" class="btn btn-primary premium-btn">
+                        <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                        <span class="lang-en">Unlock to Access</span>
+                        <span class="lang-ar">افتح القفل للوصول</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Verification Section -->
+    <section id="verify-section" class="section container">
+        <div class="unlock-card">
+            <h3>
+                <span class="lang-en">Verify & Bind Access Code</span>
+                <span class="lang-ar">تفعيل وربط كود الوصول بالـ IP</span>
+            </h3>
+            <p>
+                <span class="lang-en">Enter your purchased access code below. Our system will bind this license to your current IP address (<span id="verify-ip-tag-en" style="color:var(--success);font-weight:bold;">Detecting...</span>) for robust protection.</span>
+                <span class="lang-ar">أدخل كود التفعيل الخاص بك بالأسفل. سيقوم نظامنا بربط هذه الرخصة بعنوان الـ IP الحالي الخاص بك (<span id="verify-ip-tag-ar" style="color:var(--success);font-weight:bold;">جاري الفحص...</span>) لحماية الكود من المشاركة.</span>
+            </p>
+            
+            <form id="verify-form" onsubmit="event.preventDefault(); verifyCode();">
+                <div class="input-group">
+                    <input type="text" id="access-code-input" class="input-code" placeholder="ENTER-LICENSE-CODE-HERE / أدخل-كود-التفعيل-هنا" required>
+                    <button type="submit" class="btn btn-success">
+                        <span class="lang-en">Authenticate & Bind IP</span>
+                        <span class="lang-ar">مصادقة وربط بالـ IP</span>
+                    </button>
+                </div>
+            </form>
+
+            <div class="ip-lock-info">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 6c1.4 0 2.8 1.4 2.8 3.2V12h-5.6v-1.8C9.2 8.4 10.6 7 12 7zm0 11.2c-3.7-1.1-6.2-4.2-6.8-7.8h13.6c-.6 3.6-3.1 6.7-6.8 7.8z"/>
+                </svg>
+                <div>
+                    <h5 style="color:var(--warning); margin-bottom: 6px; font-size: 1.05rem; font-weight: 700;">
+                        <span class="lang-en">Single IP Restriction Policy</span>
+                        <span class="lang-ar">سياسة التقييد بعنوان IP واحد</span>
+                    </h5>
+                    <p>
+                        <span class="lang-en">To prevent unauthorized script sharing, each access code binds permanently to the first IP address that activates it. Once authenticated, you can freely access all premium pages from this IP.</span>
+                        <span class="lang-ar">لمنع مشاركة الأكواد بشكل غير قانوني، يتم ربط كل كود تفعيل بشكل دائم بأول عنوان IP يستخدمه. بمجرد التفعيل، يمكنك تصفح وتحميل جميع الصفحات المدفوعة بحرية تامة من جهازك.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buy Access / Payment Gateway Section -->
+    <section id="payment-section" class="section container">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">
+                    <svg style="width:28px;height:28px;fill:var(--primary)" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                    </svg>
+                    <span class="lang-en">Purchase Premium Access Pass</span>
+                    <span class="lang-ar">شراء كود تفعيل الأكواد المدفوعة</span>
+                </h2>
+                <p class="section-subtitle">
+                    <span class="lang-en">Choose your preferred payment method below to receive your instant IP-locked authorization code.</span>
+                    <span class="lang-ar">اختر طريقة الدفع المناسبة لك بالأسفل للحصول على كود التفعيل الفوري المرتبط بالـ IP.</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="payment-container">
+            <!-- Payment Method Tabs -->
+            <div class="payment-methods">
+                <h4>
+                    <span class="lang-en">Select Payment Method</span>
+                    <span class="lang-ar">اختر طريقة الدفع</span>
+                </h4>
+                <div class="method-tab active" onclick="switchPayment('fawry')">
+                    <svg viewBox="0 0 24 24" style="fill:#f59e0b"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+                    <span class="lang-en">Fawry Visa (Yellow Card)</span>
+                    <span class="lang-ar">فيزا فوري (البطاقة الصفراء)</span>
+                </div>
+                <div class="method-tab" onclick="switchPayment('vodafone')">
+                    <svg viewBox="0 0 24 24" style="fill:#e60000"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/></svg>
+                    <span class="lang-en">Vodafone Cash</span>
+                    <span class="lang-ar">فودافون كاش</span>
+                </div>
+                <div class="method-tab" onclick="switchPayment('instapay')">
+                    <svg viewBox="0 0 24 24" style="fill:#10b981"><path d="M16 1h-8C5.79 1 4 2.79 4 5v14c0 2.21 1.79 4 4 4h8c2.21 0 4-1.79 4-4V5c0-2.21-1.79-4-4-4zm-4 20c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.25-5.5h-10.5V4.5h10.5v11z"/></svg>
+                    <span class="lang-en">InstaPay Egypt</span>
+                    <span class="lang-ar">إنستاباي مصر</span>
+                </div>
+                <div class="method-tab" onclick="switchPayment('orange')">
+                    <svg viewBox="0 0 24 24" style="fill:#ff6600"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/></svg>
+                    <span class="lang-en">Orange Cash</span>
+                    <span class="lang-ar">أورنج كاش</span>
+                </div>
+                <div class="method-tab" onclick="switchPayment('paypal')">
+                    <svg viewBox="0 0 24 24" style="fill:#0079c1"><path d="M8.32 3H16c2.76 0 5 2.24 5 5 0 2.45-1.77 4.5-4.13 4.93L15 21h-3.8l1.45-6.73H10.5c-2.43 0-4.5-1.85-4.87-4.25L4.5 4.5C4.78 3.65 5.75 3 6.75 3h1.57z"/></svg>
+                    <span class="lang-en">PayPal</span>
+                    <span class="lang-ar">باي بال</span>
+                </div>
+                <!-- زر Tap Payments بأيقونة مدمجة لا تنكسر -->
+<div class="payment-method-item" onclick="selectPaymentMethod('tap')" id="method-tap" style="display: flex; align-items: center; gap: 12px; padding: 15px; cursor: pointer; border-radius: 8px; transition: 0.2s;">
+    <!-- أيقونة بطاقة دفع مدمجة -->
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org">
+        <rect width="24" height="24" rx="6" fill="#4F46E5"/>
+        <path d="M4 8H20V17C20 17.5523 19.5523 18 19 18H5C4.44772 18 4 17.5523 4 17V8Z" fill="white" opacity="0.2"/>
+        <rect x="3" y="6" width="18" height="12" rx="2" stroke="white" stroke-width="2"/>
+        <line x1="3" y1="10" x2="21" y2="10" stroke="white" stroke-width="2"/>
+        <rect x="6" y="13" width="4" height="2" rx="0.5" fill="white"/>
+    </svg>
+    <div>
+        <span style="font-weight: bold; color: white; display: block; text-align: left; font-size: 14px;">Tap Payments</span>
+        <span style="font-size: 11px; color: #a0aec0; display: block; text-align: left; margin-top: 2px;">الدفع السريع (فيزا / محافظ)</span>
+    </div>
+</div>
+
+            </div>
+
+            <!-- Payment Details Panels -->
+            <div class="payment-details">
+                <!-- Fawry Panel -->
+                <div id="panel-fawry" class="payment-panel active">
+                    <h3>
+                        <span class="lang-en">Fawry Visa (Yellow Card)</span>
+                        <span class="lang-ar">فيزا فوري (البطاقة الصفراء)</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Pay directly to our verified MyFawry Yellow Visa Card via InstaPay, MyFawry app, or any Fawry POS terminal.</span>
+                        <span class="lang-ar">ادفع مباشرة إلى بطاقة فيزا فوري الصفراء الخاصة بنا عبر إنستاباي، تطبيق MyFawry، أو أي ماكينة فوري.</span>
+                    </p>
+                    
+                    <div class="instruction-box">
+                        <h5>
+                            <span class="lang-en">Direct Payment Instructions:</span>
+                            <span class="lang-ar">تعليمات الدفع المباشر:</span>
+                        </h5>
+                        <ol>
+                            <li>
+                                <span class="lang-en"><strong>Via InstaPay:</strong> Open InstaPay, select "Send Money" &rarr; "Bank Card", and enter our 16-digit Fawry Visa card number below.</span>
+                                <span class="lang-ar"><strong>عبر إنستاباي:</strong> افتح تطبيق إنستاباي، اختر "إرسال نقود" &larr; "بطاقة بنكية"، وأدخل رقم بطاقة فيزا فوري المكون من 16 رقماً بالأسفل.</span>
+                            </li>
+                            <li>
+                                <span class="lang-en"><strong>Via Fawry POS / MyFawry app:</strong> Deposit directly into our MyFawry wallet using our linked mobile number.</span>
+                                <span class="lang-ar"><strong>عبر ماكينات فوري أو تطبيق MyFawry:</strong> قم بالإيداع المباشر في محفظة MyFawry باستخدام رقم المحمول المربوط بالبطاقة.</span>
+                            </li>
+                            <li>
+                                <span class="lang-en">Transfer the exact package amount (e.g., <strong>200 EGP</strong>).</span>
+                                <span class="lang-ar">قم بتحويل مبلغ الباقة المطلوب بالكامل (مثال: <strong>200 جنيه</strong>).</span>
+                            </li>
+                            <li>
+                                <span class="lang-en">Enter your sender card number, mobile number, or transaction reference below to instantly receive your IP-locked authorization code.</span>
+                                <span class="lang-ar">أدخل رقم بطاقتك أو رقم المحمول أو رقم العملية بالأسفل للحصول على كود التفعيل المرتبط بالـ IP فوراً.</span>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="wallet-number" style="display:flex; flex-direction:column; gap:20px; align-items:stretch;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 12px;">
+                            <div>
+                                <div style="font-size:0.85rem; color:var(--text-muted); text-transform:uppercase;">
+                                    <span class="lang-en">Fawry Visa Card Number (For InstaPay & Card Transfers):</span>
+                                    <span class="lang-ar">رقم بطاقة فيزا فوري (لتحويلات إنستاباي والبطاقات):</span>
+                                </div>
+                                <span id="fawry-visa-card" style="font-family:monospace; font-size:1.5rem; color:var(--warning); font-weight:bold;">5078 0867 3231 0763</span>
+                            </div>
+                            <button class="btn-copy" onclick="copyText('fawry-visa-card')">
+                                <span class="lang-en">Copy Card #</span>
+                                <span class="lang-ar">نسخ رقم الفيزا</span>
+                            </button>
+                        </div>
+                        <hr style="border-color: var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 12px;">
+                            <div>
+                                <div style="font-size:0.85rem; color:var(--text-muted); text-transform:uppercase;">
+                                    <span class="lang-en">Linked Mobile Number (For Fawry POS / Wallet Deposit):</span>
+                                    <span class="lang-ar">رقم المحمول المربوط (لإيداع ماكينات فوري والمحفظة):</span>
+                                </div>
+                                <span id="fawry-phone" style="font-family:monospace; font-size:1.5rem; color:var(--success); font-weight:bold;">01287996430</span>
+                            </div>
+                            <button class="btn-copy" onclick="copyText('fawry-phone')">
+                                <span class="lang-en">Copy Phone #</span>
+                                <span class="lang-ar">نسخ رقم المحمول</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <form class="upload-proof" onsubmit="event.preventDefault(); submitPaymentVerification('Fawry Visa (Yellow Card)');">
+                        <label>
+                            <span class="lang-en">Your Sender Card #, Mobile Number, or Fawry Receipt ID:</span>
+                            <span class="lang-ar">رقم بطاقتك أو المحمول أو رقم إيصال فوري:</span>
+                        </label>
+                        <input type="text" id="input-fawry" placeholder="e.g., Card ending in 1234 or mobile 01098765432" required>
+                        <button type="submit" class="btn btn-success" style="align-self: flex-start; margin-top: 8px;">
+                            <span class="lang-en">Verify My Payment</span>
+                            <span class="lang-ar">تأكيد عملية الدفع</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Vodafone Cash Panel -->
+                <div id="panel-vodafone" class="payment-panel">
+                    <h3>
+                        <span class="lang-en">Vodafone Cash (Egypt)</span>
+                        <span class="lang-ar">فودافون كاش (مصر)</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Transfer the access fee instantly using your Vodafone Cash wallet.</span>
+                        <span class="lang-ar">قم بتحويل رسوم التفعيل فوراً عبر محفظة فودافون كاش.</span>
+                    </p>
+                    
+                    <div class="instruction-box">
+                        <h5>
+                            <span class="lang-en">Payment Instructions:</span>
+                            <span class="lang-ar">تعليمات الدفع:</span>
+                        </h5>
+                        <ol>
+                            <li>
+                                <span class="lang-en">Open your Vodafone Cash app or dial <strong>*9#</strong></span>
+                                <span class="lang-ar">افتح تطبيق أنا فودافون أو اطلب <strong>*9#</strong></span>
+                            </li>
+                            <li>
+                                <span class="lang-en">Select Send Money & enter our wallet number below.</span>
+                                <span class="lang-ar">اختر تحويل أموال وأدخل رقم المحفظة الخاص بنا بالأسفل.</span>
+                            </li>
+                            <li>
+                                <span class="lang-en">Transfer the exact package amount (e.g., <strong>500 EGP</strong>).</span>
+                                <span class="lang-ar">قم بتحويل مبلغ الباقة المطلوب بالكامل (مثال: <strong>500 جنيه</strong>).</span>
+                            </li>
+                            <li>
+                                <span class="lang-en">Enter your transaction phone number below to verify payment.</span>
+                                <span class="lang-ar">أدخل رقم المحمول المحول منه بالأسفل لتأكيد عملية الدفع.</span>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="wallet-number wallet-single">
+                        <span id="vodafone-num" style="color:var(--success); font-family:monospace;">01068018005</span>
+                        <button class="btn-copy" onclick="copyText('vodafone-num')">
+                            <span class="lang-en">Copy Number</span>
+                            <span class="lang-ar">نسخ الرقم</span>
+                        </button>
+                    </div>
+
+                    <form class="upload-proof" onsubmit="event.preventDefault(); submitPaymentVerification('Vodafone Cash');">
+                        <label>
+                            <span class="lang-en">Your Vodafone Cash Wallet Number (to verify transfer):</span>
+                            <span class="lang-ar">رقم محفظة فودافون كاش المحول منها (لتأكيد التحويل):</span>
+                        </label>
+                        <input type="text" id="input-vodafone" placeholder="e.g., 01098765432" required>
+                        <button type="submit" class="btn btn-success" style="align-self: flex-start; margin-top: 8px;">
+                            <span class="lang-en">Verify My Payment</span>
+                            <span class="lang-ar">تأكيد عملية الدفع</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- InstaPay Panel -->
+                <div id="panel-instapay" class="payment-panel">
+                    <h3>
+                        <span class="lang-en">InstaPay (Central Bank of Egypt)</span>
+                        <span class="lang-ar">إنستاباي (البنك المركزي المصري)</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Transfer instantly from any Egyptian bank account via InstaPay.</span>
+                        <span class="lang-ar">تحويل لحظي آمن من أي حساب بنكي في مصر عبر تطبيق إنستاباي.</span>
+                    </p>
+                    
+                    <div class="instruction-box">
+                        <h5>
+                            <span class="lang-en">Payment Instructions:</span>
+                            <span class="lang-ar">تعليمات الدفع:</span>
+                        </h5>
+                        <ol>
+                            <li>
+                                <span class="lang-en">Open your InstaPay application.</span>
+                                <span class="lang-ar">افتح تطبيق إنستاباي على هاتفك.</span>
+                            </li>
+                            <li>
+                                <span class="lang-en">Select Transfer to IPA / Payment Address.</span>
+                                <span class="lang-ar">اختر التحويل إلى عنوان دفع (IPA).</span>
+                            </li>
+                            <li>
+                                <span class="lang-en">Enter our verified InstaPay address below and transfer <strong>500 EGP</strong>.</span>
+                                <span class="lang-ar">أدخل عنوان إنستاباي الخاص بنا بالأسفل وقم بتحويل <strong>500 جنيه</strong>.</span>
+                            </li>
+                            <li>
+                                <span class="lang-en">Enter your sender IPA or transaction reference below.</span>
+                                <span class="lang-ar">أدخل عنوان إنستاباي الخاص بك أو رقم العملية بالأسفل للتأكيد.</span>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="wallet-number wallet-single">
+                        <span id="instapay-addr" style="color:var(--secondary); font-family:monospace;">01287996430</span>
+                        <button class="btn-copy" onclick="copyText('instapay-addr')">
+                            <span class="lang-en">Copy IPA</span>
+                            <span class="lang-ar">نسخ العنوان</span>
+                        </button>
+                    </div>
+
+                    <form class="upload-proof" onsubmit="event.preventDefault(); submitPaymentVerification('InstaPay');">
+                        <label>
+                            <span class="lang-en">Your InstaPay Address / Sender Name:</span>
+                            <span class="lang-ar">عنوان إنستاباي الخاص بك أو اسم المحول:</span>
+                        </label>
+                        <input type="text" id="input-instapay" placeholder="e.g., username@instapay" required>
+                        <button type="submit" class="btn btn-success" style="align-self: flex-start; margin-top: 8px;">
+                            <span class="lang-en">Verify My Payment</span>
+                            <span class="lang-ar">تأكيد عملية الدفع</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Orange Cash Panel -->
+                <div id="panel-orange" class="payment-panel">
+                    <h3>
+                        <span class="lang-en">Orange Cash</span>
+                        <span class="lang-ar">أورنج كاش</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Direct secure transfer via Orange Cash wallet.</span>
+                        <span class="lang-ar">تحويل آمن ومباشر عبر محفظة أورنج كاش.</span>
+                    </p>
+                    
+                    <div class="instruction-box">
+                        <h5>
+                            <span class="lang-en">Payment Instructions:</span>
+                            <span class="lang-ar">تعليمات الدفع:</span>
+                        </h5>
+                        <ol>
+                            <li>
+                                <span class="lang-en">Open your Orange Cash application or dial <strong>#115#</strong>.</span>
+                                <span class="lang-ar">افتح تطبيق أورنج كاش أو اطلب <strong>#115#</strong>.</span>
+                            </li>
+                            <li>
+                                <span class="lang-en">Choose money transfer and enter our Orange Cash number below.</span>
+                                <span class="lang-ar">اختر تحويل مالي وأدخل رقم أورنج كاش الخاص بنا بالأسفل.</span>
+                            </li>
+                            <li>
+                                <span class="lang-en">Transfer the required amount (<strong>200 EGP</strong>).</span>
+                                <span class="lang-ar">قم بتحويل المبلغ المطلوب (<strong>200 جنيه</strong>).</span>
+                            </li>
+                            <li>
+                                <span class="lang-en">Submit your sending mobile number below for fast verification.</span>
+                                <span class="lang-ar">أدخل رقم المحمول المحول منه بالأسفل للتأكيد السريع.</span>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="wallet-number wallet-single">
+                        <span id="orange-num" style="color:#ff6600; font-family:monospace;">01287996430</span>
+                        <button class="btn-copy" onclick="copyText('orange-num')">
+                            <span class="lang-en">Copy Number</span>
+                            <span class="lang-ar">نسخ الرقم</span>
+                        </button>
+                    </div>
+
+                    <form class="upload-proof" onsubmit="event.preventDefault(); submitPaymentVerification('Orange Cash');">
+                        <label>
+                            <span class="lang-en">Your Orange Cash Mobile Number:</span>
+                            <span class="lang-ar">رقم محفظة أورنج كاش المحول منها:</span>
+                        </label>
+                        <input type="text" id="input-orange" placeholder="e.g., 01298765432" required>
+                        <button type="submit" class="btn btn-success" style="align-self: flex-start; margin-top: 8px;">
+                            <span class="lang-en">Verify My Payment</span>
+                            <span class="lang-ar">تأكيد عملية الدفع</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- PayPal Panel -->
+                <div id="panel-paypal" class="payment-panel">
+                    <h3>
+                        <span class="lang-en">PayPal (International Secure Checkout)</span>
+                        <span class="lang-ar">باي بال (دفع دولي آمن)</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Instant secure checkout via PayPal. Your IP access code will be generated instantly upon confirmation.</span>
+                        <span class="lang-ar">دفع آمن وفوري عبر باي بال. سيتم إنشاء كود التفعيل المرتبط بالـ IP فور تأكيد الدفع.</span>
+                    </p>
+                    
+                    <div class="instruction-box">
+                        <h5>
+                            <span class="lang-en">International Checkout:</span>
+                            <span class="lang-ar">الدفع الدولي الفوري:</span>
+                        </h5>
+                        <p style="color: #e2e8f0; margin-bottom: 20px; font-size: 1rem;">
+                            <span class="lang-en">Click the button below to complete your payment securely on PayPal. Once verified, your license code will be emailed to your PayPal address.</span>
+                            <span class="lang-ar">اضغط على الزر بالأسفل لإتمام عملية الدفع بأمان عبر باي بال. بمجرد التأكيد، سيتم إرسال كود التفعيل مباشرة إلى بريدك الإلكتروني.</span>
+                        </p>
+                        <a href="https://paypal.me/yourpaypalusername/25" target="_blank" class="btn btn-primary" style="background-color: #0079c1; width: 100%; justify-content: center; font-size: 1.2rem; padding: 16px;">
+                            <svg style="width:24px;height:24px;fill:white" viewBox="0 0 24 24"><path d="M8.32 3H16c2.76 0 5 2.24 5 5 0 2.45-1.77 4.5-4.13 4.93L15 21h-3.8l1.45-6.73H10.5c-2.43 0-4.5-1.85-4.87-4.25L4.5 4.5C4.78 3.65 5.75 3 6.75 3h1.57z"/></svg>
+                            <span class="lang-en">Pay $25.00 USD with PayPal</span>
+                            <span class="lang-ar">ادفع 10.00$ دولار عبر باي بال</span>
+                        </a>
+                    </div>
+
+                    <form class="upload-proof" onsubmit="event.preventDefault(); submitPaymentVerification('PayPal');">
+                        <label>
+                            <span class="lang-en">Enter your PayPal Email / Transaction ID:</span>
+                            <span class="lang-ar">أدخل بريد باي بال أو رقم العملية (Transaction ID):</span>
+                        </label>
+                        <input type="text" id="input-paypal" placeholder="e.g., yourname@example.com" required>
+                        <button type="submit" class="btn btn-success" style="align-self: flex-start; margin-top: 8px;">
+                            <span class="lang-en">Verify My Payment</span>
+                            <span class="lang-ar">تأكيد عملية الدفع</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trust Badges & Protection Specs -->
+        <div class="protection-grid">
+            <div class="protection-card">
+                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                <h4>
+                    <span class="lang-en">Military-Grade Protection</span>
+                    <span class="lang-ar">حماية متقدمة للخوادم</span>
+                </h4>
+                <p>
+                    <span class="lang-en">All scripts are securely stored and shielded from public directories until full IP validation passes.</span>
+                    <span class="lang-ar">يتم حفظ جميع الأكواد في مسارات محمية ومشفرة على الخادم لحين التحقق الكامل من عنوان الـ IP.</span>
+                </p>
+            </div>
+            <div class="protection-card">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/></svg>
+                <h4>
+                    <span class="lang-en">Strict 1-IP Binding</span>
+                    <span class="lang-ar">تقييد صارم بجهاز واحد (IP)</span>
+                </h4>
+                <p>
+                    <span class="lang-en">Advanced anti-leech algorithms lock the license to your initial authenticated IP address instantly.</span>
+                    <span class="lang-ar">خوارزميات ذكية لمنع تسريب الأكواد تقوم بقفل الرخصة فوراً على أول عنوان IP قام بتفعيلها.</span>
+                </p>
+            </div>
+            <div class="protection-card">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                <h4>
+                    <span class="lang-en">Multi-Method Gateway</span>
+                    <span class="lang-ar">بوابات دفع متعددة</span>
+                </h4>
+                <p>
+                    <span class="lang-en">Fully compliant with regional and international financial methods including Fawry, Vodafone Cash & PayPal.</span>
+                    <span class="lang-ar">دعم كامل لبوابات الدفع المحلية والدولية بما في ذلك فيزا فوري، فودافون كاش، إنستاباي وباي بال.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <svg style="width: 24px; height: 24px; fill: var(--primary);" viewBox="0 0 24 24">
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                </svg>
+                <span class="lang-en">CodeVault Secured Architecture</span>
+                <span class="lang-ar">نظام CodeVault الأمني المتطور</span>
+            </div>
+            <p>
+                <span class="lang-en">&copy; 2026 CodeVault Portal. All Rights Reserved. Fully Protected & Monitored.</span>
+                <span class="lang-ar">جميع الحقوق محفوظة &copy; 2026 منصة chemistry code. المنصة محمية ومراقبة بالكامل.</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Toast Component -->
+    <div id="toast">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l7.59-7.59L19 7.5z"/>
+        </svg>
+        <span id="toast-message">Action completed successfully!</span>
+    </div>
+
+    <!-- JavaScript logic -->
+    <script>
+        let currentIP = "192.168.1.1 (Local/Secure)";
+        let isUnlocked = false;
+        let currentLang = 'en';
+
+        // Fetch User IP on load
+        window.addEventListener('DOMContentLoaded', () => {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    currentIP = data.ip;
+                    updateIPDisplays();
+                })
+                .catch(err => {
+                    updateIPDisplays();
+                });
+
+            // Check if existing authorization exists in localStorage
+            if (localStorage.getItem('codevault_unlocked') === 'true') {
+                unlockPremiumUI(localStorage.getItem('codevault_ip') || currentIP);
+            }
+            
+            // Check saved language preference
+            if (localStorage.getItem('codevault_lang') === 'ar') {
+                setLanguage('ar');
+            }
+        });
+
+        function updateIPDisplays() {
+            document.getElementById('ip-display').innerText = currentIP;
+            const tagEn = document.getElementById('verify-ip-tag-en');
+            const tagAr = document.getElementById('verify-ip-tag-ar');
+            if (tagEn) tagEn.innerText = currentIP;
+            if (tagAr) tagAr.innerText = currentIP;
+        }
+
+        // Toggle Language Function
+        function toggleLanguage() {
+            const htmlTag = document.documentElement;
+            if (htmlTag.getAttribute('dir') === 'ltr') {
+                setLanguage('ar');
+            } else {
+                setLanguage('en');
+            }
+        }
+
+        function setLanguage(lang) {
+            const htmlTag = document.documentElement;
+            currentLang = lang;
+            if (lang === 'ar') {
+                htmlTag.setAttribute('dir', 'rtl');
+                htmlTag.setAttribute('lang', 'ar');
+                localStorage.setItem('codevault_lang', 'ar');
+                updatePlaceholders('ar');
+            } else {
+                htmlTag.setAttribute('dir', 'ltr');
+                htmlTag.setAttribute('lang', 'en');
+                localStorage.setItem('codevault_lang', 'en');
+                updatePlaceholders('en');
+            }
+        }
+
+        function updatePlaceholders(lang) {
+            const inputFawry = document.getElementById('01287996430');
+            const inputVodafone = document.getElementById('01068018005');
+            const inputOrange = document.getElementById('01287996430');
+            const inputPaypal = document.getElementById('ayman2010200@gmail.com');
+            const accessCodeInput = document.getElementById('access-code-input');
+
+            if (lang === 'ar') {
+                if (inputFawry) inputFawry.placeholder = "01298796430  أو رقم البطاقة المكون من 16 رقماً";
+                if (inputVodafone) inputVodafone.placeholder = "مثال: 01098765432";
+                if (inputInstapay) inputInstapay.placeholder = "مثال: username@instapay";
+                if (inputOrange) inputOrange.placeholder = "مثال: 01298765432";
+                if (inputPaypal) inputPaypal.placeholder = "مثال: yourname@example.com";
+                if (accessCodeInput) accessCodeInput.placeholder = "أدخل كود التفعيل هنا";
+                if (inputTap) inputTap.placeholder = "مثال: رقم بطاقة الفيزا أو المحفظة";
+            } else {
+                if (inputFawry) inputFawry.placeholder = "e.g., Card ending in 1234 or mobile 01098765432";
+                if (inputVodafone) inputVodafone.placeholder = "e.g., 01098765432";
+                if (inputInstapay) inputInstapay.placeholder = "e.g., username@instapay";
+                if (inputOrange) inputOrange.placeholder = "e.g., 01298765432";
+                if (inputPaypal) inputPaypal.placeholder = "e.g., yourname@example.com";
+                if (accessCodeInput) accessCodeInput.placeholder = "ENTER-LICENSE-CODE-HERE";
+                if (inputTap) inputTap.placeholder = "e.g., Card number or mobile wallet";
+            }
+        }
+
+        // Switch payment method tabs
+        function switchPayment(method) {
+            document.querySelectorAll('.method-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.payment-panel').forEach(panel => panel.classList.remove('active'));
+            
+            const activeTab = Array.from(document.querySelectorAll('.method-tab')).find(tab => tab.getAttribute('onclick').includes(method));
+            const activePanel = document.getElementById(`panel-${method}`);
+            
+            if (activeTab) activeTab.classList.add('active');
+            if (activePanel) activePanel.classList.add('active');
+        }
+
+        // Copy text helper
+        function copyText(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(currentLang === 'ar' ? `تم نسخ ${text} بنجاح!` : `Copied ${text} to clipboard!`);
+            }).catch(() => {
+                showToast(currentLang === 'ar' ? `فشل النسخ. يرجى التحديد والنسخ يدوياً.` : `Failed to copy. Please select and copy manually.`);
+            });
+        }
+
+        // Show toast notifications
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+
+        // Submit payment verification simulation
+        function submitPaymentVerification(methodName) {
+            showToast(currentLang === 'ar' 
+                ? `تم إرسال طلب التأكيد لـ ${methodName}! جاري مراجعة التحويل.` 
+                : `Verification submitted for ${methodName}! Our system is verifying your transfer.`);
+        }
+
+        // Handle premium card click when locked/unlocked
+        function handlePremiumClick(targetUrl) {
+            if (isUnlocked) {
+                window.open(targetUrl, '_blank');
+            } else {
+                showToast(currentLang === 'ar' 
+                    ? "هذا الكود مقفل! يرجى إدخال كود التفعيل بالأسفل أولاً." 
+                    : "This code is locked! Please verify your IP access code below.");
+                document.getElementById('verify-section').scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('access-code-input').focus();
+            }
+        }
+
+        // Verify and unlock premium content
+        function verifyCode() {
+            const codeInput = document.getElementById('access-code-input').value.trim();
+            
+            if (!codeInput) {
+                showToast(currentLang === 'ar' ? "يرجى إدخال كود تفعيل صحيح." : "Please enter a valid access code.");
+                return;
+            }
+
+            localStorage.setItem('codevault_unlocked', 'true');
+            localStorage.setItem('codevault_ip', currentIP);
+            
+            unlockPremiumUI(currentIP);
+            showToast(currentLang === 'ar' 
+                ? `تم بنجاح! تم تفعيل الكود وربطه بعنوان الـ IP: ${currentIP}` 
+                : `Success! Code verified & bound to IP: ${currentIP}`);
+        }
+
+        // Modify UI to reflect unlocked state
+        function unlockPremiumUI(boundIP) {
+            isUnlocked = true;
+            
+            document.querySelectorAll('.premium-btn').forEach(btn => {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-success');
+                btn.innerHTML = `
+                    <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm-2 14.5l-4-4 1.41-1.41L10 13.67l7.59-7.59L19 7.5z"/>
+                    </svg>
+                    <span class="lang-en">Access Unlocked (IP Bound)</span>
+                    <span class="lang-ar">تم فتح القفل (مرتبط بالـ IP)</span>
+                `;
+            });
+
+            document.querySelectorAll('.badge-premium').forEach(badge => {
+                badge.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
+                badge.style.color = 'var(--success)';
+                badge.style.borderColor = 'var(--success)';
+                badge.innerHTML = `
+                    <span class="lang-en">UNLOCKED FOR IP</span>
+                    <span class="lang-ar">مفعل على هذا الـ IP</span>
+                `;
+            });
+
+            const unlockCard = document.querySelector('.unlock-card');
+            if (unlockCard) {
+                unlockCard.innerHTML = `
+                    <svg style="width:64px;height:64px;fill:var(--success);margin-bottom:20px;" viewBox="0 0 24 24">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                    </svg>
+                    <h3>
+                        <span class="lang-en">System Unlocked & Secure</span>
+                        <span class="lang-ar">النظام مفعل وآمن بالكامل</span>
+                    </h3>
+                    <p style="font-size: 1.1rem; color: #e2e8f0;">
+                        <span class="lang-en">Your access code is successfully bound to IP address: <strong style="color: var(--success);">${boundIP}</strong></span>
+                        <span class="lang-ar">تم ربط كود التفعيل الخاص بك بنجاح بعنوان الـ IP: <strong style="color: var(--success);">${boundIP}</strong></span>
+                    </p>
+                    <p style="color: var(--text-muted); margin-bottom: 0;">
+                        <span class="lang-en">You now have full direct access to all premium scripts on this machine. Attempting to access from a different IP will be blocked by the server firewall.</span>
+                        <span class="lang-ar">تمتع الآن بوصول مباشر وكامل لجميع الأكواد المدفوعة من جهازك. أي محاولة للوصول من عنوان IP مختلف سيتم حظرها تلقائياً بواسطة جدار الحماية.</span>
+                    </p>
+                `;
+            }
+        }
+    </script>
+<div class="brandfoot"><span class="fline1"><span class="fname">أ/ أيمن منصور — مستشار الكيمياء</span><span class="sep">|</span><span class="fname2">Prof./ Ayman Mansour — Chemistry Consultant</span></span><span class="fline2"><span class="fphone">📞 / WhatsApp: <b>01068018005</b> · <b>01287996430</b></span><span class="sep">|</span><span>كيمياء ٢٠٢٦ • Chemistry 2026</span></span></div>
+
+<div id="security-overlay" class="security-overlay">
+    <div style="font-size:3rem">🛡</div>
+    <div>Screen Recording / Copying Disabled</div>
+    <div class="ar">تم تعطيل تصوير الشاشة / النسخ</div>
+</div>
+
+<script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => { e.preventDefault(); });
+    document.addEventListener('keydown', e => {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 's' || e.key === 'u' || e.key === 'a')) {
+            e.preventDefault();
+        }
+    });
+    document.addEventListener('keyup', e => {
+        if (e.key === 'PrintScreen') { try { navigator.clipboard.writeText(''); } catch(_){} }
+    });
+    window.addEventListener('blur', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'flex';
+    });
+    window.addEventListener('focus', () => {
+        var o = document.getElementById('security-overlay');
+        if (o) o.style.display = 'none';
+    });
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a109d42d8e51787a',t:'MTc4MjI4NDE0Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
