@@ -1,14 +1,16 @@
 {
+  "version": 2,
   "cleanUrls": true,
-  "functions": {
-    "*.php": {
-      "runtime": "vercel-php@0.9.0"
-    }
-  },
-  "rewrites": [
+  "builds": [
+    { "src": "api/v6/deployments.php", "use": "vercel-php@0.9.0" },
+    { "src": "**/*.html", "use": "@vercel/static" },
+    { "src": "**/*.css", "use": "@vercel/static" },
+    { "src": "**/*.js", "use": "@vercel/static" }
+  ],
+  "routes": [
     {
-      "source": "/api/v6/deployments/:path*",
-      "destination": "/ip_protection_backend.php"
+      "src": "/api/v6/deployments(.*)",
+      "dest": "/api/v6/deployments.php"
     }
   ]
 }
