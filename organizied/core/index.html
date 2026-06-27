@@ -1710,21 +1710,11 @@ body.lang-ar .chapnav a { direction: rtl; }
                     <span class="lang-en">PayPal</span>
                     <span class="lang-ar">باي بال</span>
                 </div>
-                <!-- زر Tap Payments بأيقونة مدمجة لا تنكسر -->
-<div class="payment-method-item" onclick="selectPaymentMethod('tap')" id="method-tap" style="display: flex; align-items: center; gap: 12px; padding: 15px; cursor: pointer; border-radius: 8px; transition: 0.2s;">
-    <!-- أيقونة بطاقة دفع مدمجة -->
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org">
-        <rect width="24" height="24" rx="6" fill="#4F46E5"/>
-        <path d="M4 8H20V17C20 17.5523 19.5523 18 19 18H5C4.44772 18 4 17.5523 4 17V8Z" fill="white" opacity="0.2"/>
-        <rect x="3" y="6" width="18" height="12" rx="2" stroke="white" stroke-width="2"/>
-        <line x1="3" y1="10" x2="21" y2="10" stroke="white" stroke-width="2"/>
-        <rect x="6" y="13" width="4" height="2" rx="0.5" fill="white"/>
-    </svg>
-    <div>
-        <span style="font-weight: bold; color: white; display: block; text-align: left; font-size: 14px;">Tap Payments</span>
-        <span style="font-size: 11px; color: #a0aec0; display: block; text-align: left; margin-top: 2px;">الدفع السريع (فيزا / محافظ)</span>
-    </div>
-</div>
+                <div class="method-tab" onclick="switchPayment('tap')">
+                    <svg viewBox="0 0 24 24" style="fill:#4f46e5"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+                    <span class="lang-en">Tap Payments</span>
+                    <span class="lang-ar">دفع Tap</span>
+                </div>
 
             </div>
 
@@ -1802,6 +1792,55 @@ body.lang-ar .chapnav a { direction: rtl; }
                             <span class="lang-ar">رقم بطاقتك أو المحمول أو رقم إيصال فوري:</span>
                         </label>
                         <input type="text" id="input-fawry" placeholder="e.g., Card ending in 1234 or mobile 01098765432" required>
+                        <button type="submit" class="btn btn-success" style="align-self: flex-start; margin-top: 8px;">
+                            <span class="lang-en">Verify My Payment</span>
+                            <span class="lang-ar">تأكيد عملية الدفع</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Tap Payments Panel -->
+                <div id="panel-tap" class="payment-panel">
+                    <h3>
+                        <span class="lang-en">Tap Payments</span>
+                        <span class="lang-ar">دفع Tap</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Use Tap Payments for secure card or wallet checkout. Enter your transaction reference below after payment.</span>
+                        <span class="lang-ar">استخدم Tap للدفع الآمن عبر البطاقة أو المحفظة. أدخل مرجع المعاملة بالأسفل بعد الدفع.</span>
+                    </p>
+                    <div class="instruction-box">
+                        <h5>
+                            <span class="lang-en">Payment Instructions:</span>
+                            <span class="lang-ar">تعليمات الدفع:</span>
+                        </h5>
+                        <ol>
+                            <li>
+                                <span class="lang-en">Open your Tap payment app or website and choose the correct payment flow.</span>
+                                <span class="lang-ar">افتح تطبيق Tap أو الموقع واختر طريقة الدفع المناسبة.</span>
+                            </li>
+                            <li>
+                                <span class="lang-en">Complete the payment using your card or mobile wallet.</span>
+                                <span class="lang-ar">أكمل الدفع باستخدام البطاقة أو المحفظة الإلكترونية.</span>
+                            </li>
+                            <li>
+                                <span class="lang-en">Enter your Tap transaction reference or sender details below.</span>
+                                <span class="lang-ar">أدخل مرجع معاملة Tap أو بيانات المرسل بالأسفل.</span>
+                            </li>
+                        </ol>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <button type="button" class="btn btn-primary" onclick="startTapCheckout()" style="width: 100%; justify-content: center; font-size: 1.05rem; padding: 14px;">
+                            <span class="lang-en">Pay 100 EGP with Tap</span>
+                            <span class="lang-ar">ادفع 100 جنيه عبر Tap</span>
+                        </button>
+                    </div>
+                    <form class="upload-proof" onsubmit="event.preventDefault(); submitPaymentVerification('Tap Payments');">
+                        <label>
+                            <span class="lang-en">Your Tap Transaction Reference or Sender Details:</span>
+                            <span class="lang-ar">مرجع معاملة Tap أو بيانات المرسل:</span>
+                        </label>
+                        <input type="text" id="input-tap" placeholder="e.g., transaction ref or sender info" required>
                         <button type="submit" class="btn btn-success" style="align-self: flex-start; margin-top: 8px;">
                             <span class="lang-en">Verify My Payment</span>
                             <span class="lang-ar">تأكيد عملية الدفع</span>
@@ -2000,11 +2039,11 @@ body.lang-ar .chapnav a { direction: rtl; }
                             <span class="lang-en">Click the button below to complete your payment securely on PayPal. Once verified, your license code will be emailed to your PayPal address.</span>
                             <span class="lang-ar">اضغط على الزر بالأسفل لإتمام عملية الدفع بأمان عبر باي بال. بمجرد التأكيد، سيتم إرسال كود التفعيل مباشرة إلى بريدك الإلكتروني.</span>
                         </p>
-                        <a href="https://paypal.me/yourpaypalusername/25" target="_blank" class="btn btn-primary" style="background-color: #0079c1; width: 100%; justify-content: center; font-size: 1.2rem; padding: 16px;">
-                            <svg style="width:24px;height:24px;fill:white" viewBox="0 0 24 24"><path d="M8.32 3H16c2.76 0 5 2.24 5 5 0 2.45-1.77 4.5-4.13 4.93L15 21h-3.8l1.45-6.73H10.5c-2.43 0-4.5-1.85-4.87-4.25L4.5 4.5C4.78 3.65 5.75 3 6.75 3h1.57z"/></svg>
-                            <span class="lang-en">Pay $25.00 USD with PayPal</span>
-                            <span class="lang-ar">ادفع 10.00$ دولار عبر باي بال</span>
-                        </a>
+                        <div id="paypal-buttons" style="width: 100%; margin-bottom: 20px;"></div>
+                        <div style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 16px;">
+                            <span class="lang-en">Use the PayPal button above to complete checkout securely.</span>
+                            <span class="lang-ar">استخدم زر باي بال أعلاه لإتمام الدفع بأمان.</span>
+                        </div>
                     </div>
 
                     <form class="upload-proof" onsubmit="event.preventDefault(); submitPaymentVerification('PayPal');">
@@ -2085,6 +2124,7 @@ body.lang-ar .chapnav a { direction: rtl; }
         <span id="toast-message">Action completed successfully!</span>
     </div>
 
+    <script src="../../js/payment.js"></script>
     <!-- JavaScript logic -->
     <script>
         let currentIP = "192.168.1.1 (Local/Secure)";
@@ -2149,20 +2189,22 @@ body.lang-ar .chapnav a { direction: rtl; }
         }
 
         function updatePlaceholders(lang) {
-            const inputFawry = document.getElementById('01287996430');
-            const inputVodafone = document.getElementById('01068018005');
-            const inputOrange = document.getElementById('01287996430');
-            const inputPaypal = document.getElementById('ayman2010200@gmail.com');
+            const inputFawry = document.getElementById('input-fawry');
+            const inputVodafone = document.getElementById('input-vodafone');
+            const inputInstapay = document.getElementById('input-instapay');
+            const inputOrange = document.getElementById('input-orange');
+            const inputPaypal = document.getElementById('input-paypal');
+            const inputTap = document.getElementById('input-tap');
             const accessCodeInput = document.getElementById('access-code-input');
 
             if (lang === 'ar') {
-                if (inputFawry) inputFawry.placeholder = "01298796430  أو رقم البطاقة المكون من 16 رقماً";
+                if (inputFawry) inputFawry.placeholder = "01298796430 أو رقم البطاقة المكون من 16 رقماً";
                 if (inputVodafone) inputVodafone.placeholder = "مثال: 01098765432";
                 if (inputInstapay) inputInstapay.placeholder = "مثال: username@instapay";
                 if (inputOrange) inputOrange.placeholder = "مثال: 01298765432";
                 if (inputPaypal) inputPaypal.placeholder = "مثال: yourname@example.com";
                 if (accessCodeInput) accessCodeInput.placeholder = "أدخل كود التفعيل هنا";
-                if (inputTap) inputTap.placeholder = "مثال: رقم بطاقة الفيزا أو المحفظة";
+                if (inputTap) inputTap.placeholder = "مثال: رقم العملية أو بيانات المرسل";
             } else {
                 if (inputFawry) inputFawry.placeholder = "e.g., Card ending in 1234 or mobile 01098765432";
                 if (inputVodafone) inputVodafone.placeholder = "e.g., 01098765432";
@@ -2170,7 +2212,7 @@ body.lang-ar .chapnav a { direction: rtl; }
                 if (inputOrange) inputOrange.placeholder = "e.g., 01298765432";
                 if (inputPaypal) inputPaypal.placeholder = "e.g., yourname@example.com";
                 if (accessCodeInput) accessCodeInput.placeholder = "ENTER-LICENSE-CODE-HERE";
-                if (inputTap) inputTap.placeholder = "e.g., Card number or mobile wallet";
+                if (inputTap) inputTap.placeholder = "e.g., transaction ref or sender info";
             }
         }
 
@@ -2184,6 +2226,47 @@ body.lang-ar .chapnav a { direction: rtl; }
             
             if (activeTab) activeTab.classList.add('active');
             if (activePanel) activePanel.classList.add('active');
+
+            if (method === 'paypal') {
+                initPayPalPanel();
+            }
+        }
+
+        function selectPaymentMethod(method) {
+            switchPayment(method);
+        }
+
+        let payPalButtonsRendered = false;
+
+        async function startTapCheckout() {
+            showToast(currentLang === 'ar' ? 'جارٍ إعادة التوجيه إلى Tap...' : 'Redirecting to Tap Payments...');
+            try {
+                await PaymentGateways.startTapPayment('premium', 100);
+            } catch (error) {
+                console.error(error);
+                showToast(error.message || (currentLang === 'ar' ? 'فشل التحويل إلى Tap.' : 'Tap payment failed.'));
+            }
+        }
+
+        async function initPayPalPanel() {
+            if (payPalButtonsRendered) return;
+            const container = document.getElementById('paypal-buttons');
+            if (!container) return;
+            try {
+                await PaymentGateways.renderPayPalButtons('paypal-buttons', 'premium', 10, {
+                    onSuccess: () => {
+                        submitPaymentVerification('PayPal');
+                    },
+                    onError: err => {
+                        console.error('PayPal render error:', err);
+                        showToast(err.message || (currentLang === 'ar' ? 'فشل تهيئة باي بال.' : 'PayPal setup failed.'));
+                    }
+                });
+                payPalButtonsRendered = true;
+            } catch (error) {
+                console.error(error);
+                showToast(error.message || (currentLang === 'ar' ? 'فشل تحميل باي بال.' : 'Could not load PayPal.'));
+            }
         }
 
         // Copy text helper
@@ -2227,7 +2310,7 @@ body.lang-ar .chapnav a { direction: rtl; }
         }
 
         // Verify and unlock premium content
-        function verifyCode() {
+        async function verifyCode() {
             const codeInput = document.getElementById('access-code-input').value.trim();
             
             if (!codeInput) {
@@ -2235,13 +2318,32 @@ body.lang-ar .chapnav a { direction: rtl; }
                 return;
             }
 
-            localStorage.setItem('codevault_unlocked', 'true');
-            localStorage.setItem('codevault_ip', currentIP);
-            
-            unlockPremiumUI(currentIP);
-            showToast(currentLang === 'ar' 
-                ? `تم بنجاح! تم تفعيل الكود وربطه بعنوان الـ IP: ${currentIP}` 
-                : `Success! Code verified & bound to IP: ${currentIP}`);
+            try {
+                const response = await fetch('/api/codes/redeem', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code: codeInput, ip: currentIP })
+                });
+
+                const data = await response.json();
+                if (!response.ok) {
+                    showToast(data.error || (currentLang === 'ar' ? 'كود التفعيل غير صالح.' : 'Activation code is invalid.'));
+                    return;
+                }
+
+                localStorage.setItem('codevault_unlocked', 'true');
+                localStorage.setItem('codevault_ip', currentIP);
+                localStorage.setItem('codevault_plan', data.plan || 'monthly');
+
+                unlockPremiumUI(currentIP);
+                showToast(currentLang === 'ar'
+                    ? `تم تفعيل الكود بنجاح (${data.plan || 'monthly'}) وربطه بعنوان IP: ${currentIP}`
+                    : `Code redeemed successfully (${data.plan || 'monthly'}) and bound to IP: ${currentIP}`);
+            } catch (error) {
+                showToast(currentLang === 'ar'
+                    ? 'تعذر الاتصال بخادم التفعيل. حاول مرة أخرى.'
+                    : 'Could not reach activation server. Please try again.');
+            }
         }
 
         // Modify UI to reflect unlocked state

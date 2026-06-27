@@ -197,3 +197,39 @@ That will make:
 - activation codes
 
 fully synchronized across all devices and browsers.
+
+---
+
+# New: Payment Intake + Code Dashboard
+
+You now have a server-backed dashboard page:
+
+```txt
+/payment-dashboard.html
+```
+
+This dashboard can:
+
+- Receive payment information manually (provider, reference, payer, amount)
+- Generate activation codes in Supabase table `activation_codes`
+- Log payment/code generation actions in `payment_events`
+- Show recent payment events and recent codes
+
+Server endpoints used:
+
+```txt
+GET  /api/dashboard/payments
+GET  /api/dashboard/codes
+POST /api/dashboard/codes
+POST /api/codes/redeem
+```
+
+Security:
+
+- Dashboard endpoints require header: `x-admin-secret`
+- Value must match `ADMIN_API_SECRET` in Vercel env vars
+
+Site activation:
+
+- Main site code entry now calls `/api/codes/redeem`
+- Generated codes can be used directly in the site unlock field

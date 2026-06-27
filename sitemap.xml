@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://chemistry-code.com/</loc></url>
-  <url><loc>https://chemistry-code.com/index-ar.html</loc></url>
-  <url><loc>https://chemistry-code.com/lessons.html</loc></url>
-  <url><loc>https://chemistry-code.com/final-revision.html</loc></url>
-  <url><loc>https://chemistry-code.com/pricing.html</loc></url>
-  <url><loc>https://chemistry-code.com/contact.html</loc></url>
+  <url><loc>https://chemistry-code.com/index.html</loc></url>
+  <url><loc>https://chemistry-code.com/04_electrochemistry.html</loc></url>
+  <url><loc>https://chemistry-code.com/compounds%20-uses.html</loc></url>
+  <url><loc>https://chemistry-code.com/electro-chemistry-ar.html</loc></url>
+  <url><loc>https://chemistry-code.com/funtion%20group.ar.html</loc></url>
+  <url><loc>https://chemistry-code.com/funtion%20group.en.html</loc></url>
+  <url><loc>https://chemistry-code.com/refund-policy.html</loc></url>
+  <url><loc>https://chemistry-code.com/transition_elements_uses.html</loc></url>
+  <url><loc>https://chemistry-code.com/payment-dashboard.html</loc></url>
+  <url><loc>https://chemistry-code.com/admin-dashboard.html</loc></url>
+  <url><loc>https://chemistry-code.com/admindashboard.html</loc></url>
+  <url><loc>https://chemistry-code.com/dashboard-control.html</loc></url>
 </urlset>

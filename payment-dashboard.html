@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payment & Code Dashboard</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #141b34;
+      --line: rgba(148, 163, 184, 0.35);
+      --text: #e2e8f0;
+      --muted: #93a4c2;
+      --brand: #38bdf8;
+      --ok: #22c55e;
+      --warn: #f59e0b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1000px 500px at 0% 0%, rgba(56, 189, 248, 0.15), transparent 55%),
+                  radial-gradient(700px 420px at 100% 0%, rgba(245, 158, 11, 0.12), transparent 60%),
+                  var(--bg);
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.1rem; color: var(--brand); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #0e1530;
+      color: var(--text);
+      padding: 10px 12px;
+      font: inherit;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    button {
+      background: linear-gradient(135deg, #0ea5e9, #0369a1);
+      border: 0;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button.secondary {
+      background: linear-gradient(135deg, #3f4a68, #1f2945);
+    }
+    button.ghost {
+      background: linear-gradient(135deg, #374151, #1f2937);
+    }
+    button.danger {
+      background: linear-gradient(135deg, #ef4444, #991b1b);
+    }
+    .mini-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .mini-actions button {
+      width: auto;
+      padding: 6px 8px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+    }
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .status {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      min-height: 1.1rem;
+    }
+    .status.ok { color: var(--ok); }
+    .status.warn { color: var(--warn); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      padding: 8px 6px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--muted); }
+    .hint {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .codes-box {
+      font-family: Consolas, 'Courier New', monospace;
+      white-space: pre-wrap;
+      background: #0b1229;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      min-height: 80px;
+    }
+    .full-span { grid-column: 1 / -1; }
+    .mt-12 { margin-top: 12px; }
+    .table-wrap { overflow: auto; }
+    .section-label {
+      display: block;
+      margin-bottom: 6px;
+      color: #93a4c2;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .toolbar-spaced { margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="panel">
+      <h1>Payment Intake + Activation Codes</h1>
+      <p class="hint">Enter payment info, generate direct-use codes, and monitor recent payment events/codes from server data.</p>
+      <div class="grid">
+        <div class="field">
+          <label>Admin API Secret</label>
+          <input id="adminSecret" type="password" placeholder="ADMIN_API_SECRET" />
+        </div>
+      </div>
+      <div id="status" class="status"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Generate Codes From Payment</h2>
+      <div class="grid">
+        <div class="field">
+          <label for="provider">Provider</label>
+          <select id="provider" title="Provider">
+            <option value="manual">manual</option>
+            <option value="tap">tap</option>
+            <option value="paypal">paypal</option>
+            <option value="fawry">fawry</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="reference">Reference</label>
+          <input id="reference" placeholder="TXN-12345" />
+        </div>
+        <div class="field">
+          <label for="email">Payer Email</label>
+          <input id="email" type="email" placeholder="student@example.com" />
+        </div>
+        <div class="field">
+          <label for="payerName">Payer Name</label>
+          <input id="payerName" placeholder="Student Name" />
+        </div>
+        <div class="field">
+          <label for="amount">Amount</label>
+          <input id="amount" type="number" value="100" placeholder="100" title="Amount" />
+        </div>
+        <div class="field">
+          <label for="currency">Currency</label>
+          <input id="currency" value="EGP" placeholder="EGP" title="Currency" />
+        </div>
+        <div class="field">
+          <label for="plan">Plan</label>
+          <select id="plan" title="Plan">
+            <option value="monthly">monthly</option>
+            <option value="vip">vip</option>
+            <option value="free">free</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="count">Codes Count</label>
+          <input id="count" type="number" value="1" min="1" max="200" placeholder="1" title="Codes count" />
+        </div>
+        <div class="field">
+          <label for="prefix">Code Prefix</label>
+          <input id="prefix" value="CHEM" placeholder="CHEM" title="Code prefix" />
+        </div>
+        <div class="field full-span">
+          <label for="notes">Notes</label>
+          <textarea id="notes" placeholder="Optional notes for this payment"></textarea>
+        </div>
+      </div>
+      <div class="toolbar">
+        <button id="generateBtn">Generate Codes</button>
+        <button id="refreshBtn" class="secondary">Refresh Lists</button>
+      </div>
+      <div class="mt-12">
+        <label class="section-label">Generated Codes</label>
+        <div id="generatedCodes" class="codes-box"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Recent Payment Events</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Provider</th>
+              <th>Reference</th>
+              <th>Email</th>
+              <th>Plan</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="paymentsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Recent Activation Codes</h2>
+      <div class="toolbar toolbar-spaced">
+        <button id="copyCsvBtn" class="ghost">Copy CSV</button>
+        <button id="downloadCsvBtn" class="secondary">Download CSV</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Code</th>
+              <th>Plan</th>
+              <th>Used</th>
+              <th>Used At</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="codesBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/payment-dashboard.js"></script>
+</body>
+</html>
