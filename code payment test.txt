@@ -1,0 +1,44 @@
+
+https://chemistry-code.com/payment-dashboard.html
+https://chemistry-code.com/admin-dashboard.html
+https://chemistry-code.com/admindashboard.html
+https://chemistry-code.com/dashboard-control.html
+Ignored files in .gitignore if not committed.
+Secrets in .env files from your machine (you must set these in Vercel Environment Variables).
+2. Deploy steps (safe and complete)
+Push latest code to GitHub main (already done in your case).
+Open Vercel project linked to this repo.
+Confirm Project Settings → Git:
+Production Branch = main.
+Go to Deployments:
+Find latest commit (f19c8fb).
+Click Redeploy.
+Go to Settings → Environment Variables and set for Production:
+PAYPAL_CLIENT_ID
+PAYPAL_CLIENT_SECRET
+TAP_SECRET_KEY
+SUPABASE_URL
+SUPABASE_SERVICE_ROLE_KEY
+ADMIN_API_SECRET
+After saving env vars, Redeploy again (important, env changes need new deployment).
+
+
+
+PAYPAL_CLIENT_ID
+PAYPAL_CLIENT_SECRET
+Optional: PAYPAL_MODE (sandbox or live)
+Optional: PAYPAL_CURRENCY (for example USD)
+Also for your new dashboard/subscription APIs, these names must be exact:
+
+SUPABASE_URL
+SUPABASE_SERVICE_ROLE_KEY (not SUPABASE_KEY)
+ADMIN_API_SECRET
+
+
+
+
+SUPABASE_URL
+SUPABASE_SERVICE_ROLE_KEY
+ADMIN_API_SECRET
+Notes
+

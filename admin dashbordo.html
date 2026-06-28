@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chemistry Code - Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cairo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #020617; color: #e2e8f0; min-height: 100vh; }
+    body.rtl { font-family: 'Cairo', sans-serif; direction: rtl; }
+    .gradient-text { background: linear-gradient(135deg, #10b981, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(16, 185, 129, 0.15); }
+    .glow-green { box-shadow: 0 0 30px rgba(16, 185, 129, 0.3), 0 0 60px rgba(16, 185, 129, 0.1); }
+    .code-font { font-family: 'JetBrains Mono', monospace; }
+    .tab-btn { transition: all 0.2s; }
+    .tab-btn.active { background: linear-gradient(135deg, #10b981, #06b6d4); color: white; }
+    .tab-btn:not(.active) { color: #94a3b8; }
+    .tab-btn:not(.active):hover { background: #1e293b; color: white; }
+    .fade-in { animation: fadeIn 0.3s ease-in; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .status-used { background: rgba(239,68,68,0.1); color: #f87171; }
+    .status-unused { background: rgba(16,185,129,0.1); color: #34d399; }
+    .status-pending { background: rgba(245,158,11,0.1); color: #fbbf24; }
+    .status-approved { background: rgba(16,185,129,0.1); color: #34d399; }
+    .status-rejected { background: rgba(239,68,68,0.1); color: #f87171; }
+    .btn-primary { background: linear-gradient(135deg, #10b981, #06b6d4); color: white; }
+    .btn-primary:hover { transform: scale(1.02); }
+    .btn-danger { background: rgba(239,68,68,0.1); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+    .btn-danger:hover { background: rgba(239,68,68,0.2); }
+    .input-field { background: #0f172a; border: 2px solid #334155; border-radius: 12px; padding: 10px 16px; color: white; width: 100%; outline: none; transition: border-color 0.2s; }
+    .input-field:focus { border-color: #10b981; }
+    .input-field::placeholder { color: #475569; }
+    .table-row:hover { background: rgba(30,41,59,0.5); }
+    .copy-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #10b981; color: white; padding: 12px 24px; border-radius: 12px; font-weight: 600; z-index: 9999; animation: toastIn 0.3s ease; }
+    @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; display: flex; align-items: center; justify-content: center; }
+    .modal-content { background: #1e293b; border: 1px solid rgba(16,185,129,0.2); border-radius: 20px; padding: 32px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" class="min-h-screen flex items-center justify-center p-4">
+  <div class="glass-card rounded-3xl p-8 md:p-12 max-w-md w-full glow-green">
+    <div class="text-center mb-8">
+      <div class="text-6xl mb-4">🔐</div>
+      <h1 class="text-2xl md:text-3xl font-bold text-white mb-2" id="loginTitle">Admin Dashboard</h1>
+      <p class="text-slate-400 text-sm" id="loginSubtitle">Login to manage Chemistry Code</p>
+    </div>
+    <div class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-slate-300 mb-2" id="usernameLabel">Username</label>
+        <input type="text" id="loginUsername" class="input-field" placeholder="admin" value="admin">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-slate-300 mb-2" id="passwordLabel">Password</label>
+        <input type="password" id="loginPassword" class="input-field" placeholder="••••••••" value="chemistry2024">
+      </div>
+      <div id="loginError" class="hidden p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm text-center"></div>
+      <button onclick="handleLogin()" class="w-full py-3 btn-primary font-semibold rounded-xl text-lg transition-transform" id="loginBtn">Login</button>
+      <button onclick="toggleLang()" class="w-full py-2 bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition-colors text-sm" id="langBtn">العربية</button>
+    </div>
+    <div class="mt-6 p-4 bg-amber-500/5 border border-amber-500/20 rounded-lg">
+      <p class="text-amber-400 text-xs text-center">Demo: admin / chemistry2024</p>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboardScreen" class="hidden min-h-screen">
+  <!-- Header -->
+  <div class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center text-white font-bold text-lg">⚛</div>
+        <div>
+          <h1 class="text-lg font-bold text-white" id="dashTitle">Chemistry Code Admin</h1>
+          <p class="text-xs text-slate-400" id="dashWelcome">Welcome, admin</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="toggleLang()" class="px-3 py-1.5 text-sm bg-slate-800 text-slate-300 rounded-lg hover:bg-slate-700 transition-colors border border-slate-700" id="dashLangBtn">العربية</button>
+        <button onclick="handleLogout()" class="px-4 py-2 btn-danger rounded-lg text-sm font-medium" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="bg-slate-900/50 border-b border-slate-800 sticky top-[60px] z-40">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex gap-2 overflow-x-auto py-2" id="tabsContainer">
+        <button class="tab-btn active px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap" onclick="switchTab('overview')" data-tab="overview">📊 <span class="tab-label">Overview</span></button>
+        <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap" onclick="switchTab('codes')" data-tab="codes">🔑 <span class="tab-label">Codes</span></button>
+        <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap" onclick="switchTab('payments')" data-tab="payments">💳 <span class="tab-label">Payments</span></button>
+        <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap" onclick="switchTab('users')" data-tab="users">👥 <span class="tab-label">Users</span></button>
+        <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap" onclick="switchTab('chapters')" data-tab="chapters">📚 <span class="tab-label">Chapters</span></button>
+        <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap" onclick="switchTab('settings')" data-tab="settings">⚙️ <span class="tab-label">Settings</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="max-w-7xl mx-auto px-4 py-8" id="tabContent"></div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="copy-toast hidden"></div>
+
+<!-- Modal -->
+<div id="modal" class="modal-overlay hidden">
+  <div class="modal-content" id="modalContent"></div>
+</div>
+
+<script>
+// ===== STATE =====
+let currentLang = 'en';
+let currentTab = 'overview';
+
+const ADMIN_CREDS = { username: 'admin', password: 'chemistry2024' };
+
+// ===== TRANSLATIONS =====
+const i18n = {
+  en: {
+    dashTitle: 'Chemistry Code Admin',
+    dashWelcome: 'Welcome, admin',
+    logoutBtn: 'Logout',
+    loginTitle: 'Admin Dashboard',
+    loginSubtitle: 'Login to manage Chemistry Code',
+    usernameLabel: 'Username',
+    passwordLabel: 'Password',
+    loginBtn: 'Login',
+    langBtn: 'العربية',
+    dashLangBtn: 'العربية',
+    tabs: { overview: 'Overview', codes: 'Codes', payments: 'Payments', users: 'Users', chapters: 'Chapters', settings: 'Settings' },
+    overview: {
+      title: 'System Overview',
+      totalCodes: 'Total Codes', used: 'used', unused: 'unused',
+      payments: 'Payments', pending: 'pending', approved: 'approved',
+      users: 'Users', premium: 'premium', free: 'free',
+      quickActions: 'Quick Actions',
+      generateCodes: 'Generate Codes', reviewPayments: 'Review Payments',
+      exportCodes: 'Export Codes', manageUsers: 'Manage Users',
+      revenue: 'Revenue', totalRevenue: 'Total Revenue (Approved)',
+    },
+    codes: {
+      title: 'Code Management',
+      generateTitle: 'Generate New Codes',
+      count: 'Count', prefix: 'Prefix', notes: 'Notes', notesPlaceholder: 'Optional notes',
+      generateBtn: 'Generate Codes',
+      newCodes: 'Newly Generated Codes', copy: 'Copy', copyAll: 'Copy All', dismiss: 'Dismiss',
+      allCodes: 'All Codes', exportCSV: 'Export CSV',
+      code: 'Code', status: 'Status', created: 'Created', actions: 'Actions',
+      used: 'Used', unused: 'Unused', delete: 'Delete',
+      showAll: 'Show All', showing: 'Showing',
+      assignTitle: 'Assign Code', assignTo: 'Assign to (name)', assignEmail: 'Assign email',
+      assignBtn: 'Assign', cancel: 'Cancel',
+      confirmDelete: 'Are you sure you want to delete this code?',
+    },
+    payments: {
+      title: 'Payment Management',
+      name: 'Name', email: 'Email', method: 'Method', amount: 'Amount',
+      reference: 'Reference', status: 'Status', date: 'Date', actions: 'Actions',
+      approve: 'Approve', reject: 'Reject', viewCode: 'View Code',
+      noPayments: 'No payments yet',
+      confirmApprove: 'Approve this payment and generate activation code?',
+      confirmReject: 'Reject this payment?',
+      approvedCode: 'Generated Code',
+      filterAll: 'All', filterPending: 'Pending', filterApproved: 'Approved', filterRejected: 'Rejected',
+    },
+    users: {
+      title: 'User Management',
+      name: 'Name', email: 'Email', status: 'Status', registered: 'Registered', code: 'Code',
+      premium: 'Premium', free: 'Free', noUsers: 'No users yet',
+      totalUsers: 'Total Users', premiumUsers: 'Premium Users', freeUsers: 'Free Users',
+    },
+    chapters: {
+      title: 'Chapter Management',
+      lessons: 'Lessons', quizzes: 'Quizzes', status: 'Status', active: 'Active',
+      free: 'FREE', premium: 'PREMIUM', viewDetails: 'View Details',
+      ch1: 'Organic Chemistry', ch2: 'Electrochemistry', ch3: 'Chemical Equilibrium',
+      ch4: 'Thermochemistry', ch5: 'Transition Elements',
+    },
+    settings: {
+      title: 'Settings',
+      systemSettings: 'System Settings',
+      version: 'Platform Version', freeChapter: 'Free Chapter',
+      price: 'Subscription Price', paymentMethods: 'Payment Methods',
+      phoneNumber: 'Phone Number',
+      advancedActions: 'Advanced Actions',
+      clearAll: 'Clear All Data', clearConfirm: 'Are you sure? This will delete ALL data permanently!',
+      exportAll: 'Export All Data (JSON)', importData: 'Import Data',
+      paymentConfig: 'Payment Configuration',
+      vodafoneNumber: 'Vodafone Cash Number', instapayId: 'InstaPay ID', orangeNumber: 'Orange Cash Number',
+      saveSettings: 'Save Settings',
+    },
+  },
+  ar: {
+    dashTitle: 'لوحة تحكم كيمستري كود',
+    dashWelcome: 'مرحباً، المدير',
+    logoutBtn: 'تسجيل خروج',
+    loginTitle: 'لوحة تحكم المدير',
+    loginSubtitle: 'سجل الدخول لإدارة كيمستري كود',
+    usernameLabel: 'اسم المستخدم',
+    passwordLabel: 'كلمة المرور',
+    loginBtn: 'تسجيل الدخول',
+    langBtn: 'English',
+    dashLangBtn: 'English',
+    tabs: { overview: 'نظرة عامة', codes: 'الأكواد', payments: 'المدفوعات', users: 'المستخدمون', chapters: 'الفصول', settings: 'الإعدادات' },
+    overview: {
+      title: 'نظرة عامة على النظام',
+      totalCodes: 'إجمالي الأكواد', used: 'مستخدم', unused: 'غير مستخدم',
+      payments: 'المدفوعات', pending: 'معلق', approved: 'موافق',
+      users: 'المستخدمون', premium: 'مميز', free: 'مجاني',
+      quickActions: 'إجراءات سريعة',
+      generateCodes: 'إنشاء أكواد', reviewPayments: 'مراجعة المدفوعات',
+      exportCodes: 'تصدير الأكواد', manageUsers: 'إدارة المستخدمين',
+      revenue: 'الإيرادات', totalRevenue: 'إجمالي الإيرادات (الموافق عليها)',
+    },
+    codes: {
+      title: 'إدارة الأكواد',
+      generateTitle: 'إنشاء أكواد جديدة',
+      count: 'العدد', prefix: 'البادئة', notes: 'ملاحظات', notesPlaceholder: 'ملاحظات اختيارية',
+      generateBtn: 'إنشاء الأكواد',
+      newCodes: 'الأكواد المُنشأة حديثاً', copy: 'نسخ', copyAll: 'نسخ الكل', dismiss: 'إخفاء',
+      allCodes: 'جميع الأكواد', exportCSV: 'تصدير CSV',
+      code: 'الكود', status: 'الحالة', created: 'تاريخ الإنشاء', actions: 'إجراءات',
+      used: 'مستخدم', unused: 'غير مستخدم', delete: 'حذف',
+      showAll: 'عرض الكل', showing: 'عرض',
+      assignTitle: 'تعيين الكود', assignTo: 'تعيين إلى (الاسم)', assignEmail: 'البريد الإلكتروني',
+      assignBtn: 'تعيين', cancel: 'إلغاء',
+      confirmDelete: 'هل أنت متأكد من حذف هذا الكود؟',
+    },
+    payments: {
+      title: 'إدارة المدفوعات',
+      name: 'الاسم', email: 'البريد', method: 'الطريقة', amount: 'المبلغ',
+      reference: 'المرجع', status: 'الحالة', date: 'التاريخ', actions: 'إجراءات',
+      approve: 'موافقة', reject: 'رفض', viewCode: 'عرض الكود',
+      noPayments: 'لا توجد مدفوعات',
+      confirmApprove: 'الموافقة على هذه الدفعة وإنشاء كود التفعيل؟',
+      confirmReject: 'رفض هذه الدفعة؟',
+      approvedCode: 'الكود المُنشأ',
+      filterAll: 'الكل', filterPending: 'معلق', filterApproved: 'موافق', filterRejected: 'مرفوض',
+    },
+    users: {
+      title: 'إدارة المستخدمين',
+      name: 'الاسم', email: 'البريد', status: 'الحالة', registered: 'التسجيل', code: 'الكود',
+      premium: 'مميز', free: 'مجاني', noUsers: 'لا يوجد مستخدمون',
+      totalUsers: 'إجمالي المستخدمين', premiumUsers: 'المستخدمون المميزون', freeUsers: 'المستخدمون المجانيون',
+    },
+    chapters: {
+      title: 'إدارة الفصول',
+      lessons: 'الدروس', quizzes: 'الاختبارات', status: 'الحالة', active: 'نشط',
+      free: 'مجاني', premium: 'مميز', viewDetails: 'عرض التفاصيل',
+      ch1: 'الكيمياء العضوية', ch2: 'الكيمياء الكهربية', ch3: 'الاتزان الكيميائي',
+      ch4: 'الكيمياء الحرارية', ch5: 'عناصر الانتقال',
+    },
+    settings: {
+      title: 'الإعدادات',
+      systemSettings: 'إعدادات النظام',
+      version: 'إصدار المنصة', freeChapter: 'الفصل المجاني',
+      price: 'سعر الاشتراك', paymentMethods: 'طرق الدفع',
+      phoneNumber: 'رقم الهاتف',
+      advancedActions: 'إجراءات متقدمة',
+      clearAll: 'حذف جميع البيانات', clearConfirm: 'هل أنت متأكد؟ سيتم حذف جميع البيانات نهائياً!',
+      exportAll: 'تصدير جميع البيانات (JSON)', importData: 'استيراد البيانات',
+      paymentConfig: 'إعدادات الدفع',
+      vodafoneNumber: 'رقم فودافون كاش', instapayId: 'معرف إنستا باي', orangeNumber: 'رقم أورانج كاش',
+      saveSettings: 'حفظ الإعدادات',
+    },
+  }
+};
+
+function t(section, key) {
+  return i18n[currentLang][section]?.[key] || key;
+}
+
+// ===== STORAGE =====
+function getCodes() { try { return JSON.parse(localStorage.getItem('cc_codes') || '[]'); } catch { return []; } }
+function saveCodes(codes) { localStorage.setItem('cc_codes', JSON.stringify(codes)); }
+function getPayments() { try { return JSON.parse(localStorage.getItem('cc_payments') || '[]'); } catch { return []; } }
+function savePayments(payments) { localStorage.setItem('cc_payments', JSON.stringify(payments)); }
+function getUsers() { try { return JSON.parse(localStorage.getItem('cc_users') || '[]'); } catch { return []; } }
+function saveUsers(users) { localStorage.setItem('cc_users', JSON.stringify(users)); }
+function getSettings() {
+  try {
+    const s = JSON.parse(localStorage.getItem('cc_settings') || '{}');
+    return { vodafone: '01068018005', instapay: 'chemistrycode@instapay', orange: '01068018005', price: '150', ...s };
+  } catch { return { vodafone: '01068018005', instapay: 'chemistrycode@instapay', orange: '01068018005', price: '150' }; }
+}
+function saveSettings(s) { localStorage.setItem('cc_settings', JSON.stringify(s)); }
+
+// ===== AUTH =====
+function handleLogin() {
+  const u = document.getElementById('loginUsername').value.trim();
+  const p = document.getElementById('loginPassword').value.trim();
+  if (u === ADMIN_CREDS.username && p === ADMIN_CREDS.password) {
+    localStorage.setItem('cc_admin_auth', 'true');
+    showDashboard();
+  } else {
+    const err = document.getElementById('loginError');
+    err.textContent = currentLang === 'ar' ? 'اسم المستخدم أو كلمة المرور غير صحيحة' : 'Invalid username or password';
+    err.classList.remove('hidden');
+    setTimeout(() => err.classList.add('hidden'), 3000);
+  }
+}
+
+function handleLogout() {
+  localStorage.removeItem('cc_admin_auth');
+  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById('dashboardScreen').classList.add('hidden');
+}
+
+function showDashboard() {
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('dashboardScreen').classList.remove('hidden');
+  updateUIText();
+  switchTab('overview');
+}
+
+// ===== LANGUAGE =====
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'ar' : 'en';
+  document.body.classList.toggle('rtl', currentLang === 'ar');
+  document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.lang = currentLang;
+  updateUIText();
+  switchTab(currentTab);
+}
+
+function updateUIText() {
+  const L = i18n[currentLang];
+  document.getElementById('loginTitle').textContent = L.loginTitle;
+  document.getElementById('loginSubtitle').textContent = L.loginSubtitle;
+  document.getElementById('usernameLabel').textContent = L.usernameLabel;
+  document.getElementById('passwordLabel').textContent = L.passwordLabel;
+  document.getElementById('loginBtn').textContent = L.loginBtn;
+  document.getElementById('langBtn').textContent = L.langBtn;
+  document.getElementById('dashLangBtn').textContent = L.dashLangBtn;
+  document.getElementById('dashTitle').textContent = L.dashTitle;
+  document.getElementById('dashWelcome').textContent = L.dashWelcome;
+  document.getElementById('logoutBtn').textContent = L.logoutBtn;
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    const tab = btn.dataset.tab;
+    if (tab && L.tabs[tab]) {
+      btn.querySelector('.tab-label').textContent = L.tabs[tab];
+    }
+  });
+}
+
+// ===== TABS =====
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tab);
+  });
+  const content = document.getElementById('tabContent');
+  switch(tab) {
+    case 'overview': content.innerHTML = renderOverview(); break;
+    case 'codes': content.innerHTML = renderCodes(); break;
+    case 'payments': content.innerHTML = renderPayments(); break;
+    case 'users': content.innerHTML = renderUsers(); break;
+    case 'chapters': content.innerHTML = renderChapters(); break;
+    case 'settings': content.innerHTML = renderSettings(); break;
+  }
+  content.classList.add('fade-in');
+  setTimeout(() => content.classList.remove('fade-in'), 300);
+}
+
+// ===== GENERATE CODE =====
+function generateCode(prefix = 'CC') {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const p = (n) => Array.from({length:n}, () => chars[Math.floor(Math.random()*chars.length)]).join('');
+  return `${prefix}-${p(4)}-${p(4)}-${p(4)}`;
+}
+
+// ===== OVERVIEW TAB =====
+function renderOverview() {
+  const codes = getCodes();
+  const payments = getPayments();
+  const users = getUsers();
+  const L = i18n[currentLang].overview;
+
+  const usedCodes = codes.filter(c => c.used).length;
+  const unusedCodes = codes.filter(c => !c.used).length;
+  const pendingPayments = payments.filter(p => p.status === 'pending').length;
+  const approvedPayments = payments.filter(p => p.status === 'approved').length;
+  const premiumUsers = users.filter(u => u.status === 'premium').length;
+  const freeUsers = users.filter(u => u.status === 'free').length;
+  const totalRevenue = approvedPayments * 150;
+
+  return `
+    <h2 class="text-2xl font-bold text-white mb-6">${L.title}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="glass-card p-6 rounded-xl">
+        <div class="text-3xl mb-2">🔑</div>
+        <div class="text-3xl font-bold text-white mb-1">${codes.length}</div>
+        <div class="text-slate-400 text-sm">${L.totalCodes}</div>
+        <div class="mt-2 text-xs text-slate-500">${usedCodes} ${L.used} / ${unusedCodes} ${L.unused}</div>
+      </div>
+      <div class="glass-card p-6 rounded-xl">
+        <div class="text-3xl mb-2">💳</div>
+        <div class="text-3xl font-bold text-white mb-1">${payments.length}</div>
+        <div class="text-slate-400 text-sm">${L.payments}</div>
+        <div class="mt-2 text-xs text-slate-500">${pendingPayments} ${L.pending} / ${approvedPayments} ${L.approved}</div>
+      </div>
+      <div class="glass-card p-6 rounded-xl">
+        <div class="text-3xl mb-2">👥</div>
+        <div class="text-3xl font-bold text-white mb-1">${users.length}</div>
+        <div class="text-slate-400 text-sm">${L.users}</div>
+        <div class="mt-2 text-xs text-slate-500">${premiumUsers} ${L.premium} / ${freeUsers} ${L.free}</div>
+      </div>
+      <div class="glass-card p-6 rounded-xl">
+        <div class="text-3xl mb-2">💰</div>
+        <div class="text-3xl font-bold text-white mb-1">${totalRevenue} EGP</div>
+        <div class="text-slate-400 text-sm">${L.totalRevenue}</div>
+      </div>
+    </div>
+    <div class="glass-card p-6 rounded-xl">
+      <h3 class="text-lg font-semibold text-white mb-4">${L.quickActions}</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <button onclick="switchTab('codes')" class="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20 transition-colors">
+          <div class="text-2xl mb-2">➕</div>
+          <div class="text-sm text-white">${L.generateCodes}</div>
+        </button>
+        <button onclick="switchTab('payments')" class="p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg hover:bg-amber-500/20 transition-colors">
+          <div class="text-2xl mb-2">💰</div>
+          <div class="text-sm text-white">${L.reviewPayments}</div>
+        </button>
+        <button onclick="exportCodesCSV()" class="p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg hover:bg-blue-500/20 transition-colors">
+          <div class="text-2xl mb-2">📥</div>
+          <div class="text-sm text-white">${L.exportCodes}</div>
+        </button>
+        <button onclick="switchTab('users')" class="p-4 bg-purple-500/10 border border-purple-500/30 rounded-lg hover:bg-purple-500/20 transition-colors">
+          <div class="text-2xl mb-2">👥</div>
+          <div class="text-sm text-white">${L.manageUsers}</div>
+        </button>
+      </div>
+    </div>
+    ${pendingPayments > 0 ? `
+    <div class="mt-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl flex items-center gap-3">
+      <span class="text-2xl">⚠️</span>
+      <div>
+        <div class="text-amber-400 font-semibold">${pendingPayments} ${currentLang === 'ar' ? 'مدفوعات معلقة تحتاج مراجعة' : 'pending payments need review'}</div>
+        <button onclick="switchTab('payments')" class="text-sm text-amber-300 underline mt-1">${currentLang === 'ar' ? 'مراجعة الآن' : 'Review now'}</button>
+      </div>
+    </div>` : ''}
+  `;
+}
+
+// ===== CODES TAB =====
+let newGeneratedCodes = [];
+let showAllCodes = false;
+
+function renderCodes() {
+  const codes = getCodes();
+  const L = i18n[currentLang].codes;
+  const displayCodes = showAllCodes ? codes : codes.slice(0, 50);
+
+  let newCodesHTML = '';
+  if (newGeneratedCodes.length > 0) {
+    newCodesHTML = `
+      <div class="glass-card p-6 rounded-xl border-2 border-emerald-500/30 mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-semibold text-white">${L.newCodes} (${newGeneratedCodes.length})</h3>
+          <div class="flex gap-2">
+            <button onclick="copyAllNewCodes()" class="px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg text-sm hover:bg-emerald-500/20">${L.copyAll}</button>
+            <button onclick="newGeneratedCodes=[];switchTab('codes')" class="px-4 py-2 bg-slate-800 text-slate-400 rounded-lg text-sm hover:bg-slate-700">${L.dismiss}</button>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-48 overflow-y-auto">
+          ${newGeneratedCodes.map(c => `
+            <div class="p-2 bg-slate-800 rounded-lg flex items-center justify-between">
+              <code class="text-emerald-400 code-font text-xs">${c.code}</code>
+              <button onclick="copyText('${c.code}')" class="text-xs text-slate-400 hover:text-white ml-2">📋</button>
+            </div>
+          `).join('')}
+        </div>
+      </div>`;
+  }
+
+  return `
+    <h2 class="text-2xl font-bold text-white mb-6">${L.title}</h2>
+    <div class="glass-card p-6 rounded-xl mb-6">
+      <h3 class="text-lg font-semibold text-white mb-4">${L.generateTitle}</h3>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">${L.count}</label>
+          <input type="number" id="codeCount" min="1" max="100" value="10" class="input-field">
+        </div>
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">${L.prefix}</label>
+          <input type="text" id="codePrefix" value="CC" class="input-field code-font" maxlength="5">
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-sm text-slate-400 mb-2">${L.notes}</label>
+          <input type="text" id="codeNotes" class="input-field" placeholder="${L.notesPlaceholder}">
+        </div>
+      </div>
+      <button onclick="handleGenerateCodes()" class="px-6 py-3 btn-primary font-semibold rounded-xl transition-transform">
+        ${L.generateBtn} 🚀
+      </button>
+    </div>
+    ${newCodesHTML}
+    <div class="glass-card p-6 rounded-xl">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-white">${L.allCodes} (${codes.length})</h3>
+        <div class="flex gap-2">
+          ${codes.length > 50 && !showAllCodes ? `<button onclick="showAllCodes=true;switchTab('codes')" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm hover:bg-slate-700">${L.showAll}</button>` : ''}
+          <button onclick="exportCodesCSV()" class="px-4 py-2 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-lg text-sm hover:bg-blue-500/20">${L.exportCSV}</button>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-slate-700">
+              <th class="text-left py-3 px-2 text-slate-400 font-medium">${L.code}</th>
+              <th class="text-left py-3 px-2 text-slate-400 font-medium">${L.status}</th>
+              <th class="text-left py-3 px-2 text-slate-400 font-medium">${L.created}</th>
+              <th class="text-left py-3 px-2 text-slate-400 font-medium">${L.actions}</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${displayCodes.length === 0 ? `<tr><td colspan="4" class="text-center text-slate-500 py-8">${currentLang === 'ar' ? 'لا توجد أكواد' : 'No codes yet'}</td></tr>` : ''}
+            ${displayCodes.map(c => `
+              <tr class="table-row border-b border-slate-800">
+                <td class="py-3 px-2"><code class="text-emerald-400 code-font text-xs">${c.code}</code></td>
+                <td class="py-3 px-2"><span class="px-2 py-1 rounded text-xs ${c.used ? 'status-used' : 'status-unused'}">${c.used ? L.used : L.unused}</span></td>
+                <td class="py-3 px-2 text-slate-400 text-xs">${new Date(c.createdAt).toLocaleDateString()}</td>
+                <td class="py-3 px-2 flex gap-2">
+                  <button onclick="copyText('${c.code}')" class="text-xs text-slate-400 hover:text-white">📋</button>
+                  ${!c.used ? `<button onclick="showAssignModal('${c.code}')" class="text-xs text-blue-400 hover:text-blue-300">✏️</button>` : ''}
+                  <button onclick="deleteCode('${c.code}')" class="text-xs text-red-400 hover:text-red-300">🗑️</button>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+        ${!showAllCodes && codes.length > 50 ? `<p class="text-center text-slate-500 text-sm mt-4">${L.showing} 50 ${currentLang === 'ar' ? 'من' : 'of'} ${codes.length}</p>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function handleGenerateCodes() {
+  const count = parseInt(document.getElementById('codeCount').value) || 1;
+  const prefix = (document.getElementById('codePrefix').value || 'CC').toUpperCase();
+  const notes = document.getElementById('codeNotes').value.trim();
+
+  const codes = getCodes();
+  newGeneratedCodes = [];
+  for (let i = 0; i < Math.min(count, 100); i++) {
+    const code = { code: generateCode(prefix), createdAt: new Date().toISOString(), used: false, notes };
+    codes.push(code);
+    newGeneratedCodes.push(code);
+  }
+  saveCodes(codes);
+  switchTab('codes');
+  showToast(currentLang === 'ar' ? `تم إنشاء ${newGeneratedCodes.length} كود بنجاح!` : `${newGeneratedCodes.length} codes generated!`);
+}
+
+function deleteCode(code) {
+  const L = i18n[currentLang].codes;
+  if (!confirm(L.confirmDelete)) return;
+  const codes = getCodes().filter(c => c.code !== code);
+  saveCodes(codes);
+  switchTab('codes');
+}
+
+function showAssignModal(code) {
+  const L = i18n[currentLang].codes;
+  document.getElementById('modal').classList.remove('hidden');
+  document.getElementById('modalContent').innerHTML = `
+    <h3 class="text-xl font-bold text-white mb-4">${L.assignTitle}</h3>
+    <p class="text-slate-400 text-sm mb-4">Code: <code class="text-emerald-400 code-font">${code}</code></p>
+    <div class="space-y-3 mb-6">
+      <input type="text" id="assignName" class="input-field" placeholder="${L.assignTo}">
+      <input type="email" id="assignEmail" class="input-field" placeholder="${L.assignEmail}">
+    </div>
+    <div class="flex gap-3">
+      <button onclick="assignCode('${code}')" class="flex-1 py-3 btn-primary rounded-xl font-semibold">${L.assignBtn}</button>
+      <button onclick="closeModal()" class="flex-1 py-3 bg-slate-800 text-slate-300 rounded-xl font-semibold">${L.cancel}</button>
+    </div>
+  `;
+}
+
+function assignCode(code) {
+  const name = document.getElementById('assignName').value.trim();
+  const email = document.getElementById('assignEmail').value.trim();
+  if (!name) return;
+  const codes = getCodes();
+  const idx = codes.findIndex(c => c.code === code);
+  if (idx !== -1) {
+    codes[idx].used = true;
+    codes[idx].assignedTo = name;
+    codes[idx].assignedEmail = email;
+    codes[idx].usedAt = new Date().toISOString();
+    saveCodes(codes);
+
+    const users = getUsers();
+    users.push({ name, email, registeredAt: new Date().toISOString(), code, status: 'premium' });
+    saveUsers(users);
+  }
+  closeModal();
+  switchTab('codes');
+  showToast(currentLang === 'ar' ? 'تم تعيين الكود بنجاح!' : 'Code assigned!');
+}
+
+function closeModal() { document.getElementById('modal').classList.add('hidden'); }
+
+function copyAllNewCodes() {
+  const text = newGeneratedCodes.map(c => c.code).join('\n');
+  copyText(text);
+}
+
+function exportCodesCSV() {
+  const codes = getCodes();
+  const csv = 'Code,Status,Created,Assigned To,Email,Notes\n' +
+    codes.map(c => `${c.code},${c.used ? 'USED' : 'UNUSED'},${c.createdAt},${c.assignedTo || ''},${c.assignedEmail || ''},${c.notes || ''}`).join('\n');
+  downloadFile(csv, `chemistry-codes-${new Date().toISOString().split('T')[0]}.csv`, 'text/csv');
+  showToast(currentLang === 'ar' ? 'تم تصدير الأكواد!' : 'Codes exported!');
+}
+
+// ===== PAYMENTS TAB =====
+let paymentFilter = 'all';
+
+function renderPayments() {
+  const payments = getPayments();
+  const L = i18n[currentLang].payments;
+  const filtered = paymentFilter === 'all' ? payments : payments.filter(p => p.status === paymentFilter);
+
+  const methodNames = { vodafone: currentLang === 'ar' ? 'فودافون كاش' : 'Vodafone Cash', instapay: 'InstaPay', orange: currentLang === 'ar' ? 'أورانج كاش' : 'Orange Cash' };
+  const methodColors = { vodafone: '#e60000', instapay: '#7c3aed', orange: '#f97316' };
+
+  return `
+    <h2 class="text-2xl font-bold text-white mb-6">${L.title}</h2>
+    <div class="flex gap-2 mb-6 flex-wrap">
+      ${['all', 'pending', 'approved', 'rejected'].map(f => `
+        <button onclick="paymentFilter='${f}';switchTab('payments')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all ${paymentFilter === f ? 'btn-primary' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}">
+          ${f === 'all' ? L.filterAll : f === 'pending' ? L.filterPending : f === 'approved' ? L.filterApproved : L.filterRejected}
+          ${f !== 'all' ? ` (${payments.filter(p => p.status === f).length})` : ` (${payments.length})`}
+        </button>
+      `).join('')}
+    </div>
+    <div class="glass-card rounded-xl overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-slate-700 bg-slate-800/50">
+              <th class="text-left py-3 px-3 text-slate-400 font-medium">${L.name}</th>
+              <th class="text-left py-3 px-3 text-slate-400 font-medium">${L.email}</th>
+              <th class="text-left py-3 px-3 text-slate-400 font-medium">${L.method}</th>
+              <th class="text-left py-3 px-3 text-slate-400 font-medium">${L.amount}</th>
+              <th class="text-left py-3 px-3 text-slate-400 font-medium">${L.reference}</th>
+              <th class="text-left py-3 px-3 text-slate-400 font-medium">${L.date}</th>
+              <th class="text-left py-3 px-3 text-slate-400 font-medium">${L.status}</th>
+              <th class="text-left py-3 px-3 text-slate-400 font-medium">${L.actions}</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${filtered.length === 0 ? `<tr><td colspan="8" class="text-center text-slate-500 py-8">${L.noPayments}</td></tr>` : ''}
+            ${filtered.map(p => `
+              <tr class="table-row border-b border-slate-800">
+                <td class="py-3 px-3 text-white font-medium">${p.name}</td>
+                <td class="py-3 px-3 text-slate-400 text-xs">${p.email}</td>
+                <td class="py-3 px-3"><span class="px-2 py-1 rounded text-xs font-medium" style="background:${methodColors[p.method]}20;color:${methodColors[p.method]}">${methodNames[p.method]}</span></td>
+                <td class="py-3 px-3 text-white font-semibold">${p.amount} EGP</td>
+                <td class="py-3 px-3 text-slate-400 text-xs code-font">${p.transactionRef}</td>
+                <td class="py-3 px-3 text-slate-400 text-xs">${new Date(p.submittedAt).toLocaleDateString()}</td>
+                <td class="py-3 px-3"><span class="px-2 py-1 rounded text-xs status-${p.status}">${p.status}</span></td>
+                <td class="py-3 px-3">
+                  ${p.status === 'pending' ? `
+                    <div class="flex gap-1">
+                      <button onclick="approvePayment('${p.id}')" class="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded text-xs hover:bg-emerald-500/20 font-medium">${L.approve}</button>
+                      <button onclick="rejectPayment('${p.id}')" class="px-3 py-1 bg-red-500/10 text-red-400 border border-red-500/30 rounded text-xs hover:bg-red-500/20 font-medium">${L.reject}</button>
+                    </div>
+                  ` : p.generatedCode ? `
+                    <button onclick="copyText('${p.generatedCode}')" class="px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded text-xs code-font hover:bg-emerald-500/20">📋 ${p.generatedCode}</button>
+                  ` : '-'}
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+function approvePayment(id) {
+  const L = i18n[currentLang].payments;
+  if (!confirm(L.confirmApprove)) return;
+  const payments = getPayments();
+  const idx = payments.findIndex(p => p.id === id);
+  if (idx !== -1) {
+    const code = generateCode('CC');
+    payments[idx].status = 'approved';
+    payments[idx].generatedCode = code;
+    savePayments(payments);
+
+    const codes = getCodes();
+    codes.push({ code, createdAt: new Date().toISOString(), used: false, assignedTo: payments[idx].name, assignedEmail: payments[idx].email, notes: 'Auto-generated for payment' });
+    saveCodes(codes);
+  }
+  switchTab('payments');
+  showToast(currentLang === 'ar' ? 'تمت الموافقة وإنشاء الكود!' : 'Approved & code generated!');
+}
+
+function rejectPayment(id) {
+  const L = i18n[currentLang].payments;
+  if (!confirm(L.confirmReject)) return;
+  const payments = getPayments();
+  const idx = payments.findIndex(p => p.id === id);
+  if (idx !== -1) {
+    payments[idx].status = 'rejected';
+    savePayments(payments);
+  }
+  switchTab('payments');
+}
+
+// ===== USERS TAB =====
+function renderUsers() {
+  const users = getUsers();
+  const L = i18n[currentLang].users;
+  const premiumCount = users.filter(u => u.status === 'premium').length;
+  const freeCount = users.filter(u => u.status === 'free').length;
+
+  return `
+    <h2 class="text-2xl font-bold text-white mb-6">${L.title}</h2>
+    <div class="grid grid-cols-3 gap-4 mb-6">
+      <div class="glass-card p-4 rounded-xl text-center">
+        <div class="text-2xl font-bold text-white">${users.length}</div>
+        <div class="text-xs text-slate-400">${L.totalUsers}</div>
+      </div>
+      <div class="glass-card p-4 rounded-xl text-center">
+        <div class="text-2xl font-bold text-emerald-400">${premiumCount}</div>
+        <div class="text-xs text-slate-400">${L.premiumUsers}</div>
+      </div>
+      <div class="glass-card p-4 rounded-xl text-center">
+        <div class="text-2xl font-bold text-slate-400">${freeCount}</div>
+        <div class="text-xs text-slate-400">${L.freeUsers}</div>
+      </div>
+    </div>
+    <div class="glass-card rounded-xl overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-slate-700 bg-slate-800/50">
+              <th class="text-left py-3 px-3 text-slate-400 font-medium">${L.name}</th>
+              <th class="text-left py-3 px-3 text-slate-400 font-medium">${L.email}</th>
+              <th class="text-left py-3 px-3 text-slate-400 font-medium">${L.status}</th>
+              <th class="text-left py-3 px-3 text-slate-400 font-medium">${L.registered}</th>
+              <th class="text-left py-3 px-3 text-slate-400 font-medium">${L.code}</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${users.length === 0 ? `<tr><td colspan="5" class="text-center text-slate-500 py-8">${L.noUsers}</td></tr>` : ''}
+            ${users.map(u => `
+              <tr class="table-row border-b border-slate-800">
+                <td class="py-3 px-3 text-white font-medium">${u.name}</td>
+                <td class="py-3 px-3 text-slate-400 text-xs">${u.email}</td>
+                <td class="py-3 px-3"><span class="px-2 py-1 rounded text-xs ${u.status === 'premium' ? 'status-unused' : 'bg-slate-700 text-slate-400'}">${u.status === 'premium' ? L.premium : L.free}</span></td>
+                <td class="py-3 px-3 text-slate-400 text-xs">${new Date(u.registeredAt).toLocaleDateString()}</td>
+                <td class="py-3 px-3 text-slate-400 text-xs code-font">${u.code || '-'}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+// ===== CHAPTERS TAB =====
+function renderChapters() {
+  const L = i18n[currentLang].chapters;
+  const chapters = [
+    { id: 1, icon: '🧪', title: L.ch1, lessons: 3, quizzes: 3, free: true, color: '#10b981' },
+    { id: 2, icon: '⚡', title: L.ch2, lessons: 3, quizzes: 2, free: false, color: '#3b82f6' },
+    { id: 3, icon: '⚖️', title: L.ch3, lessons: 2, quizzes: 2, free: false, color: '#8b5cf6' },
+    { id: 4, icon: '🔥', title: L.ch4, lessons: 2, quizzes: 2, free: false, color: '#ef4444' },
+    { id: 5, icon: '💎', title: L.ch5, lessons: 2, quizzes: 2, free: false, color: '#f59e0b' },
+  ];
+
+  return `
+    <h2 class="text-2xl font-bold text-white mb-6">${L.title}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      ${chapters.map(ch => `
+        <div class="glass-card p-6 rounded-xl hover:border-emerald-500/30 transition-all">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="text-3xl">${ch.icon}</div>
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="font-semibold text-white">${ch.title}</h3>
+                <span class="px-2 py-0.5 rounded text-xs font-bold ${ch.free ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}">${ch.free ? L.free : L.premium}</span>
+              </div>
+              <p class="text-xs text-slate-400">Chapter ${ch.id}</p>
+            </div>
+          </div>
+          <div class="space-y-2 text-sm mb-4">
+            <div class="flex justify-between">
+              <span class="text-slate-400">${L.lessons}:</span>
+              <span class="text-white font-semibold">${ch.lessons}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-400">${L.quizzes}:</span>
+              <span class="text-white font-semibold">${ch.quizzes}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-400">${L.status}:</span>
+              <span class="text-emerald-400 font-semibold">${L.active}</span>
+            </div>
+          </div>
+          <div class="w-full h-1 rounded-full" style="background:${ch.color}40">
+            <div class="h-full rounded-full" style="background:${ch.color};width:100%"></div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+// ===== SETTINGS TAB =====
+function renderSettings() {
+  const L = i18n[currentLang].settings;
+  const s = getSettings();
+
+  return `
+    <h2 class="text-2xl font-bold text-white mb-6">${L.title}</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="glass-card p-6 rounded-xl">
+        <h3 class="text-lg font-semibold text-white mb-4">${L.systemSettings}</h3>
+        <div class="space-y-3">
+          <div class="p-4 bg-slate-800 rounded-lg">
+            <div class="text-sm text-slate-400 mb-1">${L.version}</div>
+            <div class="text-white font-mono">2.0.0</div>
+          </div>
+          <div class="p-4 bg-slate-800 rounded-lg">
+            <div class="text-sm text-slate-400 mb-1">${L.freeChapter}</div>
+            <div class="text-white">Chapter 1: ${i18n[currentLang].chapters.ch1}</div>
+          </div>
+          <div class="p-4 bg-slate-800 rounded-lg">
+            <div class="text-sm text-slate-400 mb-1">${L.price}</div>
+            <div class="text-white">${s.price} EGP</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card p-6 rounded-xl">
+        <h3 class="text-lg font-semibold text-white mb-4">${L.paymentConfig}</h3>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm text-slate-400 mb-1">${L.vodafoneNumber}</label>
+            <input type="text" id="settVodafone" value="${s.vodafone}" class="input-field code-font">
+          </div>
+          <div>
+            <label class="block text-sm text-slate-400 mb-1">${L.instapayId}</label>
+            <input type="text" id="settInstapay" value="${s.instapay}" class="input-field code-font">
+          </div>
+          <div>
+            <label class="block text-sm text-slate-400 mb-1">${L.orangeNumber}</label>
+            <input type="text" id="settOrange" value="${s.orange}" class="input-field code-font">
+          </div>
+          <div>
+            <label class="block text-sm text-slate-400 mb-1">${L.price} (EGP)</label>
+            <input type="text" id="settPrice" value="${s.price}" class="input-field">
+          </div>
+          <button onclick="handleSaveSettings()" class="w-full py-3 btn-primary rounded-xl font-semibold mt-2">${L.saveSettings} ✅</button>
+        </div>
+      </div>
+
+      <div class="glass-card p-6 rounded-xl lg:col-span-2">
+        <h3 class="text-lg font-semibold text-white mb-4">${L.advancedActions}</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <button onclick="exportAllData()" class="py-3 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-xl hover:bg-blue-500/20 transition-colors font-medium">
+            📥 ${L.exportAll}
+          </button>
+          <button onclick="document.getElementById('importFile').click()" class="py-3 bg-purple-500/10 border border-purple-500/30 text-purple-400 rounded-xl hover:bg-purple-500/20 transition-colors font-medium">
+            📤 ${L.importData}
+          </button>
+          <button onclick="clearAllData()" class="py-3 btn-danger rounded-xl font-medium">
+            🗑️ ${L.clearAll}
+          </button>
+        </div>
+        <input type="file" id="importFile" class="hidden" accept=".json" onchange="importData(event)">
+      </div>
+    </div>
+  `;
+}
+
+function handleSaveSettings() {
+  const s = {
+    vodafone: document.getElementById('settVodafone').value.trim(),
+    instapay: document.getElementById('settInstapay').value.trim(),
+    orange: document.getElementById('settOrange').value.trim(),
+    price: document.getElementById('settPrice').value.trim(),
+  };
+  saveSettings(s);
+  showToast(currentLang === 'ar' ? 'تم حفظ الإعدادات!' : 'Settings saved!');
+}
+
+function exportAllData() {
+  const data = { codes: getCodes(), payments: getPayments(), users: getUsers(), settings: getSettings(), exportedAt: new Date().toISOString() };
+  downloadFile(JSON.stringify(data, null, 2), `chemistry-code-backup-${new Date().toISOString().split('T')[0]}.json`, 'application/json');
+  showToast(currentLang === 'ar' ? 'تم تصدير البيانات!' : 'Data exported!');
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.codes) saveCodes(data.codes);
+      if (data.payments) savePayments(data.payments);
+      if (data.users) saveUsers(data.users);
+      if (data.settings) saveSettings(data.settings);
+      switchTab('overview');
+      showToast(currentLang === 'ar' ? 'تم استيراد البيانات!' : 'Data imported!');
+    } catch { showToast(currentLang === 'ar' ? 'خطأ في الملف!' : 'Invalid file!'); }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function clearAllData() {
+  const L = i18n[currentLang].settings;
+  if (!confirm(L.clearConfirm)) return;
+  localStorage.removeItem('cc_codes');
+  localStorage.removeItem('cc_payments');
+  localStorage.removeItem('cc_users');
+  switchTab('overview');
+  showToast(currentLang === 'ar' ? 'تم حذف جميع البيانات!' : 'All data cleared!');
+}
+
+// ===== UTILITIES =====
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast(currentLang === 'ar' ? 'تم النسخ!' : 'Copied!');
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast(currentLang === 'ar' ? 'تم النسخ!' : 'Copied!');
+  });
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.remove('hidden');
+  setTimeout(() => toast.classList.add('hidden'), 2500);
+}
+
+function downloadFile(content, filename, type) {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('cc_admin_auth') === 'true') {
+    showDashboard();
+  }
+  document.getElementById('loginPassword').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleLogin();
+  });
+});
+</script>
+</body>
+</html>
