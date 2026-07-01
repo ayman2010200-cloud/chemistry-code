@@ -1,11 +1,50 @@
 (function () {
   const $ = (id) => document.getElementById(id);
   let latestCodes = [];
+  let latestWhatsAppPayload = { codes: [], phone: '', plan: 'monthly' };
 
   function setStatus(message, kind) {
     const el = $('status');
     el.textContent = message || '';
     el.className = 'status' + (kind ? ' ' + kind : '');
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function normalizeWhatsAppPhone(phone) {
+    const digits = String(phone || '').replace(/\D/g, '');
+    if (!digits) return '';
+    if (digits.startsWith('00')) return digits.slice(2);
+    if (digits.startsWith('0')) return `20${digits.slice(1)}`;
+    return digits;
+  }
+
+  function buildWhatsAppUrl(phone, text) {
+    const normalized = normalizeWhatsAppPhone(phone);
+    if (!normalized) return '';
+    return `https://wa.me/${encodeURIComponent(normalized)}?text=${encodeURIComponent(text)}`;
+  }
+
+  function sendCodesToWhatsApp(phone, codes, plan) {
+    const uniqueCodes = (codes || []).filter(Boolean);
+    if (!uniqueCodes.length) {
+      setStatus('No generated codes available to send.', 'warn');
+      return;
+    }
+    const url = buildWhatsAppUrl(phone, `Chemistry Code Activation\nPlan: ${plan}\nCode(s): ${uniqueCodes.join(', ')}`);
+    if (!url) {
+      setStatus('Please enter a valid WhatsApp phone number.', 'warn');
+      return;
+    }
+    window.open(url, '_blank', 'noopener');
+    setStatus('WhatsApp message opened successfully.', 'ok');
   }
 
   function getSecret() {
@@ -75,18 +114,24 @@
   function renderPayments(items) {
     const body = $('paymentsBody');
     if (!items.length) {
-      body.innerHTML = '<tr><td colspan="7">No payment events yet.</td></tr>';
+      body.innerHTML = '<tr><td colspan="9">No payment events yet.</td></tr>';
       return;
     }
     body.innerHTML = items.map((x) => `
       <tr>
         <td>${new Date(x.created_at).toLocaleString()}</td>
-        <td>${x.provider || ''}</td>
-        <td>${x.reference || ''}</td>
-        <td>${x.user_email || ''}</td>
-        <td>${x.plan || ''}</td>
-        <td>${x.amount || ''} ${x.currency || ''}</td>
-        <td>${x.status || ''}</td>
+        <td>${escapeHtml(x.provider || '')}</td>
+        <td>${escapeHtml(x.reference || '')}</td>
+        <td>${escapeHtml(x.user_email || '')}</td>
+        <td>${escapeHtml((x.raw && x.raw.phone) || '')}</td>
+        <td>${escapeHtml(x.plan || '')}</td>
+        <td>${escapeHtml(x.amount || '')} ${escapeHtml(x.currency || '')}</td>
+        <td>${escapeHtml(x.status || '')}</td>
+        <td>
+          ${x.raw && x.raw.phone && x.raw.generatedCodes && x.raw.generatedCodes.length
+            ? `<button class="ghost" data-action="wa-payment" data-phone="${escapeHtml(x.raw.phone)}" data-codes="${escapeHtml(x.raw.generatedCodes.join('|'))}" data-plan="${escapeHtml(x.plan || 'monthly')}">WhatsApp</button>`
+            : '-'}
+        </td>
       </tr>
     `).join('');
   }
@@ -159,6 +204,7 @@
         reference: $('reference').value,
         email: $('email').value,
         payerName: $('payerName').value,
+        phone: $('phone').value,
         amount: Number($('amount').value || 0),
         currency: $('currency').value,
         notes: $('notes').value
@@ -172,7 +218,15 @@
         body: JSON.stringify(payload)
       });
       $('generatedCodes').textContent = (result.codes || []).join('\n');
+      latestWhatsAppPayload = {
+        codes: result.codes || [],
+        phone: $('phone').value.trim(),
+        plan: payload.plan
+      };
       setStatus(`Generated ${result.count} code(s) successfully.`, 'ok');
+      if (latestWhatsAppPayload.phone && latestWhatsAppPayload.codes.length) {
+        sendCodesToWhatsApp(latestWhatsAppPayload.phone, latestWhatsAppPayload.codes, latestWhatsAppPayload.plan);
+      }
       await refreshLists();
     } catch (err) {
       setStatus(err.message, 'warn');
@@ -197,8 +251,20 @@
     }
   });
 
+  $('paymentsBody').addEventListener('click', (event) => {
+    const button = event.target.closest('button[data-action="wa-payment"]');
+    if (!button) return;
+    const phone = button.getAttribute('data-phone') || '';
+    const codes = (button.getAttribute('data-codes') || '').split('|').filter(Boolean);
+    const plan = button.getAttribute('data-plan') || 'monthly';
+    sendCodesToWhatsApp(phone, codes, plan);
+  });
+
   $('generateBtn').addEventListener('click', generateCodes);
   $('refreshBtn').addEventListener('click', refreshLists);
+  $('sendWhatsappBtn').addEventListener('click', () => {
+    sendCodesToWhatsApp(latestWhatsAppPayload.phone || $('phone').value.trim(), latestWhatsAppPayload.codes, latestWhatsAppPayload.plan);
+  });
   $('copyCsvBtn').addEventListener('click', async () => {
     try {
       await copyCodesCsv();

@@ -1,15 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://chemistry-code.com/</loc></url>
-  <url><loc>https://chemistry-code.com/index.html</loc></url>
-  <url><loc>https://chemistry-code.com/04_electrochemistry.html</loc></url>
-  <url><loc>https://chemistry-code.com/compounds%20-uses.html</loc></url>
-  <url><loc>https://chemistry-code.com/electro-chemistry-ar.html</loc></url>
-  <url><loc>https://chemistry-code.com/funtion%20group.ar.html</loc></url>
-  <url><loc>https://chemistry-code.com/funtion%20group.en.html</loc></url>
-  <url><loc>https://chemistry-code.com/refund-policy.html</loc></url>
-  <url><loc>https://chemistry-code.com/transition_elements_uses.html</loc></url>
-  <url><loc>https://chemistry-code.com/payment-dashboard.html</loc></url>
-  <url><loc>https://chemistry-code.com/admin-dashboard.html</loc></url>
-  <url><loc>https://chemistry-code.com/admindashboard.html</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Homepage (priority 1.0) -->
+  <url>
+    <loc>https://chemistry-code.com/</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Main Content Pages (priority 0.8) -->
+  <url>
+    <loc>https://chemistry-code.com/04-electrochemistry.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://chemistry-code.com/electro-chemistry-ar.html"/>
+  </url>
+
+  <url>
+    <loc>https://chemistry-code.com/compounds-uses.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://chemistry-code.com/function-group-en.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://chemistry-code.com/function-group-ar.html"/>
+  </url>
+
+  <url>
+    <loc>https://chemistry-code.com/function-group-ar.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chemistry-code.com/function-group-en.html"/>
+  </url>
+
+  <url>
+    <loc>https://chemistry-code.com/electro-chemistry-ar.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://chemistry-code.com/04-electrochemistry.html"/>
+  </url>
+
+  <url>
+    <loc>https://chemistry-code.com/transition-elements-uses.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Policy Pages (priority 0.5) -->
+  <url>
+    <loc>https://chemistry-code.com/refund-policy.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- NOTE: Dashboard pages excluded from sitemap (not public indexable)
+       - admin-dashboard.html
+       - payment-dashboard.html
+       - admindashboard.html
+       - dashboard-control.html
+  -->
 </urlset>

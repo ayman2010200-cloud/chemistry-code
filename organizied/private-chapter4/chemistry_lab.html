@@ -1,6 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){
+  if(localStorage.getItem('codevault_unlocked')!=='true'){
+    var r=location.pathname;
+    var depth=(r.match(/\//g)||[]).length-1;
+    var back='';for(var i=0;i<depth-1;i++)back+='../';
+    location.replace(back+'index.html#payment-section');
+  }
+})();
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Chemistry Lab form Chemistry Code</title>
@@ -497,6 +507,16 @@
 
 
     <header class="hero">
+<script>
+(function(){
+  if(localStorage.getItem('codevault_unlocked')!=='true'){
+    var r=location.pathname;
+    var depth=(r.match(/\//g)||[]).length-1;
+    var back='';for(var i=0;i<depth-1;i++)back+='../';
+    location.replace(back+'index.html#payment-section');
+  }
+})();
+</script>
         <h1> Chemistry Lab from Chemistry Code</h1>
         <p>electrochemical systems, batteries, and organic laboratory preparations with realistic apparatus design</p>
         <nav class="toc">

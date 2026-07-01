@@ -1,6 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){
+  if(localStorage.getItem('codevault_unlocked')!=='true'){
+    var r=location.pathname;
+    var depth=(r.match(/\//g)||[]).length-1;
+    var back='';for(var i=0;i<depth-1;i++)back+='../';
+    location.replace(back+'index.html#payment-section');
+  }
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clean Bilingual Animated Iron Ore Dressing</title>
@@ -449,6 +459,16 @@ body.lang-ar .chapnav a { direction: rtl; }
 <section id="ironOreDressingRoot" class="iron-ore-dressing lang-en" dir="ltr" lang="en">
 <main class="page">
 <header class="topbar">
+<script>
+(function(){
+  if(localStorage.getItem('codevault_unlocked')!=='true'){
+    var r=location.pathname;
+    var depth=(r.match(/\//g)||[]).length-1;
+    var back='';for(var i=0;i<depth-1;i++)back+='../';
+    location.replace(back+'index.html#payment-section');
+  }
+})();
+</script>
 <div><h1 data-ui="h1">Iron Ore Dressing Before Reduction</h1><p class="subtitle" data-ui="subtitle">Clean bilingual dark animated SVG: text is separated from animation, with physical and chemical mechanisms.</p></div>
 <div class="actions"><button id="toggleLanguage">العربية</button><button id="toggleAnimation">Pause animation</button><button id="downloadSvg"></button></div>
 </header>

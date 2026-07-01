@@ -1,6 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){
+  if(localStorage.getItem('codevault_unlocked')!=='true'){
+    var r=location.pathname;
+    var depth=(r.match(/\//g)||[]).length-1;
+    var back='';for(var i=0;i<depth-1;i++)back+='../';
+    location.replace(back+'index.html#payment-section');
+  }
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Titration, Dilution, Impurity & Hydrate Calculations | حسابات المعايرة والتخفيف والنقاوة وماء التبلور</title>
@@ -469,6 +479,16 @@ body[dir="rtl"] .reaction-visual{direction:ltr}
 
 <div class="page">
     <header>
+<script>
+(function(){
+  if(localStorage.getItem('codevault_unlocked')!=='true'){
+    var r=location.pathname;
+    var depth=(r.match(/\//g)||[]).length-1;
+    var back='';for(var i=0;i<depth-1;i++)back+='../';
+    location.replace(back+'index.html#payment-section');
+  }
+})();
+</script>
       <section class="hero">
         <h1><span class="lang-en">Titration & Solution Calculations</span><span class="lang-ar">حسابات المعايرة والمحاليل</span><br><span class="gradient-text">Chemistry Code</span></h1>
         <p class="lead lang-en block"> titration calculations, dilution, impure substance percentage, and finding x water of crystallization in hydrates with solved examples.</p>

@@ -1,3 +1,17 @@
+# Chemistry Code Platform - Robots Configuration
 User-agent: *
 Allow: /
+Disallow: /admin-dashboard.html
+Disallow: /payment-dashboard.html
+Disallow: /admindashboard.html
+Disallow: /dashboard-control.html
+Disallow: /.env
+Disallow: /.git
+Crawl-delay: 1
+
+# Faster crawling for Google
+User-agent: Googlebot
+Crawl-delay: 0.5
+
+# Sitemap reference
 Sitemap: https://chemistry-code.com/sitemap.xml

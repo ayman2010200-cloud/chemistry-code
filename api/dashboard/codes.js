@@ -65,6 +65,7 @@ async function generateCodes(req, res) {
     status: 'code_generated',
     raw: {
       payerName: payment.payerName || '',
+      phone: payment.phone || '',
       notes: payment.notes || '',
       generatedCount: count,
       generatedCodes: (insertedCodes || []).map(x => x.code)

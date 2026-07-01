@@ -1565,20 +1565,21 @@ body.lang-ar .chapnav a { direction: rtl; }
     <section id="verify-section" class="section container">
         <div class="unlock-card">
             <h3>
-                <span class="lang-en">Verify & Bind Access Code</span>
-                <span class="lang-ar">تفعيل وربط كود الوصول بالـ IP</span>
+                <span class="lang-en">Verify & Activate Access</span>
+                <span class="lang-ar">تفعيل الوصول وربطه بجهازك</span>
             </h3>
             <p>
-                <span class="lang-en">Enter your purchased access code below. Our system will bind this license to your current IP address (<span id="verify-ip-tag-en" style="color:var(--success);font-weight:bold;">Detecting...</span>) for robust protection.</span>
-                <span class="lang-ar">أدخل كود التفعيل الخاص بك بالأسفل. سيقوم نظامنا بربط هذه الرخصة بعنوان الـ IP الحالي الخاص بك (<span id="verify-ip-tag-ar" style="color:var(--success);font-weight:bold;">جاري الفحص...</span>) لحماية الكود من المشاركة.</span>
+                <span class="lang-en">First device: enter your code (+ email). Second device (mobile/PC): enter only your email — no new code needed. IP: <span id="verify-ip-tag-en" style="color:var(--success);font-weight:bold;">Detecting...</span></span>
+                <span class="lang-ar">الجهاز الأول: أدخل الكود (+ البريد اختياري). الجهاز الثاني (موبايل/كمبيوتر): أدخل بريدك فقط بدون كود جديد. الـ IP: <span id="verify-ip-tag-ar" style="color:var(--success);font-weight:bold;">جاري الفحص...</span></span>
             </p>
-            
+
             <form id="verify-form" onsubmit="event.preventDefault(); verifyCode();">
-                <div class="input-group">
-                    <input type="text" id="access-code-input" class="input-code" placeholder="ENTER-LICENSE-CODE-HERE / أدخل-كود-التفعيل-هنا" required>
+                <div class="input-group" style="flex-direction:column;gap:10px;">
+                    <input type="email" id="verify-email-input" class="input-code" placeholder="your@email.com — بريدك الإلكتروني (مطلوب للجهاز الثاني)">
+                    <input type="text" id="access-code-input" class="input-code" placeholder="ACTIVATION-CODE (first device) / كود التفعيل (الجهاز الأول)">
                     <button type="submit" class="btn btn-success">
-                        <span class="lang-en">Authenticate & Bind IP</span>
-                        <span class="lang-ar">مصادقة وربط بالـ IP</span>
+                        <span class="lang-en">Activate / Login from New Device</span>
+                        <span class="lang-ar">تفعيل الكود / دخول من جهاز جديد</span>
                     </button>
                 </div>
             </form>
@@ -1589,12 +1590,12 @@ body.lang-ar .chapnav a { direction: rtl; }
                 </svg>
                 <div>
                     <h5 style="color:var(--warning); margin-bottom: 6px; font-size: 1.05rem; font-weight: 700;">
-                        <span class="lang-en">Single IP Restriction Policy</span>
-                        <span class="lang-ar">سياسة التقييد بعنوان IP واحد</span>
+                        <span class="lang-en">2-Device Policy (Mobile + PC/Tablet)</span>
+                        <span class="lang-ar">سياسة الجهازين (موبايل + كمبيوتر/تابلت)</span>
                     </h5>
                     <p>
-                        <span class="lang-en">To prevent unauthorized script sharing, each access code binds permanently to the first IP address that activates it. Once authenticated, you can freely access all premium pages from this IP.</span>
-                        <span class="lang-ar">لمنع مشاركة الأكواد بشكل غير قانوني، يتم ربط كل كود تفعيل بشكل دائم بأول عنوان IP يستخدمه. بمجرد التفعيل، يمكنك تصفح وتحميل جميع الصفحات المدفوعة بحرية تامة من جهازك.</span>
+                        <span class="lang-en">Each license supports up to 2 devices for the same person. Activate with your code on Device 1, then enter only your email on Device 2 to unlock without a new code.</span>
+                        <span class="lang-ar">كل رخصة تدعم حتى جهازين لنفس الشخص. فعّل الكود على الجهاز الأول، ثم أدخل بريدك الإلكتروني فقط على الجهاز الثاني للوصول بدون كود جديد.</span>
                     </p>
                 </div>
             </div>
@@ -2103,6 +2104,8 @@ body.lang-ar .chapnav a { direction: rtl; }
             if (localStorage.getItem('codevault_lang') === 'ar') {
                 setLanguage('ar');
             }
+
+            handleTapReturnFromQuery();
         });
 
         function updateIPDisplays() {
@@ -2242,8 +2245,86 @@ body.lang-ar .chapnav a { direction: rtl; }
             }, 3500);
         }
 
-        // Submit payment verification simulation
-        function submitPaymentVerification(methodName) {
+        function clearPaymentQueryParams() {
+            const url = new URL(window.location.href);
+            url.searchParams.delete('payment');
+            url.searchParams.delete('ref');
+            window.history.replaceState({}, document.title, url.pathname + url.search + url.hash);
+        }
+
+        async function handleTapReturnFromQuery() {
+            const params = new URLSearchParams(window.location.search);
+            const payment = String(params.get('payment') || '').toLowerCase();
+            const ref = String(params.get('ref') || '').trim();
+
+            if (payment !== 'tap-success' && payment !== 'tap-cancelled') return;
+
+            if (payment === 'tap-cancelled') {
+                showToast(currentLang === 'ar' ? 'تم إلغاء عملية Tap.' : 'Tap payment was cancelled.');
+                clearPaymentQueryParams();
+                return;
+            }
+
+            if (!ref) {
+                showToast(currentLang === 'ar'
+                    ? 'تمت العودة من Tap بدون مرجع عملية.'
+                    : 'Returned from Tap without a payment reference.');
+                clearPaymentQueryParams();
+                return;
+            }
+
+            const tapInput = document.getElementById('input-tap');
+            if (tapInput) tapInput.value = ref;
+            switchPayment('tap');
+
+            await submitPaymentVerification('Tap');
+            clearPaymentQueryParams();
+        }
+
+        // Submit payment verification with live Tap check.
+        async function submitPaymentVerification(methodName) {
+            const isTapMethod = String(methodName || '').toLowerCase().includes('tap');
+
+            if (isTapMethod) {
+                const tapReference = document.getElementById('input-tap')?.value.trim();
+                if (!tapReference) {
+                    showToast(currentLang === 'ar'
+                        ? "يرجى إدخال مرجع عملية Tap أولاً."
+                        : "Please enter your Tap transaction reference first.");
+                    return;
+                }
+
+                showToast(currentLang === 'ar'
+                    ? "جاري التحقق المباشر من عملية Tap..."
+                    : "Checking Tap payment live...");
+
+                try {
+                    const response = await fetch('/api/payments/tap/check-payment', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ reference: tapReference })
+                    });
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(data.error || 'Could not verify Tap payment');
+                    }
+
+                    if (!data.paid) {
+                        showToast(currentLang === 'ar'
+                            ? "لم يتم تأكيد الدفع بعد. انتظر لحظات ثم حاول مرة أخرى."
+                            : "Payment is not confirmed yet. Please wait a moment and try again.");
+                        return;
+                    }
+                } catch (error) {
+                    console.error('Tap live check error:', error);
+                    showToast(error.message || (currentLang === 'ar'
+                        ? "تعذر التحقق من عملية Tap حالياً."
+                        : "Could not verify Tap payment right now."));
+                    return;
+                }
+            }
+
             if (!isUnlocked) {
                 localStorage.setItem('codevault_unlocked', 'true');
                 localStorage.setItem('codevault_ip', currentIP);
@@ -2278,33 +2359,56 @@ body.lang-ar .chapnav a { direction: rtl; }
         // Verify and unlock premium content
         async function verifyCode() {
             const codeInput = document.getElementById('access-code-input').value.trim();
-            
-            if (!codeInput) {
-                showToast(currentLang === 'ar' ? "يرجى إدخال كود تفعيل صحيح." : "Please enter a valid access code.");
+            const emailInput = (document.getElementById('verify-email-input')?.value || '').trim().toLowerCase();
+
+            if (!codeInput && !emailInput) {
+                showToast(currentLang === 'ar'
+                    ? 'أدخل الكود للجهاز الأول، أو بريدك الإلكتروني للجهاز الثاني.'
+                    : 'Enter your code (first device) or your email (second device).');
                 return;
             }
 
             try {
-                const response = await fetch('/api/codes/redeem', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ code: codeInput, ip: currentIP })
-                });
-
-                const data = await response.json();
-                if (!response.ok) {
-                    showToast(data.error || (currentLang === 'ar' ? 'كود التفعيل غير صالح.' : 'Activation code is invalid.'));
-                    return;
+                if (codeInput) {
+                    // ── Device 1: redeem activation code ──
+                    const currentUser = typeof DB !== 'undefined' ? DB.getCurrentUser() : null;
+                    const response = await fetch('/api/codes/redeem', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ code: codeInput, ip: currentIP, email: emailInput || currentUser?.email || '' })
+                    });
+                    const data = await response.json();
+                    if (!response.ok) {
+                        showToast(data.error || (currentLang === 'ar' ? 'كود التفعيل غير صالح.' : 'Activation code is invalid.'));
+                        return;
+                    }
+                    localStorage.setItem('codevault_unlocked', 'true');
+                    localStorage.setItem('codevault_ip', currentIP);
+                    localStorage.setItem('codevault_plan', data.plan || 'monthly');
+                    unlockPremiumUI(currentIP);
+                    showToast(currentLang === 'ar'
+                        ? `تم تفعيل الكود بنجاح (${data.plan || 'monthly'}) — الجهاز 1`
+                        : `Code activated (${data.plan || 'monthly'}) — Device 1 bound to IP: ${currentIP}`);
+                } else {
+                    // ── Device 2: verify by email, no code needed ──
+                    const response = await fetch('/api/subscriptions/check', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: emailInput, ip: currentIP })
+                    });
+                    const data = await response.json();
+                    if (!response.ok) {
+                        showToast(data.error || (currentLang === 'ar' ? 'تعذر التحقق من الاشتراك.' : 'Could not verify subscription.'));
+                        return;
+                    }
+                    localStorage.setItem('codevault_unlocked', 'true');
+                    localStorage.setItem('codevault_ip', currentIP);
+                    localStorage.setItem('codevault_plan', data.plan || 'monthly');
+                    unlockPremiumUI(currentIP);
+                    showToast(currentLang === 'ar'
+                        ? `تم التحقق من اشتراكك (${data.plan}) — الجهاز ${data.device || 2}`
+                        : `Subscription verified (${data.plan}) — Device ${data.device || 2} unlocked`);
                 }
-
-                localStorage.setItem('codevault_unlocked', 'true');
-                localStorage.setItem('codevault_ip', currentIP);
-                localStorage.setItem('codevault_plan', data.plan || 'monthly');
-
-                unlockPremiumUI(currentIP);
-                showToast(currentLang === 'ar'
-                    ? `تم تفعيل الكود بنجاح (${data.plan || 'monthly'}) وربطه بعنوان IP: ${currentIP}`
-                    : `Code redeemed successfully (${data.plan || 'monthly'}) and bound to IP: ${currentIP}`);
             } catch (error) {
                 showToast(currentLang === 'ar'
                     ? 'تعذر الاتصال بخادم التفعيل. حاول مرة أخرى.'

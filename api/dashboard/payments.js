@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
     const { data, error } = await supabase
       .from('payment_events')
-      .select('id,provider,reference,user_email,plan,amount,currency,status,created_at')
+      .select('id,provider,reference,user_email,plan,amount,currency,status,raw,created_at')
       .order('created_at', { ascending: false })
       .limit(limit);
 

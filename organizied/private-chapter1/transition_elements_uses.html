@@ -1,6 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){
+  if(localStorage.getItem('codevault_unlocked')!=='true'){
+    var r=location.pathname;
+    var depth=(r.match(/\//g)||[]).length-1;
+    var back='';for(var i=0;i<depth-1;i++)back+='../';
+    location.replace(back+'index.html#payment-section');
+  }
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Transition Elements Uses | استخدامات العناصر الانتقالية</title>
@@ -728,6 +738,16 @@ body.lang-ar .chapnav a { direction: rtl; }
 <div class="noise"></div>
 
 <header class="hero container">
+<script>
+(function(){
+  if(localStorage.getItem('codevault_unlocked')!=='true'){
+    var r=location.pathname;
+    var depth=(r.match(/\//g)||[]).length-1;
+    var back='';for(var i=0;i<depth-1;i++)back+='../';
+    location.replace(back+'index.html#payment-section');
+  }
+})();
+</script>
   <div class="badge" id="badgeText">⚛ Chemistry Study Card</div><div class="lang-dock">
   <button class="lang-btn" id="langBtn">العربية</button>
   <span class="lang-note" id="langNote">Switch language</span>

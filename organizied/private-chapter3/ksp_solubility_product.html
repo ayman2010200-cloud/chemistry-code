@@ -1,6 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){
+  if(localStorage.getItem('codevault_unlocked')!=='true'){
+    var r=location.pathname;
+    var depth=(r.match(/\//g)||[]).length-1;
+    var back='';for(var i=0;i<depth-1;i++)back+='../';
+    location.replace(back+'index.html#payment-section');
+  }
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Organic Chemistry Equations Book — All Chart Reactions</title>
@@ -742,6 +752,16 @@ body.lang-ar .chapnav a { direction: rtl; }
 <!-- ===== Inserted ksp_solubility_product.html content ===== -->
 <div class="page">
     <header>
+<script>
+(function(){
+  if(localStorage.getItem('codevault_unlocked')!=='true'){
+    var r=location.pathname;
+    var depth=(r.match(/\//g)||[]).length-1;
+    var back='';for(var i=0;i<depth-1;i++)back+='../';
+    location.replace(back+'index.html#payment-section');
+  }
+})();
+</script>
       <section class="hero">
         <h1>
           <span class="lang-en">Solubility Product</span>

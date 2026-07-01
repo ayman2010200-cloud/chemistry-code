@@ -1,19 +1,11 @@
 // js/payment.js
-// Tap Payments + Fawry integration helpers.
-// IMPORTANT: Real Tap/Fawry payments need a backend to keep secret keys and signatures private.
-// Replace the placeholder backend endpoints below with your server endpoints.
+// Tap Payments + PayPal integration helpers.
 
 const PaymentGateways = {
     config: {
         currency: 'EGP',
         tap: {
-            // Public key is safe in browser. Secret key must stay on your backend.
-            publicKey: 'pk_test_YOUR_TAP_PUBLIC_KEY',
             createChargeEndpoint: '/api/payments/tap/create-charge'
-        },
-        fawry: {
-            merchantCode: 'YOUR_FAWRY_MERCHANT_CODE',
-            createPaymentEndpoint: '/api/payments/fawry/create-payment'
         },
         paypal: {
             configEndpoint: '/api/payments/paypal/config',
@@ -83,31 +75,6 @@ const PaymentGateways = {
         window.location.href = url;
         return result;
     },
-
-    async startFawryPayment(plan, amount, extra = {}) {
-        const order = this.buildOrder(plan, amount, extra);
-
-        if (this.isPlaceholder(this.config.fawry.merchantCode) || this.isPlaceholder(this.config.fawry.createPaymentEndpoint)) {
-            this.showSetupMessage('Fawry', order, [
-                'Create a backend endpoint that generates the Fawry secure signature using your merchant secret.',
-                'Put your Fawry merchant code in PaymentGateways.config.fawry.merchantCode.',
-                'Set PaymentGateways.config.fawry.createPaymentEndpoint to your backend endpoint.',
-                'Your backend should return: { "referenceNumber": "..." } and optionally { "paymentUrl": "https://..." }.'
-            ]);
-            return { pendingSetup: true, order };
-        }
-
-        const result = await this.postJSON(this.config.fawry.createPaymentEndpoint, order);
-        if (result.paymentUrl || result.redirectUrl) {
-            window.location.href = result.paymentUrl || result.redirectUrl;
-        } else if (result.referenceNumber) {
-            alert(`Fawry reference number: ${result.referenceNumber}\nPlease pay it through any Fawry outlet or app.`);
-        } else {
-            throw new Error('Fawry response did not include a reference number or payment URL.');
-        }
-        return result;
-    },
-
 
     async getPayPalConfig() {
         if (this._paypalConfig) return this._paypalConfig;
@@ -214,11 +181,6 @@ const PaymentGateways = {
 async function payWithTap(plan, amount, extra) {
     return PaymentGateways.startTapPayment(plan, amount, extra);
 }
-
-async function payWithFawry(plan, amount, extra) {
-    return PaymentGateways.startFawryPayment(plan, amount, extra);
-}
-
 
 async function renderPayPalButtons(containerId, plan, amount, callbacks) {
     return PaymentGateways.renderPayPalButtons(containerId, plan, amount, callbacks);

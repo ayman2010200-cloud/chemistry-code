@@ -1,6 +1,20 @@
 // Vercel Serverless Function: /api/payments/tap/create-charge
 // Creates a Tap charge and returns the hosted checkout URL.
 
+function buildTapRedirectUrl(returnUrl, baseUrl, reference) {
+  const fallback = `${baseUrl}/index.html`;
+  let target;
+  try {
+    target = new URL(returnUrl || fallback, baseUrl);
+  } catch (_) {
+    target = new URL(fallback, baseUrl);
+  }
+
+  target.searchParams.set('payment', 'tap-success');
+  target.searchParams.set('ref', reference);
+  return target.toString();
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -13,7 +27,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Missing TAP_SECRET_KEY environment variable' });
     }
 
-    const { plan, amount, currency = 'EGP', customer = {}, reference, returnUrl, cancelUrl } = req.body || {};
+    const { plan, amount, currency = 'EGP', customer = {}, reference, returnUrl } = req.body || {};
 
     if (!plan || !amount || Number(amount) <= 0) {
       return res.status(400).json({ error: 'Invalid plan or amount' });
@@ -55,7 +69,7 @@ export default async function handler(req, res) {
         id: 'src_all'
       },
       redirect: {
-        url: returnUrl || `${baseUrl}/pricing.html?payment=tap-success&ref=${encodeURIComponent(safeReference)}`
+        url: buildTapRedirectUrl(returnUrl, baseUrl, safeReference)
       },
       post: {
         url: `${baseUrl}/api/payments/tap/webhook`

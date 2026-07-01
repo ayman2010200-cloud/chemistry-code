@@ -1,6 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){
+  if(localStorage.getItem('codevault_unlocked')!=='true'){
+    var r=location.pathname;
+    var depth=(r.match(/\//g)||[]).length-1;
+    var back='';for(var i=0;i<depth-1;i++)back+='../';
+    location.replace(back+'index.html#payment-section');
+  }
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Uses of Electrolytic Cells | استخدامات الخلايا الإلكتروليتية</title>
@@ -458,6 +468,16 @@ body.lang-ar .chapnav a { direction: rtl; }
 
 <div class="page">
     <header>
+<script>
+(function(){
+  if(localStorage.getItem('codevault_unlocked')!=='true'){
+    var r=location.pathname;
+    var depth=(r.match(/\//g)||[]).length-1;
+    var back='';for(var i=0;i<depth-1;i++)back+='../';
+    location.replace(back+'index.html#payment-section');
+  }
+})();
+</script>
       <section class="hero">
         <h1><span class="lang-en">Uses of Electrolytic Cells</span><span class="lang-ar">استخدامات الخلايا الإلكتروليتية</span><br><span class="gradient-text">Electrolysis </span></h1>
         <p class="lead lang-en block"> Electrolytic cell applications: electroplating, extraction of aluminum, and purification of metals with examples, electrodes, and reactions.</p>

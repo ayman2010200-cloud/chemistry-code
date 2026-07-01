@@ -180,6 +180,10 @@
           <input id="payerName" placeholder="Student Name" />
         </div>
         <div class="field">
+          <label for="phone">Payer Phone / WhatsApp</label>
+          <input id="phone" placeholder="01000000000" />
+        </div>
+        <div class="field">
           <label for="amount">Amount</label>
           <input id="amount" type="number" value="100" placeholder="100" title="Amount" />
         </div>
@@ -212,6 +216,9 @@
         <button id="generateBtn">Generate Codes</button>
         <button id="refreshBtn" class="secondary">Refresh Lists</button>
       </div>
+      <div class="toolbar">
+        <button id="sendWhatsappBtn" class="ghost">Send Last Code(s) via WhatsApp</button>
+      </div>
       <div class="mt-12">
         <label class="section-label">Generated Codes</label>
         <div id="generatedCodes" class="codes-box"></div>
@@ -228,9 +235,11 @@
               <th>Provider</th>
               <th>Reference</th>
               <th>Email</th>
+              <th>Phone</th>
               <th>Plan</th>
               <th>Amount</th>
               <th>Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody id="paymentsBody"></tbody>

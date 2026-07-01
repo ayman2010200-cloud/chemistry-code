@@ -1,6 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){
+  if(localStorage.getItem('codevault_unlocked')!=='true'){
+    var r=location.pathname;
+    var depth=(r.match(/\//g)||[]).length-1;
+    var back='';for(var i=0;i<depth-1;i++)back+='../';
+    location.replace(back+'index.html#payment-section');
+  }
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title> Alloy Types - Dark Style </title>
@@ -559,6 +569,16 @@ body.lang-ar .chapnav a { direction: rtl; }
 <section id="alloyTypesRoot" class="alloy-types-app" dir="ltr" lang="en">
 <main class="page-shell">
     <header class="topbar">
+<script>
+(function(){
+  if(localStorage.getItem('codevault_unlocked')!=='true'){
+    var r=location.pathname;
+    var depth=(r.match(/\//g)||[]).length-1;
+    var back='';for(var i=0;i<depth-1;i++)back+='../';
+    location.replace(back+'index.html#payment-section');
+  }
+})();
+</script>
       <div>
         <h1 data-i18n="Title">انواع السبائك</h1>
         <p data-i18n="Subtitle">Interstitial, substitutional, and intermetallic alloy mechanisms .</p>
